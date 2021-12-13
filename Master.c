@@ -1,9 +1,11 @@
+#define _GNU_SOURCE // need to define before including headers
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <errno.h>
-#define _GNU_SOURCE
+
 #define SO_USERS_NUM
 #define SO_NODES_NUM
 #define SO_NUM_FRIENDS
