@@ -8,6 +8,7 @@
 #define SO_NODES_NUM
 #define SO_NUM_FRIENDS
 #define SO_SIM_SEC
+
 int main()
 
 {
