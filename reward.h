@@ -1,1 +1,1 @@
-int reward(int transaction_amount);
+int reward(int * transaction_amount, int * reward);
