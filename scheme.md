@@ -82,3 +82,27 @@ Il libro mastro è formato dalla seguente struttura:
     - Una transazione è identificata da _timestamp_,_sender_,_receiver_.
     Il nodo che aggiunge un nuovo blocco al libro mastro è responsabile dell'aggiornamento dell'identificatore del blocco stesso
 
+
+# STAMPA
+Ogni secondo il processo master stampa il budget corrente di ogni processo utente e di ongi processo nodo, così come registrato nel libro mastro
+
+# TERMINAZIONE DELLA SIMULAZIONE
+Termina se si verfica uno dei seguenti casi:
+- sono  trascorsi SO_SIM_SEC_
+- il libro mastro si riempie (NB--> il libro può contenere al massimo SO_REGISTRY-SIZE)
+
+Quanod termina il processo master obbliga tutti i processi nodo utente a terminare, e stamperà un riepilogo della simulazione che contiene le seguenti informazioni:
+- motivo della terminazione
+- bilancio di ogni processo utente, anche quelli terminati prematuramente
+- bilancio di ogni processo nodo
+- numero dei processi utente terminati prematuramente
+- numero di blocchi nel libro mastro 
+- per ogni procecsso nodo, numero di transazioni ancora presenti nella transactiom pool
+----
+
+---- 
+# FINE DELLA PARTE DA 24 
+
+---
+
+
