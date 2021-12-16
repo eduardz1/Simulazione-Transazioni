@@ -8,7 +8,7 @@
 
 
 
-struct node {            /*add explanation */
+typedef struct node {            /*add explanation */
 	timestamp timestamp;
 	pid_t sender;
 	pid_t receiver;
@@ -16,15 +16,15 @@ struct node {            /*add explanation */
 	int reward;
 
 	struct node *next_node;
-}
+} node;
 struct node *head=NULL;
-struct node *current = NULL;
+//struct node *current = NULL;
 
 
 
-struct block { 
+typedef struct block { 
 	SO_BLOCK_SIZE;
 
 	struct node  **block;
 	struct block  **next_block;
-}
+};
