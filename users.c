@@ -13,7 +13,14 @@
 
 /*
  * Need to implement a way to send s transaction
- * signal, for example via a pipe
+ * signal, we can utilize a user defined signal
+ * handler.
+ * We also need to account for the signal SIGINT (CTRL-C).
+ * Maybe we can implement some sort of graphic way to visualize
+ * child processes (nodes and user) so that we can choose
+ * the PID on which to send the signal to.
+ * -- user-defined signal handlers are inherited by the child processes --
+ * so it's better to handle them in the master program
  */
 void send_transaction(){
 	int transaction_amount, reward, current_balance, retry;
