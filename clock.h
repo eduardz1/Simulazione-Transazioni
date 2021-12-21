@@ -1,3 +1,3 @@
-int tracktime();
+int timestamp();
 
 struct timestamp;
