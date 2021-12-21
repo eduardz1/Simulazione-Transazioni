@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-std=89 -g -O0 -pedantic -D _GNU_SOURCE
+CFLAGS=-std=c89 -g -O0 -pedantic -D _GNU_SOURCE
 
 # Master
 SO_USER_NUM=10

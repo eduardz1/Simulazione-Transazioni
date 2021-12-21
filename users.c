@@ -1,3 +1,5 @@
+#include "users.h"
+
 #define SO_BUDGET_INIT
 #define SO_REWARD
 /* 
