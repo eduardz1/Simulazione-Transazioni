@@ -32,8 +32,8 @@
 
 #define SO_REGISTRY_SIZE	/*max lenght of consecutive block */
 #define SO_BLOCK_SIZE		/*number of transaction per block*/ 
-#define SO_USERS_NUM 
-#define SO_NODES_NUM   
+/*#define SO_USERS_NUM 
+#define SO_NODES_NUM*/   
 #define SO_NUM_FRIENDS
 
 
@@ -57,8 +57,7 @@ typedef struct block {
 	struct node  **block;
 	struct block  **next_block;
 }block;
-int createdPidBlock[SO_NODES_NUM];
-int createdPidUsers[SO_USERS_NUM];
+
 int main(){
 
 	int Prop1 = fork(SO_NODES_NUM);
