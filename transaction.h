@@ -1,7 +1,7 @@
 #define SO_HOPS
 #include <sys/types.h>
 
-struct Transaction
+typedef struct transaction
 {
 	struct  timestamp;
 	pid_t sender;
@@ -10,4 +10,4 @@ struct Transaction
 	int reward;
 
 
-};
+} transaction;
