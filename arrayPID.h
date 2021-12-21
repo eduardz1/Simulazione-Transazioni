@@ -1,3 +1,4 @@
+#include <sys/types.h>
 #define SO_NODES_NUM
 #define SO_USERS_NUM
 
