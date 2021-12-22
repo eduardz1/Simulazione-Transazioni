@@ -2,8 +2,8 @@ CC=gcc
 CFLAGS=-std=c89 -g -O0 -pedantic -D _GNU_SOURCE
 
 # Master
-SO_USER_NUM=10
-SO_NODES_NUM=2
+SO_USER_NUM=5
+SO_NODES_NUM=5
 SO_NUM_FRIENDS=2
 SO_SIM_SEC=120
 
@@ -23,7 +23,7 @@ SO_BLOCK_SIZE=5
 
 all: master transactions users nodes
 
-master: master.c master.o
+master: master.c master.o masterdue.c masterdue.o
 	$(CC) $(CFLAGS) master.c $(SO_USER_NUM) $(SO_NODES_NUM) $(SO_NUM_FRIENDS) $(SO_SIM_SEC) -o master 
 
 transactions: transactions.c transactions.O
