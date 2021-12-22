@@ -1,9 +1,5 @@
 /* #define _GNU_SOURCE  need to define before including headers, I'm defining it into the Makefile */
-/*
- * execve(const char *user, char *const argv[], char *const envp[])
- * in user_fork to link "user" executable to the forked process, same thing for nodes
- * check lesson on pipes by prof. bini, the second hour
- */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
