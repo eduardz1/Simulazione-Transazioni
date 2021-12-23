@@ -1,6 +1,11 @@
 #ifndef SIMULAZIONE_TRANSAZIONI_MASTER_H
 #define SIMULAZIONE_TRANSAZIONI_MASTER_H
 
+/*
+ * probabilmente tutte set macro non ci servono perche' ha più senso passare i
+ * valori come parametri in compilazione
+ */
+
 /* libro mastro ----> linked list */
 
 /*
