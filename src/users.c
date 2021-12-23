@@ -1,14 +1,5 @@
 #include "users.h"
 
-#define SO_BUDGET_INIT
-#define SO_REWARD
-/* 
- * NON active wait, the time is equivalent to the 
- * verification algorithms that happen in "real" blockchains 
- */
-
-#define SO_RETRY
-
 /*
  * Need to implement a way to send s transaction
  * signal, we can utilize a user defined signal

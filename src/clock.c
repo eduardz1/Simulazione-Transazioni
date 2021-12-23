@@ -5,7 +5,7 @@
  */
 struct timeStamp()
 {
-    struct timespec tp; /* need to divide seconds and nanoseconds because it wouldnt fit in a long otherwise */
+    struct timespec tp; /* need to divide seconds and nanoseconds because it wouldn't fit in a long otherwise */
 =======
 #define _GNU_SOURCE
 

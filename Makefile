@@ -23,16 +23,16 @@ SO_BLOCK_SIZE=5
 
 all: master transactions users nodes
 
-master: master.c master.o masterdue.c masterdue.o
+master: src/master.c # master.o
 	$(CC) $(CFLAGS) master.c $(SO_USER_NUM) $(SO_NODES_NUM) $(SO_NUM_FRIENDS) $(SO_SIM_SEC) -o master 
 
-transactions: transactions.c transactions.O
-	$(CC) $(CFLAGS) transactions.c $(SO_HOPS) -o transactions
+transactions: src/transaction.c # transactions.O
+	$(CC) $(CFLAGS) transaction.c $(SO_HOPS) -o transaction
 
-users: users.c users.o
+users: src/users.c # users.o
 	$(CC) $(CFLAGS) users.c $(SO_BUDGET_INIT) $(SO_REWARD) $(SO_MIN_TRANS_GEN_NSEC) $(SO_MAX_TRANS_GEN_NSEC) $(SO_RETRY) -o users
 
-nodes: nodes.c nodes.o
+nodes: src/nodes.c # nodes.o
 	$(CC) $(CFLAGS) nodes.c $(SO_TP_SIZE) $(SO_BLOCK_SIZE) -o nodes
 
 clean:

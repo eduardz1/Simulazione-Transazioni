@@ -1,3 +1,6 @@
+#ifndef SIMULAZIONE_TRANSAZIONI_TRANSACTIONS_H
+#define SIMULAZIONE_TRANSAZIONI_TRANSACTIONS_H
+
 #define SO_HOPS
 #include <sys/types.h>
 
@@ -11,3 +14,5 @@ typedef struct transaction
 
 
 } transaction;
+
+#endif /* TRANSACTIONS */
