@@ -7,11 +7,11 @@ void print_user_nodes_table(mainPID, userPID, nodePID, userNum, nodesNum)
     printf("------------------------------------------\n");
     while (userNum--)
     {
-        printf("User %d\n", userPID[userNum]);
+        printf("User %d\n", userPID[&userNum]);
     }
     printf("------------------------------------------\n");
     while (nodesNum--)
     {
-        printf("Node %d\n", nodePID[nodesNum]);
+        printf("Node %d\n", nodePID[&nodesNum]);
     }
 }

@@ -4,7 +4,13 @@ int main(int argc, char *argv[]) /*
 								  * (unsigned int SO_USER_NUM, 
 								  *  unsigned int SO_NODES_NUM, 
 								  *  unsigned int SO_NUM_FRIENDS, 
-								  *  unsigned int SO_SIM_SEC)
+								  *  unsigned int SO_SIM_SEC,
+                                  *  -------------------------------
+                                  *  unsigned int SO_BUDGET_INIT, 
+								  *  unsigned int SO_REWARD, 
+								  *  unsigned int SO_RETRY, 
+								  *  unsigned long SO_MIN_TRANS_GEN_NSEC, 
+								  *  unsigned long SO_MAX_TRANS_GEN_NSEC)
 								  */
 {
     int u, n; /* u counter for user processes, n counter for node processes */
@@ -12,7 +18,7 @@ int main(int argc, char *argv[]) /*
     pid_t myPID = getpid();
     pid_t myPPID;
 
-    char *userArgv[6];
+    char *userArgv[5];
     char *nodeArgv[7]; /* 7 is a dummy value */
 
     struct node *head = NULL;
@@ -28,6 +34,17 @@ int main(int argc, char *argv[]) /*
     /* -- PID ARRAYS -- */
     pid_t arrayUserPID[userNum];
     pid_t arrayNodesPID[nodesNum];
+
+    /* -- USER CL PARAMETERS -- */
+    userArgv[0] = argv[5]; /* SO_BUDGET_INIT */
+    userArgv[1] = argv[6]; /* SO_REWARD */
+    userArgv[2] = argv[7]; /* SO_RETRY */
+    userArgv[3] = argv[8]; /* SO_MIN_TRANS_GEN_NSEC */
+    userArgv[4] = argv[9]; /* SO_MAX_TRANS_GEN_NSEC */
+
+    /* -- NODE CL PARAMETERS -- */
+    nodeArgv[0] = argv[10];
+    nodeArgv[1] = argv[11];
 
     /* -- SIGNAL HANDLER --
 	 * first set all bytes of sigation to 0

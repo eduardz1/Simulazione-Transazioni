@@ -83,7 +83,6 @@ typedef struct ledger
 } ledger;
 
 
-
 void interrupt_handle(int signum);
 pid_t spawn_user();
 pid_t sapwn_node();
