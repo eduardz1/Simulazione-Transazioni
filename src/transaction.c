@@ -1,20 +1,17 @@
-#include "transaction.h"
+#include "include/transaction.h"
 
-transaction sendTransaction(pid_t sender,   /
-                            pid_t receiver, /
-                            int quantity,   /
-                            int reward){
+struct transaction sendTransaction(pid_t sender, pid_t receiver, int quantity, int reward)
+{
     struct timespec tp;
-    transaction currentTransaction;
+    struct transaction currentTransaction;
     /*
      * get current time and save it in a struct timespec
      * inside the transaction struct
      */
 
-
     clock_gettime(CLOCK_REALTIME, &tp);
 
-    currentTransaction.timestamp -> tp;
+    currentTransaction.timestamp = tp;
 
     return currentTransaction;
 }

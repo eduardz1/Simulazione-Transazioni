@@ -1,4 +1,4 @@
-#include "reward.h"
+#include "include/reward.h"
 
 void reward(int * transaction_value, int * reward)
 {	

@@ -15,13 +15,13 @@
  * and a long to represent the nanoseconds
  */
 typedef struct transaction{
-	timespec  timestamp;
+	struct timespec timestamp;
 	pid_t sender;
 	pid_t  receiver;
 	int  quantity;
 	int reward;
 };
 
-transaction sendTransaction(pid_t sender, pid_t receiver, int quantity, int reward);
+struct transaction sendTransaction(pid_t sender, pid_t receiver, int quantity, int reward);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_TRANSACTIONS_H */

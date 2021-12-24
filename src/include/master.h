@@ -43,23 +43,14 @@
  * - number of transaction still in the pool, for each node
  */
 
-#include "clock.h"
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <stdio.h>
 #include <string.h>
 
-#define SO_REGISTRY_SIZE     /* max length of consecutive block */
-#define SO_BLOCK_SIZE        /* number of transaction per block*/
-/*
- * #define SO_USERS_NUM
- * #define SO_NODES_NUM
- */
-#define SO_NUM_FRIENDS
-
 typedef struct node {
-    timestamp timeStamp;
+    struct timespec timeStamp;
     pid_t sender;
     pid_t receiver;
     int quantity;

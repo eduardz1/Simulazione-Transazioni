@@ -1,4 +1,10 @@
-#include "users.h"
+#include "include/users.h"
+#include "include/transaction.h"
+#define RAND(min,max) (rand()%(max-min+1))+min
+/*
+ * NON active wait, the time is equivalent to the
+ * verification algorithms that happen in "real" blockchains
+ */
 
 /*
  * Need to implement a way to send s transaction
@@ -12,35 +18,69 @@
  * so it's better to handle them in the master program
  */
 
-void send_transaction(){
-	int transaction_amount, reward, current_balance, retry;
+int main(int argc, char *argv[]) /* 
+								  * (unsigned int SO_BUDGET_INIT, 
+								  *  unsigned int SO_REWARD, 
+								  *  unsigned int SO_RETRY, 
+								  *  unsigned long SO_MIN_TRANS_GEN_NSEC, 
+								  *  unsigned long SO_MAX_TRANS_GEN_NSEC) 
+								  */
+{
+	unsigned int budgetInit, reward, retry; /* command line int  */
+	unsigned long minTransGen, maxTransGen; /* command line long */
+
+	unsigned int currentBalance, amount;
 	pid_t user_pid, node_pid;
 
-	retry = SO_RETRY;
-	current_balance = balance(SO_BUDGET_INIT);
-	
-	if(current_balance < 2) return;
+	/* initlization of command line parameters */
+	budgetInit  = atoi(argv[1]);
+	reward 		= atoi(argv[2]);
+	retry		= atoi(argv[3]);
+	minTransGen = atol(argv[4]);
+	maxTransGen = atol(argv[5]);
+
+
+	/* 
+	 * generate a random number form SO_MIN and SO_MAX using the rand() function that generates a random number
+	 * from 0 to RAND_MAX
+	 */
+	struct timespec randSleepTime;
+	randSleepTime.tv_sec = 0;
+	randSleepTime.tv_nsec = RAND(minTransGen, maxTransGen);
+	/*
+	 * save the time unslept when interrupted by SIGUSR1 so that we can't force transactions at a much greater speed
+	 * better to save it into a separate struct because clock_nanosleep will not update it if the sleep is not interrupted
+	 */
+	struct timespec sleepTimeRemaining;
+	bzero(&sleepTimeRemaining, sizeof(sleepTimeRemaining));
+
+	currentBalance = balance(budgetInit);
+
+	if (currentBalance < 2) return;
 
 	user_pid = randPID_u();
 	/* get random pid from user group */
-	
+
 	node_pid = randPID_n();
 	/* get random pid from nodes group */
 
-	transaction_amount = (rand() % (current balance - 2 + 1)) + 2; 
-	/* get random int from 2 to current_balance */
+	amount = RAND(2,currentBalance);
+	/* get random int from 2 to currentBalance */
 
-	reward = reward(transaction_amount);
-	transaction_amount -= reward;
-	
-	while(retry--){
-		transaction(node_pid, user_pid);
+	//reward = reward(transaction_amount); need to modify reward function
+	amount -= reward;
+
+	while (retry--)
+	{
+		// transaction(nodePID, userPID);
 		/* transaction(node_pid, user_pid); */
 		/* wait(rand(SO_MIN_TRANS_GEN_NSEC, SO_MAX_GEN_NSEC) */
-		clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, const struct rndTime *request, struct rndTime *remain);
+		clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &randSleepTime, &sleepTimeRemaining);
+		clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &sleepTimeRemaining, NULL);
 	}
 }
 
-void user_transactions_handle(int SIGUSR1){
+void user_transactions_handle(int SIGUSR1)
+{
 	send_transaction();
 }
