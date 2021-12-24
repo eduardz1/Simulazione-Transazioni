@@ -1,11 +1,14 @@
 #include "include/master.h"
-#define SO_REGISTRY_SIZE     /* max length of consecutive block */
-#define SO_BLOCK_SIZE        /* number of transaction per block*/
-#define SO_USERS_NUM
-#define SO_NODES_NUM
-#define SO_NUM_FRIENDS
+#define SO_REGISTRY_SIZE /* max length of consecutive block */
+#define SO_BLOCK_SIZE    /* number of transaction per block*/
 
-int main() {
+int main(int argc, char *argv[]) /* 
+								  * (unsigned int SO_USER_NUM, 
+								  *  unsigned int SO_NODES_NUM, 
+								  *  unsigned int SO_NUM_FRIENDS, 
+								  *  unsigned int SO_SIM_SEC)
+								  */
+{
     struct node *head = NULL;
     struct node *current = NULL;
 
@@ -16,46 +19,51 @@ int main() {
 
     int Prop1 = fork(SO_NODES_NUM);
     int Prop2 = fork(SO_USERS_NUM);
-    switch (createdPidBlock[SO_NODES_NUM] = fork(SO_NODES_NUM)) {
-        case -1: /* Case Error */
-            if (Prop1 && Prop2 == 0) {
-                printf("Fork error");
-                exit(1);
-            }
-            break;
-        case 0: /* Case Child */
-            if (Prop1 && Prop2 > 0) {
-                    /*
-                     * printf("Child pid of SO_NODES_NUM is:%d\n", getpid(),Prop1);
-                     * printf("Child pid of SO_USERS_NUM is%d\n", getpid(),Prop2);
-                     */
-            }
+    switch (createdPidBlock[SO_NODES_NUM] = fork(SO_NODES_NUM))
+    {
+    case -1: /* Case Error */
+        if (Prop1 && Prop2 == 0)
+        {
+            printf("Fork error");
+            exit(1);
+        }
+        break;
+    case 0: /* Case Child */
+        if (Prop1 && Prop2 > 0)
+        {
+            /*
+             * printf("Child pid of SO_NODES_NUM is:%d\n", getpid(),Prop1);
+             * printf("Child pid of SO_USERS_NUM is%d\n", getpid(),Prop2);
+             */
+        }
 
-            break;
+        break;
 
-        default: /* Case Parent */
-            fork(SO_NODES_NUM);
+    default: /* Case Parent */
+        fork(SO_NODES_NUM);
 
-            fork(SO_USERS_NUM);
-            break;
+        fork(SO_USERS_NUM);
+        break;
     }
-
-
 }
 
-void interrupt_handle(int SIGINT) {
+void interrupt_handle(int SIGINT)
+{
     /*
      * remove any IPC object we created then terminate the process
      */
 }
 
-int printPid() {
+int printPid()
+{
     int i = 0;
     int k = 0;
-    for (int i; i < SO_NODES_NUM; i++) {
+    for (int i; i < SO_NODES_NUM; i++)
+    {
         printf("generated SO_NODES pid\n %d\n", getpid());
     }
-    for (int k; k < SO_USERS_NUM; k++) {
+    for (int k; k < SO_USERS_NUM; k++)
+    {
         printf("generated SO_USERS pid\n %d\n", getpid());
     }
 }

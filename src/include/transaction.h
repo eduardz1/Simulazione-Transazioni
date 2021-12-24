@@ -22,6 +22,6 @@ typedef struct transaction{
 	int reward;
 };
 
-struct transaction sendTransaction(pid_t sender, pid_t receiver, int quantity, int reward);
+struct transaction send_transaction(pid_t sender, pid_t receiver, int quantity, int reward);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_TRANSACTIONS_H */

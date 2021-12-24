@@ -1,6 +1,6 @@
 #include "include/transaction.h"
 
-struct transaction sendTransaction(pid_t sender, pid_t receiver, int quantity, int reward)
+struct transaction send_transaction(pid_t sender, pid_t receiver, int quantity, int reward)
 {
     struct timespec tp;
     struct transaction currentTransaction;

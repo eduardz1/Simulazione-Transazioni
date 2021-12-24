@@ -13,7 +13,7 @@ struct sigaction sa;
 sa.sa_handler = user_transactions_handle;
 sigaction(SIGUSR1, &sa, NULL);
 
-void send_transaction();
+// void send_transaction();
 
 void user_transactions_handle(int SIGUSR1);
 

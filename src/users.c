@@ -1,5 +1,6 @@
 #include "include/users.h"
 #include "include/transaction.h"
+#include "include/reward.h"
 #define RAND(min,max) (rand()%(max-min+1))+min
 /*
  * NON active wait, the time is equivalent to the
@@ -30,7 +31,7 @@ int main(int argc, char *argv[]) /*
 	unsigned long minTransGen, maxTransGen; /* command line long */
 
 	unsigned int currentBalance, amount;
-	pid_t user_pid, node_pid;
+	pid_t userPID, nodePID;
 
 	/* initlization of command line parameters */
 	budgetInit  = atoi(argv[1]);
@@ -58,16 +59,19 @@ int main(int argc, char *argv[]) /*
 
 	if (currentBalance < 2) return;
 
-	user_pid = randPID_u();
+	userPID = randPID_u();
 	/* get random pid from user group */
 
-	node_pid = randPID_n();
+	nodePID = randPID_n();
 	/* get random pid from nodes group */
 
 	amount = RAND(2,currentBalance);
 	/* get random int from 2 to currentBalance */
 
-	//reward = reward(transaction_amount); need to modify reward function
+	/* 
+	 * rick needs to implement reward function
+	 * reward = reward(amount, reward); 
+	 */
 	amount -= reward;
 
 	while (retry--)
@@ -82,5 +86,5 @@ int main(int argc, char *argv[]) /*
 
 void user_transactions_handle(int SIGUSR1)
 {
-	send_transaction();
+	return send_transaction(getpid(), );
 }
