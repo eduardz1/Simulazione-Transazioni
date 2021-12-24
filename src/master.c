@@ -1,10 +1,16 @@
-#include "master.h"
+#include "include/master.h"
+#define SO_REGISTRY_SIZE     /* max length of consecutive block */
+#define SO_BLOCK_SIZE        /* number of transaction per block*/
+#define SO_USERS_NUM
+#define SO_NODES_NUM
+#define SO_NUM_FRIENDS
 
 int main() {
     struct node *head = NULL;
     struct node *current = NULL;
 
-    struct sigaction sa_ctrl-c; /* we need to define an handler for CTRL-C command that closes any IPC object */
+    struct sigaction sa_ctrlC; /* we need to define an handler for CTRL-C command that closes any IPC object */
+    bzero(&sa_ctrlC, sizeof(sa_ctrlC));
     sa_ctrl - c.sa_handler = user_transactions_handle;
     sigaction(SIGINT, &sa, NULL);
 
