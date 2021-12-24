@@ -1,7 +1,10 @@
+#ifndef SIMULAZIONE_TRANSAZIONI_TRANSACTIONS_H
+#define SIMULAZIONE_TRANSAZIONI_TRANSACTIONS_H
+
 #define SO_HOPS
 #include <sys/types.h>
 
-struct Transaction
+typedef struct transaction
 {
 	struct  timestamp;
 	pid_t sender;
@@ -10,4 +13,6 @@ struct Transaction
 	int reward;
 
 
-};
+}transaction;
+
+#endif /*TRANSACTIONS */
