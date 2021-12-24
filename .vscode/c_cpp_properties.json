@@ -8,7 +8,8 @@
             "defines": [
                 "_DEBUG",
                 "UNICODE",
-                "_UNICODE"
+                "_UNICODE",
+                "_GNU_SOURCE"
             ],
             "cStandard": "c89",
             "cppStandard": "c++17",

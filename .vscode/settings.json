@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "users.h": "c",
+        "reward.h": "c",
+        "transaction.h": "c"
+    }
+}

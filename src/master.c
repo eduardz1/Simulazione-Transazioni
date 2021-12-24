@@ -1,6 +1,4 @@
 #include "include/master.h"
-#define SO_REGISTRY_SIZE /* max length of consecutive block */
-#define SO_BLOCK_SIZE    /* number of transaction per block*/
 
 int main(int argc, char *argv[]) /* 
 								  * (unsigned int SO_USER_NUM, 
@@ -9,45 +7,87 @@ int main(int argc, char *argv[]) /*
 								  *  unsigned int SO_SIM_SEC)
 								  */
 {
+    int u, n; /* u counter for user processes, n counter for node processes */
+    unsigned int userNum, nodesNum, friendsNum, simTime;
+    pid_t myPID = getpid();
+    pid_t myPPID;
+
+    char *userArgv[6];
+    char *nodeArgv[7]; /* 7 is a dummy value */
+
     struct node *head = NULL;
     struct node *current = NULL;
+    struct sigaction sa; /* we need to define an handler for CTRL-C command that closes any IPC object */
 
-    struct sigaction sa_ctrlC; /* we need to define an handler for CTRL-C command that closes any IPC object */
-    bzero(&sa_ctrlC, sizeof(sa_ctrlC));
-    sa_ctrl - c.sa_handler = user_transactions_handle;
+    /* -- CL PARAMETERS INITIALIZATION -- */
+    userNum = atoi(argv[1]);
+    nodesNum = atoi(argv[2]);
+    friendsNum = atoi(argv[3]);
+    simTime = atoi(argv[4]);
+
+    /* -- PID ARRAYS -- */
+    pid_t arrayUserPID[userNum];
+    pid_t arrayNodesPID[nodesNum];
+
+    /* -- SIGNAL HANDLER --
+	 * first set all bytes of sigation to 0
+	 * then initialize sa.handler to a pointer to the function interrupt_handle
+	 * then set the handler to handle SIGINT signals ((struct sigaction *oldact) = NULL) 
+	 */
+    bzero(&sa, sizeof(sa));
+    sa.sa_handler = interrupt_handle;
     sigaction(SIGINT, &sa, NULL);
 
-    int Prop1 = fork(SO_NODES_NUM);
-    int Prop2 = fork(SO_USERS_NUM);
-    switch (createdPidBlock[SO_NODES_NUM] = fork(SO_NODES_NUM))
+    for (u; u < userNum; u++)
     {
-    case -1: /* Case Error */
-        if (Prop1 && Prop2 == 0)
-        {
-            printf("Fork error");
-            exit(1);
-        }
-        break;
-    case 0: /* Case Child */
-        if (Prop1 && Prop2 > 0)
-        {
-            /*
-             * printf("Child pid of SO_NODES_NUM is:%d\n", getpid(),Prop1);
-             * printf("Child pid of SO_USERS_NUM is%d\n", getpid(),Prop2);
-             */
-        }
+        arrayUserPID[u] = spawn_user(userArgv);
+    }
 
+    for (n; n < nodesNum; n++)
+    {
+        arrayNodesPID[n] = spawn_node(nodeArgv);
+    }
+
+    print_user_nodes_table(myPID, arrayUserPID, arrayNodesPID, userNum, nodesNum);
+}
+
+pid_t spawn_user(char** userArgv)
+{
+    pid_t myPID = fork();
+    switch (myPID)
+    {
+    case -1: /* Error case */
+        /* error handling goes here */
         break;
 
-    default: /* Case Parent */
-        fork(SO_NODES_NUM);
-
-        fork(SO_USERS_NUM);
+    case 0: /* Child case */
+        execve("user", userArgv, NULL);
         break;
+
+    default:
+        return myPID;
     }
 }
 
-void interrupt_handle(int SIGINT)
+pid_t spawn_node(char** nodeArgv)
+{
+    pid_t myPID = fork();
+    switch (myPID)
+    {
+    case -1: /* Error case */
+        /* error handling goes here */
+        break;
+
+    case 0: /* Child case */
+        execve("node", nodeArgv, NULL);
+        break;
+
+    default:
+        return myPID;
+    }
+}
+
+void interrupt_handle(int signum)
 {
     /*
      * remove any IPC object we created then terminate the process

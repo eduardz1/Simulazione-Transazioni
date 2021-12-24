@@ -48,24 +48,44 @@
 #include <sys/types.h>
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
+#include <signal.h>
+#include <errno.h>
+#include <unistd.h>
 
-typedef struct node {
-    struct timespec timeStamp;
+#define SO_BLOCK_SIZE 100 /* number of transaction per block*/
+#define SO_REGISTRY_SIZE 1000 /* max length of consecutive blocks */
+
+
+/* Transaction struct */
+typedef struct transaction
+{
+    struct timespec timestamp;
     pid_t sender;
     pid_t receiver;
-    int quantity;
-    int reward;
+    int amount;
+    /* int reward; */
+} transaction;
 
-    struct node *next_node;
-};
+/* Block struct */
+typedef struct block
+{
+    struct transaction transList[SO_BLOCK_SIZE];
+    unsigned int blockIndex; /* when a block is written on ledger it's Index needs to be updated */
+    struct block *next;
+} block;
 
-typedef struct block {
-    SO_NODES_NUM;
+/* Libro Mastro (ledger) struc */
+typedef struct ledger
+{
+    struct block *head;
+    unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added */
+} ledger;
 
-    struct node **block;
-    struct block **next_block;
-};
 
-void interrupt_handle(int SIGINT);
+
+void interrupt_handle(int signum);
+pid_t spawn_user();
+pid_t sapwn_node();
 
 #endif /* SIMULAZIONE_TRANSAZIONI_MASTER_H */
