@@ -32,7 +32,7 @@
 
 #define SO_REGISTRY_SIZE	/*max lenght of consecutive block */
 #define SO_BLOCK_SIZE		/*number of transaction per block*/ 
-/*#define SO_USERS_NUM 
+#define SO_USERS_NUM
 #define SO_NODES_NUM*/   
 #define SO_NUM_FRIENDS
 
