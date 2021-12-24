@@ -4,17 +4,14 @@
 #include "balance.h"
 #include "reward.h"
 #include "arrayPID.h"
+
 #include <signal.h>
 #include <stdlib.h>
 #include <time.h>
-
-
-struct sigaction sa;
-sa.sa_handler = user_transactions_handle;
-sigaction(SIGUSR1, &sa, NULL);
+#include <signal.h>
 
 // void send_transaction();
 
-void user_transactions_handle(int SIGUSR1);
+void user_transactions_handle(int signum);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_USERS_H */
