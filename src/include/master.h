@@ -48,6 +48,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <stdio.h>
+#include <string.h>
 
 #define SO_REGISTRY_SIZE     /* max length of consecutive block */
 #define SO_BLOCK_SIZE        /* number of transaction per block*/
