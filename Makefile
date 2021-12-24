@@ -21,9 +21,9 @@ SO_RETRY=5
 SO_TP_SIZE=20
 SO_BLOCK_SIZE=5
 
-all: master transactions users nodes
+all: masterdue transactions users nodes
 
-master: master.c master.o masterdue.c masterdue.o
+master: masterdue.c masterdue.o masterdue.c masterdue.o
 	$(CC) $(CFLAGS) master.c $(SO_USER_NUM) $(SO_NODES_NUM) $(SO_NUM_FRIENDS) $(SO_SIM_SEC) -o master 
 
 transactions: transactions.c transactions.O

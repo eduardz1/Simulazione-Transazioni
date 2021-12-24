@@ -46,10 +46,10 @@ void interrupt_handle(int SIGINT) {
 int printPid() {
     int i = 0;
     int k = 0;
-    for (int i; i < SO_NODES_NUM; i++) {
+    for (k=0; i < SO_NODES_NUM; i++) {
         printf("generated SO_NODES pid\n %d\n", getpid());
     }
-    for (int k; k < SO_USERS_NUM; k++) {
+    for (k=0; k < SO_USERS_NUM; k++) {
         printf("generated SO_USERS pid\n %d\n", getpid());
     }
 }
