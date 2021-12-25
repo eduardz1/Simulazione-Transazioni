@@ -52,6 +52,9 @@
 #include <signal.h>
 #include <errno.h>
 #include <unistd.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <sys/sem.h>
 
 #define SO_BLOCK_SIZE 100 /* number of transaction per block*/
 #define SO_REGISTRY_SIZE 1000 /* max length of consecutive blocks */
@@ -75,7 +78,7 @@ typedef struct block
     struct block *next;
 } block;
 
-/* Libro Mastro (ledger) struc */
+/* Libro Mastro (ledger) struct */
 typedef struct ledger
 {
     struct block *head;
@@ -84,7 +87,7 @@ typedef struct ledger
 
 
 void interrupt_handle(int signum);
-pid_t spawn_user();
-pid_t sapwn_node();
+pid_t spawn_user(char* argv[], int ledgerID);
+pid_t spawn_node(char* argv[], int ledgerID);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_MASTER_H */
