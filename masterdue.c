@@ -1,5 +1,7 @@
 #include "masterdue.h"
-
+#include "arrayPID.h"
+#include <signal.h>  //SIGINT
+#include <stdlib.h> //exit()
 int main() {
     struct node *head = NULL;
     struct node *current = NULL;
@@ -41,15 +43,24 @@ void interrupt_handle(int SIGINT) {
     /*
      * remove any IPC object we created then terminate the process
      */
+
+}
+void ctrlchandler(int sig){    /*char c is the char that we need to use in order to interrupt the simulation, after we got the char , exit() function should terminate the program  */
+    char c;
+    signal(sig,SIG_IGN);
+
+    c=getchar();
+
+    exit(0);
 }
 
 int printPid() {
     int i = 0;
     int k = 0;
-    for (k=0; i < SO_NODES_NUM; i++) {
+    for (k = 0; i < SO_NODES_NUM; i++) {
         printf("generated SO_NODES pid\n %d\n", getpid());
     }
-    for (k=0; k < SO_USERS_NUM; k++) {
+    for (k = 0; k < SO_USERS_NUM; k++) {
         printf("generated SO_USERS pid\n %d\n", getpid());
     }
 }

@@ -53,7 +53,7 @@
 #define SO_NUM_FRIENDS
 
 typedef struct node {
-    timestamp timeStamp;
+    struct timestamp timeStamp;
     pid_t sender;
     pid_t receiver;
     int quantity;
@@ -70,5 +70,6 @@ typedef struct block {
 };
 
 void interrupt_handle(int SIGINT);
+void ctrlchandler(int);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_MASTER_H */
