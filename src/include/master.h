@@ -61,17 +61,23 @@
 
 
 /* Transaction struct */
-typedef struct transaction
+typedef struct transaction_t
 {
     struct timespec timestamp;
     pid_t sender;
     pid_t receiver;
     int amount;
+    enum {
+        pending,
+        processing,
+        confirmed,
+        aborted,
+    } status;
     /* int reward; */
 } transaction;
 
 /* Block struct */
-typedef struct block
+typedef struct block_t
 {
     struct transaction transList[SO_BLOCK_SIZE];
     unsigned int blockIndex; /* when a block is written on ledger it's Index needs to be updated */
@@ -79,7 +85,7 @@ typedef struct block
 } block;
 
 /* Libro Mastro (ledger) struct */
-typedef struct ledger
+typedef struct ledger_t
 {
     struct block *head;
     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added */
