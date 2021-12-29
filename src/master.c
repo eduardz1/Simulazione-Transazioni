@@ -1,5 +1,46 @@
 #include "include/master.h"
 
+pid_t spawn_user(userArgv, shmID)
+{
+    pid_t myPID = fork();
+    switch (myPID)
+    {
+    case -1: /* Error case */
+        /* error handling goes here */
+        break;
+
+    case 0: /* Child case */
+        execve("user", userArgv, NULL);
+        break;
+
+    default:
+        return myPID;
+    }
+}
+
+pid_t spawn_node(nodeArgv, shmID)
+{
+    pid_t myPID = fork();
+    switch (myPID)
+    {
+    case -1: /* Error case */
+        /* error handling goes here */
+        break;
+
+    case 0: /* Child case */
+        execve("node", nodeArgv, NULL);
+        break;
+
+    default:
+        return myPID;
+    }
+}
+
+void interrupt_handle(signum)
+{
+    shmctl(shmID, IPC_RMID, NULL);
+}
+
 int main(int argc, char *argv[]) /* 
 								  *  [1] unsigned int SO_USER_NUM
 								  *  [2] unsigned int SO_NODES_NUM
@@ -90,45 +131,4 @@ int main(int argc, char *argv[]) /*
     print_transactions_still_in_pool(); /* need to define, prints num of transactions still in the pool of each node */
 
     return 0;
-}
-
-pid_t spawn_user(userArgv, shmID)
-{
-    pid_t myPID = fork();
-    switch (myPID)
-    {
-    case -1: /* Error case */
-        /* error handling goes here */
-        break;
-
-    case 0: /* Child case */
-        execve("user", userArgv, NULL);
-        break;
-
-    default:
-        return myPID;
-    }
-}
-
-pid_t spawn_node(nodeArgv, shmID)
-{
-    pid_t myPID = fork();
-    switch (myPID)
-    {
-    case -1: /* Error case */
-        /* error handling goes here */
-        break;
-
-    case 0: /* Child case */
-        execve("node", nodeArgv, NULL);
-        break;
-
-    default:
-        return myPID;
-    }
-}
-
-void interrupt_handle(signum)
-{
-    shmctl(shmID, IPC_RMID, NULL);
 }

@@ -24,6 +24,11 @@
  * so it's better to handle them in the master program
  */
 
+void user_transactions_handle(int signum)
+{
+	return send_transaction(getpid(), );
+}
+
 int main(int argc, char *argv[]) /* 
 								  * (unsigned int SO_BUDGET_INIT, 
 								  *  unsigned int SO_REWARD, 
@@ -32,6 +37,8 @@ int main(int argc, char *argv[]) /*
 								  *  unsigned long SO_MAX_TRANS_GEN_NSEC) 
 								  */
 {
+	srand(time(NULL)); /* initialize rand function */
+
 	unsigned int budgetInit, reward, retry; /* command line int  */
 	unsigned long minTransGen, maxTransGen; /* command line long */
 
@@ -95,9 +102,4 @@ int main(int argc, char *argv[]) /*
 		clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &randSleepTime, &sleepTimeRemaining);
 		clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &sleepTimeRemaining, NULL);
 	}
-}
-
-void user_transactions_handle(int signum)
-{
-	return send_transaction(getpid(), );
 }
