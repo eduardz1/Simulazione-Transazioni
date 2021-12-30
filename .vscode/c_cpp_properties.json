@@ -31,7 +31,9 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/src/include/**",
-                "/usr/include/x86_64-linux-gnu"
+                "/usr/include/x86_64-linux-gnu",
+                "/usr/include/linux",
+                "/usr/lib/gcc/x86_64-linux-gnu/9/include/"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
