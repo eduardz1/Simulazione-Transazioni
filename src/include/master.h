@@ -43,57 +43,20 @@
  * - number of transaction still in the pool, for each node
  */
 
-#include <stdlib.h>
-#include <unistd.h>
 #include <sys/types.h>
 #include <stdio.h>
 #include <string.h>
-#include <time.h>
 #include <signal.h>
-#include <errno.h>
-#include <unistd.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <sys/sem.h>
 
-#define SO_BLOCK_SIZE 100 /* number of transaction per block*/
-#define SO_REGISTRY_SIZE 1000 /* max length of consecutive blocks */
+char **user_CL_parameters(char *argv[]);
+char **node_CL_parameters(char *argv[]);
 
-
-/* Transaction struct */
-typedef struct transaction_t
-{
-    struct timespec timestamp;
-    pid_t sender;
-    pid_t receiver;
-    int amount;
-    enum {
-        pending,
-        processing,
-        confirmed,
-        aborted,
-    } status;
-    /* int reward; */
-} transaction;
-
-/* Block struct */
-typedef struct block_t
-{
-    struct transaction transList[SO_BLOCK_SIZE];
-    unsigned int blockIndex; /* when a block is written on ledger it's Index needs to be updated */
-    struct block *next;
-} block;
-
-/* Libro Mastro (ledger) struct */
-typedef struct ledger_t
-{
-    struct block *head;
-    unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added */
-} ledger;
-
+pid_t spawn_user(char *argv[], int ledgerID);
+pid_t spawn_node(char *argv[], int ledgerID);
 
 void interrupt_handle(int signum);
-pid_t spawn_user(char* argv[], int ledgerID);
-pid_t spawn_node(char* argv[], int ledgerID);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_MASTER_H */
