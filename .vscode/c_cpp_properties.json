@@ -13,7 +13,7 @@
             ],
             "cStandard": "c89",
             "cppStandard": "c++17",
-            "intelliSenseMode": "windows-gcc-x64",
+            "intelliSenseMode": "linux-gcc-x64",
             "compilerPath": "C:/msys64/mingw64/bin/gcc.exe"
         }
     ],
