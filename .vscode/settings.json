@@ -4,7 +4,9 @@
         "reward.h": "c",
         "transaction.h": "c",
         "time.h": "c",
-        "stddef.h": "c"
+        "stddef.h": "c",
+        "signal.h": "c",
+        "common.h": "c"
     },
     "editor.rulers": [80,120]
 }
