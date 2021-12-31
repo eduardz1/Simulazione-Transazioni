@@ -1,3 +1,6 @@
+# metodo abbastanza pessimo di passare i parametri ma molto più easy di implementare
+# un parser apposta e qualche sistema per rendere safe gli input
+
 # ---- Master -----------
 SO_USER_NUM=5
 SO_NODES_NUM=5
