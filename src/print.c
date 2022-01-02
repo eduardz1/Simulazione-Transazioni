@@ -1,5 +1,5 @@
 #include "include/print.h"
-// #define HYPHEN "--------"
+/* #define HYPHEN "--------" */
 
 /* idk why it's broken */
 void print_user_nodes_table(mainPID, userPID, nodePID, userNum, nodesNum)

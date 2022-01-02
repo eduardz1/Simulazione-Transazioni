@@ -1,17 +1,22 @@
 #include "include/common.h"
 #include "include/users.h"
 
-/* -- USER CL PARAMETERS -- */
-#define SO_BUDGET_INIT (atoi(argv[0]))
-#define SO_REWARD (atoi(argv[1]))
-#define SO_RETRY (atoi(argv[2]))
-#define SO_MIN_TRANS_GEN_NSEC (atol(argv[3]))
-#define SO_MAX_TRANS_GEN_NSEC (atol(argv[4]))
+#define SO_USER_NUM (atoi(argv[1]))
+#define SO_NODES_NUM (atoi(argv[2]))
+#define SO_NUM_FRIENDS (atoi(argv[3]))
+#define SO_SIM_SEC (atoi(argv[4]))
 
-#define RAND(min, max) ((rand() % (max - min + 1)) + min)
-#define REWARD(trans_amount, reward_percent) (ceil(((reward_percent *  \
-													 (trans_amount)) / \
-													100.0)))
+/* -- USER CL PARAMETERS -- */
+#define SO_BUDGET_INIT (atoi(argv[5]))
+#define SO_REWARD (atoi(argv[6]))
+#define SO_RETRY (atoi(argv[7]))
+#define SO_MIN_TRANS_GEN_NSEC (atol(argv[8]))
+#define SO_MAX_TRANS_GEN_NSEC (atol(argv[9]))
+
+#define USERS_PID_ARRAY (atoi(argv[10]))
+#define NODES_PID_ARRAY (atoi(argv[11]))
+
+#define REWARD(amount, reward) (ceil(((reward * (amount)) / 100.0)))
 /*
  * NON active wait, the time is equivalent to the
  * verification algorithms that happen in "real" blockchains
@@ -44,6 +49,12 @@ int main(int argc, char *argv[])
 	struct timespec randSleepTime;
 	struct timespec sleepTimeRemaining;
 	struct sigaction sa;
+
+	pid_t *usersPID = malloc(SO_USER_NUM * sizeof(pid_t));
+	pid_t *nodesPID = malloc(SO_NODES_NUM * sizeof(pid_t));
+	usersPID = shmat(USERS_PID_ARRAY, NULL, 0);
+	nodesPID = shmat(NODES_PID_ARRAY, NULL, 0);
+	
 	/* -- SIGNAL HANDLER --
 	 * first set all bytes of sigation to 0
 	 * then initialize sa.handler to a pointer to the function user_transaction_handle
@@ -78,9 +89,9 @@ int main(int argc, char *argv[])
 			return;
 
 		/* get random pid from user group */
-		userPID = randPID_u();
+		userPID = usersPID[RAND(0, (SO_USER_NUM-1))];
 		/* get random pid from nodes group */
-		nodePID = randPID_n();
+		nodePID = nodesPID[RAND(0, (SO_NODES_NUM-1))];
 		/* get random int from 2 to currentBalance */
 		amount = RAND(2, currentBalance);
 

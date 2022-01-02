@@ -47,15 +47,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <signal.h>
-#include <sys/ipc.h>
-#include <sys/shm.h>
-#include <sys/sem.h>
 
-char **user_CL_parameters(char *argv[]);
-char **node_CL_parameters(char *argv[]);
+char **arguments(char *argv[], int *IPCarray, int UN); /* UN = 0:users, 1:nodes */
 
-pid_t spawn_user(char *argv[], int ledgerID);
-pid_t spawn_node(char *argv[], int ledgerID);
+pid_t spawn_user(char *argv[]);
+pid_t spawn_node(char *argv[]);
 
 void interrupt_handle(int signum);
 

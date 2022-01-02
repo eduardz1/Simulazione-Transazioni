@@ -1,5 +1,3 @@
-#include <sys/ipc.h>
-
 #include "include/common.h"
 
 ledger *ledger_init()
@@ -7,7 +5,7 @@ ledger *ledger_init()
     ledger *ledger;
     int shmID; /* ID of "ledger" shared memory segment */
 
-    /* -- LEDGER INITIALIZATION -- (still needs the code to initialize it)
+    /* -- LEDGER INITIALIZATION --
      * save the ID of our new (IPC_PRIVATE) shared memory segment of size -ledger-
      * smctl will deallocate the shared memory segment only when every process detaches it
      * tells OS that ledger of type ledger is our shared memory of shmID

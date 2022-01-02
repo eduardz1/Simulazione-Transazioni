@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include <signal.h>
-#include <math.h>
 
 void user_transactions_handle(int signum);
 
