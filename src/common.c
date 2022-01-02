@@ -22,18 +22,18 @@ ledger *ledger_init()
     return ledger;
 }
 
-block *new_block()
+struct block *new_block()
 {
-    block *newBlock;
+    struct block *newBlock;
     transaction reward;
     struct timespec timestamp;
 
-    memset(newBlock->transList, 0, SO_BLOCK_SIZE);
-    clock_gettime(CLOCK_REALTIME, timestamp);
+    /* memset(newBlock->transList, 0, SO_BLOCK_SIZE); */
+    clock_gettime(CLOCK_REALTIME, &timestamp);
 
     reward.timestamp = timestamp;
     reward.sender = SELF;
-    reward.receiver = mypid();
+    reward.receiver = getpid();
     reward.amount = 0;
     reward.reward = 0;
 
@@ -44,7 +44,7 @@ block *new_block()
     return newBlock;
 }
 
-void add_transaction_to_block(block *block, transaction *newTrans, int index)
+void add_transaction_to_block(struct block *block, transaction *newTrans, int index)
 {
     block->transList[index] = *newTrans; /* ye probably we don't need a whole ass function for that*/
 }

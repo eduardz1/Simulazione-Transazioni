@@ -54,6 +54,8 @@ int main(int argc, char *argv[])
 	pid_t *nodesPID = malloc(SO_NODES_NUM * sizeof(pid_t));
 	usersPID = shmat(USERS_PID_ARRAY, NULL, 0);
 	nodesPID = shmat(NODES_PID_ARRAY, NULL, 0);
+
+    return;
 	
 	/* -- SIGNAL HANDLER --
 	 * first set all bytes of sigation to 0
@@ -84,7 +86,7 @@ int main(int argc, char *argv[])
 		 */
 		bzero(&sleepTimeRemaining, sizeof(sleepTimeRemaining));
 
-		currentBalance = balance(myPID);
+		currentBalance = 100/*balance(myPID)*/;
 		if (currentBalance < 2)
 			return;
 
@@ -103,10 +105,10 @@ int main(int argc, char *argv[])
 		 */
 		send_transaction(myPID, userPID, amount, reward);
 
-		if (aborted) /* pseudo code, node needs to send an aborted or accepted signal*/
+		/* if (aborted) /* pseudo code, node needs to send an aborted or accepted signal*
 			retry--;
 		else
-			retry = SO_RETRY;
+			retry = SO_RETRY; */
 
 		clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &randSleepTime, &sleepTimeRemaining);
 		clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &sleepTimeRemaining, NULL);

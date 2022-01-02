@@ -10,17 +10,17 @@ CL_ARGUMENTS_ALL=$(SO_USER_NUM) $(SO_NODES_NUM) $(SO_NUM_FRIENDS) $(SO_SIM_SEC) 
 
 all: master users nodes
 
-master: src/master.c src/include/master.c src/common.c src/include/common.h
-	$(CC) $(CFLAGS) master.c common.c $(CL_ARGUMENTS_ALL) -o master 
+master: src/master.c src/include/master.h src/common.c src/include/common.h
+	$(CC) $(CFLAGS) src/master.c src/common.c src/print.c -lm -o master
 
 users: src/users.c src/include/users.h src/common.c src/include/common.h
-	$(CC) $(CFLAGS) users.c common.c -o users
+	$(CC) $(CFLAGS) src/users.c src/common.c -lm -o users
 
 nodes: src/nodes.c src/common.c src/include/common.h
-	$(CC) $(CFLAGS) nodes.c common.c -o nodes
+	$(CC) $(CFLAGS) src/nodes.c src/common.c -lm -o nodes
 
 clean:
 	rm -f *.o master users nodes *~
 
 run: all
-	./a
+	./master $(CL_ARGUMENTS_ALL)

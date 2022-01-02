@@ -8,6 +8,7 @@
 #include <errno.h>
 #include <time.h>
 #include <math.h>
+#include <string.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <sys/sem.h>
@@ -40,31 +41,31 @@ typedef struct transaction_t
         pending,
         processing,
         confirmed,
-        aborted,
+        aborted
     } status;
 } transaction;
 
 /* Block struct */
-typedef struct block_t
+struct block
 {
     transaction transList[SO_BLOCK_SIZE];
     unsigned int blockIndex; /* when a block is written on ledger it's Index needs to be updated */
-    block *next;
-} block;
+    struct block *next;
+};
 
 /* Libro Mastro (ledger) struct */
 typedef struct ledger_t
 {
-    block *head;
+    struct block *head;
     int shmID;                     /* ID of the shared memory segment */
     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added */
 } ledger;
 
 ledger *ledger_init();
-block *new_block();
-void add_block(block);
-void add_transaction_to_block(block *, transaction *, int index);
-void add_block_to_ledger(block *);
+struct block *new_block();
+void add_block(struct block);
+void add_transaction_to_block(struct block *, transaction *, int index);
+void add_block_to_ledger(struct block *);
 void find_transaction(struct timespec timestamp, pid_t sender, pid_t receiver); /* NULL used to group results */
 void send_transaction(pid_t sender, pid_t receiver, int quantity, int reward);
 
