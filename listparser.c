@@ -1,9 +1,9 @@
 #include <stdio.h>
 #define SO_NODES_NUM
 typedef struct node{
-    struct timestamp timestamp;
-    pid_t sender;
-    pid_t receiver;
+    struct timestamp timeStamp;  /*print in the list */
+    pid_t sender;   /*print in the list */
+    pid_t receiver; /*print in the list */
     int quantity;
     int reward;
 
@@ -24,8 +24,21 @@ void printLists(){
             printf("%d,%d",first->timestamp, first->sender, first->receiver);
     }
 }
-int main(){
-/* liste di prova*/
+
+void searchTimestamp(){
+
+
+}
+void searchSender(){
+
+
+} 
+
+void searchReceiver(){
+
 }
 
 
+int main(){
+/* liste di prova*/
+}
