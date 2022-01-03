@@ -22,5 +22,5 @@ nodes: src/nodes.c src/common.c src/include/common.h
 clean:
 	rm -f *.o master users nodes *~
 
-run: all
+run: master users
 	./master $(CL_ARGUMENTS_ALL)
