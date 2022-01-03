@@ -8,4 +8,7 @@
 
 void user_transactions_handle(int signum);
 
+struct timespec randSleepTime;
+struct timespec sleepTimeRemaining;
+
 #endif /* SIMULAZIONE_TRANSAZIONI_USERS_H */

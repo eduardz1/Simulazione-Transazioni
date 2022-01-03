@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #define SO_NODES_NUM
 typedef struct node{
     struct timestamp timeStamp;  /*print in the list */
@@ -21,20 +22,20 @@ struct node *first=NULL;
 void printLists(){
     struct node *first=first;
         while(first!=NULL){
-            printf("%d,%d",first->timestamp, first->sender, first->receiver);
+            printf("%d,%d",first->timeStamp, first->sender, first->receiver);
     }
 }
 
-void searchTimestamp(){
+void search_Timestamp(){
 
 
 }
-void searchSender(){
+void search_Sender(){
 
 
 } 
 
-void searchReceiver(){
+void search_Receiver(){
 
 }
 
