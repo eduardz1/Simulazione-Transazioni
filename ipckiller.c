@@ -1,10 +1,12 @@
+#include <stdio.h>
 void handler(){
     int status;
-    int res_kill
-
+    int res_kill;
+    int i=0;
 
     pritnf("ctrl-c killing program");
-            for(int i=0;i<SO_NODES_NUMEBR;i++){
+
+            for(i=0;i<SO_NODES_NUMBER;i++){
                 if(childs[i].status==1){
                     res_kills=kill(childs[1].pid, SIGINT);   /* kill all childs*/
         }

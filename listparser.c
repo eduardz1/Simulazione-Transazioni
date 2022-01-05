@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include <sys/types.h>
+
 #define SO_NODES_NUM
 typedef struct node{
-    struct timestamp timestamp;
+    struct timestamp timeStamp;
     pid_t sender;
     pid_t receiver;
     int quantity;
@@ -17,15 +19,17 @@ typedef struct block {
 };
 
 struct node *first=NULL;
-
+struct block **first=NULL!;
 void printLists(){
     struct node *first=first;
         while(first!=NULL){
             printf("%d,%d",first->timestamp, first->sender, first->receiver);
     }
+	
 }
+
 int main(){
-/* liste di prova*/
+/* liste di prova(ancora da mettere)*/
 }
 
 

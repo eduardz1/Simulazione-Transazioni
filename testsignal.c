@@ -4,17 +4,18 @@
 #include <unistd.h> //to have funcion  pause
 void crtlchandler(int); //include in .h
 int main();
+void exit();
 
 int main(){
     printf("inizio\n");
 
     signal(SIGINT, crtlchandler);
     while(1){
-        pause();
-        return 0;
+
     }
 
 }
+
 
 void crtlchandler(int sig){
     char c;
@@ -24,4 +25,5 @@ void crtlchandler(int sig){
 
     c=getchar();
 
+    exit(0);
 }

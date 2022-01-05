@@ -1,11 +1,6 @@
 #ifndef SIMULAZIONE_TRANSAZIONI_MASTER_H
 #define SIMULAZIONE_TRANSAZIONI_MASTER_H
 
-/*
- * probabilmente tutte set macro non ci servono perche' ha più senso passare i
- * valori come parametri in compilazione
- */
-
 /* libro mastro ----> linked list */
 
 /*
@@ -43,51 +38,38 @@
  * - number of transaction still in the pool, for each node
  */
 
+#include "clock.h"
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <stdio.h>
-#include <string.h>
-#include <time.h>
-#include <signal.h>
-#include <errno.h>
-#include <unistd.h>
-#include <sys/ipc.h>
-#include <sys/shm.h>
-#include <sys/sem.h>
 
-#define SO_BLOCK_SIZE 100 /* number of transaction per block*/
-#define SO_REGISTRY_SIZE 1000 /* max length of consecutive blocks */
+#define SO_REGISTRY_SIZE     /* max length of consecutive block */
+#define SO_BLOCK_SIZE        /* number of transaction per block*/
+/*
+ * #define SO_USERS_NUM
+ * #define SO_NODES_NUM
+ */
+#define SO_NUM_FRIENDS
 
-
-/* Transaction struct */
-typedef struct transaction
-{
-    struct timespec timestamp;
+typedef struct node {
+    struct timestamp timeStamp;
     pid_t sender;
     pid_t receiver;
-    int amount;
-    /* int reward; */
-} transaction;
+    int quantity;
+    int reward;
 
-/* Block struct */
-typedef struct block
-{
-    struct transaction transList[SO_BLOCK_SIZE];
-    unsigned int blockIndex; /* when a block is written on ledger it's Index needs to be updated */
-    struct block *next;
-} block;
+    struct node *next_node;
+};
 
-/* Libro Mastro (ledger) struct */
-typedef struct ledger
-{
-    struct block *head;
-    unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added */
-} ledger;
+typedef struct block {
+    SO_NODES_NUM;
 
+    struct node **block;
+    struct block **next_block;
+};
 
-void interrupt_handle(int signum);
-pid_t spawn_user(char* argv[], int ledgerID);
-pid_t spawn_node(char* argv[], int ledgerID);
+void interrupt_handle(int SIGINT);
+pid_t spawn_user(char* arg[],int ledgerID);Documents/Universita/2_Anno/SO/Simulazione-Transazionivoid ctrlchandler(int);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_MASTER_H */
