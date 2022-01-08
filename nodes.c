@@ -1,5 +1,8 @@
 #include <time.h>
+
 #include "nodes.h"
+#include "common.h"
+
 
 #define SO_TP_SIZE (argv[10])
 #define SO_MIN_TRANS_PROC_NSEC (argv[11])
@@ -14,20 +17,13 @@ void Node(){
     int t_pool[SO_TP_SIZE];
 
     for(i;i<SO_TP_SIZE-1;i++){
-
+        
 
     }
 }
 
 
-
-
-void processing_time(){
-    randSleepTime.tv_sec = 0;
+int main(int argc, char *argv[]){
+ randSleepTime.tv_sec = 0;
     randSleepTime.tv_nsec = RAND(SO_MIN_TRANS_PROC_NSEC, SO_MAX_TRANS_PROC_NSEC);
-}
-
-
-int main(argv[]){
-    
 }
