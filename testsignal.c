@@ -26,6 +26,10 @@ void crtlchandler(int sig){
     c=getchar();
 
     exit(0);
+<<<<<<< HEAD
+}
+=======
 
 }
 
+>>>>>>> 91cac5e173845229e25a1c647384bf5f20fcf43e
