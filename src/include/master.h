@@ -48,7 +48,7 @@
 #include <string.h>
 #include <signal.h>
 
-char **arguments(char *argv[], int *IPCarray, int UN); /* UN = 0:users, 1:nodes */
+char **arguments(int *IPCarray); /* UN = 0:users, 1:nodes */
 
 pid_t spawn_user(char *argv[]);
 pid_t spawn_node(char *argv[]);
