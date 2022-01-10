@@ -63,6 +63,15 @@ void send_transaction(pid_t sender, pid_t receiver, int quantity, int reward)
     currentTransaction.timestamp = tp;
 }
 
+
+/*void printLists(){
+    struct node *first=first;
+        while(first!=NULL){
+            printf("%d,%d",first->timeStamp, first->sender, first->receiver);
+    }
+	
+}*/
+
 /*void formatted_timestamp()
 {
     clock_t tic = clock();

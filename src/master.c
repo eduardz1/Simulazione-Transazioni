@@ -93,9 +93,28 @@ pid_t spawn_node(char **nodeArgv)
     }
 }
 
-void master_interrupt_handle(signum)
+void master_interrupt_handle(struct parameters *par)
 {
-    /* shmctl(shmID, IPC_RMID, NULL); */
+    int status;
+    int res_kill;
+    int i = 0;
+
+    pritnf("-- CTRL-C killing program");
+
+    for (i = 0; i < par->SO_NODES_NUM; i++)
+    {
+        /*if (childs[i].status == 1)
+        {
+            res_kill = kill(childs[1].pid, SIGINT); /* kill all childs*
+        }*/
+    }
+    while (wait(&status) != -1)
+    {
+        status >> 8;
+    }
+    /*semctl(semid, 0, IPC_RMID);     /*deleting mempid_sem */
+    /*shmtcl(pidmem_id, IPC_RMID, 0); /* deleting shared memory segment*/
+    exit(1);
 }
 
 int main(int argc, char *argv[])
@@ -107,8 +126,8 @@ int main(int argc, char *argv[])
     unsigned int simTime;
     char *argvSpawns[10] = {0};
 
-    user *usersPID; 
-    node *nodesPID; 
+    user *usersPID;
+    node *nodesPID;
 
     struct sigaction sa; /* we need to define an handler for CTRL-C command that closes any IPC object */
     struct sembuf sops;
@@ -153,7 +172,7 @@ int main(int argc, char *argv[])
      * then set the handler to handle SIGINT signals ((struct sigaction *oldact) = NULL)
      */
     bzero(&sa, sizeof(sa));
-    sa.sa_handler = master_interrupt_handle;
+    sa.sa_handler = master_interrupt_handle(par);
     sigaction(SIGINT, &sa, NULL);
 
 #ifdef VERBOSE
@@ -188,10 +207,10 @@ int main(int argc, char *argv[])
     {
         nodesPID[nCounter].status = available;
         nodesPID[nCounter].pid = spawn_node(argvSpawns);
-        if (getpid() != myPID){
+        if (getpid() != myPID)
+        {
             return;
         }
-            
     }
 
     sleep(simTime);

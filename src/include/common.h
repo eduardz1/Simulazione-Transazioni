@@ -131,4 +131,10 @@ void find_transaction(struct timespec timestamp, pid_t sender, pid_t receiver); 
 void send_transaction(pid_t sender, pid_t receiver, int quantity, int reward);
 void formatted_timestamp();
 
+/* listparser.c */
+void print_lists();
+void search_timestamp();
+void search_sender();
+void search_receiver();
+
 #endif /* SIMULAZIONE_TRANSAZIONI_COMMON_H */
