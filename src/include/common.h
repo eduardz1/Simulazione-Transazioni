@@ -3,6 +3,7 @@
 #define SIMULAZIONE_TRANSAZIONI_COMMON_H
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <stddef.h>
 #include <unistd.h>
 #include <errno.h>
@@ -27,6 +28,35 @@
 #define SO_BLOCK_SIZE 100     /* number of transaction per block*/
 #define SO_REGISTRY_SIZE 1000 /* max length of consecutive blocks */
 #define SELF -1
+
+#define TEST_ERROR                                 \
+    if (errno)                                     \
+    {                                              \
+        fprintf(stderr,                            \
+                "%s:%d: PID=%5d: Error %d (%s)\n", \
+                __FILE__,                          \
+                __LINE__,                          \
+                getpid(),                          \
+                errno,                             \
+                strerror(errno));                  \
+    }
+
+struct parameters
+{
+    int SO_USER_NUM;
+    int SO_NODES_NUM;
+    int SO_BUDGET_INIT;
+    int SO_REWARD;
+    int SO_MIN_TRANS_GEN_NSEC;
+    int SO_MAX_TRANS_GEN_NSEC;
+    int SO_RETRY;
+    int SO_TP_SIZE;
+    int SO_MIN_TRANS_PROC_NSEC;
+    int SO_MAX_TRANS_PROC_NSEC;
+    int SO_SIM_SEC;
+    int SO_FRIENDS_NUM;
+    int SO_HOPS;
+} par;
 
 /* Transaction struct */
 typedef struct transaction_t
