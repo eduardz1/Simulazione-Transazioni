@@ -28,7 +28,7 @@ typedef struct block {
 };
 
 struct node *first=NULL;
-struct block **first=NULL!;
+struct block **first=NULL;
 void printLists(){
     struct node *first=first;
         while(first!=NULL){
