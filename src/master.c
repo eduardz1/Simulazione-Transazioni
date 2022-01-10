@@ -124,21 +124,6 @@ int main(int argc, char *argv[])
     if (parseParameters(par) == CONF_ERROR)
         printf("-- Error reading conf file, defaulting to conf#1\n");
 
-    /*just there until parser works*
-    par->SO_USER_NUM = 10;
-    par->SO_NODES_NUM = 5;
-    par->SO_BUDGET_INIT = 1000;
-    par->SO_REWARD = 1;
-    par->SO_MIN_TRANS_GEN_NSEC = 100000000;
-    par->SO_MAX_TRANS_GEN_NSEC = 200000000;
-    par->SO_RETRY = 20;
-    par->SO_TP_SIZE = 1000;
-    par->SO_MIN_TRANS_PROC_NSEC = 100000000;
-    par->SO_MAX_TRANS_PROC_NSEC = 200000000;
-    par->SO_SIM_SEC = 10;
-    par->SO_FRIENDS_NUM = 3;
-    par->SO_HOPS = 10; */
-
     calloc(usersPID, ((par->SO_USER_NUM) * sizeof(pid_t)));
     calloc(nodesPID, ((par->SO_NODES_NUM) * sizeof(pid_t)));
     usersPID_ID = shmget(IPC_PRIVATE, sizeof(usersPID), 0600);
@@ -203,15 +188,15 @@ int main(int argc, char *argv[])
     printf("The time has come\n");
     /* kill(myPID, SIGINT); /* our sigint handler needs to do quite a lot of things to print the wall of test below */
 
-    print_user_nodes_table(myPID, usersPID, nodesPID, par->SO_USER_NUM, par->SO_NODES_NUM);
-    /* print_kill_signal();                /* need to define, prints reason of termination (simTime elapsed/
-                                                                                         ledger full/
-                                                                                         all processes terminated) *
-    print_user_balance();               /* need to define, prints balance of every user *
-    print_node_balance();               /* need to define, prints balance of every node *
-    print_num_aborted();                /* need to define, prints num of processes aborted *
-    print_num_blocks();                 /* need to define, prints num of blocks saved in the ledger *
-    print_transactions_still_in_pool(); /* need to define, prints num of transactions still in the pool of each node */
+    { /* -- FINAL PRINT -- */
+        print_user_nodes_table(myPID, usersPID, nodesPID, par->SO_USER_NUM, par->SO_NODES_NUM);
+        print_kill_signal();
+        print_user_balance();
+        print_node_balance();
+        print_num_aborted();
+        print_num_blocks();
+        print_transactions_still_in_pool();
+    }
 
     return 0;
 }

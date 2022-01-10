@@ -171,7 +171,8 @@ int parseParameters(struct parameters *par)
     }
 
 #ifdef VERBOSE
-    printf("--------------------------------------------\n");
+    printf("--------------------------------------------\n \
+            ----------- Configuration values -----------\n");
 #endif
     for (i = 0; i < NUM_PARAMETERS; i++)
     {
