@@ -35,13 +35,21 @@
  * so it's better to handle them in the master program
  */
 
+/* void wait_for_incoming_transaction() */
+
 void user_transactions_handle(int signum)
 {
 	/* return send_transaction(myPID, userPID, amount, reward); */
 }
 
+void user_interrupt_handle(int signum)
+{
+	/* */
+}
+
 int main(int argc, char *argv[])
 {
+	int i = 0;
 	unsigned int retry; /* command line int  */
 
 	unsigned int currentBalance, amount, reward;
@@ -49,7 +57,8 @@ int main(int argc, char *argv[])
 
 	struct timespec randSleepTime;
 	struct timespec sleepTimeRemaining;
-	struct sigaction sa;
+	struct sigaction saUSR1;
+	struct sigaction saINT;
 	struct parameters *par = shmat(PARAMETERS, NULL, 0);
 
 	pid_t *usersPID = malloc(10 * sizeof(pid_t));
@@ -60,19 +69,27 @@ int main(int argc, char *argv[])
 	if (argc == 0)
 	{
 		printf("Error in USERS: %d, no arguments passed\n", myPID);
+		return;
 	}
 
 	usersPID = shmat(USERS_PID_ARRAY, NULL, 0);
 	nodesPID = shmat(NODES_PID_ARRAY, NULL, 0);
 
-	/* -- SIGNAL HANDLER --
+	/* -- SIGNAL HANDLERS --
 	 * first set all bytes of sigation to 0
-	 * then initialize sa.handler to a pointer to the function user_transaction_handle
-	 * then set the handler to handle SIUSR1 signals ((struct sigaction *oldact) = NULL)
+	 * then initialize sa.handler to a pointer to 
+	 * the function user_transaction/interrupt_handle
+	 * then set the handler to handle SIUSR1/SIGINT signals 
+	 * ((struct sigaction *oldact) = NULL)
 	 */
-	bzero(&sa, sizeof(sa));
-	sa.sa_handler = user_transactions_handle;
-	sigaction(SIGUSR1, &sa, NULL);
+	bzero(&saUSR1, sizeof(saUSR1));
+	bzero(&saINT, sizeof(saINT));
+	saUSR1.sa_handler = user_transactions_handle;
+	saINT.sa_handler = user_interrupt_handle;
+	sigaction(SIGUSR1, &saUSR1, NULL);
+	sigaction(SIGINT, &saINT, NULL);
+
+
 	srand(time(NULL)); /* initialize rand function */
 
 	retry = par->SO_RETRY;
@@ -95,36 +112,44 @@ int main(int argc, char *argv[])
 		bzero(&sleepTimeRemaining, sizeof(sleepTimeRemaining));
 
 		currentBalance = 100 /*balance(myPID)*/;
-		if (currentBalance < 2)
-			return;
-
-		/* get random pid from user group */
-		userPID = usersPID[RAND(0, (par->SO_USER_NUM - 1))];
-		/* get random pid from nodes group */
-		nodePID = nodesPID[RAND(0, (par->SO_NODES_NUM - 1))];
-		/* get random int from 2 to currentBalance */
-		amount = RAND(2, currentBalance);
-
-		reward = REWARD(amount, par->SO_REWARD);
-		amount -= reward;
-
-		/* need a pipe or something else to enable user to communicate with node
-		 * and send it a send_transaction request
-		 */
-		send_transaction(myPID, userPID, amount, reward);
-
-		/* if (aborted) /* pseudo code, node needs to send an aborted or accepted signal*
-			retry--;
-		else
-			retry = SO_RETRY; */
-
-		clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &randSleepTime, &sleepTimeRemaining);
-		clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &sleepTimeRemaining, NULL);
-
-		if (!retry)
+		if (currentBalance >= 2)
 		{
-			printf("User %d has died because of too many retries :(\n", myPID);
-			return;
+
+			/* get random pid from user group */
+			userPID = usersPID[RAND(0, (par->SO_USER_NUM - 1))];
+			/* get random pid from nodes group */
+			nodePID = nodesPID[RAND(0, (par->SO_NODES_NUM - 1))];
+			/* get random int from 2 to currentBalance */
+			amount = RAND(2, currentBalance);
+
+			reward = REWARD(amount, par->SO_REWARD);
+			amount -= reward;
+
+			/* need a pipe or something else to enable user to communicate with node
+			 * and send it a send_transaction request
+			 */
+			send_transaction(myPID, userPID, amount, reward);
+
+			/* if (aborted) /* pseudo code, node needs to send an aborted or accepted signal*
+				retry--;
+			else
+				retry = SO_RETRY; */
+			if (retry == 0)
+				return MAX_RETRY;
+
+			clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &randSleepTime, &sleepTimeRemaining);
+			clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &sleepTimeRemaining, NULL);
+		}
+		else
+		{
+			if (i == 0)
+			{
+				printf("User %d went broke :/\n", myPID);
+				i = 1;
+			}
+
+			/* update_status(WENT_BROKE); ////////
+			wait_for_incoming_transaction(); ///////// */
 		}
 	}
 }

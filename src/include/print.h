@@ -1,11 +1,10 @@
 #ifndef SIMULAZIONE_TRANSAZIONI_PRINT_H
 #define SIMULAZIONE_TRANSAZIONI_PRINT_H
 
-#include <stdio.h>
-#include <sys/types.h>
+#include "common.h"
 
-
-void print_user_nodes_table(pid_t main, pid_t *user, pid_t *nodes, int userNum, int nodesNum); /* function that prints on terminal the PID of every user and node process */
+void print_time_to_die();
+void print_user_nodes_table(pid_t main, user *user, node *nodes, int userNum, int nodesNum); /* function that prints on terminal the PID of every user and node process */
 void print_kill_signal(); /* need to define, prints reason of termination (simTime elapsed/ledger full/every process terminated) */
 void print_user_balance(); /* need to define, prints balance of every user */
 void print_node_balance(); /* need to define, prints balance of every node */
