@@ -37,6 +37,36 @@
 
 /* void wait_for_incoming_transaction() */
 
+pid_t get_random_userPID(user *usersPID)
+{
+	int index;
+	pid_t val = 0;
+
+	do
+	{
+		index = RAND(0, ARRAY_SIZE(&usersPID) - 1);
+		if (usersPID[index].status != dead)
+			val = usersPID[index].pid;
+	} while (!val);
+
+	return val;
+}
+
+pid_t get_random_nodePID(node *nodesPID)
+{
+	int index;
+	pid_t val = 0;
+
+	do
+	{
+		index = RAND(0, ARRAY_SIZE(&nodesPID) - 1);
+		if (nodesPID[index].status == available)
+			val = nodesPID[index].pid;
+	} while (!val);
+
+	return val;
+}
+
 void user_transactions_handle(int signum)
 {
 	/* return send_transaction(myPID, userPID, amount, reward); */
@@ -50,36 +80,37 @@ void user_interrupt_handle(int signum)
 int main(int argc, char *argv[])
 {
 	int i = 0;
-	unsigned int retry; /* command line int  */
+	unsigned int retry;
 
 	unsigned int currentBalance, amount, reward;
 	pid_t myPID, userPID, nodePID;
 
 	struct timespec randSleepTime;
 	struct timespec sleepTimeRemaining;
+
 	struct sigaction saUSR1;
 	struct sigaction saINT;
-	struct parameters *par = shmat(PARAMETERS, NULL, 0);
 
-	pid_t *usersPID = malloc(10 * sizeof(pid_t));
-	pid_t *nodesPID = malloc(5 * sizeof(pid_t));
+	/* -- ATTACH IPC OBJECTS -- */
+	struct parameters *par = shmat(PARAMETERS, NULL, 0);
+	user *usersPID = shmat(USERS_PID_ARRAY, NULL, 0);
+	node *nodesPID = shmat(NODES_PID_ARRAY, NULL, 0);
 
 	myPID = getpid();
 
+	/* should give error anyway, pretty sure we don't need this check but
+	 * Fabio suggested it to me so it must stay for now
 	if (argc == 0)
 	{
 		printf("Error in USERS: %d, no arguments passed\n", myPID);
 		return;
-	}
-
-	usersPID = shmat(USERS_PID_ARRAY, NULL, 0);
-	nodesPID = shmat(NODES_PID_ARRAY, NULL, 0);
+	} */
 
 	/* -- SIGNAL HANDLERS --
 	 * first set all bytes of sigation to 0
-	 * then initialize sa.handler to a pointer to 
+	 * then initialize sa.handler to a pointer to
 	 * the function user_transaction/interrupt_handle
-	 * then set the handler to handle SIUSR1/SIGINT signals 
+	 * then set the handler to handle SIUSR1/SIGINT signals
 	 * ((struct sigaction *oldact) = NULL)
 	 */
 	bzero(&saUSR1, sizeof(saUSR1));
@@ -88,7 +119,6 @@ int main(int argc, char *argv[])
 	saINT.sa_handler = user_interrupt_handle;
 	sigaction(SIGUSR1, &saUSR1, NULL);
 	sigaction(SIGINT, &saINT, NULL);
-
 
 	srand(time(NULL)); /* initialize rand function */
 
@@ -114,18 +144,15 @@ int main(int argc, char *argv[])
 		currentBalance = 100 /*balance(myPID)*/;
 		if (currentBalance >= 2)
 		{
+			userPID = get_random_userPID(usersPID);
+			nodePID = get_random_nodePID(nodesPID);
 
-			/* get random pid from user group */
-			userPID = usersPID[RAND(0, (par->SO_USER_NUM - 1))];
-			/* get random pid from nodes group */
-			nodePID = nodesPID[RAND(0, (par->SO_NODES_NUM - 1))];
-			/* get random int from 2 to currentBalance */
 			amount = RAND(2, currentBalance);
 
 			reward = REWARD(amount, par->SO_REWARD);
 			amount -= reward;
 
-			/* need a pipe or something else to enable user to communicate with node
+			/* need a message queue to enable user to communicate with node
 			 * and send it a send_transaction request
 			 */
 			send_transaction(myPID, userPID, amount, reward);
