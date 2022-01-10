@@ -22,6 +22,10 @@
 #define _GNU_SOURCE
 #endif
 
+#if 0
+#define VERBOSE
+#endif
+
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 #define RAND(min, max) ((rand() % (max - min + 1)) + min)
 

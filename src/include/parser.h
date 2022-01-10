@@ -5,9 +5,10 @@
 #include <string.h>
 
 #define NUM_PARAMETERS 13
-#define CONF_FILE "../conf.txt"
+#define CONF_FILE "conf.txt"
+#define CONF_ERROR -1
 
-struct parameters parser(void);
+int parseParameters(struct parameters *par);
 
 void assignDefaults(struct parameters *par);
 

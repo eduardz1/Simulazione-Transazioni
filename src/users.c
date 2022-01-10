@@ -53,15 +53,18 @@ int main(int argc, char *argv[])
 	struct parameters *par = shmat(PARAMETERS, NULL, 0);
 
 	pid_t *usersPID = malloc(10 * sizeof(pid_t));
-	pid_t *nodesPID = malloc(5 * sizeof(pid_t)); 
+	pid_t *nodesPID = malloc(5 * sizeof(pid_t));
+
+	myPID = getpid();
+
+	if (argc == 0)
+	{
+		printf("Error in USERS: %d, no arguments passed\n", myPID);
+	}
 
 	usersPID = shmat(USERS_PID_ARRAY, NULL, 0);
 	nodesPID = shmat(NODES_PID_ARRAY, NULL, 0);
 
-	myPID = getpid();
-	printf("User %d has finished", myPID);
-    return;
-	
 	/* -- SIGNAL HANDLER --
 	 * first set all bytes of sigation to 0
 	 * then initialize sa.handler to a pointer to the function user_transaction_handle
@@ -91,14 +94,14 @@ int main(int argc, char *argv[])
 		 */
 		bzero(&sleepTimeRemaining, sizeof(sleepTimeRemaining));
 
-		currentBalance = 100/*balance(myPID)*/;
+		currentBalance = 100 /*balance(myPID)*/;
 		if (currentBalance < 2)
 			return;
 
 		/* get random pid from user group */
-		userPID = usersPID[RAND(0, (par->SO_USER_NUM-1))];
+		userPID = usersPID[RAND(0, (par->SO_USER_NUM - 1))];
 		/* get random pid from nodes group */
-		nodePID = nodesPID[RAND(0, (par->SO_NODES_NUM-1))];
+		nodePID = nodesPID[RAND(0, (par->SO_NODES_NUM - 1))];
 		/* get random int from 2 to currentBalance */
 		amount = RAND(2, currentBalance);
 
@@ -119,6 +122,9 @@ int main(int argc, char *argv[])
 		clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &sleepTimeRemaining, NULL);
 
 		if (!retry)
+		{
+			printf("User %d has died because of too many retries :(\n", myPID);
 			return;
+		}
 	}
 }

@@ -53,7 +53,8 @@ void assignDefaults(struct parameters *par)
     par->SO_FRIENDS_NUM = 3;
     par->SO_HOPS = 10;
 }
-struct parameters parser(void)
+
+int parseParameters(struct parameters *par)
 {
     FILE *fp;
 
@@ -66,12 +67,15 @@ struct parameters parser(void)
     char *tokens[NUM_PARAMETERS];
     int values[NUM_PARAMETERS];
 
-    struct parameters *par = malloc(sizeof(struct parameters));
+    /*struct parameters *par = malloc(sizeof(struct parameters));*/
     assignDefaults(par);
+#ifdef VERBOSE
+    printf("-- Assigned defaults\n");
+#endif
 
     fp = fopen(CONF_FILE, "r");
     if (fp == NULL)
-        return *par; /* default config */
+        return CONF_ERROR; /* default config */
 
     while (fgets(buffer, 127, fp))
     {
@@ -166,14 +170,22 @@ struct parameters parser(void)
         }
     }
 
+#ifdef VERBOSE
+    printf("--------------------------------------------\n");
+#endif
     for (i = 0; i < NUM_PARAMETERS; i++)
     {
-        /*printf("%s %d\n", tokens[i], values[i]);*/
+#ifdef VERBOSE
+        printf("%s %d\n", tokens[i], values[i]);
+#endif
         /*printf("%d\n", parameters[i]);*/
         free(tokens[i]);
     }
+#ifdef VERBOSE
+    printf("--------------------------------------------\n");
+#endif
 
     fclose(fp);
 
-    return *par;
+    return 0;
 }
