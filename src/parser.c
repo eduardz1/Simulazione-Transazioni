@@ -37,7 +37,22 @@ struct parameters
     {"SO_MIN_TRANS_PROC_NSEC", SO_MIN_TRANS_PROC_NSEC},
     {"SO_MAX_TRANS_PROC_NSEC", SO_MAX_TRANS_PROC_NSEC}};*/
 
-
+void assignDefaults(struct parameters *par)
+{
+    par->SO_USER_NUM = 100;
+    par->SO_NODES_NUM = 10;
+    par->SO_BUDGET_INIT = 1000;
+    par->SO_REWARD = 1;
+    par->SO_MIN_TRANS_GEN_NSEC = 100000000;
+    par->SO_MAX_TRANS_GEN_NSEC = 200000000;
+    par->SO_RETRY = 20;
+    par->SO_TP_SIZE = 1000;
+    par->SO_MIN_TRANS_PROC_NSEC = 100000000;
+    par->SO_MAX_TRANS_PROC_NSEC = 200000000;
+    par->SO_SIM_SEC = 10;
+    par->SO_FRIENDS_NUM = 3;
+    par->SO_HOPS = 10;
+}
 struct parameters parser(void)
 {
     FILE *fp;
@@ -48,29 +63,15 @@ struct parameters parser(void)
     char buffer[128];
     int i = 0;
 
-    struct parameters *par;
-    /* con#1 as default *
-    int parameters[NUM_PARAMETERS] = {100,
-                                      10,
-                                      1000,
-                                      1,
-                                      100000000,
-                                      200000000,
-                                      20,
-                                      1000,
-                                      100000000,
-                                      200000000,
-                                      10,
-                                      3,
-                                      10};*/
-
     char *tokens[NUM_PARAMETERS];
     int values[NUM_PARAMETERS];
 
+    struct parameters *par = malloc(sizeof(struct parameters));
+    assignDefaults(par);
+
     fp = fopen(CONF_FILE, "r");
     if (fp == NULL)
-        printf("oops");
-    /* return parameters; /* default config */
+        return *par; /* default config */
 
     while (fgets(buffer, 127, fp))
     {
@@ -103,7 +104,7 @@ struct parameters parser(void)
         } it can be implemented in a nicer to look at way, but not now */
 
         /*printf("%s\n",tokens[i]);*/
-        
+
         if (!strcmp(tokens[i], "SO_USER_NUM"))
         {
             par->SO_USER_NUM = values[i];
@@ -163,18 +164,13 @@ struct parameters parser(void)
         {
             par->SO_HOPS = values[i];
         }
-
-        /*printf("end check\n");*/
-
-        /*free(tokens[i]);*/
-        /*free(values[i]);*/
     }
 
     for (i = 0; i < NUM_PARAMETERS; i++)
     {
         /*printf("%s %d\n", tokens[i], values[i]);*/
         /*printf("%d\n", parameters[i]);*/
-        free(tokens[i]);  
+        free(tokens[i]);
     }
 
     fclose(fp);

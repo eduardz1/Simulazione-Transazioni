@@ -3,7 +3,7 @@ CFLAGS=-std=c89 -g -O0 -pedantic -D_GNU_SOURCE
 
 all: master users nodes
 
-master: src/master.c src/include/master.h src/common.c src/include/common.h
+master: src/master.c src/include/master.h src/common.c src/include/common.h src/print.c src/include/print.h src/parser.c src/include/parser.h
 	$(CC) $(CFLAGS) src/master.c src/common.c src/print.c src/parser.c -lm -o master
 
 users: src/users.c src/include/users.h src/common.c src/include/common.h

@@ -1,20 +1,21 @@
 #include "include/common.h"
 #include "include/users.h"
 
-#define SO_USER_NUM (atoi(argv[1]))
+/*#define SO_USER_NUM (atoi(argv[1]))
 #define SO_NODES_NUM (atoi(argv[2]))
 #define SO_NUM_FRIENDS (atoi(argv[3]))
 #define SO_SIM_SEC (atoi(argv[4]))
 
-/* -- USER CL PARAMETERS -- */
+/* -- USER CL PARAMETERS -- *
 #define SO_BUDGET_INIT (atoi(argv[5]))
 #define SO_REWARD (atoi(argv[6]))
 #define SO_RETRY (atoi(argv[7]))
 #define SO_MIN_TRANS_GEN_NSEC (atol(argv[8]))
 #define SO_MAX_TRANS_GEN_NSEC (atol(argv[9]))
-
-#define USERS_PID_ARRAY (atoi(argv[10]))
-#define NODES_PID_ARRAY (atoi(argv[11]))
+*/
+#define USERS_PID_ARRAY (atoi(argv[1]))
+#define NODES_PID_ARRAY (atoi(argv[2]))
+#define PARAMETERS (atoi(argv[3]))
 
 #define REWARD(amount, reward) (ceil(((reward * (amount)) / 100.0)))
 /*
@@ -49,12 +50,16 @@ int main(int argc, char *argv[])
 	struct timespec randSleepTime;
 	struct timespec sleepTimeRemaining;
 	struct sigaction sa;
+	struct parameters *par = shmat(PARAMETERS, NULL, 0);
 
-	pid_t *usersPID = malloc(SO_USER_NUM * sizeof(pid_t));
-	pid_t *nodesPID = malloc(SO_NODES_NUM * sizeof(pid_t));
+	pid_t *usersPID = malloc(10 * sizeof(pid_t));
+	pid_t *nodesPID = malloc(5 * sizeof(pid_t)); 
+
 	usersPID = shmat(USERS_PID_ARRAY, NULL, 0);
 	nodesPID = shmat(NODES_PID_ARRAY, NULL, 0);
 
+	myPID = getpid();
+	printf("User %d has finished", myPID);
     return;
 	
 	/* -- SIGNAL HANDLER --
@@ -67,7 +72,7 @@ int main(int argc, char *argv[])
 	sigaction(SIGUSR1, &sa, NULL);
 	srand(time(NULL)); /* initialize rand function */
 
-	retry = SO_RETRY;
+	retry = par->SO_RETRY;
 
 	while (1)
 	{
@@ -77,7 +82,7 @@ int main(int argc, char *argv[])
 		 * value for nsec is a random number from SO_MIN and SO_MAX
 		 */
 		randSleepTime.tv_sec = 0;
-		randSleepTime.tv_nsec = RAND(SO_MIN_TRANS_GEN_NSEC, SO_MAX_TRANS_GEN_NSEC);
+		randSleepTime.tv_nsec = RAND(par->SO_MIN_TRANS_GEN_NSEC, par->SO_MAX_TRANS_GEN_NSEC);
 		/*
 		 * save the time unslept when interrupted by SIGUSR1
 		 * so that we can't force transactions at a much greater speed
@@ -91,13 +96,13 @@ int main(int argc, char *argv[])
 			return;
 
 		/* get random pid from user group */
-		userPID = usersPID[RAND(0, (SO_USER_NUM-1))];
+		userPID = usersPID[RAND(0, (par->SO_USER_NUM-1))];
 		/* get random pid from nodes group */
-		nodePID = nodesPID[RAND(0, (SO_NODES_NUM-1))];
+		nodePID = nodesPID[RAND(0, (par->SO_NODES_NUM-1))];
 		/* get random int from 2 to currentBalance */
 		amount = RAND(2, currentBalance);
 
-		reward = REWARD(amount, SO_REWARD);
+		reward = REWARD(amount, par->SO_REWARD);
 		amount -= reward;
 
 		/* need a pipe or something else to enable user to communicate with node

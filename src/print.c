@@ -9,7 +9,7 @@ void print_user_nodes_table(pid_t mainPID, pid_t *userPID, pid_t *nodePID, int u
     {
         printf("User %d\n", userPID[userNum]);
     }
-    printf("------------------------------------------\n");
+    printf("--------------------------------------------\n");
     while (nodesNum--)
     {
         printf("Node %d\n", nodePID[nodesNum]);

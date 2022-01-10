@@ -1,5 +1,8 @@
 #include <time.h>
+#include "include/common.h"
 
-
-#define SO_TP_SIZE
-#define SO_BLOCK_SIZE
+int main(int argc, char *argv[]){
+    int myPID = getpid();
+    printf("Node %d has finished\n", myPID);
+    return;
+}
