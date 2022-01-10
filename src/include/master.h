@@ -43,8 +43,6 @@
  * - number of transaction still in the pool, for each node
  */
 
-#include <sys/types.h>
-#include <stdio.h>
 #include <string.h>
 #include <signal.h>
 
@@ -53,6 +51,6 @@ void makeArguments(char **argv, int *IPCarray); /* UN = 0:users, 1:nodes */
 pid_t spawn_user(char *argv[]);
 pid_t spawn_node(char *argv[]);
 
-void interrupt_handle(int signum);
+void master_interrupt_handle(struct parameters *par);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_MASTER_H */

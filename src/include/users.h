@@ -7,5 +7,6 @@
 #include <signal.h>
 
 void user_transactions_handle(int signum);
+void user_interrupt_handle(int signum);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_USERS_H */

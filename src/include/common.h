@@ -13,6 +13,7 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <sys/sem.h>
+#include <sys/types.h>
 
 #ifndef NULL
 #define NULL 0 /* thre's a problem with NULL for some reason */
@@ -32,6 +33,11 @@
 #define SO_BLOCK_SIZE 100     /* number of transaction per block*/
 #define SO_REGISTRY_SIZE 1000 /* max length of consecutive blocks */
 #define SELF -1
+#define EVERYONE_BROKE '$'
+
+/* -- USER RETURN STATUS -- */
+#define WENT_BROKE 1
+#define MAX_RETRY 2
 
 #define TEST_ERROR                                 \
     if (errno)                                     \
@@ -60,7 +66,28 @@ struct parameters
     int SO_SIM_SEC;
     int SO_FRIENDS_NUM;
     int SO_HOPS;
-} par;
+};
+
+typedef struct user_t
+{
+    pid_t pid;
+    enum
+    {
+        alive,
+        broke,
+        dead
+    } status;
+} user;
+
+typedef struct node_t
+{
+    pid_t pid;
+    enum
+    {
+        available,
+        full
+    } status;
+} node;
 
 /* Transaction struct */
 typedef struct transaction_t
@@ -102,5 +129,12 @@ void add_transaction_to_block(struct block *, transaction *, int index);
 void add_block_to_ledger(struct block *);
 void find_transaction(struct timespec timestamp, pid_t sender, pid_t receiver); /* NULL used to group results */
 void send_transaction(pid_t sender, pid_t receiver, int quantity, int reward);
+void formatted_timestamp();
+
+/* listparser.c */
+void print_lists();
+void search_timestamp();
+void search_sender();
+void search_receiver();
 
 #endif /* SIMULAZIONE_TRANSAZIONI_COMMON_H */

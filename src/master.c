@@ -93,22 +93,41 @@ pid_t spawn_node(char **nodeArgv)
     }
 }
 
-void interrupt_handle(signum)
+void master_interrupt_handle(struct parameters *par)
 {
-    /* shmctl(shmID, IPC_RMID, NULL); */
+    int status;
+    int res_kill;
+    int i = 0;
+
+    pritnf("-- CTRL-C killing program");
+
+    for (i = 0; i < par->SO_NODES_NUM; i++)
+    {
+        /*if (childs[i].status == 1)
+        {
+            res_kill = kill(childs[1].pid, SIGINT); /* kill all childs*
+        }*/
+    }
+    while (wait(&status) != -1)
+    {
+        status >> 8;
+    }
+    /*semctl(semid, 0, IPC_RMID);     /*deleting mempid_sem */
+    /*shmtcl(pidmem_id, IPC_RMID, 0); /* deleting shared memory segment*/
+    exit(1);
 }
 
 int main(int argc, char *argv[])
 {
     pid_t myPID = getpid();
 
-    int uCounter, nCounter;
+    int uCounter, nCounter, returnVal;
     int IPC_array[3] = {0};
     unsigned int simTime;
     char *argvSpawns[10] = {0};
 
-    pid_t *usersPID; /* Array of users' PIDs */
-    pid_t *nodesPID; /* Array of nodes' PIDs */
+    user *usersPID;
+    node *nodesPID;
 
     struct sigaction sa; /* we need to define an handler for CTRL-C command that closes any IPC object */
     struct sembuf sops;
@@ -124,12 +143,12 @@ int main(int argc, char *argv[])
     if (parseParameters(par) == CONF_ERROR)
         printf("-- Error reading conf file, defaulting to conf#1\n");
 
-    calloc(usersPID, ((par->SO_USER_NUM) * sizeof(pid_t)));
-    calloc(nodesPID, ((par->SO_NODES_NUM) * sizeof(pid_t)));
+    calloc(usersPID, ((par->SO_USER_NUM) * sizeof(user)));
+    calloc(nodesPID, ((par->SO_NODES_NUM) * sizeof(node)));
     usersPID_ID = shmget(IPC_PRIVATE, sizeof(usersPID), 0600);
     nodesPID_ID = shmget(IPC_PRIVATE, sizeof(nodesPID), 0600);
-    usersPID = (pid_t *)shmat(usersPID_ID, NULL, 0);
-    nodesPID = (pid_t *)shmat(nodesPID_ID, NULL, 0);
+    usersPID = (user *)shmat(usersPID_ID, NULL, 0);
+    nodesPID = (node *)shmat(nodesPID_ID, NULL, 0);
 
     shmctl(usersPID_ID, IPC_RMID, NULL);
     shmctl(nodesPID_ID, IPC_RMID, NULL);
@@ -153,7 +172,7 @@ int main(int argc, char *argv[])
      * then set the handler to handle SIGINT signals ((struct sigaction *oldact) = NULL)
      */
     bzero(&sa, sizeof(sa));
-    sa.sa_handler = interrupt_handle;
+    sa.sa_handler = master_interrupt_handle(par);
     sigaction(SIGINT, &sa, NULL);
 
 #ifdef VERBOSE
@@ -168,34 +187,45 @@ int main(int argc, char *argv[])
 
     for (uCounter = 0; uCounter < par->SO_USER_NUM; uCounter++)
     {
-        usersPID[uCounter] = spawn_user(argvSpawns);
+        usersPID[uCounter].status = alive;
+        usersPID[uCounter].pid = spawn_user(argvSpawns);
         if (getpid() != myPID)
+        {
+            switch (returnVal = wait(NULL))
+            {
+            case MAX_RETRY:
+                /* change status in usersPID */
+                printf("User %d has died because of too many retries :(\n", getpid());
+                break;
+            }
+
             return;
+        }
     }
 
     for (nCounter = 0; nCounter < par->SO_NODES_NUM; nCounter++)
     {
-        nodesPID[nCounter] = spawn_node(argvSpawns);
+        nodesPID[nCounter].status = available;
+        nodesPID[nCounter].pid = spawn_node(argvSpawns);
         if (getpid() != myPID)
+        {
             return;
+        }
     }
-
-    if (getpid() != myPID)
-        return;
 
     sleep(simTime);
 
-    printf("The time has come\n");
+    print_time_to_die();
     /* kill(myPID, SIGINT); /* our sigint handler needs to do quite a lot of things to print the wall of test below */
 
     { /* -- FINAL PRINT -- */
         print_user_nodes_table(myPID, usersPID, nodesPID, par->SO_USER_NUM, par->SO_NODES_NUM);
-        print_kill_signal();
+        /*print_kill_signal();
         print_user_balance();
         print_node_balance();
         print_num_aborted();
         print_num_blocks();
-        print_transactions_still_in_pool();
+        print_transactions_still_in_pool();*/
     }
 
     return 0;
