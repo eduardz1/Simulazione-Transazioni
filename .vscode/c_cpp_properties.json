@@ -3,16 +3,57 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/src/include/**",
+                "/usr/include/x86_64-linux-gnu"
             ],
             "defines": [
                 "_DEBUG",
                 "UNICODE",
-                "_UNICODE"
+                "_UNICODE",
+                "_GNU_SOURCE"
             ],
-            "cStandard": "c17",
+            "cStandard": "c89",
             "cppStandard": "c++17",
-            "intelliSenseMode": "windows-msvc-x64"
+            "intelliSenseMode": "windows-msvc-x86",
+            "compilerPath": "C:/msys64/mingw64/bin/gcc.exe",
+            "compilerArgs": [],
+            "mergeConfigurations": false,
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/src/include/**",
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/src/include/**",
+                "/usr/lib/gcc/x86_64-linux-gnu/9/include/",
+                "/usr/lib/gcc/x86_64-linux-gnu/10/include/",
+                "/usr/lib/gcc/x86_64-linux-gnu/11/include/",
+                "/usr/lib/x86_64-linux-gnu/include",
+                "/usr/include/linux",
+                "/usr/include/c++/11.2.0/tr1",
+                "/usr/include/c++/11.2.0/x86_64-unknown-linux-gnu"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64",
+            "compilerArgs": [
+                "--disable-multilib"
+            ],
+            "cStandard": "c89",
+            "mergeConfigurations": false,
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/**"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
         }
     ],
     "version": 4
