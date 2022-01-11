@@ -24,12 +24,12 @@ pid_t myPID;
 /*void Node()
 {
     int t_pool[SO_TP_SIZE];
-    checkTpFull(t_pool[SO_TP_SIZE]);
-    arrayProcesser();
-    createBlock();
+    check_Tp_Full(t_pool[SO_TP_SIZE]);
+    array_Processer();
+    create_Block();
 }
 
-int checkTpFull(int t_pool[SO_TP_SIZE])
+int check_Tp_Full(int t_pool[SO_TP_SIZE])
 {
     if (t_pool[SO_TP_SIZE] == SO_TP_SIZE)
     {
@@ -37,16 +37,19 @@ int checkTpFull(int t_pool[SO_TP_SIZE])
     }
 }
 
-void arrayProcesser()
+void array_Processer()
 {
     int i = 0;
     for (i; i < SO_TP_SIZE - 1; i++)
     {
+        
     }
 }
 
 int createBlock()
 {
+
+    
 }
 
 int sleepMethod(int argc, char *argv[])
