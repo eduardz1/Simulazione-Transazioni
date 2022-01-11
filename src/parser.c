@@ -1,4 +1,5 @@
 #include "include/common.h"
+#include "utils/debug.h"
 #include "include/parser.h"
 
 /*enum paramID
@@ -37,7 +38,7 @@ struct parameters
     {"SO_MIN_TRANS_PROC_NSEC", SO_MIN_TRANS_PROC_NSEC},
     {"SO_MAX_TRANS_PROC_NSEC", SO_MAX_TRANS_PROC_NSEC}};*/
 
-void assignDefaults(struct parameters *par)
+void assign_defaults(struct parameters *par)
 {
     par->SO_USER_NUM = 100;
     par->SO_NODES_NUM = 10;
@@ -54,7 +55,7 @@ void assignDefaults(struct parameters *par)
     par->SO_HOPS = 10;
 }
 
-int parseParameters(struct parameters *par)
+int parse_parameters(struct parameters *par)
 {
     FILE *fp;
 
@@ -65,13 +66,11 @@ int parseParameters(struct parameters *par)
     int i = 0;
 
     char *tokens[NUM_PARAMETERS];
-    int values[NUM_PARAMETERS];
+    unsigned long values[NUM_PARAMETERS]; /* downcast is easy, upcast not so much */
 
     /*struct parameters *par = malloc(sizeof(struct parameters));*/
-    assignDefaults(par);
-#ifdef VERBOSE
-    printf("-- Assigned defaults\n");
-#endif
+    assign_defaults(par);
+    TRACE((":parser: assigned defaults\n"));
 
     fp = fopen(CONF_FILE, "r");
     if (fp == NULL)
@@ -82,7 +81,7 @@ int parseParameters(struct parameters *par)
         tokens[i] = malloc(64);
         /*values[i] = malloc(sizeof(int));*/
 
-        sscanf(buffer, "%s %d", tokens[i], &values[i]);
+        sscanf(buffer, "%s %lu", tokens[i], &values[i]);
 
         i++;
     }
@@ -123,14 +122,14 @@ int parseParameters(struct parameters *par)
         }
         else if (!strcmp(tokens[i], "SO_REWARD"))
         {
+            /* given that it is a char it's very easy to get it out of bound,
+             * I prefer straight up normalizing it rather than resetting everything
+             * because of ERANGE
+             */
             if (values[i] >= 0 && values[i] <= 100)
-            {
                 par->SO_REWARD = values[i];
-            }
             else
-            {
-                printf("-- SO_REWARD incorrect value, defaulting to 1\n");
-            }
+                printf(":parser: SO_REWARD incorrect value, resetting default\n");
         }
         else if (!strcmp(tokens[i], "SO_MIN_TRANS_GEN_NSEC"))
         {
@@ -170,20 +169,30 @@ int parseParameters(struct parameters *par)
         }
     }
 
-#ifdef VERBOSE
-    printf("--------------------------------------------\n----------- Configuration values -----------\n");
-#endif
+    /* -- CONF ERRORS CORRECTION -- */
+    if (errno == ERANGE)
+    {
+        TRACE((":parser: one or multiple values out of bound, resetting defaults\n"));
+        assign_defaults(par);
+    }
+    if (par->SO_MIN_TRANS_GEN_NSEC > par->SO_MAX_TRANS_GEN_NSEC)
+    {
+        TRACE((":parser: SO_MIN_TRANS_GEN_NSEC greater than SO_MAX_TRANS_GEN_NSEC, will be normalized\n"));
+        par->SO_MIN_TRANS_GEN_NSEC = par->SO_MAX_TRANS_GEN_NSEC;
+    }
+    if (par->SO_MIN_TRANS_PROC_NSEC > par->SO_MAX_TRANS_PROC_NSEC)
+    {
+        TRACE((":parser: SO_MIN_TRANS_PROC_NSEC greater than SO_MAX_TRANS_PROC_NSEC, will be normalized\n"));
+        par->SO_MIN_TRANS_PROC_NSEC = par->SO_MAX_TRANS_PROC_NSEC;
+    }
+
+    TRACE(("--------------------------------------------\n----------- Configuration input ------------\n"));
     for (i = 0; i < NUM_PARAMETERS; i++)
     {
-#ifdef VERBOSE
-        printf("%s %d\n", tokens[i], values[i]);
-#endif
-        /*printf("%d\n", parameters[i]);*/
+        TRACE(("%s %lu\n", tokens[i], values[i]));
         free(tokens[i]);
     }
-#ifdef VERBOSE
-    printf("--------------------------------------------\n");
-#endif
+    TRACE(("--------------------------------------------\n"));
 
     fclose(fp);
 

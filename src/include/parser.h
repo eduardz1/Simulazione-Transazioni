@@ -8,8 +8,8 @@
 #define CONF_FILE "conf.txt"
 #define CONF_ERROR -1
 
-int parseParameters(struct parameters *par);
+int parse_parameters(struct parameters *par);
 
-void assignDefaults(struct parameters *par);
+void assign_defaults(struct parameters *par);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_PARSER_H */

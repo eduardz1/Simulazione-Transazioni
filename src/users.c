@@ -74,6 +74,7 @@ void user_transactions_handle(int signum)
 
 void user_interrupt_handle(int signum)
 {
+	write(1, "::User:: SIGINT ricevuto\n", 32);
 	exit(0);
 }
 
@@ -119,6 +120,7 @@ int main(int argc, char *argv[])
 	saINT.sa_handler = user_interrupt_handle;
 	sigaction(SIGUSR1, &saUSR1, NULL);
 	sigaction(SIGINT, &saINT, NULL);
+	sigaction(SIGCHLD, &saINT, NULL);
 
 	srand(time(NULL)); /* initialize rand function */
 
