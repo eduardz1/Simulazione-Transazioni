@@ -2,6 +2,7 @@
 #include "include/master.h"
 #include "include/print.h"
 #include "include/parser.h"
+#include "utils/debug.h"
 
 /* -- CL PARAMETERS INITIALIZATION -- *
 #define SO_USER_NUM (atoi(argv[1]))
@@ -94,8 +95,8 @@ pid_t spawn_node(char *nodeArgv[])
 }
 
 void master_interrupt_handle(int signum)
-{ 
-    killpg(0, SIGINT);
+{
+    write(1, "::Master:: SIGINT ricevuto\n", 32);
     /*
      int status;
      int res_kill;
@@ -117,7 +118,7 @@ void master_interrupt_handle(int signum)
      /*semctl(semid, 0, IPC_RMID);     /*deleting mempid_sem *
      /*shmtcl(pidmem_id, IPC_RMID, 0); /* deleting shared memory segment*
      exit(1);*/
-    exit(0);
+    exit(1);
 }
 
 int main(int argc, char *argv[])
@@ -132,7 +133,9 @@ int main(int argc, char *argv[])
     user *usersPID;
     node *nodesPID;
 
-    struct sigaction sa; /* we need to define an handler for CTRL-C command that closes any IPC object */
+    /* we two separate handlers for CTRL-C and SIGUSR2, it simpflifies everything */
+    struct sigaction sa;
+
     struct sembuf sops;
     struct parameters *par;
 
@@ -144,12 +147,10 @@ int main(int argc, char *argv[])
     par_ID = shmget((key_t)SHM_PARAMETERS, sizeof(par), IPC_CREAT | IPC_EXCL | 0600);
     par = (struct parameters *)shmat(par_ID, NULL, 0);
     if (parseParameters(par) == CONF_ERROR)
-        printf("-- Error reading conf file, defaulting to conf#1\n");
+        TRACE(("-- Error reading conf file, defaulting to conf#1\n"));
 
-    calloc(usersPID, ((par->SO_USER_NUM) * sizeof(user)));
-    calloc(nodesPID, ((par->SO_NODES_NUM) * sizeof(node)));
-    usersPID_ID = shmget((key_t)SHM_USERS_ARRAY, sizeof(usersPID), IPC_CREAT | IPC_EXCL | 0600);
-    nodesPID_ID = shmget((key_t)SHM_NODES_ARRAY, sizeof(nodesPID), IPC_CREAT | IPC_EXCL | 0600);
+    usersPID_ID = shmget((key_t)SHM_USERS_ARRAY, (par->SO_USER_NUM) * sizeof(user), IPC_CREAT | IPC_EXCL | 0600);
+    nodesPID_ID = shmget((key_t)SHM_NODES_ARRAY, (par->SO_NODES_NUM) * sizeof(node), IPC_CREAT | IPC_EXCL | 0600);
     usersPID = (user *)shmat(usersPID_ID, NULL, 0);
     nodesPID = (node *)shmat(nodesPID_ID, NULL, 0);
 
@@ -169,7 +170,7 @@ int main(int argc, char *argv[])
 
     /*ledger_init(); SEG FAULT RN */
 
-    /* -- SIGNAL HANDLER --
+    /* -- SIGNAL HANDLERS --
      * first set all bytes of sigation to 0
      * then initialize sa.handler to a pointer to the function interrupt_handle
      * then set the handler to handle SIGINT signals ((struct sigaction *oldact) = NULL)

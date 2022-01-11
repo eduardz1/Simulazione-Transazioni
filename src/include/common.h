@@ -30,9 +30,10 @@
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 #define RAND(min, max) ((rand() % (max - min + 1)) + min)
 
+
 /* -- IPC OBJECTS -- */
 #define IPC_ERROR -1
-#define SHM_PARAMETERS  1337
+#define SHM_PARAMETERS 1337
 #define SHM_USERS_ARRAY 1338
 #define SHM_NODES_ARRAY 1339
 
@@ -142,6 +143,5 @@ void print_lists();
 void search_timestamp();
 void search_sender();
 void search_receiver();
-
 
 #endif /* SIMULAZIONE_TRANSAZIONI_COMMON_H */

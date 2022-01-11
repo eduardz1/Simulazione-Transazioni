@@ -52,5 +52,6 @@ pid_t spawn_user(char *argv[]);
 pid_t spawn_node(char *argv[]);
 
 void master_interrupt_handle(int signum);
+void master_sigusr2_handle(int signum);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_MASTER_H */
