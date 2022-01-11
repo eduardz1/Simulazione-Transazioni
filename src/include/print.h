@@ -13,5 +13,6 @@ void print_num_blocks(); /* need to define, prints num of blocks saved in the le
 void print_transactions_still_in_pool(); /* need to define, prints num of transactions still in the pool of each node */
 
 void final_print(pid_t masterPID, user *usersPID, node *nodesPID, struct parameters *par);
+void print_parameters(struct parameters *par);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_PRINT_H */

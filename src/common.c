@@ -1,3 +1,4 @@
+#include "utils/debug.h"
 #include "include/common.h"
 
 ledger *ledger_init()

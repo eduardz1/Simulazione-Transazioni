@@ -46,6 +46,12 @@
 #define WENT_BROKE 1
 #define MAX_RETRY 2
 
+
+#if 1
+#define DEBUG
+#endif
+extern int errno;
+
 #define TEST_ERROR                                 \
     if (errno)                                     \
     {                                              \
@@ -60,19 +66,19 @@
 
 struct parameters
 {
-    int SO_USER_NUM;
-    int SO_NODES_NUM;
-    int SO_BUDGET_INIT;
-    int SO_REWARD;
-    int SO_MIN_TRANS_GEN_NSEC;
-    int SO_MAX_TRANS_GEN_NSEC;
-    int SO_RETRY;
-    int SO_TP_SIZE;
-    int SO_MIN_TRANS_PROC_NSEC;
-    int SO_MAX_TRANS_PROC_NSEC;
-    int SO_SIM_SEC;
-    int SO_FRIENDS_NUM;
-    int SO_HOPS;
+    unsigned int SO_USER_NUM;
+    unsigned int SO_NODES_NUM;
+    unsigned int SO_BUDGET_INIT;
+    char SO_REWARD; /* max value 100 */
+    unsigned long SO_MIN_TRANS_GEN_NSEC;
+    unsigned long SO_MAX_TRANS_GEN_NSEC;
+    unsigned int SO_RETRY;
+    unsigned int SO_TP_SIZE;
+    unsigned long SO_MIN_TRANS_PROC_NSEC;
+    unsigned long SO_MAX_TRANS_PROC_NSEC;
+    unsigned int SO_SIM_SEC;
+    unsigned int SO_FRIENDS_NUM;
+    unsigned int SO_HOPS;
 };
 
 typedef struct user_t

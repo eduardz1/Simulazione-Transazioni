@@ -118,7 +118,7 @@ void master_interrupt_handle(int signum)
      /*semctl(semid, 0, IPC_RMID);     /*deleting mempid_sem *
      /*shmtcl(pidmem_id, IPC_RMID, 0); /* deleting shared memory segment*
      exit(1);*/
-    exit(1);
+    exit(0);
 }
 
 int main(int argc, char *argv[])
@@ -146,8 +146,11 @@ int main(int argc, char *argv[])
 
     par_ID = shmget((key_t)SHM_PARAMETERS, sizeof(par), IPC_CREAT | IPC_EXCL | 0600);
     par = (struct parameters *)shmat(par_ID, NULL, 0);
-    if (parseParameters(par) == CONF_ERROR)
+    if (parse_parameters(par) == CONF_ERROR)
         TRACE(("-- Error reading conf file, defaulting to conf#1\n"));
+#ifdef DEBUG
+    print_parameters(par);
+#endif
 
     usersPID_ID = shmget((key_t)SHM_USERS_ARRAY, (par->SO_USER_NUM) * sizeof(user), IPC_CREAT | IPC_EXCL | 0600);
     nodesPID_ID = shmget((key_t)SHM_NODES_ARRAY, (par->SO_NODES_NUM) * sizeof(node), IPC_CREAT | IPC_EXCL | 0600);
