@@ -74,7 +74,7 @@ void user_transactions_handle(int signum)
 
 void user_interrupt_handle(int signum)
 {
-	/* */
+	exit(0);
 }
 
 int main(int argc, char *argv[])

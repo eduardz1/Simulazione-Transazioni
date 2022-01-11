@@ -4,7 +4,7 @@
 
 /* transaction pool==transaction's array */
 
-void Node()
+/*void Node()
 {
     int t_pool[SO_TP_SIZE];
     checkTpFull(t_pool[SO_TP_SIZE]);
@@ -36,7 +36,7 @@ int sleepMethod(int argc, char *argv[])
 {
     randSleepTime.tv_sec = 0;
     randSleepTime.tv_nsec = RAND(SO_MIN_TRANS_PROC_NSEC, SO_MAX_TRANS_PROC_NSEC);
-}
+}*/
 
 int main(int argc, char *argv[])
 {
