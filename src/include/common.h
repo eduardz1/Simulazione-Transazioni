@@ -30,6 +30,11 @@
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 #define RAND(min, max) ((rand() % (max - min + 1)) + min)
 
+/* -- IPC OBJECTS -- */
+#define SHM_USERS_ARRAY 1337
+#define SHM_NODES_ARRAY 1338
+#define SHM_PARAMETERS  1339
+
 #define SO_BLOCK_SIZE 100     /* number of transaction per block*/
 #define SO_REGISTRY_SIZE 1000 /* max length of consecutive blocks */
 #define SELF -1

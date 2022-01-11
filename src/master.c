@@ -67,7 +67,7 @@ pid_t spawn_user(char *userArgv[])
     }
 }
 
-pid_t spawn_node(char **nodeArgv)
+pid_t spawn_node(char *nodeArgv[])
 {
     pid_t myPID = fork();
     switch (myPID)
@@ -93,8 +93,8 @@ pid_t spawn_node(char **nodeArgv)
     }
 }
 
-void master_interrupt_handle(struct parameters *par)
-{
+void master_interrupt_handle(int signum)
+{/*
     int status;
     int res_kill;
     int i = 0;
@@ -106,16 +106,17 @@ void master_interrupt_handle(struct parameters *par)
         /*if (childs[i].status == 1)
         {
             res_kill = kill(childs[1].pid, SIGINT); /* kill all childs*
-        }*/
+        }*
     }
     while (wait(&status) != -1)
     {
         status >> 8;
     }
-    /*semctl(semid, 0, IPC_RMID);     /*deleting mempid_sem */
-    /*shmtcl(pidmem_id, IPC_RMID, 0); /* deleting shared memory segment*/
-    exit(1);
-}
+    /*semctl(semid, 0, IPC_RMID);     /*deleting mempid_sem *
+    /*shmtcl(pidmem_id, IPC_RMID, 0); /* deleting shared memory segment*
+    exit(1);*/
+    exit(0);
+} 
 
 int main(int argc, char *argv[])
 {
@@ -138,15 +139,15 @@ int main(int argc, char *argv[])
     int nodesPID_ID;
     int par_ID;
 
-    par_ID = shmget(IPC_PRIVATE, sizeof(par), 0600);
+    par_ID = shmget(SHM_PARAMETERS, sizeof(par), IPC_CREAT | 0600);
     par = (struct parameters *)shmat(par_ID, NULL, 0);
     if (parseParameters(par) == CONF_ERROR)
         printf("-- Error reading conf file, defaulting to conf#1\n");
 
     calloc(usersPID, ((par->SO_USER_NUM) * sizeof(user)));
     calloc(nodesPID, ((par->SO_NODES_NUM) * sizeof(node)));
-    usersPID_ID = shmget(IPC_PRIVATE, sizeof(usersPID), 0600);
-    nodesPID_ID = shmget(IPC_PRIVATE, sizeof(nodesPID), 0600);
+    usersPID_ID = shmget(SHM_USERS_ARRAY, sizeof(usersPID), IPC_CREAT | 0600);
+    nodesPID_ID = shmget(SHM_NODES_ARRAY, sizeof(nodesPID), IPC_CREAT | 0600);
     usersPID = (user *)shmat(usersPID_ID, NULL, 0);
     nodesPID = (node *)shmat(nodesPID_ID, NULL, 0);
 
@@ -172,7 +173,7 @@ int main(int argc, char *argv[])
      * then set the handler to handle SIGINT signals ((struct sigaction *oldact) = NULL)
      */
     bzero(&sa, sizeof(sa));
-    sa.sa_handler = master_interrupt_handle(par);
+    sa.sa_handler = master_interrupt_handle;
     sigaction(SIGINT, &sa, NULL);
 
 #ifdef VERBOSE
