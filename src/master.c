@@ -94,29 +94,31 @@ pid_t spawn_node(char *nodeArgv[])
 }
 
 void master_interrupt_handle(int signum)
-{/*
-    int status;
-    int res_kill;
-    int i = 0;
+{ 
+    killpg(0, SIGINT);
+    /*
+     int status;
+     int res_kill;
+     int i = 0;
 
-    pritnf("-- CTRL-C killing program");
+     pritnf("-- CTRL-C killing program");
 
-    for (i = 0; i < par->SO_NODES_NUM; i++)
-    {
-        /*if (childs[i].status == 1)
-        {
-            res_kill = kill(childs[1].pid, SIGINT); /* kill all childs*
-        }*
-    }
-    while (wait(&status) != -1)
-    {
-        status >> 8;
-    }
-    /*semctl(semid, 0, IPC_RMID);     /*deleting mempid_sem *
-    /*shmtcl(pidmem_id, IPC_RMID, 0); /* deleting shared memory segment*
-    exit(1);*/
+     for (i = 0; i < par->SO_NODES_NUM; i++)
+     {
+         /*if (childs[i].status == 1)
+         {
+             res_kill = kill(childs[1].pid, SIGINT); /* kill all childs*
+         }*
+     }
+     while (wait(&status) != -1)
+     {
+         status >> 8;
+     }
+     /*semctl(semid, 0, IPC_RMID);     /*deleting mempid_sem *
+     /*shmtcl(pidmem_id, IPC_RMID, 0); /* deleting shared memory segment*
+     exit(1);*/
     exit(0);
-} 
+}
 
 int main(int argc, char *argv[])
 {
@@ -139,15 +141,15 @@ int main(int argc, char *argv[])
     int nodesPID_ID;
     int par_ID;
 
-    par_ID = shmget(SHM_PARAMETERS, sizeof(par), IPC_CREAT | 0600);
+    par_ID = shmget((key_t)SHM_PARAMETERS, sizeof(par), IPC_CREAT | IPC_EXCL | 0600);
     par = (struct parameters *)shmat(par_ID, NULL, 0);
     if (parseParameters(par) == CONF_ERROR)
         printf("-- Error reading conf file, defaulting to conf#1\n");
 
     calloc(usersPID, ((par->SO_USER_NUM) * sizeof(user)));
     calloc(nodesPID, ((par->SO_NODES_NUM) * sizeof(node)));
-    usersPID_ID = shmget(SHM_USERS_ARRAY, sizeof(usersPID), IPC_CREAT | 0600);
-    nodesPID_ID = shmget(SHM_NODES_ARRAY, sizeof(nodesPID), IPC_CREAT | 0600);
+    usersPID_ID = shmget((key_t)SHM_USERS_ARRAY, sizeof(usersPID), IPC_CREAT | IPC_EXCL | 0600);
+    nodesPID_ID = shmget((key_t)SHM_NODES_ARRAY, sizeof(nodesPID), IPC_CREAT | IPC_EXCL | 0600);
     usersPID = (user *)shmat(usersPID_ID, NULL, 0);
     nodesPID = (node *)shmat(nodesPID_ID, NULL, 0);
 
@@ -181,6 +183,7 @@ int main(int argc, char *argv[])
 #endif
 
     makeArguments(argvSpawns, IPC_array);
+    setpgid(0, 0);
 
 #ifdef VERBOSE
     printf("-- Made arguments\n");
@@ -217,17 +220,8 @@ int main(int argc, char *argv[])
     sleep(simTime);
 
     print_time_to_die();
-    /* kill(myPID, SIGINT); /* our sigint handler needs to do quite a lot of things to print the wall of test below */
-
-    { /* -- FINAL PRINT -- */
-        print_user_nodes_table(myPID, usersPID, nodesPID, par->SO_USER_NUM, par->SO_NODES_NUM);
-        /*print_kill_signal();
-        print_user_balance();
-        print_node_balance();
-        print_num_aborted();
-        print_num_blocks();
-        print_transactions_still_in_pool();*/
-    }
+    final_print(myPID, usersPID, nodesPID, par);
+    killpg(0, SIGINT); /* our sigint handler needs to do quite a lot of things to print the wall of test below */
 
     return 0;
 }
