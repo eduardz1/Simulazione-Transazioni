@@ -7,8 +7,11 @@ void print_time_to_die()
     printf("\n***********************\n|| The time has come ||\n***********************\n\n");
 }
 
-void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, int userNum, int nodesNum)
+void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct parameters *par)
 {
+    int userNum = par->SO_USER_NUM;
+    int nodesNum = par->SO_NODES_NUM;
+
     printf(" ------- Master Process PID is %d ----------\n", mainPID);
     printf("|                                             |\n");
     printf(" - Type ------- PID --------- Status ---------\n");
@@ -31,6 +34,17 @@ void print_node_balance();
 void print_num_aborted();
 void print_num_blocks();
 void print_transactions_still_in_pool();
+
+void final_print(pid_t masterPID, user *usersPID, node *nodesPID, struct parameters *par)
+{
+    print_user_nodes_table(masterPID, usersPID, nodesPID, par);
+    /*print_kill_signal();
+    print_user_balance();
+    print_node_balance();
+    print_num_aborted();
+    print_num_blocks();
+    print_transactions_still_in_pool();*/
+}
 
 /*void print_kill_signal(mainPID, userPid /* other process *)
 {
