@@ -4,7 +4,7 @@
 ## General Tasks
 - [ ] **Eduard ->** implement semaphores to access "usersPID" and "nodesPID" structs
 - [ ] implement message queue to send transactions (user communicates with node and ask to update ledger basically)
-- [ ] fix formatted_timestamp() in common.c
+- [x] **Rick->**fix formatted_timestamp() in common.c
 - [ ] finish every print function
 
 ## Master Specific
