@@ -52,7 +52,7 @@ pid_t spawn_user(char *argv[]);
 pid_t spawn_node(char *argv[]);
 
 void shared_memory_objects_init(int *shared_memory_objects_IDs);
-void semaphores_init(int *semaphores_ID);
+void semaphores_init();
 void make_ipc_array(int *IPC_objects_IDs);
 
 void master_interrupt_handle(int signum);

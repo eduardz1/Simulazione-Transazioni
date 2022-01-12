@@ -28,10 +28,6 @@
 #define _GNU_SOURCE
 #endif
 
-#if 0
-#define VERBOSE
-#endif
-
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 #define RAND(min, max) ((rand() % (max - min + 1)) + min)
 
@@ -48,12 +44,21 @@
 #define SELF -1
 #define EVERYONE_BROKE '$'
 
+/* -- ARGV LOCATION OF IPC OBJECTS -- */
+#define USERS_PID_ARGV (atoi(argv[1]))
+#define NODES_PID_ARGV (atoi(argv[2]))
+#define PARAMETERS_ARGV (atoi(argv[3]))
+#define LEDGER_ARGV (atoi(argv[4]))
+#define SEM_ID_ARGV (atoi(argv[5]))
+
 /* -- USER RETURN STATUS -- */
 #define WENT_BROKE 1
 #define MAX_RETRY 2
+#define ERROR -1
 
 extern int errno;
 
+#ifndef TEST_ERROR
 #define TEST_ERROR                                 \
     if (errno)                                     \
     {                                              \
@@ -65,6 +70,7 @@ extern int errno;
                 errno,                             \
                 strerror(errno));                  \
     }
+#endif
 
 struct parameters
 {
