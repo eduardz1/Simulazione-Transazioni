@@ -16,11 +16,15 @@
  ======================
  */
 
-user *usersPID;
-node *nodesPID;
 /* parameters of simulation */
 struct parameters *par;
+user *usersPID;
+node *nodesPID;
 ledger *mainLedger;
+
+int semID;
+
+/*extern int usersPrematurelyDead = 0;*/
 
 /*
  ======================
@@ -35,17 +39,20 @@ void make_arguments(int *IPC_array, char **argv)
     char *nPID_array = malloc(3 * sizeof(IPC_array[0]) + 1);
     char *parameters = malloc(3 * sizeof(IPC_array[0]) + 1);
     char *ledger = malloc(3 * sizeof(IPC_array[0]) + 1);
+    char *semID = malloc(3 * sizeof(IPC_array[0]) + 1);
 
     sprintf(uPID_array, "%d", IPC_array[0]);
     sprintf(nPID_array, "%d", IPC_array[1]);
     sprintf(parameters, "%d", IPC_array[2]);
-    sprintf(ledger, "%d", IPC_array[2]);
+    sprintf(ledger, "%d", IPC_array[3]);
+    sprintf(semID, "%d", IPC_array[4]);
 
     argv[0] = USER_NAME; /* need nodes to have a different name but not a priority */
     argv[1] = uPID_array;
     argv[2] = nPID_array;
     argv[3] = parameters;
     argv[4] = ledger;
+    argv[5] = semID;
     argv[8] = NULL; /* Terminating argv with NULL value */
 }
 
@@ -103,28 +110,37 @@ void shared_memory_objects_init(int *shmArray)
     int par_ID;
 
     /* parameters init and read from conf file */
-    par_ID = shmget((key_t)SHM_PARAMETERS, sizeof(par), IPC_CREAT | IPC_EXCL | 0600);
+    par_ID = shmget(SHM_PARAMETERS, sizeof(par), 0600 | IPC_CREAT | IPC_EXCL);
+    TEST_ERROR
     par = (struct parameters *)shmat(par_ID, NULL, 0);
     if (parse_parameters(par) == CONF_ERROR)
+    {
         TRACE(("-- Error reading conf file, defaulting to conf#1\n"));
+    }
     else
+    {
         TRACE(("-- Conf file read successful\n"));
-    TRACE((print_parameters(par)));
-
+    }
+#ifdef DEBUG
+    print_parameters(par);
+#endif
     /* (users_t) and (nodes_t) arrays */
-    usersPID_ID = shmget((key_t)SHM_USERS_ARRAY,
+    usersPID_ID = shmget(SHM_USERS_ARRAY,
                          (par->SO_USER_NUM) * sizeof(user),
-                         IPC_CREAT | IPC_EXCL | 0600);
-    nodesPID_ID = shmget((key_t)SHM_NODES_ARRAY,
+                         0600 | IPC_CREAT | IPC_EXCL);
+    TEST_ERROR
+    nodesPID_ID = shmget(SHM_NODES_ARRAY,
                          (par->SO_NODES_NUM) * sizeof(node),
-                         IPC_CREAT | IPC_EXCL | 0600);
+                         0600 | IPC_CREAT | IPC_EXCL);
+    TEST_ERROR
     usersPID = (user *)shmat(usersPID_ID, NULL, 0);
     nodesPID = (node *)shmat(nodesPID_ID, NULL, 0);
 
     /* mainLedger */
-    mainLedger_ID = shmget((key_t)SHM_LEDGER,
+    mainLedger_ID = shmget(SHM_LEDGER,
                            (par->SO_NODES_NUM) * sizeof(node),
-                           IPC_CREAT | IPC_EXCL | 0600);
+                           0600 | IPC_CREAT | IPC_EXCL);
+    TEST_ERROR
     mainLedger = (ledger *)shmat(mainLedger_ID, NULL, 0);
 
     /* mark for deallocation so that they are automatically
@@ -141,17 +157,21 @@ void shared_memory_objects_init(int *shmArray)
     shmArray[3] = mainLedger_ID;
 }
 
-/*int *semaphores_init(){
-
-}*/
+void semaphores_init()
+{
+    semID = semget(SEM_MASTER, 1, 0600 | IPC_CREAT | IPC_EXCL);
+    TEST_ERROR
+    TRACE((":master: semID is %d\n", semID));
+}
 
 /* makes an array with every IPC object ID */
 void make_ipc_array(int *IPC_array)
 {
     int shmIDs[SHM_NUM]; /* array containing every shared memory ID */
-    int *semIDs;
+    int semIDs[1] = {0};
 
     shared_memory_objects_init(shmIDs);
+    semIDs[0] = semID;
     /* semaphores_init(semIDs); */
     memcpy(IPC_array, shmIDs, SHM_NUM * sizeof(int));
     memcpy(IPC_array + SHM_NUM, shmIDs, SEM_NUM * sizeof(int));
@@ -160,33 +180,23 @@ void make_ipc_array(int *IPC_array)
 /* CTRL-C handler */
 void master_interrupt_handle(int signum)
 {
-    write(1, "::Master:: SIGINT ricevuto\n\n", 28);
+    write(1, "::Master:: SIGINT ricevuto\n", 28);
     killpg(0, SIGINT);
-    
+
     /* just to avoid printing before everyone has finished*/
     sleep(1);
     final_print(getpid(), usersPID, nodesPID, par);
+
     /*
-     int status;
-     int res_kill;
-     int i = 0;
+    int status;
 
-     pritnf("-- CTRL-C killing program");
+    while (wait(&status) != -1)
+    {
+        status >> 8; /* no idea about what it does please help *
+    } 
+    */
 
-     for (i = 0; i < par->SO_NODES_NUM; i++)
-     {
-         /*if (childs[i].status == 1)
-         {
-             res_kill = kill(childs[1].pid, SIGINT); /* kill all childs*
-         }*
-     }
-     while (wait(&status) != -1)
-     {
-         status >> 8;
-     }
-     /*semctl(semid, 0, IPC_RMID);     /*deleting mempid_sem *
-     /*shmtcl(pidmem_id, IPC_RMID, 0); /* deleting shared memory segment*
-     exit(1);*/
+    semctl(semID, 1, IPC_RMID);
     exit(0);
 }
 
@@ -195,13 +205,14 @@ int main(int argc, char *argv[])
     pid_t myPID = getpid();
 
     int uCounter, nCounter, returnVal;
-    uint32_t simTime;
+    int simTime;
     int ipcObjectsIDs[IPC_NUM];
     char *argvSpawns[8] = {0};
 
     struct sigaction sa;
     struct sembuf sops;
 
+    semaphores_init();
     make_ipc_array(ipcObjectsIDs);
     make_arguments(ipcObjectsIDs, argvSpawns);
     mainLedger = ledger_init();
@@ -217,10 +228,27 @@ int main(int argc, char *argv[])
     sa.sa_handler = master_interrupt_handle;
     sigaction(SIGINT, &sa, NULL);
 
+    for (nCounter = 0; nCounter < par->SO_NODES_NUM; nCounter++)
+    {
+        LOCK
+            nodesPID[nCounter]
+                .status = available;
+        nodesPID[nCounter].pid = spawn_node(argvSpawns);
+        UNLOCK
+        if (getpid() != myPID)
+        {
+            return;
+        }
+    }
+
+    /*usersPrematurelyDead = 0;*/
     for (uCounter = 0; uCounter < par->SO_USER_NUM; uCounter++)
     {
-        usersPID[uCounter].status = alive;
+        LOCK
+            usersPID[uCounter]
+                .status = alive;
         usersPID[uCounter].pid = spawn_user(argvSpawns);
+        UNLOCK
         if (getpid() != myPID)
         {
             switch (returnVal = wait(NULL))
@@ -235,20 +263,9 @@ int main(int argc, char *argv[])
         }
     }
 
-    for (nCounter = 0; nCounter < par->SO_NODES_NUM; nCounter++)
-    {
-        nodesPID[nCounter].status = available;
-        nodesPID[nCounter].pid = spawn_node(argvSpawns);
-        if (getpid() != myPID)
-        {
-            return;
-        }
-    }
-
     sleep(simTime);
 
     print_time_to_die();
-    final_print(myPID, usersPID, nodesPID, par);
     killpg(0, SIGINT); /* our sigint handler needs to do quite a lot of things to print the wall of test below */
 
     return 0;

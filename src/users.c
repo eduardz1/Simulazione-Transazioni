@@ -1,22 +1,6 @@
 #include "include/common.h"
 #include "include/users.h"
 
-/*#define SO_USER_NUM (atoi(argv[1]))
-#define SO_NODES_NUM (atoi(argv[2]))
-#define SO_NUM_FRIENDS (atoi(argv[3]))
-#define SO_SIM_SEC (atoi(argv[4]))
-
-/* -- USER CL PARAMETERS -- *
-#define SO_BUDGET_INIT (atoi(argv[5]))
-#define SO_REWARD (atoi(argv[6]))
-#define SO_RETRY (atoi(argv[7]))
-#define SO_MIN_TRANS_GEN_NSEC (atol(argv[8]))
-#define SO_MAX_TRANS_GEN_NSEC (atol(argv[9]))
-*/
-#define USERS_PID_ARRAY (atoi(argv[1]))
-#define NODES_PID_ARRAY (atoi(argv[2]))
-#define PARAMETERS (atoi(argv[3]))
-
 #define REWARD(amount, reward) (ceil(((reward * (amount)) / 100.0)))
 /*
  * NON active wait, the time is equivalent to the
@@ -37,6 +21,43 @@
 
 /* void wait_for_incoming_transaction() */
 
+/*
+ ======================
+ || GLOBAL VARIABLES ||
+ ======================
+ */
+
+/* parameters of simulation */
+struct parameters *par;
+user *usersPID;
+node *nodesPID;
+ledger *mainLedger;
+
+int semID;
+
+pid_t myPID;
+
+/*
+ ======================
+ ||    FUNCTIONS     ||
+ ======================
+ */
+
+/* returns index of where user with PID_toSearch is located in usersPID[] */
+int get_pid_userIndex(int PID_toSearch)
+{
+	int i;
+
+	for (i = 0; i < par->SO_USER_NUM; i++)
+	{
+		if (usersPID[i].pid == myPID)
+			return i;
+	}
+
+	return -1;
+}
+
+/* returns a random PID of a non-dead user from usersPID[] */
 pid_t get_random_userPID(user *usersPID)
 {
 	int index;
@@ -52,6 +73,7 @@ pid_t get_random_userPID(user *usersPID)
 	return val;
 }
 
+/* returns a random PID of an available node from nodesPID[] */
 pid_t get_random_nodePID(node *nodesPID)
 {
 	int index;
@@ -67,11 +89,47 @@ pid_t get_random_nodePID(node *nodesPID)
 	return val;
 }
 
+/* safely updates status of user to statusToSet: 0 alive, 1 broke, 2 dead */
+void update_status(int statusToSet)
+{
+	int i = get_pid_userIndex(myPID);
+	if (i == -1)
+	{
+		TRACE((":users: %d failed to find myself in usersPID[]", myPID));
+	}
+
+	sem_reserve(semID, 1);
+	usersPID[i].status = statusToSet;
+	if (statusToSet == 2)
+	{
+		/*usersPrematurelyDead++;*/
+		TRACE((":users: dead increased\n"));
+	}
+	sem_release(semID, 1);
+}
+
+/* attaches ipc objects based on IDs passed via arguments */
+void attach_ipc_objects(char **argv)
+{
+	par = shmat(PARAMETERS_ARGV, NULL, 0);
+	TEST_ERROR
+	usersPID = shmat(USERS_PID_ARGV, NULL, 0);
+	TEST_ERROR
+	nodesPID = shmat(NODES_PID_ARGV, NULL, 0);
+	TEST_ERROR
+	mainLedger = shmat(LEDGER_ARGV, NULL, 0);
+	TEST_ERROR
+	semID = SEM_ID_ARGV;
+	TRACE((":users: %d semID is %d\n", getpid(), semID));
+}
+
+/* SIGUSR1 handler, sends a transaction */
 void user_transactions_handle(int signum)
 {
 	/* return send_transaction(myPID, userPID, amount, reward); */
 }
 
+/* CTRL-C handler */
 void user_interrupt_handle(int signum)
 {
 	write(1, "::User:: SIGINT ricevuto\n", 26);
@@ -81,10 +139,8 @@ void user_interrupt_handle(int signum)
 int main(int argc, char *argv[])
 {
 	int i = 0;
-	unsigned int retry;
-
-	unsigned int currentBalance, amount, reward;
-	pid_t myPID, userPID, nodePID;
+	int currentBalance, amount, reward, retry;
+	pid_t userPID, nodePID;
 
 	struct timespec randSleepTime;
 	struct timespec sleepTimeRemaining;
@@ -92,20 +148,18 @@ int main(int argc, char *argv[])
 	struct sigaction saUSR1;
 	struct sigaction saINT;
 
-	/* -- ATTACH IPC OBJECTS -- */
-	struct parameters *par = shmat(PARAMETERS, NULL, 0);
-	user *usersPID = shmat(USERS_PID_ARRAY, NULL, 0);
-	node *nodesPID = shmat(NODES_PID_ARRAY, NULL, 0);
+	struct sembuf sops;
 
-	myPID = getpid();
-
-	/* should give error anyway, pretty sure we don't need this check but
-	 * Fabio suggested it to me so it must stay for now
 	if (argc == 0)
 	{
-		printf("Error in USERS: %d, no arguments passed\n", myPID);
-		return;
-	} */
+		printf(":users: %d, no arguments passed, can't continue like this any more :C\n", myPID);
+		return ERROR;
+	}
+
+	srand(time(NULL)); /* initialize rand function */
+	myPID = getpid();  /* set myPID value */
+
+	attach_ipc_objects(argv);
 
 	/* -- SIGNAL HANDLERS --
 	 * first set all bytes of sigation to 0
@@ -120,8 +174,6 @@ int main(int argc, char *argv[])
 	saINT.sa_handler = user_interrupt_handle;
 	sigaction(SIGUSR1, &saUSR1, NULL);
 	sigaction(SIGINT, &saINT, NULL);
-	
-	srand(time(NULL)); /* initialize rand function */
 
 	retry = par->SO_RETRY;
 
@@ -149,7 +201,6 @@ int main(int argc, char *argv[])
 			nodePID = get_random_nodePID(nodesPID);
 
 			amount = RAND(2, currentBalance);
-
 			reward = REWARD(amount, par->SO_REWARD);
 			amount -= reward;
 
@@ -163,21 +214,20 @@ int main(int argc, char *argv[])
 			else
 				retry = SO_RETRY; */
 			if (retry == 0)
+			{
+				update_status(2);
 				return MAX_RETRY;
+			}
 
 			clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &randSleepTime, &sleepTimeRemaining);
 			clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &sleepTimeRemaining, NULL);
 		}
 		else
 		{
-			if (i == 0)
-			{
-				printf("User %d went broke :/\n", myPID);
-				i = 1;
-			}
+			printf(":users: %d went broke :/\n", myPID);
+			update_status(1);
 
-			/* update_status(WENT_BROKE); ////////
-			wait_for_incoming_transaction(); ///////// */
+			/*wait_for_incoming_transaction(); ///////// */
 		}
 	}
 }

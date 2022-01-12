@@ -17,6 +17,8 @@
 #include <sys/types.h>
 
 #include "../utils/debug.h"
+#include "../utils/sem.h"
+#include "../utils/lists.h"
 
 #ifndef NULL
 #define NULL 0 /* thre's a problem with NULL for some reason */
@@ -24,10 +26,6 @@
 
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
-#endif
-
-#if 0
-#define VERBOSE
 #endif
 
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
@@ -39,18 +37,28 @@
 #define SHM_USERS_ARRAY 1338
 #define SHM_NODES_ARRAY 1339
 #define SHM_LEDGER 1340
+#define SEM_MASTER 420
 
 #define SO_BLOCK_SIZE 100     /* number of transaction per block*/
 #define SO_REGISTRY_SIZE 1000 /* max length of consecutive blocks */
 #define SELF -1
 #define EVERYONE_BROKE '$'
 
+/* -- ARGV LOCATION OF IPC OBJECTS -- */
+#define USERS_PID_ARGV (atoi(argv[1]))
+#define NODES_PID_ARGV (atoi(argv[2]))
+#define PARAMETERS_ARGV (atoi(argv[3]))
+#define LEDGER_ARGV (atoi(argv[4]))
+#define SEM_ID_ARGV (atoi(argv[5]))
+
 /* -- USER RETURN STATUS -- */
 #define WENT_BROKE 1
 #define MAX_RETRY 2
+#define ERROR -1
 
 extern int errno;
 
+#ifndef TEST_ERROR
 #define TEST_ERROR                                 \
     if (errno)                                     \
     {                                              \
@@ -62,6 +70,7 @@ extern int errno;
                 errno,                             \
                 strerror(errno));                  \
     }
+#endif
 
 struct parameters
 {
