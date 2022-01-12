@@ -123,6 +123,22 @@ void attach_ipc_objects(char **argv)
 	TRACE((":users: %d semID is %d\n", getpid(), semID));
 }
 
+/* initializes signal handlers for SIGINT and SIGUSR1 */
+void signal_handlers_init(struct sigaction *saUSR1, struct sigaction *saINT)
+{
+	/* -- SIGNAL HANDLERS --
+	 * first set all bytes of sigation to 0
+	 * then initialize sa.handler to a pointer to
+	 * the function user_transaction/interrupt_handle
+	 * then set the handler to handle SIUSR1/SIGINT signals
+	 * ((struct sigaction *oldact) = NULL)
+	 */
+	saUSR1->sa_handler = user_transactions_handle;
+	saINT->sa_handler = user_interrupt_handle;
+	sigaction(SIGUSR1, saUSR1, NULL);
+	sigaction(SIGINT, saINT, NULL);
+}
+
 /* SIGUSR1 handler, sends a transaction */
 void user_transactions_handle(int signum)
 {
@@ -145,10 +161,12 @@ int main(int argc, char *argv[])
 	struct timespec randSleepTime;
 	struct timespec sleepTimeRemaining;
 
+	struct sembuf sops;
+
 	struct sigaction saUSR1;
 	struct sigaction saINT;
-
-	struct sembuf sops;
+	bzero(&saUSR1, sizeof(saUSR1));
+	bzero(&saINT, sizeof(saINT));
 
 	if (argc == 0)
 	{
@@ -160,26 +178,11 @@ int main(int argc, char *argv[])
 	myPID = getpid();  /* set myPID value */
 
 	attach_ipc_objects(argv);
-
-	/* -- SIGNAL HANDLERS --
-	 * first set all bytes of sigation to 0
-	 * then initialize sa.handler to a pointer to
-	 * the function user_transaction/interrupt_handle
-	 * then set the handler to handle SIUSR1/SIGINT signals
-	 * ((struct sigaction *oldact) = NULL)
-	 */
-	bzero(&saUSR1, sizeof(saUSR1));
-	bzero(&saINT, sizeof(saINT));
-	saUSR1.sa_handler = user_transactions_handle;
-	saINT.sa_handler = user_interrupt_handle;
-	sigaction(SIGUSR1, &saUSR1, NULL);
-	sigaction(SIGINT, &saINT, NULL);
+	signal_handlers_init(&saUSR1, &saINT);
 
 	retry = par->SO_RETRY;
-
 	while (1)
 	{
-
 		/* -- SLEEP TIME SET --
 		 * value for sec set to 0
 		 * value for nsec is a random number from SO_MIN and SO_MAX

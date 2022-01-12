@@ -1,3 +1,5 @@
+
+#include "include/common.h"
 #include "include/print.h"
 
 /* #define HYPHEN "--------" */
@@ -92,3 +94,84 @@ void print_transactions_still_in_pool()
 {
     printf("----TOTAL TRANSACTION STILL IN POLL:%d----");
 }*/
+
+void print_transaction(FILE *fp, transaction *t)
+{
+    char tmp[10];
+    switch (t->status)
+    {
+    case pending:
+        strcpy(tmp, "pending");
+        break;
+    case aborted:
+        strcpy(tmp, "aborted");
+        break;
+    case confirmed:
+        strcpy(tmp, "confirmed");
+        break;
+    case processing:
+        strcpy(tmp, "confirmed");
+        break;
+    }
+
+    fprintf(fp, " -------------------------- \n");
+    formatted_timestamp(fp);
+    fprintf(fp, "    %s", tmp);
+    fprintf(fp, "|  %d --> %d\n", t->sender, t->receiver);
+    fprintf(fp, "|  Amount:    %d\n", t->amount);
+    fprintf(fp, "|  Reward:    %d\n", t->reward);
+    fprintf(fp, "|  Reward:    %d\n", t->reward);
+    fprintf(fp, " -------------------------- \n");
+}
+
+void print_block(FILE *fp, block *b)
+{
+    int i;
+    block *curr;
+
+    for (curr = b; curr != NULL; curr = (block*)curr->next)
+    {
+        fprintf(fp, "= %.3d =======================\n", b->blockIndex);
+        for (i = 0; i < SO_BLOCK_SIZE; i++)
+        {
+            print_transaction(fp, &(b->transList[i]));
+        }
+        fprintf(fp, "============================\n");
+    }
+}
+
+void print_ledger(ledger *l)
+{
+    FILE *fp = fopen("ledger.txt", "w");
+    if (fp == NULL)
+    {
+        printf(":print: coudln't open file pointer ledger.txt\n");
+    }
+
+    fprintf(fp, "Registry Real Size is %d blocks\n", l->registryCurrSize);
+    print_block(fp, l->head);
+    fclose(fp);
+}
+
+/* print without /n */
+void formatted_timestamp(FILE *fp)
+{
+    printf("Hey");
+    /*clock_t tic = clock();
+    clock_t start = clock();
+    clock_t stop = clock();
+
+    time_t rawtime;
+    time_t now;
+    struct tm *info;
+    struct tm *today;
+    double elapsed;
+    char buf[128];
+
+    time(&now);
+    today = localtime(&now);
+    strftime(buf, 128, "%Y/%m/%d", today);
+    printf("%s\n", buf);
+
+    elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC; /* time ./a.out*/
+}
