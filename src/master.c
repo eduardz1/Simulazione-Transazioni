@@ -97,6 +97,7 @@ pid_t spawn_node(char *nodeArgv[])
 void master_interrupt_handle(int signum)
 {
     write(1, "::Master:: SIGINT ricevuto\n", 28);
+    killpg(0, SIGINT);
     /*
      int status;
      int res_kill;
@@ -123,6 +124,7 @@ void master_interrupt_handle(int signum)
 
 int main(int argc, char *argv[])
 {
+    struct timespec simTime_n = {0};
     pid_t myPID = getpid();
 
     int uCounter, nCounter, returnVal;
@@ -221,7 +223,8 @@ int main(int argc, char *argv[])
         }
     }
 
-    sleep(simTime);
+    simTime_n.tv_sec = par->SO_SIM_SEC;
+    nanosleep(&simTime_n, NULL);
 
     print_time_to_die();
     final_print(myPID, usersPID, nodesPID, par);

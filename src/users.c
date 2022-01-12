@@ -120,8 +120,7 @@ int main(int argc, char *argv[])
 	saINT.sa_handler = user_interrupt_handle;
 	sigaction(SIGUSR1, &saUSR1, NULL);
 	sigaction(SIGINT, &saINT, NULL);
-	sigaction(SIGCHLD, &saINT, NULL);
-
+	
 	srand(time(NULL)); /* initialize rand function */
 
 	retry = par->SO_RETRY;
