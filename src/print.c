@@ -12,7 +12,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
     int userNum = par->SO_USER_NUM;
     int nodesNum = par->SO_NODES_NUM;
 
-    printf(" ------- Master Process PID is %d ----------\n", mainPID);
+    printf("\n ------- Master Process PID is %d ----------\n", mainPID);
     printf("|                                             |\n");
     printf(" - Type ------- PID --------- Status ---------\n");
     printf(" ---------------------------------------------\n");

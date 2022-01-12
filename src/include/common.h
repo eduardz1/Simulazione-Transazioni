@@ -17,6 +17,8 @@
 #include <sys/types.h>
 
 #include "../utils/debug.h"
+#include "../utils/sem.h"
+#include "../utils/lists.h"
 
 #ifndef NULL
 #define NULL 0 /* thre's a problem with NULL for some reason */
@@ -39,6 +41,7 @@
 #define SHM_USERS_ARRAY 1338
 #define SHM_NODES_ARRAY 1339
 #define SHM_LEDGER 1340
+#define SEM_MASTER 420
 
 #define SO_BLOCK_SIZE 100     /* number of transaction per block*/
 #define SO_REGISTRY_SIZE 1000 /* max length of consecutive blocks */

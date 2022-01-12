@@ -22,6 +22,8 @@ node *nodesPID;
 struct parameters *par;
 ledger *mainLedger;
 
+int semID;
+
 /*
  ======================
  ||    FUNCTIONS     ||
@@ -149,7 +151,7 @@ void shared_memory_objects_init(int *shmArray)
 void make_ipc_array(int *IPC_array)
 {
     int shmIDs[SHM_NUM]; /* array containing every shared memory ID */
-    int *semIDs;
+    int semIDs[1];
 
     shared_memory_objects_init(shmIDs);
     /* semaphores_init(semIDs); */
@@ -160,9 +162,9 @@ void make_ipc_array(int *IPC_array)
 /* CTRL-C handler */
 void master_interrupt_handle(int signum)
 {
-    write(1, "::Master:: SIGINT ricevuto\n\n", 28);
+    write(1, "::Master:: SIGINT ricevuto\n", 28);
     killpg(0, SIGINT);
-    
+
     /* just to avoid printing before everyone has finished*/
     sleep(1);
     final_print(getpid(), usersPID, nodesPID, par);
@@ -201,6 +203,7 @@ int main(int argc, char *argv[])
 
     struct sigaction sa;
     struct sembuf sops;
+    semID = semget(SEM_MASTER, 1, 0600);
 
     make_ipc_array(ipcObjectsIDs);
     make_arguments(ipcObjectsIDs, argvSpawns);
@@ -219,8 +222,11 @@ int main(int argc, char *argv[])
 
     for (uCounter = 0; uCounter < par->SO_USER_NUM; uCounter++)
     {
-        usersPID[uCounter].status = alive;
+        LOCK
+            usersPID[uCounter]
+                .status = alive;
         usersPID[uCounter].pid = spawn_user(argvSpawns);
+        UNLOCK
         if (getpid() != myPID)
         {
             switch (returnVal = wait(NULL))
@@ -237,8 +243,11 @@ int main(int argc, char *argv[])
 
     for (nCounter = 0; nCounter < par->SO_NODES_NUM; nCounter++)
     {
-        nodesPID[nCounter].status = available;
+        LOCK
+            nodesPID[nCounter]
+                .status = available;
         nodesPID[nCounter].pid = spawn_node(argvSpawns);
+        UNLOCK
         if (getpid() != myPID)
         {
             return;
