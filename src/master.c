@@ -96,7 +96,8 @@ pid_t spawn_node(char *nodeArgv[])
 
 void master_interrupt_handle(int signum)
 {
-    write(1, "::Master:: SIGINT ricevuto\n", 32);
+    write(1, "::Master:: SIGINT ricevuto\n", 28);
+    killpg(0, SIGINT);
     /*
      int status;
      int res_kill;
@@ -187,7 +188,7 @@ int main(int argc, char *argv[])
 #endif
 
     makeArguments(argvSpawns, IPC_array);
-    setpgid(0, 0);
+    /*setpgid(0, 0);*/
 
 #ifdef VERBOSE
     printf("-- Made arguments\n");
@@ -221,7 +222,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    sleep(simTime);
+    sleep(simTime, NULL);
 
     print_time_to_die();
     final_print(myPID, usersPID, nodesPID, par);
