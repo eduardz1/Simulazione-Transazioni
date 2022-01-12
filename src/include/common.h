@@ -46,10 +46,6 @@
 #define WENT_BROKE 1
 #define MAX_RETRY 2
 
-
-#if 1
-#define DEBUG
-#endif
 extern int errno;
 
 #define TEST_ERROR                                 \

@@ -96,7 +96,7 @@ pid_t spawn_node(char *nodeArgv[])
 
 void master_interrupt_handle(int signum)
 {
-    write(1, "::Master:: SIGINT ricevuto\n", 32);
+    write(1, "::Master:: SIGINT ricevuto\n", 28);
     /*
      int status;
      int res_kill;
