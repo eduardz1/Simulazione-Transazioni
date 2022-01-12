@@ -37,5 +37,5 @@ debug:
 clean:
 	rm -f *.o master users nodes *~
 
-run:
+run: all
 	./master

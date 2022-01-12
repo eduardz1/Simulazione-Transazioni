@@ -1,9 +1,8 @@
-#include "utils/debug.h"
 #include "include/common.h"
 
 ledger *ledger_init()
 {
-    ledger *ledger;
+    ledger *newLedger;
     int shmID; /* ID of "ledger" shared memory segment */
 
     /* -- LEDGER INITIALIZATION --
@@ -11,21 +10,20 @@ ledger *ledger_init()
      * smctl will deallocate the shared memory segment only when every process detaches it
      * tells OS that ledger of type ledger is our shared memory of shmID
      */
-    shmID = shmget(IPC_PRIVATE, sizeof(ledger), 0600); /* 0600 dummy value */
+    shmID = shmget(IPC_PRIVATE, sizeof(newLedger), 0600);
     shmctl(shmID, IPC_RMID, NULL);
 
-    ledger->head = new_block();
-    ledger->shmID = shmID;
-    ledger->registryCurrSize = 1;
+    newLedger->head = new_block();
+    newLedger->registryCurrSize = 1;
 
-    shmat(shmID, NULL, 0);
+    newLedger = (ledger *)shmat(shmID, NULL, 0);
 
-    return ledger;
+    return newLedger;
 }
 
-struct block *new_block()
+block *new_block()
 {
-    struct block *newBlock;
+    block *newBlock = malloc(sizeof(block));
     transaction reward;
     struct timespec timestamp;
 
@@ -45,7 +43,7 @@ struct block *new_block()
     return newBlock;
 }
 
-void add_transaction_to_block(struct block *block, transaction *newTrans, int index)
+void add_transaction_to_block(block *block, transaction *newTrans, int index)
 {
     block->transList[index] = *newTrans; /* ye probably we don't need a whole ass function for that*/
 }

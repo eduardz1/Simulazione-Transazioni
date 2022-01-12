@@ -46,12 +46,15 @@
 #include <string.h>
 #include <signal.h>
 
-void makeArguments(char **argv, int *IPCarray); /* UN = 0:users, 1:nodes */
+void make_arguments(int *IPCarray, char **argv);
 
 pid_t spawn_user(char *argv[]);
 pid_t spawn_node(char *argv[]);
 
+void shared_memory_objects_init(int *shared_memory_objects_IDs);
+void semaphores_init(int *semaphores_ID);
+void make_ipc_array(int *IPC_objects_IDs);
+
 void master_interrupt_handle(int signum);
-void master_sigusr2_handle(int signum);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_MASTER_H */
