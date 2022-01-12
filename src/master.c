@@ -2,46 +2,54 @@
 #include "include/master.h"
 #include "include/print.h"
 #include "include/parser.h"
-#include "utils/debug.h"
 
-/* -- CL PARAMETERS INITIALIZATION -- *
-#define SO_USER_NUM (atoi(argv[1]))
-#define SO_NODES_NUM (atoi(argv[2]))
-#define SO_NUM_FRIENDS (atoi(argv[3]))
-#define SO_SIM_SEC (atoi(argv[4]))
-
-/* -- USER CL PARAMETERS -- *
-#define SO_BUDGET_INIT (argv[5])
-#define SO_REWARD (argv[6])
-#define SO_RETRY (argv[7])
-#define SO_MIN_TRANS_GEN_NSEC (argv[8])
-#define SO_MAX_TRANS_GEN_NSEC (argv[9])
-
-/* -- NODE CL PARAMETERS -- *
-#define SO_TP_SIZE (argv[10])
-#define SO_MIN_TRANS_PROC_NSEC (argv[11])
-#define SO_MAX_TRANS_PROC_NSEC (argv[12]) */
+#define SHM_NUM 4
+#define SEM_NUM 1
+#define IPC_NUM 8
 
 #define USER_NAME "./users"
 #define NODE_NAME "./nodes"
 
-void makeArguments(char **argv, int *IPC_array)
+/*
+ ======================
+ || GLOBAL VARIABLES ||
+ ======================
+ */
+
+user *usersPID;
+node *nodesPID;
+/* parameters of simulation */
+struct parameters *par;
+ledger *mainLedger;
+
+/*
+ ======================
+ ||    FUNCTIONS     ||
+ ======================
+ */
+
+/* make argv array with IPC IDs for user and nodes */
+void make_arguments(int *IPC_array, char **argv)
 {
     char *uPID_array = malloc(3 * sizeof(IPC_array[0]) + 1);
     char *nPID_array = malloc(3 * sizeof(IPC_array[0]) + 1);
     char *parameters = malloc(3 * sizeof(IPC_array[0]) + 1);
+    char *ledger = malloc(3 * sizeof(IPC_array[0]) + 1);
 
     sprintf(uPID_array, "%d", IPC_array[0]);
     sprintf(nPID_array, "%d", IPC_array[1]);
     sprintf(parameters, "%d", IPC_array[2]);
+    sprintf(ledger, "%d", IPC_array[2]);
 
-    argv[0] = USER_NAME;
+    argv[0] = USER_NAME; /* need nodes to have a different name but not a priority */
     argv[1] = uPID_array;
     argv[2] = nPID_array;
     argv[3] = parameters;
-    argv[10] = NULL; /* Terminating argv with NULL value */
+    argv[4] = ledger;
+    argv[8] = NULL; /* Terminating argv with NULL value */
 }
 
+/* fork and execve a "./users" */
 pid_t spawn_user(char *userArgv[])
 {
     pid_t myPID = fork();
@@ -52,22 +60,18 @@ pid_t spawn_user(char *userArgv[])
         break;
 
     case 0: /* Child case */
-#ifdef VERBOSE
-        printf("-- Spawning child\n");
-#endif
+        TRACE((":master: Spawning user\n"));
         execve(USER_NAME, userArgv, NULL);
         TEST_ERROR
-        printf("!! Non puoi vedere mai questo messagio, spero\n");
+        TRACE(("!! Message that should never be seen\n"));
         break;
 
     default:
-#ifdef VERBOSE
-        printf("-- User myPID: %d\n", myPID);
-#endif
         return myPID;
     }
 }
 
+/* fork and execve a "./nodes" */
 pid_t spawn_node(char *nodeArgv[])
 {
     pid_t myPID = fork();
@@ -78,26 +82,90 @@ pid_t spawn_node(char *nodeArgv[])
         break;
 
     case 0: /* Child case */
-#ifdef VERBOSE
-        printf("-- Spawning node\n");
-#endif
+        TRACE((":master: Spawning node\n"));
         execve(NODE_NAME, nodeArgv, NULL);
         TEST_ERROR
-        printf("!! Non puoi vedere mai questo messagio, spero\n");
+        TRACE(("!! Message that should never be seen\n"));
         break;
 
     default:
-#ifdef VERBOSE
-        printf("-- Node myPID: %d\n", myPID);
-#endif
         return myPID;
     }
 }
 
+/* attach usersPID, nodesPID, par and mainLedger to shared memory, returns an array with respective IDs */
+void shared_memory_objects_init(int *shmArray)
+{
+    /* shared memory segments IDs */
+    int usersPID_ID;
+    int nodesPID_ID;
+    int mainLedger_ID;
+    int par_ID;
+
+    /* parameters init and read from conf file */
+    par_ID = shmget((key_t)SHM_PARAMETERS, sizeof(par), IPC_CREAT | IPC_EXCL | 0600);
+    par = (struct parameters *)shmat(par_ID, NULL, 0);
+    if (parse_parameters(par) == CONF_ERROR)
+        TRACE(("-- Error reading conf file, defaulting to conf#1\n"));
+    else
+        TRACE(("-- Conf file read successful\n"));
+    TRACE((print_parameters(par)));
+
+    /* (users_t) and (nodes_t) arrays */
+    usersPID_ID = shmget((key_t)SHM_USERS_ARRAY,
+                         (par->SO_USER_NUM) * sizeof(user),
+                         IPC_CREAT | IPC_EXCL | 0600);
+    nodesPID_ID = shmget((key_t)SHM_NODES_ARRAY,
+                         (par->SO_NODES_NUM) * sizeof(node),
+                         IPC_CREAT | IPC_EXCL | 0600);
+    usersPID = (user *)shmat(usersPID_ID, NULL, 0);
+    nodesPID = (node *)shmat(nodesPID_ID, NULL, 0);
+
+    /* mainLedger */
+    mainLedger_ID = shmget((key_t)SHM_LEDGER,
+                           (par->SO_NODES_NUM) * sizeof(node),
+                           IPC_CREAT | IPC_EXCL | 0600);
+    mainLedger = (ledger *)shmat(mainLedger_ID, NULL, 0);
+
+    /* mark for deallocation so that they are automatically
+     * removed once master dies
+     */
+    shmctl(usersPID_ID, IPC_RMID, NULL);
+    shmctl(nodesPID_ID, IPC_RMID, NULL);
+    shmctl(par_ID, IPC_RMID, NULL);
+    shmctl(mainLedger_ID, IPC_RMID, NULL);
+
+    shmArray[0] = usersPID_ID;
+    shmArray[1] = nodesPID_ID;
+    shmArray[2] = par_ID;
+    shmArray[3] = mainLedger_ID;
+}
+
+/*int *semaphores_init(){
+
+}*/
+
+/* makes an array with every IPC object ID */
+void make_ipc_array(int *IPC_array)
+{
+    int shmIDs[SHM_NUM]; /* array containing every shared memory ID */
+    int *semIDs;
+
+    shared_memory_objects_init(shmIDs);
+    /* semaphores_init(semIDs); */
+    memcpy(IPC_array, shmIDs, SHM_NUM * sizeof(int));
+    memcpy(IPC_array + SHM_NUM, shmIDs, SEM_NUM * sizeof(int));
+}
+
+/* CTRL-C handler */
 void master_interrupt_handle(int signum)
 {
-    write(1, "::Master:: SIGINT ricevuto\n", 28);
+    write(1, "::Master:: SIGINT ricevuto\n\n", 28);
     killpg(0, SIGINT);
+    
+    /* just to avoid printing before everyone has finished*/
+    sleep(1);
+    final_print(getpid(), usersPID, nodesPID, par);
     /*
      int status;
      int res_kill;
@@ -127,54 +195,20 @@ int main(int argc, char *argv[])
     pid_t myPID = getpid();
 
     int uCounter, nCounter, returnVal;
-    int IPC_array[3] = {0};
-    unsigned int simTime;
-    char *argvSpawns[10] = {0};
+    uint32_t simTime;
+    int ipcObjectsIDs[IPC_NUM];
+    char *argvSpawns[8] = {0};
 
-    user *usersPID;
-    node *nodesPID;
-
-    /* we two separate handlers for CTRL-C and SIGUSR2, it simpflifies everything */
     struct sigaction sa;
-
     struct sembuf sops;
-    struct parameters *par;
 
-    /* shared memory segments IDs */
-    int usersPID_ID;
-    int nodesPID_ID;
-    int par_ID;
-
-    par_ID = shmget((key_t)SHM_PARAMETERS, sizeof(par), IPC_CREAT | IPC_EXCL | 0600);
-    par = (struct parameters *)shmat(par_ID, NULL, 0);
-    if (parse_parameters(par) == CONF_ERROR)
-        TRACE(("-- Error reading conf file, defaulting to conf#1\n"));
-#ifdef DEBUG
-    print_parameters(par);
-#endif
-
-    usersPID_ID = shmget((key_t)SHM_USERS_ARRAY, (par->SO_USER_NUM) * sizeof(user), IPC_CREAT | IPC_EXCL | 0600);
-    nodesPID_ID = shmget((key_t)SHM_NODES_ARRAY, (par->SO_NODES_NUM) * sizeof(node), IPC_CREAT | IPC_EXCL | 0600);
-    usersPID = (user *)shmat(usersPID_ID, NULL, 0);
-    nodesPID = (node *)shmat(nodesPID_ID, NULL, 0);
-
-    shmctl(usersPID_ID, IPC_RMID, NULL);
-    shmctl(nodesPID_ID, IPC_RMID, NULL);
-    shmctl(par_ID, IPC_RMID, NULL);
-
-#ifdef VERBOSE
-    printf("-- Initialized every shared memory segment\n");
-#endif
-
-    IPC_array[0] = usersPID_ID;
-    IPC_array[1] = nodesPID_ID;
-    IPC_array[2] = par_ID;
+    make_ipc_array(ipcObjectsIDs);
+    make_arguments(ipcObjectsIDs, argvSpawns);
+    mainLedger = ledger_init();
 
     simTime = par->SO_SIM_SEC;
 
-    /*ledger_init(); SEG FAULT RN */
-
-    /* -- SIGNAL HANDLERS --
+    /* -- SIGNAL HANDLER --
      * first set all bytes of sigation to 0
      * then initialize sa.handler to a pointer to the function interrupt_handle
      * then set the handler to handle SIGINT signals ((struct sigaction *oldact) = NULL)
@@ -182,17 +216,6 @@ int main(int argc, char *argv[])
     bzero(&sa, sizeof(sa));
     sa.sa_handler = master_interrupt_handle;
     sigaction(SIGINT, &sa, NULL);
-
-#ifdef VERBOSE
-    printf("-- Sig handler done\n");
-#endif
-
-    makeArguments(argvSpawns, IPC_array);
-    /*setpgid(0, 0);*/
-
-#ifdef VERBOSE
-    printf("-- Made arguments\n");
-#endif
 
     for (uCounter = 0; uCounter < par->SO_USER_NUM; uCounter++)
     {
@@ -222,7 +245,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    sleep(simTime, NULL);
+    sleep(simTime);
 
     print_time_to_die();
     final_print(myPID, usersPID, nodesPID, par);
