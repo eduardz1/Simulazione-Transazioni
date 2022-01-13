@@ -1,0 +1,41 @@
+.TH "transaction_t" 3 "Thu Jan 13 2022" "Simulazione-Transazioni" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+transaction_t
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum { \fBpending\fP, \fBprocessing\fP, \fBconfirmed\fP, \fBaborted\fP }"
+.br
+.in -1c
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "struct timespec \fBtimestamp\fP"
+.br
+.ti -1c
+.RI "pid_t \fBsender\fP"
+.br
+.ti -1c
+.RI "pid_t \fBreceiver\fP"
+.br
+.ti -1c
+.RI "int \fBamount\fP"
+.br
+.ti -1c
+.RI "int \fBreward\fP"
+.br
+.ti -1c
+.RI "enum transaction_t:: { \&.\&.\&. }  \fBstatus\fP"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Simulazione-Transazioni from the source code\&.

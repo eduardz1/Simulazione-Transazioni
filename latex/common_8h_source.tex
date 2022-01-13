@@ -1,0 +1,172 @@
+\hypertarget{common_8h_source}{}\doxysection{common.\+h}
+\label{common_8h_source}\index{src/include/common.h@{src/include/common.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef SIMULAZIONE\_TRANSAZIONI\_COMMON\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define SIMULAZIONE\_TRANSAZIONI\_COMMON\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <stddef.h>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <stdint.h>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <errno.h>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <time.h>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <math.h>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <string.h>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <sys/ipc.h>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <sys/shm.h>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <sys/sem.h>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <sys/msg.h>}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <sys/types.h>}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include "{}../utils/debug.h"{}}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include "{}../utils/sem.h"{}}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include "{}../utils/lists.h"{}}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#ifndef NULL}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define NULL 0 }\textcolor{comment}{/* thre's a problem with NULL for some reason */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#ifndef \_GNU\_SOURCE}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#define \_GNU\_SOURCE}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#define ARRAY\_SIZE(x) (sizeof(x) / sizeof((x)[0]))}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#define RAND(min, max) ((rand() \% (max -\/ min + 1)) + min)}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{comment}{/* -\/-\/ IPC OBJECTS -\/-\/ */}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#define IPC\_ERROR -\/1}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#define SHM\_PARAMETERS 1337}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#define SHM\_USERS\_ARRAY 1338}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#define SHM\_NODES\_ARRAY 1339}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#define SHM\_LEDGER 1340}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#define SEM\_MASTER 420}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#define M\_QUEUE\_KEY 0x5AD}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#define SO\_BLOCK\_SIZE 100     }\textcolor{comment}{/* number of transaction per block*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#define SO\_REGISTRY\_SIZE 1000 }\textcolor{comment}{/* max length of consecutive blocks */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#define SELF -\/1}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#define EVERYONE\_BROKE '\$'}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{comment}{/* -\/-\/ ARGV LOCATION OF IPC OBJECTS -\/-\/ */}}
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#define USERS\_PID\_ARGV (atoi(argv[1]))}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#define NODES\_PID\_ARGV (atoi(argv[2]))}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#define PARAMETERS\_ARGV (atoi(argv[3]))}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#define LEDGER\_ARGV (atoi(argv[4]))}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#define SEM\_ID\_ARGV (atoi(argv[5]))}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \textcolor{comment}{/* -\/-\/ USER RETURN STATUS -\/-\/ */}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#define WENT\_BROKE 1}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#define MAX\_RETRY 2}}
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#define ERROR -\/1}}
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#define SUCCESS 0}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} errno;}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#ifndef TEST\_ERROR}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#define TEST\_ERROR                                 \(\backslash\)}}
+\DoxyCodeLine{65 \textcolor{preprocessor}{    if (errno)                                     \(\backslash\)}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{    \{                                              \(\backslash\)}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{        fprintf(stderr,                            \(\backslash\)}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{                "{}\%s:\%d: PID=\%5d: Error \%d (\%s)\(\backslash\)n"{}}, \(\backslash\)}
+\DoxyCodeLine{69                 \_\_FILE\_\_,                          \(\backslash\)}
+\DoxyCodeLine{70                 \_\_LINE\_\_,                          \(\backslash\)}
+\DoxyCodeLine{71                 getpid(),                          \(\backslash\)}
+\DoxyCodeLine{72                 errno,                             \(\backslash\)}
+\DoxyCodeLine{73                 strerror(errno));                  \(\backslash\)}
+\DoxyCodeLine{74     \}}
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{keyword}{struct }\mbox{\hyperlink{structparameters}{parameters}}}
+\DoxyCodeLine{78 \{}
+\DoxyCodeLine{79     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} SO\_USER\_NUM;}
+\DoxyCodeLine{80     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} SO\_NODES\_NUM;}
+\DoxyCodeLine{81     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} SO\_BUDGET\_INIT;}
+\DoxyCodeLine{82     \textcolor{keywordtype}{char} SO\_REWARD; \textcolor{comment}{/* max value 100 */}}
+\DoxyCodeLine{83     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} SO\_MIN\_TRANS\_GEN\_NSEC;}
+\DoxyCodeLine{84     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} SO\_MAX\_TRANS\_GEN\_NSEC;}
+\DoxyCodeLine{85     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} SO\_RETRY;}
+\DoxyCodeLine{86     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} SO\_TP\_SIZE;}
+\DoxyCodeLine{87     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} SO\_MIN\_TRANS\_PROC\_NSEC;}
+\DoxyCodeLine{88     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} SO\_MAX\_TRANS\_PROC\_NSEC;}
+\DoxyCodeLine{89     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} SO\_SIM\_SEC;}
+\DoxyCodeLine{90     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} SO\_FRIENDS\_NUM;}
+\DoxyCodeLine{91     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} SO\_HOPS;}
+\DoxyCodeLine{92 \};}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structuser__t}{user\_t}}}
+\DoxyCodeLine{95 \{}
+\DoxyCodeLine{96     pid\_t pid;}
+\DoxyCodeLine{97     \textcolor{keyword}{enum}}
+\DoxyCodeLine{98     \{}
+\DoxyCodeLine{99         alive,}
+\DoxyCodeLine{100         broke,}
+\DoxyCodeLine{101         dead}
+\DoxyCodeLine{102     \} status;}
+\DoxyCodeLine{103 \} \mbox{\hyperlink{structuser__t}{user}};}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structnode__t}{node\_t}}}
+\DoxyCodeLine{106 \{}
+\DoxyCodeLine{107     pid\_t pid;}
+\DoxyCodeLine{108     \textcolor{keyword}{enum}}
+\DoxyCodeLine{109     \{}
+\DoxyCodeLine{110         available,}
+\DoxyCodeLine{111         full}
+\DoxyCodeLine{112     \} status;}
+\DoxyCodeLine{113 \} \mbox{\hyperlink{structnode__t}{node}};}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115 \textcolor{comment}{/* Transaction struct */}}
+\DoxyCodeLine{116 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structtransaction__t}{transaction\_t}}}
+\DoxyCodeLine{117 \{}
+\DoxyCodeLine{118     \textcolor{keyword}{struct }timespec timestamp;}
+\DoxyCodeLine{119     pid\_t sender;}
+\DoxyCodeLine{120     pid\_t receiver;}
+\DoxyCodeLine{121     \textcolor{keywordtype}{int} amount;}
+\DoxyCodeLine{122     \textcolor{keywordtype}{int} reward;}
+\DoxyCodeLine{123     \textcolor{keyword}{enum}}
+\DoxyCodeLine{124     \{}
+\DoxyCodeLine{125         pending,}
+\DoxyCodeLine{126         processing,}
+\DoxyCodeLine{127         confirmed,}
+\DoxyCodeLine{128         aborted}
+\DoxyCodeLine{129     \} status;}
+\DoxyCodeLine{130 \} \mbox{\hyperlink{structtransaction__t}{transaction}};}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132 \textcolor{keyword}{struct }\mbox{\hyperlink{structmessage}{message}}}
+\DoxyCodeLine{133 \{}
+\DoxyCodeLine{134     \textcolor{keywordtype}{long} mtype;}
+\DoxyCodeLine{135     \mbox{\hyperlink{structtransaction__t}{transaction}} userTrans;}
+\DoxyCodeLine{136 \};}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138 \textcolor{comment}{/* Block struct */}}
+\DoxyCodeLine{139 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structblock__t}{block\_t}}}
+\DoxyCodeLine{140 \{}
+\DoxyCodeLine{141     \mbox{\hyperlink{structtransaction__t}{transaction}} transList[SO\_BLOCK\_SIZE];}
+\DoxyCodeLine{142     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} blockIndex; \textcolor{comment}{/* when a block is written on ledger it's Index needs to be updated */}}
+\DoxyCodeLine{143     \textcolor{keyword}{struct }\mbox{\hyperlink{structblock__t}{block}} *next;}
+\DoxyCodeLine{144     \textcolor{keyword}{struct }\mbox{\hyperlink{structblock__t}{block}} *prev;}
+\DoxyCodeLine{145 \} \mbox{\hyperlink{structblock__t}{block}};}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147 \textcolor{comment}{/* Libro Mastro (ledger) struct */}}
+\DoxyCodeLine{148 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structledger__t}{ledger\_t}}}
+\DoxyCodeLine{149 \{}
+\DoxyCodeLine{150     \mbox{\hyperlink{structblock__t}{block}} *head;}
+\DoxyCodeLine{151     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} registryCurrSize; \textcolor{comment}{/* initialize to SO\_REGISTRY\_SIZE, update with every new block added */}}
+\DoxyCodeLine{152 \} \mbox{\hyperlink{structledger__t}{ledger}};}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154 \mbox{\hyperlink{structledger__t}{ledger}} *ledger\_init();}
+\DoxyCodeLine{155 \mbox{\hyperlink{structblock__t}{block}} *new\_block();}
+\DoxyCodeLine{156 \textcolor{keywordtype}{void} add\_block(\mbox{\hyperlink{structblock__t}{block}});}
+\DoxyCodeLine{157 \textcolor{keywordtype}{void} add\_transaction\_to\_block(\mbox{\hyperlink{structblock__t}{block}} *, \mbox{\hyperlink{structtransaction__t}{transaction}} *, \textcolor{keywordtype}{int} index);}
+\DoxyCodeLine{158 \textcolor{keywordtype}{void} add\_block\_to\_ledger(\mbox{\hyperlink{structblock__t}{block}} *);}
+\DoxyCodeLine{159 \textcolor{keywordtype}{void} find\_transaction(\textcolor{keyword}{struct} timespec timestamp, pid\_t sender, pid\_t receiver); \textcolor{comment}{/* NULL used to group results */}}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161 \textcolor{comment}{/* listparser.c */}}
+\DoxyCodeLine{162 \textcolor{keywordtype}{void} search\_timestamp();}
+\DoxyCodeLine{163 \textcolor{keywordtype}{void} search\_sender();}
+\DoxyCodeLine{164 \textcolor{keywordtype}{void} search\_receiver();}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* SIMULAZIONE\_TRANSAZIONI\_COMMON\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

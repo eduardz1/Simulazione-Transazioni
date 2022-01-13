@@ -1,0 +1,36 @@
+\hypertarget{users_8h_source}{}\doxysection{users.\+h}
+\label{users_8h_source}\index{src/include/users.h@{src/include/users.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef SIMULAZIONE\_TRANSAZIONI\_USERS\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define SIMULAZIONE\_TRANSAZIONI\_USERS\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <signal.h>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <time.h>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <signal.h>}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{comment}{/* sets sleep time with nsec precision for trans\_gen */}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define SLEEP\_TIME\_SET        \(\backslash\)}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{    randSleepTime.tv\_sec = 0; \(\backslash\)}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{    randSleepTime.tv\_nsec = RAND(par-\/>SO\_MIN\_TRANS\_GEN\_NSEC, par-\/>SO\_MAX\_TRANS\_GEN\_NSEC);}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#define SLEEP                                                                            \(\backslash\)}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{    clock\_nanosleep(CLOCK\_REALTIME, TIMER\_ABSTIME, \&randSleepTime, \&sleepTimeRemaining); \(\backslash\)}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{    clock\_nanosleep(CLOCK\_REALTIME, TIMER\_ABSTIME, \&sleepTimeRemaining, NULL);}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{keywordtype}{void} user\_transactions\_handle(\textcolor{keywordtype}{int} signum);}
+\DoxyCodeLine{20 \textcolor{keywordtype}{void} user\_interrupt\_handle(\textcolor{keywordtype}{int} signum);}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{keywordtype}{int} get\_pid\_userIndex(\textcolor{keywordtype}{int} PID\_toSearch);}
+\DoxyCodeLine{23 pid\_t get\_random\_userPID();}
+\DoxyCodeLine{24 pid\_t get\_random\_nodePID();}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keywordtype}{void} queue\_to\_pid(pid\_t nodePID);}
+\DoxyCodeLine{27 \textcolor{keywordtype}{void} transaction\_init(pid\_t nodePID, \textcolor{keywordtype}{int} amount, \textcolor{keywordtype}{int} reward);}
+\DoxyCodeLine{28 \textcolor{keywordtype}{int} send\_transaction();}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* SIMULAZIONE\_TRANSAZIONI\_USERS\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

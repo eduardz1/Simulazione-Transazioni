@@ -1,0 +1,91 @@
+\hypertarget{sem_8h_source}{}\doxysection{sem.\+h}
+\label{sem_8h_source}\index{src/utils/sem.h@{src/utils/sem.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef SIMULAZIONE\_TRANSAZIONI\_SEM\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define SIMULAZIONE\_TRANSAZIONI\_SEM\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <sys/types.h>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <sys/ipc.h>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <sys/sem.h>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <string.h>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <errno.h>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{comment}{/* from prof. Schifanella examples */}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#define LOCK                    \(\backslash\)}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{    sops.sem\_num = 1;           \(\backslash\)}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{    sops.sem\_op = -\/1;           \(\backslash\)}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{    sops.sem\_flg = 0;           \(\backslash\)}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{    semop(semID, \&sops, 1);}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#define UNLOCK                  \(\backslash\)}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{    sops.sem\_num = 1;           \(\backslash\)}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{    sops.sem\_op = 1;            \(\backslash\)}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{    sops.sem\_flg = 0;           \(\backslash\)}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{    semop(semID, \&sops, 1);}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{comment}{/* from prof. Bini examples */}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{/*}}
+\DoxyCodeLine{28 \textcolor{comment}{ * The following union must be defined as required by the semctl man}}
+\DoxyCodeLine{29 \textcolor{comment}{ * page}}
+\DoxyCodeLine{30 \textcolor{comment}{ */}}
+\DoxyCodeLine{31 \textcolor{keyword}{union }\mbox{\hyperlink{unionsemun}{semun}} \{}
+\DoxyCodeLine{32     \textcolor{keywordtype}{int}              val;    \textcolor{comment}{/* Value for SETVAL */}}
+\DoxyCodeLine{33     \textcolor{keyword}{struct }semid\_ds *buf;    \textcolor{comment}{/* Buffer for IPC\_STAT, IPC\_SET */}}
+\DoxyCodeLine{34     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short}  *array;  \textcolor{comment}{/* Array for GETALL, SETALL */}}
+\DoxyCodeLine{35     \textcolor{keyword}{struct }seminfo  *\_\_buf;  \textcolor{comment}{/* Buffer for IPC\_INFO}}
+\DoxyCodeLine{36 \textcolor{comment}{                    (Linux-\/specific) */}}
+\DoxyCodeLine{37 \};}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \textcolor{comment}{/*}}
+\DoxyCodeLine{41 \textcolor{comment}{ * Set a semaphore to a user defined value}}
+\DoxyCodeLine{42 \textcolor{comment}{ * INPUT:}}
+\DoxyCodeLine{43 \textcolor{comment}{ * -\/ sem\_id: the ID of the semaphore IPC object}}
+\DoxyCodeLine{44 \textcolor{comment}{ * -\/ sem\_num: the position of the semaphore in the array}}
+\DoxyCodeLine{45 \textcolor{comment}{ * -\/ sem\_val: the initialization value of the semaphore}}
+\DoxyCodeLine{46 \textcolor{comment}{ * RESULT:}}
+\DoxyCodeLine{47 \textcolor{comment}{ * -\/ the selected semaphore is initialized to the given value}}
+\DoxyCodeLine{48 \textcolor{comment}{ * -\/ the returned value is the same as the invoked semctl}}
+\DoxyCodeLine{49 \textcolor{comment}{ */}}
+\DoxyCodeLine{50 \textcolor{keywordtype}{int} sem\_set\_val(\textcolor{keywordtype}{int} sem\_id, \textcolor{keywordtype}{int} sem\_num, \textcolor{keywordtype}{int} sem\_val);}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{comment}{/*}}
+\DoxyCodeLine{53 \textcolor{comment}{ * Try to access the resource}}
+\DoxyCodeLine{54 \textcolor{comment}{ * INPUT:}}
+\DoxyCodeLine{55 \textcolor{comment}{ * -\/ sem\_id: the ID of the semaphore IPC object}}
+\DoxyCodeLine{56 \textcolor{comment}{ * -\/ sem\_num: the position of the semaphore in the array}}
+\DoxyCodeLine{57 \textcolor{comment}{ * RESULT}}
+\DoxyCodeLine{58 \textcolor{comment}{ * -\/ if the resource is available (semaphore value > 0), the semaphore}}
+\DoxyCodeLine{59 \textcolor{comment}{ *   is decremented by one}}
+\DoxyCodeLine{60 \textcolor{comment}{ * -\/ if the resource is not available (semaphore value == 0), the}}
+\DoxyCodeLine{61 \textcolor{comment}{ *   process is blocked until the resource becomes available again}}
+\DoxyCodeLine{62 \textcolor{comment}{ * -\/ the returned value is the same as the invoked semop}}
+\DoxyCodeLine{63 \textcolor{comment}{ */}}
+\DoxyCodeLine{64 \textcolor{keywordtype}{int} sem\_reserve(\textcolor{keywordtype}{int} sem\_id, \textcolor{keywordtype}{int} sem\_num);}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66 \textcolor{comment}{/*}}
+\DoxyCodeLine{67 \textcolor{comment}{ * Release the resource}}
+\DoxyCodeLine{68 \textcolor{comment}{ * INPUT:}}
+\DoxyCodeLine{69 \textcolor{comment}{ * -\/ sem\_id: the ID of the semaphore IPC object}}
+\DoxyCodeLine{70 \textcolor{comment}{ * -\/ sem\_num: the position of the semaphore in the array}}
+\DoxyCodeLine{71 \textcolor{comment}{ * RESULT:}}
+\DoxyCodeLine{72 \textcolor{comment}{ * -\/ the semaphore value is incremented by one. This may unblock some}}
+\DoxyCodeLine{73 \textcolor{comment}{ *   process}}
+\DoxyCodeLine{74 \textcolor{comment}{ * -\/ the returned value is the same as the invoked semop}}
+\DoxyCodeLine{75 \textcolor{comment}{ */}}
+\DoxyCodeLine{76 \textcolor{keywordtype}{int} sem\_release(\textcolor{keywordtype}{int} sem\_id, \textcolor{keywordtype}{int} sem\_num);}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 \textcolor{comment}{/*}}
+\DoxyCodeLine{79 \textcolor{comment}{ * Print all semaphore values to a string. my\_string MUST be}}
+\DoxyCodeLine{80 \textcolor{comment}{ * previously allocated}}
+\DoxyCodeLine{81 \textcolor{comment}{ */}}
+\DoxyCodeLine{82 \textcolor{keywordtype}{int} sem\_getall(\textcolor{keywordtype}{char} * my\_string, \textcolor{keywordtype}{int} sem\_id);}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* SIMULAZIONE\_TRANSAZIONI\_SEM\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

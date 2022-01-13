@@ -1,0 +1,21 @@
+\hypertarget{debug_8h_source}{}\doxysection{debug.\+h}
+\label{debug_8h_source}\index{src/utils/debug.h@{src/utils/debug.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef SIMULAZIONE\_TRANSAZIONI\_DEBUG\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define SIMULAZIONE\_TRANSAZIONI\_DEBUG\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <stdarg.h>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{6 \textcolor{comment}{/* kudos to https://stackoverflow.com/questions/1644868/define-\/macro-\/for-\/debug-\/printing-\/in-\/c/1644898\#1644898?newreg=f3d84f0e4a0846b6ab71f2eac2374d70 */}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keywordtype}{void} dbg\_printf(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *fmt, ...);}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifdef DEBUG}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define TRACE(x) dbg\_printf x;}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#define TRACE(x)}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* SIMULAZIONE\_TRANSAZIONI\_DEBUG\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}
