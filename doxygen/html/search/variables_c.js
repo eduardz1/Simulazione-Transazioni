@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['semid_0',['semID',['../master_8c.html#ae520355298e7bac453a556eeab7df45f',1,'semID():&#160;master.c'],['../nodes_8c.html#ae520355298e7bac453a556eeab7df45f',1,'semID():&#160;nodes.c'],['../users_8c.html#ae520355298e7bac453a556eeab7df45f',1,'semID():&#160;users.c']]],
+  ['sender_1',['sender',['../structtransaction__t.html#a36060e3785ebad7b278cb01d5159c0c5',1,'transaction_t']]],
+  ['sleeptimeremaining_2',['sleepTimeRemaining',['../nodes_8h.html#a45ff1b670dbcc1a3ff3c2657aba0b66b',1,'nodes.h']]],
+  ['so_5fbudget_5finit_3',['SO_BUDGET_INIT',['../structparameters.html#a375c541a19818ce43b6ae275d0a80365',1,'parameters']]],
+  ['so_5ffriends_5fnum_4',['SO_FRIENDS_NUM',['../structparameters.html#a6d8f5bd80c3eda4ed6d9f2440f9105b2',1,'parameters']]],
+  ['so_5fhops_5',['SO_HOPS',['../structparameters.html#a85ca4a1c61f11babff7ccd10ec58ee70',1,'parameters']]],
+  ['so_5fmax_5ftrans_5fgen_5fnsec_6',['SO_MAX_TRANS_GEN_NSEC',['../structparameters.html#abca064afd6b392e1f9e24b5fda8cdecb',1,'parameters']]],
+  ['so_5fmax_5ftrans_5fproc_5fnsec_7',['SO_MAX_TRANS_PROC_NSEC',['../structparameters.html#af7fbb0805dd6c4e1729d70a30164bc1c',1,'parameters']]],
+  ['so_5fmin_5ftrans_5fgen_5fnsec_8',['SO_MIN_TRANS_GEN_NSEC',['../structparameters.html#a213ccb7b7e150d7bf584f35cc824ead6',1,'parameters']]],
+  ['so_5fmin_5ftrans_5fproc_5fnsec_9',['SO_MIN_TRANS_PROC_NSEC',['../structparameters.html#a19a5fe1068e3e1ceceab49114d856628',1,'parameters']]],
+  ['so_5fnodes_5fnum_10',['SO_NODES_NUM',['../structparameters.html#a379d08051847c4f98268a27001b06261',1,'parameters']]],
+  ['so_5fretry_11',['SO_RETRY',['../structparameters.html#ac2861693c2d9121c5ecad90de2189690',1,'parameters']]],
+  ['so_5freward_12',['SO_REWARD',['../structparameters.html#a1e8968a80441b4a641d5ff3566af04f1',1,'parameters']]],
+  ['so_5fsim_5fsec_13',['SO_SIM_SEC',['../structparameters.html#a86c91cb21e43e2f92651c149f93f0dc5',1,'parameters']]],
+  ['so_5ftp_5fsize_14',['SO_TP_SIZE',['../structparameters.html#a8fe346ee9f21d4a40e15388b72579fbe',1,'parameters']]],
+  ['so_5fuser_5fnum_15',['SO_USER_NUM',['../structparameters.html#a1a7bfa0882f03d573b4e419d02f041f8',1,'parameters']]],
+  ['status_16',['status',['../structuser__t.html#a2f25fcb4ca138820780f3fc6ee156d17',1,'user_t::status()'],['../structnode__t.html#a3298103f7912ec98c0f00205b2ac218d',1,'node_t::status()'],['../structtransaction__t.html#a95a086466eb975b4da063388dd397dd3',1,'transaction_t::status()']]]
+];

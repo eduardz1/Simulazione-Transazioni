@@ -1,0 +1,823 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.3" xml:lang="en-US">
+  <compounddef id="users_8c" kind="file" language="C++">
+    <compoundname>users.c</compoundname>
+    <includes refid="common_8h" local="yes">include/common.h</includes>
+    <includes refid="users_8h" local="yes">include/users.h</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>include/common.h</label>
+        <link refid="common_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>include/users.h</label>
+        <link refid="users_8h"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/users.c</label>
+        <link refid="users_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>../utils/debug.h</label>
+        <link refid="debug_8h"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>../utils/lists.h</label>
+        <link refid="lists_8h"/>
+      </node>
+      <node id="19">
+        <label>../utils/sem.h</label>
+        <link refid="sem_8h"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>errno.h</label>
+      </node>
+      <node id="10">
+        <label>math.h</label>
+      </node>
+      <node id="22">
+        <label>signal.h</label>
+      </node>
+      <node id="18">
+        <label>stdarg.h</label>
+      </node>
+      <node id="5">
+        <label>stddef.h</label>
+      </node>
+      <node id="6">
+        <label>stdint.h</label>
+      </node>
+      <node id="4">
+        <label>stdio.h</label>
+      </node>
+      <node id="3">
+        <label>stdlib.h</label>
+      </node>
+      <node id="11">
+        <label>string.h</label>
+      </node>
+      <node id="12">
+        <label>sys/ipc.h</label>
+      </node>
+      <node id="15">
+        <label>sys/msg.h</label>
+      </node>
+      <node id="14">
+        <label>sys/sem.h</label>
+      </node>
+      <node id="13">
+        <label>sys/shm.h</label>
+      </node>
+      <node id="16">
+        <label>sys/types.h</label>
+      </node>
+      <node id="9">
+        <label>time.h</label>
+      </node>
+      <node id="7">
+        <label>unistd.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="users_8c_1a6552301543b6d6d55cb62f88d40300a0" prot="public" static="no">
+        <name>REWARD</name>
+        <param><defname>amount</defname></param>
+        <param><defname>reward</defname></param>
+        <initializer>(ceil(((reward * (amount)) / 100.0)))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="4" column="9" bodyfile="src/users.c" bodystart="4" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="users_8c_1a963935917aae796fbb8f2728703adf04" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structparameters" kindref="compound">parameters</ref> *</type>
+        <definition>struct parameters* par</definition>
+        <argsstring></argsstring>
+        <name>par</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="31" column="17" bodyfile="src/users.c" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="users_8c_1af667a518a4feef7b7540ebac0cd618cf" prot="public" static="no" mutable="no">
+        <type><ref refid="common_8h_1a75285f7670649ccfb5ccbbc952a15bfd" kindref="member">user</ref> *</type>
+        <definition>user* usersPID</definition>
+        <argsstring></argsstring>
+        <name>usersPID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="32" column="6" bodyfile="src/users.c" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="users_8c_1a803b35477f039b41487c3b1abee12b80" prot="public" static="no" mutable="no">
+        <type><ref refid="common_8h_1a85b4f4124a5616dea92c9e8a221a8db5" kindref="member">node</ref> *</type>
+        <definition>node* nodesPID</definition>
+        <argsstring></argsstring>
+        <name>nodesPID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="33" column="6" bodyfile="src/users.c" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="users_8c_1a61246e5e608d3240fbbee97c978af351" prot="public" static="no" mutable="no">
+        <type><ref refid="common_8h_1af8b2bdfa2bfa44284c83a9d6994b13f1" kindref="member">ledger</ref> *</type>
+        <definition>ledger* mainLedger</definition>
+        <argsstring></argsstring>
+        <name>mainLedger</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="34" column="8" bodyfile="src/users.c" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="users_8c_1ae520355298e7bac453a556eeab7df45f" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int semID</definition>
+        <argsstring></argsstring>
+        <name>semID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="36" column="5" bodyfile="src/users.c" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="users_8c_1abba475816ec0c77dd5821e7fa9ab4207" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int queueID</definition>
+        <argsstring></argsstring>
+        <name>queueID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="37" column="5" bodyfile="src/users.c" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="users_8c_1a2ac06e48b5c5d403186f052dbefc3fe7" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int currBalance</definition>
+        <argsstring></argsstring>
+        <name>currBalance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="39" column="5" bodyfile="src/users.c" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="users_8c_1af97c23712a0bab92e0ca95694e85282e" prot="public" static="no" mutable="no">
+        <type>pid_t</type>
+        <definition>pid_t myPID</definition>
+        <argsstring></argsstring>
+        <name>myPID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="40" column="7" bodyfile="src/users.c" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="users_8c_1af230afc0b56da7230ff9dacabbac1e25" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int outGoingTransactions</definition>
+        <argsstring></argsstring>
+        <name>outGoingTransactions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="41" column="5" bodyfile="src/users.c" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="users_8c_1ad315771a76938636b622d7af42c8afd7" prot="public" static="no" mutable="no">
+        <type><ref refid="common_8h_1a96717a5adf375b5328bde513e91bf658" kindref="member">transaction</ref></type>
+        <definition>transaction currTrans</definition>
+        <argsstring></argsstring>
+        <name>currTrans</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="42" column="13" bodyfile="src/users.c" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="users_8c_1a7f41cf6401b33c2055d553d8315decaa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int get_pid_userIndex</definition>
+        <argsstring>(int PID_toSearch)</argsstring>
+        <name>get_pid_userIndex</name>
+        <param>
+          <type>int</type>
+          <declname>PID_toSearch</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="51" column="5" bodyfile="src/users.c" bodystart="51" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="users_8c_1aaf15d0912c5fa42321118d1c652551d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>pid_t</type>
+        <definition>pid_t get_random_userPID</definition>
+        <argsstring>()</argsstring>
+        <name>get_random_userPID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="65" column="7" bodyfile="src/users.c" bodystart="65" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="users_8c_1a7a26cf1c5a9c15d42c4f3caeaa179b0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>pid_t</type>
+        <definition>pid_t get_random_nodePID</definition>
+        <argsstring>()</argsstring>
+        <name>get_random_nodePID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="83" column="7" bodyfile="src/users.c" bodystart="83" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="users_8c_1a959cd23eec8cbe2e56f5cc915e24ec2b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void update_status</definition>
+        <argsstring>(int statusToSet)</argsstring>
+        <name>update_status</name>
+        <param>
+          <type>int</type>
+          <declname>statusToSet</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="101" column="6" bodyfile="src/users.c" bodystart="101" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="users_8c_1add037018869db8fbc785a9e0b24dd020" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void attach_ipc_objects</definition>
+        <argsstring>(char **argv)</argsstring>
+        <name>attach_ipc_objects</name>
+        <param>
+          <type>char **</type>
+          <declname>argv</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="120" column="6" bodyfile="src/users.c" bodystart="120" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="users_8c_1a9cceef0ffc7483e71c1cc4652a05cc1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void queue_to_pid</definition>
+        <argsstring>(pid_t nodePID)</argsstring>
+        <name>queue_to_pid</name>
+        <param>
+          <type>pid_t</type>
+          <declname>nodePID</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="138" column="6" bodyfile="src/users.c" bodystart="138" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="users_8c_1aad9c23bdb64131e376665a8dd7085f9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void transaction_init</definition>
+        <argsstring>(pid_t userPID, int amount, int reward)</argsstring>
+        <name>transaction_init</name>
+        <param>
+          <type>pid_t</type>
+          <declname>userPID</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>amount</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>reward</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="146" column="6" bodyfile="src/users.c" bodystart="146" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="users_8c_1a54d1d8f51781e0b3c58e16d3e04f2f74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void signal_handlers_init</definition>
+        <argsstring>(struct sigaction *saUSR1, struct sigaction *saINT)</argsstring>
+        <name>signal_handlers_init</name>
+        <param>
+          <type>struct sigaction *</type>
+          <declname>saUSR1</declname>
+        </param>
+        <param>
+          <type>struct sigaction *</type>
+          <declname>saINT</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="160" column="6" bodyfile="src/users.c" bodystart="160" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="users_8c_1af881b5c5f39090e7fc6c5c5d6630c7cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int send_transaction</definition>
+        <argsstring>()</argsstring>
+        <name>send_transaction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="176" column="5" bodyfile="src/users.c" bodystart="176" bodyend="214"/>
+      </memberdef>
+      <memberdef kind="function" id="users_8c_1a2419f7ac6a2d2282e04a8535b4b5c2f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void user_transactions_handle</definition>
+        <argsstring>(int signum)</argsstring>
+        <name>user_transactions_handle</name>
+        <param>
+          <type>int</type>
+          <declname>signum</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="217" column="6" bodyfile="src/users.c" bodystart="217" bodyend="224"/>
+      </memberdef>
+      <memberdef kind="function" id="users_8c_1a9aab3bf870349762f604cebd8633aea5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void user_interrupt_handle</definition>
+        <argsstring>(int signum)</argsstring>
+        <name>user_interrupt_handle</name>
+        <param>
+          <type>int</type>
+          <declname>signum</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="227" column="6" bodyfile="src/users.c" bodystart="227" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="users_8c_1a0ddf1224851353fc92bfbff6f499fa97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int main</definition>
+        <argsstring>(int argc, char *argv[])</argsstring>
+        <name>main</name>
+        <param>
+          <type>int</type>
+          <declname>argc</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>argv</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/users.c" line="233" column="5" bodyfile="src/users.c" bodystart="233" bodyend="312"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;<ref refid="common_8h" kindref="compound">include/common.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="users_8h" kindref="compound">include/users.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4" refid="users_8c_1a6552301543b6d6d55cb62f88d40300a0" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>REWARD(amount,<sp/>reward)<sp/>(ceil(((reward<sp/>*<sp/>(amount))<sp/>/<sp/>100.0)))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>NON<sp/>active<sp/>wait,<sp/>the<sp/>time<sp/>is<sp/>equivalent<sp/>to<sp/>the</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>verification<sp/>algorithms<sp/>that<sp/>happen<sp/>in<sp/>&quot;real&quot;<sp/>blockchains</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*<sp/>Need<sp/>to<sp/>implement<sp/>a<sp/>way<sp/>to<sp/>send<sp/>s<sp/>transaction</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>signal,<sp/>we<sp/>can<sp/>utilize<sp/>a<sp/>user<sp/>defined<sp/>signal</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>handler.</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/>We<sp/>also<sp/>need<sp/>to<sp/>account<sp/>for<sp/>the<sp/>signal<sp/>SIGINT<sp/>(CTRL-C).</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/>Maybe<sp/>we<sp/>can<sp/>implement<sp/>some<sp/>sort<sp/>of<sp/>graphic<sp/>way<sp/>to<sp/>visualize</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/>child<sp/>processes<sp/>(nodes<sp/>and<sp/>user)<sp/>so<sp/>that<sp/>we<sp/>can<sp/>choose</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/>the<sp/>PID<sp/>on<sp/>which<sp/>to<sp/>send<sp/>the<sp/>signal<sp/>to.</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>--<sp/>user-defined<sp/>signal<sp/>handlers<sp/>are<sp/>inherited<sp/>by<sp/>the<sp/>child<sp/>processes<sp/>--</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/>so<sp/>it&apos;s<sp/>better<sp/>to<sp/>handle<sp/>them<sp/>in<sp/>the<sp/>master<sp/>program</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>void<sp/>wait_for_incoming_transaction()<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>======================</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>||<sp/>GLOBAL<sp/>VARIABLES<sp/>||</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>======================</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>parameters<sp/>of<sp/>simulation<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="users_8c_1a963935917aae796fbb8f2728703adf04" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structparameters" kindref="compound">parameters</ref><sp/>*<ref refid="users_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>;</highlight></codeline>
+<codeline lineno="32" refid="users_8c_1af667a518a4feef7b7540ebac0cd618cf" refkind="member"><highlight class="normal"><ref refid="structuser__t" kindref="compound">user</ref><sp/>*<ref refid="users_8c_1af667a518a4feef7b7540ebac0cd618cf" kindref="member">usersPID</ref>;</highlight></codeline>
+<codeline lineno="33" refid="users_8c_1a803b35477f039b41487c3b1abee12b80" refkind="member"><highlight class="normal"><ref refid="structnode__t" kindref="compound">node</ref><sp/>*<ref refid="users_8c_1a803b35477f039b41487c3b1abee12b80" kindref="member">nodesPID</ref>;</highlight></codeline>
+<codeline lineno="34" refid="users_8c_1a61246e5e608d3240fbbee97c978af351" refkind="member"><highlight class="normal"><ref refid="structledger__t" kindref="compound">ledger</ref><sp/>*<ref refid="users_8c_1a61246e5e608d3240fbbee97c978af351" kindref="member">mainLedger</ref>;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="users_8c_1ae520355298e7bac453a556eeab7df45f" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="users_8c_1ae520355298e7bac453a556eeab7df45f" kindref="member">semID</ref>;</highlight></codeline>
+<codeline lineno="37" refid="users_8c_1abba475816ec0c77dd5821e7fa9ab4207" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="users_8c_1abba475816ec0c77dd5821e7fa9ab4207" kindref="member">queueID</ref>;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39" refid="users_8c_1a2ac06e48b5c5d403186f052dbefc3fe7" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="users_8c_1a2ac06e48b5c5d403186f052dbefc3fe7" kindref="member">currBalance</ref>;</highlight></codeline>
+<codeline lineno="40" refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" refkind="member"><highlight class="normal">pid_t<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>;</highlight></codeline>
+<codeline lineno="41" refid="users_8c_1af230afc0b56da7230ff9dacabbac1e25" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="users_8c_1af230afc0b56da7230ff9dacabbac1e25" kindref="member">outGoingTransactions</ref>;<sp/></highlight><highlight class="comment">/*<sp/>accumulate<sp/>amount<sp/>of<sp/>transactions<sp/>sent<sp/>but<sp/>yet<sp/>to<sp/>be<sp/>received<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="users_8c_1ad315771a76938636b622d7af42c8afd7" refkind="member"><highlight class="normal"><ref refid="structtransaction__t" kindref="compound">transaction</ref><sp/><ref refid="users_8c_1ad315771a76938636b622d7af42c8afd7" kindref="member">currTrans</ref>;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/>======================</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/>||<sp/><sp/><sp/><sp/>FUNCTIONS<sp/><sp/><sp/><sp/><sp/>||</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/>======================</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>returns<sp/>index<sp/>of<sp/>where<sp/>user<sp/>with<sp/>PID_toSearch<sp/>is<sp/>located<sp/>in<sp/>usersPID[]<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="users_8h_1a7f41cf6401b33c2055d553d8315decaa" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="users_8c_1a7f41cf6401b33c2055d553d8315decaa" kindref="member">get_pid_userIndex</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>PID_toSearch)</highlight></codeline>
+<codeline lineno="52"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/><ref refid="users_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1a1a7bfa0882f03d573b4e419d02f041f8" kindref="member">SO_USER_NUM</ref>;<sp/>i++)</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="users_8c_1af667a518a4feef7b7540ebac0cd618cf" kindref="member">usersPID</ref>[i].pid<sp/>==<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>)</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>-1;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>returns<sp/>a<sp/>random<sp/>PID<sp/>of<sp/>a<sp/>non-dead<sp/>user<sp/>from<sp/>usersPID[]<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65" refid="users_8h_1aaf15d0912c5fa42321118d1c652551d2" refkind="member"><highlight class="normal">pid_t<sp/><ref refid="users_8c_1aaf15d0912c5fa42321118d1c652551d2" kindref="member">get_random_userPID</ref>()</highlight></codeline>
+<codeline lineno="66"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>index;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>pid_t<sp/>val<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">do</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>index<sp/>=<sp/><ref refid="common_8h_1a0d7644a795aa2dd33f01ef184f3f672a" kindref="member">RAND</ref>(0,<sp/><ref refid="users_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1a1a7bfa0882f03d573b4e419d02f041f8" kindref="member">SO_USER_NUM</ref><sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="debug_8h_1a494d31903e7b0333dfa03b0778679113" kindref="member">TRACE</ref>((</highlight><highlight class="stringliteral">&quot;:user:<sp/>%d<sp/>index<sp/>is<sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>,<sp/>index))</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="debug_8h_1a494d31903e7b0333dfa03b0778679113" kindref="member">TRACE</ref>((</highlight><highlight class="stringliteral">&quot;:users:<sp/>%d<sp/>usersPID[%d]\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>,<sp/>index));</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="users_8c_1af667a518a4feef7b7540ebac0cd618cf" kindref="member">usersPID</ref>[index].status<sp/>!=<sp/>dead)</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>val<sp/>=<sp/><ref refid="users_8c_1af667a518a4feef7b7540ebac0cd618cf" kindref="member">usersPID</ref>[index].<ref refid="structuser__t_1ae0d46a978d5cd6707411f276ad869b9c" kindref="member">pid</ref>;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(!val);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>val;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>returns<sp/>a<sp/>random<sp/>PID<sp/>of<sp/>an<sp/>available<sp/>node<sp/>from<sp/>nodesPID[]<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="users_8h_1a7a26cf1c5a9c15d42c4f3caeaa179b0e" refkind="member"><highlight class="normal">pid_t<sp/><ref refid="users_8c_1a7a26cf1c5a9c15d42c4f3caeaa179b0e" kindref="member">get_random_nodePID</ref>()</highlight></codeline>
+<codeline lineno="84"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>index;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>pid_t<sp/>val<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">do</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>index<sp/>=<sp/><ref refid="common_8h_1a0d7644a795aa2dd33f01ef184f3f672a" kindref="member">RAND</ref>(0,<sp/><ref refid="users_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1a379d08051847c4f98268a27001b06261" kindref="member">SO_NODES_NUM</ref><sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="debug_8h_1a494d31903e7b0333dfa03b0778679113" kindref="member">TRACE</ref>((</highlight><highlight class="stringliteral">&quot;:user:<sp/>%d<sp/>index<sp/>is<sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>,<sp/>index))</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="debug_8h_1a494d31903e7b0333dfa03b0778679113" kindref="member">TRACE</ref>((</highlight><highlight class="stringliteral">&quot;:users:<sp/>%d<sp/>nodesPID[%d]\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>,<sp/>index));</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="users_8c_1a803b35477f039b41487c3b1abee12b80" kindref="member">nodesPID</ref>[index].status<sp/>==<sp/>available)</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>val<sp/>=<sp/><ref refid="users_8c_1a803b35477f039b41487c3b1abee12b80" kindref="member">nodesPID</ref>[index].<ref refid="structnode__t_1ae0d46a978d5cd6707411f276ad869b9c" kindref="member">pid</ref>;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(!val);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>val;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>safely<sp/>updates<sp/>status<sp/>of<sp/>user<sp/>to<sp/>statusToSet:<sp/>0<sp/>alive,<sp/>1<sp/>broke,<sp/>2<sp/>dead<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101" refid="users_8c_1a959cd23eec8cbe2e56f5cc915e24ec2b" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="users_8c_1a959cd23eec8cbe2e56f5cc915e24ec2b" kindref="member">update_status</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>statusToSet)</highlight></codeline>
+<codeline lineno="102"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/><ref refid="users_8c_1a7f41cf6401b33c2055d553d8315decaa" kindref="member">get_pid_userIndex</ref>(<ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(i<sp/>==<sp/>-1)</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="debug_8h_1a494d31903e7b0333dfa03b0778679113" kindref="member">TRACE</ref>((</highlight><highlight class="stringliteral">&quot;:users:<sp/>%d<sp/>failed<sp/>to<sp/>find<sp/>myself<sp/>in<sp/>usersPID[]&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>));</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="sem_8c_1a8a9bfe4b1b46fa8a09858b192d6e8764" kindref="member">sem_reserve</ref>(<ref refid="users_8c_1ae520355298e7bac453a556eeab7df45f" kindref="member">semID</ref>,<sp/>1);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1af667a518a4feef7b7540ebac0cd618cf" kindref="member">usersPID</ref>[i].<ref refid="structuser__t_1a2f25fcb4ca138820780f3fc6ee156d17" kindref="member">status</ref><sp/>=<sp/>statusToSet;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(statusToSet<sp/>==<sp/>2)</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*usersPrematurelyDead++;*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="debug_8h_1a494d31903e7b0333dfa03b0778679113" kindref="member">TRACE</ref>((</highlight><highlight class="stringliteral">&quot;:users:<sp/>dead<sp/>increased\n&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="sem_8c_1a3fbb448c9f985007f6030b3927357b5c" kindref="member">sem_release</ref>(<ref refid="users_8c_1ae520355298e7bac453a556eeab7df45f" kindref="member">semID</ref>,<sp/>1);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>attaches<sp/>ipc<sp/>objects<sp/>based<sp/>on<sp/>IDs<sp/>passed<sp/>via<sp/>arguments<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="120" refid="users_8c_1add037018869db8fbc785a9e0b24dd020" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="users_8c_1add037018869db8fbc785a9e0b24dd020" kindref="member">attach_ipc_objects</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**argv)</highlight></codeline>
+<codeline lineno="121"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref><sp/>=<sp/>shmat(<ref refid="common_8h_1a8dc6d4d682e4f826ef23717f1b28d60c" kindref="member">PARAMETERS_ARGV</ref>,<sp/><ref refid="common_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4" kindref="member">NULL</ref>,<sp/>0);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="debug_8h_1a494d31903e7b0333dfa03b0778679113" kindref="member">TRACE</ref>((</highlight><highlight class="stringliteral">&quot;:users<sp/>%d<sp/>par-&gt;SO_RETRY<sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>,<sp/><ref refid="users_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1ac2861693c2d9121c5ecad90de2189690" kindref="member">SO_RETRY</ref>))</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="common_8h_1a8251bcdfc5c83845e0834adf211de033" kindref="member">TEST_ERROR</ref></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1af667a518a4feef7b7540ebac0cd618cf" kindref="member">usersPID</ref><sp/>=<sp/>shmat(<ref refid="common_8h_1abdb8ae9e0caeeaa6b02791a1991ec34e" kindref="member">USERS_PID_ARGV</ref>,<sp/><ref refid="common_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4" kindref="member">NULL</ref>,<sp/>0);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="debug_8h_1a494d31903e7b0333dfa03b0778679113" kindref="member">TRACE</ref>((</highlight><highlight class="stringliteral">&quot;:users:<sp/>%d<sp/>usersPID[0]<sp/>=<sp/>%d,<sp/>usersPID[3]<sp/>=<sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>,<sp/><ref refid="users_8c_1af667a518a4feef7b7540ebac0cd618cf" kindref="member">usersPID</ref>[0],<sp/><ref refid="users_8c_1af667a518a4feef7b7540ebac0cd618cf" kindref="member">usersPID</ref>[3]))</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="common_8h_1a8251bcdfc5c83845e0834adf211de033" kindref="member">TEST_ERROR</ref></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1a803b35477f039b41487c3b1abee12b80" kindref="member">nodesPID</ref><sp/>=<sp/>shmat(<ref refid="common_8h_1aa26907b48e282ee32e55a0f21d90c651" kindref="member">NODES_PID_ARGV</ref>,<sp/><ref refid="common_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4" kindref="member">NULL</ref>,<sp/>0);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="debug_8h_1a494d31903e7b0333dfa03b0778679113" kindref="member">TRACE</ref>((</highlight><highlight class="stringliteral">&quot;:users:<sp/>%d<sp/>nodesPID[0]<sp/>=<sp/>%d,<sp/>nodesPID[3]<sp/>=<sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>,<sp/><ref refid="users_8c_1a803b35477f039b41487c3b1abee12b80" kindref="member">nodesPID</ref>[0],<sp/><ref refid="users_8c_1a803b35477f039b41487c3b1abee12b80" kindref="member">nodesPID</ref>[3]))</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="common_8h_1a8251bcdfc5c83845e0834adf211de033" kindref="member">TEST_ERROR</ref></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1a61246e5e608d3240fbbee97c978af351" kindref="member">mainLedger</ref><sp/>=<sp/>shmat(<ref refid="common_8h_1acbabb34d7448290aade7aa93bb0c09ca" kindref="member">LEDGER_ARGV</ref>,<sp/><ref refid="common_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4" kindref="member">NULL</ref>,<sp/>0);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="common_8h_1a8251bcdfc5c83845e0834adf211de033" kindref="member">TEST_ERROR</ref></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1ae520355298e7bac453a556eeab7df45f" kindref="member">semID</ref><sp/>=<sp/><ref refid="common_8h_1a6b6ae98a167eeb9050cca5e9f9e5cf37" kindref="member">SEM_ID_ARGV</ref>;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="debug_8h_1a494d31903e7b0333dfa03b0778679113" kindref="member">TRACE</ref>((</highlight><highlight class="stringliteral">&quot;:users:<sp/>%d<sp/>semID<sp/>is<sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>,<sp/><ref refid="users_8c_1ae520355298e7bac453a556eeab7df45f" kindref="member">semID</ref>));</highlight></codeline>
+<codeline lineno="135"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>use<sp/>nodePID<sp/>as<sp/>key<sp/>for<sp/>msgget<sp/>and<sp/>check<sp/>for<sp/>errors<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="138" refid="users_8h_1a9cceef0ffc7483e71c1cc4652a05cc1c" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="users_8c_1a9cceef0ffc7483e71c1cc4652a05cc1c" kindref="member">queue_to_pid</ref>(pid_t<sp/>nodePID)</highlight></codeline>
+<codeline lineno="139"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1abba475816ec0c77dd5821e7fa9ab4207" kindref="member">queueID</ref><sp/>=<sp/>msgget(nodePID,<sp/>IPC_CREAT<sp/>|<sp/>0600);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="common_8h_1a8251bcdfc5c83845e0834adf211de033" kindref="member">TEST_ERROR</ref></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="debug_8h_1a494d31903e7b0333dfa03b0778679113" kindref="member">TRACE</ref>((</highlight><highlight class="stringliteral">&quot;:users:<sp/>%d<sp/>-&gt;<sp/>%d<sp/>queueID<sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>,<sp/>nodePID,<sp/><ref refid="users_8c_1abba475816ec0c77dd5821e7fa9ab4207" kindref="member">queueID</ref>))</highlight></codeline>
+<codeline lineno="143"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>initializes<sp/>transaction<sp/>values<sp/>and<sp/>sets<sp/>it<sp/>to<sp/>pending<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="146" refid="users_8h_1a1e2d07708f3abf72150e65545e8bef23" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="users_8c_1aad9c23bdb64131e376665a8dd7085f9b" kindref="member">transaction_init</ref>(pid_t<sp/>userPID,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>amount,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>reward)</highlight></codeline>
+<codeline lineno="147"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">timespec<sp/>exactTime;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1ad315771a76938636b622d7af42c8afd7" kindref="member">currTrans</ref>.<ref refid="structtransaction__t_1a36060e3785ebad7b278cb01d5159c0c5" kindref="member">sender</ref><sp/>=<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>;</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1ad315771a76938636b622d7af42c8afd7" kindref="member">currTrans</ref>.<ref refid="structtransaction__t_1a3c01e8bf1e61ee67a25113f3db1a32b8" kindref="member">receiver</ref><sp/>=<sp/>userPID;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1ad315771a76938636b622d7af42c8afd7" kindref="member">currTrans</ref>.<ref refid="structtransaction__t_1a14236de313193a14b4dbdf442bcf2bb9" kindref="member">amount</ref><sp/>=<sp/>amount;</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1ad315771a76938636b622d7af42c8afd7" kindref="member">currTrans</ref>.<ref refid="structtransaction__t_1af571e76d8e59b8452f38407799272e4a" kindref="member">reward</ref><sp/>=<sp/>reward;</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1ad315771a76938636b622d7af42c8afd7" kindref="member">currTrans</ref>.<ref refid="structtransaction__t_1a95a086466eb975b4da063388dd397dd3" kindref="member">status</ref><sp/>=<sp/>pending;</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/>clock_gettime(CLOCK_REALTIME,<sp/>&amp;exactTime);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1ad315771a76938636b622d7af42c8afd7" kindref="member">currTrans</ref>.<ref refid="structtransaction__t_1a2aace03835c4d951b3dee117b328ef87" kindref="member">timestamp</ref><sp/>=<sp/>exactTime;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>initializes<sp/>signal<sp/>handlers<sp/>for<sp/>SIGINT<sp/>and<sp/>SIGUSR1<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="160" refid="users_8c_1a54d1d8f51781e0b3c58e16d3e04f2f74" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="users_8c_1a54d1d8f51781e0b3c58e16d3e04f2f74" kindref="member">signal_handlers_init</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>sigaction<sp/>*saUSR1,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>sigaction<sp/>*saINT)</highlight></codeline>
+<codeline lineno="161"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>--<sp/>SIGNAL<sp/>HANDLERS<sp/>--</highlight></codeline>
+<codeline lineno="163"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>first<sp/>set<sp/>all<sp/>bytes<sp/>of<sp/>sigation<sp/>to<sp/>0</highlight></codeline>
+<codeline lineno="164"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>then<sp/>initialize<sp/>sa.handler<sp/>to<sp/>a<sp/>pointer<sp/>to</highlight></codeline>
+<codeline lineno="165"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>the<sp/>function<sp/>user_transaction/interrupt_handle</highlight></codeline>
+<codeline lineno="166"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>then<sp/>set<sp/>the<sp/>handler<sp/>to<sp/>handle<sp/>SIUSR1/SIGINT<sp/>signals</highlight></codeline>
+<codeline lineno="167"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>((struct<sp/>sigaction<sp/>*oldact)<sp/>=<sp/>NULL)</highlight></codeline>
+<codeline lineno="168"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/>saUSR1-&gt;sa_handler<sp/>=<sp/><ref refid="users_8c_1a2419f7ac6a2d2282e04a8535b4b5c2f9" kindref="member">user_transactions_handle</ref>;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/>saINT-&gt;sa_handler<sp/>=<sp/><ref refid="users_8c_1a9aab3bf870349762f604cebd8633aea5" kindref="member">user_interrupt_handle</ref>;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/>sigaction(SIGUSR1,<sp/>saUSR1,<sp/><ref refid="common_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4" kindref="member">NULL</ref>);</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/>sigaction(SIGINT,<sp/>saINT,<sp/><ref refid="common_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4" kindref="member">NULL</ref>);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>send<sp/>transaction<sp/>currTrans<sp/>to<sp/>user<sp/>userPID<sp/>via<sp/>node<sp/>nodePID<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="176" refid="users_8h_1af881b5c5f39090e7fc6c5c5d6630c7cb" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="users_8c_1af881b5c5f39090e7fc6c5c5d6630c7cb" kindref="member">send_transaction</ref>()</highlight></codeline>
+<codeline lineno="177"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/>msgsnd(<ref refid="users_8c_1abba475816ec0c77dd5821e7fa9ab4207" kindref="member">queueID</ref>,<sp/>&amp;<ref refid="users_8c_1ad315771a76938636b622d7af42c8afd7" kindref="member">currTrans</ref>,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="structtransaction__t" kindref="compound">transaction</ref>),<sp/>0);</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="common_8h_1a8251bcdfc5c83845e0834adf211de033" kindref="member">TEST_ERROR</ref></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1a2ac06e48b5c5d403186f052dbefc3fe7" kindref="member">currBalance</ref><sp/>-=<sp/>(<ref refid="users_8c_1ad315771a76938636b622d7af42c8afd7" kindref="member">currTrans</ref>.<ref refid="structtransaction__t_1a14236de313193a14b4dbdf442bcf2bb9" kindref="member">amount</ref><sp/>+<sp/><ref refid="users_8c_1ad315771a76938636b622d7af42c8afd7" kindref="member">currTrans</ref>.<ref refid="structtransaction__t_1af571e76d8e59b8452f38407799272e4a" kindref="member">reward</ref>);</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1af230afc0b56da7230ff9dacabbac1e25" kindref="member">outGoingTransactions</ref><sp/>+=<sp/>(<ref refid="users_8c_1ad315771a76938636b622d7af42c8afd7" kindref="member">currTrans</ref>.<ref refid="structtransaction__t_1a14236de313193a14b4dbdf442bcf2bb9" kindref="member">amount</ref><sp/>+<sp/><ref refid="users_8c_1ad315771a76938636b622d7af42c8afd7" kindref="member">currTrans</ref>.<ref refid="structtransaction__t_1af571e76d8e59b8452f38407799272e4a" kindref="member">reward</ref>);</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(<ref refid="common_8h_1ad65a8842cc674e3ddf69355898c0ecbf" kindref="member">errno</ref>)</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>EACCES:</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;:users<sp/>%d<sp/>no<sp/>write<sp/>permission<sp/>on<sp/>queue\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>EAGAIN:</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;:users:<sp/>%d<sp/>queue<sp/>full\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>);<sp/></highlight><highlight class="comment">/*<sp/>keep<sp/>if<sp/>we<sp/>decide<sp/>to<sp/>use<sp/>IPC_NOWAIT<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>EFAULT:</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;:users:<sp/>%d<sp/>address<sp/>pointed<sp/>by<sp/>msgp<sp/>inaccessible\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>);</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>EIDRM:</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;:users:<sp/>%d<sp/>message<sp/>queue<sp/>removed\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>);</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>EINTR:</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="debug_8h_1a494d31903e7b0333dfa03b0778679113" kindref="member">TRACE</ref>((</highlight><highlight class="stringliteral">&quot;:users:<sp/>%d<sp/>signal<sp/>caught<sp/>when<sp/>waiting<sp/>for<sp/>queue<sp/>to<sp/>free\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>));</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>EINVAL:</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;:users:<sp/>%d<sp/>invalid<sp/><sp/>msqid<sp/><sp/>value,<sp/><sp/>or<sp/>nonpositive<sp/>mtype<sp/>value,<sp/>or<sp/>invalid<sp/>msgsz<sp/>value\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>);</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>ENOMEM:</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;:users:<sp/>%d<sp/>system<sp/>out<sp/>of<sp/>memory\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>);<sp/></highlight><highlight class="comment">/*<sp/>should<sp/>basically<sp/>never<sp/>happen<sp/>I<sp/>hope<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="debug_8h_1a494d31903e7b0333dfa03b0778679113" kindref="member">TRACE</ref>((</highlight><highlight class="stringliteral">&quot;Transaction<sp/>sent\n&quot;</highlight><highlight class="normal">))</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="common_8h_1aa90cac659d18e8ef6294c7ae337f6b58" kindref="member">SUCCESS</ref>;</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1ad315771a76938636b622d7af42c8afd7" kindref="member">currTrans</ref>.<ref refid="structtransaction__t_1a95a086466eb975b4da063388dd397dd3" kindref="member">status</ref><sp/>=<sp/>aborted;</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1a2ac06e48b5c5d403186f052dbefc3fe7" kindref="member">currBalance</ref><sp/>+=<sp/>(<ref refid="users_8c_1ad315771a76938636b622d7af42c8afd7" kindref="member">currTrans</ref>.<ref refid="structtransaction__t_1a14236de313193a14b4dbdf442bcf2bb9" kindref="member">amount</ref><sp/>+<sp/><ref refid="users_8c_1ad315771a76938636b622d7af42c8afd7" kindref="member">currTrans</ref>.<ref refid="structtransaction__t_1af571e76d8e59b8452f38407799272e4a" kindref="member">reward</ref>);</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1af230afc0b56da7230ff9dacabbac1e25" kindref="member">outGoingTransactions</ref><sp/>-=<sp/>(<ref refid="users_8c_1ad315771a76938636b622d7af42c8afd7" kindref="member">currTrans</ref>.<ref refid="structtransaction__t_1a14236de313193a14b4dbdf442bcf2bb9" kindref="member">amount</ref><sp/>+<sp/><ref refid="users_8c_1ad315771a76938636b622d7af42c8afd7" kindref="member">currTrans</ref>.<ref refid="structtransaction__t_1af571e76d8e59b8452f38407799272e4a" kindref="member">reward</ref>);</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>we<sp/>can<sp/>then<sp/>track<sp/>this<sp/>type<sp/>of<sp/>aborted<sp/>transactions<sp/>but<sp/>rn<sp/>there&apos;s<sp/>no<sp/>need<sp/>to<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="common_8h_1a8fe83ac76edc595f6b98cd4a4127aed5" kindref="member">ERROR</ref>;</highlight></codeline>
+<codeline lineno="214"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>SIGUSR1<sp/>handler,<sp/>sends<sp/>a<sp/>transaction<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="217" refid="users_8h_1a2419f7ac6a2d2282e04a8535b4b5c2f9" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="users_8c_1a2419f7ac6a2d2282e04a8535b4b5c2f9" kindref="member">user_transactions_handle</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>signum)</highlight></codeline>
+<codeline lineno="218"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/>write(1,<sp/></highlight><highlight class="stringliteral">&quot;::User::<sp/>SIGUSR1<sp/>received\n&quot;</highlight><highlight class="normal">,<sp/>27);</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="users_8c_1a2ac06e48b5c5d403186f052dbefc3fe7" kindref="member">currBalance</ref><sp/>&gt;<sp/>2)</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="users_8c_1af881b5c5f39090e7fc6c5c5d6630c7cb" kindref="member">send_transaction</ref>();<sp/></highlight><highlight class="comment">/*<sp/>we&apos;re<sp/>calling<sp/>a<sp/>printf<sp/>which<sp/>is<sp/>not<sp/>thread<sp/>safe,<sp/>need<sp/>to<sp/>fix<sp/>somehow*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>write(1,<sp/></highlight><highlight class="stringliteral">&quot;::User::<sp/>sorry<sp/>balance<sp/>too<sp/>low\n&quot;</highlight><highlight class="normal">,<sp/>32);</highlight></codeline>
+<codeline lineno="224"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight></codeline>
+<codeline lineno="226"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>CTRL-C<sp/>handler<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="227" refid="users_8h_1a9aab3bf870349762f604cebd8633aea5" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="users_8c_1a9aab3bf870349762f604cebd8633aea5" kindref="member">user_interrupt_handle</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>signum)</highlight></codeline>
+<codeline lineno="228"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/>write(1,<sp/></highlight><highlight class="stringliteral">&quot;::User::<sp/>SIGINT<sp/>received\n&quot;</highlight><highlight class="normal">,<sp/>26);</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/>exit(0);</highlight></codeline>
+<codeline lineno="231"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="233" refid="users_8c_1a0ddf1224851353fc92bfbff6f499fa97" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="users_8c_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>argc,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*argv[])</highlight></codeline>
+<codeline lineno="234"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>amount,<sp/>reward,<sp/>retry;</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/>pid_t<sp/>userPID,<sp/>nodePID;</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">timespec<sp/><ref refid="nodes_8h_1a3a6bc37f09273282c75d2fcc8b27f09e" kindref="member">randSleepTime</ref>;</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">timespec<sp/><ref refid="nodes_8h_1a45ff1b670dbcc1a3ff3c2657aba0b66b" kindref="member">sleepTimeRemaining</ref>;</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">sembuf<sp/>sops;</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structmessage" kindref="compound">message</ref><sp/>transMsg;</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">sigaction<sp/>saUSR1;</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">sigaction<sp/>saINT;</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/>bzero(&amp;saUSR1,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(saUSR1));</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/>bzero(&amp;saINT,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(saINT));</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref><sp/>=<sp/>getpid();<sp/></highlight><highlight class="comment">/*<sp/>set<sp/>myPID<sp/>value<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="debug_8h_1a494d31903e7b0333dfa03b0778679113" kindref="member">TRACE</ref>((</highlight><highlight class="stringliteral">&quot;:users:<sp/>%d<sp/>USERS_PID_ARGV<sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>,<sp/><ref refid="common_8h_1abdb8ae9e0caeeaa6b02791a1991ec34e" kindref="member">USERS_PID_ARGV</ref>))</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="debug_8h_1a494d31903e7b0333dfa03b0778679113" kindref="member">TRACE</ref>((</highlight><highlight class="stringliteral">&quot;:users:<sp/>%d<sp/>NODES_PID_ARGV<sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>,<sp/><ref refid="common_8h_1aa26907b48e282ee32e55a0f21d90c651" kindref="member">NODES_PID_ARGV</ref>))</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="debug_8h_1a494d31903e7b0333dfa03b0778679113" kindref="member">TRACE</ref>((</highlight><highlight class="stringliteral">&quot;:users:<sp/>%d<sp/>PARAMETERS_ARGV<sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>,<sp/><ref refid="common_8h_1a8dc6d4d682e4f826ef23717f1b28d60c" kindref="member">PARAMETERS_ARGV</ref>))</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="debug_8h_1a494d31903e7b0333dfa03b0778679113" kindref="member">TRACE</ref>((</highlight><highlight class="stringliteral">&quot;:users:<sp/>%d<sp/>LEDGER_ARGV<sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>,<sp/><ref refid="common_8h_1acbabb34d7448290aade7aa93bb0c09ca" kindref="member">LEDGER_ARGV</ref>))</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="debug_8h_1a494d31903e7b0333dfa03b0778679113" kindref="member">TRACE</ref>((</highlight><highlight class="stringliteral">&quot;:users:<sp/>%d<sp/>SEM_ID_PID_ARGV<sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>,<sp/><ref refid="common_8h_1a6b6ae98a167eeb9050cca5e9f9e5cf37" kindref="member">SEM_ID_ARGV</ref>))</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(argc<sp/>==<sp/>0)</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;:users:<sp/>%d,<sp/>no<sp/>arguments<sp/>passed,<sp/>can&apos;t<sp/>continue<sp/>like<sp/>this<sp/>any<sp/>more<sp/>:C\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>);</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="common_8h_1a8fe83ac76edc595f6b98cd4a4127aed5" kindref="member">ERROR</ref>;</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"></highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/>srand(time(<ref refid="common_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4" kindref="member">NULL</ref>));<sp/></highlight><highlight class="comment">/*<sp/>initialize<sp/>rand<sp/>function<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"></highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1add037018869db8fbc785a9e0b24dd020" kindref="member">attach_ipc_objects</ref>(argv);</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="users_8c_1a54d1d8f51781e0b3c58e16d3e04f2f74" kindref="member">signal_handlers_init</ref>(&amp;saUSR1,<sp/>&amp;saINT);</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/>transMsg.<ref refid="structmessage_1a6e71692f0e74d6cd516fa62386afcfb4" kindref="member">mtype</ref><sp/>=<sp/>atol(</highlight><highlight class="stringliteral">&quot;transaction&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"></highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/>retry<sp/>=<sp/><ref refid="users_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1ac2861693c2d9121c5ecad90de2189690" kindref="member">SO_RETRY</ref>;</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(1)</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="users_8h_1a42693010975aeff6d524880e8ca2c717" kindref="member">SLEEP_TIME_SET</ref></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="273"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>save<sp/>the<sp/>time<sp/>unslept<sp/>when<sp/>interrupted<sp/>by<sp/>SIGUSR1</highlight></codeline>
+<codeline lineno="274"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>so<sp/>that<sp/>we<sp/>can&apos;t<sp/>force<sp/>transactions<sp/>at<sp/>a<sp/>much<sp/>greater<sp/>speed</highlight></codeline>
+<codeline lineno="275"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>better<sp/>to<sp/>save<sp/>it<sp/>into<sp/>a<sp/>separate<sp/>struct<sp/>because<sp/>clock_nanosleep</highlight></codeline>
+<codeline lineno="276"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>will<sp/>not<sp/>update<sp/>it<sp/>if<sp/>the<sp/>sleep<sp/>is<sp/>not<sp/>interrupted</highlight></codeline>
+<codeline lineno="277"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bzero(&amp;<ref refid="nodes_8h_1a45ff1b670dbcc1a3ff3c2657aba0b66b" kindref="member">sleepTimeRemaining</ref>,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="nodes_8h_1a45ff1b670dbcc1a3ff3c2657aba0b66b" kindref="member">sleepTimeRemaining</ref>));</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="users_8c_1a2ac06e48b5c5d403186f052dbefc3fe7" kindref="member">currBalance</ref><sp/>=<sp/>100<sp/></highlight><highlight class="comment">/*balance(myPID)*/</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="users_8c_1a2ac06e48b5c5d403186f052dbefc3fe7" kindref="member">currBalance</ref><sp/>&gt;=<sp/>2)</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>userPID<sp/>=<sp/><ref refid="users_8c_1aaf15d0912c5fa42321118d1c652551d2" kindref="member">get_random_userPID</ref>();</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nodePID<sp/>=<sp/><ref refid="users_8c_1a7a26cf1c5a9c15d42c4f3caeaa179b0e" kindref="member">get_random_nodePID</ref>();</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"></highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>amount<sp/>=<sp/><ref refid="common_8h_1a0d7644a795aa2dd33f01ef184f3f672a" kindref="member">RAND</ref>(2,<sp/><ref refid="users_8c_1a2ac06e48b5c5d403186f052dbefc3fe7" kindref="member">currBalance</ref>);</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>reward<sp/>=<sp/><ref refid="users_8c_1a6552301543b6d6d55cb62f88d40300a0" kindref="member">REWARD</ref>(amount,<sp/><ref refid="users_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1a1e8968a80441b4a641d5ff3566af04f1" kindref="member">SO_REWARD</ref>);</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>amount<sp/>-=<sp/>reward;</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"></highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="users_8c_1a9cceef0ffc7483e71c1cc4652a05cc1c" kindref="member">queue_to_pid</ref>(nodePID);</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="users_8c_1aad9c23bdb64131e376665a8dd7085f9b" kindref="member">transaction_init</ref>(userPID,<sp/>amount,<sp/>reward);</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="users_8c_1af881b5c5f39090e7fc6c5c5d6630c7cb" kindref="member">send_transaction</ref>()<sp/>==<sp/>0)</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>retry<sp/>=<sp/><ref refid="users_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1ac2861693c2d9121c5ecad90de2189690" kindref="member">SO_RETRY</ref>;</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>retry--;</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"></highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(retry<sp/>==<sp/>0)</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="users_8c_1a959cd23eec8cbe2e56f5cc915e24ec2b" kindref="member">update_status</ref>(2);</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="common_8h_1a01c3892c16d6330e486637967ab0289b" kindref="member">MAX_RETRY</ref>;</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="users_8h_1a44e89d523436fcbbf2c56e4fb335d509" kindref="member">SLEEP</ref></highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;:users:<sp/>%d<sp/>went<sp/>broke<sp/>:/\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kindref="member">myPID</ref>);</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="users_8c_1a959cd23eec8cbe2e56f5cc915e24ec2b" kindref="member">update_status</ref>(1);</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"></highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*wait_for_incoming_transaction();<sp/>/////////<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="312"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/users.c"/>
+  </compounddef>
+</doxygen>

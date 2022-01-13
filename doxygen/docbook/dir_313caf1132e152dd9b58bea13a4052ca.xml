@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_dir_313caf1132e152dd9b58bea13a4052ca" xml:lang="en-US">
+<title>src/utils Directory Reference</title>
+<indexterm><primary>src/utils Directory Reference</primary></indexterm>
+Directory dependency graph for utils:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="dir_313caf1132e152dd9b58bea13a4052ca_dep.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Files    </title>
+        <itemizedlist>
+            <listitem><para>file <link linkend="_debug_8c">debug.c</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_debug_8h">debug.h</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_lists_8c">lists.c</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_lists_8h">lists.h</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_sem_8c">sem.c</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_sem_8h">sem.h</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

@@ -1,0 +1,87 @@
+.TH "transaction_t" 3 "Thu Jan 13 2022" "Simulazione Transazioni" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+transaction_t
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <common\&.h>\fP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum { \fBpending\fP, \fBprocessing\fP, \fBconfirmed\fP, \fBaborted\fP }"
+.br
+.in -1c
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "struct timespec \fBtimestamp\fP"
+.br
+.ti -1c
+.RI "pid_t \fBsender\fP"
+.br
+.ti -1c
+.RI "pid_t \fBreceiver\fP"
+.br
+.ti -1c
+.RI "int \fBamount\fP"
+.br
+.ti -1c
+.RI "int \fBreward\fP"
+.br
+.ti -1c
+.RI "enum transaction_t:: { \&.\&.\&. }  \fBstatus\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line \fB116\fP of file \fBcommon\&.h\fP\&.
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "anonymous enum"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIpending \fP\fP
+.TP
+\fB\fIprocessing \fP\fP
+.TP
+\fB\fIconfirmed \fP\fP
+.TP
+\fB\fIaborted \fP\fP
+.PP
+Definition at line \fB123\fP of file \fBcommon\&.h\fP\&.
+.SH "Field Documentation"
+.PP 
+.SS "int amount"
+
+.PP
+Definition at line \fB121\fP of file \fBcommon\&.h\fP\&.
+.SS "pid_t receiver"
+
+.PP
+Definition at line \fB120\fP of file \fBcommon\&.h\fP\&.
+.SS "int reward"
+
+.PP
+Definition at line \fB122\fP of file \fBcommon\&.h\fP\&.
+.SS "pid_t sender"
+
+.PP
+Definition at line \fB119\fP of file \fBcommon\&.h\fP\&.
+.SS "enum  { \&.\&.\&. }  status"
+
+.SS "struct timespec timestamp"
+
+.PP
+Definition at line \fB118\fP of file \fBcommon\&.h\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Simulazione Transazioni from the source code\&.

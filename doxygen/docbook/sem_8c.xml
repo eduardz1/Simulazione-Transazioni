@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_sem_8c" xml:lang="en-US">
+<title>src/utils/sem.c File Reference</title>
+<indexterm><primary>src/utils/sem.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &quot;sem.h&quot;
+</programlisting>Include dependency graph for sem.c:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="sem_8c__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_sem_8c_1a8251bcdfc5c83845e0834adf211de033">TEST_ERROR</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_sem_8c_1a69c382a53528227d1164f00a6e6e6d49">sem_set_val</link> (int sem_id, int sem_num, int sem_val)</para>
+</listitem>
+            <listitem><para>int <link linkend="_sem_8c_1a8a9bfe4b1b46fa8a09858b192d6e8764">sem_reserve</link> (int sem_id, int sem_num)</para>
+</listitem>
+            <listitem><para>int <link linkend="_sem_8c_1a3fbb448c9f985007f6030b3927357b5c">sem_release</link> (int sem_id, int sem_num)</para>
+</listitem>
+            <listitem><para>int <link linkend="_sem_8c_1a8f04187bfc8f247398ab8ba5d7bdd196">sem_getall</link> (char *my_string, int sem_id)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_sem_8c_1ad65a8842cc674e3ddf69355898c0ecbf">errno</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_sem_8c_1a8251bcdfc5c83845e0834adf211de033"/><section>
+    <title>TEST_ERROR</title>
+<indexterm><primary>TEST_ERROR</primary><secondary>sem.c</secondary></indexterm>
+<indexterm><primary>sem.c</primary><secondary>TEST_ERROR</secondary></indexterm>
+<para><computeroutput>#define TEST_ERROR</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered">&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_sem_8c_1ad65a8842cc674e3ddf69355898c0ecbf">errno</link>)&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;{&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fprintf(stderr,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;%s:%d:&#32;PID=%5d:&#32;Error&#32;%d&#32;(%s)\n&quot;</emphasis>,&#32;\
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;__FILE__,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;__LINE__,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;getpid(),&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_sem_8c_1ad65a8842cc674e3ddf69355898c0ecbf">errno</link>,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;strerror(<link linkend="_sem_8c_1ad65a8842cc674e3ddf69355898c0ecbf">errno</link>));&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;}
+</programlisting><para>
+Definition at line <link linkend="_sem_8c_source_1l00004">4</link> of file <link linkend="_sem_8c_source">sem.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_sem_8c_1a8f04187bfc8f247398ab8ba5d7bdd196"/><section>
+    <title>sem_getall()</title>
+<indexterm><primary>sem_getall</primary><secondary>sem.c</secondary></indexterm>
+<indexterm><primary>sem.c</primary><secondary>sem_getall</secondary></indexterm>
+<para><computeroutput>int sem_getall (char * my_string, int sem_id)</computeroutput></para><para>
+Definition at line <link linkend="_sem_8c_source_1l00049">49</link> of file <link linkend="_sem_8c_source">sem.c</link>.</para>
+</section>
+<anchor xml:id="_sem_8c_1a3fbb448c9f985007f6030b3927357b5c"/><section>
+    <title>sem_release()</title>
+<indexterm><primary>sem_release</primary><secondary>sem.c</secondary></indexterm>
+<indexterm><primary>sem.c</primary><secondary>sem_release</secondary></indexterm>
+<para><computeroutput>int sem_release (int sem_id, int sem_num)</computeroutput></para><para>
+Definition at line <link linkend="_sem_8c_source_1l00037">37</link> of file <link linkend="_sem_8c_source">sem.c</link>.</para>
+</section>
+<anchor xml:id="_sem_8c_1a8a9bfe4b1b46fa8a09858b192d6e8764"/><section>
+    <title>sem_reserve()</title>
+<indexterm><primary>sem_reserve</primary><secondary>sem.c</secondary></indexterm>
+<indexterm><primary>sem.c</primary><secondary>sem_reserve</secondary></indexterm>
+<para><computeroutput>int sem_reserve (int sem_id, int sem_num)</computeroutput></para><para>
+Definition at line <link linkend="_sem_8c_source_1l00026">26</link> of file <link linkend="_sem_8c_source">sem.c</link>.</para>
+</section>
+<anchor xml:id="_sem_8c_1a69c382a53528227d1164f00a6e6e6d49"/><section>
+    <title>sem_set_val()</title>
+<indexterm><primary>sem_set_val</primary><secondary>sem.c</secondary></indexterm>
+<indexterm><primary>sem.c</primary><secondary>sem_set_val</secondary></indexterm>
+<para><computeroutput>int sem_set_val (int sem_id, int sem_num, int sem_val)</computeroutput></para><para>
+Definition at line <link linkend="_sem_8c_source_1l00020">20</link> of file <link linkend="_sem_8c_source">sem.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Variable Documentation</title>
+<anchor xml:id="_sem_8c_1ad65a8842cc674e3ddf69355898c0ecbf"/><section>
+    <title>errno</title>
+<indexterm><primary>errno</primary><secondary>sem.c</secondary></indexterm>
+<indexterm><primary>sem.c</primary><secondary>errno</secondary></indexterm>
+<para><computeroutput>int errno</computeroutput></para><para>
+Definition at line <link linkend="_sem_8c_source_1l00017">17</link> of file <link linkend="_sem_8c_source">sem.c</link>.</para>
+</section>
+</section>
+</section>

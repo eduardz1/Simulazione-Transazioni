@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.3" xml:lang="en-US">
+  <compounddef id="lists_8h" kind="file" language="C++">
+    <compoundname>lists.h</compoundname>
+    <includedby refid="common_8h" local="yes">src/include/common.h</includedby>
+    <invincdepgraph>
+      <node id="3">
+        <label>src/common.c</label>
+        <link refid="common_8c"/>
+      </node>
+      <node id="2">
+        <label>src/include/common.h</label>
+        <link refid="common_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>src/include/print.h</label>
+        <link refid="print_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>src/master.c</label>
+        <link refid="master_8c"/>
+      </node>
+      <node id="7">
+        <label>src/nodes.c</label>
+        <link refid="nodes_8c"/>
+      </node>
+      <node id="8">
+        <label>src/parser.c</label>
+        <link refid="parser_8c"/>
+      </node>
+      <node id="6">
+        <label>src/print.c</label>
+        <link refid="print_8c"/>
+      </node>
+      <node id="9">
+        <label>src/users.c</label>
+        <link refid="users_8c"/>
+      </node>
+      <node id="1">
+        <label>src/utils/lists.h</label>
+        <link refid="lists_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+    </programlisting>
+    <location file="src/utils/lists.h"/>
+  </compounddef>
+</doxygen>

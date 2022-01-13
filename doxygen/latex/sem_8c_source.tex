@@ -1,0 +1,81 @@
+\hypertarget{sem_8c_source}{}\doxysection{sem.\+c}
+\label{sem_8c_source}\index{src/utils/sem.c@{src/utils/sem.c}}
+\mbox{\hyperlink{sem_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00001}00001 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{sem_8h}{sem.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00002}00002 }
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00003}00003 \textcolor{preprocessor}{\#ifndef TEST\_ERROR}}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00004}\mbox{\hyperlink{sem_8c_a8251bcdfc5c83845e0834adf211de033}{00004}} \textcolor{preprocessor}{\#define TEST\_ERROR                                 \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00005}00005 \textcolor{preprocessor}{    if (errno)                                     \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00006}00006 \textcolor{preprocessor}{    \{                                              \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00007}00007 \textcolor{preprocessor}{        fprintf(stderr,                            \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00008}00008 \textcolor{preprocessor}{                "{}\%s:\%d: PID=\%5d: Error \%d (\%s)\(\backslash\)n"{}}, \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00009}00009                 \_\_FILE\_\_,                          \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00010}00010                 \_\_LINE\_\_,                          \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00011}00011                 getpid(),                          \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00012}00012                 errno,                             \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00013}00013                 strerror(errno));                  \(\backslash\)}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00014}00014     \}}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00015}00015 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00016}00016 }
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00017}\mbox{\hyperlink{common_8h_ad65a8842cc674e3ddf69355898c0ecbf}{00017}} \textcolor{keywordtype}{int} \mbox{\hyperlink{sem_8c_ad65a8842cc674e3ddf69355898c0ecbf}{errno}};}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00018}00018 }
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00019}00019 \textcolor{comment}{/* Set a semaphore to a user defined value */}}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00020}\mbox{\hyperlink{sem_8c_a69c382a53528227d1164f00a6e6e6d49}{00020}} \textcolor{keywordtype}{int} \mbox{\hyperlink{sem_8c_a69c382a53528227d1164f00a6e6e6d49}{sem\_set\_val}}(\textcolor{keywordtype}{int} sem\_id, \textcolor{keywordtype}{int} sem\_num, \textcolor{keywordtype}{int} sem\_val)}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00021}00021 \{}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00022}00022     \textcolor{keywordflow}{return} semctl(sem\_id, sem\_num, SETVAL, sem\_val);}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00023}00023 \}}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00024}00024 }
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00025}00025 \textcolor{comment}{/* Try to access the resource */}}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00026}\mbox{\hyperlink{sem_8c_a8a9bfe4b1b46fa8a09858b192d6e8764}{00026}} \textcolor{keywordtype}{int} \mbox{\hyperlink{sem_8c_a8a9bfe4b1b46fa8a09858b192d6e8764}{sem\_reserve}}(\textcolor{keywordtype}{int} sem\_id, \textcolor{keywordtype}{int} sem\_num)}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00027}00027 \{}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00028}00028     \textcolor{keyword}{struct }sembuf sops;}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00029}00029 }
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00030}00030     sops.sem\_num = sem\_num;}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00031}00031     sops.sem\_op = -\/1;}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00032}00032     sops.sem\_flg = 0;}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00033}00033     \textcolor{keywordflow}{return} semop(sem\_id, \&sops, 1);}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00034}00034 \}}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00035}00035 }
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00036}00036 \textcolor{comment}{/* Release the resource */}}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00037}\mbox{\hyperlink{sem_8c_a3fbb448c9f985007f6030b3927357b5c}{00037}} \textcolor{keywordtype}{int} \mbox{\hyperlink{sem_8c_a3fbb448c9f985007f6030b3927357b5c}{sem\_release}}(\textcolor{keywordtype}{int} sem\_id, \textcolor{keywordtype}{int} sem\_num)}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00038}00038 \{}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00039}00039     \textcolor{keyword}{struct }sembuf sops;}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00040}00040 }
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00041}00041     sops.sem\_num = sem\_num;}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00042}00042     sops.sem\_op = 1;}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00043}00043     sops.sem\_flg = 0;}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00044}00044 }
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00045}00045     \textcolor{keywordflow}{return} semop(sem\_id, \&sops, 1);}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00046}00046 \}}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00047}00047 }
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00048}00048 \textcolor{comment}{/* Print all semaphore values to a string */}}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00049}\mbox{\hyperlink{sem_8c_a8f04187bfc8f247398ab8ba5d7bdd196}{00049}} \textcolor{keywordtype}{int} \mbox{\hyperlink{sem_8c_a8f04187bfc8f247398ab8ba5d7bdd196}{sem\_getall}}(\textcolor{keywordtype}{char} *my\_string, \textcolor{keywordtype}{int} sem\_id)}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00050}00050 \{}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00051}00051     \textcolor{keyword}{union }\mbox{\hyperlink{unionsemun}{semun}} arg; \textcolor{comment}{/* man semctl per vedere def della union  */}}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00052}00052     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} *sem\_vals, i;}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00053}00053     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} num\_sem;}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00054}00054     \textcolor{keywordtype}{char} cur\_str[10];}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00055}00055     \textcolor{keyword}{struct }semid\_ds my\_ds;}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00056}00056 }
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00057}00057     \textcolor{comment}{/* Get the number of semaphores */}}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00058}00058     arg.\mbox{\hyperlink{unionsemun_abfe50c0b29f1681cd94b5b59650f9778}{buf}} = \&my\_ds;}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00059}00059     semctl(sem\_id, 0, IPC\_STAT, arg);}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00060}00060     \mbox{\hyperlink{sem_8c_a8251bcdfc5c83845e0834adf211de033}{TEST\_ERROR}};}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00061}00061     num\_sem = arg.\mbox{\hyperlink{unionsemun_abfe50c0b29f1681cd94b5b59650f9778}{buf}}-\/>sem\_nsems;}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00062}00062 }
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00063}00063     \textcolor{comment}{/* Get the values of all semaphores */}}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00064}00064     sem\_vals = malloc(\textcolor{keyword}{sizeof}(*sem\_vals) * num\_sem);}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00065}00065     arg.\mbox{\hyperlink{unionsemun_aa1a8ce34333758f6f17d0c24136d287b}{array}} = sem\_vals;}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00066}00066     semctl(sem\_id, 0, GETALL, arg);}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00067}00067 }
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00068}00068     \textcolor{comment}{/* Initialize the string. MUST be allocated by the caller */}}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00069}00069     my\_string[0] = 0;}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00070}00070     \textcolor{keywordflow}{for} (i = 0; i < num\_sem; i++)}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00071}00071     \{}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00072}00072         sprintf(cur\_str, \textcolor{stringliteral}{"{}\%d "{}}, sem\_vals[i]);}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00073}00073         strcat(my\_string, cur\_str);}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00074}00074     \}}
+\DoxyCodeLine{\Hypertarget{sem_8c_source_l00075}00075 \}}
+
+\end{DoxyCode}

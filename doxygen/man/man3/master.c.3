@@ -1,0 +1,164 @@
+.TH "src/master.c" 3 "Thu Jan 13 2022" "Simulazione Transazioni" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/master.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'include/common\&.h'\fP
+.br
+\fC#include 'include/master\&.h'\fP
+.br
+\fC#include 'include/print\&.h'\fP
+.br
+\fC#include 'include/parser\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBSHM_NUM\fP   4"
+.br
+.ti -1c
+.RI "#define \fBSEM_NUM\fP   1"
+.br
+.ti -1c
+.RI "#define \fBIPC_NUM\fP   8"
+.br
+.ti -1c
+.RI "#define \fBUSER_NAME\fP   '\&./users'"
+.br
+.ti -1c
+.RI "#define \fBNODE_NAME\fP   '\&./nodes'"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBmake_arguments\fP (int *IPC_array, char **argv)"
+.br
+.ti -1c
+.RI "pid_t \fBspawn_user\fP (char *userArgv[])"
+.br
+.ti -1c
+.RI "pid_t \fBspawn_node\fP (char *nodeArgv[])"
+.br
+.ti -1c
+.RI "void \fBshared_memory_objects_init\fP (int *shmArray)"
+.br
+.ti -1c
+.RI "void \fBsemaphores_init\fP ()"
+.br
+.ti -1c
+.RI "void \fBmake_ipc_array\fP (int *IPC_array)"
+.br
+.ti -1c
+.RI "void \fBmaster_interrupt_handle\fP (int signum)"
+.br
+.ti -1c
+.RI "int \fBmain\fP (int argc, char *argv[])"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "struct \fBparameters\fP * \fBpar\fP"
+.br
+.ti -1c
+.RI "\fBuser\fP * \fBusersPID\fP"
+.br
+.ti -1c
+.RI "\fBnode\fP * \fBnodesPID\fP"
+.br
+.ti -1c
+.RI "\fBledger\fP * \fBmainLedger\fP"
+.br
+.ti -1c
+.RI "int \fBsemID\fP"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define IPC_NUM   8"
+
+.PP
+Definition at line \fB8\fP of file \fBmaster\&.c\fP\&.
+.SS "#define NODE_NAME   '\&./nodes'"
+
+.PP
+Definition at line \fB11\fP of file \fBmaster\&.c\fP\&.
+.SS "#define SEM_NUM   1"
+
+.PP
+Definition at line \fB7\fP of file \fBmaster\&.c\fP\&.
+.SS "#define SHM_NUM   4"
+
+.PP
+Definition at line \fB6\fP of file \fBmaster\&.c\fP\&.
+.SS "#define USER_NAME   '\&./users'"
+
+.PP
+Definition at line \fB10\fP of file \fBmaster\&.c\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "int main (int argc, char * argv[])"
+
+.PP
+Definition at line \fB210\fP of file \fBmaster\&.c\fP\&.
+.SS "void make_arguments (int * IPC_array, char ** argv)"
+
+.PP
+Definition at line \fB36\fP of file \fBmaster\&.c\fP\&.
+.SS "void make_ipc_array (int * IPC_array)"
+
+.PP
+Definition at line \fB175\fP of file \fBmaster\&.c\fP\&.
+.SS "void master_interrupt_handle (int signum)"
+
+.PP
+Definition at line \fB188\fP of file \fBmaster\&.c\fP\&.
+.SS "void semaphores_init ()"
+
+.PP
+Definition at line \fB167\fP of file \fBmaster\&.c\fP\&.
+.SS "void shared_memory_objects_init (int * shmArray)"
+
+.PP
+Definition at line \fB111\fP of file \fBmaster\&.c\fP\&.
+.SS "pid_t spawn_node (char * nodeArgv[])"
+
+.PP
+Definition at line \fB88\fP of file \fBmaster\&.c\fP\&.
+.SS "pid_t spawn_user (char * userArgv[])"
+
+.PP
+Definition at line \fB65\fP of file \fBmaster\&.c\fP\&.
+.SH "Variable Documentation"
+.PP 
+.SS "\fBledger\fP* mainLedger"
+
+.PP
+Definition at line \fB23\fP of file \fBmaster\&.c\fP\&.
+.SS "\fBnode\fP* nodesPID"
+
+.PP
+Definition at line \fB22\fP of file \fBmaster\&.c\fP\&.
+.SS "struct \fBparameters\fP* par"
+
+.PP
+Definition at line \fB20\fP of file \fBmaster\&.c\fP\&.
+.SS "int semID"
+
+.PP
+Definition at line \fB25\fP of file \fBmaster\&.c\fP\&.
+.SS "\fBuser\fP* usersPID"
+
+.PP
+Definition at line \fB21\fP of file \fBmaster\&.c\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Simulazione Transazioni from the source code\&.

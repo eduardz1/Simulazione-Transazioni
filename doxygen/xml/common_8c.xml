@@ -1,0 +1,239 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.3" xml:lang="en-US">
+  <compounddef id="common_8c" kind="file" language="C++">
+    <compoundname>common.c</compoundname>
+    <includes refid="common_8h" local="yes">include/common.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>src/common.c</label>
+        <link refid="common_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>include/common.h</label>
+        <link refid="common_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>../utils/debug.h</label>
+        <link refid="debug_8h"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>../utils/lists.h</label>
+        <link refid="lists_8h"/>
+      </node>
+      <node id="19">
+        <label>../utils/sem.h</label>
+        <link refid="sem_8h"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>errno.h</label>
+      </node>
+      <node id="10">
+        <label>math.h</label>
+      </node>
+      <node id="18">
+        <label>stdarg.h</label>
+      </node>
+      <node id="5">
+        <label>stddef.h</label>
+      </node>
+      <node id="6">
+        <label>stdint.h</label>
+      </node>
+      <node id="4">
+        <label>stdio.h</label>
+      </node>
+      <node id="3">
+        <label>stdlib.h</label>
+      </node>
+      <node id="11">
+        <label>string.h</label>
+      </node>
+      <node id="12">
+        <label>sys/ipc.h</label>
+      </node>
+      <node id="15">
+        <label>sys/msg.h</label>
+      </node>
+      <node id="14">
+        <label>sys/sem.h</label>
+      </node>
+      <node id="13">
+        <label>sys/shm.h</label>
+      </node>
+      <node id="16">
+        <label>sys/types.h</label>
+      </node>
+      <node id="9">
+        <label>time.h</label>
+      </node>
+      <node id="7">
+        <label>unistd.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="common_8c_1a92d436f484409e36c57caaa0b45ae9da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="common_8h_1af8b2bdfa2bfa44284c83a9d6994b13f1" kindref="member">ledger</ref> *</type>
+        <definition>ledger * ledger_init</definition>
+        <argsstring>()</argsstring>
+        <name>ledger_init</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/common.c" line="3" column="8" bodyfile="src/common.c" bodystart="3" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="common_8c_1ab670b223f506d8bc9ee5286f6e37b1cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="common_8h_1acc02c32db194c6d92ce82de8c99eacbc" kindref="member">block</ref> *</type>
+        <definition>block * new_block</definition>
+        <argsstring>()</argsstring>
+        <name>new_block</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/common.c" line="24" column="7" bodyfile="src/common.c" bodystart="24" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="common_8c_1a870e971fe7155d42f50beaa446dfd874" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void add_transaction_to_block</definition>
+        <argsstring>(block *block, transaction *newTrans, int index)</argsstring>
+        <name>add_transaction_to_block</name>
+        <param>
+          <type><ref refid="common_8h_1acc02c32db194c6d92ce82de8c99eacbc" kindref="member">block</ref> *</type>
+          <declname>block</declname>
+        </param>
+        <param>
+          <type><ref refid="common_8h_1a96717a5adf375b5328bde513e91bf658" kindref="member">transaction</ref> *</type>
+          <declname>newTrans</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/common.c" line="46" column="6" bodyfile="src/common.c" bodystart="46" bodyend="49"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;<ref refid="common_8h" kindref="compound">include/common.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3" refid="common_8c_1a92d436f484409e36c57caaa0b45ae9da" refkind="member"><highlight class="normal"><ref refid="structledger__t" kindref="compound">ledger</ref><sp/>*<ref refid="common_8c_1a92d436f484409e36c57caaa0b45ae9da" kindref="member">ledger_init</ref>()</highlight></codeline>
+<codeline lineno="4"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structledger__t" kindref="compound">ledger</ref><sp/>*newLedger;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>shmID;<sp/></highlight><highlight class="comment">/*<sp/>ID<sp/>of<sp/>&quot;ledger&quot;<sp/>shared<sp/>memory<sp/>segment<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>--<sp/>LEDGER<sp/>INITIALIZATION<sp/>--</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>save<sp/>the<sp/>ID<sp/>of<sp/>our<sp/>new<sp/>(IPC_PRIVATE)<sp/>shared<sp/>memory<sp/>segment<sp/>of<sp/>size<sp/>-ledger-</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>smctl<sp/>will<sp/>deallocate<sp/>the<sp/>shared<sp/>memory<sp/>segment<sp/>only<sp/>when<sp/>every<sp/>process<sp/>detaches<sp/>it</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>tells<sp/>OS<sp/>that<sp/>ledger<sp/>of<sp/>type<sp/>ledger<sp/>is<sp/>our<sp/>shared<sp/>memory<sp/>of<sp/>shmID</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>shmID<sp/>=<sp/>shmget(IPC_PRIVATE,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(newLedger),<sp/>0600);</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>shmctl(shmID,<sp/>IPC_RMID,<sp/><ref refid="common_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4" kindref="member">NULL</ref>);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>newLedger-&gt;<ref refid="structledger__t_1ae8b38edd17a3a5769aea3c05f4e2b432" kindref="member">head</ref><sp/>=<sp/><ref refid="common_8c_1ab670b223f506d8bc9ee5286f6e37b1cd" kindref="member">new_block</ref>();</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>newLedger-&gt;<ref refid="structledger__t_1a3687d896ad2d77106df256f1db753c18" kindref="member">registryCurrSize</ref><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>newLedger<sp/>=<sp/>(<ref refid="structledger__t" kindref="compound">ledger</ref><sp/>*)shmat(shmID,<sp/><ref refid="common_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4" kindref="member">NULL</ref>,<sp/>0);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>newLedger;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24" refid="common_8c_1ab670b223f506d8bc9ee5286f6e37b1cd" refkind="member"><highlight class="normal"><ref refid="structblock__t" kindref="compound">block</ref><sp/>*<ref refid="common_8c_1ab670b223f506d8bc9ee5286f6e37b1cd" kindref="member">new_block</ref>()</highlight></codeline>
+<codeline lineno="25"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structblock__t" kindref="compound">block</ref><sp/>*newBlock<sp/>=<sp/>malloc(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="structblock__t" kindref="compound">block</ref>));</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structtransaction__t" kindref="compound">transaction</ref><sp/>reward;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">timespec<sp/>timestamp;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>memset(newBlock-&gt;transList,<sp/>0,<sp/>SO_BLOCK_SIZE);<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>clock_gettime(CLOCK_REALTIME,<sp/>&amp;timestamp);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>reward.<ref refid="structtransaction__t_1a2aace03835c4d951b3dee117b328ef87" kindref="member">timestamp</ref><sp/>=<sp/>timestamp;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>reward.<ref refid="structtransaction__t_1a36060e3785ebad7b278cb01d5159c0c5" kindref="member">sender</ref><sp/>=<sp/><ref refid="common_8h_1a6233123742aa307f2a5ce737acca67f0" kindref="member">SELF</ref>;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>reward.<ref refid="structtransaction__t_1a3c01e8bf1e61ee67a25113f3db1a32b8" kindref="member">receiver</ref><sp/>=<sp/>getpid();</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>reward.<ref refid="structtransaction__t_1a14236de313193a14b4dbdf442bcf2bb9" kindref="member">amount</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>reward.<ref refid="structtransaction__t_1af571e76d8e59b8452f38407799272e4a" kindref="member">reward</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>newBlock-&gt;<ref refid="structblock__t_1a75735b68381e6c25555bb53c163abfe9" kindref="member">transList</ref>[0]<sp/>=<sp/>reward;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>newBlock-&gt;<ref refid="structblock__t_1aa72742d9d7c1c8631aa36c0077f13b1d" kindref="member">blockIndex</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>newBlock-&gt;<ref refid="structblock__t_1a063b51ee50d55219236d2e4db6ce97a8" kindref="member">next</ref><sp/>=<sp/><ref refid="common_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4" kindref="member">NULL</ref>;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>newBlock;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="common_8c_1a870e971fe7155d42f50beaa446dfd874" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="common_8c_1a870e971fe7155d42f50beaa446dfd874" kindref="member">add_transaction_to_block</ref>(<ref refid="structblock__t" kindref="compound">block</ref><sp/>*<ref refid="structblock__t" kindref="compound">block</ref>,<sp/><ref refid="structtransaction__t" kindref="compound">transaction</ref><sp/>*newTrans,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>index)</highlight></codeline>
+<codeline lineno="47"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structblock__t" kindref="compound">block</ref>-&gt;<ref refid="structblock__t_1a75735b68381e6c25555bb53c163abfe9" kindref="member">transList</ref>[index]<sp/>=<sp/>*newTrans;<sp/></highlight><highlight class="comment">/*<sp/>ye<sp/>probably<sp/>we<sp/>don&apos;t<sp/>need<sp/>a<sp/>whole<sp/>ass<sp/>function<sp/>for<sp/>that*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/common.c"/>
+  </compounddef>
+</doxygen>

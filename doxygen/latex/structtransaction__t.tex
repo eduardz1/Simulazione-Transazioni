@@ -1,0 +1,130 @@
+\hypertarget{structtransaction__t}{}\doxysection{transaction\+\_\+t Struct Reference}
+\label{structtransaction__t}\index{transaction\_t@{transaction\_t}}
+
+
+{\ttfamily \#include $<$common.\+h$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{structtransaction__t_a99fb83031ce9923c84392b4e92f956b5a6a6b4e7520e01adba9632dc9d9229e2f}{pending}}
+, \mbox{\hyperlink{structtransaction__t_a99fb83031ce9923c84392b4e92f956b5ac87aff6c8e5d399b301672280549ea3e}{processing}}
+, \mbox{\hyperlink{structtransaction__t_a99fb83031ce9923c84392b4e92f956b5ad6daa5d32ad2d7b003a0178c8eb07178}{confirmed}}
+, \mbox{\hyperlink{structtransaction__t_a99fb83031ce9923c84392b4e92f956b5aaf2b197bcf14794c85c5f313dab0ca31}{aborted}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+struct timespec \mbox{\hyperlink{structtransaction__t_a2aace03835c4d951b3dee117b328ef87}{timestamp}}
+\item 
+pid\+\_\+t \mbox{\hyperlink{structtransaction__t_a36060e3785ebad7b278cb01d5159c0c5}{sender}}
+\item 
+pid\+\_\+t \mbox{\hyperlink{structtransaction__t_a3c01e8bf1e61ee67a25113f3db1a32b8}{receiver}}
+\item 
+int \mbox{\hyperlink{structtransaction__t_a14236de313193a14b4dbdf442bcf2bb9}{amount}}
+\item 
+int \mbox{\hyperlink{structtransaction__t_af571e76d8e59b8452f38407799272e4a}{reward}}
+\item 
+enum transaction\+\_\+t\+:: \{ ... \}  \mbox{\hyperlink{structtransaction__t_a95a086466eb975b4da063388dd397dd3}{status}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \mbox{\hyperlink{common_8h_source_l00116}{116}} of file \mbox{\hyperlink{common_8h_source}{common.\+h}}.
+
+
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{structtransaction__t_a99fb83031ce9923c84392b4e92f956b5}\label{structtransaction__t_a99fb83031ce9923c84392b4e92f956b5}} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily anonymous enum}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{pending@{pending}!transaction\_t@{transaction\_t}}\index{transaction\_t@{transaction\_t}!pending@{pending}}}\mbox{\Hypertarget{structtransaction__t_a99fb83031ce9923c84392b4e92f956b5a6a6b4e7520e01adba9632dc9d9229e2f}\label{structtransaction__t_a99fb83031ce9923c84392b4e92f956b5a6a6b4e7520e01adba9632dc9d9229e2f}} 
+pending&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{processing@{processing}!transaction\_t@{transaction\_t}}\index{transaction\_t@{transaction\_t}!processing@{processing}}}\mbox{\Hypertarget{structtransaction__t_a99fb83031ce9923c84392b4e92f956b5ac87aff6c8e5d399b301672280549ea3e}\label{structtransaction__t_a99fb83031ce9923c84392b4e92f956b5ac87aff6c8e5d399b301672280549ea3e}} 
+processing&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{confirmed@{confirmed}!transaction\_t@{transaction\_t}}\index{transaction\_t@{transaction\_t}!confirmed@{confirmed}}}\mbox{\Hypertarget{structtransaction__t_a99fb83031ce9923c84392b4e92f956b5ad6daa5d32ad2d7b003a0178c8eb07178}\label{structtransaction__t_a99fb83031ce9923c84392b4e92f956b5ad6daa5d32ad2d7b003a0178c8eb07178}} 
+confirmed&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{aborted@{aborted}!transaction\_t@{transaction\_t}}\index{transaction\_t@{transaction\_t}!aborted@{aborted}}}\mbox{\Hypertarget{structtransaction__t_a99fb83031ce9923c84392b4e92f956b5aaf2b197bcf14794c85c5f313dab0ca31}\label{structtransaction__t_a99fb83031ce9923c84392b4e92f956b5aaf2b197bcf14794c85c5f313dab0ca31}} 
+aborted&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{common_8h_source_l00123}{123}} of file \mbox{\hyperlink{common_8h_source}{common.\+h}}.
+
+
+
+\doxysubsection{Field Documentation}
+\mbox{\Hypertarget{structtransaction__t_a14236de313193a14b4dbdf442bcf2bb9}\label{structtransaction__t_a14236de313193a14b4dbdf442bcf2bb9}} 
+\index{transaction\_t@{transaction\_t}!amount@{amount}}
+\index{amount@{amount}!transaction\_t@{transaction\_t}}
+\doxysubsubsection{\texorpdfstring{amount}{amount}}
+{\footnotesize\ttfamily int amount}
+
+
+
+Definition at line \mbox{\hyperlink{common_8h_source_l00121}{121}} of file \mbox{\hyperlink{common_8h_source}{common.\+h}}.
+
+\mbox{\Hypertarget{structtransaction__t_a3c01e8bf1e61ee67a25113f3db1a32b8}\label{structtransaction__t_a3c01e8bf1e61ee67a25113f3db1a32b8}} 
+\index{transaction\_t@{transaction\_t}!receiver@{receiver}}
+\index{receiver@{receiver}!transaction\_t@{transaction\_t}}
+\doxysubsubsection{\texorpdfstring{receiver}{receiver}}
+{\footnotesize\ttfamily pid\+\_\+t receiver}
+
+
+
+Definition at line \mbox{\hyperlink{common_8h_source_l00120}{120}} of file \mbox{\hyperlink{common_8h_source}{common.\+h}}.
+
+\mbox{\Hypertarget{structtransaction__t_af571e76d8e59b8452f38407799272e4a}\label{structtransaction__t_af571e76d8e59b8452f38407799272e4a}} 
+\index{transaction\_t@{transaction\_t}!reward@{reward}}
+\index{reward@{reward}!transaction\_t@{transaction\_t}}
+\doxysubsubsection{\texorpdfstring{reward}{reward}}
+{\footnotesize\ttfamily int reward}
+
+
+
+Definition at line \mbox{\hyperlink{common_8h_source_l00122}{122}} of file \mbox{\hyperlink{common_8h_source}{common.\+h}}.
+
+\mbox{\Hypertarget{structtransaction__t_a36060e3785ebad7b278cb01d5159c0c5}\label{structtransaction__t_a36060e3785ebad7b278cb01d5159c0c5}} 
+\index{transaction\_t@{transaction\_t}!sender@{sender}}
+\index{sender@{sender}!transaction\_t@{transaction\_t}}
+\doxysubsubsection{\texorpdfstring{sender}{sender}}
+{\footnotesize\ttfamily pid\+\_\+t sender}
+
+
+
+Definition at line \mbox{\hyperlink{common_8h_source_l00119}{119}} of file \mbox{\hyperlink{common_8h_source}{common.\+h}}.
+
+\mbox{\Hypertarget{structtransaction__t_a95a086466eb975b4da063388dd397dd3}\label{structtransaction__t_a95a086466eb975b4da063388dd397dd3}} 
+\index{transaction\_t@{transaction\_t}!status@{status}}
+\index{status@{status}!transaction\_t@{transaction\_t}}
+\doxysubsubsection{\texorpdfstring{}{}}
+{\footnotesize\ttfamily enum  \{ ... \}  status}
+
+\mbox{\Hypertarget{structtransaction__t_a2aace03835c4d951b3dee117b328ef87}\label{structtransaction__t_a2aace03835c4d951b3dee117b328ef87}} 
+\index{transaction\_t@{transaction\_t}!timestamp@{timestamp}}
+\index{timestamp@{timestamp}!transaction\_t@{transaction\_t}}
+\doxysubsubsection{\texorpdfstring{timestamp}{timestamp}}
+{\footnotesize\ttfamily struct timespec timestamp}
+
+
+
+Definition at line \mbox{\hyperlink{common_8h_source_l00118}{118}} of file \mbox{\hyperlink{common_8h_source}{common.\+h}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/include/\mbox{\hyperlink{common_8h}{common.\+h}}\end{DoxyCompactItemize}

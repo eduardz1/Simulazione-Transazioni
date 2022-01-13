@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_users_8h_source" xml:lang="en-US">
+<title>users.h</title>
+<indexterm><primary>src/include/users.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_users_8h_source_1l00001"/>00001 <emphasis role="preprocessor">#ifndef&#32;SIMULAZIONE_TRANSAZIONI_USERS_H</emphasis>
+<anchor xml:id="_users_8h_source_1l00002"/>00002 <emphasis role="preprocessor">#define&#32;SIMULAZIONE_TRANSAZIONI_USERS_H</emphasis>
+<anchor xml:id="_users_8h_source_1l00003"/>00003 
+<anchor xml:id="_users_8h_source_1l00004"/>00004 <emphasis role="preprocessor">#include&#32;&lt;signal.h&gt;</emphasis>
+<anchor xml:id="_users_8h_source_1l00005"/>00005 <emphasis role="preprocessor">#include&#32;&lt;stdlib.h&gt;</emphasis>
+<anchor xml:id="_users_8h_source_1l00006"/>00006 <emphasis role="preprocessor">#include&#32;&lt;time.h&gt;</emphasis>
+<anchor xml:id="_users_8h_source_1l00007"/>00007 <emphasis role="preprocessor">#include&#32;&lt;signal.h&gt;</emphasis>
+<anchor xml:id="_users_8h_source_1l00008"/>00008 
+<anchor xml:id="_users_8h_source_1l00009"/>00009 <emphasis role="comment">/*&#32;sets&#32;sleep&#32;time&#32;with&#32;nsec&#32;precision&#32;for&#32;trans_gen&#32;*/</emphasis>
+<anchor xml:id="_users_8h_source_1l00010"/><link linkend="_users_8h_1a42693010975aeff6d524880e8ca2c717">00010</link> <emphasis role="preprocessor">#define&#32;SLEEP_TIME_SET&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<anchor xml:id="_users_8h_source_1l00011"/>00011 <emphasis role="preprocessor">&#32;&#32;&#32;&#32;randSleepTime.tv_sec&#32;=&#32;0;&#32;\</emphasis>
+<anchor xml:id="_users_8h_source_1l00012"/>00012 <emphasis role="preprocessor">&#32;&#32;&#32;&#32;randSleepTime.tv_nsec&#32;=&#32;RAND(par-&gt;SO_MIN_TRANS_GEN_NSEC,&#32;par-&gt;SO_MAX_TRANS_GEN_NSEC);</emphasis>
+<anchor xml:id="_users_8h_source_1l00013"/>00013 
+<anchor xml:id="_users_8h_source_1l00014"/><link linkend="_users_8h_1a44e89d523436fcbbf2c56e4fb335d509">00014</link> <emphasis role="preprocessor">#define&#32;SLEEP&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<anchor xml:id="_users_8h_source_1l00015"/>00015 <emphasis role="preprocessor">&#32;&#32;&#32;&#32;clock_nanosleep(CLOCK_REALTIME,&#32;TIMER_ABSTIME,&#32;&amp;randSleepTime,&#32;&amp;sleepTimeRemaining);&#32;\</emphasis>
+<anchor xml:id="_users_8h_source_1l00016"/>00016 <emphasis role="preprocessor">&#32;&#32;&#32;&#32;clock_nanosleep(CLOCK_REALTIME,&#32;TIMER_ABSTIME,&#32;&amp;sleepTimeRemaining,&#32;NULL);</emphasis>
+<anchor xml:id="_users_8h_source_1l00017"/>00017 
+<anchor xml:id="_users_8h_source_1l00018"/>00018 
+<anchor xml:id="_users_8h_source_1l00019"/>00019 <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_users_8h_1a2419f7ac6a2d2282e04a8535b4b5c2f9">user_transactions_handle</link>(<emphasis role="keywordtype">int</emphasis>&#32;signum);
+<anchor xml:id="_users_8h_source_1l00020"/>00020 <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_users_8h_1a9aab3bf870349762f604cebd8633aea5">user_interrupt_handle</link>(<emphasis role="keywordtype">int</emphasis>&#32;signum);
+<anchor xml:id="_users_8h_source_1l00021"/>00021 
+<anchor xml:id="_users_8h_source_1l00022"/>00022 <emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_users_8h_1a7f41cf6401b33c2055d553d8315decaa">get_pid_userIndex</link>(<emphasis role="keywordtype">int</emphasis>&#32;PID_toSearch);
+<anchor xml:id="_users_8h_source_1l00023"/>00023 pid_t&#32;<link linkend="_users_8h_1aaf15d0912c5fa42321118d1c652551d2">get_random_userPID</link>();
+<anchor xml:id="_users_8h_source_1l00024"/>00024 pid_t&#32;<link linkend="_users_8h_1a7a26cf1c5a9c15d42c4f3caeaa179b0e">get_random_nodePID</link>();
+<anchor xml:id="_users_8h_source_1l00025"/>00025 
+<anchor xml:id="_users_8h_source_1l00026"/>00026 <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_users_8h_1a9cceef0ffc7483e71c1cc4652a05cc1c">queue_to_pid</link>(pid_t&#32;nodePID);
+<anchor xml:id="_users_8h_source_1l00027"/>00027 <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_users_8h_1a1e2d07708f3abf72150e65545e8bef23">transaction_init</link>(pid_t&#32;nodePID,&#32;<emphasis role="keywordtype">int</emphasis>&#32;amount,&#32;<emphasis role="keywordtype">int</emphasis>&#32;reward);
+<anchor xml:id="_users_8h_source_1l00028"/>00028 <emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_users_8h_1af881b5c5f39090e7fc6c5c5d6630c7cb">send_transaction</link>();
+<anchor xml:id="_users_8h_source_1l00029"/>00029 
+<anchor xml:id="_users_8h_source_1l00030"/>00030 <emphasis role="preprocessor">#endif&#32;</emphasis><emphasis role="comment">/*&#32;SIMULAZIONE_TRANSAZIONI_USERS_H&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+</programlisting></section>

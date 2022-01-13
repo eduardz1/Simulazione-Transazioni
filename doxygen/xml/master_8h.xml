@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.3" xml:lang="en-US">
+  <compounddef id="master_8h" kind="file" language="C++">
+    <compoundname>master.h</compoundname>
+    <includes local="no">string.h</includes>
+    <includes local="no">signal.h</includes>
+    <includedby refid="master_8c" local="yes">src/master.c</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/include/master.h</label>
+        <link refid="master_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>signal.h</label>
+      </node>
+      <node id="2">
+        <label>string.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>src/include/master.h</label>
+        <link refid="master_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>src/master.c</label>
+        <link refid="master_8c"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="master_8h_1a5798314bd3d030e33274ce05f522984f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void make_arguments</definition>
+        <argsstring>(int *IPCarray, char *argv[])</argsstring>
+        <name>make_arguments</name>
+        <param>
+          <type>int *</type>
+          <declname>IPCarray</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>argv</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/master.h" line="49" column="6" declfile="src/include/master.h" declline="49" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="master_8h_1a9f9715b418947b3d25eaa102b494b7eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>pid_t</type>
+        <definition>pid_t spawn_user</definition>
+        <argsstring>(char *argv[])</argsstring>
+        <name>spawn_user</name>
+        <param>
+          <type>char *</type>
+          <declname>argv</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/master.h" line="51" column="7" bodyfile="src/master.c" bodystart="65" bodyend="85" declfile="src/include/master.h" declline="51" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="master_8h_1ac4c522e4371812b5b4e5fd7982c58dd3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>pid_t</type>
+        <definition>pid_t spawn_node</definition>
+        <argsstring>(char *argv[])</argsstring>
+        <name>spawn_node</name>
+        <param>
+          <type>char *</type>
+          <declname>argv</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/master.h" line="52" column="7" bodyfile="src/master.c" bodystart="88" bodyend="108" declfile="src/include/master.h" declline="52" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="master_8h_1af65ef707ebfa9cc135e6d466c75dbda8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void shared_memory_objects_init</definition>
+        <argsstring>(int *shared_memory_objects_IDs)</argsstring>
+        <name>shared_memory_objects_init</name>
+        <param>
+          <type>int *</type>
+          <declname>shared_memory_objects_IDs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/master.h" line="54" column="6" bodyfile="src/master.c" bodystart="111" bodyend="165" declfile="src/include/master.h" declline="54" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="master_8h_1a808faa6034b867dc92c3878d95cec5d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void semaphores_init</definition>
+        <argsstring>()</argsstring>
+        <name>semaphores_init</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/master.h" line="55" column="6" bodyfile="src/master.c" bodystart="167" bodyend="172" declfile="src/include/master.h" declline="55" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="master_8h_1af39360a8f6b9dda80c2adfe9f456f75e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void make_ipc_array</definition>
+        <argsstring>(int *IPC_objects_IDs)</argsstring>
+        <name>make_ipc_array</name>
+        <param>
+          <type>int *</type>
+          <declname>IPC_objects_IDs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/master.h" line="56" column="6" bodyfile="src/master.c" bodystart="175" bodyend="185" declfile="src/include/master.h" declline="56" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="master_8h_1a6732beb5ef32cd411a23cf0d8c915e37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void master_interrupt_handle</definition>
+        <argsstring>(int signum)</argsstring>
+        <name>master_interrupt_handle</name>
+        <param>
+          <type>int</type>
+          <declname>signum</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/master.h" line="58" column="6" bodyfile="src/master.c" bodystart="188" bodyend="208" declfile="src/include/master.h" declline="58" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>SIMULAZIONE_TRANSAZIONI_MASTER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SIMULAZIONE_TRANSAZIONI_MASTER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>probabilmente<sp/>tutte<sp/>set<sp/>macro<sp/>non<sp/>ci<sp/>servono<sp/>perche&apos;<sp/>ha<sp/>più<sp/>senso<sp/>passare<sp/>i</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>valori<sp/>come<sp/>parametri<sp/>in<sp/>compilazione</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>libro<sp/>mastro<sp/>----&gt;<sp/>linked<sp/>list<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>execve(const<sp/>char<sp/>*user,<sp/>char<sp/>*const<sp/>argv[],<sp/>char<sp/>*const<sp/>envp[])</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>in<sp/>user_fork<sp/>to<sp/>link<sp/>&quot;user&quot;<sp/>executable<sp/>to<sp/>the<sp/>forked<sp/>process,<sp/>same<sp/>thing<sp/>for<sp/>nodes</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/>check<sp/>lesson<sp/>on<sp/>pipes<sp/>by<sp/>prof.<sp/>bini,<sp/>the<sp/>second<sp/>hour</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/>every<sp/>transaction<sp/>should<sp/>be<sp/>noted<sp/>and<sp/>we<sp/>need<sp/>to<sp/>manage<sp/>inconsistency<sp/>with</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/>semaphores<sp/>maybe</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>get<sp/>every<sp/>user_pid,<sp/>ask<sp/>to<sp/>libro_mastro</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>to<sp/>return<sp/>it&apos;s<sp/>current_budget<sp/>and<sp/>print</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>repeat<sp/>every<sp/>second<sp/>until<sp/>simulation<sp/>persists</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>remember<sp/>that<sp/>CTRL-C<sp/>should<sp/>kill<sp/>the<sp/>simulation</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>need<sp/>to<sp/>define<sp/>a<sp/>kill<sp/>signal<sp/>for<sp/>the<sp/>simulation,<sp/>either:</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*<sp/>-<sp/>SO_SIM_SEC<sp/>seconds<sp/>have<sp/>passed</highlight></codeline>
+<codeline lineno="32"><highlight class="comment"><sp/>*<sp/>-<sp/>libro_mastro<sp/>is<sp/>full</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/>*<sp/>-<sp/>CTRL-C<sp/>from<sp/>stdin</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/>*<sp/>end<sp/>of<sp/>simulation<sp/>should<sp/>print:</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/>*<sp/>-<sp/>kill<sp/>signal</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/>*<sp/>-<sp/>balance<sp/>of<sp/>every<sp/>user,<sp/>as<sp/>before,<sp/>may<sp/>need<sp/>to<sp/>write<sp/>a<sp/>funciton<sp/>for<sp/>that</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/>*<sp/>-<sp/>balance<sp/>of<sp/>every<sp/>node<sp/>(function<sp/>as<sp/>before<sp/>but<sp/>with<sp/>different<sp/>parameter)</highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/>*<sp/>-<sp/>number<sp/>of<sp/>user<sp/>processes<sp/>aborted</highlight></codeline>
+<codeline lineno="42"><highlight class="comment"><sp/>*<sp/>-<sp/>number<sp/>of<sp/>blocks<sp/>in<sp/>the<sp/>libro_mastro</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/>*<sp/>-<sp/>number<sp/>of<sp/>transaction<sp/>still<sp/>in<sp/>the<sp/>pool,<sp/>for<sp/>each<sp/>node</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;signal.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49" refid="master_8h_1a5798314bd3d030e33274ce05f522984f" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="master_8h_1a5798314bd3d030e33274ce05f522984f" kindref="member">make_arguments</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>*IPCarray,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*argv[]);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal">pid_t<sp/><ref refid="master_8h_1a9f9715b418947b3d25eaa102b494b7eb" kindref="member">spawn_user</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*argv[]);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal">pid_t<sp/><ref refid="master_8h_1ac4c522e4371812b5b4e5fd7982c58dd3" kindref="member">spawn_node</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*argv[]);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="master_8h_1af65ef707ebfa9cc135e6d466c75dbda8" kindref="member">shared_memory_objects_init</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>*shared_memory_objects_IDs);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="master_8h_1a808faa6034b867dc92c3878d95cec5d0" kindref="member">semaphores_init</ref>();</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="master_8h_1af39360a8f6b9dda80c2adfe9f456f75e" kindref="member">make_ipc_array</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>*IPC_objects_IDs);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="master_8h_1a6732beb5ef32cd411a23cf0d8c915e37" kindref="member">master_interrupt_handle</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>signum);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>SIMULAZIONE_TRANSAZIONI_MASTER_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="src/include/master.h"/>
+  </compounddef>
+</doxygen>

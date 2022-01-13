@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_print_8c_source" xml:lang="en-US">
+<title>print.c</title>
+<indexterm><primary>src/print.c</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_print_8c_source_1l00001"/>00001 
+<anchor xml:id="_print_8c_source_1l00002"/>00002 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_common_8h">include/common.h</link>&quot;</emphasis>
+<anchor xml:id="_print_8c_source_1l00003"/>00003 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_print_8h">include/print.h</link>&quot;</emphasis>
+<anchor xml:id="_print_8c_source_1l00004"/>00004 
+<anchor xml:id="_print_8c_source_1l00005"/>00005 <emphasis role="comment">/*&#32;#define&#32;HYPHEN&#32;&quot;--------&quot;&#32;*/</emphasis>
+<anchor xml:id="_print_8c_source_1l00006"/>00006 
+<anchor xml:id="_print_8c_source_1l00007"/><link linkend="_print_8h_1abba0d38395714b105fe448566b916b24">00007</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_print_8c_1abba0d38395714b105fe448566b916b24">print_time_to_die</link>()
+<anchor xml:id="_print_8c_source_1l00008"/>00008 {
+<anchor xml:id="_print_8c_source_1l00009"/>00009 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;\n***********************\n||&#32;The&#32;time&#32;has&#32;come&#32;||\n***********************\n\n&quot;</emphasis>);
+<anchor xml:id="_print_8c_source_1l00010"/>00010 }
+<anchor xml:id="_print_8c_source_1l00011"/>00011 
+<anchor xml:id="_print_8c_source_1l00012"/><link linkend="_print_8h_1a34b8fcde9a89e8e5f9c0571f30fd55c4">00012</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_print_8c_1ac04c3524bda40db9d223b33d141accee">print_user_nodes_table</link>(pid_t&#32;mainPID,&#32;<link linkend="_structuser__t">user</link>&#32;*userPID,&#32;<link linkend="_structnode__t">node</link>&#32;*nodePID,&#32;<emphasis role="keyword">struct</emphasis>&#32;<link linkend="_structparameters">parameters</link>&#32;*<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>)
+<anchor xml:id="_print_8c_source_1l00013"/>00013 {
+<anchor xml:id="_print_8c_source_1l00014"/>00014 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;userNum&#32;=&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a1a7bfa0882f03d573b4e419d02f041f8">SO_USER_NUM</link>;
+<anchor xml:id="_print_8c_source_1l00015"/>00015 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;nodesNum&#32;=&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a379d08051847c4f98268a27001b06261">SO_NODES_NUM</link>;
+<anchor xml:id="_print_8c_source_1l00016"/>00016 
+<anchor xml:id="_print_8c_source_1l00017"/>00017 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;\n&#32;-------&#32;Master&#32;Process&#32;PID&#32;is&#32;%d&#32;----------\n&quot;</emphasis>,&#32;mainPID);
+<anchor xml:id="_print_8c_source_1l00018"/>00018 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;|&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;|\n&quot;</emphasis>);
+<anchor xml:id="_print_8c_source_1l00019"/>00019 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;-&#32;Type&#32;-------&#32;PID&#32;---------&#32;Status&#32;---------\n&quot;</emphasis>);
+<anchor xml:id="_print_8c_source_1l00020"/>00020 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;---------------------------------------------\n&quot;</emphasis>);
+<anchor xml:id="_print_8c_source_1l00021"/>00021 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(userNum--)
+<anchor xml:id="_print_8c_source_1l00022"/>00022 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_print_8c_source_1l00023"/>00023 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;|&#32;&#32;User&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;%d&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;%d&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;|\n&quot;</emphasis>,&#32;userPID[userNum].pid,&#32;userPID[userNum].status);
+<anchor xml:id="_print_8c_source_1l00024"/>00024 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_print_8c_source_1l00025"/>00025 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;---------------------------------------------\n&quot;</emphasis>);
+<anchor xml:id="_print_8c_source_1l00026"/>00026 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(nodesNum--)
+<anchor xml:id="_print_8c_source_1l00027"/>00027 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_print_8c_source_1l00028"/>00028 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;|&#32;&#32;Node&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;%d&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;%d&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;|\n&quot;</emphasis>,&#32;nodePID[nodesNum].pid,&#32;nodePID[nodesNum].status);
+<anchor xml:id="_print_8c_source_1l00029"/>00029 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_print_8c_source_1l00030"/>00030 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;&#32;---------------------------------------------\n&quot;</emphasis>);
+<anchor xml:id="_print_8c_source_1l00031"/>00031 }
+<anchor xml:id="_print_8c_source_1l00032"/>00032 
+<anchor xml:id="_print_8c_source_1l00033"/><link linkend="_print_8c_1a5360a76a02aff83178fa550d60c3d464">00033</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_print_8c_1a5360a76a02aff83178fa550d60c3d464">print_kill_signal</link>();
+<anchor xml:id="_print_8c_source_1l00034"/><link linkend="_print_8c_1a859f47c0058e4d60975aff4750031a82">00034</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_print_8c_1a859f47c0058e4d60975aff4750031a82">print_user_balance</link>();
+<anchor xml:id="_print_8c_source_1l00035"/><link linkend="_print_8c_1ae96b17109a900709ef5355bc84720e9c">00035</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_print_8c_1ae96b17109a900709ef5355bc84720e9c">print_node_balance</link>();
+<anchor xml:id="_print_8c_source_1l00036"/><link linkend="_print_8c_1a153f1f994e981d23912535871cb742bb">00036</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_print_8c_1a153f1f994e981d23912535871cb742bb">print_num_aborted</link>();
+<anchor xml:id="_print_8c_source_1l00037"/><link linkend="_print_8c_1a692dfc8fc42a6b304aa4aa200bba4186">00037</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_print_8c_1a692dfc8fc42a6b304aa4aa200bba4186">print_num_blocks</link>();
+<anchor xml:id="_print_8c_source_1l00038"/><link linkend="_print_8c_1ad4abfc9577091b1339716d5a34ef57cb">00038</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_print_8c_1ad4abfc9577091b1339716d5a34ef57cb">print_transactions_still_in_pool</link>();
+<anchor xml:id="_print_8c_source_1l00039"/>00039 
+<anchor xml:id="_print_8c_source_1l00040"/><link linkend="_print_8h_1a3210b536ef064414b1736cd2e9b7d3bd">00040</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_print_8c_1a3210b536ef064414b1736cd2e9b7d3bd">final_print</link>(pid_t&#32;masterPID,&#32;<link linkend="_structuser__t">user</link>&#32;*<link linkend="_master_8c_1af667a518a4feef7b7540ebac0cd618cf">usersPID</link>,&#32;<link linkend="_structnode__t">node</link>&#32;*<link linkend="_master_8c_1a803b35477f039b41487c3b1abee12b80">nodesPID</link>,&#32;<emphasis role="keyword">struct</emphasis>&#32;<link linkend="_structparameters">parameters</link>&#32;*<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>)
+<anchor xml:id="_print_8c_source_1l00041"/>00041 {
+<anchor xml:id="_print_8c_source_1l00042"/>00042 &#32;&#32;&#32;&#32;<link linkend="_print_8c_1ac04c3524bda40db9d223b33d141accee">print_user_nodes_table</link>(masterPID,&#32;<link linkend="_master_8c_1af667a518a4feef7b7540ebac0cd618cf">usersPID</link>,&#32;<link linkend="_master_8c_1a803b35477f039b41487c3b1abee12b80">nodesPID</link>,&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>);
+<anchor xml:id="_print_8c_source_1l00043"/>00043 &#32;&#32;&#32;&#32;<emphasis role="comment">/*print_kill_signal();</emphasis>
+<anchor xml:id="_print_8c_source_1l00044"/>00044 <emphasis role="comment">&#32;&#32;&#32;&#32;print_user_balance();</emphasis>
+<anchor xml:id="_print_8c_source_1l00045"/>00045 <emphasis role="comment">&#32;&#32;&#32;&#32;print_node_balance();*</emphasis>
+<anchor xml:id="_print_8c_source_1l00046"/>00046 <emphasis role="comment">&#32;&#32;&#32;&#32;print_num_aborted();</emphasis>
+<anchor xml:id="_print_8c_source_1l00047"/>00047 <emphasis role="comment">&#32;&#32;&#32;&#32;/*</emphasis>
+<anchor xml:id="_print_8c_source_1l00048"/>00048 <emphasis role="comment">&#32;&#32;&#32;&#32;print_num_blocks();</emphasis>
+<anchor xml:id="_print_8c_source_1l00049"/>00049 <emphasis role="comment">&#32;&#32;&#32;&#32;print_transactions_still_in_pool();*/</emphasis>
+<anchor xml:id="_print_8c_source_1l00050"/>00050 }
+<anchor xml:id="_print_8c_source_1l00051"/>00051 
+<anchor xml:id="_print_8c_source_1l00052"/><link linkend="_print_8h_1a7632b11ea6036c833f5c2cd3cd0bb087">00052</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_print_8c_1a7632b11ea6036c833f5c2cd3cd0bb087">print_parameters</link>(<emphasis role="keyword">struct</emphasis>&#32;<link linkend="_structparameters">parameters</link>&#32;*<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>)
+<anchor xml:id="_print_8c_source_1l00053"/>00053 {
+<anchor xml:id="_print_8c_source_1l00054"/>00054 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;--------------------------------------------\n-----------&#32;Configuration&#32;value&#32;------------\n&quot;</emphasis>);
+<anchor xml:id="_print_8c_source_1l00055"/>00055 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;SO_USER_NUM-&gt;%u\n&quot;</emphasis>,&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a1a7bfa0882f03d573b4e419d02f041f8">SO_USER_NUM</link>);
+<anchor xml:id="_print_8c_source_1l00056"/>00056 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;SO_NODES_NUM-&gt;%u\n&quot;</emphasis>,&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a379d08051847c4f98268a27001b06261">SO_NODES_NUM</link>);
+<anchor xml:id="_print_8c_source_1l00057"/>00057 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;SO_BUDGET_INIT-&gt;%u\n&quot;</emphasis>,&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a375c541a19818ce43b6ae275d0a80365">SO_BUDGET_INIT</link>);
+<anchor xml:id="_print_8c_source_1l00058"/>00058 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;SO_REWARD-&gt;%u\n&quot;</emphasis>,&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a1e8968a80441b4a641d5ff3566af04f1">SO_REWARD</link>);
+<anchor xml:id="_print_8c_source_1l00059"/>00059 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;SO_MIN_TRANS_GEN_NSEC-&gt;%lu\n&quot;</emphasis>,&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a213ccb7b7e150d7bf584f35cc824ead6">SO_MIN_TRANS_GEN_NSEC</link>);
+<anchor xml:id="_print_8c_source_1l00060"/>00060 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;SO_MAX_TRANS_GEN_NSEC-&gt;%lu\n&quot;</emphasis>,&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1abca064afd6b392e1f9e24b5fda8cdecb">SO_MAX_TRANS_GEN_NSEC</link>);
+<anchor xml:id="_print_8c_source_1l00061"/>00061 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;SO_RETRY-&gt;%u\n&quot;</emphasis>,&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1ac2861693c2d9121c5ecad90de2189690">SO_RETRY</link>);
+<anchor xml:id="_print_8c_source_1l00062"/>00062 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;SO_TP_SIZE-&gt;%u\n&quot;</emphasis>,&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a8fe346ee9f21d4a40e15388b72579fbe">SO_TP_SIZE</link>);
+<anchor xml:id="_print_8c_source_1l00063"/>00063 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;SO_MIN_TRANS_PROC_NSEC-&gt;%lu\n&quot;</emphasis>,&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a19a5fe1068e3e1ceceab49114d856628">SO_MIN_TRANS_PROC_NSEC</link>);
+<anchor xml:id="_print_8c_source_1l00064"/>00064 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;SO_MAX_TRANS_PROC_NSEC-&gt;%lu\n&quot;</emphasis>,&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1af7fbb0805dd6c4e1729d70a30164bc1c">SO_MAX_TRANS_PROC_NSEC</link>);
+<anchor xml:id="_print_8c_source_1l00065"/>00065 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;SO_SIM_SEC-&gt;%u\n&quot;</emphasis>,&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a86c91cb21e43e2f92651c149f93f0dc5">SO_SIM_SEC</link>);
+<anchor xml:id="_print_8c_source_1l00066"/>00066 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;SO_FRIENDS_NUM-&gt;%u\n&quot;</emphasis>,&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a6d8f5bd80c3eda4ed6d9f2440f9105b2">SO_FRIENDS_NUM</link>);
+<anchor xml:id="_print_8c_source_1l00067"/>00067 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;SO_HOPS-&gt;%u\n&quot;</emphasis>,&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a85ca4a1c61f11babff7ccd10ec58ee70">SO_HOPS</link>);
+<anchor xml:id="_print_8c_source_1l00068"/>00068 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;--------------------------------------------\n&quot;</emphasis>);
+<anchor xml:id="_print_8c_source_1l00069"/>00069 }
+<anchor xml:id="_print_8c_source_1l00070"/>00070 
+<anchor xml:id="_print_8c_source_1l00071"/>00071 <emphasis role="comment">/*void&#32;print_kill_signal(mainPID,&#32;userPid&#32;/*&#32;other&#32;process&#32;*)</emphasis>
+<anchor xml:id="_print_8c_source_1l00072"/>00072 <emphasis role="comment">{</emphasis>
+<anchor xml:id="_print_8c_source_1l00073"/>00073 <emphasis role="comment">&#32;&#32;&#32;&#32;printf(&quot;-----PROCESS&#32;PID&#32;NUM&#32;%d&#32;KILL----&quot;,&#32;mainPID);</emphasis>
+<anchor xml:id="_print_8c_source_1l00074"/>00074 <emphasis role="comment">}</emphasis>
+<anchor xml:id="_print_8c_source_1l00075"/>00075 <emphasis role="comment">void&#32;print_user_balance(int&#32;balance)</emphasis>
+<anchor xml:id="_print_8c_source_1l00076"/>00076 <emphasis role="comment">{</emphasis>
+<anchor xml:id="_print_8c_source_1l00077"/>00077 <emphasis role="comment">&#32;&#32;&#32;&#32;printf(&quot;-----CURRENT&#32;BALANCE&#32;IS:%d-----&quot;,&#32;balance);</emphasis>
+<anchor xml:id="_print_8c_source_1l00078"/>00078 <emphasis role="comment">}</emphasis>
+<anchor xml:id="_print_8c_source_1l00079"/>00079 <emphasis role="comment"></emphasis>
+<anchor xml:id="_print_8c_source_1l00080"/>00080 <emphasis role="comment">void&#32;print_node_balance(int&#32;balamce)</emphasis>
+<anchor xml:id="_print_8c_source_1l00081"/>00081 <emphasis role="comment">{</emphasis>
+<anchor xml:id="_print_8c_source_1l00082"/>00082 <emphasis role="comment">&#32;&#32;&#32;&#32;printf(&quot;----CURRENT&#32;NODE&#32;BALANCE&#32;IS:%d&quot;,&#32;balance);</emphasis>
+<anchor xml:id="_print_8c_source_1l00083"/>00083 <emphasis role="comment">}&#32;*/</emphasis>
+<anchor xml:id="_print_8c_source_1l00084"/>00084 <emphasis role="comment">/*void&#32;print_num_aborted()</emphasis>
+<anchor xml:id="_print_8c_source_1l00085"/>00085 <emphasis role="comment">{</emphasis>
+<anchor xml:id="_print_8c_source_1l00086"/>00086 <emphasis role="comment">&#32;&#32;&#32;&#32;printf(&quot;\n--&#32;Num&#32;of&#32;aborted&#32;users:&#32;%d\n&quot;,&#32;usersPrematurelyDead);</emphasis>
+<anchor xml:id="_print_8c_source_1l00087"/>00087 <emphasis role="comment">}</emphasis>
+<anchor xml:id="_print_8c_source_1l00088"/>00088 <emphasis role="comment">/*</emphasis>
+<anchor xml:id="_print_8c_source_1l00089"/>00089 <emphasis role="comment">void&#32;print_num_blocks()</emphasis>
+<anchor xml:id="_print_8c_source_1l00090"/>00090 <emphasis role="comment">{</emphasis>
+<anchor xml:id="_print_8c_source_1l00091"/>00091 <emphasis role="comment">&#32;&#32;&#32;&#32;printf(&quot;---TOTAL&#32;BLOCK:%d&quot;);</emphasis>
+<anchor xml:id="_print_8c_source_1l00092"/>00092 <emphasis role="comment">}</emphasis>
+<anchor xml:id="_print_8c_source_1l00093"/>00093 <emphasis role="comment">void&#32;print_transactions_still_in_pool()</emphasis>
+<anchor xml:id="_print_8c_source_1l00094"/>00094 <emphasis role="comment">{</emphasis>
+<anchor xml:id="_print_8c_source_1l00095"/>00095 <emphasis role="comment">&#32;&#32;&#32;&#32;printf(&quot;----TOTAL&#32;TRANSACTION&#32;STILL&#32;IN&#32;POLL:%d----&quot;);</emphasis>
+<anchor xml:id="_print_8c_source_1l00096"/>00096 <emphasis role="comment">}*/</emphasis>
+<anchor xml:id="_print_8c_source_1l00097"/>00097 
+<anchor xml:id="_print_8c_source_1l00098"/><link linkend="_print_8h_1a0d2d8efd9ece9ba96b0a15b7d471c3bc">00098</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_print_8c_1a0d2d8efd9ece9ba96b0a15b7d471c3bc">print_transaction</link>(FILE&#32;*fp,&#32;<link linkend="_structtransaction__t">transaction</link>&#32;*t)
+<anchor xml:id="_print_8c_source_1l00099"/>00099 {
+<anchor xml:id="_print_8c_source_1l00100"/>00100 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;tmp[10];
+<anchor xml:id="_print_8c_source_1l00101"/>00101 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">switch</emphasis>&#32;(t-&gt;<link linkend="_structtransaction__t_1a95a086466eb975b4da063388dd397dd3">status</link>)
+<anchor xml:id="_print_8c_source_1l00102"/>00102 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_print_8c_source_1l00103"/>00103 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;pending:
+<anchor xml:id="_print_8c_source_1l00104"/>00104 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;strcpy(tmp,&#32;<emphasis role="stringliteral">&quot;pending&quot;</emphasis>);
+<anchor xml:id="_print_8c_source_1l00105"/>00105 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+<anchor xml:id="_print_8c_source_1l00106"/>00106 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;aborted:
+<anchor xml:id="_print_8c_source_1l00107"/>00107 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;strcpy(tmp,&#32;<emphasis role="stringliteral">&quot;aborted&quot;</emphasis>);
+<anchor xml:id="_print_8c_source_1l00108"/>00108 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+<anchor xml:id="_print_8c_source_1l00109"/>00109 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;confirmed:
+<anchor xml:id="_print_8c_source_1l00110"/>00110 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;strcpy(tmp,&#32;<emphasis role="stringliteral">&quot;confirmed&quot;</emphasis>);
+<anchor xml:id="_print_8c_source_1l00111"/>00111 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+<anchor xml:id="_print_8c_source_1l00112"/>00112 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;processing:
+<anchor xml:id="_print_8c_source_1l00113"/>00113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;strcpy(tmp,&#32;<emphasis role="stringliteral">&quot;confirmed&quot;</emphasis>);
+<anchor xml:id="_print_8c_source_1l00114"/>00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">break</emphasis>;
+<anchor xml:id="_print_8c_source_1l00115"/>00115 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_print_8c_source_1l00116"/>00116 
+<anchor xml:id="_print_8c_source_1l00117"/>00117 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;&#32;--------------------------&#32;\n&quot;</emphasis>);
+<anchor xml:id="_print_8c_source_1l00118"/>00118 &#32;&#32;&#32;&#32;<link linkend="_print_8c_1a694b7105f14c48043dbf079031abd5be">formatted_timestamp</link>(fp);
+<anchor xml:id="_print_8c_source_1l00119"/>00119 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;&#32;&#32;&#32;&#32;%s&quot;</emphasis>,&#32;tmp);
+<anchor xml:id="_print_8c_source_1l00120"/>00120 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;|&#32;&#32;%d&#32;--&gt;&#32;%d\n&quot;</emphasis>,&#32;t-&gt;<link linkend="_structtransaction__t_1a36060e3785ebad7b278cb01d5159c0c5">sender</link>,&#32;t-&gt;<link linkend="_structtransaction__t_1a3c01e8bf1e61ee67a25113f3db1a32b8">receiver</link>);
+<anchor xml:id="_print_8c_source_1l00121"/>00121 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;|&#32;&#32;Amount:&#32;&#32;&#32;&#32;%d\n&quot;</emphasis>,&#32;t-&gt;<link linkend="_structtransaction__t_1a14236de313193a14b4dbdf442bcf2bb9">amount</link>);
+<anchor xml:id="_print_8c_source_1l00122"/>00122 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;|&#32;&#32;Reward:&#32;&#32;&#32;&#32;%d\n&quot;</emphasis>,&#32;t-&gt;<link linkend="_structtransaction__t_1af571e76d8e59b8452f38407799272e4a">reward</link>);
+<anchor xml:id="_print_8c_source_1l00123"/>00123 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;|&#32;&#32;Reward:&#32;&#32;&#32;&#32;%d\n&quot;</emphasis>,&#32;t-&gt;<link linkend="_structtransaction__t_1af571e76d8e59b8452f38407799272e4a">reward</link>);
+<anchor xml:id="_print_8c_source_1l00124"/>00124 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;&#32;--------------------------&#32;\n&quot;</emphasis>);
+<anchor xml:id="_print_8c_source_1l00125"/>00125 }
+<anchor xml:id="_print_8c_source_1l00126"/>00126 
+<anchor xml:id="_print_8c_source_1l00127"/><link linkend="_print_8h_1a0adafcfb5ee991d673e8c71c84f0d4da">00127</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_print_8c_1a0adafcfb5ee991d673e8c71c84f0d4da">print_block</link>(FILE&#32;*fp,&#32;<link linkend="_structblock__t">block</link>&#32;*b)
+<anchor xml:id="_print_8c_source_1l00128"/>00128 {
+<anchor xml:id="_print_8c_source_1l00129"/>00129 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;i;
+<anchor xml:id="_print_8c_source_1l00130"/>00130 &#32;&#32;&#32;&#32;<link linkend="_structblock__t">block</link>&#32;*curr;
+<anchor xml:id="_print_8c_source_1l00131"/>00131 
+<anchor xml:id="_print_8c_source_1l00132"/>00132 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(curr&#32;=&#32;b;&#32;curr&#32;!=&#32;<link linkend="_common_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</link>;&#32;curr&#32;=&#32;(<link linkend="_structblock__t">block</link>*)curr-&gt;<link linkend="_structblock__t_1a063b51ee50d55219236d2e4db6ce97a8">next</link>)
+<anchor xml:id="_print_8c_source_1l00133"/>00133 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_print_8c_source_1l00134"/>00134 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;=&#32;%.3d&#32;=======================\n&quot;</emphasis>,&#32;b-&gt;<link linkend="_structblock__t_1aa72742d9d7c1c8631aa36c0077f13b1d">blockIndex</link>);
+<anchor xml:id="_print_8c_source_1l00135"/>00135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(i&#32;=&#32;0;&#32;i&#32;&lt;&#32;<link linkend="_common_8h_1a320169181de72ba0b5203555e14103c4">SO_BLOCK_SIZE</link>;&#32;i++)
+<anchor xml:id="_print_8c_source_1l00136"/>00136 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="_print_8c_source_1l00137"/>00137 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_print_8c_1a0d2d8efd9ece9ba96b0a15b7d471c3bc">print_transaction</link>(fp,&#32;&amp;(b-&gt;<link linkend="_structblock__t_1a75735b68381e6c25555bb53c163abfe9">transList</link>[i]));
+<anchor xml:id="_print_8c_source_1l00138"/>00138 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_print_8c_source_1l00139"/>00139 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;============================\n&quot;</emphasis>);
+<anchor xml:id="_print_8c_source_1l00140"/>00140 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_print_8c_source_1l00141"/>00141 }
+<anchor xml:id="_print_8c_source_1l00142"/>00142 
+<anchor xml:id="_print_8c_source_1l00143"/><link linkend="_print_8h_1ab1c0c4107a8f068374cff27e2997f0f7">00143</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_print_8c_1ab1c0c4107a8f068374cff27e2997f0f7">print_ledger</link>(<link linkend="_structledger__t">ledger</link>&#32;*l)
+<anchor xml:id="_print_8c_source_1l00144"/>00144 {
+<anchor xml:id="_print_8c_source_1l00145"/>00145 &#32;&#32;&#32;&#32;FILE&#32;*fp&#32;=&#32;fopen(<emphasis role="stringliteral">&quot;ledger.txt&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;w&quot;</emphasis>);
+<anchor xml:id="_print_8c_source_1l00146"/>00146 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fp&#32;==&#32;<link linkend="_common_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</link>)
+<anchor xml:id="_print_8c_source_1l00147"/>00147 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_print_8c_source_1l00148"/>00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;:print:&#32;coudln&apos;t&#32;open&#32;file&#32;pointer&#32;ledger.txt\n&quot;</emphasis>);
+<anchor xml:id="_print_8c_source_1l00149"/>00149 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_print_8c_source_1l00150"/>00150 
+<anchor xml:id="_print_8c_source_1l00151"/>00151 &#32;&#32;&#32;&#32;fprintf(fp,&#32;<emphasis role="stringliteral">&quot;Registry&#32;Real&#32;Size&#32;is&#32;%d&#32;blocks\n&quot;</emphasis>,&#32;l-&gt;<link linkend="_structledger__t_1a3687d896ad2d77106df256f1db753c18">registryCurrSize</link>);
+<anchor xml:id="_print_8c_source_1l00152"/>00152 &#32;&#32;&#32;&#32;<link linkend="_print_8c_1a0adafcfb5ee991d673e8c71c84f0d4da">print_block</link>(fp,&#32;l-&gt;<link linkend="_structledger__t_1ae8b38edd17a3a5769aea3c05f4e2b432">head</link>);
+<anchor xml:id="_print_8c_source_1l00153"/>00153 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_print_8c_source_1l00154"/>00154 }
+<anchor xml:id="_print_8c_source_1l00155"/>00155 
+<anchor xml:id="_print_8c_source_1l00156"/>00156 <emphasis role="comment">/*&#32;print&#32;without&#32;/n&#32;*/</emphasis>
+<anchor xml:id="_print_8c_source_1l00157"/><link linkend="_print_8h_1a694b7105f14c48043dbf079031abd5be">00157</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_print_8c_1a694b7105f14c48043dbf079031abd5be">formatted_timestamp</link>(FILE&#32;*fp)
+<anchor xml:id="_print_8c_source_1l00158"/>00158 {
+<anchor xml:id="_print_8c_source_1l00159"/>00159 &#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;Hey&quot;</emphasis>);
+<anchor xml:id="_print_8c_source_1l00160"/>00160 &#32;&#32;&#32;&#32;<emphasis role="comment">/*clock_t&#32;tic&#32;=&#32;clock();</emphasis>
+<anchor xml:id="_print_8c_source_1l00161"/>00161 <emphasis role="comment">&#32;&#32;&#32;&#32;clock_t&#32;start&#32;=&#32;clock();</emphasis>
+<anchor xml:id="_print_8c_source_1l00162"/>00162 <emphasis role="comment">&#32;&#32;&#32;&#32;clock_t&#32;stop&#32;=&#32;clock();</emphasis>
+<anchor xml:id="_print_8c_source_1l00163"/>00163 <emphasis role="comment"></emphasis>
+<anchor xml:id="_print_8c_source_1l00164"/>00164 <emphasis role="comment">&#32;&#32;&#32;&#32;time_t&#32;rawtime;</emphasis>
+<anchor xml:id="_print_8c_source_1l00165"/>00165 <emphasis role="comment">&#32;&#32;&#32;&#32;time_t&#32;now;</emphasis>
+<anchor xml:id="_print_8c_source_1l00166"/>00166 <emphasis role="comment">&#32;&#32;&#32;&#32;struct&#32;tm&#32;*info;</emphasis>
+<anchor xml:id="_print_8c_source_1l00167"/>00167 <emphasis role="comment">&#32;&#32;&#32;&#32;struct&#32;tm&#32;*today;</emphasis>
+<anchor xml:id="_print_8c_source_1l00168"/>00168 <emphasis role="comment">&#32;&#32;&#32;&#32;double&#32;elapsed;</emphasis>
+<anchor xml:id="_print_8c_source_1l00169"/>00169 <emphasis role="comment">&#32;&#32;&#32;&#32;char&#32;buf[128];</emphasis>
+<anchor xml:id="_print_8c_source_1l00170"/>00170 <emphasis role="comment"></emphasis>
+<anchor xml:id="_print_8c_source_1l00171"/>00171 <emphasis role="comment">&#32;&#32;&#32;&#32;time(&amp;now);</emphasis>
+<anchor xml:id="_print_8c_source_1l00172"/>00172 <emphasis role="comment">&#32;&#32;&#32;&#32;today&#32;=&#32;localtime(&amp;now);</emphasis>
+<anchor xml:id="_print_8c_source_1l00173"/>00173 <emphasis role="comment">&#32;&#32;&#32;&#32;strftime(buf,&#32;128,&#32;&quot;%Y/%m/%d&quot;,&#32;today);</emphasis>
+<anchor xml:id="_print_8c_source_1l00174"/>00174 <emphasis role="comment">&#32;&#32;&#32;&#32;printf(&quot;%s\n&quot;,&#32;buf);</emphasis>
+<anchor xml:id="_print_8c_source_1l00175"/>00175 <emphasis role="comment"></emphasis>
+<anchor xml:id="_print_8c_source_1l00176"/>00176 <emphasis role="comment">&#32;&#32;&#32;&#32;elapsed&#32;=&#32;(double)(stop&#32;-&#32;start)&#32;*&#32;1000.0&#32;/&#32;CLOCKS_PER_SEC;&#32;/*&#32;time&#32;./a.out*/</emphasis>
+<anchor xml:id="_print_8c_source_1l00177"/>00177 }
+</programlisting></section>

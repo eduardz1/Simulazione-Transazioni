@@ -1,0 +1,94 @@
+\hypertarget{master_8h}{}\doxysection{src/include/master.h File Reference}
+\label{master_8h}\index{src/include/master.h@{src/include/master.h}}
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+Include dependency graph for master.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{master_8h_a5798314bd3d030e33274ce05f522984f}{make\+\_\+arguments}} (int $\ast$IPCarray, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\item 
+pid\+\_\+t \mbox{\hyperlink{master_8h_a9f9715b418947b3d25eaa102b494b7eb}{spawn\+\_\+user}} (char $\ast$argv\mbox{[}$\,$\mbox{]})
+\item 
+pid\+\_\+t \mbox{\hyperlink{master_8h_ac4c522e4371812b5b4e5fd7982c58dd3}{spawn\+\_\+node}} (char $\ast$argv\mbox{[}$\,$\mbox{]})
+\item 
+void \mbox{\hyperlink{master_8h_af65ef707ebfa9cc135e6d466c75dbda8}{shared\+\_\+memory\+\_\+objects\+\_\+init}} (int $\ast$shared\+\_\+memory\+\_\+objects\+\_\+\+IDs)
+\item 
+void \mbox{\hyperlink{master_8h_a808faa6034b867dc92c3878d95cec5d0}{semaphores\+\_\+init}} ()
+\item 
+void \mbox{\hyperlink{master_8h_af39360a8f6b9dda80c2adfe9f456f75e}{make\+\_\+ipc\+\_\+array}} (int $\ast$IPC\+\_\+objects\+\_\+\+IDs)
+\item 
+void \mbox{\hyperlink{master_8h_a6732beb5ef32cd411a23cf0d8c915e37}{master\+\_\+interrupt\+\_\+handle}} (int signum)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{master_8h_a5798314bd3d030e33274ce05f522984f}\label{master_8h_a5798314bd3d030e33274ce05f522984f}} 
+\index{master.h@{master.h}!make\_arguments@{make\_arguments}}
+\index{make\_arguments@{make\_arguments}!master.h@{master.h}}
+\doxysubsubsection{\texorpdfstring{make\_arguments()}{make\_arguments()}}
+{\footnotesize\ttfamily void make\+\_\+arguments (\begin{DoxyParamCaption}\item[{int $\ast$}]{IPCarray,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{master_8h_af39360a8f6b9dda80c2adfe9f456f75e}\label{master_8h_af39360a8f6b9dda80c2adfe9f456f75e}} 
+\index{master.h@{master.h}!make\_ipc\_array@{make\_ipc\_array}}
+\index{make\_ipc\_array@{make\_ipc\_array}!master.h@{master.h}}
+\doxysubsubsection{\texorpdfstring{make\_ipc\_array()}{make\_ipc\_array()}}
+{\footnotesize\ttfamily void make\+\_\+ipc\+\_\+array (\begin{DoxyParamCaption}\item[{int $\ast$}]{IPC\+\_\+objects\+\_\+\+IDs }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{master_8c_source_l00175}{175}} of file \mbox{\hyperlink{master_8c_source}{master.\+c}}.
+
+\mbox{\Hypertarget{master_8h_a6732beb5ef32cd411a23cf0d8c915e37}\label{master_8h_a6732beb5ef32cd411a23cf0d8c915e37}} 
+\index{master.h@{master.h}!master\_interrupt\_handle@{master\_interrupt\_handle}}
+\index{master\_interrupt\_handle@{master\_interrupt\_handle}!master.h@{master.h}}
+\doxysubsubsection{\texorpdfstring{master\_interrupt\_handle()}{master\_interrupt\_handle()}}
+{\footnotesize\ttfamily void master\+\_\+interrupt\+\_\+handle (\begin{DoxyParamCaption}\item[{int}]{signum }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{master_8c_source_l00188}{188}} of file \mbox{\hyperlink{master_8c_source}{master.\+c}}.
+
+\mbox{\Hypertarget{master_8h_a808faa6034b867dc92c3878d95cec5d0}\label{master_8h_a808faa6034b867dc92c3878d95cec5d0}} 
+\index{master.h@{master.h}!semaphores\_init@{semaphores\_init}}
+\index{semaphores\_init@{semaphores\_init}!master.h@{master.h}}
+\doxysubsubsection{\texorpdfstring{semaphores\_init()}{semaphores\_init()}}
+{\footnotesize\ttfamily void semaphores\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{master_8c_source_l00167}{167}} of file \mbox{\hyperlink{master_8c_source}{master.\+c}}.
+
+\mbox{\Hypertarget{master_8h_af65ef707ebfa9cc135e6d466c75dbda8}\label{master_8h_af65ef707ebfa9cc135e6d466c75dbda8}} 
+\index{master.h@{master.h}!shared\_memory\_objects\_init@{shared\_memory\_objects\_init}}
+\index{shared\_memory\_objects\_init@{shared\_memory\_objects\_init}!master.h@{master.h}}
+\doxysubsubsection{\texorpdfstring{shared\_memory\_objects\_init()}{shared\_memory\_objects\_init()}}
+{\footnotesize\ttfamily void shared\+\_\+memory\+\_\+objects\+\_\+init (\begin{DoxyParamCaption}\item[{int $\ast$}]{shared\+\_\+memory\+\_\+objects\+\_\+\+IDs }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{master_8c_source_l00111}{111}} of file \mbox{\hyperlink{master_8c_source}{master.\+c}}.
+
+\mbox{\Hypertarget{master_8h_ac4c522e4371812b5b4e5fd7982c58dd3}\label{master_8h_ac4c522e4371812b5b4e5fd7982c58dd3}} 
+\index{master.h@{master.h}!spawn\_node@{spawn\_node}}
+\index{spawn\_node@{spawn\_node}!master.h@{master.h}}
+\doxysubsubsection{\texorpdfstring{spawn\_node()}{spawn\_node()}}
+{\footnotesize\ttfamily pid\+\_\+t spawn\+\_\+node (\begin{DoxyParamCaption}\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{master_8c_source_l00088}{88}} of file \mbox{\hyperlink{master_8c_source}{master.\+c}}.
+
+\mbox{\Hypertarget{master_8h_a9f9715b418947b3d25eaa102b494b7eb}\label{master_8h_a9f9715b418947b3d25eaa102b494b7eb}} 
+\index{master.h@{master.h}!spawn\_user@{spawn\_user}}
+\index{spawn\_user@{spawn\_user}!master.h@{master.h}}
+\doxysubsubsection{\texorpdfstring{spawn\_user()}{spawn\_user()}}
+{\footnotesize\ttfamily pid\+\_\+t spawn\+\_\+user (\begin{DoxyParamCaption}\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{master_8c_source_l00065}{65}} of file \mbox{\hyperlink{master_8c_source}{master.\+c}}.
+

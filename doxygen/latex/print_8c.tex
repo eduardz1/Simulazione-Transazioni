@@ -1,0 +1,156 @@
+\hypertarget{print_8c}{}\doxysection{src/print.c File Reference}
+\label{print_8c}\index{src/print.c@{src/print.c}}
+{\ttfamily \#include \char`\"{}include/common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}include/print.\+h\char`\"{}}\newline
+Include dependency graph for print.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{print_8c_abba0d38395714b105fe448566b916b24}{print\+\_\+time\+\_\+to\+\_\+die}} ()
+\item 
+void \mbox{\hyperlink{print_8c_ac04c3524bda40db9d223b33d141accee}{print\+\_\+user\+\_\+nodes\+\_\+table}} (pid\+\_\+t main\+PID, \mbox{\hyperlink{common_8h_a75285f7670649ccfb5ccbbc952a15bfd}{user}} $\ast$user\+PID, \mbox{\hyperlink{common_8h_a85b4f4124a5616dea92c9e8a221a8db5}{node}} $\ast$node\+PID, struct \mbox{\hyperlink{structparameters}{parameters}} $\ast$\mbox{\hyperlink{users_8c_a963935917aae796fbb8f2728703adf04}{par}})
+\item 
+void \mbox{\hyperlink{print_8c_a5360a76a02aff83178fa550d60c3d464}{print\+\_\+kill\+\_\+signal}} ()
+\item 
+void \mbox{\hyperlink{print_8c_a859f47c0058e4d60975aff4750031a82}{print\+\_\+user\+\_\+balance}} ()
+\item 
+void \mbox{\hyperlink{print_8c_ae96b17109a900709ef5355bc84720e9c}{print\+\_\+node\+\_\+balance}} ()
+\item 
+void \mbox{\hyperlink{print_8c_a153f1f994e981d23912535871cb742bb}{print\+\_\+num\+\_\+aborted}} ()
+\item 
+void \mbox{\hyperlink{print_8c_a692dfc8fc42a6b304aa4aa200bba4186}{print\+\_\+num\+\_\+blocks}} ()
+\item 
+void \mbox{\hyperlink{print_8c_ad4abfc9577091b1339716d5a34ef57cb}{print\+\_\+transactions\+\_\+still\+\_\+in\+\_\+pool}} ()
+\item 
+void \mbox{\hyperlink{print_8c_a3210b536ef064414b1736cd2e9b7d3bd}{final\+\_\+print}} (pid\+\_\+t master\+PID, \mbox{\hyperlink{common_8h_a75285f7670649ccfb5ccbbc952a15bfd}{user}} $\ast$\mbox{\hyperlink{users_8c_af667a518a4feef7b7540ebac0cd618cf}{users\+PID}}, \mbox{\hyperlink{common_8h_a85b4f4124a5616dea92c9e8a221a8db5}{node}} $\ast$\mbox{\hyperlink{users_8c_a803b35477f039b41487c3b1abee12b80}{nodes\+PID}}, struct \mbox{\hyperlink{structparameters}{parameters}} $\ast$\mbox{\hyperlink{users_8c_a963935917aae796fbb8f2728703adf04}{par}})
+\item 
+void \mbox{\hyperlink{print_8c_a7632b11ea6036c833f5c2cd3cd0bb087}{print\+\_\+parameters}} (struct \mbox{\hyperlink{structparameters}{parameters}} $\ast$\mbox{\hyperlink{users_8c_a963935917aae796fbb8f2728703adf04}{par}})
+\item 
+void \mbox{\hyperlink{print_8c_a0d2d8efd9ece9ba96b0a15b7d471c3bc}{print\+\_\+transaction}} (FILE $\ast$fp, \mbox{\hyperlink{common_8h_a96717a5adf375b5328bde513e91bf658}{transaction}} $\ast$t)
+\item 
+void \mbox{\hyperlink{print_8c_a0adafcfb5ee991d673e8c71c84f0d4da}{print\+\_\+block}} (FILE $\ast$fp, \mbox{\hyperlink{common_8h_acc02c32db194c6d92ce82de8c99eacbc}{block}} $\ast$b)
+\item 
+void \mbox{\hyperlink{print_8c_ab1c0c4107a8f068374cff27e2997f0f7}{print\+\_\+ledger}} (\mbox{\hyperlink{common_8h_af8b2bdfa2bfa44284c83a9d6994b13f1}{ledger}} $\ast$l)
+\item 
+void \mbox{\hyperlink{print_8c_a694b7105f14c48043dbf079031abd5be}{formatted\+\_\+timestamp}} (FILE $\ast$fp)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{print_8c_a3210b536ef064414b1736cd2e9b7d3bd}\label{print_8c_a3210b536ef064414b1736cd2e9b7d3bd}} 
+\index{print.c@{print.c}!final\_print@{final\_print}}
+\index{final\_print@{final\_print}!print.c@{print.c}}
+\doxysubsubsection{\texorpdfstring{final\_print()}{final\_print()}}
+{\footnotesize\ttfamily void final\+\_\+print (\begin{DoxyParamCaption}\item[{pid\+\_\+t}]{master\+PID,  }\item[{\mbox{\hyperlink{common_8h_a75285f7670649ccfb5ccbbc952a15bfd}{user}} $\ast$}]{users\+PID,  }\item[{\mbox{\hyperlink{common_8h_a85b4f4124a5616dea92c9e8a221a8db5}{node}} $\ast$}]{nodes\+PID,  }\item[{struct \mbox{\hyperlink{structparameters}{parameters}} $\ast$}]{par }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{print_8c_source_l00040}{40}} of file \mbox{\hyperlink{print_8c_source}{print.\+c}}.
+
+\mbox{\Hypertarget{print_8c_a694b7105f14c48043dbf079031abd5be}\label{print_8c_a694b7105f14c48043dbf079031abd5be}} 
+\index{print.c@{print.c}!formatted\_timestamp@{formatted\_timestamp}}
+\index{formatted\_timestamp@{formatted\_timestamp}!print.c@{print.c}}
+\doxysubsubsection{\texorpdfstring{formatted\_timestamp()}{formatted\_timestamp()}}
+{\footnotesize\ttfamily void formatted\+\_\+timestamp (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{fp }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{print_8c_source_l00157}{157}} of file \mbox{\hyperlink{print_8c_source}{print.\+c}}.
+
+\mbox{\Hypertarget{print_8c_a0adafcfb5ee991d673e8c71c84f0d4da}\label{print_8c_a0adafcfb5ee991d673e8c71c84f0d4da}} 
+\index{print.c@{print.c}!print\_block@{print\_block}}
+\index{print\_block@{print\_block}!print.c@{print.c}}
+\doxysubsubsection{\texorpdfstring{print\_block()}{print\_block()}}
+{\footnotesize\ttfamily void print\+\_\+block (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{fp,  }\item[{\mbox{\hyperlink{common_8h_acc02c32db194c6d92ce82de8c99eacbc}{block}} $\ast$}]{b }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{print_8c_source_l00127}{127}} of file \mbox{\hyperlink{print_8c_source}{print.\+c}}.
+
+\mbox{\Hypertarget{print_8c_a5360a76a02aff83178fa550d60c3d464}\label{print_8c_a5360a76a02aff83178fa550d60c3d464}} 
+\index{print.c@{print.c}!print\_kill\_signal@{print\_kill\_signal}}
+\index{print\_kill\_signal@{print\_kill\_signal}!print.c@{print.c}}
+\doxysubsubsection{\texorpdfstring{print\_kill\_signal()}{print\_kill\_signal()}}
+{\footnotesize\ttfamily void print\+\_\+kill\+\_\+signal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{print_8c_ab1c0c4107a8f068374cff27e2997f0f7}\label{print_8c_ab1c0c4107a8f068374cff27e2997f0f7}} 
+\index{print.c@{print.c}!print\_ledger@{print\_ledger}}
+\index{print\_ledger@{print\_ledger}!print.c@{print.c}}
+\doxysubsubsection{\texorpdfstring{print\_ledger()}{print\_ledger()}}
+{\footnotesize\ttfamily void print\+\_\+ledger (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{common_8h_af8b2bdfa2bfa44284c83a9d6994b13f1}{ledger}} $\ast$}]{l }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{print_8c_source_l00143}{143}} of file \mbox{\hyperlink{print_8c_source}{print.\+c}}.
+
+\mbox{\Hypertarget{print_8c_ae96b17109a900709ef5355bc84720e9c}\label{print_8c_ae96b17109a900709ef5355bc84720e9c}} 
+\index{print.c@{print.c}!print\_node\_balance@{print\_node\_balance}}
+\index{print\_node\_balance@{print\_node\_balance}!print.c@{print.c}}
+\doxysubsubsection{\texorpdfstring{print\_node\_balance()}{print\_node\_balance()}}
+{\footnotesize\ttfamily void print\+\_\+node\+\_\+balance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{print_8c_a153f1f994e981d23912535871cb742bb}\label{print_8c_a153f1f994e981d23912535871cb742bb}} 
+\index{print.c@{print.c}!print\_num\_aborted@{print\_num\_aborted}}
+\index{print\_num\_aborted@{print\_num\_aborted}!print.c@{print.c}}
+\doxysubsubsection{\texorpdfstring{print\_num\_aborted()}{print\_num\_aborted()}}
+{\footnotesize\ttfamily void print\+\_\+num\+\_\+aborted (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{print_8c_a692dfc8fc42a6b304aa4aa200bba4186}\label{print_8c_a692dfc8fc42a6b304aa4aa200bba4186}} 
+\index{print.c@{print.c}!print\_num\_blocks@{print\_num\_blocks}}
+\index{print\_num\_blocks@{print\_num\_blocks}!print.c@{print.c}}
+\doxysubsubsection{\texorpdfstring{print\_num\_blocks()}{print\_num\_blocks()}}
+{\footnotesize\ttfamily void print\+\_\+num\+\_\+blocks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{print_8c_a7632b11ea6036c833f5c2cd3cd0bb087}\label{print_8c_a7632b11ea6036c833f5c2cd3cd0bb087}} 
+\index{print.c@{print.c}!print\_parameters@{print\_parameters}}
+\index{print\_parameters@{print\_parameters}!print.c@{print.c}}
+\doxysubsubsection{\texorpdfstring{print\_parameters()}{print\_parameters()}}
+{\footnotesize\ttfamily void print\+\_\+parameters (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structparameters}{parameters}} $\ast$}]{par }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{print_8c_source_l00052}{52}} of file \mbox{\hyperlink{print_8c_source}{print.\+c}}.
+
+\mbox{\Hypertarget{print_8c_abba0d38395714b105fe448566b916b24}\label{print_8c_abba0d38395714b105fe448566b916b24}} 
+\index{print.c@{print.c}!print\_time\_to\_die@{print\_time\_to\_die}}
+\index{print\_time\_to\_die@{print\_time\_to\_die}!print.c@{print.c}}
+\doxysubsubsection{\texorpdfstring{print\_time\_to\_die()}{print\_time\_to\_die()}}
+{\footnotesize\ttfamily void print\+\_\+time\+\_\+to\+\_\+die (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{print_8c_source_l00007}{7}} of file \mbox{\hyperlink{print_8c_source}{print.\+c}}.
+
+\mbox{\Hypertarget{print_8c_a0d2d8efd9ece9ba96b0a15b7d471c3bc}\label{print_8c_a0d2d8efd9ece9ba96b0a15b7d471c3bc}} 
+\index{print.c@{print.c}!print\_transaction@{print\_transaction}}
+\index{print\_transaction@{print\_transaction}!print.c@{print.c}}
+\doxysubsubsection{\texorpdfstring{print\_transaction()}{print\_transaction()}}
+{\footnotesize\ttfamily void print\+\_\+transaction (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{fp,  }\item[{\mbox{\hyperlink{common_8h_a96717a5adf375b5328bde513e91bf658}{transaction}} $\ast$}]{t }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{print_8c_source_l00098}{98}} of file \mbox{\hyperlink{print_8c_source}{print.\+c}}.
+
+\mbox{\Hypertarget{print_8c_ad4abfc9577091b1339716d5a34ef57cb}\label{print_8c_ad4abfc9577091b1339716d5a34ef57cb}} 
+\index{print.c@{print.c}!print\_transactions\_still\_in\_pool@{print\_transactions\_still\_in\_pool}}
+\index{print\_transactions\_still\_in\_pool@{print\_transactions\_still\_in\_pool}!print.c@{print.c}}
+\doxysubsubsection{\texorpdfstring{print\_transactions\_still\_in\_pool()}{print\_transactions\_still\_in\_pool()}}
+{\footnotesize\ttfamily void print\+\_\+transactions\+\_\+still\+\_\+in\+\_\+pool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{print_8c_a859f47c0058e4d60975aff4750031a82}\label{print_8c_a859f47c0058e4d60975aff4750031a82}} 
+\index{print.c@{print.c}!print\_user\_balance@{print\_user\_balance}}
+\index{print\_user\_balance@{print\_user\_balance}!print.c@{print.c}}
+\doxysubsubsection{\texorpdfstring{print\_user\_balance()}{print\_user\_balance()}}
+{\footnotesize\ttfamily void print\+\_\+user\+\_\+balance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{print_8c_ac04c3524bda40db9d223b33d141accee}\label{print_8c_ac04c3524bda40db9d223b33d141accee}} 
+\index{print.c@{print.c}!print\_user\_nodes\_table@{print\_user\_nodes\_table}}
+\index{print\_user\_nodes\_table@{print\_user\_nodes\_table}!print.c@{print.c}}
+\doxysubsubsection{\texorpdfstring{print\_user\_nodes\_table()}{print\_user\_nodes\_table()}}
+{\footnotesize\ttfamily void print\+\_\+user\+\_\+nodes\+\_\+table (\begin{DoxyParamCaption}\item[{pid\+\_\+t}]{main\+PID,  }\item[{\mbox{\hyperlink{common_8h_a75285f7670649ccfb5ccbbc952a15bfd}{user}} $\ast$}]{user\+PID,  }\item[{\mbox{\hyperlink{common_8h_a85b4f4124a5616dea92c9e8a221a8db5}{node}} $\ast$}]{node\+PID,  }\item[{struct \mbox{\hyperlink{structparameters}{parameters}} $\ast$}]{par }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{print_8c_source_l00012}{12}} of file \mbox{\hyperlink{print_8c_source}{print.\+c}}.
+

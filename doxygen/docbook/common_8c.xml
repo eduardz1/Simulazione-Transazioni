@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_common_8c" xml:lang="en-US">
+<title>src/common.c File Reference</title>
+<indexterm><primary>src/common.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &quot;include/common.h&quot;
+</programlisting>Include dependency graph for common.c:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="common_8c__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_common_8h_1af8b2bdfa2bfa44284c83a9d6994b13f1">ledger</link> * <link linkend="_common_8c_1a92d436f484409e36c57caaa0b45ae9da">ledger_init</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_common_8h_1acc02c32db194c6d92ce82de8c99eacbc">block</link> * <link linkend="_common_8c_1ab670b223f506d8bc9ee5286f6e37b1cd">new_block</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_common_8c_1a870e971fe7155d42f50beaa446dfd874">add_transaction_to_block</link> (<link linkend="_common_8h_1acc02c32db194c6d92ce82de8c99eacbc">block</link> *<link linkend="_common_8h_1acc02c32db194c6d92ce82de8c99eacbc">block</link>, <link linkend="_common_8h_1a96717a5adf375b5328bde513e91bf658">transaction</link> *newTrans, int index)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_common_8c_1a870e971fe7155d42f50beaa446dfd874"/><section>
+    <title>add_transaction_to_block()</title>
+<indexterm><primary>add_transaction_to_block</primary><secondary>common.c</secondary></indexterm>
+<indexterm><primary>common.c</primary><secondary>add_transaction_to_block</secondary></indexterm>
+<para><computeroutput>void add_transaction_to_block (<link linkend="_common_8h_1acc02c32db194c6d92ce82de8c99eacbc">block</link> * block, <link linkend="_common_8h_1a96717a5adf375b5328bde513e91bf658">transaction</link> * newTrans, int index)</computeroutput></para><para>
+Definition at line <link linkend="_common_8c_source_1l00046">46</link> of file <link linkend="_common_8c_source">common.c</link>.</para>
+</section>
+<anchor xml:id="_common_8c_1a92d436f484409e36c57caaa0b45ae9da"/><section>
+    <title>ledger_init()</title>
+<indexterm><primary>ledger_init</primary><secondary>common.c</secondary></indexterm>
+<indexterm><primary>common.c</primary><secondary>ledger_init</secondary></indexterm>
+<para><computeroutput><link linkend="_common_8h_1af8b2bdfa2bfa44284c83a9d6994b13f1">ledger</link> * ledger_init ( )</computeroutput></para><para>
+Definition at line <link linkend="_common_8c_source_1l00003">3</link> of file <link linkend="_common_8c_source">common.c</link>.</para>
+</section>
+<anchor xml:id="_common_8c_1ab670b223f506d8bc9ee5286f6e37b1cd"/><section>
+    <title>new_block()</title>
+<indexterm><primary>new_block</primary><secondary>common.c</secondary></indexterm>
+<indexterm><primary>common.c</primary><secondary>new_block</secondary></indexterm>
+<para><computeroutput><link linkend="_common_8h_1acc02c32db194c6d92ce82de8c99eacbc">block</link> * new_block ( )</computeroutput></para><para>
+Definition at line <link linkend="_common_8c_source_1l00024">24</link> of file <link linkend="_common_8c_source">common.c</link>.</para>
+</section>
+</section>
+</section>

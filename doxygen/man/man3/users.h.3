@@ -1,0 +1,110 @@
+.TH "src/include/users.h" 3 "Thu Jan 13 2022" "Simulazione Transazioni" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/include/users.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <signal\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <time\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBSLEEP_TIME_SET\fP"
+.br
+.ti -1c
+.RI "#define \fBSLEEP\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBuser_transactions_handle\fP (int signum)"
+.br
+.ti -1c
+.RI "void \fBuser_interrupt_handle\fP (int signum)"
+.br
+.ti -1c
+.RI "int \fBget_pid_userIndex\fP (int PID_toSearch)"
+.br
+.ti -1c
+.RI "pid_t \fBget_random_userPID\fP ()"
+.br
+.ti -1c
+.RI "pid_t \fBget_random_nodePID\fP ()"
+.br
+.ti -1c
+.RI "void \fBqueue_to_pid\fP (pid_t nodePID)"
+.br
+.ti -1c
+.RI "void \fBtransaction_init\fP (pid_t nodePID, int amount, int reward)"
+.br
+.ti -1c
+.RI "int \fBsend_transaction\fP ()"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define SLEEP"
+\fBValue:\fP
+.PP
+.nf
+    clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &randSleepTime, &sleepTimeRemaining); \
+    clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &sleepTimeRemaining, NULL);
+.fi
+.PP
+Definition at line \fB14\fP of file \fBusers\&.h\fP\&.
+.SS "#define SLEEP_TIME_SET"
+\fBValue:\fP
+.PP
+.nf
+    randSleepTime\&.tv_sec = 0; \
+    randSleepTime\&.tv_nsec = RAND(par->SO_MIN_TRANS_GEN_NSEC, par->SO_MAX_TRANS_GEN_NSEC);
+.fi
+.PP
+Definition at line \fB10\fP of file \fBusers\&.h\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "int get_pid_userIndex (int PID_toSearch)"
+
+.PP
+Definition at line \fB51\fP of file \fBusers\&.c\fP\&.
+.SS "pid_t get_random_nodePID ()"
+
+.PP
+Definition at line \fB83\fP of file \fBusers\&.c\fP\&.
+.SS "pid_t get_random_userPID ()"
+
+.PP
+Definition at line \fB65\fP of file \fBusers\&.c\fP\&.
+.SS "void queue_to_pid (pid_t nodePID)"
+
+.PP
+Definition at line \fB138\fP of file \fBusers\&.c\fP\&.
+.SS "int send_transaction ()"
+
+.PP
+Definition at line \fB176\fP of file \fBusers\&.c\fP\&.
+.SS "void transaction_init (pid_t nodePID, int amount, int reward)"
+
+.PP
+Definition at line \fB146\fP of file \fBusers\&.c\fP\&.
+.SS "void user_interrupt_handle (int signum)"
+
+.PP
+Definition at line \fB227\fP of file \fBusers\&.c\fP\&.
+.SS "void user_transactions_handle (int signum)"
+
+.PP
+Definition at line \fB217\fP of file \fBusers\&.c\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Simulazione Transazioni from the source code\&.

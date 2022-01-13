@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_print_8c" xml:lang="en-US">
+<title>src/print.c File Reference</title>
+<indexterm><primary>src/print.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &quot;include/common.h&quot;
+#include &quot;include/print.h&quot;
+</programlisting>Include dependency graph for print.c:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8c__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_print_8c_1abba0d38395714b105fe448566b916b24">print_time_to_die</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_print_8c_1ac04c3524bda40db9d223b33d141accee">print_user_nodes_table</link> (pid_t mainPID, <link linkend="_common_8h_1a75285f7670649ccfb5ccbbc952a15bfd">user</link> *userPID, <link linkend="_common_8h_1a85b4f4124a5616dea92c9e8a221a8db5">node</link> *nodePID, struct <link linkend="_structparameters">parameters</link> *<link linkend="_users_8c_1a963935917aae796fbb8f2728703adf04">par</link>)</para>
+</listitem>
+            <listitem><para>void <link linkend="_print_8c_1a5360a76a02aff83178fa550d60c3d464">print_kill_signal</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_print_8c_1a859f47c0058e4d60975aff4750031a82">print_user_balance</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_print_8c_1ae96b17109a900709ef5355bc84720e9c">print_node_balance</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_print_8c_1a153f1f994e981d23912535871cb742bb">print_num_aborted</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_print_8c_1a692dfc8fc42a6b304aa4aa200bba4186">print_num_blocks</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_print_8c_1ad4abfc9577091b1339716d5a34ef57cb">print_transactions_still_in_pool</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_print_8c_1a3210b536ef064414b1736cd2e9b7d3bd">final_print</link> (pid_t masterPID, <link linkend="_common_8h_1a75285f7670649ccfb5ccbbc952a15bfd">user</link> *<link linkend="_users_8c_1af667a518a4feef7b7540ebac0cd618cf">usersPID</link>, <link linkend="_common_8h_1a85b4f4124a5616dea92c9e8a221a8db5">node</link> *<link linkend="_users_8c_1a803b35477f039b41487c3b1abee12b80">nodesPID</link>, struct <link linkend="_structparameters">parameters</link> *<link linkend="_users_8c_1a963935917aae796fbb8f2728703adf04">par</link>)</para>
+</listitem>
+            <listitem><para>void <link linkend="_print_8c_1a7632b11ea6036c833f5c2cd3cd0bb087">print_parameters</link> (struct <link linkend="_structparameters">parameters</link> *<link linkend="_users_8c_1a963935917aae796fbb8f2728703adf04">par</link>)</para>
+</listitem>
+            <listitem><para>void <link linkend="_print_8c_1a0d2d8efd9ece9ba96b0a15b7d471c3bc">print_transaction</link> (FILE *fp, <link linkend="_common_8h_1a96717a5adf375b5328bde513e91bf658">transaction</link> *t)</para>
+</listitem>
+            <listitem><para>void <link linkend="_print_8c_1a0adafcfb5ee991d673e8c71c84f0d4da">print_block</link> (FILE *fp, <link linkend="_common_8h_1acc02c32db194c6d92ce82de8c99eacbc">block</link> *b)</para>
+</listitem>
+            <listitem><para>void <link linkend="_print_8c_1ab1c0c4107a8f068374cff27e2997f0f7">print_ledger</link> (<link linkend="_common_8h_1af8b2bdfa2bfa44284c83a9d6994b13f1">ledger</link> *l)</para>
+</listitem>
+            <listitem><para>void <link linkend="_print_8c_1a694b7105f14c48043dbf079031abd5be">formatted_timestamp</link> (FILE *fp)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_print_8c_1a3210b536ef064414b1736cd2e9b7d3bd"/><section>
+    <title>final_print()</title>
+<indexterm><primary>final_print</primary><secondary>print.c</secondary></indexterm>
+<indexterm><primary>print.c</primary><secondary>final_print</secondary></indexterm>
+<para><computeroutput>void final_print (pid_t masterPID, <link linkend="_common_8h_1a75285f7670649ccfb5ccbbc952a15bfd">user</link> * usersPID, <link linkend="_common_8h_1a85b4f4124a5616dea92c9e8a221a8db5">node</link> * nodesPID, struct <link linkend="_structparameters">parameters</link> * par)</computeroutput></para><para>
+Definition at line <link linkend="_print_8c_source_1l00040">40</link> of file <link linkend="_print_8c_source">print.c</link>.</para>
+</section>
+<anchor xml:id="_print_8c_1a694b7105f14c48043dbf079031abd5be"/><section>
+    <title>formatted_timestamp()</title>
+<indexterm><primary>formatted_timestamp</primary><secondary>print.c</secondary></indexterm>
+<indexterm><primary>print.c</primary><secondary>formatted_timestamp</secondary></indexterm>
+<para><computeroutput>void formatted_timestamp (FILE * fp)</computeroutput></para><para>
+Definition at line <link linkend="_print_8c_source_1l00157">157</link> of file <link linkend="_print_8c_source">print.c</link>.</para>
+</section>
+<anchor xml:id="_print_8c_1a0adafcfb5ee991d673e8c71c84f0d4da"/><section>
+    <title>print_block()</title>
+<indexterm><primary>print_block</primary><secondary>print.c</secondary></indexterm>
+<indexterm><primary>print.c</primary><secondary>print_block</secondary></indexterm>
+<para><computeroutput>void print_block (FILE * fp, <link linkend="_common_8h_1acc02c32db194c6d92ce82de8c99eacbc">block</link> * b)</computeroutput></para><para>
+Definition at line <link linkend="_print_8c_source_1l00127">127</link> of file <link linkend="_print_8c_source">print.c</link>.</para>
+</section>
+<anchor xml:id="_print_8c_1a5360a76a02aff83178fa550d60c3d464"/><section>
+    <title>print_kill_signal()</title>
+<indexterm><primary>print_kill_signal</primary><secondary>print.c</secondary></indexterm>
+<indexterm><primary>print.c</primary><secondary>print_kill_signal</secondary></indexterm>
+<para><computeroutput>void print_kill_signal ( )</computeroutput></para></section>
+<anchor xml:id="_print_8c_1ab1c0c4107a8f068374cff27e2997f0f7"/><section>
+    <title>print_ledger()</title>
+<indexterm><primary>print_ledger</primary><secondary>print.c</secondary></indexterm>
+<indexterm><primary>print.c</primary><secondary>print_ledger</secondary></indexterm>
+<para><computeroutput>void print_ledger (<link linkend="_common_8h_1af8b2bdfa2bfa44284c83a9d6994b13f1">ledger</link> * l)</computeroutput></para><para>
+Definition at line <link linkend="_print_8c_source_1l00143">143</link> of file <link linkend="_print_8c_source">print.c</link>.</para>
+</section>
+<anchor xml:id="_print_8c_1ae96b17109a900709ef5355bc84720e9c"/><section>
+    <title>print_node_balance()</title>
+<indexterm><primary>print_node_balance</primary><secondary>print.c</secondary></indexterm>
+<indexterm><primary>print.c</primary><secondary>print_node_balance</secondary></indexterm>
+<para><computeroutput>void print_node_balance ( )</computeroutput></para></section>
+<anchor xml:id="_print_8c_1a153f1f994e981d23912535871cb742bb"/><section>
+    <title>print_num_aborted()</title>
+<indexterm><primary>print_num_aborted</primary><secondary>print.c</secondary></indexterm>
+<indexterm><primary>print.c</primary><secondary>print_num_aborted</secondary></indexterm>
+<para><computeroutput>void print_num_aborted ( )</computeroutput></para></section>
+<anchor xml:id="_print_8c_1a692dfc8fc42a6b304aa4aa200bba4186"/><section>
+    <title>print_num_blocks()</title>
+<indexterm><primary>print_num_blocks</primary><secondary>print.c</secondary></indexterm>
+<indexterm><primary>print.c</primary><secondary>print_num_blocks</secondary></indexterm>
+<para><computeroutput>void print_num_blocks ( )</computeroutput></para></section>
+<anchor xml:id="_print_8c_1a7632b11ea6036c833f5c2cd3cd0bb087"/><section>
+    <title>print_parameters()</title>
+<indexterm><primary>print_parameters</primary><secondary>print.c</secondary></indexterm>
+<indexterm><primary>print.c</primary><secondary>print_parameters</secondary></indexterm>
+<para><computeroutput>void print_parameters (struct <link linkend="_structparameters">parameters</link> * par)</computeroutput></para><para>
+Definition at line <link linkend="_print_8c_source_1l00052">52</link> of file <link linkend="_print_8c_source">print.c</link>.</para>
+</section>
+<anchor xml:id="_print_8c_1abba0d38395714b105fe448566b916b24"/><section>
+    <title>print_time_to_die()</title>
+<indexterm><primary>print_time_to_die</primary><secondary>print.c</secondary></indexterm>
+<indexterm><primary>print.c</primary><secondary>print_time_to_die</secondary></indexterm>
+<para><computeroutput>void print_time_to_die ( )</computeroutput></para><para>
+Definition at line <link linkend="_print_8c_source_1l00007">7</link> of file <link linkend="_print_8c_source">print.c</link>.</para>
+</section>
+<anchor xml:id="_print_8c_1a0d2d8efd9ece9ba96b0a15b7d471c3bc"/><section>
+    <title>print_transaction()</title>
+<indexterm><primary>print_transaction</primary><secondary>print.c</secondary></indexterm>
+<indexterm><primary>print.c</primary><secondary>print_transaction</secondary></indexterm>
+<para><computeroutput>void print_transaction (FILE * fp, <link linkend="_common_8h_1a96717a5adf375b5328bde513e91bf658">transaction</link> * t)</computeroutput></para><para>
+Definition at line <link linkend="_print_8c_source_1l00098">98</link> of file <link linkend="_print_8c_source">print.c</link>.</para>
+</section>
+<anchor xml:id="_print_8c_1ad4abfc9577091b1339716d5a34ef57cb"/><section>
+    <title>print_transactions_still_in_pool()</title>
+<indexterm><primary>print_transactions_still_in_pool</primary><secondary>print.c</secondary></indexterm>
+<indexterm><primary>print.c</primary><secondary>print_transactions_still_in_pool</secondary></indexterm>
+<para><computeroutput>void print_transactions_still_in_pool ( )</computeroutput></para></section>
+<anchor xml:id="_print_8c_1a859f47c0058e4d60975aff4750031a82"/><section>
+    <title>print_user_balance()</title>
+<indexterm><primary>print_user_balance</primary><secondary>print.c</secondary></indexterm>
+<indexterm><primary>print.c</primary><secondary>print_user_balance</secondary></indexterm>
+<para><computeroutput>void print_user_balance ( )</computeroutput></para></section>
+<anchor xml:id="_print_8c_1ac04c3524bda40db9d223b33d141accee"/><section>
+    <title>print_user_nodes_table()</title>
+<indexterm><primary>print_user_nodes_table</primary><secondary>print.c</secondary></indexterm>
+<indexterm><primary>print.c</primary><secondary>print_user_nodes_table</secondary></indexterm>
+<para><computeroutput>void print_user_nodes_table (pid_t mainPID, <link linkend="_common_8h_1a75285f7670649ccfb5ccbbc952a15bfd">user</link> * userPID, <link linkend="_common_8h_1a85b4f4124a5616dea92c9e8a221a8db5">node</link> * nodePID, struct <link linkend="_structparameters">parameters</link> * par)</computeroutput></para><para>
+Definition at line <link linkend="_print_8c_source_1l00012">12</link> of file <link linkend="_print_8c_source">print.c</link>.</para>
+</section>
+</section>
+</section>

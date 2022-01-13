@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_annotated" xml:lang="en-US">
+<title>Data Structures</title>
+Here are the data structures with brief descriptions:<link linkend="_structblock__t">block_t</link><link linkend="_structledger__t">ledger_t</link><link linkend="_structmessage">message</link><link linkend="_structnode__t">node_t</link><link linkend="_structparameters">parameters</link><link linkend="_unionsemun">semun</link><link linkend="_structtransaction__t">transaction_t</link><link linkend="_structuser__t">user_t</link></section>

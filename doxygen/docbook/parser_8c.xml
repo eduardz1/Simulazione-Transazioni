@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_parser_8c" xml:lang="en-US">
+<title>src/parser.c File Reference</title>
+<indexterm><primary>src/parser.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &quot;include/common.h&quot;
+#include &quot;utils/debug.h&quot;
+#include &quot;include/parser.h&quot;
+</programlisting>Include dependency graph for parser.c:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="parser_8c__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_parser_8c_1aa4f4f74bc94c9506ecdce2e5b3ef35df">assign_defaults</link> (struct <link linkend="_structparameters">parameters</link> *<link linkend="_users_8c_1a963935917aae796fbb8f2728703adf04">par</link>)</para>
+</listitem>
+            <listitem><para>int <link linkend="_parser_8c_1aa51f83495fd93bbb234b08030216c91a">parse_parameters</link> (struct <link linkend="_structparameters">parameters</link> *<link linkend="_users_8c_1a963935917aae796fbb8f2728703adf04">par</link>)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_parser_8c_1aa4f4f74bc94c9506ecdce2e5b3ef35df"/><section>
+    <title>assign_defaults()</title>
+<indexterm><primary>assign_defaults</primary><secondary>parser.c</secondary></indexterm>
+<indexterm><primary>parser.c</primary><secondary>assign_defaults</secondary></indexterm>
+<para><computeroutput>void assign_defaults (struct <link linkend="_structparameters">parameters</link> * par)</computeroutput></para><para>
+Definition at line <link linkend="_parser_8c_source_1l00041">41</link> of file <link linkend="_parser_8c_source">parser.c</link>.</para>
+</section>
+<anchor xml:id="_parser_8c_1aa51f83495fd93bbb234b08030216c91a"/><section>
+    <title>parse_parameters()</title>
+<indexterm><primary>parse_parameters</primary><secondary>parser.c</secondary></indexterm>
+<indexterm><primary>parser.c</primary><secondary>parse_parameters</secondary></indexterm>
+<para><computeroutput>int parse_parameters (struct <link linkend="_structparameters">parameters</link> * par)</computeroutput></para><para>
+Definition at line <link linkend="_parser_8c_source_1l00058">58</link> of file <link linkend="_parser_8c_source">parser.c</link>.</para>
+</section>
+</section>
+</section>

@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<book xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_index" xml:lang="en-US">
+    <info>
+    <title>Simulazione Transazioni</title>
+    </info>
+<chapter>
+    <title>Data Structure Documentation</title>
+    <xi:include href="structblock__t.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="structledger__t.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="structmessage.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="structnode__t.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="structparameters.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="unionsemun.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="structtransaction__t.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="structuser__t.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+</chapter>
+<chapter>
+    <title>File Documentation</title>
+    <xi:include href="common_8c.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="common_8c_source.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="balance_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="balance_8h_source.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="common_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="common_8h_source.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="master_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="master_8h_source.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="nodes_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="nodes_8h_source.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="parser_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="parser_8h_source.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="print_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="print_8h_source.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="users_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="users_8h_source.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="master_8c.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="master_8c_source.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="nodes_8c.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="nodes_8c_source.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="parser_8c.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="parser_8c_source.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="print_8c.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="print_8c_source.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="users_8c.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="users_8c_source.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="debug_8c.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="debug_8c_source.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="debug_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="debug_8h_source.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="lists_8c.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="lists_8c_source.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="lists_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="lists_8h_source.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="sem_8c.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="sem_8c_source.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="sem_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="sem_8h_source.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+</chapter>
+<index/>
+</book>

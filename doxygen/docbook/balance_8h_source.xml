@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_balance_8h_source" xml:lang="en-US">
+<title>balance.h</title>
+<indexterm><primary>src/include/balance.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_balance_8h_source_1l00001"/><link linkend="_balance_8h_1a7b4d059bad2052af60d26aa64718a219">00001</link> <emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_balance_8h_1a7b4d059bad2052af60d26aa64718a219">balance</link>(<emphasis role="keywordtype">int</emphasis>&#32;budget)
+<anchor xml:id="_balance_8h_source_1l00002"/>00002 {
+<anchor xml:id="_balance_8h_source_1l00003"/>00003 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;unitoCoin_in;
+<anchor xml:id="_balance_8h_source_1l00004"/>00004 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;unitoCoin_out;
+<anchor xml:id="_balance_8h_source_1l00005"/>00005 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;unitoCoin_out_notregistered;
+<anchor xml:id="_balance_8h_source_1l00006"/>00006 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;curr_balance&#32;=&#32;unitoCoin_in&#32;+&#32;unitoCoin_out&#32;-&#32;unitoCoin_out_notregistered;
+<anchor xml:id="_balance_8h_source_1l00007"/>00007 };
+<anchor xml:id="_balance_8h_source_1l00008"/>00008 
+</programlisting></section>

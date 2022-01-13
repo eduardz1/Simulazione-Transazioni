@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_nodes_8c" xml:lang="en-US">
+<title>src/nodes.c File Reference</title>
+<indexterm><primary>src/nodes.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;time.h&gt;
+#include &quot;include/nodes.h&quot;
+#include &quot;include/common.h&quot;
+</programlisting>Include dependency graph for nodes.c:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="nodes_8c__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_nodes_8c_1a0ddf1224851353fc92bfbff6f499fa97">main</link> (int argc, char *argv[])</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structparameters">parameters</link> * <link linkend="_nodes_8c_1a963935917aae796fbb8f2728703adf04">par</link></para>
+</listitem>
+            <listitem><para><link linkend="_common_8h_1a75285f7670649ccfb5ccbbc952a15bfd">user</link> * <link linkend="_nodes_8c_1af667a518a4feef7b7540ebac0cd618cf">usersPID</link></para>
+</listitem>
+            <listitem><para><link linkend="_common_8h_1a85b4f4124a5616dea92c9e8a221a8db5">node</link> * <link linkend="_nodes_8c_1a803b35477f039b41487c3b1abee12b80">nodesPID</link></para>
+</listitem>
+            <listitem><para><link linkend="_common_8h_1af8b2bdfa2bfa44284c83a9d6994b13f1">ledger</link> * <link linkend="_nodes_8c_1a61246e5e608d3240fbbee97c978af351">mainLedger</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_nodes_8c_1ae520355298e7bac453a556eeab7df45f">semID</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_nodes_8c_1abba475816ec0c77dd5821e7fa9ab4207">queueID</link></para>
+</listitem>
+            <listitem><para>pid_t <link linkend="_nodes_8c_1af97c23712a0bab92e0ca95694e85282e">myPID</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_nodes_8c_1a0ddf1224851353fc92bfbff6f499fa97"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>nodes.c</secondary></indexterm>
+<indexterm><primary>nodes.c</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (int argc, char * argv[])</computeroutput></para><para>
+Definition at line <link linkend="_nodes_8c_source_1l00058">58</link> of file <link linkend="_nodes_8c_source">nodes.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Variable Documentation</title>
+<anchor xml:id="_nodes_8c_1a61246e5e608d3240fbbee97c978af351"/><section>
+    <title>mainLedger</title>
+<indexterm><primary>mainLedger</primary><secondary>nodes.c</secondary></indexterm>
+<indexterm><primary>nodes.c</primary><secondary>mainLedger</secondary></indexterm>
+<para><computeroutput><link linkend="_common_8h_1af8b2bdfa2bfa44284c83a9d6994b13f1">ledger</link>* mainLedger</computeroutput></para><para>
+Definition at line <link linkend="_nodes_8c_source_1l00017">17</link> of file <link linkend="_nodes_8c_source">nodes.c</link>.</para>
+</section>
+<anchor xml:id="_nodes_8c_1af97c23712a0bab92e0ca95694e85282e"/><section>
+    <title>myPID</title>
+<indexterm><primary>myPID</primary><secondary>nodes.c</secondary></indexterm>
+<indexterm><primary>nodes.c</primary><secondary>myPID</secondary></indexterm>
+<para><computeroutput>pid_t myPID</computeroutput></para><para>
+Definition at line <link linkend="_nodes_8c_source_1l00022">22</link> of file <link linkend="_nodes_8c_source">nodes.c</link>.</para>
+</section>
+<anchor xml:id="_nodes_8c_1a803b35477f039b41487c3b1abee12b80"/><section>
+    <title>nodesPID</title>
+<indexterm><primary>nodesPID</primary><secondary>nodes.c</secondary></indexterm>
+<indexterm><primary>nodes.c</primary><secondary>nodesPID</secondary></indexterm>
+<para><computeroutput><link linkend="_common_8h_1a85b4f4124a5616dea92c9e8a221a8db5">node</link>* nodesPID</computeroutput></para><para>
+Definition at line <link linkend="_nodes_8c_source_1l00016">16</link> of file <link linkend="_nodes_8c_source">nodes.c</link>.</para>
+</section>
+<anchor xml:id="_nodes_8c_1a963935917aae796fbb8f2728703adf04"/><section>
+    <title>par</title>
+<indexterm><primary>par</primary><secondary>nodes.c</secondary></indexterm>
+<indexterm><primary>nodes.c</primary><secondary>par</secondary></indexterm>
+<para><computeroutput>struct <link linkend="_structparameters">parameters</link>* par</computeroutput></para><para>
+Definition at line <link linkend="_nodes_8c_source_1l00014">14</link> of file <link linkend="_nodes_8c_source">nodes.c</link>.</para>
+</section>
+<anchor xml:id="_nodes_8c_1abba475816ec0c77dd5821e7fa9ab4207"/><section>
+    <title>queueID</title>
+<indexterm><primary>queueID</primary><secondary>nodes.c</secondary></indexterm>
+<indexterm><primary>nodes.c</primary><secondary>queueID</secondary></indexterm>
+<para><computeroutput>int queueID</computeroutput></para><para>
+Definition at line <link linkend="_nodes_8c_source_1l00020">20</link> of file <link linkend="_nodes_8c_source">nodes.c</link>.</para>
+</section>
+<anchor xml:id="_nodes_8c_1ae520355298e7bac453a556eeab7df45f"/><section>
+    <title>semID</title>
+<indexterm><primary>semID</primary><secondary>nodes.c</secondary></indexterm>
+<indexterm><primary>nodes.c</primary><secondary>semID</secondary></indexterm>
+<para><computeroutput>int semID</computeroutput></para><para>
+Definition at line <link linkend="_nodes_8c_source_1l00019">19</link> of file <link linkend="_nodes_8c_source">nodes.c</link>.</para>
+</section>
+<anchor xml:id="_nodes_8c_1af667a518a4feef7b7540ebac0cd618cf"/><section>
+    <title>usersPID</title>
+<indexterm><primary>usersPID</primary><secondary>nodes.c</secondary></indexterm>
+<indexterm><primary>nodes.c</primary><secondary>usersPID</secondary></indexterm>
+<para><computeroutput><link linkend="_common_8h_1a75285f7670649ccfb5ccbbc952a15bfd">user</link>* usersPID</computeroutput></para><para>
+Definition at line <link linkend="_nodes_8c_source_1l00015">15</link> of file <link linkend="_nodes_8c_source">nodes.c</link>.</para>
+</section>
+</section>
+</section>
