@@ -3,12 +3,12 @@
 #include "include/common.h"
 
 /* transaction pool==transaction's array */
-
-/*void Node()
+/*
+void Node(argv[2])
 {
     int t_pool[SO_TP_SIZE];
     check_Tp_Full(t_pool[SO_TP_SIZE]);
-    array_Processer();
+    array_Processer(argv[2]);
     create_Block();
 }
 
@@ -39,8 +39,8 @@ int sleepMethod(int argc, char *argv[])
 {
     randSleepTime.tv_sec = 0;
     randSleepTime.tv_nsec = RAND(SO_MIN_TRANS_PROC_NSEC, SO_MAX_TRANS_PROC_NSEC);
-}*/
-
+}
+*/
 int main(int argc, char *argv[])
 {
     int myPID = getpid();
