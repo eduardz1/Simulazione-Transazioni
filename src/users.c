@@ -134,7 +134,8 @@ void attach_ipc_objects(char **argv)
 	TRACE((":users: %d semID is %d\n", myPID, semID));
 }
 
-/* use nodePID as key for msgget and check for errors */
+/* use nodePID as key for 
+ and check for errors */
 void queue_to_pid(pid_t nodePID)
 {
 	queueID = msgget(nodePID, IPC_CREAT | 0600);
