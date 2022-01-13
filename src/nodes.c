@@ -8,7 +8,11 @@ void Node(argv[2])
 {
     int t_pool[SO_TP_SIZE];
     check_Tp_Full(t_pool[SO_TP_SIZE]);
+<<<<<<< HEAD
     array_Processer(argv[2]);
+=======
+    array_Processer();
+>>>>>>> 15b496920d21496ea65a0874f53854587916afe9
     create_Block();
 }
 
