@@ -47,17 +47,3 @@ void add_transaction_to_block(block *block, transaction *newTrans, int index)
 {
     block->transList[index] = *newTrans; /* ye probably we don't need a whole ass function for that*/
 }
-
-void send_transaction(pid_t sender, pid_t receiver, int quantity, int reward)
-{
-    struct timespec tp;
-    transaction currentTransaction;
-    /*
-     * get current time and save it in a struct timespec
-     * inside the transaction struct
-     */
-
-    clock_gettime(CLOCK_REALTIME, &tp);
-
-    currentTransaction.timestamp = tp;
-}

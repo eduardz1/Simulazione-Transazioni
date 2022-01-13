@@ -1,4 +1,3 @@
-/* Common header that multiple processes need to use */
 #ifndef SIMULAZIONE_TRANSAZIONI_COMMON_H
 #define SIMULAZIONE_TRANSAZIONI_COMMON_H
 
@@ -14,6 +13,7 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <sys/sem.h>
+#include <sys/msg.h>
 #include <sys/types.h>
 
 #include "../utils/debug.h"
@@ -38,6 +38,7 @@
 #define SHM_NODES_ARRAY 1339
 #define SHM_LEDGER 1340
 #define SEM_MASTER 420
+#define M_QUEUE_KEY 0x5AD
 
 #define SO_BLOCK_SIZE 100     /* number of transaction per block*/
 #define SO_REGISTRY_SIZE 1000 /* max length of consecutive blocks */
@@ -55,6 +56,7 @@
 #define WENT_BROKE 1
 #define MAX_RETRY 2
 #define ERROR -1
+#define SUCCESS 0
 
 extern int errno;
 
@@ -127,6 +129,12 @@ typedef struct transaction_t
     } status;
 } transaction;
 
+struct message
+{
+    long mtype;
+    transaction userTrans;
+};
+
 /* Block struct */
 typedef struct block_t
 {
@@ -149,7 +157,6 @@ void add_block(block);
 void add_transaction_to_block(block *, transaction *, int index);
 void add_block_to_ledger(block *);
 void find_transaction(struct timespec timestamp, pid_t sender, pid_t receiver); /* NULL used to group results */
-void send_transaction(pid_t sender, pid_t receiver, int quantity, int reward);
 
 /* listparser.c */
 void search_timestamp();

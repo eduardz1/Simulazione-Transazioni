@@ -3,7 +3,7 @@
 
 ## General Tasks
 - [x] **Eduard ->** implement semaphores to access "usersPID" and "nodesPID" structs
-- [ ] implement message queue to send transactions (user communicates with node and ask to update ledger basically)
+- [x] **Eduard ->** implement message queue to send transactions (user communicates with node and ask to update ledger basically)
 - [ ] fix formatted_timestamp() in common.c
 - [ ] finish every print function
 - [ ] parser for a linked list (ledger)
@@ -20,9 +20,9 @@
 - [x] **Eduard ->** function to extract random nodePID from "nodesPID" array of "node" (needs to account status)
 - [ ] function to calculate balance of a user based on transaction history
 - [x] **Eduard ->** signal handler for SIGINT
-- [ ] signal handler for SIGUSR1 (sends a transaction)
+- [x] **Eduard ->** signal handler for SIGUSR1 (sends a transaction)
 - [ ] function that waits for a transaction when user is broke, behaviour without this function is to spam non stop the check for (balance >= 2), wasting resources
-- [ ] message queue user-to-node 
+- [x] **Eduard ->** message queue user-to-node 
 
 ## Node Specific
 *Fill with something, I haven't taken a look at it yet*

@@ -1,0 +1,1822 @@
+rm -f *.o master users nodes *~
+gcc -c -std=c89 -g -O0 -pedantic -D_GNU_SOURCE -DDEBUG src/common.c src/utils/*.c
+src/utils/lists.c:1: warning: ISO C forbids an empty translation unit [-Wpedantic]
+gcc -std=c89 -g -O0 -pedantic -D_GNU_SOURCE -DDEBUG src/master.c  src/print.c src/parser.c *.o -lm -o master
+gcc -std=c89 -g -O0 -pedantic -D_GNU_SOURCE -DDEBUG src/users.c *.o -lm -o users
+gcc -std=c89 -g -O0 -pedantic -D_GNU_SOURCE -DDEBUG src/nodes.c *.o -lm -o nodes
+./master
+:master: semID is 6
+:parser: assigned defaults
+--------------------------------------------
+----------- Configuration input ------------
+SO_USER_NUM 9
+SO_NODES_NUM 6
+SO_FRIENDS_NUM 999
+SO_SIM_SEC 10
+SO_HOPS 7
+SO_BUDGET_INIT 998
+SO_REWARD 14
+SO_MIN_TRANS_GEN_NSEC 100000001
+SO_MAX_TRANS_GEN_NSEC 200000001
+SO_RETRY 21
+SO_TP_SIZE 997
+SO_MIN_TRANS_PROC_NSEC 100000002
+SO_MAX_TRANS_PROC_NSEC 200000002
+--------------------------------------------
+-- Conf file read successful
+:master: argv[uPID] = 31
+:master: argv[nPID] = 32
+:master: argv[par] = 30
+:master: argv[ledger] = 33
+:master: argv[sem] = 31
+:master: Spawning node
+:master: Spawning node
+:master: Spawning node
+:master: Spawning node
+:master: Spawning node
+:master: Spawning node
+:master: Spawning user
+Node 9765 has finished
+:master: Spawning user
+Node 9767 has finished
+:master: Spawning user
+Node 9766 has finished
+:master: Spawning user
+Node 9768 has finished
+:master: Spawning user
+Node 9769 has finished
+Node 9770 has finished
+:master: Spawning user
+:master: Spawning user
+:users: 0 USERS_PID_ARGV 31
+:users: 0 NODES_PID_ARGV 32
+:users: 0 PARAMETERS_ARGV 30
+:users: 0 LEDGER_ARGV 33
+:users: 0 SEM_ID_PID_ARGV 0
+:users: 9771 semID is 0
+:master: Spawning user
+:users: 9771 usersPID[0]
+:users: 9771 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+Transaction sent
+:users: 0 USERS_PID_ARGV 31
+:users: 0 USERS_PID_ARGV 31
+:users: 0 NODES_PID_ARGV 32
+:users: 9771 usersPID[0]
+:users: 0 NODES_PID_ARGV 32
+:users: 0 PARAMETERS_ARGV 30
+:users: 9771 nodesPID[0]
+:users: 0 PARAMETERS_ARGV 30
+:master: Spawning user
+:users: 0 LEDGER_ARGV 33
+:users: 9771 -> 9765 queueID 6
+:users: 0 LEDGER_ARGV 33
+:users: 0 USERS_PID_ARGV 31
+:users: 0 SEM_ID_PID_ARGV 0
+Transaction sent
+:users: 0 SEM_ID_PID_ARGV 0
+:users: 0 NODES_PID_ARGV 32
+:users: 0 PARAMETERS_ARGV 30
+:users: 0 LEDGER_ARGV 33
+:users: 0 SEM_ID_PID_ARGV 0
+:users: 9771 usersPID[0]
+:users: 9772 semID is 0
+:users: 9771 nodesPID[0]
+:users: 9773 semID is 0
+:users: 9771 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+:users: 9774 semID is 0
+Transaction sent
+:users: 9773 usersPID[0]
+:users: 9772 nodesPID[0]
+:users: 9773 nodesPID[0]
+:users: 9774 usersPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 0 USERS_PID_ARGV 31
+:users: 9774 nodesPID[0]
+:users: 9773 -> 9765 queueID 6
+:users: 9771 usersPID[0]
+Transaction sent
+:users: 0 NODES_PID_ARGV 32
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+:users: 9771 nodesPID[0]
+:users: 0 PARAMETERS_ARGV 30
+Transaction sent
+:users: 9771 -> 9765 queueID 6
+:users: 0 LEDGER_ARGV 33
+Transaction sent
+:users: 0 SEM_ID_PID_ARGV 0
+:users: 9772 usersPID[0]
+:users: 9772 nodesPID[0]
+:users: 9773 usersPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9773 nodesPID[0]
+:users: 9774 usersPID[0]
+Transaction sent
+:users: 9775 semID is 0
+:users: 9773 -> 9765 queueID 6
+:users: 9774 nodesPID[0]
+:users: 9775 usersPID[0]
+Transaction sent
+:users: 9774 -> 9765 queueID 6
+:users: 9771 usersPID[0]
+:users: 9775 nodesPID[0]
+:users: 9772 usersPID[0]
+Transaction sent
+:users: 9771 nodesPID[0]
+:users: 9772 nodesPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9771 -> 9765 queueID 6
+:users: 9772 -> 9765 queueID 6
+:users: 9773 usersPID[0]
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 9773 nodesPID[0]
+:users: 9774 usersPID[0]
+:users: 9773 -> 9765 queueID 6
+:users: 0 USERS_PID_ARGV 31
+:users: 9774 nodesPID[0]
+Transaction sent
+:users: 9771 usersPID[0]
+:users: 9775 usersPID[0]
+:users: 9772 usersPID[0]
+:users: 0 NODES_PID_ARGV 32
+:users: 9774 -> 9765 queueID 6
+:users: 9771 nodesPID[0]
+:users: 9775 nodesPID[0]
+:users: 9772 nodesPID[0]
+:users: 0 PARAMETERS_ARGV 30
+Transaction sent
+:users: 9773 usersPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9775 -> 9765 queueID 6
+:users: 9772 -> 9765 queueID 6
+:users: 0 LEDGER_ARGV 33
+:users: 9773 nodesPID[0]
+:users: 9774 usersPID[0]
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 0 SEM_ID_PID_ARGV 0
+:users: 9773 -> 9765 queueID 6
+:users: 9774 nodesPID[0]
+:users: 0 USERS_PID_ARGV 31
+Transaction sent
+:users: 9774 -> 9765 queueID 6
+:users: 9771 usersPID[0]
+:users: 9772 usersPID[0]
+:users: 0 NODES_PID_ARGV 32
+Transaction sent
+:users: 9776 semID is 0
+:users: 9771 nodesPID[0]
+:users: 9772 nodesPID[0]
+:users: 0 PARAMETERS_ARGV 30
+:users: 9775 usersPID[0]
+:users: 9773 usersPID[0]
+:users: 9776 usersPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9772 -> 9765 queueID 6
+:users: 0 LEDGER_ARGV 33
+:users: 9774 usersPID[0]
+:users: 9775 nodesPID[0]
+:users: 9773 nodesPID[0]
+:users: 9776 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 0 SEM_ID_PID_ARGV 0
+:users: 9774 nodesPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9773 -> 9765 queueID 6
+:users: 0 USERS_PID_ARGV 31
+:users: 9772 usersPID[0]
+:users: 9776 -> 9765 queueID 6
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 9771 usersPID[0]
+:users: 0 NODES_PID_ARGV 32
+:users: 9772 nodesPID[0]
+:users: 9777 semID is 0
+Transaction sent
+:users: 9771 nodesPID[0]
+:users: 0 PARAMETERS_ARGV 30
+:users: 9775 usersPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 0 USERS_PID_ARGV 31
+:users: 9773 usersPID[0]
+:users: 9777 usersPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 0 LEDGER_ARGV 33
+:users: 9776 usersPID[0]
+:users: 9775 nodesPID[0]
+Transaction sent
+:users: 9774 usersPID[0]
+:users: 0 NODES_PID_ARGV 32
+:users: 9773 nodesPID[0]
+:users: 9777 nodesPID[0]
+Transaction sent
+:users: 0 SEM_ID_PID_ARGV 0
+:users: 9776 nodesPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9774 nodesPID[0]
+:users: 0 PARAMETERS_ARGV 30
+:users: 9773 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+:users: 9777 -> 9765 queueID 6
+:users: 9776 -> 9765 queueID 6
+Transaction sent
+:users: 9774 -> 9765 queueID 6
+:users: 0 LEDGER_ARGV 33
+Transaction sent
+:users: 9772 nodesPID[0]
+:users: 9778 semID is 0
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 9771 usersPID[0]
+:users: 0 SEM_ID_PID_ARGV 0
+:users: 9772 -> 9765 queueID 6
+:users: 9778 usersPID[0]
+:users: 9773 usersPID[0]
+:users: 9771 nodesPID[0]
+:users: 9777 usersPID[0]
+:users: 9775 usersPID[0]
+Transaction sent
+:users: 9776 usersPID[0]
+:users: 9778 nodesPID[0]
+:users: 9774 usersPID[0]
+:users: 9773 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9777 nodesPID[0]
+:users: 9775 nodesPID[0]
+:users: 9779 semID is 0
+:users: 9776 nodesPID[0]
+:users: 9774 nodesPID[0]
+:users: 9778 -> 9765 queueID 6
+:users: 9773 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+Transaction sent
+:users: 9777 -> 9765 queueID 6
+:users: 9775 -> 9765 queueID 6
+:users: 9776 -> 9765 queueID 6
+:users: 9779 usersPID[0]
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+Transaction sent
+:users: 9772 nodesPID[0]
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 9779 nodesPID[0]
+Transaction sent
+:users: 9771 usersPID[0]
+:users: 9773 usersPID[0]
+:users: 9778 usersPID[0]
+:users: 9779 -> 9765 queueID 6
+:users: 9771 nodesPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9773 nodesPID[0]
+:users: 9778 nodesPID[0]
+:users: 9777 usersPID[0]
+:users: 9776 usersPID[0]
+Transaction sent
+:users: 9771 -> 9765 queueID 6
+:users: 9774 usersPID[0]
+Transaction sent
+:users: 9775 usersPID[0]
+:users: 9773 -> 9765 queueID 6
+:users: 9778 -> 9765 queueID 6
+:users: 9777 nodesPID[0]
+:users: 9776 nodesPID[0]
+Transaction sent
+:users: 9774 nodesPID[0]
+:users: 9775 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9779 usersPID[0]
+:users: 9777 -> 9765 queueID 6
+:users: 9771 usersPID[0]
+:users: 9776 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+:users: 9774 -> 9765 queueID 6
+:users: 9775 -> 9765 queueID 6
+:users: 9779 nodesPID[0]
+Transaction sent
+:users: 9771 nodesPID[0]
+Transaction sent
+:users: 9773 usersPID[0]
+:users: 9772 nodesPID[0]
+:users: 9778 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9779 -> 9765 queueID 6
+:users: 9771 -> 9765 queueID 6
+:users: 9773 nodesPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9778 nodesPID[0]
+:users: 9777 usersPID[0]
+:users: 9776 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9774 usersPID[0]
+:users: 9773 -> 9765 queueID 6
+Transaction sent
+:users: 9778 -> 9765 queueID 6
+:users: 9777 nodesPID[0]
+:users: 9775 usersPID[0]
+:users: 9776 nodesPID[0]
+:users: 9774 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9779 usersPID[0]
+:users: 9777 -> 9765 queueID 6
+:users: 9771 usersPID[0]
+:users: 9775 nodesPID[0]
+:users: 9776 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+:users: 9774 -> 9765 queueID 6
+:users: 9779 nodesPID[0]
+Transaction sent
+:users: 9771 nodesPID[0]
+:users: 9775 -> 9765 queueID 6
+Transaction sent
+:users: 9773 usersPID[0]
+:users: 9772 nodesPID[0]
+:users: 9778 usersPID[0]
+Transaction sent
+:users: 9779 -> 9765 queueID 6
+:users: 9771 -> 9765 queueID 6
+Transaction sent
+:users: 9773 nodesPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9778 nodesPID[0]
+:users: 9777 usersPID[0]
+Transaction sent
+:users: 9776 usersPID[0]
+Transaction sent
+:users: 9773 -> 9765 queueID 6
+Transaction sent
+:users: 9778 -> 9765 queueID 6
+:users: 9774 usersPID[0]
+:users: 9777 nodesPID[0]
+:users: 9776 nodesPID[0]
+Transaction sent
+:users: 9775 usersPID[0]
+Transaction sent
+:users: 9774 nodesPID[0]
+:users: 9779 usersPID[0]
+:users: 9777 -> 9765 queueID 6
+:users: 9776 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+:users: 9775 nodesPID[0]
+:users: 9774 -> 9765 queueID 6
+:users: 9778 usersPID[0]
+:users: 9779 nodesPID[0]
+:users: 9771 usersPID[0]
+:users: 9773 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9772 nodesPID[0]
+:users: 9775 -> 9765 queueID 6
+Transaction sent
+:users: 9778 nodesPID[0]
+:users: 9779 -> 9765 queueID 6
+:users: 9771 nodesPID[0]
+:users: 9773 nodesPID[0]
+:users: 9772 -> 9765 queueID 6
+Transaction sent
+:users: 9778 -> 9765 queueID 6
+Transaction sent
+:users: 9777 usersPID[0]
+:users: 9776 usersPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9773 -> 9765 queueID 6
+Transaction sent
+:users: 9774 usersPID[0]
+Transaction sent
+:users: 9777 nodesPID[0]
+:users: 9776 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9779 usersPID[0]
+:users: 9774 nodesPID[0]
+:users: 9775 usersPID[0]
+:users: 9777 -> 9765 queueID 6
+:users: 9776 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+:users: 9778 usersPID[0]
+:users: 9779 nodesPID[0]
+:users: 9774 -> 9765 queueID 6
+:users: 9775 nodesPID[0]
+Transaction sent
+:users: 9771 usersPID[0]
+Transaction sent
+:users: 9773 usersPID[0]
+:users: 9772 nodesPID[0]
+:users: 9778 nodesPID[0]
+:users: 9779 -> 9765 queueID 6
+Transaction sent
+:users: 9775 -> 9765 queueID 6
+:users: 9771 nodesPID[0]
+:users: 9773 nodesPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9778 -> 9765 queueID 6
+:users: 9777 usersPID[0]
+Transaction sent
+:users: 9776 usersPID[0]
+Transaction sent
+:users: 9771 -> 9765 queueID 6
+:users: 9773 -> 9765 queueID 6
+Transaction sent
+Transaction sent
+:users: 9774 usersPID[0]
+:users: 9777 nodesPID[0]
+:users: 9776 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9779 usersPID[0]
+:users: 9775 usersPID[0]
+:users: 9774 nodesPID[0]
+:users: 9777 -> 9765 queueID 6
+:users: 9776 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+:users: 9778 usersPID[0]
+:users: 9779 nodesPID[0]
+:users: 9775 nodesPID[0]
+:users: 9774 -> 9765 queueID 6
+:users: 9771 usersPID[0]
+Transaction sent
+:users: 9773 usersPID[0]
+Transaction sent
+:users: 9772 nodesPID[0]
+:users: 9778 nodesPID[0]
+:users: 9779 -> 9765 queueID 6
+:users: 9775 -> 9765 queueID 6
+Transaction sent
+:users: 9771 nodesPID[0]
+:users: 9773 nodesPID[0]
+:users: 9772 -> 9765 queueID 6
+Transaction sent
+:users: 9774 usersPID[0]
+:users: 9774 nodesPID[0]
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+:users: 9772 usersPID[0]
+:users: 9772 nodesPID[0]
+:users: 9772 -> 9765 queueID 6
+Transaction sent
+:users: 9774 usersPID[0]
+:users: 9774 nodesPID[0]
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+:users: 9772 usersPID[0]
+:users: 9772 nodesPID[0]
+:users: 9772 -> 9765 queueID 6
+Transaction sent
+:users: 9774 usersPID[0]
+:users: 9774 nodesPID[0]
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+:users: 9772 usersPID[0]
+:users: 9774 usersPID[0]
+:users: 9774 nodesPID[0]
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+:users: 9774 usersPID[0]
+:users: 9774 nodesPID[0]
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+:users: 9774 usersPID[0]
+:users: 9774 nodesPID[0]
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+:users: 9774 usersPID[0]
+:users: 9774 nodesPID[0]
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+:users: 9778 -> 9765 queueID 6
+Transaction sent
+Transaction sent
+:users: 9777 usersPID[0]
+:users: 9776 usersPID[0]
+:users: 9779 usersPID[0]
+:users: 9779 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9773 -> 9765 queueID 6
+:users: 9772 nodesPID[0]
+:users: 9774 usersPID[0]
+:users: 9777 nodesPID[0]
+:users: 9776 nodesPID[0]
+:users: 9775 usersPID[0]
+:users: 9779 -> 9765 queueID 6
+Transaction sent
+Transaction sent
+:users: 9772 -> 9765 queueID 6
+:users: 9774 nodesPID[0]
+Transaction sent
+:users: 9777 -> 9765 queueID 6
+:users: 9776 -> 9765 queueID 6
+:users: 9775 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+Transaction sent
+:users: 9771 usersPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9773 usersPID[0]
+Transaction sent
+:users: 9778 usersPID[0]
+:users: 9771 nodesPID[0]
+:users: 9779 usersPID[0]
+Transaction sent
+:users: 9773 nodesPID[0]
+:users: 9772 usersPID[0]
+:users: 9777 usersPID[0]
+:users: 9778 nodesPID[0]
+:users: 9776 usersPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9779 nodesPID[0]
+:users: 9774 usersPID[0]
+:users: 9773 -> 9765 queueID 6
+:users: 9772 nodesPID[0]
+:users: 9777 nodesPID[0]
+:users: 9778 -> 9765 queueID 6
+:users: 9776 nodesPID[0]
+:users: 9775 usersPID[0]
+Transaction sent
+:users: 9779 -> 9765 queueID 6
+:users: 9774 nodesPID[0]
+Transaction sent
+:users: 9772 -> 9765 queueID 6
+:users: 9777 -> 9765 queueID 6
+Transaction sent
+:users: 9771 usersPID[0]
+:users: 9771 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+Transaction sent
+:users: 9777 usersPID[0]
+:users: 9777 nodesPID[0]
+:users: 9777 -> 9765 queueID 6
+Transaction sent
+:users: 9773 usersPID[0]
+:users: 9771 usersPID[0]
+:users: 9771 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9777 usersPID[0]
+:users: 9777 nodesPID[0]
+Transaction sent
+:users: 9776 -> 9765 queueID 6
+:users: 9775 nodesPID[0]
+Transaction sent
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+:users: 9773 nodesPID[0]
+Transaction sent
+:users: 9777 -> 9765 queueID 6
+Transaction sent
+:users: 9775 -> 9765 queueID 6
+Transaction sent
+:users: 9773 -> 9765 queueID 6
+:users: 9778 usersPID[0]
+Transaction sent
+:users: 9779 usersPID[0]
+:users: 9772 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9771 usersPID[0]
+:users: 9778 nodesPID[0]
+:users: 9776 usersPID[0]
+:users: 9779 nodesPID[0]
+:users: 9772 nodesPID[0]
+:users: 9774 usersPID[0]
+:users: 9777 usersPID[0]
+:users: 9771 nodesPID[0]
+:users: 9778 -> 9765 queueID 6
+:users: 9776 nodesPID[0]
+:users: 9779 -> 9765 queueID 6
+:users: 9775 usersPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9773 usersPID[0]
+:users: 9774 nodesPID[0]
+:users: 9777 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+Transaction sent
+:users: 9776 -> 9765 queueID 6
+Transaction sent
+:users: 9775 nodesPID[0]
+Transaction sent
+:users: 9773 nodesPID[0]
+:users: 9774 -> 9765 queueID 6
+:users: 9777 -> 9765 queueID 6
+Transaction sent
+Transaction sent
+:users: 9775 -> 9765 queueID 6
+:users: 9773 -> 9765 queueID 6
+Transaction sent
+:users: 9779 usersPID[0]
+Transaction sent
+:users: 9772 usersPID[0]
+Transaction sent
+:users: 9771 usersPID[0]
+:users: 9776 usersPID[0]
+Transaction sent
+:users: 9779 nodesPID[0]
+:users: 9772 nodesPID[0]
+:users: 9771 nodesPID[0]
+:users: 9774 usersPID[0]
+:users: 9776 nodesPID[0]
+:users: 9777 usersPID[0]
+:users: 9773 usersPID[0]
+:users: 9779 -> 9765 queueID 6
+:users: 9778 usersPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9775 usersPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9774 nodesPID[0]
+:users: 9776 -> 9765 queueID 6
+Transaction sent
+:users: 9777 nodesPID[0]
+:users: 9773 nodesPID[0]
+Transaction sent
+:users: 9778 nodesPID[0]
+Transaction sent
+:users: 9775 nodesPID[0]
+Transaction sent
+:users: 9774 -> 9765 queueID 6
+:users: 9777 -> 9765 queueID 6
+:users: 9773 -> 9765 queueID 6
+:users: 9776 usersPID[0]
+:users: 9778 -> 9765 queueID 6
+:users: 9775 -> 9765 queueID 6
+Transaction sent
+:users: 9779 usersPID[0]
+Transaction sent
+:users: 9772 usersPID[0]
+Transaction sent
+:users: 9771 usersPID[0]
+:users: 9774 usersPID[0]
+:users: 9776 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9779 nodesPID[0]
+:users: 9772 nodesPID[0]
+:users: 9771 nodesPID[0]
+:users: 9774 nodesPID[0]
+:users: 9776 -> 9765 queueID 6
+:users: 9777 usersPID[0]
+:users: 9773 usersPID[0]
+:users: 9779 -> 9765 queueID 6
+:users: 9772 -> 9765 queueID 6
+:users: 9771 -> 9765 queueID 6
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+:users: 9775 usersPID[0]
+:users: 9777 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9773 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9775 nodesPID[0]
+:users: 9777 -> 9765 queueID 6
+:users: 9773 -> 9765 queueID 6
+:users: 9776 usersPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9779 usersPID[0]
+Transaction sent
+:users: 9772 usersPID[0]
+Transaction sent
+:users: 9776 nodesPID[0]
+:users: 9771 usersPID[0]
+Transaction sent
+:users: 9778 usersPID[0]
+:users: 9779 nodesPID[0]
+:users: 9774 usersPID[0]
+:users: 9772 nodesPID[0]
+:users: 9776 -> 9765 queueID 6
+:users: 9771 nodesPID[0]
+:users: 9777 usersPID[0]
+:users: 9778 nodesPID[0]
+:users: 9773 usersPID[0]
+:users: 9779 -> 9765 queueID 6
+:users: 9774 nodesPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9775 usersPID[0]
+Transaction sent
+:users: 9771 -> 9765 queueID 6
+:users: 9777 nodesPID[0]
+:users: 9778 -> 9765 queueID 6
+:users: 9773 nodesPID[0]
+Transaction sent
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+:users: 9775 nodesPID[0]
+Transaction sent
+:users: 9777 -> 9765 queueID 6
+Transaction sent
+:users: 9773 -> 9765 queueID 6
+:users: 9776 usersPID[0]
+Transaction sent
+:users: 9775 -> 9765 queueID 6
+Transaction sent
+:users: 9779 usersPID[0]
+Transaction sent
+:users: 9772 usersPID[0]
+:users: 9776 nodesPID[0]
+Transaction sent
+:users: 9771 usersPID[0]
+:users: 9779 nodesPID[0]
+:users: 9779 -> 9765 queueID 6
+Transaction sent
+:users: 9775 usersPID[0]
+:users: 9775 nodesPID[0]
+:users: 9775 -> 9765 queueID 6
+Transaction sent
+:users: 9775 usersPID[0]
+:users: 9778 usersPID[0]
+:users: 9772 nodesPID[0]
+:users: 9774 usersPID[0]
+:users: 9776 -> 9765 queueID 6
+:users: 9777 usersPID[0]
+:users: 9771 nodesPID[0]
+:users: 9773 usersPID[0]
+:users: 9779 usersPID[0]
+:users: 9775 nodesPID[0]
+:users: 9778 nodesPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9774 nodesPID[0]
+Transaction sent
+:users: 9777 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9773 nodesPID[0]
+:users: 9779 nodesPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9778 -> 9765 queueID 6
+Transaction sent
+:users: 9774 -> 9765 queueID 6
+:users: 9777 -> 9765 queueID 6
+Transaction sent
+:users: 9773 -> 9765 queueID 6
+:users: 9779 -> 9765 queueID 6
+:users: 9776 usersPID[0]
+:users: 9772 usersPID[0]
+Transaction sent
+Transaction sent
+Transaction sent
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 9776 nodesPID[0]
+:users: 9772 nodesPID[0]
+:users: 9771 usersPID[0]
+:users: 9776 -> 9765 queueID 6
+:users: 9775 usersPID[0]
+:users: 9778 usersPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9774 usersPID[0]
+:users: 9771 nodesPID[0]
+:users: 9777 usersPID[0]
+Transaction sent
+:users: 9773 usersPID[0]
+:users: 9775 nodesPID[0]
+:users: 9779 usersPID[0]
+:users: 9778 nodesPID[0]
+Transaction sent
+:users: 9774 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9777 nodesPID[0]
+:users: 9773 nodesPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9779 nodesPID[0]
+:users: 9778 -> 9765 queueID 6
+:users: 9776 usersPID[0]
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+:users: 9777 -> 9765 queueID 6
+:users: 9773 -> 9765 queueID 6
+Transaction sent
+:users: 9772 usersPID[0]
+:users: 9779 -> 9765 queueID 6
+Transaction sent
+:users: 9776 nodesPID[0]
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 9772 nodesPID[0]
+Transaction sent
+:users: 9771 usersPID[0]
+:users: 9776 -> 9765 queueID 6
+:users: 9775 usersPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9778 usersPID[0]
+:users: 9779 usersPID[0]
+:users: 9774 usersPID[0]
+:users: 9771 nodesPID[0]
+:users: 9777 usersPID[0]
+Transaction sent
+:users: 9775 nodesPID[0]
+:users: 9773 usersPID[0]
+Transaction sent
+:users: 9778 nodesPID[0]
+:users: 9779 nodesPID[0]
+:users: 9774 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9777 nodesPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9773 nodesPID[0]
+:users: 9778 -> 9765 queueID 6
+:users: 9776 usersPID[0]
+:users: 9779 -> 9765 queueID 6
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+:users: 9772 usersPID[0]
+:users: 9777 -> 9765 queueID 6
+Transaction sent
+:users: 9773 -> 9765 queueID 6
+Transaction sent
+:users: 9776 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9772 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9776 -> 9765 queueID 6
+:users: 9771 usersPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9775 usersPID[0]
+:users: 9778 usersPID[0]
+:users: 9779 usersPID[0]
+Transaction sent
+:users: 9774 usersPID[0]
+:users: 9771 nodesPID[0]
+Transaction sent
+:users: 9775 nodesPID[0]
+:users: 9777 usersPID[0]
+:users: 9773 usersPID[0]
+:users: 9778 nodesPID[0]
+:users: 9779 nodesPID[0]
+:users: 9774 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9775 -> 9765 queueID 6
+:users: 9777 nodesPID[0]
+:users: 9776 usersPID[0]
+:users: 9773 nodesPID[0]
+:users: 9778 -> 9765 queueID 6
+:users: 9779 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+Transaction sent
+:users: 9777 -> 9765 queueID 6
+:users: 9776 nodesPID[0]
+:users: 9773 -> 9765 queueID 6
+Transaction sent
+Transaction sent
+:users: 9772 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9776 -> 9765 queueID 6
+Transaction sent
+:users: 9771 usersPID[0]
+:users: 9775 usersPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9778 usersPID[0]
+Transaction sent
+:users: 9779 usersPID[0]
+:users: 9771 nodesPID[0]
+:users: 9775 nodesPID[0]
+:users: 9774 usersPID[0]
+:users: 9777 usersPID[0]
+Transaction sent
+:users: 9778 nodesPID[0]
+:users: 9773 usersPID[0]
+:users: 9779 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9775 -> 9765 queueID 6
+:users: 9774 nodesPID[0]
+:users: 9777 nodesPID[0]
+:users: 9778 -> 9765 queueID 6
+:users: 9773 nodesPID[0]
+:users: 9779 -> 9765 queueID 6
+Transaction sent
+:users: 9772 usersPID[0]
+Transaction sent
+:users: 9774 -> 9765 queueID 6
+:users: 9776 usersPID[0]
+:users: 9777 -> 9765 queueID 6
+Transaction sent
+:users: 9773 -> 9765 queueID 6
+Transaction sent
+:users: 9772 nodesPID[0]
+Transaction sent
+:users: 9776 nodesPID[0]
+Transaction sent
+:users: 9771 usersPID[0]
+:users: 9775 usersPID[0]
+Transaction sent
+:users: 9772 -> 9765 queueID 6
+:users: 9776 -> 9765 queueID 6
+:users: 9778 usersPID[0]
+:users: 9771 nodesPID[0]
+:users: 9779 usersPID[0]
+:users: 9775 nodesPID[0]
+:users: 9774 usersPID[0]
+Transaction sent
+:users: 9777 usersPID[0]
+Transaction sent
+:users: 9778 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9779 nodesPID[0]
+:users: 9773 usersPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9774 nodesPID[0]
+:users: 9777 nodesPID[0]
+:users: 9778 -> 9765 queueID 6
+Transaction sent
+:users: 9772 usersPID[0]
+:users: 9779 -> 9765 queueID 6
+:users: 9773 nodesPID[0]
+Transaction sent
+:users: 9776 usersPID[0]
+:users: 9774 -> 9765 queueID 6
+:users: 9777 -> 9765 queueID 6
+Transaction sent
+:users: 9772 nodesPID[0]
+Transaction sent
+:users: 9773 -> 9765 queueID 6
+:users: 9776 nodesPID[0]
+:users: 9771 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9772 -> 9765 queueID 6
+:users: 9775 usersPID[0]
+Transaction sent
+:users: 9776 -> 9765 queueID 6
+:users: 9778 usersPID[0]
+:users: 9771 nodesPID[0]
+:users: 9779 usersPID[0]
+Transaction sent
+:users: 9775 nodesPID[0]
+Transaction sent
+:users: 9774 usersPID[0]
+:users: 9778 nodesPID[0]
+:users: 9777 usersPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9779 nodesPID[0]
+:users: 9773 usersPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9774 nodesPID[0]
+:users: 9778 -> 9765 queueID 6
+:users: 9777 nodesPID[0]
+:users: 9772 usersPID[0]
+Transaction sent
+:users: 9779 -> 9765 queueID 6
+:users: 9776 usersPID[0]
+:users: 9773 nodesPID[0]
+Transaction sent
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+:users: 9777 -> 9765 queueID 6
+:users: 9772 nodesPID[0]
+Transaction sent
+:users: 9776 nodesPID[0]
+:users: 9773 -> 9765 queueID 6
+:users: 9771 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9772 -> 9765 queueID 6
+:users: 9775 usersPID[0]
+:users: 9778 usersPID[0]
+:users: 9776 -> 9765 queueID 6
+Transaction sent
+:users: 9779 usersPID[0]
+:users: 9771 nodesPID[0]
+Transaction sent
+:users: 9775 nodesPID[0]
+:users: 9778 nodesPID[0]
+Transaction sent
+:users: 9774 usersPID[0]
+:users: 9777 usersPID[0]
+:users: 9779 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9775 -> 9765 queueID 6
+:users: 9778 -> 9765 queueID 6
+:users: 9773 usersPID[0]
+:users: 9774 nodesPID[0]
+:users: 9777 nodesPID[0]
+:users: 9772 usersPID[0]
+:users: 9779 -> 9765 queueID 6
+Transaction sent
+Transaction sent
+:users: 9776 usersPID[0]
+Transaction sent
+:users: 9773 nodesPID[0]
+:users: 9774 -> 9765 queueID 6
+:users: 9777 -> 9765 queueID 6
+:users: 9772 nodesPID[0]
+Transaction sent
+:users: 9776 nodesPID[0]
+:users: 9773 -> 9765 queueID 6
+Transaction sent
+Transaction sent
+:users: 9771 usersPID[0]
+:users: 9775 usersPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9778 usersPID[0]
+:users: 9776 -> 9765 queueID 6
+Transaction sent
+:users: 9771 nodesPID[0]
+:users: 9779 usersPID[0]
+:users: 9775 nodesPID[0]
+Transaction sent
+:users: 9778 nodesPID[0]
+:users: 9774 usersPID[0]
+:users: 9777 usersPID[0]
+Transaction sent
+:users: 9771 -> 9765 queueID 6
+:users: 9779 nodesPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9773 usersPID[0]
+:users: 9778 -> 9765 queueID 6
+:users: 9774 nodesPID[0]
+:users: 9777 nodesPID[0]
+Transaction sent
+:users: 9772 usersPID[0]
+:users: 9779 -> 9765 queueID 6
+Transaction sent
+:users: 9773 nodesPID[0]
+Transaction sent
+:users: 9776 usersPID[0]
+:users: 9774 -> 9765 queueID 6
+:users: 9777 -> 9765 queueID 6
+:users: 9772 nodesPID[0]
+Transaction sent
+:users: 9773 -> 9765 queueID 6
+:users: 9776 nodesPID[0]
+:users: 9771 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9775 usersPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9778 usersPID[0]
+Transaction sent
+:users: 9776 -> 9765 queueID 6
+:users: 9774 usersPID[0]
+:users: 9771 nodesPID[0]
+:users: 9779 usersPID[0]
+:users: 9775 nodesPID[0]
+Transaction sent
+:users: 9778 nodesPID[0]
+Transaction sent
+:users: 9777 usersPID[0]
+:users: 9774 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9779 nodesPID[0]
+:users: 9773 usersPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9778 -> 9765 queueID 6
+:users: 9777 nodesPID[0]
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+:users: 9772 usersPID[0]
+:users: 9779 -> 9765 queueID 6
+:users: 9773 nodesPID[0]
+:users: 9776 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9777 -> 9765 queueID 6
+Transaction sent
+:users: 9772 nodesPID[0]
+Transaction sent
+:users: 9773 -> 9765 queueID 6
+:users: 9776 nodesPID[0]
+:users: 9771 usersPID[0]
+Transaction sent
+:users: 9772 -> 9765 queueID 6
+:users: 9775 usersPID[0]
+:users: 9778 usersPID[0]
+Transaction sent
+:users: 9776 -> 9765 queueID 6
+:users: 9774 usersPID[0]
+:users: 9771 nodesPID[0]
+:users: 9779 usersPID[0]
+Transaction sent
+:users: 9775 nodesPID[0]
+:users: 9778 nodesPID[0]
+Transaction sent
+:users: 9777 usersPID[0]
+:users: 9774 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9779 nodesPID[0]
+:users: 9773 usersPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9778 -> 9765 queueID 6
+:users: 9777 nodesPID[0]
+:users: 9774 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+Transaction sent
+:users: 9779 -> 9765 queueID 6
+:users: 9773 nodesPID[0]
+:users: 9776 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9777 -> 9765 queueID 6
+Transaction sent
+:users: 9772 nodesPID[0]
+Transaction sent
+:users: 9773 -> 9765 queueID 6
+:users: 9776 nodesPID[0]
+:users: 9778 usersPID[0]
+:users: 9771 usersPID[0]
+Transaction sent
+:users: 9772 -> 9765 queueID 6
+:users: 9775 usersPID[0]
+Transaction sent
+:users: 9776 -> 9765 queueID 6
+:users: 9778 nodesPID[0]
+:users: 9774 usersPID[0]
+:users: 9771 nodesPID[0]
+:users: 9779 usersPID[0]
+Transaction sent
+:users: 9775 nodesPID[0]
+Transaction sent
+:users: 9778 -> 9765 queueID 6
+:users: 9777 usersPID[0]
+:users: 9774 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9779 nodesPID[0]
+:users: 9773 usersPID[0]
+:users: 9775 -> 9765 queueID 6
+Transaction sent
+:users: 9777 nodesPID[0]
+:users: 9774 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+Transaction sent
+:users: 9779 -> 9765 queueID 6
+:users: 9776 usersPID[0]
+:users: 9773 nodesPID[0]
+Transaction sent
+:users: 9777 -> 9765 queueID 6
+Transaction sent
+:users: 9772 nodesPID[0]
+:users: 9778 usersPID[0]
+Transaction sent
+:users: 9776 nodesPID[0]
+:users: 9773 -> 9765 queueID 6
+Transaction sent
+:users: 9771 usersPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9778 nodesPID[0]
+:users: 9779 usersPID[0]
+:users: 9776 -> 9765 queueID 6
+:users: 9775 usersPID[0]
+Transaction sent
+:users: 9774 usersPID[0]
+:users: 9771 nodesPID[0]
+Transaction sent
+:users: 9778 -> 9765 queueID 6
+:users: 9779 nodesPID[0]
+Transaction sent
+:users: 9777 usersPID[0]
+:users: 9775 nodesPID[0]
+:users: 9774 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+Transaction sent
+:users: 9773 usersPID[0]
+:users: 9779 -> 9765 queueID 6
+:users: 9777 nodesPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+:users: 9776 usersPID[0]
+:users: 9773 nodesPID[0]
+Transaction sent
+:users: 9777 -> 9765 queueID 6
+Transaction sent
+:users: 9772 nodesPID[0]
+:users: 9778 usersPID[0]
+Transaction sent
+:users: 9776 nodesPID[0]
+:users: 9779 usersPID[0]
+:users: 9773 -> 9765 queueID 6
+Transaction sent
+:users: 9772 -> 9765 queueID 6
+:users: 9771 usersPID[0]
+:users: 9778 nodesPID[0]
+:users: 9776 -> 9765 queueID 6
+:users: 9779 nodesPID[0]
+:users: 9775 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9774 usersPID[0]
+:users: 9771 nodesPID[0]
+:users: 9778 -> 9765 queueID 6
+Transaction sent
+:users: 9779 -> 9765 queueID 6
+:users: 9777 usersPID[0]
+:users: 9775 nodesPID[0]
+:users: 9774 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+Transaction sent
+:users: 9773 usersPID[0]
+Transaction sent
+:users: 9772 usersPID[0]
+:users: 9777 nodesPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9774 -> 9765 queueID 6
+Transaction sent
+:users: 9776 usersPID[0]
+:users: 9773 nodesPID[0]
+:users: 9772 nodesPID[0]
+:users: 9777 -> 9765 queueID 6
+Transaction sent
+:users: 9778 usersPID[0]
+Transaction sent
+:users: 9779 usersPID[0]
+:users: 9776 nodesPID[0]
+:users: 9773 -> 9765 queueID 6
+:users: 9772 -> 9765 queueID 6
+Transaction sent
+:users: 9778 nodesPID[0]
+:users: 9771 usersPID[0]
+:users: 9779 nodesPID[0]
+:users: 9776 -> 9765 queueID 6
+Transaction sent
+:users: 9775 usersPID[0]
+Transaction sent
+:users: 9774 usersPID[0]
+:users: 9778 -> 9765 queueID 6
+:users: 9771 nodesPID[0]
+:users: 9779 -> 9765 queueID 6
+Transaction sent
+:users: 9777 usersPID[0]
+:users: 9775 nodesPID[0]
+:users: 9774 nodesPID[0]
+Transaction sent
+:users: 9773 usersPID[0]
+:users: 9771 -> 9765 queueID 6
+Transaction sent
+:users: 9772 usersPID[0]
+:users: 9777 nodesPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9774 -> 9765 queueID 6
+:users: 9773 nodesPID[0]
+:users: 9776 usersPID[0]
+Transaction sent
+:users: 9772 nodesPID[0]
+:users: 9777 -> 9765 queueID 6
+:users: 9778 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9773 -> 9765 queueID 6
+:users: 9779 usersPID[0]
+:users: 9776 nodesPID[0]
+:users: 9772 -> 9765 queueID 6
+Transaction sent
+:users: 9778 nodesPID[0]
+Transaction sent
+:users: 9771 usersPID[0]
+:users: 9779 nodesPID[0]
+:users: 9776 -> 9765 queueID 6
+Transaction sent
+:users: 9777 usersPID[0]
+:users: 9775 usersPID[0]
+:users: 9773 usersPID[0]
+:users: 9774 usersPID[0]
+:users: 9778 -> 9765 queueID 6
+:users: 9771 nodesPID[0]
+:users: 9779 -> 9765 queueID 6
+Transaction sent
+:users: 9777 nodesPID[0]
+:users: 9775 nodesPID[0]
+:users: 9773 nodesPID[0]
+:users: 9774 nodesPID[0]
+Transaction sent
+:users: 9772 usersPID[0]
+:users: 9771 -> 9765 queueID 6
+Transaction sent
+:users: 9777 -> 9765 queueID 6
+:users: 9775 -> 9765 queueID 6
+:users: 9773 -> 9765 queueID 6
+:users: 9774 -> 9765 queueID 6
+:users: 9776 usersPID[0]
+:users: 9772 nodesPID[0]
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 9778 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9776 nodesPID[0]
+:users: 9779 usersPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9778 nodesPID[0]
+:users: 9776 -> 9765 queueID 6
+:users: 9771 usersPID[0]
+:users: 9779 nodesPID[0]
+:users: 9777 usersPID[0]
+:users: 9775 usersPID[0]
+Transaction sent
+:users: 9773 usersPID[0]
+:users: 9778 -> 9765 queueID 6
+Transaction sent
+:users: 9774 usersPID[0]
+:users: 9771 nodesPID[0]
+:users: 9779 -> 9765 queueID 6
+:users: 9777 nodesPID[0]
+:users: 9775 nodesPID[0]
+:users: 9773 nodesPID[0]
+Transaction sent
+:users: 9774 nodesPID[0]
+:users: 9772 usersPID[0]
+:users: 9771 -> 9765 queueID 6
+Transaction sent
+:users: 9777 -> 9765 queueID 6
+:users: 9776 usersPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9773 -> 9765 queueID 6
+:users: 9774 -> 9765 queueID 6
+:users: 9772 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9778 usersPID[0]
+Transaction sent
+:users: 9776 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9779 usersPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9778 nodesPID[0]
+:users: 9776 -> 9765 queueID 6
+:users: 9774 usersPID[0]
+:users: 9779 nodesPID[0]
+:users: 9771 usersPID[0]
+Transaction sent
+:users: 9777 usersPID[0]
+:users: 9778 -> 9765 queueID 6
+Transaction sent
+:users: 9775 usersPID[0]
+:users: 9774 nodesPID[0]
+:users: 9773 usersPID[0]
+:users: 9779 -> 9765 queueID 6
+:users: 9771 nodesPID[0]
+:users: 9777 nodesPID[0]
+Transaction sent
+:users: 9775 nodesPID[0]
+:users: 9774 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+:users: 9773 nodesPID[0]
+Transaction sent
+:users: 9776 usersPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9777 -> 9765 queueID 6
+:users: 9775 -> 9765 queueID 6
+Transaction sent
+:users: 9772 nodesPID[0]
+:users: 9773 -> 9765 queueID 6
+:users: 9778 usersPID[0]
+:users: 9776 nodesPID[0]
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 9779 usersPID[0]
+:users: 9772 -> 9765 queueID 6
+Transaction sent
+:users: 9778 nodesPID[0]
+:users: 9776 -> 9765 queueID 6
+:users: 9774 usersPID[0]
+:users: 9775 usersPID[0]
+:users: 9779 nodesPID[0]
+Transaction sent
+:users: 9778 -> 9765 queueID 6
+:users: 9771 usersPID[0]
+:users: 9777 usersPID[0]
+Transaction sent
+:users: 9774 nodesPID[0]
+:users: 9775 nodesPID[0]
+:users: 9779 -> 9765 queueID 6
+:users: 9773 usersPID[0]
+Transaction sent
+:users: 9771 nodesPID[0]
+:users: 9777 nodesPID[0]
+:users: 9772 usersPID[0]
+:users: 9774 -> 9765 queueID 6
+:users: 9775 -> 9765 queueID 6
+Transaction sent
+:users: 9773 nodesPID[0]
+:users: 9776 usersPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9777 -> 9765 queueID 6
+:users: 9772 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9778 usersPID[0]
+:users: 9773 -> 9765 queueID 6
+:users: 9776 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9779 usersPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9778 nodesPID[0]
+Transaction sent
+:users: 9776 -> 9765 queueID 6
+:users: 9774 usersPID[0]
+:users: 9775 usersPID[0]
+:users: 9779 nodesPID[0]
+Transaction sent
+:users: 9778 -> 9765 queueID 6
+Transaction sent
+:users: 9771 usersPID[0]
+:users: 9777 usersPID[0]
+:users: 9774 nodesPID[0]
+:users: 9775 nodesPID[0]
+:users: 9779 -> 9765 queueID 6
+:users: 9773 usersPID[0]
+Transaction sent
+:users: 9771 nodesPID[0]
+:users: 9777 nodesPID[0]
+:users: 9774 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+:users: 9775 -> 9765 queueID 6
+Transaction sent
+:users: 9773 nodesPID[0]
+:users: 9776 usersPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9777 -> 9765 queueID 6
+Transaction sent
+:users: 9772 nodesPID[0]
+Transaction sent
+:users: 9778 usersPID[0]
+:users: 9773 -> 9765 queueID 6
+:users: 9776 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9779 usersPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9778 nodesPID[0]
+Transaction sent
+:users: 9776 -> 9765 queueID 6
+:users: 9771 usersPID[0]
+:users: 9774 usersPID[0]
+:users: 9775 usersPID[0]
+:users: 9779 nodesPID[0]
+Transaction sent
+:users: 9778 -> 9765 queueID 6
+Transaction sent
+:users: 9777 usersPID[0]
+:users: 9771 nodesPID[0]
+:users: 9774 nodesPID[0]
+:users: 9775 nodesPID[0]
+:users: 9773 usersPID[0]
+:users: 9779 -> 9765 queueID 6
+Transaction sent
+:users: 9777 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9774 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9773 nodesPID[0]
+:users: 9776 usersPID[0]
+Transaction sent
+:users: 9777 -> 9765 queueID 6
+Transaction sent
+Transaction sent
+:users: 9772 nodesPID[0]
+Transaction sent
+:users: 9778 usersPID[0]
+:users: 9773 -> 9765 queueID 6
+:users: 9776 nodesPID[0]
+Transaction sent
+:users: 9779 usersPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9778 nodesPID[0]
+Transaction sent
+:users: 9776 -> 9765 queueID 6
+:users: 9771 usersPID[0]
+:users: 9774 usersPID[0]
+:users: 9779 nodesPID[0]
+:users: 9775 usersPID[0]
+Transaction sent
+:users: 9778 -> 9765 queueID 6
+:users: 9777 usersPID[0]
+Transaction sent
+:users: 9771 nodesPID[0]
+:users: 9774 nodesPID[0]
+:users: 9779 -> 9765 queueID 6
+:users: 9773 usersPID[0]
+:users: 9775 nodesPID[0]
+Transaction sent
+:users: 9777 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9774 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+Transaction sent
+:users: 9773 nodesPID[0]
+:users: 9776 usersPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9777 -> 9765 queueID 6
+Transaction sent
+Transaction sent
+:users: 9772 nodesPID[0]
+:users: 9778 usersPID[0]
+:users: 9773 -> 9765 queueID 6
+:users: 9776 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9779 usersPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9778 nodesPID[0]
+Transaction sent
+:users: 9776 -> 9765 queueID 6
+:users: 9771 usersPID[0]
+:users: 9777 usersPID[0]
+:users: 9774 usersPID[0]
+:users: 9779 nodesPID[0]
+Transaction sent
+:users: 9778 -> 9765 queueID 6
+:users: 9775 usersPID[0]
+Transaction sent
+:users: 9771 nodesPID[0]
+:users: 9777 nodesPID[0]
+:users: 9774 nodesPID[0]
+:users: 9773 usersPID[0]
+:users: 9779 -> 9765 queueID 6
+Transaction sent
+:users: 9775 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+:users: 9777 -> 9765 queueID 6
+:users: 9774 -> 9765 queueID 6
+:users: 9773 nodesPID[0]
+Transaction sent
+:users: 9776 usersPID[0]
+:users: 9775 -> 9765 queueID 6
+Transaction sent
+:users: 9772 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9779 usersPID[0]
+:users: 9778 usersPID[0]
+:users: 9773 -> 9765 queueID 6
+:users: 9776 nodesPID[0]
+Transaction sent
+:users: 9772 -> 9765 queueID 6
+:users: 9779 nodesPID[0]
+:users: 9778 nodesPID[0]
+:users: 9771 usersPID[0]
+Transaction sent
+:users: 9777 usersPID[0]
+:users: 9776 -> 9765 queueID 6
+:users: 9774 usersPID[0]
+Transaction sent
+:users: 9779 -> 9765 queueID 6
+:users: 9778 -> 9765 queueID 6
+:users: 9775 usersPID[0]
+:users: 9771 nodesPID[0]
+:users: 9777 nodesPID[0]
+Transaction sent
+:users: 9774 nodesPID[0]
+Transaction sent
+:users: 9773 usersPID[0]
+Transaction sent
+:users: 9775 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9777 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+:users: 9774 -> 9765 queueID 6
+:users: 9773 nodesPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9776 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9779 usersPID[0]
+:users: 9772 nodesPID[0]
+Transaction sent
+:users: 9778 usersPID[0]
+:users: 9773 -> 9765 queueID 6
+Transaction sent
+:users: 9776 nodesPID[0]
+:users: 9779 nodesPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9778 nodesPID[0]
+:users: 9771 usersPID[0]
+Transaction sent
+:users: 9777 usersPID[0]
+:users: 9776 -> 9765 queueID 6
+:users: 9779 -> 9765 queueID 6
+Transaction sent
+:users: 9774 usersPID[0]
+:users: 9778 -> 9765 queueID 6
+:users: 9771 nodesPID[0]
+:users: 9775 usersPID[0]
+:users: 9777 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9774 nodesPID[0]
+Transaction sent
+:users: 9773 usersPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9775 nodesPID[0]
+:users: 9777 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+:users: 9774 -> 9765 queueID 6
+:users: 9773 nodesPID[0]
+Transaction sent
+:users: 9776 usersPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9779 usersPID[0]
+Transaction sent
+:users: 9772 nodesPID[0]
+:users: 9778 usersPID[0]
+Transaction sent
+:users: 9773 -> 9765 queueID 6
+:users: 9776 nodesPID[0]
+Transaction sent
+:users: 9779 nodesPID[0]
+:users: 9772 -> 9765 queueID 6
+:users: 9778 nodesPID[0]
+:users: 9771 usersPID[0]
+Transaction sent
+:users: 9776 -> 9765 queueID 6
+:users: 9777 usersPID[0]
+:users: 9779 -> 9765 queueID 6
+Transaction sent
+:users: 9778 -> 9765 queueID 6
+:users: 9771 nodesPID[0]
+:users: 9775 usersPID[0]
+Transaction sent
+:users: 9777 nodesPID[0]
+Transaction sent
+:users: 9774 usersPID[0]
+:users: 9773 usersPID[0]
+Transaction sent
+:users: 9771 -> 9765 queueID 6
+:users: 9775 nodesPID[0]
+:users: 9777 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+:users: 9774 nodesPID[0]
+:users: 9776 usersPID[0]
+:users: 9773 nodesPID[0]
+:users: 9779 usersPID[0]
+Transaction sent
+:users: 9775 -> 9765 queueID 6
+Transaction sent
+:users: 9772 nodesPID[0]
+:users: 9774 -> 9765 queueID 6
+:users: 9778 usersPID[0]
+:users: 9776 nodesPID[0]
+:users: 9773 -> 9765 queueID 6
+:users: 9779 nodesPID[0]
+Transaction sent
+:users: 9772 -> 9765 queueID 6
+Transaction sent
+:users: 9778 nodesPID[0]
+:users: 9776 -> 9765 queueID 6
+:users: 9771 usersPID[0]
+Transaction sent
+:users: 9779 -> 9765 queueID 6
+Transaction sent
+:users: 9778 -> 9765 queueID 6
+Transaction sent
+:users: 9771 nodesPID[0]
+:users: 9775 usersPID[0]
+:users: 9777 usersPID[0]
+Transaction sent
+:users: 9774 usersPID[0]
+:users: 9776 usersPID[0]
+Transaction sent
+:users: 9773 usersPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9775 nodesPID[0]
+:users: 9772 usersPID[0]
+:users: 9777 nodesPID[0]
+:users: 9774 nodesPID[0]
+:users: 9776 nodesPID[0]
+:users: 9773 nodesPID[0]
+:users: 9779 usersPID[0]
+Transaction sent
+:users: 9775 -> 9765 queueID 6
+:users: 9772 nodesPID[0]
+:users: 9777 -> 9765 queueID 6
+:users: 9774 -> 9765 queueID 6
+:users: 9776 -> 9765 queueID 6
+:users: 9773 -> 9765 queueID 6
+:users: 9779 nodesPID[0]
+Transaction sent
+:users: 9772 -> 9765 queueID 6
+:users: 9778 usersPID[0]
+Transaction sent
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 9771 usersPID[0]
+:users: 9779 -> 9765 queueID 6
+Transaction sent
+:users: 9778 nodesPID[0]
+:users: 9775 usersPID[0]
+:users: 9771 nodesPID[0]
+Transaction sent
+:users: 9777 usersPID[0]
+:users: 9774 usersPID[0]
+:users: 9776 usersPID[0]
+:users: 9778 -> 9765 queueID 6
+:users: 9773 usersPID[0]
+:users: 9775 nodesPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9772 usersPID[0]
+:users: 9777 nodesPID[0]
+:users: 9774 nodesPID[0]
+:users: 9776 nodesPID[0]
+Transaction sent
+:users: 9773 nodesPID[0]
+:users: 9779 usersPID[0]
+:users: 9775 -> 9765 queueID 6
+Transaction sent
+:users: 9772 nodesPID[0]
+:users: 9777 -> 9765 queueID 6
+:users: 9774 -> 9765 queueID 6
+:users: 9776 -> 9765 queueID 6
+:users: 9773 -> 9765 queueID 6
+:users: 9779 nodesPID[0]
+Transaction sent
+:users: 9772 -> 9765 queueID 6
+:users: 9778 usersPID[0]
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 9779 -> 9765 queueID 6
+:users: 9771 usersPID[0]
+:users: 9778 nodesPID[0]
+:users: 9775 usersPID[0]
+:users: 9771 nodesPID[0]
+:users: 9778 -> 9765 queueID 6
+:users: 9777 usersPID[0]
+:users: 9775 nodesPID[0]
+:users: 9774 usersPID[0]
+:users: 9771 -> 9765 queueID 6
+:users: 9776 usersPID[0]
+:users: 9777 nodesPID[0]
+:users: 9775 -> 9765 queueID 6
+:users: 9774 nodesPID[0]
+:users: 9776 nodesPID[0]
+:users: 9777 -> 9765 queueID 6
+:users: 9774 -> 9765 queueID 6
+:users: 9776 -> 9765 queueID 6
+::User:: SIGINT received
+ ::User:: SIGINT received
+ ::User:: SIGINT received
+ ::User:: SIGINT received
+ ::User:: SIGINT received
+ ::User:: SIGINT received
+ ::User:: SIGINT received
+ ::User:: SIGINT received
+ ::Master:: SIGINT ricevuto
+ ::User:: SIGINT received
+ --------------------------------------------
+----------- Configuration value ------------
+SO_USER_NUM->9
+SO_NODES_NUM->6
+SO_BUDGET_INIT->998
+SO_REWARD->14
+SO_MIN_TRANS_GEN_NSEC->100000001
+SO_MAX_TRANS_GEN_NSEC->200000001
+SO_RETRY->21
+SO_TP_SIZE->997
+SO_MIN_TRANS_PROC_NSEC->100000002
+SO_MAX_TRANS_PROC_NSEC->200000002
+SO_SIM_SEC->10
+SO_FRIENDS_NUM->999
+SO_HOPS->7
+--------------------------------------------
+
+***********************
+|| The time has come ||
+***********************
+
+
+ ------- Master Process PID is 9764 ----------
+|                                             |
+ - Type ------- PID --------- Status ---------
+ ---------------------------------------------
+|  User         9779            0             |
+|  User         9778            0             |
+|  User         9777            0             |
+|  User         9776            0             |
+|  User         9775            0             |
+|  User         9774            0             |
+|  User         9773            0             |
+|  User         9772            0             |
+|  User         9771            0             |
+ ---------------------------------------------
+|  Node         9770            0             |
+|  Node         9769            0             |
+|  Node         9768            0             |
+|  Node         9767            0             |
+|  Node         9766            0             |
+|  Node         9765            0             |
+ ---------------------------------------------

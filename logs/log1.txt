@@ -1,0 +1,1772 @@
+rm -f *.o master users nodes *~
+gcc -c -std=c89 -g -O0 -pedantic -D_GNU_SOURCE -DDEBUG src/common.c src/utils/*.c
+src/utils/lists.c:1: warning: ISO C forbids an empty translation unit [-Wpedantic]
+gcc -std=c89 -g -O0 -pedantic -D_GNU_SOURCE -DDEBUG src/master.c  src/print.c src/parser.c *.o -lm -o master
+gcc -std=c89 -g -O0 -pedantic -D_GNU_SOURCE -DDEBUG src/users.c *.o -lm -o users
+gcc -std=c89 -g -O0 -pedantic -D_GNU_SOURCE -DDEBUG src/nodes.c *.o -lm -o nodes
+./master
+:master: semID is 4
+:parser: assigned defaults
+--------------------------------------------
+----------- Configuration input ------------
+SO_USER_NUM 9
+SO_NODES_NUM 6
+SO_FRIENDS_NUM 999
+SO_SIM_SEC 10
+SO_HOPS 7
+SO_BUDGET_INIT 998
+SO_REWARD 14
+SO_MIN_TRANS_GEN_NSEC 100000001
+SO_MAX_TRANS_GEN_NSEC 200000001
+SO_RETRY 21
+SO_TP_SIZE 997
+SO_MIN_TRANS_PROC_NSEC 100000002
+SO_MAX_TRANS_PROC_NSEC 200000002
+--------------------------------------------
+-- Conf file read successful
+:master: Spawning node
+:master: Spawning node
+:master: Spawning node
+:master: Spawning node
+:master: Spawning node
+:master: Spawning node
+:master: Spawning user
+Node 8052 has finished
+:master: Spawning user
+Node 8054 has finished
+Node 8053 has finished
+:master: Spawning user
+Node 8055 has finished
+:master: Spawning user
+Node 8056 has finished
+:master: Spawning user
+:master: Spawning user
+Node 8057 has finished
+:master: Spawning user
+:users: 8058 semID is 0
+:users: 8058 usersPID[0]
+:users: 8058 nodesPID[0]
+:master: Spawning user
+:users: 8058 -> 8052 queueID 4
+:users: 8059 semID is 0
+Transaction sent
+:users: 8059 usersPID[0]
+:users: 8059 nodesPID[0]
+:users: 8060 semID is 0
+:users: 8059 -> 8052 queueID 4
+Transaction sent
+:users: 8058 usersPID[0]
+:users: 8060 usersPID[0]
+:users: 8058 nodesPID[0]
+:users: 8060 nodesPID[0]
+:users: 8058 -> 8052 queueID 4
+Transaction sent
+:users: 8059 usersPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8059 nodesPID[0]
+Transaction sent
+:users: 8059 -> 8052 queueID 4
+Transaction sent
+:users: 8058 usersPID[0]
+:users: 8058 nodesPID[0]
+:users: 8058 -> 8052 queueID 4
+:master: Spawning user
+Transaction sent
+:users: 8060 usersPID[0]
+:users: 8059 usersPID[0]
+:users: 8060 nodesPID[0]
+:users: 8059 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8059 -> 8052 queueID 4
+:users: 8058 usersPID[0]
+:users: 8062 semID is 0
+Transaction sent
+:users: 8061 semID is 0
+Transaction sent
+:users: 8058 nodesPID[0]
+:users: 8062 usersPID[0]
+:users: 8061 usersPID[0]
+:users: 8058 -> 8052 queueID 4
+:users: 8062 nodesPID[0]
+:users: 8060 usersPID[0]
+:users: 8061 nodesPID[0]
+Transaction sent
+:users: 8059 usersPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8060 nodesPID[0]
+:users: 8061 -> 8052 queueID 4
+:users: 8059 nodesPID[0]
+Transaction sent
+:users: 8060 -> 8052 queueID 4
+Transaction sent
+:users: 8058 usersPID[0]
+:users: 8059 -> 8052 queueID 4
+Transaction sent
+:users: 8058 nodesPID[0]
+Transaction sent
+:users: 8062 usersPID[0]
+:users: 8058 -> 8052 queueID 4
+:users: 8062 nodesPID[0]
+:users: 8061 usersPID[0]
+Transaction sent
+:users: 8062 -> 8052 queueID 4
+:users: 8059 usersPID[0]
+:users: 8060 usersPID[0]
+:users: 8061 nodesPID[0]
+Transaction sent
+:users: 8059 nodesPID[0]
+:users: 8060 nodesPID[0]
+:users: 8061 -> 8052 queueID 4
+:users: 8058 usersPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8060 -> 8052 queueID 4
+Transaction sent
+:users: 8058 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 8063 semID is 0
+:users: 8058 -> 8052 queueID 4
+:users: 8062 usersPID[0]
+:users: 8061 usersPID[0]
+:users: 8059 usersPID[0]
+:users: 8063 usersPID[0]
+Transaction sent
+:users: 8060 usersPID[0]
+:users: 8062 nodesPID[0]
+:users: 8061 nodesPID[0]
+:users: 8059 nodesPID[0]
+:users: 8063 nodesPID[0]
+:users: 8060 nodesPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8061 -> 8052 queueID 4
+:users: 8059 -> 8052 queueID 4
+:users: 8058 usersPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8063 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 8058 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 8064 semID is 0
+:users: 8058 -> 8052 queueID 4
+:users: 8062 usersPID[0]
+:users: 8061 usersPID[0]
+:users: 8059 usersPID[0]
+Transaction sent
+:users: 8064 usersPID[0]
+:users: 8060 usersPID[0]
+:users: 8062 nodesPID[0]
+:users: 8061 nodesPID[0]
+:users: 8063 usersPID[0]
+:users: 8059 nodesPID[0]
+:users: 8064 nodesPID[0]
+:users: 8060 nodesPID[0]
+:users: 8065 semID is 0
+:users: 8062 -> 8052 queueID 4
+:users: 8061 -> 8052 queueID 4
+:users: 8058 usersPID[0]
+:users: 8063 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8060 -> 8052 queueID 4
+:users: 8064 -> 8052 queueID 4
+Transaction sent
+:users: 8065 usersPID[0]
+Transaction sent
+:users: 8058 nodesPID[0]
+:users: 8063 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 8065 nodesPID[0]
+:users: 8058 -> 8052 queueID 4
+Transaction sent
+:users: 8061 usersPID[0]
+Transaction sent
+:users: 8065 -> 8052 queueID 4
+:users: 8062 usersPID[0]
+:users: 8061 nodesPID[0]
+:users: 8060 usersPID[0]
+:users: 8064 usersPID[0]
+:users: 8062 nodesPID[0]
+Transaction sent
+:users: 8061 -> 8052 queueID 4
+:users: 8063 usersPID[0]
+:users: 8060 nodesPID[0]
+:users: 8058 usersPID[0]
+:users: 8064 nodesPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8059 usersPID[0]
+Transaction sent
+:users: 8063 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8058 nodesPID[0]
+:users: 8064 -> 8052 queueID 4
+Transaction sent
+:users: 8065 usersPID[0]
+:users: 8059 nodesPID[0]
+:users: 8063 -> 8052 queueID 4
+Transaction sent
+:users: 8058 -> 8052 queueID 4
+Transaction sent
+:users: 8061 usersPID[0]
+:users: 8065 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8061 nodesPID[0]
+:users: 8065 -> 8052 queueID 4
+Transaction sent
+:users: 8060 usersPID[0]
+:users: 8062 usersPID[0]
+:users: 8064 usersPID[0]
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+:users: 8060 nodesPID[0]
+:users: 8063 usersPID[0]
+:users: 8066 semID is 0
+:users: 8062 nodesPID[0]
+:users: 8058 usersPID[0]
+:users: 8064 nodesPID[0]
+Transaction sent
+:users: 8060 -> 8052 queueID 4
+:users: 8063 nodesPID[0]
+:users: 8065 usersPID[0]
+:users: 8059 usersPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8061 usersPID[0]
+:users: 8066 usersPID[0]
+:users: 8058 nodesPID[0]
+:users: 8064 -> 8052 queueID 4
+Transaction sent
+:users: 8063 -> 8052 queueID 4
+:users: 8065 nodesPID[0]
+:users: 8059 nodesPID[0]
+Transaction sent
+:users: 8061 nodesPID[0]
+:users: 8066 nodesPID[0]
+:users: 8058 -> 8052 queueID 4
+Transaction sent
+:users: 8066 -> 8052 queueID 4
+Transaction sent
+:users: 8065 -> 8052 queueID 4
+:users: 8059 -> 8052 queueID 4
+:users: 8061 -> 8052 queueID 4
+:users: 8060 usersPID[0]
+Transaction sent
+:users: 8062 usersPID[0]
+Transaction sent
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 8064 usersPID[0]
+:users: 8063 usersPID[0]
+:users: 8060 nodesPID[0]
+:users: 8062 nodesPID[0]
+:users: 8058 usersPID[0]
+:users: 8064 nodesPID[0]
+:users: 8065 usersPID[0]
+:users: 8063 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8062 -> 8052 queueID 4
+:users: 8059 usersPID[0]
+:users: 8058 nodesPID[0]
+:users: 8061 usersPID[0]
+:users: 8066 usersPID[0]
+:users: 8064 -> 8052 queueID 4
+:users: 8065 nodesPID[0]
+:users: 8063 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8059 nodesPID[0]
+:users: 8058 -> 8052 queueID 4
+:users: 8061 nodesPID[0]
+:users: 8066 nodesPID[0]
+Transaction sent
+:users: 8065 -> 8052 queueID 4
+Transaction sent
+:users: 8059 -> 8052 queueID 4
+Transaction sent
+:users: 8061 -> 8052 queueID 4
+:users: 8062 usersPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8060 usersPID[0]
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 8064 usersPID[0]
+:users: 8062 nodesPID[0]
+:users: 8063 usersPID[0]
+Transaction sent
+:users: 8060 nodesPID[0]
+:users: 8058 usersPID[0]
+:users: 8064 nodesPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8063 nodesPID[0]
+:users: 8065 usersPID[0]
+:users: 8059 usersPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8061 usersPID[0]
+:users: 8058 nodesPID[0]
+:users: 8064 -> 8052 queueID 4
+Transaction sent
+:users: 8063 -> 8052 queueID 4
+:users: 8065 nodesPID[0]
+:users: 8066 usersPID[0]
+:users: 8059 nodesPID[0]
+Transaction sent
+:users: 8061 nodesPID[0]
+:users: 8058 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8065 -> 8052 queueID 4
+:users: 8066 nodesPID[0]
+:users: 8064 usersPID[0]
+:users: 8063 usersPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+:users: 8062 usersPID[0]
+:users: 8060 usersPID[0]
+Transaction sent
+:users: 8066 -> 8052 queueID 4
+:users: 8064 nodesPID[0]
+:users: 8063 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 8062 nodesPID[0]
+:users: 8060 nodesPID[0]
+Transaction sent
+:users: 8058 usersPID[0]
+:users: 8064 -> 8052 queueID 4
+:users: 8063 -> 8052 queueID 4
+:users: 8065 usersPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8060 -> 8052 queueID 4
+:users: 8058 nodesPID[0]
+Transaction sent
+:users: 8059 usersPID[0]
+:users: 8061 usersPID[0]
+Transaction sent
+:users: 8065 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 8066 usersPID[0]
+:users: 8058 -> 8052 queueID 4
+:users: 8059 nodesPID[0]
+:users: 8061 nodesPID[0]
+:users: 8065 -> 8052 queueID 4
+:users: 8064 usersPID[0]
+:users: 8066 nodesPID[0]
+:users: 8063 usersPID[0]
+Transaction sent
+:users: 8059 -> 8052 queueID 4
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+:users: 8060 usersPID[0]
+:users: 8064 nodesPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8063 nodesPID[0]
+:users: 8062 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 8060 nodesPID[0]
+:users: 8064 -> 8052 queueID 4
+:users: 8058 usersPID[0]
+Transaction sent
+:users: 8063 -> 8052 queueID 4
+:users: 8062 nodesPID[0]
+:users: 8065 usersPID[0]
+:users: 8060 -> 8052 queueID 4
+Transaction sent
+:users: 8058 nodesPID[0]
+:users: 8059 usersPID[0]
+Transaction sent
+:users: 8061 usersPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8065 nodesPID[0]
+Transaction sent
+:users: 8058 -> 8052 queueID 4
+:users: 8066 usersPID[0]
+:users: 8059 nodesPID[0]
+:users: 8061 nodesPID[0]
+:users: 8064 usersPID[0]
+Transaction sent
+:users: 8065 -> 8052 queueID 4
+Transaction sent
+:users: 8063 usersPID[0]
+:users: 8066 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8061 -> 8052 queueID 4
+:users: 8064 nodesPID[0]
+:users: 8060 usersPID[0]
+Transaction sent
+:users: 8063 nodesPID[0]
+:users: 8066 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8064 -> 8052 queueID 4
+:users: 8058 usersPID[0]
+:users: 8060 nodesPID[0]
+:users: 8063 -> 8052 queueID 4
+:users: 8062 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 8065 usersPID[0]
+:users: 8058 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+Transaction sent
+:users: 8062 nodesPID[0]
+:users: 8061 usersPID[0]
+:users: 8065 nodesPID[0]
+:users: 8058 -> 8052 queueID 4
+:users: 8059 usersPID[0]
+Transaction sent
+:users: 8062 -> 8052 queueID 4
+:users: 8066 usersPID[0]
+:users: 8064 usersPID[0]
+:users: 8061 nodesPID[0]
+:users: 8065 -> 8052 queueID 4
+Transaction sent
+:users: 8063 usersPID[0]
+:users: 8059 nodesPID[0]
+Transaction sent
+:users: 8066 nodesPID[0]
+:users: 8064 nodesPID[0]
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+:users: 8060 usersPID[0]
+:users: 8063 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8066 -> 8052 queueID 4
+:users: 8064 -> 8052 queueID 4
+:users: 8058 usersPID[0]
+Transaction sent
+:users: 8060 nodesPID[0]
+:users: 8063 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 8065 usersPID[0]
+:users: 8062 usersPID[0]
+:users: 8058 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+Transaction sent
+:users: 8061 usersPID[0]
+:users: 8065 nodesPID[0]
+:users: 8062 nodesPID[0]
+:users: 8058 -> 8052 queueID 4
+:users: 8059 usersPID[0]
+Transaction sent
+:users: 8064 usersPID[0]
+:users: 8066 usersPID[0]
+:users: 8061 nodesPID[0]
+:users: 8065 -> 8052 queueID 4
+:users: 8062 -> 8052 queueID 4
+Transaction sent
+:users: 8059 nodesPID[0]
+:users: 8063 usersPID[0]
+:users: 8064 nodesPID[0]
+:users: 8066 nodesPID[0]
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8060 usersPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8063 nodesPID[0]
+:users: 8064 -> 8052 queueID 4
+:users: 8066 -> 8052 queueID 4
+Transaction sent
+:users: 8058 usersPID[0]
+:users: 8060 nodesPID[0]
+Transaction sent
+:users: 8063 -> 8052 queueID 4
+Transaction sent
+:users: 8065 usersPID[0]
+Transaction sent
+:users: 8058 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+Transaction sent
+:users: 8062 usersPID[0]
+:users: 8061 usersPID[0]
+:users: 8059 usersPID[0]
+:users: 8065 nodesPID[0]
+:users: 8058 -> 8052 queueID 4
+Transaction sent
+:users: 8064 usersPID[0]
+:users: 8062 nodesPID[0]
+:users: 8066 usersPID[0]
+:users: 8061 nodesPID[0]
+:users: 8059 nodesPID[0]
+:users: 8065 -> 8052 queueID 4
+Transaction sent
+:users: 8064 nodesPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8066 nodesPID[0]
+:users: 8061 -> 8052 queueID 4
+:users: 8059 -> 8052 queueID 4
+:users: 8063 usersPID[0]
+:users: 8060 usersPID[0]
+Transaction sent
+:users: 8064 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8066 -> 8052 queueID 4
+Transaction sent
+:users: 8058 usersPID[0]
+Transaction sent
+:users: 8063 nodesPID[0]
+:users: 8060 nodesPID[0]
+Transaction sent
+:users: 8065 usersPID[0]
+:users: 8064 usersPID[0]
+:users: 8058 nodesPID[0]
+:users: 8063 -> 8052 queueID 4
+:users: 8060 -> 8052 queueID 4
+:users: 8061 usersPID[0]
+:users: 8065 nodesPID[0]
+:users: 8064 nodesPID[0]
+:users: 8059 usersPID[0]
+:users: 8058 -> 8052 queueID 4
+:users: 8062 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 8061 nodesPID[0]
+:users: 8066 usersPID[0]
+:users: 8065 -> 8052 queueID 4
+:users: 8064 -> 8052 queueID 4
+:users: 8059 nodesPID[0]
+Transaction sent
+:users: 8062 nodesPID[0]
+:users: 8061 -> 8052 queueID 4
+:users: 8066 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 8063 usersPID[0]
+:users: 8060 usersPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8062 -> 8052 queueID 4
+Transaction sent
+:users: 8066 -> 8052 queueID 4
+:users: 8058 usersPID[0]
+:users: 8063 nodesPID[0]
+:users: 8060 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 8065 usersPID[0]
+:users: 8064 usersPID[0]
+Transaction sent
+:users: 8058 nodesPID[0]
+:users: 8063 -> 8052 queueID 4
+:users: 8060 -> 8052 queueID 4
+:users: 8061 usersPID[0]
+:users: 8065 nodesPID[0]
+:users: 8064 nodesPID[0]
+:users: 8058 -> 8052 queueID 4
+:users: 8062 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 8061 nodesPID[0]
+:users: 8065 -> 8052 queueID 4
+:users: 8064 -> 8052 queueID 4
+:users: 8066 usersPID[0]
+Transaction sent
+:users: 8062 nodesPID[0]
+:users: 8059 usersPID[0]
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8066 nodesPID[0]
+:users: 8063 usersPID[0]
+:users: 8060 usersPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8059 nodesPID[0]
+Transaction sent
+:users: 8058 usersPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8063 nodesPID[0]
+:users: 8060 nodesPID[0]
+Transaction sent
+:users: 8065 usersPID[0]
+:users: 8064 usersPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8058 nodesPID[0]
+Transaction sent
+:users: 8063 -> 8052 queueID 4
+:users: 8060 -> 8052 queueID 4
+:users: 8061 usersPID[0]
+:users: 8065 nodesPID[0]
+:users: 8064 nodesPID[0]
+Transaction sent
+:users: 8058 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8061 nodesPID[0]
+:users: 8065 -> 8052 queueID 4
+:users: 8064 -> 8052 queueID 4
+:users: 8062 usersPID[0]
+:users: 8066 usersPID[0]
+:users: 8060 usersPID[0]
+Transaction sent
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+:users: 8059 usersPID[0]
+Transaction sent
+:users: 8062 nodesPID[0]
+:users: 8063 usersPID[0]
+:users: 8066 nodesPID[0]
+:users: 8060 nodesPID[0]
+Transaction sent
+:users: 8059 nodesPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8058 usersPID[0]
+:users: 8063 nodesPID[0]
+:users: 8065 usersPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8060 -> 8052 queueID 4
+:users: 8064 usersPID[0]
+:users: 8059 -> 8052 queueID 4
+Transaction sent
+:users: 8058 nodesPID[0]
+:users: 8063 -> 8052 queueID 4
+:users: 8065 nodesPID[0]
+:users: 8061 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 8064 nodesPID[0]
+Transaction sent
+:users: 8058 -> 8052 queueID 4
+Transaction sent
+:users: 8065 -> 8052 queueID 4
+:users: 8061 nodesPID[0]
+:users: 8064 -> 8052 queueID 4
+Transaction sent
+:users: 8062 usersPID[0]
+Transaction sent
+:users: 8066 usersPID[0]
+:users: 8060 usersPID[0]
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+:users: 8059 usersPID[0]
+:users: 8062 nodesPID[0]
+:users: 8063 usersPID[0]
+:users: 8066 nodesPID[0]
+:users: 8060 nodesPID[0]
+:users: 8058 usersPID[0]
+Transaction sent
+:users: 8065 usersPID[0]
+:users: 8059 nodesPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8063 nodesPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8060 -> 8052 queueID 4
+:users: 8064 usersPID[0]
+:users: 8058 nodesPID[0]
+:users: 8065 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+Transaction sent
+:users: 8061 usersPID[0]
+:users: 8063 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8064 nodesPID[0]
+:users: 8058 -> 8052 queueID 4
+:users: 8065 -> 8052 queueID 4
+Transaction sent
+:users: 8061 nodesPID[0]
+Transaction sent
+:users: 8066 usersPID[0]
+:users: 8064 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8061 -> 8052 queueID 4
+:users: 8060 usersPID[0]
+:users: 8062 usersPID[0]
+:users: 8066 nodesPID[0]
+Transaction sent
+:users: 8059 usersPID[0]
+:users: 8063 usersPID[0]
+Transaction sent
+:users: 8060 nodesPID[0]
+:users: 8062 nodesPID[0]
+:users: 8058 usersPID[0]
+:users: 8064 usersPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8065 usersPID[0]
+:users: 8059 nodesPID[0]
+:users: 8063 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8062 -> 8052 queueID 4
+:users: 8058 nodesPID[0]
+:users: 8064 nodesPID[0]
+:users: 8061 usersPID[0]
+Transaction sent
+:users: 8065 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8063 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8058 -> 8052 queueID 4
+:users: 8064 -> 8052 queueID 4
+:users: 8061 nodesPID[0]
+:users: 8065 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 8066 usersPID[0]
+Transaction sent
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+:users: 8060 usersPID[0]
+:users: 8066 nodesPID[0]
+:users: 8062 usersPID[0]
+Transaction sent
+:users: 8059 usersPID[0]
+:users: 8063 usersPID[0]
+:users: 8058 usersPID[0]
+:users: 8060 nodesPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8064 usersPID[0]
+:users: 8062 nodesPID[0]
+:users: 8065 usersPID[0]
+:users: 8059 nodesPID[0]
+:users: 8063 nodesPID[0]
+:users: 8058 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8061 usersPID[0]
+Transaction sent
+:users: 8064 nodesPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8065 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8063 -> 8052 queueID 4
+:users: 8058 -> 8052 queueID 4
+Transaction sent
+:users: 8061 nodesPID[0]
+:users: 8064 -> 8052 queueID 4
+Transaction sent
+:users: 8065 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 8066 usersPID[0]
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8060 usersPID[0]
+:users: 8066 nodesPID[0]
+Transaction sent
+:users: 8063 usersPID[0]
+:users: 8058 usersPID[0]
+:users: 8060 nodesPID[0]
+:users: 8062 usersPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8061 usersPID[0]
+:users: 8064 usersPID[0]
+:users: 8063 nodesPID[0]
+:users: 8059 usersPID[0]
+:users: 8065 usersPID[0]
+:users: 8058 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8062 nodesPID[0]
+Transaction sent
+:users: 8061 nodesPID[0]
+:users: 8064 nodesPID[0]
+:users: 8063 -> 8052 queueID 4
+:users: 8059 nodesPID[0]
+:users: 8065 nodesPID[0]
+:users: 8058 -> 8052 queueID 4
+Transaction sent
+:users: 8062 -> 8052 queueID 4
+:users: 8061 -> 8052 queueID 4
+:users: 8064 -> 8052 queueID 4
+Transaction sent
+:users: 8059 -> 8052 queueID 4
+:users: 8065 -> 8052 queueID 4
+:users: 8066 usersPID[0]
+Transaction sent
+Transaction sent
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 8060 usersPID[0]
+Transaction sent
+:users: 8066 nodesPID[0]
+:users: 8063 usersPID[0]
+:users: 8060 nodesPID[0]
+:users: 8058 usersPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8061 usersPID[0]
+:users: 8063 nodesPID[0]
+:users: 8064 usersPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8059 usersPID[0]
+:users: 8058 nodesPID[0]
+:users: 8062 usersPID[0]
+Transaction sent
+:users: 8065 usersPID[0]
+:users: 8061 nodesPID[0]
+:users: 8063 -> 8052 queueID 4
+:users: 8064 nodesPID[0]
+Transaction sent
+:users: 8059 nodesPID[0]
+:users: 8058 -> 8052 queueID 4
+:users: 8062 nodesPID[0]
+:users: 8065 nodesPID[0]
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+:users: 8064 -> 8052 queueID 4
+:users: 8059 -> 8052 queueID 4
+:users: 8066 usersPID[0]
+Transaction sent
+:users: 8062 -> 8052 queueID 4
+:users: 8065 -> 8052 queueID 4
+Transaction sent
+:users: 8060 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 8066 nodesPID[0]
+Transaction sent
+:users: 8063 usersPID[0]
+Transaction sent
+:users: 8060 nodesPID[0]
+:users: 8058 usersPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8061 usersPID[0]
+:users: 8063 nodesPID[0]
+:users: 8064 usersPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8059 usersPID[0]
+:users: 8062 usersPID[0]
+:users: 8058 nodesPID[0]
+Transaction sent
+:users: 8061 nodesPID[0]
+:users: 8065 usersPID[0]
+:users: 8063 -> 8052 queueID 4
+Transaction sent
+:users: 8064 nodesPID[0]
+Transaction sent
+:users: 8059 nodesPID[0]
+:users: 8062 nodesPID[0]
+:users: 8058 -> 8052 queueID 4
+:users: 8061 -> 8052 queueID 4
+:users: 8065 nodesPID[0]
+:users: 8066 usersPID[0]
+:users: 8064 -> 8052 queueID 4
+:users: 8059 -> 8052 queueID 4
+:users: 8063 usersPID[0]
+:users: 8062 -> 8052 queueID 4
+Transaction sent
+:users: 8060 usersPID[0]
+Transaction sent
+:users: 8065 -> 8052 queueID 4
+:users: 8066 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 8063 nodesPID[0]
+Transaction sent
+:users: 8060 nodesPID[0]
+Transaction sent
+:users: 8066 -> 8052 queueID 4
+:users: 8058 usersPID[0]
+:users: 8063 -> 8052 queueID 4
+:users: 8061 usersPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8064 usersPID[0]
+Transaction sent
+:users: 8058 nodesPID[0]
+:users: 8059 usersPID[0]
+Transaction sent
+:users: 8061 nodesPID[0]
+Transaction sent
+:users: 8065 usersPID[0]
+:users: 8064 nodesPID[0]
+:users: 8062 usersPID[0]
+:users: 8058 -> 8052 queueID 4
+:users: 8059 nodesPID[0]
+:users: 8061 -> 8052 queueID 4
+:users: 8065 nodesPID[0]
+:users: 8066 usersPID[0]
+:users: 8064 -> 8052 queueID 4
+:users: 8063 usersPID[0]
+:users: 8062 nodesPID[0]
+Transaction sent
+:users: 8060 usersPID[0]
+:users: 8059 -> 8052 queueID 4
+Transaction sent
+:users: 8065 -> 8052 queueID 4
+:users: 8066 nodesPID[0]
+Transaction sent
+:users: 8063 nodesPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8060 nodesPID[0]
+:users: 8061 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 8064 usersPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8058 usersPID[0]
+:users: 8063 -> 8052 queueID 4
+Transaction sent
+:users: 8060 -> 8052 queueID 4
+:users: 8061 nodesPID[0]
+:users: 8064 nodesPID[0]
+Transaction sent
+:users: 8058 nodesPID[0]
+Transaction sent
+:users: 8059 usersPID[0]
+:users: 8065 usersPID[0]
+Transaction sent
+:users: 8061 -> 8052 queueID 4
+:users: 8062 usersPID[0]
+:users: 8064 -> 8052 queueID 4
+:users: 8058 -> 8052 queueID 4
+:users: 8059 nodesPID[0]
+:users: 8065 nodesPID[0]
+:users: 8066 usersPID[0]
+Transaction sent
+:users: 8063 usersPID[0]
+:users: 8062 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 8059 -> 8052 queueID 4
+:users: 8060 usersPID[0]
+:users: 8065 -> 8052 queueID 4
+:users: 8066 nodesPID[0]
+:users: 8063 nodesPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8061 usersPID[0]
+Transaction sent
+:users: 8060 nodesPID[0]
+Transaction sent
+:users: 8064 usersPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8063 -> 8052 queueID 4
+:users: 8058 usersPID[0]
+Transaction sent
+:users: 8061 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8064 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 8059 usersPID[0]
+:users: 8058 nodesPID[0]
+:users: 8065 usersPID[0]
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+:users: 8064 -> 8052 queueID 4
+:users: 8063 usersPID[0]
+:users: 8059 nodesPID[0]
+:users: 8058 -> 8052 queueID 4
+:users: 8065 nodesPID[0]
+Transaction sent
+:users: 8062 usersPID[0]
+:users: 8066 usersPID[0]
+Transaction sent
+:users: 8063 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+Transaction sent
+:users: 8065 -> 8052 queueID 4
+:users: 8060 usersPID[0]
+:users: 8062 nodesPID[0]
+:users: 8066 nodesPID[0]
+:users: 8063 -> 8052 queueID 4
+:users: 8061 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 8060 nodesPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8064 usersPID[0]
+:users: 8066 -> 8052 queueID 4
+Transaction sent
+:users: 8058 usersPID[0]
+:users: 8061 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+Transaction sent
+:users: 8064 nodesPID[0]
+Transaction sent
+:users: 8065 usersPID[0]
+:users: 8058 nodesPID[0]
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+:users: 8064 -> 8052 queueID 4
+:users: 8059 usersPID[0]
+:users: 8063 usersPID[0]
+:users: 8065 nodesPID[0]
+:users: 8058 -> 8052 queueID 4
+Transaction sent
+:users: 8066 usersPID[0]
+Transaction sent
+:users: 8062 usersPID[0]
+:users: 8059 nodesPID[0]
+:users: 8063 nodesPID[0]
+:users: 8065 -> 8052 queueID 4
+:users: 8060 usersPID[0]
+:users: 8064 usersPID[0]
+Transaction sent
+:users: 8066 nodesPID[0]
+:users: 8062 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8061 usersPID[0]
+:users: 8063 -> 8052 queueID 4
+Transaction sent
+:users: 8060 nodesPID[0]
+:users: 8064 nodesPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8062 -> 8052 queueID 4
+Transaction sent
+:users: 8061 nodesPID[0]
+Transaction sent
+:users: 8058 usersPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8064 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8065 usersPID[0]
+:users: 8061 -> 8052 queueID 4
+:users: 8058 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 8059 usersPID[0]
+:users: 8063 usersPID[0]
+:users: 8065 nodesPID[0]
+Transaction sent
+:users: 8058 -> 8052 queueID 4
+:users: 8066 usersPID[0]
+:users: 8059 nodesPID[0]
+:users: 8063 nodesPID[0]
+:users: 8065 -> 8052 queueID 4
+:users: 8060 usersPID[0]
+Transaction sent
+:users: 8062 usersPID[0]
+:users: 8064 usersPID[0]
+:users: 8066 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8063 -> 8052 queueID 4
+Transaction sent
+:users: 8060 nodesPID[0]
+:users: 8061 usersPID[0]
+:users: 8062 nodesPID[0]
+:users: 8064 nodesPID[0]
+:users: 8066 -> 8052 queueID 4
+Transaction sent
+:users: 8065 usersPID[0]
+Transaction sent
+:users: 8058 usersPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8061 nodesPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8064 -> 8052 queueID 4
+Transaction sent
+:users: 8065 nodesPID[0]
+:users: 8058 nodesPID[0]
+Transaction sent
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8063 usersPID[0]
+:users: 8065 -> 8052 queueID 4
+:users: 8058 -> 8052 queueID 4
+:users: 8059 usersPID[0]
+Transaction sent
+:users: 8064 usersPID[0]
+:users: 8066 usersPID[0]
+:users: 8063 nodesPID[0]
+Transaction sent
+:users: 8060 usersPID[0]
+Transaction sent
+:users: 8059 nodesPID[0]
+:users: 8064 nodesPID[0]
+:users: 8066 nodesPID[0]
+:users: 8062 usersPID[0]
+:users: 8063 -> 8052 queueID 4
+:users: 8060 nodesPID[0]
+:users: 8061 usersPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8064 -> 8052 queueID 4
+:users: 8065 usersPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8062 nodesPID[0]
+Transaction sent
+:users: 8058 usersPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8061 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 8065 nodesPID[0]
+Transaction sent
+:users: 8062 -> 8052 queueID 4
+:users: 8058 nodesPID[0]
+Transaction sent
+:users: 8061 -> 8052 queueID 4
+:users: 8063 usersPID[0]
+:users: 8065 -> 8052 queueID 4
+Transaction sent
+:users: 8058 -> 8052 queueID 4
+:users: 8064 usersPID[0]
+Transaction sent
+:users: 8063 nodesPID[0]
+Transaction sent
+:users: 8066 usersPID[0]
+Transaction sent
+:users: 8059 usersPID[0]
+:users: 8064 nodesPID[0]
+:users: 8060 usersPID[0]
+:users: 8063 -> 8052 queueID 4
+:users: 8066 nodesPID[0]
+:users: 8061 usersPID[0]
+:users: 8059 nodesPID[0]
+:users: 8062 usersPID[0]
+:users: 8064 -> 8052 queueID 4
+:users: 8065 usersPID[0]
+:users: 8060 nodesPID[0]
+Transaction sent
+:users: 8058 usersPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8061 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8062 nodesPID[0]
+Transaction sent
+:users: 8065 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8058 nodesPID[0]
+Transaction sent
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+:users: 8062 -> 8052 queueID 4
+:users: 8063 usersPID[0]
+:users: 8065 -> 8052 queueID 4
+Transaction sent
+:users: 8058 -> 8052 queueID 4
+Transaction sent
+:users: 8064 usersPID[0]
+Transaction sent
+:users: 8063 nodesPID[0]
+Transaction sent
+:users: 8066 usersPID[0]
+Transaction sent
+:users: 8059 usersPID[0]
+:users: 8064 nodesPID[0]
+:users: 8063 -> 8052 queueID 4
+:users: 8060 usersPID[0]
+:users: 8066 nodesPID[0]
+:users: 8061 usersPID[0]
+:users: 8059 nodesPID[0]
+:users: 8064 -> 8052 queueID 4
+:users: 8065 usersPID[0]
+Transaction sent
+:users: 8060 nodesPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8058 usersPID[0]
+:users: 8062 usersPID[0]
+:users: 8061 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+Transaction sent
+:users: 8065 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+Transaction sent
+:users: 8058 nodesPID[0]
+:users: 8063 usersPID[0]
+:users: 8062 nodesPID[0]
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+:users: 8065 -> 8052 queueID 4
+Transaction sent
+:users: 8058 -> 8052 queueID 4
+:users: 8063 nodesPID[0]
+:users: 8064 usersPID[0]
+:users: 8062 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8066 usersPID[0]
+Transaction sent
+:users: 8063 -> 8052 queueID 4
+:users: 8064 nodesPID[0]
+:users: 8059 usersPID[0]
+Transaction sent
+:users: 8060 usersPID[0]
+:users: 8066 nodesPID[0]
+Transaction sent
+:users: 8061 usersPID[0]
+:users: 8064 -> 8052 queueID 4
+:users: 8059 nodesPID[0]
+:users: 8065 usersPID[0]
+:users: 8060 nodesPID[0]
+:users: 8058 usersPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8062 usersPID[0]
+:users: 8061 nodesPID[0]
+Transaction sent
+:users: 8059 -> 8052 queueID 4
+:users: 8065 nodesPID[0]
+:users: 8063 usersPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8058 nodesPID[0]
+Transaction sent
+:users: 8062 nodesPID[0]
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+:users: 8065 -> 8052 queueID 4
+:users: 8063 nodesPID[0]
+Transaction sent
+:users: 8058 -> 8052 queueID 4
+:users: 8064 usersPID[0]
+:users: 8062 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8063 -> 8052 queueID 4
+:users: 8066 usersPID[0]
+Transaction sent
+:users: 8064 nodesPID[0]
+:users: 8059 usersPID[0]
+Transaction sent
+:users: 8060 usersPID[0]
+Transaction sent
+:users: 8066 nodesPID[0]
+:users: 8058 usersPID[0]
+:users: 8064 -> 8052 queueID 4
+:users: 8061 usersPID[0]
+:users: 8059 nodesPID[0]
+:users: 8065 usersPID[0]
+:users: 8060 nodesPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8058 nodesPID[0]
+Transaction sent
+:users: 8061 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8063 usersPID[0]
+:users: 8065 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8062 usersPID[0]
+Transaction sent
+:users: 8058 -> 8052 queueID 4
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+:users: 8063 nodesPID[0]
+:users: 8065 -> 8052 queueID 4
+Transaction sent
+:users: 8064 usersPID[0]
+:users: 8066 usersPID[0]
+:users: 8062 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 8063 -> 8052 queueID 4
+Transaction sent
+:users: 8064 nodesPID[0]
+:users: 8066 nodesPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8060 usersPID[0]
+:users: 8061 usersPID[0]
+Transaction sent
+:users: 8064 -> 8052 queueID 4
+:users: 8059 usersPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8058 usersPID[0]
+Transaction sent
+:users: 8060 nodesPID[0]
+:users: 8061 nodesPID[0]
+:users: 8065 usersPID[0]
+Transaction sent
+:users: 8059 nodesPID[0]
+Transaction sent
+:users: 8058 nodesPID[0]
+:users: 8063 usersPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8061 -> 8052 queueID 4
+:users: 8065 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8058 -> 8052 queueID 4
+:users: 8063 nodesPID[0]
+:users: 8064 usersPID[0]
+Transaction sent
+:users: 8062 usersPID[0]
+Transaction sent
+:users: 8065 -> 8052 queueID 4
+Transaction sent
+:users: 8066 usersPID[0]
+Transaction sent
+:users: 8063 -> 8052 queueID 4
+:users: 8064 nodesPID[0]
+:users: 8062 nodesPID[0]
+Transaction sent
+:users: 8060 usersPID[0]
+:users: 8066 nodesPID[0]
+Transaction sent
+:users: 8061 usersPID[0]
+:users: 8064 -> 8052 queueID 4
+:users: 8062 -> 8052 queueID 4
+:users: 8059 usersPID[0]
+:users: 8059 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+Transaction sent
+:users: 8060 nodesPID[0]
+:users: 8058 usersPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8061 nodesPID[0]
+Transaction sent
+:users: 8065 usersPID[0]
+Transaction sent
+:users: 8063 usersPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8058 nodesPID[0]
+Transaction sent
+:users: 8061 -> 8052 queueID 4
+:users: 8059 usersPID[0]
+:users: 8065 nodesPID[0]
+:users: 8063 nodesPID[0]
+Transaction sent
+:users: 8058 -> 8052 queueID 4
+:users: 8064 usersPID[0]
+Transaction sent
+:users: 8059 nodesPID[0]
+:users: 8065 -> 8052 queueID 4
+:users: 8063 -> 8052 queueID 4
+:users: 8062 usersPID[0]
+Transaction sent
+:users: 8066 usersPID[0]
+:users: 8064 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8060 usersPID[0]
+:users: 8062 nodesPID[0]
+:users: 8066 nodesPID[0]
+:users: 8064 -> 8052 queueID 4
+Transaction sent
+:users: 8058 usersPID[0]
+:users: 8061 usersPID[0]
+:users: 8060 nodesPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8066 -> 8052 queueID 4
+Transaction sent
+:users: 8065 usersPID[0]
+:users: 8063 usersPID[0]
+:users: 8058 nodesPID[0]
+:users: 8061 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8065 nodesPID[0]
+:users: 8063 nodesPID[0]
+:users: 8058 -> 8052 queueID 4
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+:users: 8064 usersPID[0]
+:users: 8059 usersPID[0]
+:users: 8065 -> 8052 queueID 4
+:users: 8063 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8064 nodesPID[0]
+:users: 8066 usersPID[0]
+:users: 8059 nodesPID[0]
+Transaction sent
+:users: 8062 usersPID[0]
+Transaction sent
+:users: 8060 usersPID[0]
+:users: 8064 -> 8052 queueID 4
+:users: 8066 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8058 usersPID[0]
+:users: 8062 nodesPID[0]
+:users: 8061 usersPID[0]
+:users: 8060 nodesPID[0]
+Transaction sent
+:users: 8065 usersPID[0]
+:users: 8066 -> 8052 queueID 4
+Transaction sent
+:users: 8058 nodesPID[0]
+:users: 8063 usersPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8061 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8065 nodesPID[0]
+Transaction sent
+:users: 8058 -> 8052 queueID 4
+:users: 8063 nodesPID[0]
+:users: 8064 usersPID[0]
+Transaction sent
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+:users: 8059 usersPID[0]
+:users: 8065 -> 8052 queueID 4
+Transaction sent
+:users: 8063 -> 8052 queueID 4
+:users: 8064 nodesPID[0]
+Transaction sent
+:users: 8066 usersPID[0]
+:users: 8059 nodesPID[0]
+Transaction sent
+:users: 8058 usersPID[0]
+:users: 8062 usersPID[0]
+Transaction sent
+:users: 8064 -> 8052 queueID 4
+:users: 8060 usersPID[0]
+:users: 8066 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8058 nodesPID[0]
+:users: 8062 nodesPID[0]
+:users: 8061 usersPID[0]
+Transaction sent
+:users: 8060 nodesPID[0]
+:users: 8065 usersPID[0]
+:users: 8066 -> 8052 queueID 4
+Transaction sent
+:users: 8058 -> 8052 queueID 4
+:users: 8063 usersPID[0]
+:users: 8064 usersPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8061 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8065 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 8063 nodesPID[0]
+:users: 8064 nodesPID[0]
+Transaction sent
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+:users: 8065 -> 8052 queueID 4
+:users: 8063 -> 8052 queueID 4
+:users: 8059 usersPID[0]
+:users: 8064 -> 8052 queueID 4
+Transaction sent
+:users: 8066 usersPID[0]
+:users: 8058 usersPID[0]
+:users: 8062 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 8059 nodesPID[0]
+Transaction sent
+:users: 8060 usersPID[0]
+:users: 8066 nodesPID[0]
+:users: 8058 nodesPID[0]
+:users: 8062 nodesPID[0]
+:users: 8061 usersPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8060 nodesPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8065 usersPID[0]
+:users: 8058 -> 8052 queueID 4
+:users: 8062 -> 8052 queueID 4
+:users: 8061 nodesPID[0]
+:users: 8064 usersPID[0]
+Transaction sent
+:users: 8063 usersPID[0]
+:users: 8060 -> 8052 queueID 4
+Transaction sent
+:users: 8065 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 8061 -> 8052 queueID 4
+:users: 8064 nodesPID[0]
+:users: 8063 nodesPID[0]
+Transaction sent
+:users: 8065 -> 8052 queueID 4
+:users: 8059 usersPID[0]
+Transaction sent
+:users: 8064 -> 8052 queueID 4
+:users: 8063 -> 8052 queueID 4
+:users: 8066 usersPID[0]
+Transaction sent
+:users: 8058 usersPID[0]
+:users: 8059 nodesPID[0]
+:users: 8061 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 8060 usersPID[0]
+:users: 8062 usersPID[0]
+:users: 8066 nodesPID[0]
+:users: 8058 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8061 nodesPID[0]
+:users: 8065 usersPID[0]
+:users: 8060 nodesPID[0]
+:users: 8062 nodesPID[0]
+:users: 8066 -> 8052 queueID 4
+:users: 8058 -> 8052 queueID 4
+:users: 8064 usersPID[0]
+:users: 8063 usersPID[0]
+Transaction sent
+:users: 8061 -> 8052 queueID 4
+:users: 8065 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8062 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8064 nodesPID[0]
+:users: 8063 nodesPID[0]
+Transaction sent
+:users: 8059 usersPID[0]
+:users: 8065 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8064 -> 8052 queueID 4
+:users: 8063 -> 8052 queueID 4
+:users: 8059 nodesPID[0]
+:users: 8066 usersPID[0]
+:users: 8058 usersPID[0]
+Transaction sent
+:users: 8061 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 8059 -> 8052 queueID 4
+:users: 8066 nodesPID[0]
+:users: 8060 usersPID[0]
+:users: 8058 nodesPID[0]
+:users: 8062 usersPID[0]
+:users: 8061 nodesPID[0]
+Transaction sent
+:users: 8066 -> 8052 queueID 4
+:users: 8060 nodesPID[0]
+:users: 8065 usersPID[0]
+:users: 8058 -> 8052 queueID 4
+:users: 8064 usersPID[0]
+:users: 8062 nodesPID[0]
+:users: 8063 usersPID[0]
+:users: 8061 -> 8052 queueID 4
+Transaction sent
+:users: 8060 -> 8052 queueID 4
+:users: 8065 nodesPID[0]
+Transaction sent
+:users: 8064 nodesPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8063 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 8065 -> 8052 queueID 4
+:users: 8059 usersPID[0]
+:users: 8064 -> 8052 queueID 4
+Transaction sent
+:users: 8063 -> 8052 queueID 4
+:users: 8058 usersPID[0]
+Transaction sent
+:users: 8059 nodesPID[0]
+:users: 8066 usersPID[0]
+Transaction sent
+:users: 8061 usersPID[0]
+:users: 8060 usersPID[0]
+Transaction sent
+:users: 8058 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8066 nodesPID[0]
+:users: 8062 usersPID[0]
+:users: 8061 nodesPID[0]
+:users: 8060 nodesPID[0]
+:users: 8065 usersPID[0]
+:users: 8058 -> 8052 queueID 4
+:users: 8064 usersPID[0]
+Transaction sent
+:users: 8066 -> 8052 queueID 4
+:users: 8062 nodesPID[0]
+:users: 8061 -> 8052 queueID 4
+:users: 8063 usersPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8065 nodesPID[0]
+Transaction sent
+:users: 8064 nodesPID[0]
+Transaction sent
+:users: 8062 -> 8052 queueID 4
+Transaction sent
+:users: 8063 nodesPID[0]
+Transaction sent
+:users: 8065 -> 8052 queueID 4
+:users: 8059 usersPID[0]
+:users: 8064 -> 8052 queueID 4
+Transaction sent
+:users: 8063 -> 8052 queueID 4
+:users: 8058 usersPID[0]
+Transaction sent
+:users: 8059 nodesPID[0]
+Transaction sent
+:users: 8061 usersPID[0]
+:users: 8060 usersPID[0]
+Transaction sent
+:users: 8058 nodesPID[0]
+:users: 8066 usersPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8061 nodesPID[0]
+:users: 8062 usersPID[0]
+:users: 8063 usersPID[0]
+:users: 8060 nodesPID[0]
+:users: 8065 usersPID[0]
+:users: 8058 -> 8052 queueID 4
+:users: 8064 usersPID[0]
+:users: 8066 nodesPID[0]
+Transaction sent
+:users: 8061 -> 8052 queueID 4
+:users: 8062 nodesPID[0]
+:users: 8063 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8065 nodesPID[0]
+Transaction sent
+:users: 8064 nodesPID[0]
+:users: 8066 -> 8052 queueID 4
+Transaction sent
+:users: 8062 -> 8052 queueID 4
+:users: 8063 -> 8052 queueID 4
+Transaction sent
+:users: 8065 -> 8052 queueID 4
+:users: 8059 usersPID[0]
+:users: 8064 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 8058 usersPID[0]
+Transaction sent
+:users: 8059 nodesPID[0]
+:users: 8061 usersPID[0]
+Transaction sent
+:users: 8060 usersPID[0]
+:users: 8058 nodesPID[0]
+:users: 8066 usersPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8061 nodesPID[0]
+:users: 8063 usersPID[0]
+:users: 8062 usersPID[0]
+:users: 8060 nodesPID[0]
+:users: 8065 usersPID[0]
+:users: 8058 -> 8052 queueID 4
+:users: 8066 nodesPID[0]
+Transaction sent
+:users: 8064 usersPID[0]
+:users: 8061 -> 8052 queueID 4
+:users: 8063 nodesPID[0]
+:users: 8062 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8065 nodesPID[0]
+Transaction sent
+:users: 8066 -> 8052 queueID 4
+:users: 8064 nodesPID[0]
+Transaction sent
+:users: 8063 -> 8052 queueID 4
+:users: 8062 -> 8052 queueID 4
+Transaction sent
+:users: 8059 usersPID[0]
+:users: 8065 -> 8052 queueID 4
+Transaction sent
+:users: 8064 -> 8052 queueID 4
+Transaction sent
+Transaction sent
+:users: 8058 usersPID[0]
+:users: 8059 nodesPID[0]
+Transaction sent
+:users: 8061 usersPID[0]
+Transaction sent
+:users: 8060 usersPID[0]
+:users: 8058 nodesPID[0]
+:users: 8059 -> 8052 queueID 4
+:users: 8061 nodesPID[0]
+:users: 8063 usersPID[0]
+:users: 8060 nodesPID[0]
+:users: 8062 usersPID[0]
+:users: 8058 -> 8052 queueID 4
+:users: 8066 usersPID[0]
+Transaction sent
+:users: 8065 usersPID[0]
+:users: 8061 -> 8052 queueID 4
+:users: 8064 usersPID[0]
+:users: 8063 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8062 nodesPID[0]
+Transaction sent
+:users: 8066 nodesPID[0]
+:users: 8065 nodesPID[0]
+Transaction sent
+:users: 8064 nodesPID[0]
+:users: 8063 -> 8052 queueID 4
+Transaction sent
+:users: 8058 usersPID[0]
+:users: 8059 usersPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8066 -> 8052 queueID 4
+:users: 8065 -> 8052 queueID 4
+:users: 8064 -> 8052 queueID 4
+Transaction sent
+:users: 8058 nodesPID[0]
+:users: 8059 nodesPID[0]
+:users: 8061 usersPID[0]
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 8060 usersPID[0]
+Transaction sent
+:users: 8058 -> 8052 queueID 4
+:users: 8059 -> 8052 queueID 4
+:users: 8061 nodesPID[0]
+:users: 8063 usersPID[0]
+:users: 8060 nodesPID[0]
+Transaction sent
+:users: 8062 usersPID[0]
+:users: 8061 -> 8052 queueID 4
+:users: 8065 usersPID[0]
+:users: 8063 nodesPID[0]
+:users: 8060 -> 8052 queueID 4
+:users: 8064 usersPID[0]
+:users: 8062 nodesPID[0]
+:users: 8066 usersPID[0]
+:users: 8065 nodesPID[0]
+:users: 8063 -> 8052 queueID 4
+:users: 8058 usersPID[0]
+:users: 8064 nodesPID[0]
+:users: 8062 -> 8052 queueID 4
+:users: 8066 nodesPID[0]
+:users: 8065 -> 8052 queueID 4
+:users: 8058 nodesPID[0]
+:users: 8064 -> 8052 queueID 4
+:users: 8066 -> 8052 queueID 4
+:users: 8058 -> 8052 queueID 4
+::User:: SIGINT received
+ ::User:: SIGINT received
+ ::User:: SIGINT received
+ ::User:: SIGINT received
+ ::User:: SIGINT received
+ ::User:: SIGINT received
+ ::User:: SIGINT received
+ ::User:: SIGINT received
+ ::User:: SIGINT received
+ ::Master:: SIGINT ricevuto
+ --------------------------------------------
+----------- Configuration value ------------
+SO_USER_NUM->9
+SO_NODES_NUM->6
+SO_BUDGET_INIT->998
+SO_REWARD->14
+SO_MIN_TRANS_GEN_NSEC->100000001
+SO_MAX_TRANS_GEN_NSEC->200000001
+SO_RETRY->21
+SO_TP_SIZE->997
+SO_MIN_TRANS_PROC_NSEC->100000002
+SO_MAX_TRANS_PROC_NSEC->200000002
+SO_SIM_SEC->10
+SO_FRIENDS_NUM->999
+SO_HOPS->7
+--------------------------------------------
+
+***********************
+|| The time has come ||
+***********************
+
+
+ ------- Master Process PID is 8051 ----------
+|                                             |
+ - Type ------- PID --------- Status ---------
+ ---------------------------------------------
+|  User         8066            0             |
+|  User         8065            0             |
+|  User         8064            0             |
+|  User         8063            0             |
+|  User         8062            0             |
+|  User         8061            0             |
+|  User         8060            0             |
+|  User         8059            0             |
+|  User         8058            0             |
+ ---------------------------------------------
+|  Node         8057            0             |
+|  Node         8056            0             |
+|  Node         8055            0             |
+|  Node         8054            0             |
+|  Node         8053            0             |
+|  Node         8052            0             |
+ ---------------------------------------------
