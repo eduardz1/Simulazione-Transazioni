@@ -242,9 +242,9 @@ int main(int argc, char *argv[])
 	struct message transMsg;
 
 	struct sigaction saUSR1;
-	struct sigaction saINT;
+	struct sigaction saINT_user;
 	bzero(&saUSR1, sizeof(saUSR1));
-	bzero(&saINT, sizeof(saINT));
+	bzero(&saINT_user, sizeof(saINT_user));
 
 	myPID = getpid(); /* set myPID value */
 	TRACE((":users: %d USERS_PID_ARGV %d\n", myPID, USERS_PID_ARGV))
@@ -262,7 +262,7 @@ int main(int argc, char *argv[])
 	srand(time(NULL)); /* initialize rand function */
 
 	attach_ipc_objects(argv);
-	signal_handlers_init(&saUSR1, &saINT);
+	signal_handlers_init(&saUSR1, &saINT_user);
 	transMsg.mtype = atol("transaction");
 
 	retry = par->SO_RETRY;
