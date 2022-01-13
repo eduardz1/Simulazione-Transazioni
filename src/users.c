@@ -71,7 +71,7 @@ pid_t get_random_userPID()
 	{
 		index = RAND(0, par->SO_USER_NUM - 1);
 		TRACE((":user: %d index is %d\n", myPID, index))
-		TRACE((":users: %d usersPID[%d]\n", myPID, index));
+		TRACE((":user: %d usersPID[%d]\n", myPID, index));
 		if (usersPID[index].status != dead)
 			val = usersPID[index].pid;
 	} while (!val);
@@ -89,7 +89,7 @@ pid_t get_random_nodePID()
 	{
 		index = RAND(0, par->SO_NODES_NUM - 1);
 		TRACE((":user: %d index is %d\n", myPID, index))
-		TRACE((":users: %d nodesPID[%d]\n", myPID, index));
+		TRACE((":user: %d nodesPID[%d]\n", myPID, index));
 		if (nodesPID[index].status == available)
 			val = nodesPID[index].pid;
 	} while (!val);
@@ -103,7 +103,7 @@ void update_status(int statusToSet)
 	int i = get_pid_userIndex(myPID);
 	if (i == -1)
 	{
-		TRACE((":users: %d failed to find myself in usersPID[]", myPID));
+		TRACE((":user: %d failed to find myself in usersPID[]", myPID));
 	}
 
 	sem_reserve(semID, 1);
@@ -111,7 +111,7 @@ void update_status(int statusToSet)
 	if (statusToSet == 2)
 	{
 		/*usersPrematurelyDead++;*/
-		TRACE((":users: dead increased\n"));
+		TRACE((":user: dead increased\n"));
 	}
 	sem_release(semID, 1);
 }
@@ -120,26 +120,28 @@ void update_status(int statusToSet)
 void attach_ipc_objects(char **argv)
 {
 	par = shmat(PARAMETERS_ARGV, NULL, 0);
-	TRACE((":users %d par->SO_RETRY %d\n", myPID, par->SO_RETRY))
+	TRACE((":user %d par->SO_RETRY %d\n", myPID, par->SO_RETRY))
 	TEST_ERROR
 	usersPID = shmat(USERS_PID_ARGV, NULL, 0);
-	TRACE((":users: %d usersPID[0] = %d, usersPID[3] = %d\n", myPID, usersPID[0], usersPID[3]))
+	TRACE((":user: %d usersPID[0] = %d, usersPID[3] = %d\n", myPID, usersPID[0], usersPID[3]))
 	TEST_ERROR
 	nodesPID = shmat(NODES_PID_ARGV, NULL, 0);
-	TRACE((":users: %d nodesPID[0] = %d, nodesPID[3] = %d\n", myPID, nodesPID[0], nodesPID[3]))
+	TRACE((":user: %d nodesPID[0] = %d, nodesPID[3] = %d\n", myPID, nodesPID[0], nodesPID[3]))
 	TEST_ERROR
 	mainLedger = shmat(LEDGER_ARGV, NULL, 0);
 	TEST_ERROR
 	semID = SEM_ID_ARGV;
-	TRACE((":users: %d semID is %d\n", myPID, semID));
+	TRACE((":user: %d semID is %d\n", myPID, semID));
 }
 
 /* use nodePID as key for msgget and check for errors */
 void queue_to_pid(pid_t nodePID)
 {
+	/* NO QUEUES UNTIL NODES HANDLER WORKS!
+	
 	queueID = msgget(nodePID, IPC_CREAT | 0600);
 	TEST_ERROR
-	TRACE((":users: %d -> %d queueID %d\n", myPID, nodePID, queueID))
+	TRACE((":user: %d -> %d queueID %d\n", myPID, nodePID, queueID))*/
 }
 
 /* initializes transaction values and sets it to pending */
@@ -182,25 +184,25 @@ int send_transaction()
 	switch (errno)
 	{
 	case EACCES:
-		printf(":users %d no write permission on queue\n", myPID);
+		printf(":user %d no write permission on queue\n", myPID);
 		break;
 	case EAGAIN:
-		printf(":users: %d queue full\n", myPID); /* keep if we decide to use IPC_NOWAIT */
+		printf(":user: %d queue full\n", myPID); /* keep if we decide to use IPC_NOWAIT */
 		break;
 	case EFAULT:
-		printf(":users: %d address pointed by msgp inaccessible\n", myPID);
+		printf(":user: %d address pointed by msgp inaccessible\n", myPID);
 		break;
 	case EIDRM:
-		printf(":users: %d message queue removed\n", myPID);
+		printf(":user: %d message queue removed\n", myPID);
 		break;
 	case EINTR:
-		TRACE((":users: %d signal caught when waiting for queue to free\n", myPID));
+		TRACE((":user: %d signal caught when waiting for queue to free\n", myPID));
 		break;
 	case EINVAL:
-		printf(":users: %d invalid  msqid  value,  or nonpositive mtype value, or invalid msgsz value\n", myPID);
+		printf(":user: %d invalid  msqid  value,  or nonpositive mtype value, or invalid msgsz value\n", myPID);
 		break;
 	case ENOMEM:
-		printf(":users: %d system out of memory\n", myPID); /* should basically never happen I hope */
+		printf(":user: %d system out of memory\n", myPID); /* should basically never happen I hope */
 		break;
 	default:
 		TRACE(("Transaction sent\n"))
@@ -247,15 +249,15 @@ int main(int argc, char *argv[])
 	bzero(&saINT_user, sizeof(saINT_user));
 
 	myPID = getpid(); /* set myPID value */
-	TRACE((":users: %d USERS_PID_ARGV %d\n", myPID, USERS_PID_ARGV))
-	TRACE((":users: %d NODES_PID_ARGV %d\n", myPID, NODES_PID_ARGV))
-	TRACE((":users: %d PARAMETERS_ARGV %d\n", myPID, PARAMETERS_ARGV))
-	TRACE((":users: %d LEDGER_ARGV %d\n", myPID, LEDGER_ARGV))
-	TRACE((":users: %d SEM_ID_PID_ARGV %d\n", myPID, SEM_ID_ARGV))
+	TRACE((":user: %d USERS_PID_ARGV %d\n", myPID, USERS_PID_ARGV))
+	TRACE((":user: %d NODES_PID_ARGV %d\n", myPID, NODES_PID_ARGV))
+	TRACE((":user: %d PARAMETERS_ARGV %d\n", myPID, PARAMETERS_ARGV))
+	TRACE((":user: %d LEDGER_ARGV %d\n", myPID, LEDGER_ARGV))
+	TRACE((":user: %d SEM_ID_PID_ARGV %d\n", myPID, SEM_ID_ARGV))
 
 	if (argc == 0)
 	{
-		printf(":users: %d, no arguments passed, can't continue like this any more :C\n", myPID);
+		printf(":user: %d, no arguments passed, can't continue like this any more :C\n", myPID);
 		return ERROR;
 	}
 
@@ -303,7 +305,7 @@ int main(int argc, char *argv[])
 		}
 		else
 		{
-			printf(":users: %d went broke :/\n", myPID);
+			printf(":user: %d went broke :/\n", myPID);
 			update_status(1);
 
 			/*wait_for_incoming_transaction(); ///////// */

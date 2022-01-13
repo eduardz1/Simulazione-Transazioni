@@ -1,6 +1,13 @@
 #ifndef SIMULAZIONE_TRANSAZIONI_USERS_H
 #define SIMULAZIONE_TRANSAZIONI_USERS_H
 
+#include <signal.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <sys/sem.h>
+#include <sys/msg.h>
+#include <errno.h>
+
 /* sets sleep time with nsec precision for trans_gen */
 #define SLEEP_TIME_SET        \
     randSleepTime.tv_sec = 0; \

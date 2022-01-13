@@ -1,5 +1,6 @@
 #include "include/common.h"
 
+/* initializes new ledger data structure */
 ledger *ledger_init()
 {
     ledger *newLedger;
@@ -13,7 +14,7 @@ ledger *ledger_init()
     shmID = shmget(IPC_PRIVATE, sizeof(newLedger), 0600);
     shmctl(shmID, IPC_RMID, NULL);
 
-    newLedger->head = new_block();
+    newLedger->head = NULL;
     newLedger->registryCurrSize = 1;
 
     newLedger = (ledger *)shmat(shmID, NULL, 0);
@@ -21,23 +22,35 @@ ledger *ledger_init()
     return newLedger;
 }
 
-block *new_block()
+/* sums rewards of sumBlock[SO_BLOCK_SIZE-1] transactions */
+int sum_reward(transaction **sumBlock)
 {
+    int i = 0;
+    int sum;
+
+    for (i = 0; i < (SO_BLOCK_SIZE - 1); i++)
+    {
+        sum += sumBlock[i]->reward;
+    }
+    return sum;
+}
+
+/* initializes new block with transList[0] as reward transaction */
+block *new_block(transaction **blockTransactions)
+{
+
     block *newBlock = malloc(sizeof(block));
     transaction reward;
     struct timespec timestamp;
-
-    /* memset(newBlock->transList, 0, SO_BLOCK_SIZE); */
     clock_gettime(CLOCK_REALTIME, &timestamp);
 
     reward.timestamp = timestamp;
     reward.sender = SELF;
     reward.receiver = getpid();
-    reward.amount = 0;
+    reward.amount = sum_reward(blockTransactions); /*sum of each reward of transaction in the block */
     reward.reward = 0;
 
-    newBlock->transList[0] = reward;
-    newBlock->blockIndex = 0;
+    memcpy(newBlock->transList + 1, *blockTransactions, (SO_BLOCK_SIZE - 1) * (sizeof(transaction)));
     newBlock->next = NULL;
 
     return newBlock;

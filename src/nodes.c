@@ -1,5 +1,5 @@
-#include "include/nodes.h"
 #include "include/common.h"
+#include "include/nodes.h"
 
 /* transaction pool==transaction's array */
 
@@ -8,6 +8,8 @@
  || GLOBAL VARIABLES ||
  ======================
  */
+
+transaction *pool;
 
 /* parameters of simulation */
 struct parameters *par;
@@ -54,11 +56,12 @@ int sleepMethod(int argc, char *argv[])
     randSleepTime.tv_nsec = RAND(SO_MIN_TRANS_PROC_NSEC, SO_MAX_TRANS_PROC_NSEC);
 }*/
 
-/* initializes signal handlers for SIGINT *
-void signal_handler_init(struct sigaction *saINT)
+/* initializes signal handlers for SIGINT */
+/*
+void signal_handler_init(struct sigaction *saINT_node)
 {
-    saINT->sa_handler = node_interrupt_handle;
-    sigaction(SIGINT, saINT, NULL);
+    saINT_node->sa_handler = node_interrupt_handle;
+    sigaction(SIGINT, saINT_node, NULL);
 } */
 
 /* CTRL-C handler */
@@ -73,16 +76,38 @@ void node_interrupt_handle(int signum)
 
 int main(int argc, char *argv[])
 {
-    int myPID = getpid();
+
+    struct timespec randSleepTime;
+    struct timespec sleepTimeRemaining;
     struct sigaction saINT_node;
+
     bzero(&saINT_node, sizeof(saINT_node));
     saINT_node.sa_handler = node_interrupt_handle;
     sigaction(SIGINT, &saINT_node, NULL);
-    /*
-    signal_handler_init(&saINT);*/
+    TEST_ERROR
+    /*signal_handler_init(&saINT_node); no idea why it isn't working, it's literally the same implementation as user */
+    myPID = getpid();
+    TRACE((":node: %d sighandler init\n", myPID));
 
-    queueID = msgget(myPID, IPC_CREAT | 0600);
-    while(1){
-        sleep(1);
+    /* NO QUEUES UNTIL HANDLER WORKS!
+    
+    queueID = msgget(myPID, IPC_CREAT | IPC_EXCL | 0600);
+    TEST_ERROR
+    TRACE((":node: %d queueID is %d\n", myPID, queueID))
+    msgctl(queueID, IPC_RMID, NULL);*/
+    while (1)
+    {
+        SLEEP_TIME_SET
+        /* check if we have at least SO_BLOCK_SIZE-1 transactions in pool
+         * if true take them, set status to processing and create new block
+         * newBlock = new_block(transactionsChosen);
+         * LOCK ledger
+         * -- append transaction to ledger setting newBlock.prev equals to last
+         * -- block with NULL next in ledger and setting the former block's next
+         * -- to *newBlock
+         * set every newBlock transaction's status to confirmed
+         */
+        SLEEP
+        /* UNLOCK ledger */
     }
 }

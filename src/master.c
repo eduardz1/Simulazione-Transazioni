@@ -249,6 +249,8 @@ int main(int argc, char *argv[])
         }
     }
 
+    sleep(0.5);
+
     /*usersPrematurelyDead = 0;*/
     for (uCounter = 0; uCounter < par->SO_USER_NUM; uCounter++)
     {
