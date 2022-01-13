@@ -20,7 +20,16 @@ ledger *ledger_init()
 
     return newLedger;
 }
-
+int sum_reward(transaction** sumBlock)
+{
+    int i=0;
+    int sumReward;
+    for(i=0;i<SO_BLOCK_SIZE-1;i++)
+    {
+        sumReward+=sumBlock[i]->reward;
+    }
+    return sumReward;
+}
 block *new_block(transaction** blockTransaction)
 {
 

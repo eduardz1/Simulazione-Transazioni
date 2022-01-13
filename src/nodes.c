@@ -37,16 +37,7 @@ int check_Tp_Full()
     }
 }
 */
-int sum_reward(transaction** sumBlock)
-{
-    int i=0;
-    int sumReward;
-    for(i=0;i<SO_BLOCK_SIZE-1;i++)
-    {
-        sumReward+=sumBlock[i]->reward;
-    }
-    return sumReward;
-}
+
 
 
 void sleepMethod(int argc, char *argv[])
