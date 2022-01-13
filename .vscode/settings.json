@@ -8,7 +8,8 @@
         "signal.h": "c",
         "common.h": "c",
         "sem.h": "c",
-        "cstdint": "c"
+        "cstdint": "c",
+        "string.h": "c"
     },
     "editor.rulers": [80,120]
 }

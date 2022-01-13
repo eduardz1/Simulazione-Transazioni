@@ -34,8 +34,12 @@ node *nodesPID;
 ledger *mainLedger;
 
 int semID;
+int queueID;
 
+int currBalance;
 pid_t myPID;
+int outGoingTransactions; /* accumulate amount of transactions sent but yet to be received */
+transaction currTrans;
 
 /*
  ======================
@@ -58,14 +62,16 @@ int get_pid_userIndex(int PID_toSearch)
 }
 
 /* returns a random PID of a non-dead user from usersPID[] */
-pid_t get_random_userPID(user *usersPID)
+pid_t get_random_userPID()
 {
 	int index;
 	pid_t val = 0;
 
 	do
 	{
-		index = RAND(0, ARRAY_SIZE(&usersPID) - 1);
+		index = RAND(0, par->SO_USER_NUM - 1);
+		TRACE((":user: %d index is %d\n", myPID, index))
+		TRACE((":users: %d usersPID[%d]\n", myPID, index));
 		if (usersPID[index].status != dead)
 			val = usersPID[index].pid;
 	} while (!val);
@@ -74,14 +80,16 @@ pid_t get_random_userPID(user *usersPID)
 }
 
 /* returns a random PID of an available node from nodesPID[] */
-pid_t get_random_nodePID(node *nodesPID)
+pid_t get_random_nodePID()
 {
 	int index;
 	pid_t val = 0;
 
 	do
 	{
-		index = RAND(0, ARRAY_SIZE(&nodesPID) - 1);
+		index = RAND(0, par->SO_NODES_NUM - 1);
+		TRACE((":user: %d index is %d\n", myPID, index))
+		TRACE((":users: %d nodesPID[%d]\n", myPID, index));
 		if (nodesPID[index].status == available)
 			val = nodesPID[index].pid;
 	} while (!val);
@@ -112,43 +120,138 @@ void update_status(int statusToSet)
 void attach_ipc_objects(char **argv)
 {
 	par = shmat(PARAMETERS_ARGV, NULL, 0);
+	TRACE((":users %d par->SO_RETRY %d\n", myPID, par->SO_RETRY))
 	TEST_ERROR
 	usersPID = shmat(USERS_PID_ARGV, NULL, 0);
+	TRACE((":users: %d usersPID[0] = %d, usersPID[3] = %d\n", myPID, usersPID[0], usersPID[3]))
 	TEST_ERROR
 	nodesPID = shmat(NODES_PID_ARGV, NULL, 0);
+	TRACE((":users: %d nodesPID[0] = %d, nodesPID[3] = %d\n", myPID, nodesPID[0], nodesPID[3]))
 	TEST_ERROR
 	mainLedger = shmat(LEDGER_ARGV, NULL, 0);
 	TEST_ERROR
 	semID = SEM_ID_ARGV;
-	TRACE((":users: %d semID is %d\n", getpid(), semID));
+	TRACE((":users: %d semID is %d\n", myPID, semID));
+}
+
+/* use nodePID as key for msgget and check for errors */
+void queue_to_pid(pid_t nodePID)
+{
+	queueID = msgget(nodePID, IPC_CREAT | 0600);
+	TEST_ERROR
+	TRACE((":users: %d -> %d queueID %d\n", myPID, nodePID, queueID))
+}
+
+/* initializes transaction values and sets it to pending */
+void transaction_init(pid_t userPID, int amount, int reward)
+{
+	struct timespec exactTime;
+
+	currTrans.sender = myPID;
+	currTrans.receiver = userPID;
+	currTrans.amount = amount;
+	currTrans.reward = reward;
+	currTrans.status = pending;
+	clock_gettime(CLOCK_REALTIME, &exactTime);
+	currTrans.timestamp = exactTime;
+}
+
+/* initializes signal handlers for SIGINT and SIGUSR1 */
+void signal_handlers_init(struct sigaction *saUSR1, struct sigaction *saINT)
+{
+	/* -- SIGNAL HANDLERS --
+	 * first set all bytes of sigation to 0
+	 * then initialize sa.handler to a pointer to
+	 * the function user_transaction/interrupt_handle
+	 * then set the handler to handle SIUSR1/SIGINT signals
+	 * ((struct sigaction *oldact) = NULL)
+	 */
+	saUSR1->sa_handler = user_transactions_handle;
+	saINT->sa_handler = user_interrupt_handle;
+	sigaction(SIGUSR1, saUSR1, NULL);
+	sigaction(SIGINT, saINT, NULL);
+}
+
+/* send transaction currTrans to user userPID via node nodePID */
+int send_transaction()
+{
+	msgsnd(queueID, &currTrans, sizeof(transaction), 0);
+	TEST_ERROR
+	currBalance -= (currTrans.amount + currTrans.reward);
+	outGoingTransactions += (currTrans.amount + currTrans.reward);
+	switch (errno)
+	{
+	case EACCES:
+		printf(":users %d no write permission on queue\n", myPID);
+		break;
+	case EAGAIN:
+		printf(":users: %d queue full\n", myPID); /* keep if we decide to use IPC_NOWAIT */
+		break;
+	case EFAULT:
+		printf(":users: %d address pointed by msgp inaccessible\n", myPID);
+		break;
+	case EIDRM:
+		printf(":users: %d message queue removed\n", myPID);
+		break;
+	case EINTR:
+		TRACE((":users: %d signal caught when waiting for queue to free\n", myPID));
+		break;
+	case EINVAL:
+		printf(":users: %d invalid  msqid  value,  or nonpositive mtype value, or invalid msgsz value\n", myPID);
+		break;
+	case ENOMEM:
+		printf(":users: %d system out of memory\n", myPID); /* should basically never happen I hope */
+		break;
+	default:
+		TRACE(("Transaction sent\n"))
+		return SUCCESS;
+	}
+	currTrans.status = aborted;
+	currBalance += (currTrans.amount + currTrans.reward);
+	outGoingTransactions -= (currTrans.amount + currTrans.reward);
+	/* we can then track this type of aborted transactions but rn there's no need to */
+	return ERROR;
 }
 
 /* SIGUSR1 handler, sends a transaction */
 void user_transactions_handle(int signum)
 {
-	/* return send_transaction(myPID, userPID, amount, reward); */
+	write(1, "::User:: SIGUSR1 received\n", 27);
+	if (currBalance > 2)
+		send_transaction(); /* we're calling a printf which is not thread safe, need to fix somehow*/
+	else
+		write(1, "::User:: sorry balance too low\n", 32);
 }
 
 /* CTRL-C handler */
 void user_interrupt_handle(int signum)
 {
-	write(1, "::User:: SIGINT ricevuto\n", 26);
+	write(1, "::User:: SIGINT received\n", 26);
 	exit(0);
 }
 
 int main(int argc, char *argv[])
 {
-	int i = 0;
-	int currentBalance, amount, reward, retry;
+	int amount, reward, retry;
 	pid_t userPID, nodePID;
 
 	struct timespec randSleepTime;
 	struct timespec sleepTimeRemaining;
 
+	struct sembuf sops;
+	struct message transMsg;
+
 	struct sigaction saUSR1;
 	struct sigaction saINT;
+	bzero(&saUSR1, sizeof(saUSR1));
+	bzero(&saINT, sizeof(saINT));
 
-	struct sembuf sops;
+	myPID = getpid(); /* set myPID value */
+	TRACE((":users: %d USERS_PID_ARGV %d\n", myPID, USERS_PID_ARGV))
+	TRACE((":users: %d NODES_PID_ARGV %d\n", myPID, NODES_PID_ARGV))
+	TRACE((":users: %d PARAMETERS_ARGV %d\n", myPID, PARAMETERS_ARGV))
+	TRACE((":users: %d LEDGER_ARGV %d\n", myPID, LEDGER_ARGV))
+	TRACE((":users: %d SEM_ID_PID_ARGV %d\n", myPID, SEM_ID_ARGV))
 
 	if (argc == 0)
 	{
@@ -157,35 +260,15 @@ int main(int argc, char *argv[])
 	}
 
 	srand(time(NULL)); /* initialize rand function */
-	myPID = getpid();  /* set myPID value */
 
 	attach_ipc_objects(argv);
-
-	/* -- SIGNAL HANDLERS --
-	 * first set all bytes of sigation to 0
-	 * then initialize sa.handler to a pointer to
-	 * the function user_transaction/interrupt_handle
-	 * then set the handler to handle SIUSR1/SIGINT signals
-	 * ((struct sigaction *oldact) = NULL)
-	 */
-	bzero(&saUSR1, sizeof(saUSR1));
-	bzero(&saINT, sizeof(saINT));
-	saUSR1.sa_handler = user_transactions_handle;
-	saINT.sa_handler = user_interrupt_handle;
-	sigaction(SIGUSR1, &saUSR1, NULL);
-	sigaction(SIGINT, &saINT, NULL);
+	signal_handlers_init(&saUSR1, &saINT);
+	transMsg.mtype = atol("transaction");
 
 	retry = par->SO_RETRY;
-
 	while (1)
 	{
-
-		/* -- SLEEP TIME SET --
-		 * value for sec set to 0
-		 * value for nsec is a random number from SO_MIN and SO_MAX
-		 */
-		randSleepTime.tv_sec = 0;
-		randSleepTime.tv_nsec = RAND(par->SO_MIN_TRANS_GEN_NSEC, par->SO_MAX_TRANS_GEN_NSEC);
+		SLEEP_TIME_SET
 		/*
 		 * save the time unslept when interrupted by SIGUSR1
 		 * so that we can't force transactions at a much greater speed
@@ -194,33 +277,29 @@ int main(int argc, char *argv[])
 		 */
 		bzero(&sleepTimeRemaining, sizeof(sleepTimeRemaining));
 
-		currentBalance = 100 /*balance(myPID)*/;
-		if (currentBalance >= 2)
+		currBalance = 100 /*balance(myPID)*/;
+		if (currBalance >= 2)
 		{
-			userPID = get_random_userPID(usersPID);
-			nodePID = get_random_nodePID(nodesPID);
+			userPID = get_random_userPID();
+			nodePID = get_random_nodePID();
 
-			amount = RAND(2, currentBalance);
+			amount = RAND(2, currBalance);
 			reward = REWARD(amount, par->SO_REWARD);
 			amount -= reward;
 
-			/* need a message queue to enable user to communicate with node
-			 * and send it a send_transaction request
-			 */
-			send_transaction(myPID, userPID, amount, reward);
-
-			/* if (aborted) /* pseudo code, node needs to send an aborted or accepted signal*
-				retry--;
+			queue_to_pid(nodePID);
+			transaction_init(userPID, amount, reward);
+			if (send_transaction() == 0)
+				retry = par->SO_RETRY;
 			else
-				retry = SO_RETRY; */
+				retry--;
+
 			if (retry == 0)
 			{
 				update_status(2);
 				return MAX_RETRY;
 			}
-
-			clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &randSleepTime, &sleepTimeRemaining);
-			clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &sleepTimeRemaining, NULL);
+			SLEEP
 		}
 		else
 		{

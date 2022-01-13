@@ -1,0 +1,1817 @@
+rm -f *.o master users nodes *~
+gcc -c -std=c89 -g -O0 -pedantic -D_GNU_SOURCE -DDEBUG src/common.c src/utils/*.c
+src/utils/lists.c:1: warning: ISO C forbids an empty translation unit [-Wpedantic]
+gcc -std=c89 -g -O0 -pedantic -D_GNU_SOURCE -DDEBUG src/master.c  src/print.c src/parser.c *.o -lm -o master
+gcc -std=c89 -g -O0 -pedantic -D_GNU_SOURCE -DDEBUG src/users.c *.o -lm -o users
+gcc -std=c89 -g -O0 -pedantic -D_GNU_SOURCE -DDEBUG src/nodes.c *.o -lm -o nodes
+./master
+:master: semID is 5
+:parser: assigned defaults
+--------------------------------------------
+----------- Configuration input ------------
+SO_USER_NUM 9
+SO_NODES_NUM 6
+SO_FRIENDS_NUM 999
+SO_SIM_SEC 10
+SO_HOPS 7
+SO_BUDGET_INIT 998
+SO_REWARD 14
+SO_MIN_TRANS_GEN_NSEC 100000001
+SO_MAX_TRANS_GEN_NSEC 200000001
+SO_RETRY 21
+SO_TP_SIZE 997
+SO_MIN_TRANS_PROC_NSEC 100000002
+SO_MAX_TRANS_PROC_NSEC 200000002
+--------------------------------------------
+-- Conf file read successful
+:master: Spawning node
+:master: Spawning node
+:master: Spawning node
+:master: Spawning node
+:master: Spawning node
+:master: Spawning node
+:master: Spawning user
+Node 9248 has finished
+:master: Spawning user
+Node 9247 has finished
+Node 9246 has finished
+:master: Spawning user
+:master: Spawning user
+Node 9249 has finished
+:master: Spawning user
+Node 9250 has finished
+Node 9251 has finished
+:master: Spawning user
+:master: Spawning user
+:master: Spawning user
+:users: 0 USERS_PID_ARGV 26
+:users: 0 NODES_PID_ARGV 27
+:users: 0 PARAMETERS_ARGV 25
+:users: 0 LEDGER_ARGV 28
+:users: 0 SEM_ID_PID_ARGV 0
+:users: 0 USERS_PID_ARGV 26
+:users: 9252 semID is 0
+:master: Spawning user
+:users: 0 USERS_PID_ARGV 26
+:users: 0 NODES_PID_ARGV 27
+:users: 9252 usersPID[0]
+:users: 0 USERS_PID_ARGV 26
+:users: 0 NODES_PID_ARGV 27
+:users: 0 PARAMETERS_ARGV 25
+:users: 9252 nodesPID[0]
+:users: 0 NODES_PID_ARGV 27
+:users: 0 PARAMETERS_ARGV 25
+:users: 0 LEDGER_ARGV 28
+:users: 0 PARAMETERS_ARGV 25
+:users: 0 LEDGER_ARGV 28
+:users: 0 SEM_ID_PID_ARGV 0
+:users: 0 LEDGER_ARGV 28
+:users: 0 SEM_ID_PID_ARGV 0
+:users: 0 SEM_ID_PID_ARGV 0
+:users: 9254 semID is 0
+:users: 9254 usersPID[0]
+:users: 9253 semID is 0
+:users: 9255 semID is 0
+:users: 9254 nodesPID[0]
+:users: 9253 usersPID[0]
+:users: 9255 usersPID[0]
+:users: 0 USERS_PID_ARGV 26
+:users: 9253 nodesPID[0]
+:users: 9255 nodesPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9252 -> 9246 queueID 5
+:users: 0 NODES_PID_ARGV 27
+:users: 9253 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9255 -> 9246 queueID 5
+Transaction sent
+:users: 0 PARAMETERS_ARGV 25
+Transaction sent
+:users: 0 LEDGER_ARGV 28
+:users: 9254 usersPID[0]
+:users: 0 SEM_ID_PID_ARGV 0
+:users: 9254 nodesPID[0]
+:users: 9253 usersPID[0]
+:users: 0 USERS_PID_ARGV 26
+:users: 9254 -> 9246 queueID 5
+:users: 9252 usersPID[0]
+:users: 9253 nodesPID[0]
+:users: 0 NODES_PID_ARGV 27
+:users: 9255 usersPID[0]
+Transaction sent
+:users: 9256 semID is 0
+:users: 9252 nodesPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 0 PARAMETERS_ARGV 25
+:users: 9255 nodesPID[0]
+:users: 0 USERS_PID_ARGV 26
+:users: 9256 usersPID[0]
+:users: 9252 -> 9246 queueID 5
+Transaction sent
+:users: 9254 usersPID[0]
+:users: 0 LEDGER_ARGV 28
+:users: 9255 -> 9246 queueID 5
+:users: 0 NODES_PID_ARGV 27
+:users: 9256 nodesPID[0]
+Transaction sent
+:users: 9254 nodesPID[0]
+:users: 0 SEM_ID_PID_ARGV 0
+Transaction sent
+:users: 0 PARAMETERS_ARGV 25
+:users: 9253 usersPID[0]
+:users: 9256 -> 9246 queueID 5
+:users: 9254 -> 9246 queueID 5
+:users: 0 LEDGER_ARGV 28
+:users: 9253 nodesPID[0]
+:users: 9252 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9257 semID is 0
+:users: 9255 usersPID[0]
+:users: 0 SEM_ID_PID_ARGV 0
+:users: 9253 -> 9246 queueID 5
+:users: 9252 nodesPID[0]
+:users: 0 USERS_PID_ARGV 26
+:users: 9257 usersPID[0]
+:users: 9255 nodesPID[0]
+:users: 9254 usersPID[0]
+Transaction sent
+:users: 9252 -> 9246 queueID 5
+:users: 9256 usersPID[0]
+:users: 0 NODES_PID_ARGV 27
+:users: 9258 semID is 0
+:users: 9257 nodesPID[0]
+:users: 9255 -> 9246 queueID 5
+:users: 9254 nodesPID[0]
+Transaction sent
+:users: 9256 nodesPID[0]
+:users: 0 PARAMETERS_ARGV 25
+:users: 9253 usersPID[0]
+:users: 9258 usersPID[0]
+Transaction sent
+:users: 0 USERS_PID_ARGV 26
+:users: 9257 -> 9246 queueID 5
+:users: 9254 -> 9246 queueID 5
+:users: 9256 -> 9246 queueID 5
+:users: 0 LEDGER_ARGV 28
+:users: 9253 nodesPID[0]
+:users: 9252 usersPID[0]
+:users: 9258 nodesPID[0]
+:users: 0 NODES_PID_ARGV 27
+Transaction sent
+Transaction sent
+:users: 9255 usersPID[0]
+Transaction sent
+:users: 0 SEM_ID_PID_ARGV 0
+:users: 9253 -> 9246 queueID 5
+:users: 9252 nodesPID[0]
+:users: 0 PARAMETERS_ARGV 25
+:users: 9258 -> 9246 queueID 5
+:users: 9255 nodesPID[0]
+Transaction sent
+:users: 9252 -> 9246 queueID 5
+:users: 9257 usersPID[0]
+:users: 0 LEDGER_ARGV 28
+:users: 9254 usersPID[0]
+:users: 9256 usersPID[0]
+Transaction sent
+:users: 9255 -> 9246 queueID 5
+Transaction sent
+:users: 9259 semID is 0
+:users: 9257 nodesPID[0]
+:users: 0 SEM_ID_PID_ARGV 0
+:users: 9254 nodesPID[0]
+:users: 9256 nodesPID[0]
+:users: 9253 usersPID[0]
+Transaction sent
+:users: 9257 -> 9246 queueID 5
+:users: 9259 usersPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9258 usersPID[0]
+:users: 9256 -> 9246 queueID 5
+:users: 9253 nodesPID[0]
+Transaction sent
+:users: 9260 semID is 0
+:users: 9259 nodesPID[0]
+Transaction sent
+:users: 9252 usersPID[0]
+:users: 9258 nodesPID[0]
+Transaction sent
+:users: 9255 usersPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9260 usersPID[0]
+:users: 9259 -> 9246 queueID 5
+:users: 9252 nodesPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9257 usersPID[0]
+:users: 9255 nodesPID[0]
+Transaction sent
+:users: 9254 usersPID[0]
+:users: 9260 nodesPID[0]
+Transaction sent
+:users: 9252 -> 9246 queueID 5
+:users: 9256 usersPID[0]
+Transaction sent
+:users: 9257 nodesPID[0]
+:users: 9255 -> 9246 queueID 5
+:users: 9254 nodesPID[0]
+:users: 9260 -> 9246 queueID 5
+Transaction sent
+:users: 9256 nodesPID[0]
+:users: 9253 usersPID[0]
+:users: 9257 -> 9246 queueID 5
+Transaction sent
+:users: 9254 -> 9246 queueID 5
+:users: 9258 usersPID[0]
+Transaction sent
+:users: 9259 usersPID[0]
+:users: 9256 -> 9246 queueID 5
+:users: 9253 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9258 nodesPID[0]
+:users: 9259 nodesPID[0]
+:users: 9260 usersPID[0]
+:users: 9255 usersPID[0]
+Transaction sent
+:users: 9253 -> 9246 queueID 5
+:users: 9252 usersPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9259 -> 9246 queueID 5
+:users: 9260 nodesPID[0]
+:users: 9255 nodesPID[0]
+:users: 9257 usersPID[0]
+Transaction sent
+:users: 9254 usersPID[0]
+:users: 9252 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9260 -> 9246 queueID 5
+:users: 9256 usersPID[0]
+:users: 9255 -> 9246 queueID 5
+:users: 9257 nodesPID[0]
+:users: 9254 nodesPID[0]
+:users: 9252 -> 9246 queueID 5
+:users: 9253 usersPID[0]
+Transaction sent
+:users: 9256 nodesPID[0]
+Transaction sent
+:users: 9257 -> 9246 queueID 5
+:users: 9258 usersPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9259 usersPID[0]
+Transaction sent
+:users: 9253 nodesPID[0]
+:users: 9256 -> 9246 queueID 5
+Transaction sent
+:users: 9258 nodesPID[0]
+Transaction sent
+:users: 9260 usersPID[0]
+:users: 9259 nodesPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9255 usersPID[0]
+Transaction sent
+:users: 9258 -> 9246 queueID 5
+:users: 9260 nodesPID[0]
+:users: 9259 -> 9246 queueID 5
+:users: 9257 usersPID[0]
+Transaction sent
+:users: 9255 nodesPID[0]
+:users: 9252 usersPID[0]
+Transaction sent
+:users: 9254 usersPID[0]
+:users: 9260 -> 9246 queueID 5
+Transaction sent
+:users: 9257 nodesPID[0]
+:users: 9256 usersPID[0]
+:users: 9255 -> 9246 queueID 5
+:users: 9252 nodesPID[0]
+:users: 9254 nodesPID[0]
+Transaction sent
+:users: 9253 usersPID[0]
+:users: 9257 -> 9246 queueID 5
+:users: 9256 nodesPID[0]
+:users: 9258 usersPID[0]
+Transaction sent
+:users: 9252 -> 9246 queueID 5
+:users: 9254 -> 9246 queueID 5
+:users: 9259 usersPID[0]
+:users: 9253 nodesPID[0]
+Transaction sent
+:users: 9256 -> 9246 queueID 5
+:users: 9258 nodesPID[0]
+:users: 9260 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9259 nodesPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9255 usersPID[0]
+Transaction sent
+:users: 9258 -> 9246 queueID 5
+:users: 9260 nodesPID[0]
+:users: 9257 usersPID[0]
+:users: 9259 -> 9246 queueID 5
+Transaction sent
+:users: 9255 nodesPID[0]
+Transaction sent
+:users: 9254 usersPID[0]
+:users: 9260 -> 9246 queueID 5
+:users: 9257 nodesPID[0]
+Transaction sent
+:users: 9252 usersPID[0]
+:users: 9256 usersPID[0]
+:users: 9255 -> 9246 queueID 5
+:users: 9254 nodesPID[0]
+:users: 9253 usersPID[0]
+Transaction sent
+:users: 9257 -> 9246 queueID 5
+:users: 9252 nodesPID[0]
+:users: 9256 nodesPID[0]
+Transaction sent
+:users: 9254 -> 9246 queueID 5
+:users: 9258 usersPID[0]
+:users: 9253 nodesPID[0]
+:users: 9259 usersPID[0]
+Transaction sent
+:users: 9252 -> 9246 queueID 5
+:users: 9256 -> 9246 queueID 5
+:users: 9260 usersPID[0]
+Transaction sent
+:users: 9258 nodesPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9259 nodesPID[0]
+:users: 9255 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9260 nodesPID[0]
+:users: 9257 usersPID[0]
+:users: 9258 -> 9246 queueID 5
+Transaction sent
+:users: 9259 -> 9246 queueID 5
+:users: 9255 nodesPID[0]
+:users: 9254 usersPID[0]
+:users: 9260 -> 9246 queueID 5
+:users: 9257 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9256 usersPID[0]
+:users: 9255 -> 9246 queueID 5
+:users: 9254 nodesPID[0]
+Transaction sent
+:users: 9252 usersPID[0]
+:users: 9257 -> 9246 queueID 5
+:users: 9253 usersPID[0]
+:users: 9256 nodesPID[0]
+Transaction sent
+:users: 9254 -> 9246 queueID 5
+:users: 9258 usersPID[0]
+:users: 9252 nodesPID[0]
+:users: 9259 usersPID[0]
+Transaction sent
+:users: 9253 nodesPID[0]
+:users: 9256 -> 9246 queueID 5
+:users: 9260 usersPID[0]
+Transaction sent
+:users: 9258 nodesPID[0]
+:users: 9252 -> 9246 queueID 5
+:users: 9259 nodesPID[0]
+:users: 9253 -> 9246 queueID 5
+Transaction sent
+:users: 9260 nodesPID[0]
+:users: 9258 -> 9246 queueID 5
+Transaction sent
+:users: 9256 usersPID[0]
+:users: 9257 usersPID[0]
+Transaction sent
+:users: 9259 -> 9246 queueID 5
+Transaction sent
+:users: 9254 usersPID[0]
+:users: 9255 usersPID[0]
+:users: 9260 -> 9246 queueID 5
+:users: 9258 usersPID[0]
+:users: 9256 nodesPID[0]
+:users: 9257 nodesPID[0]
+Transaction sent
+:users: 9252 usersPID[0]
+:users: 9254 nodesPID[0]
+:users: 9255 nodesPID[0]
+Transaction sent
+:users: 9253 usersPID[0]
+:users: 9258 nodesPID[0]
+:users: 9256 -> 9246 queueID 5
+:users: 9257 -> 9246 queueID 5
+:users: 9252 nodesPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9255 -> 9246 queueID 5
+:users: 9253 nodesPID[0]
+:users: 9259 usersPID[0]
+:users: 9258 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9252 -> 9246 queueID 5
+:users: 9260 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9253 -> 9246 queueID 5
+:users: 9259 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9260 nodesPID[0]
+:users: 9256 usersPID[0]
+:users: 9254 usersPID[0]
+Transaction sent
+:users: 9257 usersPID[0]
+:users: 9259 -> 9246 queueID 5
+:users: 9260 -> 9246 queueID 5
+:users: 9256 nodesPID[0]
+:users: 9255 usersPID[0]
+:users: 9254 nodesPID[0]
+:users: 9257 nodesPID[0]
+:users: 9258 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9256 -> 9246 queueID 5
+:users: 9255 nodesPID[0]
+:users: 9252 usersPID[0]
+:users: 9253 usersPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9257 -> 9246 queueID 5
+:users: 9258 nodesPID[0]
+Transaction sent
+:users: 9255 -> 9246 queueID 5
+:users: 9252 nodesPID[0]
+:users: 9253 nodesPID[0]
+:users: 9259 usersPID[0]
+:users: 9260 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9258 -> 9246 queueID 5
+Transaction sent
+:users: 9252 -> 9246 queueID 5
+:users: 9253 -> 9246 queueID 5
+:users: 9259 nodesPID[0]
+:users: 9260 nodesPID[0]
+:users: 9256 usersPID[0]
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 9259 -> 9246 queueID 5
+:users: 9254 usersPID[0]
+:users: 9257 usersPID[0]
+:users: 9260 -> 9246 queueID 5
+:users: 9256 nodesPID[0]
+:users: 9255 usersPID[0]
+Transaction sent
+:users: 9254 nodesPID[0]
+:users: 9257 nodesPID[0]
+:users: 9252 usersPID[0]
+:users: 9258 usersPID[0]
+Transaction sent
+:users: 9256 -> 9246 queueID 5
+:users: 9253 usersPID[0]
+:users: 9255 nodesPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9257 -> 9246 queueID 5
+:users: 9252 nodesPID[0]
+:users: 9258 nodesPID[0]
+:users: 9259 usersPID[0]
+Transaction sent
+:users: 9253 nodesPID[0]
+:users: 9255 -> 9246 queueID 5
+Transaction sent
+:users: 9260 usersPID[0]
+Transaction sent
+:users: 9252 -> 9246 queueID 5
+:users: 9258 -> 9246 queueID 5
+:users: 9259 nodesPID[0]
+:users: 9257 usersPID[0]
+:users: 9253 -> 9246 queueID 5
+Transaction sent
+:users: 9260 nodesPID[0]
+:users: 9256 usersPID[0]
+Transaction sent
+:users: 9254 usersPID[0]
+Transaction sent
+:users: 9259 -> 9246 queueID 5
+:users: 9257 nodesPID[0]
+Transaction sent
+:users: 9260 -> 9246 queueID 5
+:users: 9256 nodesPID[0]
+:users: 9254 nodesPID[0]
+:users: 9255 usersPID[0]
+Transaction sent
+:users: 9257 -> 9246 queueID 5
+Transaction sent
+:users: 9256 -> 9246 queueID 5
+:users: 9254 -> 9246 queueID 5
+:users: 9255 nodesPID[0]
+:users: 9252 usersPID[0]
+:users: 9253 usersPID[0]
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 9258 usersPID[0]
+:users: 9255 -> 9246 queueID 5
+:users: 9259 usersPID[0]
+:users: 9252 nodesPID[0]
+:users: 9253 nodesPID[0]
+:users: 9260 usersPID[0]
+:users: 9258 nodesPID[0]
+Transaction sent
+:users: 9259 nodesPID[0]
+:users: 9257 usersPID[0]
+:users: 9256 usersPID[0]
+:users: 9252 -> 9246 queueID 5
+:users: 9253 -> 9246 queueID 5
+:users: 9254 usersPID[0]
+:users: 9260 nodesPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9259 -> 9246 queueID 5
+:users: 9257 nodesPID[0]
+:users: 9256 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9255 usersPID[0]
+:users: 9254 nodesPID[0]
+:users: 9260 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9257 -> 9246 queueID 5
+:users: 9256 -> 9246 queueID 5
+:users: 9255 nodesPID[0]
+:users: 9254 -> 9246 queueID 5
+Transaction sent
+:users: 9253 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9255 -> 9246 queueID 5
+:users: 9252 usersPID[0]
+Transaction sent
+:users: 9258 usersPID[0]
+:users: 9259 usersPID[0]
+:users: 9253 nodesPID[0]
+Transaction sent
+:users: 9252 nodesPID[0]
+:users: 9260 usersPID[0]
+:users: 9258 nodesPID[0]
+:users: 9257 usersPID[0]
+:users: 9259 nodesPID[0]
+:users: 9256 usersPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9252 -> 9246 queueID 5
+:users: 9260 nodesPID[0]
+:users: 9254 usersPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9257 nodesPID[0]
+:users: 9259 -> 9246 queueID 5
+:users: 9255 usersPID[0]
+:users: 9256 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9260 -> 9246 queueID 5
+:users: 9254 nodesPID[0]
+Transaction sent
+:users: 9257 -> 9246 queueID 5
+Transaction sent
+:users: 9255 nodesPID[0]
+:users: 9256 -> 9246 queueID 5
+Transaction sent
+:users: 9254 -> 9246 queueID 5
+Transaction sent
+:users: 9253 usersPID[0]
+:users: 9255 -> 9246 queueID 5
+Transaction sent
+:users: 9258 usersPID[0]
+Transaction sent
+:users: 9252 usersPID[0]
+:users: 9259 usersPID[0]
+:users: 9253 nodesPID[0]
+Transaction sent
+:users: 9260 usersPID[0]
+:users: 9258 nodesPID[0]
+:users: 9257 usersPID[0]
+:users: 9252 nodesPID[0]
+:users: 9259 nodesPID[0]
+:users: 9256 usersPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9260 nodesPID[0]
+:users: 9254 usersPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9257 nodesPID[0]
+:users: 9252 -> 9246 queueID 5
+:users: 9259 -> 9246 queueID 5
+:users: 9255 usersPID[0]
+:users: 9256 nodesPID[0]
+Transaction sent
+:users: 9260 -> 9246 queueID 5
+:users: 9254 nodesPID[0]
+Transaction sent
+:users: 9257 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9255 nodesPID[0]
+:users: 9256 -> 9246 queueID 5
+Transaction sent
+:users: 9254 -> 9246 queueID 5
+Transaction sent
+:users: 9253 usersPID[0]
+:users: 9255 -> 9246 queueID 5
+Transaction sent
+:users: 9258 usersPID[0]
+Transaction sent
+:users: 9259 usersPID[0]
+:users: 9253 nodesPID[0]
+Transaction sent
+:users: 9260 usersPID[0]
+:users: 9252 usersPID[0]
+:users: 9258 nodesPID[0]
+:users: 9257 usersPID[0]
+:users: 9259 nodesPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9256 usersPID[0]
+:users: 9260 nodesPID[0]
+:users: 9252 nodesPID[0]
+:users: 9254 usersPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9257 nodesPID[0]
+:users: 9255 usersPID[0]
+:users: 9259 -> 9246 queueID 5
+Transaction sent
+:users: 9256 nodesPID[0]
+:users: 9260 -> 9246 queueID 5
+:users: 9252 -> 9246 queueID 5
+:users: 9254 nodesPID[0]
+Transaction sent
+:users: 9257 -> 9246 queueID 5
+:users: 9255 nodesPID[0]
+Transaction sent
+:users: 9256 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9254 -> 9246 queueID 5
+:users: 9253 usersPID[0]
+Transaction sent
+:users: 9255 -> 9246 queueID 5
+Transaction sent
+:users: 9259 usersPID[0]
+Transaction sent
+:users: 9260 usersPID[0]
+:users: 9253 nodesPID[0]
+:users: 9258 usersPID[0]
+Transaction sent
+:users: 9259 nodesPID[0]
+:users: 9252 usersPID[0]
+:users: 9260 nodesPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9256 usersPID[0]
+:users: 9258 nodesPID[0]
+:users: 9259 -> 9246 queueID 5
+:users: 9254 usersPID[0]
+:users: 9252 nodesPID[0]
+:users: 9260 -> 9246 queueID 5
+:users: 9257 usersPID[0]
+Transaction sent
+:users: 9256 nodesPID[0]
+:users: 9255 usersPID[0]
+:users: 9258 -> 9246 queueID 5
+Transaction sent
+:users: 9254 nodesPID[0]
+:users: 9252 -> 9246 queueID 5
+Transaction sent
+:users: 9257 nodesPID[0]
+:users: 9256 -> 9246 queueID 5
+:users: 9255 nodesPID[0]
+Transaction sent
+:users: 9253 usersPID[0]
+:users: 9254 -> 9246 queueID 5
+Transaction sent
+:users: 9257 -> 9246 queueID 5
+Transaction sent
+:users: 9259 usersPID[0]
+:users: 9255 -> 9246 queueID 5
+:users: 9253 nodesPID[0]
+:users: 9260 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9259 nodesPID[0]
+:users: 9258 usersPID[0]
+Transaction sent
+:users: 9253 -> 9246 queueID 5
+:users: 9260 nodesPID[0]
+:users: 9256 usersPID[0]
+:users: 9259 -> 9246 queueID 5
+:users: 9258 nodesPID[0]
+:users: 9252 usersPID[0]
+Transaction sent
+:users: 9260 -> 9246 queueID 5
+:users: 9254 usersPID[0]
+:users: 9256 nodesPID[0]
+:users: 9257 usersPID[0]
+Transaction sent
+:users: 9258 -> 9246 queueID 5
+:users: 9255 usersPID[0]
+:users: 9252 nodesPID[0]
+Transaction sent
+:users: 9254 nodesPID[0]
+:users: 9256 -> 9246 queueID 5
+:users: 9257 nodesPID[0]
+:users: 9253 usersPID[0]
+Transaction sent
+:users: 9255 nodesPID[0]
+:users: 9252 -> 9246 queueID 5
+:users: 9254 -> 9246 queueID 5
+:users: 9259 usersPID[0]
+Transaction sent
+:users: 9257 -> 9246 queueID 5
+:users: 9253 nodesPID[0]
+:users: 9260 usersPID[0]
+:users: 9255 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9259 nodesPID[0]
+Transaction sent
+:users: 9253 -> 9246 queueID 5
+:users: 9260 nodesPID[0]
+Transaction sent
+:users: 9256 usersPID[0]
+:users: 9258 usersPID[0]
+:users: 9259 -> 9246 queueID 5
+Transaction sent
+:users: 9260 -> 9246 queueID 5
+:users: 9256 nodesPID[0]
+:users: 9254 usersPID[0]
+:users: 9257 usersPID[0]
+:users: 9258 nodesPID[0]
+:users: 9252 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9255 usersPID[0]
+:users: 9256 -> 9246 queueID 5
+:users: 9254 nodesPID[0]
+:users: 9257 nodesPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9253 usersPID[0]
+:users: 9252 nodesPID[0]
+:users: 9255 nodesPID[0]
+Transaction sent
+:users: 9254 -> 9246 queueID 5
+:users: 9257 -> 9246 queueID 5
+:users: 9259 usersPID[0]
+:users: 9260 usersPID[0]
+Transaction sent
+:users: 9253 nodesPID[0]
+:users: 9252 -> 9246 queueID 5
+:users: 9255 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9259 nodesPID[0]
+:users: 9260 nodesPID[0]
+:users: 9256 usersPID[0]
+:users: 9253 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9258 usersPID[0]
+:users: 9259 -> 9246 queueID 5
+:users: 9260 -> 9246 queueID 5
+:users: 9256 nodesPID[0]
+Transaction sent
+:users: 9254 usersPID[0]
+:users: 9257 usersPID[0]
+:users: 9258 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9256 -> 9246 queueID 5
+:users: 9255 usersPID[0]
+:users: 9254 nodesPID[0]
+:users: 9257 nodesPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9252 usersPID[0]
+:users: 9253 usersPID[0]
+Transaction sent
+:users: 9255 nodesPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9257 -> 9246 queueID 5
+:users: 9260 usersPID[0]
+Transaction sent
+:users: 9259 usersPID[0]
+:users: 9252 nodesPID[0]
+:users: 9253 nodesPID[0]
+:users: 9255 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9260 nodesPID[0]
+:users: 9256 usersPID[0]
+:users: 9259 nodesPID[0]
+:users: 9252 -> 9246 queueID 5
+:users: 9253 -> 9246 queueID 5
+Transaction sent
+:users: 9258 usersPID[0]
+:users: 9260 -> 9246 queueID 5
+:users: 9256 nodesPID[0]
+:users: 9259 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9257 usersPID[0]
+:users: 9254 usersPID[0]
+:users: 9258 nodesPID[0]
+Transaction sent
+:users: 9256 -> 9246 queueID 5
+Transaction sent
+:users: 9255 usersPID[0]
+:users: 9257 nodesPID[0]
+:users: 9254 nodesPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9253 usersPID[0]
+Transaction sent
+:users: 9252 usersPID[0]
+:users: 9260 usersPID[0]
+:users: 9255 nodesPID[0]
+:users: 9257 -> 9246 queueID 5
+:users: 9254 -> 9246 queueID 5
+Transaction sent
+:users: 9259 usersPID[0]
+:users: 9253 nodesPID[0]
+:users: 9252 nodesPID[0]
+:users: 9260 nodesPID[0]
+:users: 9255 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9256 usersPID[0]
+:users: 9259 nodesPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9252 -> 9246 queueID 5
+:users: 9260 -> 9246 queueID 5
+Transaction sent
+:users: 9258 usersPID[0]
+:users: 9256 nodesPID[0]
+:users: 9259 -> 9246 queueID 5
+Transaction sent
+:users: 9257 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9254 usersPID[0]
+:users: 9258 nodesPID[0]
+:users: 9256 -> 9246 queueID 5
+Transaction sent
+:users: 9257 nodesPID[0]
+:users: 9255 usersPID[0]
+:users: 9254 nodesPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9253 usersPID[0]
+Transaction sent
+:users: 9257 -> 9246 queueID 5
+:users: 9260 usersPID[0]
+:users: 9255 nodesPID[0]
+:users: 9254 -> 9246 queueID 5
+Transaction sent
+:users: 9252 usersPID[0]
+:users: 9253 nodesPID[0]
+:users: 9259 usersPID[0]
+Transaction sent
+:users: 9260 nodesPID[0]
+:users: 9255 -> 9246 queueID 5
+Transaction sent
+:users: 9256 usersPID[0]
+:users: 9252 nodesPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9259 nodesPID[0]
+:users: 9260 -> 9246 queueID 5
+Transaction sent
+:users: 9256 nodesPID[0]
+:users: 9252 -> 9246 queueID 5
+:users: 9257 usersPID[0]
+Transaction sent
+:users: 9259 -> 9246 queueID 5
+:users: 9258 usersPID[0]
+Transaction sent
+:users: 9254 usersPID[0]
+:users: 9256 -> 9246 queueID 5
+Transaction sent
+:users: 9257 nodesPID[0]
+Transaction sent
+:users: 9255 usersPID[0]
+:users: 9258 nodesPID[0]
+:users: 9254 nodesPID[0]
+:users: 9253 usersPID[0]
+Transaction sent
+:users: 9257 -> 9246 queueID 5
+:users: 9260 usersPID[0]
+:users: 9255 nodesPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9254 -> 9246 queueID 5
+:users: 9253 nodesPID[0]
+:users: 9259 usersPID[0]
+Transaction sent
+:users: 9260 nodesPID[0]
+:users: 9252 usersPID[0]
+:users: 9255 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9256 usersPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9259 nodesPID[0]
+:users: 9260 -> 9246 queueID 5
+:users: 9252 nodesPID[0]
+Transaction sent
+:users: 9257 usersPID[0]
+:users: 9256 nodesPID[0]
+Transaction sent
+:users: 9259 -> 9246 queueID 5
+Transaction sent
+:users: 9252 -> 9246 queueID 5
+:users: 9258 usersPID[0]
+:users: 9254 usersPID[0]
+:users: 9257 nodesPID[0]
+:users: 9256 -> 9246 queueID 5
+Transaction sent
+:users: 9255 usersPID[0]
+Transaction sent
+:users: 9258 nodesPID[0]
+:users: 9254 nodesPID[0]
+:users: 9253 usersPID[0]
+:users: 9257 -> 9246 queueID 5
+:users: 9260 usersPID[0]
+Transaction sent
+:users: 9255 nodesPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9254 -> 9246 queueID 5
+:users: 9253 nodesPID[0]
+:users: 9259 usersPID[0]
+Transaction sent
+:users: 9256 usersPID[0]
+:users: 9260 nodesPID[0]
+:users: 9255 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9252 usersPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9259 nodesPID[0]
+:users: 9256 nodesPID[0]
+:users: 9260 -> 9246 queueID 5
+Transaction sent
+:users: 9257 usersPID[0]
+:users: 9252 nodesPID[0]
+Transaction sent
+:users: 9259 -> 9246 queueID 5
+:users: 9256 -> 9246 queueID 5
+:users: 9258 usersPID[0]
+Transaction sent
+:users: 9254 usersPID[0]
+:users: 9257 nodesPID[0]
+:users: 9252 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9258 nodesPID[0]
+:users: 9255 usersPID[0]
+:users: 9253 usersPID[0]
+:users: 9254 nodesPID[0]
+:users: 9257 -> 9246 queueID 5
+Transaction sent
+:users: 9260 usersPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9255 nodesPID[0]
+:users: 9253 nodesPID[0]
+:users: 9259 usersPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9256 usersPID[0]
+Transaction sent
+:users: 9260 nodesPID[0]
+Transaction sent
+:users: 9255 -> 9246 queueID 5
+:users: 9253 -> 9246 queueID 5
+:users: 9259 nodesPID[0]
+Transaction sent
+:users: 9256 nodesPID[0]
+:users: 9252 usersPID[0]
+:users: 9260 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9259 -> 9246 queueID 5
+:users: 9257 usersPID[0]
+:users: 9256 -> 9246 queueID 5
+:users: 9258 usersPID[0]
+:users: 9252 nodesPID[0]
+Transaction sent
+:users: 9254 usersPID[0]
+Transaction sent
+:users: 9257 nodesPID[0]
+Transaction sent
+:users: 9258 nodesPID[0]
+:users: 9255 usersPID[0]
+:users: 9253 usersPID[0]
+:users: 9252 -> 9246 queueID 5
+:users: 9254 nodesPID[0]
+:users: 9257 -> 9246 queueID 5
+:users: 9258 -> 9246 queueID 5
+:users: 9260 usersPID[0]
+:users: 9255 nodesPID[0]
+:users: 9253 nodesPID[0]
+:users: 9259 usersPID[0]
+Transaction sent
+:users: 9254 -> 9246 queueID 5
+Transaction sent
+:users: 9256 usersPID[0]
+Transaction sent
+:users: 9260 nodesPID[0]
+:users: 9255 -> 9246 queueID 5
+:users: 9253 -> 9246 queueID 5
+:users: 9259 nodesPID[0]
+Transaction sent
+:users: 9256 nodesPID[0]
+:users: 9260 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9257 usersPID[0]
+:users: 9259 -> 9246 queueID 5
+:users: 9258 usersPID[0]
+:users: 9252 usersPID[0]
+:users: 9256 -> 9246 queueID 5
+Transaction sent
+:users: 9257 nodesPID[0]
+Transaction sent
+:users: 9254 usersPID[0]
+:users: 9258 nodesPID[0]
+:users: 9252 nodesPID[0]
+:users: 9255 usersPID[0]
+:users: 9253 usersPID[0]
+Transaction sent
+:users: 9257 -> 9246 queueID 5
+:users: 9254 nodesPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9252 -> 9246 queueID 5
+:users: 9260 usersPID[0]
+:users: 9255 nodesPID[0]
+:users: 9253 nodesPID[0]
+:users: 9259 usersPID[0]
+Transaction sent
+:users: 9254 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9260 nodesPID[0]
+:users: 9256 usersPID[0]
+:users: 9255 -> 9246 queueID 5
+:users: 9253 -> 9246 queueID 5
+:users: 9259 nodesPID[0]
+Transaction sent
+:users: 9260 -> 9246 queueID 5
+:users: 9256 nodesPID[0]
+:users: 9257 usersPID[0]
+Transaction sent
+:users: 9252 usersPID[0]
+Transaction sent
+:users: 9258 usersPID[0]
+:users: 9259 -> 9246 queueID 5
+Transaction sent
+:users: 9256 -> 9246 queueID 5
+:users: 9257 nodesPID[0]
+:users: 9252 nodesPID[0]
+:users: 9254 usersPID[0]
+:users: 9258 nodesPID[0]
+Transaction sent
+:users: 9255 usersPID[0]
+Transaction sent
+:users: 9257 -> 9246 queueID 5
+:users: 9253 usersPID[0]
+:users: 9252 -> 9246 queueID 5
+:users: 9254 nodesPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9260 usersPID[0]
+:users: 9255 nodesPID[0]
+Transaction sent
+:users: 9253 nodesPID[0]
+Transaction sent
+:users: 9259 usersPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9256 usersPID[0]
+Transaction sent
+:users: 9257 usersPID[0]
+:users: 9260 nodesPID[0]
+:users: 9255 -> 9246 queueID 5
+:users: 9253 -> 9246 queueID 5
+:users: 9259 nodesPID[0]
+Transaction sent
+:users: 9252 usersPID[0]
+:users: 9256 nodesPID[0]
+:users: 9257 nodesPID[0]
+:users: 9260 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9254 usersPID[0]
+:users: 9259 -> 9246 queueID 5
+:users: 9252 nodesPID[0]
+:users: 9256 -> 9246 queueID 5
+:users: 9257 -> 9246 queueID 5
+Transaction sent
+:users: 9258 usersPID[0]
+:users: 9254 nodesPID[0]
+Transaction sent
+:users: 9252 -> 9246 queueID 5
+Transaction sent
+:users: 9255 usersPID[0]
+Transaction sent
+:users: 9253 usersPID[0]
+:users: 9258 nodesPID[0]
+:users: 9259 usersPID[0]
+:users: 9254 -> 9246 queueID 5
+Transaction sent
+:users: 9260 usersPID[0]
+:users: 9255 nodesPID[0]
+:users: 9253 nodesPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9259 nodesPID[0]
+:users: 9256 usersPID[0]
+Transaction sent
+:users: 9257 usersPID[0]
+:users: 9260 nodesPID[0]
+:users: 9255 -> 9246 queueID 5
+:users: 9253 -> 9246 queueID 5
+Transaction sent
+:users: 9259 -> 9246 queueID 5
+:users: 9256 nodesPID[0]
+:users: 9257 nodesPID[0]
+:users: 9260 -> 9246 queueID 5
+:users: 9252 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9254 usersPID[0]
+Transaction sent
+:users: 9256 -> 9246 queueID 5
+:users: 9257 -> 9246 queueID 5
+Transaction sent
+:users: 9252 nodesPID[0]
+:users: 9258 usersPID[0]
+:users: 9254 nodesPID[0]
+Transaction sent
+:users: 9255 usersPID[0]
+Transaction sent
+:users: 9253 usersPID[0]
+:users: 9252 -> 9246 queueID 5
+:users: 9258 nodesPID[0]
+:users: 9259 usersPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9255 nodesPID[0]
+:users: 9260 usersPID[0]
+:users: 9253 nodesPID[0]
+Transaction sent
+:users: 9258 -> 9246 queueID 5
+:users: 9256 usersPID[0]
+:users: 9259 nodesPID[0]
+:users: 9257 usersPID[0]
+Transaction sent
+:users: 9255 -> 9246 queueID 5
+:users: 9260 nodesPID[0]
+:users: 9253 -> 9246 queueID 5
+Transaction sent
+:users: 9256 nodesPID[0]
+:users: 9259 -> 9246 queueID 5
+:users: 9257 nodesPID[0]
+Transaction sent
+:users: 9260 -> 9246 queueID 5
+Transaction sent
+:users: 9252 usersPID[0]
+:users: 9256 -> 9246 queueID 5
+:users: 9254 usersPID[0]
+Transaction sent
+:users: 9257 -> 9246 queueID 5
+Transaction sent
+:users: 9258 usersPID[0]
+:users: 9252 nodesPID[0]
+Transaction sent
+:users: 9255 usersPID[0]
+:users: 9254 nodesPID[0]
+:users: 9253 usersPID[0]
+Transaction sent
+:users: 9258 nodesPID[0]
+:users: 9252 -> 9246 queueID 5
+:users: 9259 usersPID[0]
+:users: 9255 nodesPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9260 usersPID[0]
+:users: 9253 nodesPID[0]
+:users: 9256 usersPID[0]
+:users: 9258 -> 9246 queueID 5
+Transaction sent
+:users: 9259 nodesPID[0]
+:users: 9255 -> 9246 queueID 5
+:users: 9257 usersPID[0]
+Transaction sent
+:users: 9260 nodesPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9256 nodesPID[0]
+Transaction sent
+:users: 9259 -> 9246 queueID 5
+Transaction sent
+:users: 9257 nodesPID[0]
+:users: 9260 -> 9246 queueID 5
+Transaction sent
+:users: 9256 -> 9246 queueID 5
+Transaction sent
+:users: 9252 usersPID[0]
+:users: 9254 usersPID[0]
+:users: 9257 -> 9246 queueID 5
+Transaction sent
+:users: 9253 usersPID[0]
+Transaction sent
+:users: 9252 nodesPID[0]
+:users: 9255 usersPID[0]
+:users: 9254 nodesPID[0]
+Transaction sent
+:users: 9258 usersPID[0]
+:users: 9259 usersPID[0]
+:users: 9253 nodesPID[0]
+:users: 9252 -> 9246 queueID 5
+:users: 9255 nodesPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9260 usersPID[0]
+:users: 9256 usersPID[0]
+:users: 9258 nodesPID[0]
+:users: 9259 nodesPID[0]
+:users: 9253 -> 9246 queueID 5
+Transaction sent
+:users: 9257 usersPID[0]
+:users: 9255 -> 9246 queueID 5
+Transaction sent
+:users: 9260 nodesPID[0]
+:users: 9256 nodesPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9259 -> 9246 queueID 5
+Transaction sent
+:users: 9257 nodesPID[0]
+Transaction sent
+:users: 9260 -> 9246 queueID 5
+:users: 9256 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9257 -> 9246 queueID 5
+:users: 9254 usersPID[0]
+:users: 9252 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9259 usersPID[0]
+:users: 9253 usersPID[0]
+Transaction sent
+:users: 9255 usersPID[0]
+:users: 9254 nodesPID[0]
+:users: 9252 nodesPID[0]
+:users: 9258 usersPID[0]
+:users: 9259 nodesPID[0]
+:users: 9253 nodesPID[0]
+:users: 9260 usersPID[0]
+:users: 9255 nodesPID[0]
+:users: 9256 usersPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9252 -> 9246 queueID 5
+:users: 9258 nodesPID[0]
+:users: 9257 usersPID[0]
+:users: 9259 -> 9246 queueID 5
+:users: 9253 -> 9246 queueID 5
+:users: 9260 nodesPID[0]
+:users: 9255 -> 9246 queueID 5
+:users: 9256 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9258 -> 9246 queueID 5
+:users: 9257 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9260 -> 9246 queueID 5
+Transaction sent
+:users: 9256 -> 9246 queueID 5
+Transaction sent
+:users: 9257 -> 9246 queueID 5
+Transaction sent
+:users: 9254 usersPID[0]
+Transaction sent
+:users: 9259 usersPID[0]
+Transaction sent
+:users: 9253 usersPID[0]
+:users: 9252 usersPID[0]
+:users: 9254 nodesPID[0]
+:users: 9255 usersPID[0]
+:users: 9259 nodesPID[0]
+:users: 9257 usersPID[0]
+:users: 9260 usersPID[0]
+:users: 9253 nodesPID[0]
+:users: 9252 nodesPID[0]
+:users: 9256 usersPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9255 nodesPID[0]
+:users: 9258 usersPID[0]
+:users: 9259 -> 9246 queueID 5
+:users: 9257 nodesPID[0]
+:users: 9260 nodesPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9252 -> 9246 queueID 5
+:users: 9256 nodesPID[0]
+Transaction sent
+:users: 9255 -> 9246 queueID 5
+:users: 9258 nodesPID[0]
+Transaction sent
+:users: 9257 -> 9246 queueID 5
+:users: 9260 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9256 -> 9246 queueID 5
+Transaction sent
+:users: 9258 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9253 usersPID[0]
+:users: 9254 usersPID[0]
+Transaction sent
+:users: 9259 usersPID[0]
+Transaction sent
+:users: 9255 usersPID[0]
+:users: 9253 nodesPID[0]
+:users: 9257 usersPID[0]
+:users: 9254 nodesPID[0]
+:users: 9252 usersPID[0]
+:users: 9260 usersPID[0]
+:users: 9259 nodesPID[0]
+:users: 9255 nodesPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9256 usersPID[0]
+:users: 9257 nodesPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9252 nodesPID[0]
+:users: 9258 usersPID[0]
+:users: 9260 nodesPID[0]
+:users: 9259 -> 9246 queueID 5
+:users: 9255 -> 9246 queueID 5
+Transaction sent
+:users: 9256 nodesPID[0]
+:users: 9257 -> 9246 queueID 5
+Transaction sent
+:users: 9252 -> 9246 queueID 5
+:users: 9258 nodesPID[0]
+:users: 9260 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9256 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9258 -> 9246 queueID 5
+:users: 9253 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9254 usersPID[0]
+Transaction sent
+:users: 9259 usersPID[0]
+:users: 9253 nodesPID[0]
+:users: 9255 usersPID[0]
+:users: 9257 usersPID[0]
+:users: 9254 nodesPID[0]
+:users: 9259 nodesPID[0]
+:users: 9260 usersPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9255 nodesPID[0]
+:users: 9256 usersPID[0]
+:users: 9252 usersPID[0]
+:users: 9257 nodesPID[0]
+:users: 9258 usersPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9259 -> 9246 queueID 5
+:users: 9260 nodesPID[0]
+Transaction sent
+:users: 9255 -> 9246 queueID 5
+:users: 9256 nodesPID[0]
+:users: 9252 nodesPID[0]
+:users: 9257 -> 9246 queueID 5
+:users: 9258 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9260 -> 9246 queueID 5
+Transaction sent
+:users: 9256 -> 9246 queueID 5
+:users: 9252 -> 9246 queueID 5
+Transaction sent
+:users: 9258 -> 9246 queueID 5
+:users: 9253 usersPID[0]
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 9254 usersPID[0]
+:users: 9259 usersPID[0]
+Transaction sent
+:users: 9253 nodesPID[0]
+:users: 9255 usersPID[0]
+:users: 9257 usersPID[0]
+:users: 9254 nodesPID[0]
+:users: 9259 nodesPID[0]
+:users: 9260 usersPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9256 usersPID[0]
+:users: 9255 nodesPID[0]
+:users: 9257 nodesPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9259 -> 9246 queueID 5
+:users: 9260 nodesPID[0]
+:users: 9252 usersPID[0]
+Transaction sent
+:users: 9256 nodesPID[0]
+:users: 9255 -> 9246 queueID 5
+:users: 9257 -> 9246 queueID 5
+Transaction sent
+:users: 9258 usersPID[0]
+Transaction sent
+:users: 9260 -> 9246 queueID 5
+:users: 9252 nodesPID[0]
+:users: 9256 -> 9246 queueID 5
+Transaction sent
+:users: 9254 usersPID[0]
+Transaction sent
+:users: 9258 nodesPID[0]
+:users: 9253 usersPID[0]
+Transaction sent
+:users: 9252 -> 9246 queueID 5
+Transaction sent
+:users: 9254 nodesPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9259 usersPID[0]
+:users: 9253 nodesPID[0]
+:users: 9255 usersPID[0]
+Transaction sent
+:users: 9257 usersPID[0]
+:users: 9254 -> 9246 queueID 5
+Transaction sent
+:users: 9259 nodesPID[0]
+:users: 9260 usersPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9256 usersPID[0]
+:users: 9255 nodesPID[0]
+:users: 9257 nodesPID[0]
+Transaction sent
+:users: 9259 -> 9246 queueID 5
+:users: 9260 nodesPID[0]
+Transaction sent
+:users: 9256 nodesPID[0]
+:users: 9255 -> 9246 queueID 5
+:users: 9258 usersPID[0]
+:users: 9257 -> 9246 queueID 5
+:users: 9252 usersPID[0]
+Transaction sent
+:users: 9260 -> 9246 queueID 5
+:users: 9256 -> 9246 queueID 5
+Transaction sent
+:users: 9258 nodesPID[0]
+:users: 9254 usersPID[0]
+Transaction sent
+:users: 9252 nodesPID[0]
+:users: 9253 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9258 -> 9246 queueID 5
+:users: 9254 nodesPID[0]
+:users: 9257 usersPID[0]
+:users: 9259 usersPID[0]
+:users: 9252 -> 9246 queueID 5
+:users: 9253 nodesPID[0]
+:users: 9255 usersPID[0]
+Transaction sent
+:users: 9254 -> 9246 queueID 5
+:users: 9257 nodesPID[0]
+:users: 9260 usersPID[0]
+:users: 9259 nodesPID[0]
+Transaction sent
+:users: 9253 -> 9246 queueID 5
+:users: 9255 nodesPID[0]
+Transaction sent
+:users: 9257 -> 9246 queueID 5
+:users: 9260 nodesPID[0]
+:users: 9259 -> 9246 queueID 5
+:users: 9256 usersPID[0]
+:users: 9258 usersPID[0]
+Transaction sent
+:users: 9255 -> 9246 queueID 5
+Transaction sent
+:users: 9260 -> 9246 queueID 5
+Transaction sent
+:users: 9256 nodesPID[0]
+:users: 9258 nodesPID[0]
+:users: 9254 usersPID[0]
+:users: 9252 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9253 usersPID[0]
+:users: 9257 usersPID[0]
+:users: 9256 -> 9246 queueID 5
+:users: 9258 -> 9246 queueID 5
+:users: 9255 usersPID[0]
+:users: 9254 nodesPID[0]
+:users: 9252 nodesPID[0]
+:users: 9259 usersPID[0]
+:users: 9253 nodesPID[0]
+:users: 9257 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9255 nodesPID[0]
+:users: 9260 usersPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9252 -> 9246 queueID 5
+:users: 9259 nodesPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9257 -> 9246 queueID 5
+:users: 9255 -> 9246 queueID 5
+:users: 9260 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9256 usersPID[0]
+:users: 9259 -> 9246 queueID 5
+:users: 9258 usersPID[0]
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 9260 -> 9246 queueID 5
+:users: 9256 nodesPID[0]
+Transaction sent
+:users: 9258 nodesPID[0]
+:users: 9254 usersPID[0]
+Transaction sent
+:users: 9256 -> 9246 queueID 5
+:users: 9253 usersPID[0]
+:users: 9252 usersPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9257 usersPID[0]
+:users: 9254 nodesPID[0]
+:users: 9255 usersPID[0]
+Transaction sent
+:users: 9253 nodesPID[0]
+:users: 9259 usersPID[0]
+:users: 9252 nodesPID[0]
+Transaction sent
+:users: 9260 usersPID[0]
+:users: 9260 nodesPID[0]
+:users: 9256 usersPID[0]
+:users: 9257 nodesPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9255 nodesPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9259 nodesPID[0]
+:users: 9252 -> 9246 queueID 5
+:users: 9260 -> 9246 queueID 5
+:users: 9256 nodesPID[0]
+:users: 9257 -> 9246 queueID 5
+:users: 9258 usersPID[0]
+Transaction sent
+:users: 9255 -> 9246 queueID 5
+Transaction sent
+:users: 9259 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9256 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9258 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9260 usersPID[0]
+:users: 9254 usersPID[0]
+:users: 9253 usersPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9260 nodesPID[0]
+:users: 9257 usersPID[0]
+:users: 9254 nodesPID[0]
+:users: 9252 usersPID[0]
+:users: 9256 usersPID[0]
+:users: 9253 nodesPID[0]
+Transaction sent
+:users: 9255 usersPID[0]
+:users: 9260 -> 9246 queueID 5
+:users: 9259 usersPID[0]
+:users: 9257 nodesPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9252 nodesPID[0]
+:users: 9256 nodesPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9255 nodesPID[0]
+Transaction sent
+:users: 9259 nodesPID[0]
+:users: 9257 -> 9246 queueID 5
+Transaction sent
+:users: 9258 usersPID[0]
+:users: 9252 -> 9246 queueID 5
+:users: 9256 -> 9246 queueID 5
+Transaction sent
+:users: 9255 -> 9246 queueID 5
+:users: 9259 -> 9246 queueID 5
+Transaction sent
+:users: 9258 nodesPID[0]
+Transaction sent
+:users: 9260 usersPID[0]
+Transaction sent
+Transaction sent
+Transaction sent
+:users: 9254 usersPID[0]
+:users: 9258 -> 9246 queueID 5
+:users: 9260 nodesPID[0]
+:users: 9253 usersPID[0]
+:users: 9257 usersPID[0]
+:users: 9254 nodesPID[0]
+Transaction sent
+:users: 9256 usersPID[0]
+:users: 9260 -> 9246 queueID 5
+:users: 9253 nodesPID[0]
+:users: 9255 usersPID[0]
+:users: 9257 nodesPID[0]
+:users: 9252 usersPID[0]
+:users: 9259 usersPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9256 nodesPID[0]
+Transaction sent
+:users: 9253 -> 9246 queueID 5
+:users: 9255 nodesPID[0]
+:users: 9257 -> 9246 queueID 5
+:users: 9258 usersPID[0]
+:users: 9252 nodesPID[0]
+:users: 9259 nodesPID[0]
+Transaction sent
+:users: 9256 -> 9246 queueID 5
+Transaction sent
+:users: 9255 -> 9246 queueID 5
+Transaction sent
+:users: 9258 nodesPID[0]
+:users: 9252 -> 9246 queueID 5
+:users: 9259 -> 9246 queueID 5
+:users: 9260 usersPID[0]
+Transaction sent
+Transaction sent
+:users: 9258 -> 9246 queueID 5
+Transaction sent
+:users: 9254 usersPID[0]
+Transaction sent
+:users: 9260 nodesPID[0]
+:users: 9253 usersPID[0]
+:users: 9257 usersPID[0]
+Transaction sent
+:users: 9254 nodesPID[0]
+:users: 9256 usersPID[0]
+:users: 9260 -> 9246 queueID 5
+:users: 9255 usersPID[0]
+:users: 9253 nodesPID[0]
+:users: 9257 nodesPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9259 usersPID[0]
+:users: 9256 nodesPID[0]
+Transaction sent
+:users: 9252 usersPID[0]
+:users: 9255 nodesPID[0]
+:users: 9258 usersPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9257 -> 9246 queueID 5
+Transaction sent
+:users: 9259 nodesPID[0]
+:users: 9256 -> 9246 queueID 5
+:users: 9252 nodesPID[0]
+:users: 9255 -> 9246 queueID 5
+:users: 9258 nodesPID[0]
+Transaction sent
+:users: 9260 usersPID[0]
+Transaction sent
+:users: 9259 -> 9246 queueID 5
+Transaction sent
+:users: 9252 -> 9246 queueID 5
+Transaction sent
+:users: 9258 -> 9246 queueID 5
+:users: 9254 usersPID[0]
+:users: 9260 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9253 usersPID[0]
+Transaction sent
+:users: 9257 usersPID[0]
+:users: 9254 nodesPID[0]
+:users: 9260 -> 9246 queueID 5
+:users: 9256 usersPID[0]
+:users: 9255 usersPID[0]
+:users: 9253 nodesPID[0]
+:users: 9257 nodesPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9252 usersPID[0]
+:users: 9259 usersPID[0]
+Transaction sent
+:users: 9256 nodesPID[0]
+:users: 9255 nodesPID[0]
+:users: 9258 usersPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9257 -> 9246 queueID 5
+Transaction sent
+:users: 9252 nodesPID[0]
+:users: 9259 nodesPID[0]
+:users: 9256 -> 9246 queueID 5
+:users: 9255 -> 9246 queueID 5
+:users: 9258 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9260 usersPID[0]
+:users: 9252 -> 9246 queueID 5
+:users: 9259 -> 9246 queueID 5
+Transaction sent
+Transaction sent
+:users: 9258 -> 9246 queueID 5
+:users: 9254 usersPID[0]
+:users: 9260 nodesPID[0]
+Transaction sent
+Transaction sent
+:users: 9253 usersPID[0]
+Transaction sent
+:users: 9254 nodesPID[0]
+:users: 9260 -> 9246 queueID 5
+:users: 9256 usersPID[0]
+:users: 9255 usersPID[0]
+:users: 9253 nodesPID[0]
+:users: 9257 usersPID[0]
+:users: 9254 -> 9246 queueID 5
+Transaction sent
+:users: 9256 nodesPID[0]
+:users: 9259 usersPID[0]
+:users: 9255 nodesPID[0]
+:users: 9258 usersPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9257 nodesPID[0]
+:users: 9252 usersPID[0]
+Transaction sent
+:users: 9256 -> 9246 queueID 5
+:users: 9259 nodesPID[0]
+:users: 9255 -> 9246 queueID 5
+:users: 9258 nodesPID[0]
+:users: 9260 usersPID[0]
+Transaction sent
+:users: 9257 -> 9246 queueID 5
+:users: 9252 nodesPID[0]
+Transaction sent
+:users: 9259 -> 9246 queueID 5
+Transaction sent
+:users: 9258 -> 9246 queueID 5
+:users: 9260 nodesPID[0]
+:users: 9254 usersPID[0]
+Transaction sent
+:users: 9252 -> 9246 queueID 5
+:users: 9253 usersPID[0]
+:users: 9260 -> 9246 queueID 5
+:users: 9254 nodesPID[0]
+:users: 9256 usersPID[0]
+:users: 9255 usersPID[0]
+:users: 9253 nodesPID[0]
+:users: 9254 -> 9246 queueID 5
+:users: 9256 nodesPID[0]
+:users: 9255 nodesPID[0]
+:users: 9257 usersPID[0]
+:users: 9253 -> 9246 queueID 5
+:users: 9256 -> 9246 queueID 5
+:users: 9255 -> 9246 queueID 5
+:users: 9257 nodesPID[0]
+:users: 9257 -> 9246 queueID 5
+::User:: SIGINT received
+ ::User:: SIGINT received
+ ::User:: SIGINT received
+ ::User:: SIGINT received
+ ::User:: SIGINT received
+ ::User:: SIGINT received
+ ::User:: SIGINT received
+ ::User:: SIGINT received
+ ::User:: SIGINT received
+ ::Master:: SIGINT ricevuto
+ --------------------------------------------
+----------- Configuration value ------------
+SO_USER_NUM->9
+SO_NODES_NUM->6
+SO_BUDGET_INIT->998
+SO_REWARD->14
+SO_MIN_TRANS_GEN_NSEC->100000001
+SO_MAX_TRANS_GEN_NSEC->200000001
+SO_RETRY->21
+SO_TP_SIZE->997
+SO_MIN_TRANS_PROC_NSEC->100000002
+SO_MAX_TRANS_PROC_NSEC->200000002
+SO_SIM_SEC->10
+SO_FRIENDS_NUM->999
+SO_HOPS->7
+--------------------------------------------
+
+***********************
+|| The time has come ||
+***********************
+
+
+ ------- Master Process PID is 9245 ----------
+|                                             |
+ - Type ------- PID --------- Status ---------
+ ---------------------------------------------
+|  User         9260            0             |
+|  User         9259            0             |
+|  User         9258            0             |
+|  User         9257            0             |
+|  User         9256            0             |
+|  User         9255            0             |
+|  User         9254            0             |
+|  User         9253            0             |
+|  User         9252            0             |
+ ---------------------------------------------
+|  Node         9251            0             |
+|  Node         9250            0             |
+|  Node         9249            0             |
+|  Node         9248            0             |
+|  Node         9247            0             |
+|  Node         9246            0             |
+ ---------------------------------------------

@@ -46,7 +46,7 @@
 #include <string.h>
 #include <signal.h>
 
-void make_arguments(int *IPCarray, char **argv);
+void make_arguments(int *IPCarray, char *argv[]);
 
 pid_t spawn_user(char *argv[]);
 pid_t spawn_node(char *argv[]);

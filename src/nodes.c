@@ -4,6 +4,23 @@
 
 /* transaction pool==transaction's array */
 
+/*
+ ======================
+ || GLOBAL VARIABLES ||
+ ======================
+ */
+
+/* parameters of simulation */
+struct parameters *par;
+user *usersPID;
+node *nodesPID;
+ledger *mainLedger;
+
+int semID;
+int queueID;
+
+pid_t myPID;
+
 /*void Node()
 {
     int t_pool[SO_TP_SIZE];
@@ -43,4 +60,6 @@ int main(int argc, char *argv[])
     int myPID = getpid();
     printf("Node %d has finished\n", myPID);
     return 0;
+
+    queueID = msgget(myPID, IPC_CREAT | 0600);
 }

@@ -49,10 +49,15 @@ void make_arguments(int *IPC_array, char **argv)
 
     argv[0] = USER_NAME; /* need nodes to have a different name but not a priority */
     argv[1] = uPID_array;
+    TRACE((":master: argv[uPID] = %s\n", uPID_array))
     argv[2] = nPID_array;
+    TRACE((":master: argv[nPID] = %s\n", nPID_array))
     argv[3] = parameters;
+    TRACE((":master: argv[par] = %s\n", parameters))
     argv[4] = ledger;
+    TRACE((":master: argv[ledger] = %s\n", ledger))
     argv[5] = semID;
+    TRACE((":master: argv[sem] = %s\n", semID))
     argv[8] = NULL; /* Terminating argv with NULL value */
 }
 
@@ -60,6 +65,7 @@ void make_arguments(int *IPC_array, char **argv)
 pid_t spawn_user(char *userArgv[])
 {
     pid_t myPID = fork();
+    TRACE((":master: argv values: %s %s %s %s %s %s\n", userArgv[0], userArgv[1], userArgv[2], userArgv[3], userArgv[4], userArgv[5]))
     switch (myPID)
     {
     case -1: /* Error case */
@@ -82,6 +88,7 @@ pid_t spawn_user(char *userArgv[])
 pid_t spawn_node(char *nodeArgv[])
 {
     pid_t myPID = fork();
+    TRACE((":master: argv values: %s %s %s %s %s %s\n", nodeArgv[0], nodeArgv[1], nodeArgv[2], nodeArgv[3], nodeArgv[4], nodeArgv[5]))
     switch (myPID)
     {
     case -1: /* Error case */
@@ -207,7 +214,7 @@ int main(int argc, char *argv[])
     int uCounter, nCounter, returnVal;
     int simTime;
     int ipcObjectsIDs[IPC_NUM];
-    char *argvSpawns[8] = {0};
+    char **argvSpawns = malloc(8*32);
 
     struct sigaction sa;
     struct sembuf sops;
