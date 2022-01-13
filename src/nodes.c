@@ -9,6 +9,7 @@
  || GLOBAL VARIABLES ||
  ======================
  */
+ transaction *t_pool;
 
 /* parameters of simulation */
 struct parameters *par;
@@ -21,48 +22,69 @@ int queueID;
 
 pid_t myPID;
 
-/*void Node()
-{
-    int t_pool[SO_TP_SIZE];
-    check_Tp_Full(t_pool[SO_TP_SIZE]);
-    array_Processer();
-    create_Block();
-}
 
-int check_Tp_Full(int t_pool[SO_TP_SIZE])
+
+
+/*
+int check_Tp_Full()
 {
-    if (t_pool[SO_TP_SIZE] == SO_TP_SIZE)
+
+    if (t_pool == par->SO_TP_SIZE)
     {
         return 0;
+    } else {
+        createBlock();            /* if the t_pool isn't full it create new block *      
     }
 }
-
-void array_Processer()
+*/
+int sum_reward(transaction** sumBlock)
 {
-    int i = 0;
-    for (i; i < SO_TP_SIZE - 1; i++)
+    int i=0;
+    int sumReward;
+    for(i=0;i<SO_BLOCK_SIZE-1;i++)
     {
-        
+        sumReward+=sumBlock[i]->reward;
     }
+    return sumReward;
 }
 
-int createBlock()
-{
 
-    
-}
-
-int sleepMethod(int argc, char *argv[])
+void sleepMethod(int argc, char *argv[])
 {
     randSleepTime.tv_sec = 0;
-    randSleepTime.tv_nsec = RAND(SO_MIN_TRANS_PROC_NSEC, SO_MAX_TRANS_PROC_NSEC);
-}*/
+    randSleepTime.tv_nsec = RAND(par->SO_MIN_TRANS_PROC_NSEC, par->SO_MAX_TRANS_PROC_NSEC);
+}
+void node_interrupt_handle(int signum)
+{
+    write(1, "::Node:: SIGINT received\n", 26);
+    msgctl(queueID, IPC_RMID, NULL);
+    TRACE((":node: queue removed\n"))
+    TEST_ERROR
+    exit(0);
+}
 
 int main(int argc, char *argv[])
 {
+     transaction** sumBlock;
+    transaction** blockTransaction;
+   
     int myPID = getpid();
-    printf("Node %d has finished\n", myPID);
-    return 0;
-
+    struct sigaction saINT_node;
+     t_pool=malloc(sizeof(transaction)*(par->SO_TP_SIZE));
+    bzero(&saINT_node, sizeof(saINT_node));
+    saINT_node.sa_handler = node_interrupt_handle;
+    sigaction(SIGINT, &saINT_node, NULL);
+    /*
+    signal_handler_init(&saINT);*/
+   
     queueID = msgget(myPID, IPC_CREAT | 0600);
+
+
+    while(1){
+   
+    
+    /*check_Tp_Full();*/
+    sum_reward(sumBlock);
+    new_block(blockTransaction);
+    }
 }

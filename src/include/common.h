@@ -15,6 +15,7 @@
 #include <sys/sem.h>
 #include <sys/msg.h>
 #include <sys/types.h>
+#include <signal.h>
 
 #include "../utils/debug.h"
 #include "../utils/sem.h"
@@ -152,7 +153,7 @@ typedef struct ledger_t
 } ledger;
 
 ledger *ledger_init();
-block *new_block();
+block *new_block(transaction** blockTransaction);
 void add_block(block);
 void add_transaction_to_block(block *, transaction *, int index);
 void add_block_to_ledger(block *);
