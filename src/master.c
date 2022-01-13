@@ -152,6 +152,7 @@ void shared_memory_objects_init(int *shmArray)
 
     /* mark for deallocation so that they are automatically
      * removed once master dies
+     * this will set the key to 0x00000000
      */
     shmctl(usersPID_ID, IPC_RMID, NULL);
     shmctl(nodesPID_ID, IPC_RMID, NULL);

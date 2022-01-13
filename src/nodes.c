@@ -1,4 +1,3 @@
-#include <time.h>
 #include "include/nodes.h"
 #include "include/common.h"
 
@@ -55,11 +54,35 @@ int sleepMethod(int argc, char *argv[])
     randSleepTime.tv_nsec = RAND(SO_MIN_TRANS_PROC_NSEC, SO_MAX_TRANS_PROC_NSEC);
 }*/
 
+/* initializes signal handlers for SIGINT *
+void signal_handler_init(struct sigaction *saINT)
+{
+    saINT->sa_handler = node_interrupt_handle;
+    sigaction(SIGINT, saINT, NULL);
+} */
+
+/* CTRL-C handler */
+void node_interrupt_handle(int signum)
+{
+    write(1, "::Node:: SIGINT received\n", 26);
+    msgctl(queueID, IPC_RMID, NULL);
+    TRACE((":node: queue removed\n"))
+    TEST_ERROR
+    exit(0);
+}
+
 int main(int argc, char *argv[])
 {
     int myPID = getpid();
-    printf("Node %d has finished\n", myPID);
-    return 0;
+    struct sigaction saINT_node;
+    bzero(&saINT_node, sizeof(saINT_node));
+    saINT_node.sa_handler = node_interrupt_handle;
+    sigaction(SIGINT, &saINT_node, NULL);
+    /*
+    signal_handler_init(&saINT);*/
 
     queueID = msgget(myPID, IPC_CREAT | 0600);
+    while(1){
+        sleep(1);
+    }
 }
