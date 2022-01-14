@@ -54,6 +54,39 @@ void node_interrupt_handle(int signum)
     exit(0);
 }
 
+void attach_ipc_objects(char **argv)
+{
+    par = shmat(PARAMETERS_ARGV, NULL, 0);
+    TRACE((":user %d par->SO_RETRY %d\n", myPID, par->SO_RETRY))
+    TEST_ERROR
+    usersPID = shmat(USERS_PID_ARGV, NULL, 0);
+    TRACE((":user: %d usersPID[0] = %d, usersPID[3] = %d\n", myPID, usersPID[0], usersPID[3]))
+    TEST_ERROR
+    nodesPID = shmat(NODES_PID_ARGV, NULL, 0);
+    TRACE((":user: %d nodesPID[0] = %d, nodesPID[3] = %d\n", myPID, nodesPID[0], nodesPID[3]))
+    TEST_ERROR
+    mainLedger = shmat(LEDGER_ARGV, NULL, 0);
+    TEST_ERROR
+    semID = SEM_ID_ARGV;
+    TRACE((":user: %d semID is %d\n", myPID, semID));
+}
+
+void signal_handler_init(struct sigaction *saINT_node)
+{
+    saINT_node->sa_handler = node_interrupt_handle;
+    sigaction(SIGINT, saINT_node, NULL);
+}
+
+void node_interrupt_handle(int signum)
+{
+    write(1, "::Node:: SIGINT received\n", 26);
+    msgctl(queueID, IPC_RMID, NULL);
+    TRACE((":node: queue removed\n"))
+    TEST_ERROR
+    exit(0);
+}
+
+
 int main(int argc, char *argv[])
 {
     transaction** sumBlock;
