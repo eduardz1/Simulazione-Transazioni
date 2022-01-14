@@ -21,67 +21,8 @@ ledger *ledger_init()
 
     return newLedger;
 }
-<<<<<<< HEAD
-int sum_reward(transaction** sumBlock)
-{
-    int i=0;
-    int sumReward;
-    for(i=0;i<SO_BLOCK_SIZE-1;i++)
-    {
-        sumReward+=sumBlock[i]->reward;
-    }
-    return sumReward;
-}
-block *new_block(transaction** blockTransaction)
-{
 
-   block *newBlock= malloc(sizeof(block));
-=======
 
-/* sums rewards of sumBlock[SO_BLOCK_SIZE-1] transactions */
-int sum_reward(transaction **sumBlock)
-{
-    int i = 0;
-    int sum;
-
-    for (i = 0; i < (SO_BLOCK_SIZE - 1); i++)
-    {
-        sum += sumBlock[i]->reward;
-    }
-    return sum;
-}
-
-/* initializes new block with transList[0] as reward transaction */
-block *new_block(transaction **blockTransactions)
-{
-
-    block *newBlock = malloc(sizeof(block));
->>>>>>> 186ae1ddadc5020fa84654c5c27098ed17907a91
-    transaction reward;
-    struct timespec timestamp;
-    clock_gettime(CLOCK_REALTIME, &timestamp);
-
-<<<<<<< HEAD
-    reward.timestamp= timestamp;
-    reward.sender= SELF;
-    reward.receiver=getpid();
-    reward.amount= sum_reward(blockTransaction); /*sum of each reward of transaction in the block */
-    reward.reward=0;
-
-    memcpy(newBlock->transList+1, *blockTransaction,(SO_BLOCK_SIZE-1)*(sizeof(transaction)));
-=======
-    reward.timestamp = timestamp;
-    reward.sender = SELF;
-    reward.receiver = getpid();
-    reward.amount = sum_reward(blockTransactions); /*sum of each reward of transaction in the block */
-    reward.reward = 0;
-
-    memcpy(newBlock->transList + 1, *blockTransactions, (SO_BLOCK_SIZE - 1) * (sizeof(transaction)));
->>>>>>> 186ae1ddadc5020fa84654c5c27098ed17907a91
-    newBlock->next = NULL;
-
-    return newBlock;
-}
 
 void add_transaction_to_block(block *block, transaction *newTrans, int index)
 {
