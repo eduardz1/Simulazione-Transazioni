@@ -38,7 +38,6 @@ int queueID;
 
 int currBalance;
 pid_t myPID;
-int outGoingTransactions; /* accumulate amount of transactions sent but yet to be received */
 transaction currTrans;
 
 /*
@@ -137,11 +136,11 @@ void attach_ipc_objects(char **argv)
 /* use nodePID as key for msgget and check for errors */
 void queue_to_pid(pid_t nodePID)
 {
-	/* NO QUEUES UNTIL NODES HANDLER WORKS!
-	
+	/* NO QUEUES UNTIL NODES HANDLER WORKS! */
+
 	queueID = msgget(nodePID, IPC_CREAT | 0600);
 	TEST_ERROR
-	TRACE((":user: %d -> %d queueID %d\n", myPID, nodePID, queueID))*/
+	TRACE((":user: %d -> %d queueID %d\n", myPID, nodePID, queueID))
 }
 
 /* initializes transaction values and sets it to pending */
@@ -177,6 +176,8 @@ void signal_handlers_init(struct sigaction *saUSR1, struct sigaction *saINT)
 /* send transaction currTrans to user userPID via node nodePID */
 int send_transaction()
 {
+	/* accumulate amount of transactions sent but yet to be received */
+	int outGoingTransactions = 0;
 	msgsnd(queueID, &currTrans, sizeof(transaction), 0);
 	TEST_ERROR
 	currBalance -= (currTrans.amount + currTrans.reward);

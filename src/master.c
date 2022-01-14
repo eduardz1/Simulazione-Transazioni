@@ -32,7 +32,7 @@ int semID;
  ======================
  */
 
-/* make argv array with IPC IDs for user and nodes */
+/* make argv array with IPC IDs for user and nodes, mode 0 user, mode 1 nodes*/
 void make_arguments(int *IPC_array, char **argv)
 {
     char *uPID_array = malloc(3 * sizeof(IPC_array[0]) + 1);
@@ -47,7 +47,6 @@ void make_arguments(int *IPC_array, char **argv)
     sprintf(ledger, "%d", IPC_array[3]);
     sprintf(semID, "%d", IPC_array[4]);
 
-    argv[0] = USER_NAME; /* need nodes to have a different name but not a priority */
     argv[1] = uPID_array;
     TRACE((":master: argv[uPID] = %s\n", uPID_array))
     argv[2] = nPID_array;
@@ -236,6 +235,7 @@ int main(int argc, char *argv[])
     sa.sa_handler = master_interrupt_handle;
     sigaction(SIGINT, &sa, NULL);
 
+    argvSpawns[0] = NODE_NAME;
     for (nCounter = 0; nCounter < par->SO_NODES_NUM; nCounter++)
     {
         LOCK
@@ -249,9 +249,8 @@ int main(int argc, char *argv[])
         }
     }
 
-    sleep(0.5);
-
     /*usersPrematurelyDead = 0;*/
+    argvSpawns[0] = USER_NAME;
     for (uCounter = 0; uCounter < par->SO_USER_NUM; uCounter++)
     {
         LOCK
