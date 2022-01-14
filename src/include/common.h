@@ -96,6 +96,7 @@ struct parameters
 typedef struct user_t
 {
     pid_t pid;
+    int balance;
     enum
     {
         alive,
@@ -107,6 +108,7 @@ typedef struct user_t
 typedef struct node_t
 {
     pid_t pid;
+    int balance;
     enum
     {
         available,
@@ -154,11 +156,8 @@ typedef struct ledger_t
 } ledger;
 
 ledger *ledger_init();
-<<<<<<< HEAD
-block *new_block(transaction** blockTransaction);
-=======
-block *new_block(transaction **);
->>>>>>> 186ae1ddadc5020fa84654c5c27098ed17907a91
+
+
 void add_block(block);
 int sum_reward(transaction **);
 void add_transaction_to_block(block *, transaction *, int index);
