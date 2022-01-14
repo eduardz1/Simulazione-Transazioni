@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.3" xml:lang="en-US">
+  <compounddef id="structtransaction__t" kind="struct" language="C++" prot="public">
+    <compoundname>transaction_t</compoundname>
+    <includes refid="common_8h" local="no">common.h</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5" prot="public" static="no" strong="no">
+        <type></type>
+        <name>@2</name>
+        <qualifiedname>transaction_t::@2</qualifiedname>
+        <enumvalue id="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5a6a6b4e7520e01adba9632dc9d9229e2f" prot="public">
+          <name>pending</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5ac87aff6c8e5d399b301672280549ea3e" prot="public">
+          <name>processing</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5ad6daa5d32ad2d7b003a0178c8eb07178" prot="public">
+          <name>confirmed</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5aaf2b197bcf14794c85c5f313dab0ca31" prot="public">
+          <name>aborted</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="123" column="5" bodyfile="src/include/common.h" bodystart="124" bodyend="129"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structtransaction__t_1a2aace03835c4d951b3dee117b328ef87" prot="public" static="no" mutable="no">
+        <type>struct timespec</type>
+        <definition>struct timespec timestamp</definition>
+        <argsstring></argsstring>
+        <name>timestamp</name>
+        <qualifiedname>transaction_t::timestamp</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="118" column="19" bodyfile="src/include/common.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structtransaction__t_1a36060e3785ebad7b278cb01d5159c0c5" prot="public" static="no" mutable="no">
+        <type>pid_t</type>
+        <definition>pid_t sender</definition>
+        <argsstring></argsstring>
+        <name>sender</name>
+        <qualifiedname>transaction_t::sender</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="119" column="11" bodyfile="src/include/common.h" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structtransaction__t_1a3c01e8bf1e61ee67a25113f3db1a32b8" prot="public" static="no" mutable="no">
+        <type>pid_t</type>
+        <definition>pid_t receiver</definition>
+        <argsstring></argsstring>
+        <name>receiver</name>
+        <qualifiedname>transaction_t::receiver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="120" column="11" bodyfile="src/include/common.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structtransaction__t_1a14236de313193a14b4dbdf442bcf2bb9" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int amount</definition>
+        <argsstring></argsstring>
+        <name>amount</name>
+        <qualifiedname>transaction_t::amount</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="121" column="9" bodyfile="src/include/common.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structtransaction__t_1af571e76d8e59b8452f38407799272e4a" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int reward</definition>
+        <argsstring></argsstring>
+        <name>reward</name>
+        <qualifiedname>transaction_t::reward</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="122" column="9" bodyfile="src/include/common.h" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structtransaction__t_1a95a086466eb975b4da063388dd397dd3" prot="public" static="no" mutable="no">
+        <type>enum transaction_t::@2</type>
+        <definition>enum transaction_t::@2 status</definition>
+        <argsstring></argsstring>
+        <name>status</name>
+        <qualifiedname>transaction_t::status</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="129" column="12"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/include/common.h" line="116" column="1" bodyfile="src/include/common.h" bodystart="117" bodyend="130"/>
+    <listofallmembers>
+      <member refid="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5aaf2b197bcf14794c85c5f313dab0ca31" prot="public" virt="non-virtual"><scope>transaction_t</scope><name>aborted</name></member>
+      <member refid="structtransaction__t_1a14236de313193a14b4dbdf442bcf2bb9" prot="public" virt="non-virtual"><scope>transaction_t</scope><name>amount</name></member>
+      <member refid="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5ad6daa5d32ad2d7b003a0178c8eb07178" prot="public" virt="non-virtual"><scope>transaction_t</scope><name>confirmed</name></member>
+      <member refid="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5a6a6b4e7520e01adba9632dc9d9229e2f" prot="public" virt="non-virtual"><scope>transaction_t</scope><name>pending</name></member>
+      <member refid="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5ac87aff6c8e5d399b301672280549ea3e" prot="public" virt="non-virtual"><scope>transaction_t</scope><name>processing</name></member>
+      <member refid="structtransaction__t_1a3c01e8bf1e61ee67a25113f3db1a32b8" prot="public" virt="non-virtual"><scope>transaction_t</scope><name>receiver</name></member>
+      <member refid="structtransaction__t_1af571e76d8e59b8452f38407799272e4a" prot="public" virt="non-virtual"><scope>transaction_t</scope><name>reward</name></member>
+      <member refid="structtransaction__t_1a36060e3785ebad7b278cb01d5159c0c5" prot="public" virt="non-virtual"><scope>transaction_t</scope><name>sender</name></member>
+      <member refid="structtransaction__t_1a95a086466eb975b4da063388dd397dd3" prot="public" virt="non-virtual"><scope>transaction_t</scope><name>status</name></member>
+      <member refid="structtransaction__t_1a2aace03835c4d951b3dee117b328ef87" prot="public" virt="non-virtual"><scope>transaction_t</scope><name>timestamp</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

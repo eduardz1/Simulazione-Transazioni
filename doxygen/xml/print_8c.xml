@@ -1,0 +1,567 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.3" xml:lang="en-US">
+  <compounddef id="print_8c" kind="file" language="C++">
+    <compoundname>print.c</compoundname>
+    <includes refid="common_8h" local="yes">include/common.h</includes>
+    <includes refid="print_8h" local="yes">include/print.h</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>include/common.h</label>
+        <link refid="common_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>include/print.h</label>
+        <link refid="print_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/print.c</label>
+        <link refid="print_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>../utils/debug.h</label>
+        <link refid="debug_8h"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>../utils/lists.h</label>
+        <link refid="lists_8h"/>
+      </node>
+      <node id="19">
+        <label>../utils/sem.h</label>
+        <link refid="sem_8h"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>errno.h</label>
+      </node>
+      <node id="10">
+        <label>math.h</label>
+      </node>
+      <node id="18">
+        <label>stdarg.h</label>
+      </node>
+      <node id="5">
+        <label>stddef.h</label>
+      </node>
+      <node id="6">
+        <label>stdint.h</label>
+      </node>
+      <node id="4">
+        <label>stdio.h</label>
+      </node>
+      <node id="3">
+        <label>stdlib.h</label>
+      </node>
+      <node id="11">
+        <label>string.h</label>
+      </node>
+      <node id="12">
+        <label>sys/ipc.h</label>
+      </node>
+      <node id="15">
+        <label>sys/msg.h</label>
+      </node>
+      <node id="14">
+        <label>sys/sem.h</label>
+      </node>
+      <node id="13">
+        <label>sys/shm.h</label>
+      </node>
+      <node id="16">
+        <label>sys/types.h</label>
+      </node>
+      <node id="9">
+        <label>time.h</label>
+      </node>
+      <node id="7">
+        <label>unistd.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="print_8c_1abba0d38395714b105fe448566b916b24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_time_to_die</definition>
+        <argsstring>()</argsstring>
+        <name>print_time_to_die</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/print.c" line="7" column="6" bodyfile="src/print.c" bodystart="7" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="function" id="print_8c_1ac04c3524bda40db9d223b33d141accee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_user_nodes_table</definition>
+        <argsstring>(pid_t mainPID, user *userPID, node *nodePID, struct parameters *par)</argsstring>
+        <name>print_user_nodes_table</name>
+        <param>
+          <type>pid_t</type>
+          <declname>mainPID</declname>
+        </param>
+        <param>
+          <type><ref refid="common_8h_1a75285f7670649ccfb5ccbbc952a15bfd" kindref="member">user</ref> *</type>
+          <declname>userPID</declname>
+        </param>
+        <param>
+          <type><ref refid="common_8h_1a85b4f4124a5616dea92c9e8a221a8db5" kindref="member">node</ref> *</type>
+          <declname>nodePID</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structparameters" kindref="compound">parameters</ref> *</type>
+          <declname>par</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/print.c" line="12" column="6" bodyfile="src/print.c" bodystart="12" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="print_8c_1a5360a76a02aff83178fa550d60c3d464" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_kill_signal</definition>
+        <argsstring>()</argsstring>
+        <name>print_kill_signal</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/print.c" line="33" column="6" declfile="src/print.c" declline="33" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="print_8c_1a859f47c0058e4d60975aff4750031a82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_user_balance</definition>
+        <argsstring>()</argsstring>
+        <name>print_user_balance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/print.c" line="34" column="6" declfile="src/print.c" declline="34" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="print_8c_1ae96b17109a900709ef5355bc84720e9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_node_balance</definition>
+        <argsstring>()</argsstring>
+        <name>print_node_balance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/print.c" line="35" column="6" declfile="src/print.c" declline="35" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="print_8c_1a153f1f994e981d23912535871cb742bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_num_aborted</definition>
+        <argsstring>()</argsstring>
+        <name>print_num_aborted</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/print.c" line="36" column="6" declfile="src/print.c" declline="36" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="print_8c_1a692dfc8fc42a6b304aa4aa200bba4186" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_num_blocks</definition>
+        <argsstring>()</argsstring>
+        <name>print_num_blocks</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/print.c" line="37" column="6" declfile="src/print.c" declline="37" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="print_8c_1ad4abfc9577091b1339716d5a34ef57cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_transactions_still_in_pool</definition>
+        <argsstring>()</argsstring>
+        <name>print_transactions_still_in_pool</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/print.c" line="38" column="6" declfile="src/print.c" declline="38" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="print_8c_1a3210b536ef064414b1736cd2e9b7d3bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void final_print</definition>
+        <argsstring>(pid_t masterPID, user *usersPID, node *nodesPID, struct parameters *par)</argsstring>
+        <name>final_print</name>
+        <param>
+          <type>pid_t</type>
+          <declname>masterPID</declname>
+        </param>
+        <param>
+          <type><ref refid="common_8h_1a75285f7670649ccfb5ccbbc952a15bfd" kindref="member">user</ref> *</type>
+          <declname>usersPID</declname>
+        </param>
+        <param>
+          <type><ref refid="common_8h_1a85b4f4124a5616dea92c9e8a221a8db5" kindref="member">node</ref> *</type>
+          <declname>nodesPID</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structparameters" kindref="compound">parameters</ref> *</type>
+          <declname>par</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/print.c" line="40" column="6" bodyfile="src/print.c" bodystart="40" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="print_8c_1a7632b11ea6036c833f5c2cd3cd0bb087" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_parameters</definition>
+        <argsstring>(struct parameters *par)</argsstring>
+        <name>print_parameters</name>
+        <param>
+          <type>struct <ref refid="structparameters" kindref="compound">parameters</ref> *</type>
+          <declname>par</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/print.c" line="52" column="6" bodyfile="src/print.c" bodystart="52" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="print_8c_1a0d2d8efd9ece9ba96b0a15b7d471c3bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_transaction</definition>
+        <argsstring>(FILE *fp, transaction *t)</argsstring>
+        <name>print_transaction</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <param>
+          <type><ref refid="common_8h_1a96717a5adf375b5328bde513e91bf658" kindref="member">transaction</ref> *</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/print.c" line="98" column="6" bodyfile="src/print.c" bodystart="98" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="print_8c_1a0adafcfb5ee991d673e8c71c84f0d4da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_block</definition>
+        <argsstring>(FILE *fp, block *b)</argsstring>
+        <name>print_block</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <param>
+          <type><ref refid="common_8h_1acc02c32db194c6d92ce82de8c99eacbc" kindref="member">block</ref> *</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/print.c" line="127" column="6" bodyfile="src/print.c" bodystart="127" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="print_8c_1ab1c0c4107a8f068374cff27e2997f0f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_ledger</definition>
+        <argsstring>(ledger *l)</argsstring>
+        <name>print_ledger</name>
+        <param>
+          <type><ref refid="common_8h_1af8b2bdfa2bfa44284c83a9d6994b13f1" kindref="member">ledger</ref> *</type>
+          <declname>l</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/print.c" line="143" column="6" bodyfile="src/print.c" bodystart="143" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="print_8c_1a694b7105f14c48043dbf079031abd5be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void formatted_timestamp</definition>
+        <argsstring>(FILE *fp)</argsstring>
+        <name>formatted_timestamp</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/print.c" line="157" column="6" bodyfile="src/print.c" bodystart="157" bodyend="177"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="common_8h" kindref="compound">include/common.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="print_8h" kindref="compound">include/print.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>#define<sp/>HYPHEN<sp/>&quot;--------&quot;<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7" refid="print_8h_1abba0d38395714b105fe448566b916b24" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8c_1abba0d38395714b105fe448566b916b24" kindref="member">print_time_to_die</ref>()</highlight></codeline>
+<codeline lineno="8"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;\n***********************\n||<sp/>The<sp/>time<sp/>has<sp/>come<sp/>||\n***********************\n\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="print_8h_1a34b8fcde9a89e8e5f9c0571f30fd55c4" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8c_1ac04c3524bda40db9d223b33d141accee" kindref="member">print_user_nodes_table</ref>(pid_t<sp/>mainPID,<sp/><ref refid="structuser__t" kindref="compound">user</ref><sp/>*userPID,<sp/><ref refid="structnode__t" kindref="compound">node</ref><sp/>*nodePID,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structparameters" kindref="compound">parameters</ref><sp/>*<ref refid="master_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>)</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>userNum<sp/>=<sp/><ref refid="master_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1a1a7bfa0882f03d573b4e419d02f041f8" kindref="member">SO_USER_NUM</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>nodesNum<sp/>=<sp/><ref refid="master_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1a379d08051847c4f98268a27001b06261" kindref="member">SO_NODES_NUM</ref>;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;\n<sp/>-------<sp/>Master<sp/>Process<sp/>PID<sp/>is<sp/>%d<sp/>----------\n&quot;</highlight><highlight class="normal">,<sp/>mainPID);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;|<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;<sp/>-<sp/>Type<sp/>-------<sp/>PID<sp/>---------<sp/>Status<sp/>---------\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;<sp/>---------------------------------------------\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(userNum--)</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;|<sp/><sp/>User<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%d<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%d<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|\n&quot;</highlight><highlight class="normal">,<sp/>userPID[userNum].pid,<sp/>userPID[userNum].status);</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;<sp/>---------------------------------------------\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(nodesNum--)</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;|<sp/><sp/>Node<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%d<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>%d<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|\n&quot;</highlight><highlight class="normal">,<sp/>nodePID[nodesNum].pid,<sp/>nodePID[nodesNum].status);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;<sp/>---------------------------------------------\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="31"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33" refid="print_8c_1a5360a76a02aff83178fa550d60c3d464" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8c_1a5360a76a02aff83178fa550d60c3d464" kindref="member">print_kill_signal</ref>();</highlight></codeline>
+<codeline lineno="34" refid="print_8c_1a859f47c0058e4d60975aff4750031a82" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8c_1a859f47c0058e4d60975aff4750031a82" kindref="member">print_user_balance</ref>();</highlight></codeline>
+<codeline lineno="35" refid="print_8c_1ae96b17109a900709ef5355bc84720e9c" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8c_1ae96b17109a900709ef5355bc84720e9c" kindref="member">print_node_balance</ref>();</highlight></codeline>
+<codeline lineno="36" refid="print_8c_1a153f1f994e981d23912535871cb742bb" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8c_1a153f1f994e981d23912535871cb742bb" kindref="member">print_num_aborted</ref>();</highlight></codeline>
+<codeline lineno="37" refid="print_8c_1a692dfc8fc42a6b304aa4aa200bba4186" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8c_1a692dfc8fc42a6b304aa4aa200bba4186" kindref="member">print_num_blocks</ref>();</highlight></codeline>
+<codeline lineno="38" refid="print_8c_1ad4abfc9577091b1339716d5a34ef57cb" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8c_1ad4abfc9577091b1339716d5a34ef57cb" kindref="member">print_transactions_still_in_pool</ref>();</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="print_8h_1a3210b536ef064414b1736cd2e9b7d3bd" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8c_1a3210b536ef064414b1736cd2e9b7d3bd" kindref="member">final_print</ref>(pid_t<sp/>masterPID,<sp/><ref refid="structuser__t" kindref="compound">user</ref><sp/>*<ref refid="master_8c_1af667a518a4feef7b7540ebac0cd618cf" kindref="member">usersPID</ref>,<sp/><ref refid="structnode__t" kindref="compound">node</ref><sp/>*<ref refid="master_8c_1a803b35477f039b41487c3b1abee12b80" kindref="member">nodesPID</ref>,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structparameters" kindref="compound">parameters</ref><sp/>*<ref refid="master_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>)</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="print_8c_1ac04c3524bda40db9d223b33d141accee" kindref="member">print_user_nodes_table</ref>(masterPID,<sp/><ref refid="master_8c_1af667a518a4feef7b7540ebac0cd618cf" kindref="member">usersPID</ref>,<sp/><ref refid="master_8c_1a803b35477f039b41487c3b1abee12b80" kindref="member">nodesPID</ref>,<sp/><ref refid="master_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*print_kill_signal();</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/><sp/><sp/><sp/>print_user_balance();</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/><sp/><sp/><sp/>print_node_balance();*</highlight></codeline>
+<codeline lineno="46"><highlight class="comment"><sp/><sp/><sp/><sp/>print_num_aborted();</highlight></codeline>
+<codeline lineno="47"><highlight class="comment"><sp/><sp/><sp/><sp/>/*</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/>print_num_blocks();</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/>print_transactions_still_in_pool();*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="print_8h_1a7632b11ea6036c833f5c2cd3cd0bb087" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8c_1a7632b11ea6036c833f5c2cd3cd0bb087" kindref="member">print_parameters</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structparameters" kindref="compound">parameters</ref><sp/>*<ref refid="master_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>)</highlight></codeline>
+<codeline lineno="53"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;--------------------------------------------\n-----------<sp/>Configuration<sp/>value<sp/>------------\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;SO_USER_NUM-&gt;%u\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="master_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1a1a7bfa0882f03d573b4e419d02f041f8" kindref="member">SO_USER_NUM</ref>);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;SO_NODES_NUM-&gt;%u\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="master_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1a379d08051847c4f98268a27001b06261" kindref="member">SO_NODES_NUM</ref>);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;SO_BUDGET_INIT-&gt;%u\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="master_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1a375c541a19818ce43b6ae275d0a80365" kindref="member">SO_BUDGET_INIT</ref>);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;SO_REWARD-&gt;%u\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="master_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1a1e8968a80441b4a641d5ff3566af04f1" kindref="member">SO_REWARD</ref>);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;SO_MIN_TRANS_GEN_NSEC-&gt;%lu\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="master_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1a213ccb7b7e150d7bf584f35cc824ead6" kindref="member">SO_MIN_TRANS_GEN_NSEC</ref>);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;SO_MAX_TRANS_GEN_NSEC-&gt;%lu\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="master_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1abca064afd6b392e1f9e24b5fda8cdecb" kindref="member">SO_MAX_TRANS_GEN_NSEC</ref>);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;SO_RETRY-&gt;%u\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="master_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1ac2861693c2d9121c5ecad90de2189690" kindref="member">SO_RETRY</ref>);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;SO_TP_SIZE-&gt;%u\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="master_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1a8fe346ee9f21d4a40e15388b72579fbe" kindref="member">SO_TP_SIZE</ref>);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;SO_MIN_TRANS_PROC_NSEC-&gt;%lu\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="master_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1a19a5fe1068e3e1ceceab49114d856628" kindref="member">SO_MIN_TRANS_PROC_NSEC</ref>);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;SO_MAX_TRANS_PROC_NSEC-&gt;%lu\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="master_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1af7fbb0805dd6c4e1729d70a30164bc1c" kindref="member">SO_MAX_TRANS_PROC_NSEC</ref>);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;SO_SIM_SEC-&gt;%u\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="master_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1a86c91cb21e43e2f92651c149f93f0dc5" kindref="member">SO_SIM_SEC</ref>);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;SO_FRIENDS_NUM-&gt;%u\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="master_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1a6d8f5bd80c3eda4ed6d9f2440f9105b2" kindref="member">SO_FRIENDS_NUM</ref>);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;SO_HOPS-&gt;%u\n&quot;</highlight><highlight class="normal">,<sp/><ref refid="master_8c_1a963935917aae796fbb8f2728703adf04" kindref="member">par</ref>-&gt;<ref refid="structparameters_1a85ca4a1c61f11babff7ccd10ec58ee70" kindref="member">SO_HOPS</ref>);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;--------------------------------------------\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="comment">/*void<sp/>print_kill_signal(mainPID,<sp/>userPid<sp/>/*<sp/>other<sp/>process<sp/>*)</highlight></codeline>
+<codeline lineno="72"><highlight class="comment">{</highlight></codeline>
+<codeline lineno="73"><highlight class="comment"><sp/><sp/><sp/><sp/>printf(&quot;-----PROCESS<sp/>PID<sp/>NUM<sp/>%d<sp/>KILL----&quot;,<sp/>mainPID);</highlight></codeline>
+<codeline lineno="74"><highlight class="comment">}</highlight></codeline>
+<codeline lineno="75"><highlight class="comment">void<sp/>print_user_balance(int<sp/>balance)</highlight></codeline>
+<codeline lineno="76"><highlight class="comment">{</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/><sp/><sp/><sp/>printf(&quot;-----CURRENT<sp/>BALANCE<sp/>IS:%d-----&quot;,<sp/>balance);</highlight></codeline>
+<codeline lineno="78"><highlight class="comment">}</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"></highlight></codeline>
+<codeline lineno="80"><highlight class="comment">void<sp/>print_node_balance(int<sp/>balamce)</highlight></codeline>
+<codeline lineno="81"><highlight class="comment">{</highlight></codeline>
+<codeline lineno="82"><highlight class="comment"><sp/><sp/><sp/><sp/>printf(&quot;----CURRENT<sp/>NODE<sp/>BALANCE<sp/>IS:%d&quot;,<sp/>balance);</highlight></codeline>
+<codeline lineno="83"><highlight class="comment">}<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight><highlight class="comment">/*void<sp/>print_num_aborted()</highlight></codeline>
+<codeline lineno="85"><highlight class="comment">{</highlight></codeline>
+<codeline lineno="86"><highlight class="comment"><sp/><sp/><sp/><sp/>printf(&quot;\n--<sp/>Num<sp/>of<sp/>aborted<sp/>users:<sp/>%d\n&quot;,<sp/>usersPrematurelyDead);</highlight></codeline>
+<codeline lineno="87"><highlight class="comment">}</highlight></codeline>
+<codeline lineno="88"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="89"><highlight class="comment">void<sp/>print_num_blocks()</highlight></codeline>
+<codeline lineno="90"><highlight class="comment">{</highlight></codeline>
+<codeline lineno="91"><highlight class="comment"><sp/><sp/><sp/><sp/>printf(&quot;---TOTAL<sp/>BLOCK:%d&quot;);</highlight></codeline>
+<codeline lineno="92"><highlight class="comment">}</highlight></codeline>
+<codeline lineno="93"><highlight class="comment">void<sp/>print_transactions_still_in_pool()</highlight></codeline>
+<codeline lineno="94"><highlight class="comment">{</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/><sp/><sp/><sp/>printf(&quot;----TOTAL<sp/>TRANSACTION<sp/>STILL<sp/>IN<sp/>POLL:%d----&quot;);</highlight></codeline>
+<codeline lineno="96"><highlight class="comment">}*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98" refid="print_8h_1a0d2d8efd9ece9ba96b0a15b7d471c3bc" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8c_1a0d2d8efd9ece9ba96b0a15b7d471c3bc" kindref="member">print_transaction</ref>(FILE<sp/>*fp,<sp/><ref refid="structtransaction__t" kindref="compound">transaction</ref><sp/>*t)</highlight></codeline>
+<codeline lineno="99"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>tmp[10];</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(t-&gt;<ref refid="structtransaction__t_1a95a086466eb975b4da063388dd397dd3" kindref="member">status</ref>)</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>pending:</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>strcpy(tmp,<sp/></highlight><highlight class="stringliteral">&quot;pending&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>aborted:</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>strcpy(tmp,<sp/></highlight><highlight class="stringliteral">&quot;aborted&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>confirmed:</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>strcpy(tmp,<sp/></highlight><highlight class="stringliteral">&quot;confirmed&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>processing:</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>strcpy(tmp,<sp/></highlight><highlight class="stringliteral">&quot;confirmed&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/>fprintf(fp,<sp/></highlight><highlight class="stringliteral">&quot;<sp/>--------------------------<sp/>\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="print_8c_1a694b7105f14c48043dbf079031abd5be" kindref="member">formatted_timestamp</ref>(fp);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>fprintf(fp,<sp/></highlight><highlight class="stringliteral">&quot;<sp/><sp/><sp/><sp/>%s&quot;</highlight><highlight class="normal">,<sp/>tmp);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/>fprintf(fp,<sp/></highlight><highlight class="stringliteral">&quot;|<sp/><sp/>%d<sp/>--&gt;<sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/>t-&gt;<ref refid="structtransaction__t_1a36060e3785ebad7b278cb01d5159c0c5" kindref="member">sender</ref>,<sp/>t-&gt;<ref refid="structtransaction__t_1a3c01e8bf1e61ee67a25113f3db1a32b8" kindref="member">receiver</ref>);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>fprintf(fp,<sp/></highlight><highlight class="stringliteral">&quot;|<sp/><sp/>Amount:<sp/><sp/><sp/><sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/>t-&gt;<ref refid="structtransaction__t_1a14236de313193a14b4dbdf442bcf2bb9" kindref="member">amount</ref>);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>fprintf(fp,<sp/></highlight><highlight class="stringliteral">&quot;|<sp/><sp/>Reward:<sp/><sp/><sp/><sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/>t-&gt;<ref refid="structtransaction__t_1af571e76d8e59b8452f38407799272e4a" kindref="member">reward</ref>);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>fprintf(fp,<sp/></highlight><highlight class="stringliteral">&quot;|<sp/><sp/>Reward:<sp/><sp/><sp/><sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/>t-&gt;<ref refid="structtransaction__t_1af571e76d8e59b8452f38407799272e4a" kindref="member">reward</ref>);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>fprintf(fp,<sp/></highlight><highlight class="stringliteral">&quot;<sp/>--------------------------<sp/>\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127" refid="print_8h_1a0adafcfb5ee991d673e8c71c84f0d4da" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8c_1a0adafcfb5ee991d673e8c71c84f0d4da" kindref="member">print_block</ref>(FILE<sp/>*fp,<sp/><ref refid="structblock__t" kindref="compound">block</ref><sp/>*b)</highlight></codeline>
+<codeline lineno="128"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structblock__t" kindref="compound">block</ref><sp/>*curr;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(curr<sp/>=<sp/>b;<sp/>curr<sp/>!=<sp/><ref refid="common_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4" kindref="member">NULL</ref>;<sp/>curr<sp/>=<sp/>(<ref refid="structblock__t" kindref="compound">block</ref>*)curr-&gt;<ref refid="structblock__t_1a063b51ee50d55219236d2e4db6ce97a8" kindref="member">next</ref>)</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(fp,<sp/></highlight><highlight class="stringliteral">&quot;=<sp/>%.3d<sp/>=======================\n&quot;</highlight><highlight class="normal">,<sp/>b-&gt;<ref refid="structblock__t_1aa72742d9d7c1c8631aa36c0077f13b1d" kindref="member">blockIndex</ref>);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/><ref refid="common_8h_1a320169181de72ba0b5203555e14103c4" kindref="member">SO_BLOCK_SIZE</ref>;<sp/>i++)</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="print_8c_1a0d2d8efd9ece9ba96b0a15b7d471c3bc" kindref="member">print_transaction</ref>(fp,<sp/>&amp;(b-&gt;<ref refid="structblock__t_1a75735b68381e6c25555bb53c163abfe9" kindref="member">transList</ref>[i]));</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(fp,<sp/></highlight><highlight class="stringliteral">&quot;============================\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="141"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143" refid="print_8h_1ab1c0c4107a8f068374cff27e2997f0f7" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8c_1ab1c0c4107a8f068374cff27e2997f0f7" kindref="member">print_ledger</ref>(<ref refid="structledger__t" kindref="compound">ledger</ref><sp/>*l)</highlight></codeline>
+<codeline lineno="144"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/>FILE<sp/>*fp<sp/>=<sp/>fopen(</highlight><highlight class="stringliteral">&quot;ledger.txt&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;w&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(fp<sp/>==<sp/><ref refid="common_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4" kindref="member">NULL</ref>)</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;:print:<sp/>coudln&apos;t<sp/>open<sp/>file<sp/>pointer<sp/>ledger.txt\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>fprintf(fp,<sp/></highlight><highlight class="stringliteral">&quot;Registry<sp/>Real<sp/>Size<sp/>is<sp/>%d<sp/>blocks\n&quot;</highlight><highlight class="normal">,<sp/>l-&gt;<ref refid="structledger__t_1a3687d896ad2d77106df256f1db753c18" kindref="member">registryCurrSize</ref>);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="print_8c_1a0adafcfb5ee991d673e8c71c84f0d4da" kindref="member">print_block</ref>(fp,<sp/>l-&gt;<ref refid="structledger__t_1ae8b38edd17a3a5769aea3c05f4e2b432" kindref="member">head</ref>);</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>fclose(fp);</highlight></codeline>
+<codeline lineno="154"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>print<sp/>without<sp/>/n<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="157" refid="print_8h_1a694b7105f14c48043dbf079031abd5be" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8c_1a694b7105f14c48043dbf079031abd5be" kindref="member">formatted_timestamp</ref>(FILE<sp/>*fp)</highlight></codeline>
+<codeline lineno="158"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;Hey&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*clock_t<sp/>tic<sp/>=<sp/>clock();</highlight></codeline>
+<codeline lineno="161"><highlight class="comment"><sp/><sp/><sp/><sp/>clock_t<sp/>start<sp/>=<sp/>clock();</highlight></codeline>
+<codeline lineno="162"><highlight class="comment"><sp/><sp/><sp/><sp/>clock_t<sp/>stop<sp/>=<sp/>clock();</highlight></codeline>
+<codeline lineno="163"><highlight class="comment"></highlight></codeline>
+<codeline lineno="164"><highlight class="comment"><sp/><sp/><sp/><sp/>time_t<sp/>rawtime;</highlight></codeline>
+<codeline lineno="165"><highlight class="comment"><sp/><sp/><sp/><sp/>time_t<sp/>now;</highlight></codeline>
+<codeline lineno="166"><highlight class="comment"><sp/><sp/><sp/><sp/>struct<sp/>tm<sp/>*info;</highlight></codeline>
+<codeline lineno="167"><highlight class="comment"><sp/><sp/><sp/><sp/>struct<sp/>tm<sp/>*today;</highlight></codeline>
+<codeline lineno="168"><highlight class="comment"><sp/><sp/><sp/><sp/>double<sp/>elapsed;</highlight></codeline>
+<codeline lineno="169"><highlight class="comment"><sp/><sp/><sp/><sp/>char<sp/>buf[128];</highlight></codeline>
+<codeline lineno="170"><highlight class="comment"></highlight></codeline>
+<codeline lineno="171"><highlight class="comment"><sp/><sp/><sp/><sp/>time(&amp;now);</highlight></codeline>
+<codeline lineno="172"><highlight class="comment"><sp/><sp/><sp/><sp/>today<sp/>=<sp/>localtime(&amp;now);</highlight></codeline>
+<codeline lineno="173"><highlight class="comment"><sp/><sp/><sp/><sp/>strftime(buf,<sp/>128,<sp/>&quot;%Y/%m/%d&quot;,<sp/>today);</highlight></codeline>
+<codeline lineno="174"><highlight class="comment"><sp/><sp/><sp/><sp/>printf(&quot;%s\n&quot;,<sp/>buf);</highlight></codeline>
+<codeline lineno="175"><highlight class="comment"></highlight></codeline>
+<codeline lineno="176"><highlight class="comment"><sp/><sp/><sp/><sp/>elapsed<sp/>=<sp/>(double)(stop<sp/>-<sp/>start)<sp/>*<sp/>1000.0<sp/>/<sp/>CLOCKS_PER_SEC;<sp/>/*<sp/>time<sp/>./a.out*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/print.c"/>
+  </compounddef>
+</doxygen>

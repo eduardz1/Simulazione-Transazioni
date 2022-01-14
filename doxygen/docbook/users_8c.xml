@@ -1,0 +1,247 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_users_8c" xml:lang="en-US">
+<title>src/users.c File Reference</title>
+<indexterm><primary>src/users.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &quot;include/common.h&quot;
+#include &quot;include/users.h&quot;
+</programlisting>Include dependency graph for users.c:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="users_8c__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_users_8c_1a6552301543b6d6d55cb62f88d40300a0">REWARD</link>(amount,  reward)   (ceil(((reward * (amount)) / 100.0)))</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_users_8c_1a7f41cf6401b33c2055d553d8315decaa">get_pid_userIndex</link> (int PID_toSearch)</para>
+</listitem>
+            <listitem><para>pid_t <link linkend="_users_8c_1aaf15d0912c5fa42321118d1c652551d2">get_random_userPID</link> ()</para>
+</listitem>
+            <listitem><para>pid_t <link linkend="_users_8c_1a7a26cf1c5a9c15d42c4f3caeaa179b0e">get_random_nodePID</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_users_8c_1a959cd23eec8cbe2e56f5cc915e24ec2b">update_status</link> (int statusToSet)</para>
+</listitem>
+            <listitem><para>void <link linkend="_users_8c_1add037018869db8fbc785a9e0b24dd020">attach_ipc_objects</link> (char **argv)</para>
+</listitem>
+            <listitem><para>void <link linkend="_users_8c_1a9cceef0ffc7483e71c1cc4652a05cc1c">queue_to_pid</link> (pid_t nodePID)</para>
+</listitem>
+            <listitem><para>void <link linkend="_users_8c_1aad9c23bdb64131e376665a8dd7085f9b">transaction_init</link> (pid_t userPID, int amount, int reward)</para>
+</listitem>
+            <listitem><para>void <link linkend="_users_8c_1a54d1d8f51781e0b3c58e16d3e04f2f74">signal_handlers_init</link> (struct sigaction *saUSR1, struct sigaction *saINT)</para>
+</listitem>
+            <listitem><para>int <link linkend="_users_8c_1af881b5c5f39090e7fc6c5c5d6630c7cb">send_transaction</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_users_8c_1a2419f7ac6a2d2282e04a8535b4b5c2f9">user_transactions_handle</link> (int signum)</para>
+</listitem>
+            <listitem><para>void <link linkend="_users_8c_1a9aab3bf870349762f604cebd8633aea5">user_interrupt_handle</link> (int signum)</para>
+</listitem>
+            <listitem><para>int <link linkend="_users_8c_1a0ddf1224851353fc92bfbff6f499fa97">main</link> (int argc, char *argv[])</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structparameters">parameters</link> * <link linkend="_users_8c_1a963935917aae796fbb8f2728703adf04">par</link></para>
+</listitem>
+            <listitem><para><link linkend="_common_8h_1a75285f7670649ccfb5ccbbc952a15bfd">user</link> * <link linkend="_users_8c_1af667a518a4feef7b7540ebac0cd618cf">usersPID</link></para>
+</listitem>
+            <listitem><para><link linkend="_common_8h_1a85b4f4124a5616dea92c9e8a221a8db5">node</link> * <link linkend="_users_8c_1a803b35477f039b41487c3b1abee12b80">nodesPID</link></para>
+</listitem>
+            <listitem><para><link linkend="_common_8h_1af8b2bdfa2bfa44284c83a9d6994b13f1">ledger</link> * <link linkend="_users_8c_1a61246e5e608d3240fbbee97c978af351">mainLedger</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_users_8c_1ae520355298e7bac453a556eeab7df45f">semID</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_users_8c_1abba475816ec0c77dd5821e7fa9ab4207">queueID</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_users_8c_1a2ac06e48b5c5d403186f052dbefc3fe7">currBalance</link></para>
+</listitem>
+            <listitem><para>pid_t <link linkend="_users_8c_1af97c23712a0bab92e0ca95694e85282e">myPID</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_users_8c_1af230afc0b56da7230ff9dacabbac1e25">outGoingTransactions</link></para>
+</listitem>
+            <listitem><para><link linkend="_common_8h_1a96717a5adf375b5328bde513e91bf658">transaction</link> <link linkend="_users_8c_1ad315771a76938636b622d7af42c8afd7">currTrans</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_users_8c_1a6552301543b6d6d55cb62f88d40300a0"/><section>
+    <title>REWARD</title>
+<indexterm><primary>REWARD</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>REWARD</secondary></indexterm>
+<para><computeroutput>#define REWARD( amount,  reward)   (ceil(((reward * (amount)) / 100.0)))</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00004">4</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_users_8c_1add037018869db8fbc785a9e0b24dd020"/><section>
+    <title>attach_ipc_objects()</title>
+<indexterm><primary>attach_ipc_objects</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>attach_ipc_objects</secondary></indexterm>
+<para><computeroutput>void attach_ipc_objects (char ** argv)</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00120">120</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+<anchor xml:id="_users_8c_1a7f41cf6401b33c2055d553d8315decaa"/><section>
+    <title>get_pid_userIndex()</title>
+<indexterm><primary>get_pid_userIndex</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>get_pid_userIndex</secondary></indexterm>
+<para><computeroutput>int get_pid_userIndex (int PID_toSearch)</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00051">51</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+<anchor xml:id="_users_8c_1a7a26cf1c5a9c15d42c4f3caeaa179b0e"/><section>
+    <title>get_random_nodePID()</title>
+<indexterm><primary>get_random_nodePID</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>get_random_nodePID</secondary></indexterm>
+<para><computeroutput>pid_t get_random_nodePID ( )</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00083">83</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+<anchor xml:id="_users_8c_1aaf15d0912c5fa42321118d1c652551d2"/><section>
+    <title>get_random_userPID()</title>
+<indexterm><primary>get_random_userPID</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>get_random_userPID</secondary></indexterm>
+<para><computeroutput>pid_t get_random_userPID ( )</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00065">65</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+<anchor xml:id="_users_8c_1a0ddf1224851353fc92bfbff6f499fa97"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (int argc, char * argv[])</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00233">233</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+<anchor xml:id="_users_8c_1a9cceef0ffc7483e71c1cc4652a05cc1c"/><section>
+    <title>queue_to_pid()</title>
+<indexterm><primary>queue_to_pid</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>queue_to_pid</secondary></indexterm>
+<para><computeroutput>void queue_to_pid (pid_t nodePID)</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00138">138</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+<anchor xml:id="_users_8c_1af881b5c5f39090e7fc6c5c5d6630c7cb"/><section>
+    <title>send_transaction()</title>
+<indexterm><primary>send_transaction</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>send_transaction</secondary></indexterm>
+<para><computeroutput>int send_transaction ( )</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00176">176</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+<anchor xml:id="_users_8c_1a54d1d8f51781e0b3c58e16d3e04f2f74"/><section>
+    <title>signal_handlers_init()</title>
+<indexterm><primary>signal_handlers_init</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>signal_handlers_init</secondary></indexterm>
+<para><computeroutput>void signal_handlers_init (struct sigaction * saUSR1, struct sigaction * saINT)</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00160">160</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+<anchor xml:id="_users_8c_1aad9c23bdb64131e376665a8dd7085f9b"/><section>
+    <title>transaction_init()</title>
+<indexterm><primary>transaction_init</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>transaction_init</secondary></indexterm>
+<para><computeroutput>void transaction_init (pid_t userPID, int amount, int reward)</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00146">146</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+<anchor xml:id="_users_8c_1a959cd23eec8cbe2e56f5cc915e24ec2b"/><section>
+    <title>update_status()</title>
+<indexterm><primary>update_status</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>update_status</secondary></indexterm>
+<para><computeroutput>void update_status (int statusToSet)</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00101">101</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+<anchor xml:id="_users_8c_1a9aab3bf870349762f604cebd8633aea5"/><section>
+    <title>user_interrupt_handle()</title>
+<indexterm><primary>user_interrupt_handle</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>user_interrupt_handle</secondary></indexterm>
+<para><computeroutput>void user_interrupt_handle (int signum)</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00227">227</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+<anchor xml:id="_users_8c_1a2419f7ac6a2d2282e04a8535b4b5c2f9"/><section>
+    <title>user_transactions_handle()</title>
+<indexterm><primary>user_transactions_handle</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>user_transactions_handle</secondary></indexterm>
+<para><computeroutput>void user_transactions_handle (int signum)</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00217">217</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+</section>
+<section>
+<title>Variable Documentation</title>
+<anchor xml:id="_users_8c_1a2ac06e48b5c5d403186f052dbefc3fe7"/><section>
+    <title>currBalance</title>
+<indexterm><primary>currBalance</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>currBalance</secondary></indexterm>
+<para><computeroutput>int currBalance</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00039">39</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+<anchor xml:id="_users_8c_1ad315771a76938636b622d7af42c8afd7"/><section>
+    <title>currTrans</title>
+<indexterm><primary>currTrans</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>currTrans</secondary></indexterm>
+<para><computeroutput><link linkend="_common_8h_1a96717a5adf375b5328bde513e91bf658">transaction</link> currTrans</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00042">42</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+<anchor xml:id="_users_8c_1a61246e5e608d3240fbbee97c978af351"/><section>
+    <title>mainLedger</title>
+<indexterm><primary>mainLedger</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>mainLedger</secondary></indexterm>
+<para><computeroutput><link linkend="_common_8h_1af8b2bdfa2bfa44284c83a9d6994b13f1">ledger</link>* mainLedger</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00034">34</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+<anchor xml:id="_users_8c_1af97c23712a0bab92e0ca95694e85282e"/><section>
+    <title>myPID</title>
+<indexterm><primary>myPID</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>myPID</secondary></indexterm>
+<para><computeroutput>pid_t myPID</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00040">40</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+<anchor xml:id="_users_8c_1a803b35477f039b41487c3b1abee12b80"/><section>
+    <title>nodesPID</title>
+<indexterm><primary>nodesPID</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>nodesPID</secondary></indexterm>
+<para><computeroutput><link linkend="_common_8h_1a85b4f4124a5616dea92c9e8a221a8db5">node</link>* nodesPID</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00033">33</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+<anchor xml:id="_users_8c_1af230afc0b56da7230ff9dacabbac1e25"/><section>
+    <title>outGoingTransactions</title>
+<indexterm><primary>outGoingTransactions</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>outGoingTransactions</secondary></indexterm>
+<para><computeroutput>int outGoingTransactions</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00041">41</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+<anchor xml:id="_users_8c_1a963935917aae796fbb8f2728703adf04"/><section>
+    <title>par</title>
+<indexterm><primary>par</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>par</secondary></indexterm>
+<para><computeroutput>struct <link linkend="_structparameters">parameters</link>* par</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00031">31</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+<anchor xml:id="_users_8c_1abba475816ec0c77dd5821e7fa9ab4207"/><section>
+    <title>queueID</title>
+<indexterm><primary>queueID</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>queueID</secondary></indexterm>
+<para><computeroutput>int queueID</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00037">37</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+<anchor xml:id="_users_8c_1ae520355298e7bac453a556eeab7df45f"/><section>
+    <title>semID</title>
+<indexterm><primary>semID</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>semID</secondary></indexterm>
+<para><computeroutput>int semID</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00036">36</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+<anchor xml:id="_users_8c_1af667a518a4feef7b7540ebac0cd618cf"/><section>
+    <title>usersPID</title>
+<indexterm><primary>usersPID</primary><secondary>users.c</secondary></indexterm>
+<indexterm><primary>users.c</primary><secondary>usersPID</secondary></indexterm>
+<para><computeroutput><link linkend="_common_8h_1a75285f7670649ccfb5ccbbc952a15bfd">user</link>* usersPID</computeroutput></para><para>
+Definition at line <link linkend="_users_8c_source_1l00032">32</link> of file <link linkend="_users_8c_source">users.c</link>.</para>
+</section>
+</section>
+</section>

@@ -1,0 +1,115 @@
+\hypertarget{nodes_8c}{}\doxysection{src/nodes.c File Reference}
+\label{nodes_8c}\index{src/nodes.c@{src/nodes.c}}
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}include/nodes.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}include/common.\+h\char`\"{}}\newline
+Include dependency graph for nodes.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{nodes_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structparameters}{parameters}} $\ast$ \mbox{\hyperlink{nodes_8c_a963935917aae796fbb8f2728703adf04}{par}}
+\item 
+\mbox{\hyperlink{common_8h_a75285f7670649ccfb5ccbbc952a15bfd}{user}} $\ast$ \mbox{\hyperlink{nodes_8c_af667a518a4feef7b7540ebac0cd618cf}{users\+PID}}
+\item 
+\mbox{\hyperlink{common_8h_a85b4f4124a5616dea92c9e8a221a8db5}{node}} $\ast$ \mbox{\hyperlink{nodes_8c_a803b35477f039b41487c3b1abee12b80}{nodes\+PID}}
+\item 
+\mbox{\hyperlink{common_8h_af8b2bdfa2bfa44284c83a9d6994b13f1}{ledger}} $\ast$ \mbox{\hyperlink{nodes_8c_a61246e5e608d3240fbbee97c978af351}{main\+Ledger}}
+\item 
+int \mbox{\hyperlink{nodes_8c_ae520355298e7bac453a556eeab7df45f}{sem\+ID}}
+\item 
+int \mbox{\hyperlink{nodes_8c_abba475816ec0c77dd5821e7fa9ab4207}{queue\+ID}}
+\item 
+pid\+\_\+t \mbox{\hyperlink{nodes_8c_af97c23712a0bab92e0ca95694e85282e}{my\+PID}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{nodes_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{nodes_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{nodes.c@{nodes.c}!main@{main}}
+\index{main@{main}!nodes.c@{nodes.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8c_source_l00058}{58}} of file \mbox{\hyperlink{nodes_8c_source}{nodes.\+c}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{nodes_8c_a61246e5e608d3240fbbee97c978af351}\label{nodes_8c_a61246e5e608d3240fbbee97c978af351}} 
+\index{nodes.c@{nodes.c}!mainLedger@{mainLedger}}
+\index{mainLedger@{mainLedger}!nodes.c@{nodes.c}}
+\doxysubsubsection{\texorpdfstring{mainLedger}{mainLedger}}
+{\footnotesize\ttfamily \mbox{\hyperlink{common_8h_af8b2bdfa2bfa44284c83a9d6994b13f1}{ledger}}$\ast$ main\+Ledger}
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8c_source_l00017}{17}} of file \mbox{\hyperlink{nodes_8c_source}{nodes.\+c}}.
+
+\mbox{\Hypertarget{nodes_8c_af97c23712a0bab92e0ca95694e85282e}\label{nodes_8c_af97c23712a0bab92e0ca95694e85282e}} 
+\index{nodes.c@{nodes.c}!myPID@{myPID}}
+\index{myPID@{myPID}!nodes.c@{nodes.c}}
+\doxysubsubsection{\texorpdfstring{myPID}{myPID}}
+{\footnotesize\ttfamily pid\+\_\+t my\+PID}
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8c_source_l00022}{22}} of file \mbox{\hyperlink{nodes_8c_source}{nodes.\+c}}.
+
+\mbox{\Hypertarget{nodes_8c_a803b35477f039b41487c3b1abee12b80}\label{nodes_8c_a803b35477f039b41487c3b1abee12b80}} 
+\index{nodes.c@{nodes.c}!nodesPID@{nodesPID}}
+\index{nodesPID@{nodesPID}!nodes.c@{nodes.c}}
+\doxysubsubsection{\texorpdfstring{nodesPID}{nodesPID}}
+{\footnotesize\ttfamily \mbox{\hyperlink{common_8h_a85b4f4124a5616dea92c9e8a221a8db5}{node}}$\ast$ nodes\+PID}
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8c_source_l00016}{16}} of file \mbox{\hyperlink{nodes_8c_source}{nodes.\+c}}.
+
+\mbox{\Hypertarget{nodes_8c_a963935917aae796fbb8f2728703adf04}\label{nodes_8c_a963935917aae796fbb8f2728703adf04}} 
+\index{nodes.c@{nodes.c}!par@{par}}
+\index{par@{par}!nodes.c@{nodes.c}}
+\doxysubsubsection{\texorpdfstring{par}{par}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structparameters}{parameters}}$\ast$ par}
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8c_source_l00014}{14}} of file \mbox{\hyperlink{nodes_8c_source}{nodes.\+c}}.
+
+\mbox{\Hypertarget{nodes_8c_abba475816ec0c77dd5821e7fa9ab4207}\label{nodes_8c_abba475816ec0c77dd5821e7fa9ab4207}} 
+\index{nodes.c@{nodes.c}!queueID@{queueID}}
+\index{queueID@{queueID}!nodes.c@{nodes.c}}
+\doxysubsubsection{\texorpdfstring{queueID}{queueID}}
+{\footnotesize\ttfamily int queue\+ID}
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8c_source_l00020}{20}} of file \mbox{\hyperlink{nodes_8c_source}{nodes.\+c}}.
+
+\mbox{\Hypertarget{nodes_8c_ae520355298e7bac453a556eeab7df45f}\label{nodes_8c_ae520355298e7bac453a556eeab7df45f}} 
+\index{nodes.c@{nodes.c}!semID@{semID}}
+\index{semID@{semID}!nodes.c@{nodes.c}}
+\doxysubsubsection{\texorpdfstring{semID}{semID}}
+{\footnotesize\ttfamily int sem\+ID}
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8c_source_l00019}{19}} of file \mbox{\hyperlink{nodes_8c_source}{nodes.\+c}}.
+
+\mbox{\Hypertarget{nodes_8c_af667a518a4feef7b7540ebac0cd618cf}\label{nodes_8c_af667a518a4feef7b7540ebac0cd618cf}} 
+\index{nodes.c@{nodes.c}!usersPID@{usersPID}}
+\index{usersPID@{usersPID}!nodes.c@{nodes.c}}
+\doxysubsubsection{\texorpdfstring{usersPID}{usersPID}}
+{\footnotesize\ttfamily \mbox{\hyperlink{common_8h_a75285f7670649ccfb5ccbbc952a15bfd}{user}}$\ast$ users\+PID}
+
+
+
+Definition at line \mbox{\hyperlink{nodes_8c_source_l00015}{15}} of file \mbox{\hyperlink{nodes_8c_source}{nodes.\+c}}.
+

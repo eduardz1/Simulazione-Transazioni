@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_debug_8c_source" xml:lang="en-US">
+<title>debug.c</title>
+<indexterm><primary>src/utils/debug.c</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_debug_8c_source_1l00001"/>00001 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_debug_8h">debug.h</link>&quot;</emphasis>
+<anchor xml:id="_debug_8c_source_1l00002"/>00002 
+<anchor xml:id="_debug_8c_source_1l00003"/><link linkend="_debug_8c_1ad9dde2c4e4def50c7e04145a08a59f6f">00003</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_debug_8c_1ad9dde2c4e4def50c7e04145a08a59f6f">dbg_printf</link>(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*fmt,&#32;...)
+<anchor xml:id="_debug_8c_source_1l00004"/>00004 {
+<anchor xml:id="_debug_8c_source_1l00005"/>00005 &#32;&#32;&#32;&#32;va_list&#32;args;
+<anchor xml:id="_debug_8c_source_1l00006"/>00006 &#32;&#32;&#32;&#32;va_start(args,&#32;fmt);
+<anchor xml:id="_debug_8c_source_1l00007"/>00007 &#32;&#32;&#32;&#32;vfprintf(stderr,&#32;fmt,&#32;args);
+<anchor xml:id="_debug_8c_source_1l00008"/>00008 &#32;&#32;&#32;&#32;va_end(args);
+<anchor xml:id="_debug_8c_source_1l00009"/>00009 }
+</programlisting></section>

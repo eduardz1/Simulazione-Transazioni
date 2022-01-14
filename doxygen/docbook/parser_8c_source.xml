@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_parser_8c_source" xml:lang="en-US">
+<title>parser.c</title>
+<indexterm><primary>src/parser.c</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_parser_8c_source_1l00001"/>00001 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_common_8h">include/common.h</link>&quot;</emphasis>
+<anchor xml:id="_parser_8c_source_1l00002"/>00002 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_debug_8h">utils/debug.h</link>&quot;</emphasis>
+<anchor xml:id="_parser_8c_source_1l00003"/>00003 <emphasis role="preprocessor">#include&#32;&quot;<link linkend="_parser_8h">include/parser.h</link>&quot;</emphasis>
+<anchor xml:id="_parser_8c_source_1l00004"/>00004 
+<anchor xml:id="_parser_8c_source_1l00005"/>00005 <emphasis role="comment">/*enum&#32;paramID</emphasis>
+<anchor xml:id="_parser_8c_source_1l00006"/>00006 <emphasis role="comment">{</emphasis>
+<anchor xml:id="_parser_8c_source_1l00007"/>00007 <emphasis role="comment">&#32;&#32;&#32;&#32;SO_USER_NUM,</emphasis>
+<anchor xml:id="_parser_8c_source_1l00008"/>00008 <emphasis role="comment">&#32;&#32;&#32;&#32;SO_NODES_NUM,</emphasis>
+<anchor xml:id="_parser_8c_source_1l00009"/>00009 <emphasis role="comment">&#32;&#32;&#32;&#32;SO_NUM_FRIENDS,</emphasis>
+<anchor xml:id="_parser_8c_source_1l00010"/>00010 <emphasis role="comment">&#32;&#32;&#32;&#32;SO_SIM_SEC,</emphasis>
+<anchor xml:id="_parser_8c_source_1l00011"/>00011 <emphasis role="comment">&#32;&#32;&#32;&#32;SO_HOPS,</emphasis>
+<anchor xml:id="_parser_8c_source_1l00012"/>00012 <emphasis role="comment">&#32;&#32;&#32;&#32;SO_BUDGET_INIT,</emphasis>
+<anchor xml:id="_parser_8c_source_1l00013"/>00013 <emphasis role="comment">&#32;&#32;&#32;&#32;SO_REWARD,</emphasis>
+<anchor xml:id="_parser_8c_source_1l00014"/>00014 <emphasis role="comment">&#32;&#32;&#32;&#32;SO_MIN_TRANS_GEN_NSEC,</emphasis>
+<anchor xml:id="_parser_8c_source_1l00015"/>00015 <emphasis role="comment">&#32;&#32;&#32;&#32;SO_MAX_TRANS_GEN_NSEC,</emphasis>
+<anchor xml:id="_parser_8c_source_1l00016"/>00016 <emphasis role="comment">&#32;&#32;&#32;&#32;SO_RETRY,</emphasis>
+<anchor xml:id="_parser_8c_source_1l00017"/>00017 <emphasis role="comment">&#32;&#32;&#32;&#32;SO_TP_SIZE,</emphasis>
+<anchor xml:id="_parser_8c_source_1l00018"/>00018 <emphasis role="comment">&#32;&#32;&#32;&#32;SO_MIN_TRANS_PROC_NSEC,</emphasis>
+<anchor xml:id="_parser_8c_source_1l00019"/>00019 <emphasis role="comment">&#32;&#32;&#32;&#32;SO_MAX_TRANS_PROC_NSEC</emphasis>
+<anchor xml:id="_parser_8c_source_1l00020"/>00020 <emphasis role="comment">};</emphasis>
+<anchor xml:id="_parser_8c_source_1l00021"/>00021 <emphasis role="comment"></emphasis>
+<anchor xml:id="_parser_8c_source_1l00022"/>00022 <emphasis role="comment">struct&#32;parameters</emphasis>
+<anchor xml:id="_parser_8c_source_1l00023"/>00023 <emphasis role="comment">{</emphasis>
+<anchor xml:id="_parser_8c_source_1l00024"/>00024 <emphasis role="comment">&#32;&#32;&#32;&#32;char&#32;*string;</emphasis>
+<anchor xml:id="_parser_8c_source_1l00025"/>00025 <emphasis role="comment">&#32;&#32;&#32;&#32;enum&#32;paramID&#32;id;</emphasis>
+<anchor xml:id="_parser_8c_source_1l00026"/>00026 <emphasis role="comment">}&#32;paramList[]&#32;=&#32;{</emphasis>
+<anchor xml:id="_parser_8c_source_1l00027"/>00027 <emphasis role="comment">&#32;&#32;&#32;&#32;{&quot;SO_USER_NUM&quot;,&#32;SO_USER_NUM},</emphasis>
+<anchor xml:id="_parser_8c_source_1l00028"/>00028 <emphasis role="comment">&#32;&#32;&#32;&#32;{&quot;SO_NODES_NUM&quot;,&#32;SO_NODES_NUM},</emphasis>
+<anchor xml:id="_parser_8c_source_1l00029"/>00029 <emphasis role="comment">&#32;&#32;&#32;&#32;{&quot;SO_NUM_FRIENDS&quot;,&#32;SO_NUM_FRIENDS},</emphasis>
+<anchor xml:id="_parser_8c_source_1l00030"/>00030 <emphasis role="comment">&#32;&#32;&#32;&#32;{&quot;SO_SIM_SEC&quot;,&#32;SO_SIM_SEC},</emphasis>
+<anchor xml:id="_parser_8c_source_1l00031"/>00031 <emphasis role="comment">&#32;&#32;&#32;&#32;{&quot;SO_HOPS&quot;,&#32;SO_HOPS},</emphasis>
+<anchor xml:id="_parser_8c_source_1l00032"/>00032 <emphasis role="comment">&#32;&#32;&#32;&#32;{&quot;SO_BUDGET_INIT&quot;,&#32;SO_BUDGET_INIT},</emphasis>
+<anchor xml:id="_parser_8c_source_1l00033"/>00033 <emphasis role="comment">&#32;&#32;&#32;&#32;{&quot;SO_REWARD&quot;,&#32;SO_REWARD},</emphasis>
+<anchor xml:id="_parser_8c_source_1l00034"/>00034 <emphasis role="comment">&#32;&#32;&#32;&#32;{&quot;SO_MIN_TRANS_GEN_NSEC&quot;,&#32;SO_MIN_TRANS_GEN_NSEC},</emphasis>
+<anchor xml:id="_parser_8c_source_1l00035"/>00035 <emphasis role="comment">&#32;&#32;&#32;&#32;{&quot;SO_MAX_TRANS_GEN_NSEC&quot;,&#32;SO_MAX_TRANS_GEN_NSEC},</emphasis>
+<anchor xml:id="_parser_8c_source_1l00036"/>00036 <emphasis role="comment">&#32;&#32;&#32;&#32;{&quot;SO_RETRY&quot;,&#32;SO_RETRY},</emphasis>
+<anchor xml:id="_parser_8c_source_1l00037"/>00037 <emphasis role="comment">&#32;&#32;&#32;&#32;{&quot;SO_TP_SIZE&quot;,&#32;SO_TP_SIZE},</emphasis>
+<anchor xml:id="_parser_8c_source_1l00038"/>00038 <emphasis role="comment">&#32;&#32;&#32;&#32;{&quot;SO_MIN_TRANS_PROC_NSEC&quot;,&#32;SO_MIN_TRANS_PROC_NSEC},</emphasis>
+<anchor xml:id="_parser_8c_source_1l00039"/>00039 <emphasis role="comment">&#32;&#32;&#32;&#32;{&quot;SO_MAX_TRANS_PROC_NSEC&quot;,&#32;SO_MAX_TRANS_PROC_NSEC}};*/</emphasis>
+<anchor xml:id="_parser_8c_source_1l00040"/>00040 
+<anchor xml:id="_parser_8c_source_1l00041"/><link linkend="_parser_8h_1aa4f4f74bc94c9506ecdce2e5b3ef35df">00041</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_parser_8c_1aa4f4f74bc94c9506ecdce2e5b3ef35df">assign_defaults</link>(<emphasis role="keyword">struct</emphasis>&#32;<link linkend="_structparameters">parameters</link>&#32;*<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>)
+<anchor xml:id="_parser_8c_source_1l00042"/>00042 {
+<anchor xml:id="_parser_8c_source_1l00043"/>00043 &#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a1a7bfa0882f03d573b4e419d02f041f8">SO_USER_NUM</link>&#32;=&#32;100;
+<anchor xml:id="_parser_8c_source_1l00044"/>00044 &#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a379d08051847c4f98268a27001b06261">SO_NODES_NUM</link>&#32;=&#32;10;
+<anchor xml:id="_parser_8c_source_1l00045"/>00045 &#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a375c541a19818ce43b6ae275d0a80365">SO_BUDGET_INIT</link>&#32;=&#32;1000;
+<anchor xml:id="_parser_8c_source_1l00046"/>00046 &#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a1e8968a80441b4a641d5ff3566af04f1">SO_REWARD</link>&#32;=&#32;1;
+<anchor xml:id="_parser_8c_source_1l00047"/>00047 &#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a213ccb7b7e150d7bf584f35cc824ead6">SO_MIN_TRANS_GEN_NSEC</link>&#32;=&#32;100000000;
+<anchor xml:id="_parser_8c_source_1l00048"/>00048 &#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1abca064afd6b392e1f9e24b5fda8cdecb">SO_MAX_TRANS_GEN_NSEC</link>&#32;=&#32;200000000;
+<anchor xml:id="_parser_8c_source_1l00049"/>00049 &#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1ac2861693c2d9121c5ecad90de2189690">SO_RETRY</link>&#32;=&#32;20;
+<anchor xml:id="_parser_8c_source_1l00050"/>00050 &#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a8fe346ee9f21d4a40e15388b72579fbe">SO_TP_SIZE</link>&#32;=&#32;1000;
+<anchor xml:id="_parser_8c_source_1l00051"/>00051 &#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a19a5fe1068e3e1ceceab49114d856628">SO_MIN_TRANS_PROC_NSEC</link>&#32;=&#32;100000000;
+<anchor xml:id="_parser_8c_source_1l00052"/>00052 &#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1af7fbb0805dd6c4e1729d70a30164bc1c">SO_MAX_TRANS_PROC_NSEC</link>&#32;=&#32;200000000;
+<anchor xml:id="_parser_8c_source_1l00053"/>00053 &#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a86c91cb21e43e2f92651c149f93f0dc5">SO_SIM_SEC</link>&#32;=&#32;10;
+<anchor xml:id="_parser_8c_source_1l00054"/>00054 &#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a6d8f5bd80c3eda4ed6d9f2440f9105b2">SO_FRIENDS_NUM</link>&#32;=&#32;3;
+<anchor xml:id="_parser_8c_source_1l00055"/>00055 &#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a85ca4a1c61f11babff7ccd10ec58ee70">SO_HOPS</link>&#32;=&#32;10;
+<anchor xml:id="_parser_8c_source_1l00056"/>00056 }
+<anchor xml:id="_parser_8c_source_1l00057"/>00057 
+<anchor xml:id="_parser_8c_source_1l00058"/><link linkend="_parser_8h_1aa51f83495fd93bbb234b08030216c91a">00058</link> <emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_parser_8c_1aa51f83495fd93bbb234b08030216c91a">parse_parameters</link>(<emphasis role="keyword">struct</emphasis>&#32;<link linkend="_structparameters">parameters</link>&#32;*<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>)
+<anchor xml:id="_parser_8c_source_1l00059"/>00059 {
+<anchor xml:id="_parser_8c_source_1l00060"/>00060 &#32;&#32;&#32;&#32;FILE&#32;*fp;
+<anchor xml:id="_parser_8c_source_1l00061"/>00061 
+<anchor xml:id="_parser_8c_source_1l00062"/>00062 &#32;&#32;&#32;&#32;<emphasis role="comment">/*enum&#32;paramID&#32;tokensE;*/</emphasis>
+<anchor xml:id="_parser_8c_source_1l00063"/>00063 
+<anchor xml:id="_parser_8c_source_1l00064"/>00064 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;longer&#32;than&#32;NUM_PARAMETERS&#32;to&#32;account&#32;for&#32;comments&#32;and&#32;such&#32;*/</emphasis>
+<anchor xml:id="_parser_8c_source_1l00065"/>00065 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;buffer[128];
+<anchor xml:id="_parser_8c_source_1l00066"/>00066 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;i&#32;=&#32;0;
+<anchor xml:id="_parser_8c_source_1l00067"/>00067 
+<anchor xml:id="_parser_8c_source_1l00068"/>00068 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;*tokens[<link linkend="_parser_8h_1ae80c74b7cac856ec6868587f85c47427">NUM_PARAMETERS</link>];
+<anchor xml:id="_parser_8c_source_1l00069"/>00069 &#32;&#32;&#32;&#32;<emphasis role="keywordtype">unsigned</emphasis>&#32;<emphasis role="keywordtype">long</emphasis>&#32;values[<link linkend="_parser_8h_1ae80c74b7cac856ec6868587f85c47427">NUM_PARAMETERS</link>];&#32;<emphasis role="comment">/*&#32;downcast&#32;is&#32;easy,&#32;upcast&#32;not&#32;so&#32;much&#32;*/</emphasis>
+<anchor xml:id="_parser_8c_source_1l00070"/>00070 
+<anchor xml:id="_parser_8c_source_1l00071"/>00071 &#32;&#32;&#32;&#32;<emphasis role="comment">/*struct&#32;parameters&#32;*par&#32;=&#32;malloc(sizeof(struct&#32;parameters));*/</emphasis>
+<anchor xml:id="_parser_8c_source_1l00072"/>00072 &#32;&#32;&#32;&#32;<link linkend="_parser_8c_1aa4f4f74bc94c9506ecdce2e5b3ef35df">assign_defaults</link>(<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>);
+<anchor xml:id="_parser_8c_source_1l00073"/>00073 &#32;&#32;&#32;&#32;<link linkend="_debug_8h_1a494d31903e7b0333dfa03b0778679113">TRACE</link>((<emphasis role="stringliteral">&quot;:parser:&#32;assigned&#32;defaults\n&quot;</emphasis>));
+<anchor xml:id="_parser_8c_source_1l00074"/>00074 
+<anchor xml:id="_parser_8c_source_1l00075"/>00075 &#32;&#32;&#32;&#32;fp&#32;=&#32;fopen(<link linkend="_parser_8h_1a2b53ff59ad6fe7d737de442d3dfe0634">CONF_FILE</link>,&#32;<emphasis role="stringliteral">&quot;r&quot;</emphasis>);
+<anchor xml:id="_parser_8c_source_1l00076"/>00076 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(fp&#32;==&#32;<link linkend="_common_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</link>)
+<anchor xml:id="_parser_8c_source_1l00077"/>00077 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_parser_8h_1ad223dab1d6a66f81b6b0c6c268a19a3f">CONF_ERROR</link>;&#32;<emphasis role="comment">/*&#32;default&#32;config&#32;*/</emphasis>
+<anchor xml:id="_parser_8c_source_1l00078"/>00078 
+<anchor xml:id="_parser_8c_source_1l00079"/>00079 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">while</emphasis>&#32;(fgets(buffer,&#32;127,&#32;fp))
+<anchor xml:id="_parser_8c_source_1l00080"/>00080 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_parser_8c_source_1l00081"/>00081 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;tokens[i]&#32;=&#32;malloc(64);
+<anchor xml:id="_parser_8c_source_1l00082"/>00082 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*values[i]&#32;=&#32;malloc(sizeof(int));*/</emphasis>
+<anchor xml:id="_parser_8c_source_1l00083"/>00083 
+<anchor xml:id="_parser_8c_source_1l00084"/>00084 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;sscanf(buffer,&#32;<emphasis role="stringliteral">&quot;%s&#32;%lu&quot;</emphasis>,&#32;tokens[i],&#32;&amp;values[i]);
+<anchor xml:id="_parser_8c_source_1l00085"/>00085 
+<anchor xml:id="_parser_8c_source_1l00086"/>00086 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;i++;
+<anchor xml:id="_parser_8c_source_1l00087"/>00087 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_parser_8c_source_1l00088"/>00088 
+<anchor xml:id="_parser_8c_source_1l00089"/>00089 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(i&#32;=&#32;0;&#32;i&#32;&lt;&#32;<link linkend="_parser_8h_1ae80c74b7cac856ec6868587f85c47427">NUM_PARAMETERS</link>;&#32;i++)
+<anchor xml:id="_parser_8c_source_1l00090"/>00090 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_parser_8c_source_1l00091"/>00091 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*switch(tokensE){</emphasis>
+<anchor xml:id="_parser_8c_source_1l00092"/>00092 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;case&#32;SO_USER_NUM:</emphasis>
+<anchor xml:id="_parser_8c_source_1l00093"/>00093 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;case&#32;SO_NODES_NUM:</emphasis>
+<anchor xml:id="_parser_8c_source_1l00094"/>00094 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;case&#32;SO_NUM_FRIENDS:</emphasis>
+<anchor xml:id="_parser_8c_source_1l00095"/>00095 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;case&#32;SO_SIM_SEC:</emphasis>
+<anchor xml:id="_parser_8c_source_1l00096"/>00096 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;case&#32;SO_HOPS:</emphasis>
+<anchor xml:id="_parser_8c_source_1l00097"/>00097 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;case&#32;SO_BUDGET_INIT:</emphasis>
+<anchor xml:id="_parser_8c_source_1l00098"/>00098 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;case&#32;SO_REWARD:</emphasis>
+<anchor xml:id="_parser_8c_source_1l00099"/>00099 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;case&#32;SO_MIN_TRANS_GEN_NSEC:</emphasis>
+<anchor xml:id="_parser_8c_source_1l00100"/>00100 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;case&#32;SO_MAX_TRANS_GEN_NSEC:</emphasis>
+<anchor xml:id="_parser_8c_source_1l00101"/>00101 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;case&#32;SO_RETRY:</emphasis>
+<anchor xml:id="_parser_8c_source_1l00102"/>00102 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;case&#32;SO_TP_SIZE:</emphasis>
+<anchor xml:id="_parser_8c_source_1l00103"/>00103 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;case&#32;SO_MIN_TRANS_PROC_NSEC:</emphasis>
+<anchor xml:id="_parser_8c_source_1l00104"/>00104 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;case&#32;SO_MAX_TRANS_PROC_NSEC:</emphasis>
+<anchor xml:id="_parser_8c_source_1l00105"/>00105 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;default:</emphasis>
+<anchor xml:id="_parser_8c_source_1l00106"/>00106 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;break;</emphasis>
+<anchor xml:id="_parser_8c_source_1l00107"/>00107 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}&#32;it&#32;can&#32;be&#32;implemented&#32;in&#32;a&#32;nicer&#32;to&#32;look&#32;at&#32;way,&#32;but&#32;not&#32;now&#32;*/</emphasis>
+<anchor xml:id="_parser_8c_source_1l00108"/>00108 
+<anchor xml:id="_parser_8c_source_1l00109"/>00109 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*printf(&quot;%s\n&quot;,tokens[i]);*/</emphasis>
+<anchor xml:id="_parser_8c_source_1l00110"/>00110 
+<anchor xml:id="_parser_8c_source_1l00111"/>00111 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!strcmp(tokens[i],&#32;<emphasis role="stringliteral">&quot;SO_USER_NUM&quot;</emphasis>))
+<anchor xml:id="_parser_8c_source_1l00112"/>00112 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="_parser_8c_source_1l00113"/>00113 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a1a7bfa0882f03d573b4e419d02f041f8">SO_USER_NUM</link>&#32;=&#32;values[i];
+<anchor xml:id="_parser_8c_source_1l00114"/>00114 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_parser_8c_source_1l00115"/>00115 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!strcmp(tokens[i],&#32;<emphasis role="stringliteral">&quot;SO_NODES_NUM&quot;</emphasis>))
+<anchor xml:id="_parser_8c_source_1l00116"/>00116 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="_parser_8c_source_1l00117"/>00117 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a379d08051847c4f98268a27001b06261">SO_NODES_NUM</link>&#32;=&#32;values[i];
+<anchor xml:id="_parser_8c_source_1l00118"/>00118 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_parser_8c_source_1l00119"/>00119 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!strcmp(tokens[i],&#32;<emphasis role="stringliteral">&quot;SO_BUDGET_INIT&quot;</emphasis>))
+<anchor xml:id="_parser_8c_source_1l00120"/>00120 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="_parser_8c_source_1l00121"/>00121 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a375c541a19818ce43b6ae275d0a80365">SO_BUDGET_INIT</link>&#32;=&#32;values[i];
+<anchor xml:id="_parser_8c_source_1l00122"/>00122 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_parser_8c_source_1l00123"/>00123 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!strcmp(tokens[i],&#32;<emphasis role="stringliteral">&quot;SO_REWARD&quot;</emphasis>))
+<anchor xml:id="_parser_8c_source_1l00124"/>00124 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="_parser_8c_source_1l00125"/>00125 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;given&#32;that&#32;it&#32;is&#32;a&#32;char&#32;it&apos;s&#32;very&#32;easy&#32;to&#32;get&#32;it&#32;out&#32;of&#32;bound,</emphasis>
+<anchor xml:id="_parser_8c_source_1l00126"/>00126 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*&#32;I&#32;prefer&#32;straight&#32;up&#32;normalizing&#32;it&#32;rather&#32;than&#32;resetting&#32;everything</emphasis>
+<anchor xml:id="_parser_8c_source_1l00127"/>00127 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*&#32;because&#32;of&#32;ERANGE</emphasis>
+<anchor xml:id="_parser_8c_source_1l00128"/>00128 <emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;*/</emphasis>
+<anchor xml:id="_parser_8c_source_1l00129"/>00129 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(values[i]&#32;&gt;=&#32;0&#32;&amp;&amp;&#32;values[i]&#32;&lt;=&#32;100)
+<anchor xml:id="_parser_8c_source_1l00130"/>00130 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a1e8968a80441b4a641d5ff3566af04f1">SO_REWARD</link>&#32;=&#32;values[i];
+<anchor xml:id="_parser_8c_source_1l00131"/>00131 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>
+<anchor xml:id="_parser_8c_source_1l00132"/>00132 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;printf(<emphasis role="stringliteral">&quot;:parser:&#32;SO_REWARD&#32;incorrect&#32;value,&#32;resetting&#32;default\n&quot;</emphasis>);
+<anchor xml:id="_parser_8c_source_1l00133"/>00133 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_parser_8c_source_1l00134"/>00134 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!strcmp(tokens[i],&#32;<emphasis role="stringliteral">&quot;SO_MIN_TRANS_GEN_NSEC&quot;</emphasis>))
+<anchor xml:id="_parser_8c_source_1l00135"/>00135 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="_parser_8c_source_1l00136"/>00136 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a213ccb7b7e150d7bf584f35cc824ead6">SO_MIN_TRANS_GEN_NSEC</link>&#32;=&#32;values[i];
+<anchor xml:id="_parser_8c_source_1l00137"/>00137 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_parser_8c_source_1l00138"/>00138 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!strcmp(tokens[i],&#32;<emphasis role="stringliteral">&quot;SO_MAX_TRANS_GEN_NSEC&quot;</emphasis>))
+<anchor xml:id="_parser_8c_source_1l00139"/>00139 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="_parser_8c_source_1l00140"/>00140 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1abca064afd6b392e1f9e24b5fda8cdecb">SO_MAX_TRANS_GEN_NSEC</link>&#32;=&#32;values[i];
+<anchor xml:id="_parser_8c_source_1l00141"/>00141 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_parser_8c_source_1l00142"/>00142 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!strcmp(tokens[i],&#32;<emphasis role="stringliteral">&quot;SO_RETRY&quot;</emphasis>))
+<anchor xml:id="_parser_8c_source_1l00143"/>00143 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="_parser_8c_source_1l00144"/>00144 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1ac2861693c2d9121c5ecad90de2189690">SO_RETRY</link>&#32;=&#32;values[i];
+<anchor xml:id="_parser_8c_source_1l00145"/>00145 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_parser_8c_source_1l00146"/>00146 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!strcmp(tokens[i],&#32;<emphasis role="stringliteral">&quot;SO_TP_SIZE&quot;</emphasis>))
+<anchor xml:id="_parser_8c_source_1l00147"/>00147 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="_parser_8c_source_1l00148"/>00148 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a8fe346ee9f21d4a40e15388b72579fbe">SO_TP_SIZE</link>&#32;=&#32;values[i];
+<anchor xml:id="_parser_8c_source_1l00149"/>00149 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_parser_8c_source_1l00150"/>00150 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!strcmp(tokens[i],&#32;<emphasis role="stringliteral">&quot;SO_MIN_TRANS_PROC_NSEC&quot;</emphasis>))
+<anchor xml:id="_parser_8c_source_1l00151"/>00151 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="_parser_8c_source_1l00152"/>00152 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a19a5fe1068e3e1ceceab49114d856628">SO_MIN_TRANS_PROC_NSEC</link>&#32;=&#32;values[i];
+<anchor xml:id="_parser_8c_source_1l00153"/>00153 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_parser_8c_source_1l00154"/>00154 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!strcmp(tokens[i],&#32;<emphasis role="stringliteral">&quot;SO_MAX_TRANS_PROC_NSEC&quot;</emphasis>))
+<anchor xml:id="_parser_8c_source_1l00155"/>00155 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="_parser_8c_source_1l00156"/>00156 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1af7fbb0805dd6c4e1729d70a30164bc1c">SO_MAX_TRANS_PROC_NSEC</link>&#32;=&#32;values[i];
+<anchor xml:id="_parser_8c_source_1l00157"/>00157 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_parser_8c_source_1l00158"/>00158 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!strcmp(tokens[i],&#32;<emphasis role="stringliteral">&quot;SO_SIM_SEC&quot;</emphasis>))
+<anchor xml:id="_parser_8c_source_1l00159"/>00159 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="_parser_8c_source_1l00160"/>00160 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a86c91cb21e43e2f92651c149f93f0dc5">SO_SIM_SEC</link>&#32;=&#32;values[i];
+<anchor xml:id="_parser_8c_source_1l00161"/>00161 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_parser_8c_source_1l00162"/>00162 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!strcmp(tokens[i],&#32;<emphasis role="stringliteral">&quot;SO_FRIENDS_NUM&quot;</emphasis>))
+<anchor xml:id="_parser_8c_source_1l00163"/>00163 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="_parser_8c_source_1l00164"/>00164 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a6d8f5bd80c3eda4ed6d9f2440f9105b2">SO_FRIENDS_NUM</link>&#32;=&#32;values[i];
+<anchor xml:id="_parser_8c_source_1l00165"/>00165 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_parser_8c_source_1l00166"/>00166 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">else</emphasis>&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!strcmp(tokens[i],&#32;<emphasis role="stringliteral">&quot;SO_HOPS&quot;</emphasis>))
+<anchor xml:id="_parser_8c_source_1l00167"/>00167 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{
+<anchor xml:id="_parser_8c_source_1l00168"/>00168 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a85ca4a1c61f11babff7ccd10ec58ee70">SO_HOPS</link>&#32;=&#32;values[i];
+<anchor xml:id="_parser_8c_source_1l00169"/>00169 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;}
+<anchor xml:id="_parser_8c_source_1l00170"/>00170 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_parser_8c_source_1l00171"/>00171 
+<anchor xml:id="_parser_8c_source_1l00172"/>00172 &#32;&#32;&#32;&#32;<emphasis role="comment">/*&#32;--&#32;CONF&#32;ERRORS&#32;CORRECTION&#32;--&#32;*/</emphasis>
+<anchor xml:id="_parser_8c_source_1l00173"/>00173 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_common_8h_1ad65a8842cc674e3ddf69355898c0ecbf">errno</link>&#32;==&#32;ERANGE)
+<anchor xml:id="_parser_8c_source_1l00174"/>00174 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_parser_8c_source_1l00175"/>00175 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_debug_8h_1a494d31903e7b0333dfa03b0778679113">TRACE</link>((<emphasis role="stringliteral">&quot;:parser:&#32;one&#32;or&#32;multiple&#32;values&#32;out&#32;of&#32;bound,&#32;resetting&#32;defaults\n&quot;</emphasis>));
+<anchor xml:id="_parser_8c_source_1l00176"/>00176 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_parser_8c_1aa4f4f74bc94c9506ecdce2e5b3ef35df">assign_defaults</link>(<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>);
+<anchor xml:id="_parser_8c_source_1l00177"/>00177 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_parser_8c_source_1l00178"/>00178 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a213ccb7b7e150d7bf584f35cc824ead6">SO_MIN_TRANS_GEN_NSEC</link>&#32;&gt;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1abca064afd6b392e1f9e24b5fda8cdecb">SO_MAX_TRANS_GEN_NSEC</link>)
+<anchor xml:id="_parser_8c_source_1l00179"/>00179 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_parser_8c_source_1l00180"/>00180 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_debug_8h_1a494d31903e7b0333dfa03b0778679113">TRACE</link>((<emphasis role="stringliteral">&quot;:parser:&#32;SO_MIN_TRANS_GEN_NSEC&#32;greater&#32;than&#32;SO_MAX_TRANS_GEN_NSEC,&#32;will&#32;be&#32;normalized\n&quot;</emphasis>));
+<anchor xml:id="_parser_8c_source_1l00181"/>00181 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a213ccb7b7e150d7bf584f35cc824ead6">SO_MIN_TRANS_GEN_NSEC</link>&#32;=&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1abca064afd6b392e1f9e24b5fda8cdecb">SO_MAX_TRANS_GEN_NSEC</link>;
+<anchor xml:id="_parser_8c_source_1l00182"/>00182 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_parser_8c_source_1l00183"/>00183 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a19a5fe1068e3e1ceceab49114d856628">SO_MIN_TRANS_PROC_NSEC</link>&#32;&gt;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1af7fbb0805dd6c4e1729d70a30164bc1c">SO_MAX_TRANS_PROC_NSEC</link>)
+<anchor xml:id="_parser_8c_source_1l00184"/>00184 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_parser_8c_source_1l00185"/>00185 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_debug_8h_1a494d31903e7b0333dfa03b0778679113">TRACE</link>((<emphasis role="stringliteral">&quot;:parser:&#32;SO_MIN_TRANS_PROC_NSEC&#32;greater&#32;than&#32;SO_MAX_TRANS_PROC_NSEC,&#32;will&#32;be&#32;normalized\n&quot;</emphasis>));
+<anchor xml:id="_parser_8c_source_1l00186"/>00186 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1a19a5fe1068e3e1ceceab49114d856628">SO_MIN_TRANS_PROC_NSEC</link>&#32;=&#32;<link linkend="_master_8c_1a963935917aae796fbb8f2728703adf04">par</link>-&gt;<link linkend="_structparameters_1af7fbb0805dd6c4e1729d70a30164bc1c">SO_MAX_TRANS_PROC_NSEC</link>;
+<anchor xml:id="_parser_8c_source_1l00187"/>00187 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_parser_8c_source_1l00188"/>00188 
+<anchor xml:id="_parser_8c_source_1l00189"/>00189 &#32;&#32;&#32;&#32;<link linkend="_debug_8h_1a494d31903e7b0333dfa03b0778679113">TRACE</link>((<emphasis role="stringliteral">&quot;--------------------------------------------\n-----------&#32;Configuration&#32;input&#32;------------\n&quot;</emphasis>));
+<anchor xml:id="_parser_8c_source_1l00190"/>00190 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">for</emphasis>&#32;(i&#32;=&#32;0;&#32;i&#32;&lt;&#32;<link linkend="_parser_8h_1ae80c74b7cac856ec6868587f85c47427">NUM_PARAMETERS</link>;&#32;i++)
+<anchor xml:id="_parser_8c_source_1l00191"/>00191 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_parser_8c_source_1l00192"/>00192 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_debug_8h_1a494d31903e7b0333dfa03b0778679113">TRACE</link>((<emphasis role="stringliteral">&quot;%s&#32;%lu\n&quot;</emphasis>,&#32;tokens[i],&#32;values[i]));
+<anchor xml:id="_parser_8c_source_1l00193"/>00193 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;free(tokens[i]);
+<anchor xml:id="_parser_8c_source_1l00194"/>00194 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_parser_8c_source_1l00195"/>00195 &#32;&#32;&#32;&#32;<link linkend="_debug_8h_1a494d31903e7b0333dfa03b0778679113">TRACE</link>((<emphasis role="stringliteral">&quot;--------------------------------------------\n&quot;</emphasis>));
+<anchor xml:id="_parser_8c_source_1l00196"/>00196 
+<anchor xml:id="_parser_8c_source_1l00197"/>00197 &#32;&#32;&#32;&#32;fclose(fp);
+<anchor xml:id="_parser_8c_source_1l00198"/>00198 
+<anchor xml:id="_parser_8c_source_1l00199"/>00199 &#32;&#32;&#32;&#32;<emphasis role="keywordflow">return</emphasis>&#32;0;
+<anchor xml:id="_parser_8c_source_1l00200"/>00200 }
+</programlisting></section>

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.3" xml:lang="en-US">
+  <compounddef id="dir_313caf1132e152dd9b58bea13a4052ca" kind="dir">
+    <compoundname>src/utils</compoundname>
+    <innerfile refid="debug_8c">debug.c</innerfile>
+    <innerfile refid="debug_8h">debug.h</innerfile>
+    <innerfile refid="lists_8c">lists.c</innerfile>
+    <innerfile refid="lists_8h">lists.h</innerfile>
+    <innerfile refid="sem_8c">sem.c</innerfile>
+    <innerfile refid="sem_8h">sem.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/utils/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,272 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.9.3" xml:lang="en-US">
+  <compound refid="structblock__t" kind="struct"><name>block_t</name>
+    <member refid="structblock__t_1a75735b68381e6c25555bb53c163abfe9" kind="variable"><name>transList</name></member>
+    <member refid="structblock__t_1aa72742d9d7c1c8631aa36c0077f13b1d" kind="variable"><name>blockIndex</name></member>
+    <member refid="structblock__t_1a063b51ee50d55219236d2e4db6ce97a8" kind="variable"><name>next</name></member>
+    <member refid="structblock__t_1a203e7b65bebf69e2be0878ee3c322c0c" kind="variable"><name>prev</name></member>
+  </compound>
+  <compound refid="structledger__t" kind="struct"><name>ledger_t</name>
+    <member refid="structledger__t_1ae8b38edd17a3a5769aea3c05f4e2b432" kind="variable"><name>head</name></member>
+    <member refid="structledger__t_1a3687d896ad2d77106df256f1db753c18" kind="variable"><name>registryCurrSize</name></member>
+  </compound>
+  <compound refid="structmessage" kind="struct"><name>message</name>
+    <member refid="structmessage_1a6e71692f0e74d6cd516fa62386afcfb4" kind="variable"><name>mtype</name></member>
+    <member refid="structmessage_1a16b3f182630755c893589f24a779c143" kind="variable"><name>userTrans</name></member>
+  </compound>
+  <compound refid="structnode__t" kind="struct"><name>node_t</name>
+    <member refid="structnode__t_1adf764cbdea00d65edcd07bb9953ad2b7" kind="enum"><name>@1</name></member>
+    <member refid="structnode__t_1adf764cbdea00d65edcd07bb9953ad2b7a5d20e160566f0b85357fd5a3c87a985e" kind="enumvalue"><name>available</name></member>
+    <member refid="structnode__t_1adf764cbdea00d65edcd07bb9953ad2b7a0a601c9076b9914da4a237c8688b1c88" kind="enumvalue"><name>full</name></member>
+    <member refid="structnode__t_1ae0d46a978d5cd6707411f276ad869b9c" kind="variable"><name>pid</name></member>
+    <member refid="structnode__t_1a3298103f7912ec98c0f00205b2ac218d" kind="variable"><name>status</name></member>
+  </compound>
+  <compound refid="structparameters" kind="struct"><name>parameters</name>
+    <member refid="structparameters_1a1a7bfa0882f03d573b4e419d02f041f8" kind="variable"><name>SO_USER_NUM</name></member>
+    <member refid="structparameters_1a379d08051847c4f98268a27001b06261" kind="variable"><name>SO_NODES_NUM</name></member>
+    <member refid="structparameters_1a375c541a19818ce43b6ae275d0a80365" kind="variable"><name>SO_BUDGET_INIT</name></member>
+    <member refid="structparameters_1a1e8968a80441b4a641d5ff3566af04f1" kind="variable"><name>SO_REWARD</name></member>
+    <member refid="structparameters_1a213ccb7b7e150d7bf584f35cc824ead6" kind="variable"><name>SO_MIN_TRANS_GEN_NSEC</name></member>
+    <member refid="structparameters_1abca064afd6b392e1f9e24b5fda8cdecb" kind="variable"><name>SO_MAX_TRANS_GEN_NSEC</name></member>
+    <member refid="structparameters_1ac2861693c2d9121c5ecad90de2189690" kind="variable"><name>SO_RETRY</name></member>
+    <member refid="structparameters_1a8fe346ee9f21d4a40e15388b72579fbe" kind="variable"><name>SO_TP_SIZE</name></member>
+    <member refid="structparameters_1a19a5fe1068e3e1ceceab49114d856628" kind="variable"><name>SO_MIN_TRANS_PROC_NSEC</name></member>
+    <member refid="structparameters_1af7fbb0805dd6c4e1729d70a30164bc1c" kind="variable"><name>SO_MAX_TRANS_PROC_NSEC</name></member>
+    <member refid="structparameters_1a86c91cb21e43e2f92651c149f93f0dc5" kind="variable"><name>SO_SIM_SEC</name></member>
+    <member refid="structparameters_1a6d8f5bd80c3eda4ed6d9f2440f9105b2" kind="variable"><name>SO_FRIENDS_NUM</name></member>
+    <member refid="structparameters_1a85ca4a1c61f11babff7ccd10ec58ee70" kind="variable"><name>SO_HOPS</name></member>
+  </compound>
+  <compound refid="unionsemun" kind="union"><name>semun</name>
+    <member refid="unionsemun_1aa0ccb5ee6d882ee3605ff47745c6467b" kind="variable"><name>val</name></member>
+    <member refid="unionsemun_1abfe50c0b29f1681cd94b5b59650f9778" kind="variable"><name>buf</name></member>
+    <member refid="unionsemun_1aa1a8ce34333758f6f17d0c24136d287b" kind="variable"><name>array</name></member>
+    <member refid="unionsemun_1ae346309b7d595e3bdcefd759c34aa23f" kind="variable"><name>__buf</name></member>
+  </compound>
+  <compound refid="structtransaction__t" kind="struct"><name>transaction_t</name>
+    <member refid="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5" kind="enum"><name>@2</name></member>
+    <member refid="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5a6a6b4e7520e01adba9632dc9d9229e2f" kind="enumvalue"><name>pending</name></member>
+    <member refid="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5ac87aff6c8e5d399b301672280549ea3e" kind="enumvalue"><name>processing</name></member>
+    <member refid="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5ad6daa5d32ad2d7b003a0178c8eb07178" kind="enumvalue"><name>confirmed</name></member>
+    <member refid="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5aaf2b197bcf14794c85c5f313dab0ca31" kind="enumvalue"><name>aborted</name></member>
+    <member refid="structtransaction__t_1a2aace03835c4d951b3dee117b328ef87" kind="variable"><name>timestamp</name></member>
+    <member refid="structtransaction__t_1a36060e3785ebad7b278cb01d5159c0c5" kind="variable"><name>sender</name></member>
+    <member refid="structtransaction__t_1a3c01e8bf1e61ee67a25113f3db1a32b8" kind="variable"><name>receiver</name></member>
+    <member refid="structtransaction__t_1a14236de313193a14b4dbdf442bcf2bb9" kind="variable"><name>amount</name></member>
+    <member refid="structtransaction__t_1af571e76d8e59b8452f38407799272e4a" kind="variable"><name>reward</name></member>
+    <member refid="structtransaction__t_1a95a086466eb975b4da063388dd397dd3" kind="variable"><name>status</name></member>
+  </compound>
+  <compound refid="structuser__t" kind="struct"><name>user_t</name>
+    <member refid="structuser__t_1a06fc87d81c62e9abb8790b6e5713c55b" kind="enum"><name>@0</name></member>
+    <member refid="structuser__t_1a06fc87d81c62e9abb8790b6e5713c55bac188eabb2d61ddb1e8632280be9b0dd5" kind="enumvalue"><name>alive</name></member>
+    <member refid="structuser__t_1a06fc87d81c62e9abb8790b6e5713c55bab67cb4169c109061885309cc2199cbba" kind="enumvalue"><name>broke</name></member>
+    <member refid="structuser__t_1a06fc87d81c62e9abb8790b6e5713c55ba2bc11c916ebf99c8bd8b66b416de6d62" kind="enumvalue"><name>dead</name></member>
+    <member refid="structuser__t_1ae0d46a978d5cd6707411f276ad869b9c" kind="variable"><name>pid</name></member>
+    <member refid="structuser__t_1a2f25fcb4ca138820780f3fc6ee156d17" kind="variable"><name>status</name></member>
+  </compound>
+  <compound refid="common_8c" kind="file"><name>common.c</name>
+    <member refid="common_8c_1a92d436f484409e36c57caaa0b45ae9da" kind="function"><name>ledger_init</name></member>
+    <member refid="common_8c_1ab670b223f506d8bc9ee5286f6e37b1cd" kind="function"><name>new_block</name></member>
+    <member refid="common_8c_1a870e971fe7155d42f50beaa446dfd874" kind="function"><name>add_transaction_to_block</name></member>
+  </compound>
+  <compound refid="balance_8h" kind="file"><name>balance.h</name>
+    <member refid="balance_8h_1a7b4d059bad2052af60d26aa64718a219" kind="function"><name>balance</name></member>
+  </compound>
+  <compound refid="common_8h" kind="file"><name>common.h</name>
+    <member refid="common_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4" kind="define"><name>NULL</name></member>
+    <member refid="common_8h_1a369266c24eacffb87046522897a570d5" kind="define"><name>_GNU_SOURCE</name></member>
+    <member refid="common_8h_1a6242a25f9d996f0cc4f4cdb911218b75" kind="define"><name>ARRAY_SIZE</name></member>
+    <member refid="common_8h_1a0d7644a795aa2dd33f01ef184f3f672a" kind="define"><name>RAND</name></member>
+    <member refid="common_8h_1a8d3bb11cd2b49f5181b881aac93d069a" kind="define"><name>IPC_ERROR</name></member>
+    <member refid="common_8h_1a682c31ec4c2347e42bb80ea43ccb4438" kind="define"><name>SHM_PARAMETERS</name></member>
+    <member refid="common_8h_1a3baba14bf322fc6a6367f5ae6795d440" kind="define"><name>SHM_USERS_ARRAY</name></member>
+    <member refid="common_8h_1a55de6fde37952d6cbbf28f2ed2299ace" kind="define"><name>SHM_NODES_ARRAY</name></member>
+    <member refid="common_8h_1a5de1e6971273cfe0a7fdd4570401eb53" kind="define"><name>SHM_LEDGER</name></member>
+    <member refid="common_8h_1a1abb954531733b3c7b64d0d78a75df2a" kind="define"><name>SEM_MASTER</name></member>
+    <member refid="common_8h_1aa4f1eb96a74b0e784972e897bcead9ef" kind="define"><name>M_QUEUE_KEY</name></member>
+    <member refid="common_8h_1a320169181de72ba0b5203555e14103c4" kind="define"><name>SO_BLOCK_SIZE</name></member>
+    <member refid="common_8h_1aae9d8904fbca80e9986482d75e345f98" kind="define"><name>SO_REGISTRY_SIZE</name></member>
+    <member refid="common_8h_1a6233123742aa307f2a5ce737acca67f0" kind="define"><name>SELF</name></member>
+    <member refid="common_8h_1a0584f5b77b23fd251570a4c60806f8a9" kind="define"><name>EVERYONE_BROKE</name></member>
+    <member refid="common_8h_1abdb8ae9e0caeeaa6b02791a1991ec34e" kind="define"><name>USERS_PID_ARGV</name></member>
+    <member refid="common_8h_1aa26907b48e282ee32e55a0f21d90c651" kind="define"><name>NODES_PID_ARGV</name></member>
+    <member refid="common_8h_1a8dc6d4d682e4f826ef23717f1b28d60c" kind="define"><name>PARAMETERS_ARGV</name></member>
+    <member refid="common_8h_1acbabb34d7448290aade7aa93bb0c09ca" kind="define"><name>LEDGER_ARGV</name></member>
+    <member refid="common_8h_1a6b6ae98a167eeb9050cca5e9f9e5cf37" kind="define"><name>SEM_ID_ARGV</name></member>
+    <member refid="common_8h_1ae1712c33caea2a8ca5b5dcade31aab99" kind="define"><name>WENT_BROKE</name></member>
+    <member refid="common_8h_1a01c3892c16d6330e486637967ab0289b" kind="define"><name>MAX_RETRY</name></member>
+    <member refid="common_8h_1a8fe83ac76edc595f6b98cd4a4127aed5" kind="define"><name>ERROR</name></member>
+    <member refid="common_8h_1aa90cac659d18e8ef6294c7ae337f6b58" kind="define"><name>SUCCESS</name></member>
+    <member refid="common_8h_1a8251bcdfc5c83845e0834adf211de033" kind="define"><name>TEST_ERROR</name></member>
+    <member refid="common_8h_1a75285f7670649ccfb5ccbbc952a15bfd" kind="typedef"><name>user</name></member>
+    <member refid="common_8h_1a85b4f4124a5616dea92c9e8a221a8db5" kind="typedef"><name>node</name></member>
+    <member refid="common_8h_1a96717a5adf375b5328bde513e91bf658" kind="typedef"><name>transaction</name></member>
+    <member refid="common_8h_1acc02c32db194c6d92ce82de8c99eacbc" kind="typedef"><name>block</name></member>
+    <member refid="common_8h_1af8b2bdfa2bfa44284c83a9d6994b13f1" kind="typedef"><name>ledger</name></member>
+    <member refid="common_8h_1ad65a8842cc674e3ddf69355898c0ecbf" kind="variable"><name>errno</name></member>
+    <member refid="common_8h_1a92d436f484409e36c57caaa0b45ae9da" kind="function"><name>ledger_init</name></member>
+    <member refid="common_8h_1ab670b223f506d8bc9ee5286f6e37b1cd" kind="function"><name>new_block</name></member>
+    <member refid="common_8h_1a99970dbc1175970ecba0e7c5e03d2f84" kind="function"><name>add_block</name></member>
+    <member refid="common_8h_1aa0f3746a3fc31a06a45c8356c406b8aa" kind="function"><name>add_transaction_to_block</name></member>
+    <member refid="common_8h_1a8b859d92497767ee0f9608993b7157e9" kind="function"><name>add_block_to_ledger</name></member>
+    <member refid="common_8h_1a023050d658b039c99f82511175fbfdb9" kind="function"><name>find_transaction</name></member>
+    <member refid="common_8h_1a4751fd07d9dcd6444d3761b6e1398523" kind="function"><name>search_timestamp</name></member>
+    <member refid="common_8h_1ab17517bd1393b9e236afecac072a08c5" kind="function"><name>search_sender</name></member>
+    <member refid="common_8h_1a95cfd78671315484af4af4158c12349d" kind="function"><name>search_receiver</name></member>
+  </compound>
+  <compound refid="master_8h" kind="file"><name>master.h</name>
+    <member refid="master_8h_1a5798314bd3d030e33274ce05f522984f" kind="function"><name>make_arguments</name></member>
+    <member refid="master_8h_1a9f9715b418947b3d25eaa102b494b7eb" kind="function"><name>spawn_user</name></member>
+    <member refid="master_8h_1ac4c522e4371812b5b4e5fd7982c58dd3" kind="function"><name>spawn_node</name></member>
+    <member refid="master_8h_1af65ef707ebfa9cc135e6d466c75dbda8" kind="function"><name>shared_memory_objects_init</name></member>
+    <member refid="master_8h_1a808faa6034b867dc92c3878d95cec5d0" kind="function"><name>semaphores_init</name></member>
+    <member refid="master_8h_1af39360a8f6b9dda80c2adfe9f456f75e" kind="function"><name>make_ipc_array</name></member>
+    <member refid="master_8h_1a6732beb5ef32cd411a23cf0d8c915e37" kind="function"><name>master_interrupt_handle</name></member>
+  </compound>
+  <compound refid="nodes_8h" kind="file"><name>nodes.h</name>
+    <member refid="nodes_8h_1a3a6bc37f09273282c75d2fcc8b27f09e" kind="variable"><name>randSleepTime</name></member>
+    <member refid="nodes_8h_1a45ff1b670dbcc1a3ff3c2657aba0b66b" kind="variable"><name>sleepTimeRemaining</name></member>
+  </compound>
+  <compound refid="parser_8h" kind="file"><name>parser.h</name>
+    <member refid="parser_8h_1ae80c74b7cac856ec6868587f85c47427" kind="define"><name>NUM_PARAMETERS</name></member>
+    <member refid="parser_8h_1a2b53ff59ad6fe7d737de442d3dfe0634" kind="define"><name>CONF_FILE</name></member>
+    <member refid="parser_8h_1ad223dab1d6a66f81b6b0c6c268a19a3f" kind="define"><name>CONF_ERROR</name></member>
+    <member refid="parser_8h_1aa51f83495fd93bbb234b08030216c91a" kind="function"><name>parse_parameters</name></member>
+    <member refid="parser_8h_1aa4f4f74bc94c9506ecdce2e5b3ef35df" kind="function"><name>assign_defaults</name></member>
+  </compound>
+  <compound refid="print_8h" kind="file"><name>print.h</name>
+    <member refid="print_8h_1abba0d38395714b105fe448566b916b24" kind="function"><name>print_time_to_die</name></member>
+    <member refid="print_8h_1a34b8fcde9a89e8e5f9c0571f30fd55c4" kind="function"><name>print_user_nodes_table</name></member>
+    <member refid="print_8h_1a5360a76a02aff83178fa550d60c3d464" kind="function"><name>print_kill_signal</name></member>
+    <member refid="print_8h_1a859f47c0058e4d60975aff4750031a82" kind="function"><name>print_user_balance</name></member>
+    <member refid="print_8h_1ae96b17109a900709ef5355bc84720e9c" kind="function"><name>print_node_balance</name></member>
+    <member refid="print_8h_1a153f1f994e981d23912535871cb742bb" kind="function"><name>print_num_aborted</name></member>
+    <member refid="print_8h_1a692dfc8fc42a6b304aa4aa200bba4186" kind="function"><name>print_num_blocks</name></member>
+    <member refid="print_8h_1ad4abfc9577091b1339716d5a34ef57cb" kind="function"><name>print_transactions_still_in_pool</name></member>
+    <member refid="print_8h_1a3210b536ef064414b1736cd2e9b7d3bd" kind="function"><name>final_print</name></member>
+    <member refid="print_8h_1a7632b11ea6036c833f5c2cd3cd0bb087" kind="function"><name>print_parameters</name></member>
+    <member refid="print_8h_1a0adafcfb5ee991d673e8c71c84f0d4da" kind="function"><name>print_block</name></member>
+    <member refid="print_8h_1a0d2d8efd9ece9ba96b0a15b7d471c3bc" kind="function"><name>print_transaction</name></member>
+    <member refid="print_8h_1ab1c0c4107a8f068374cff27e2997f0f7" kind="function"><name>print_ledger</name></member>
+    <member refid="print_8h_1a694b7105f14c48043dbf079031abd5be" kind="function"><name>formatted_timestamp</name></member>
+  </compound>
+  <compound refid="users_8h" kind="file"><name>users.h</name>
+    <member refid="users_8h_1a42693010975aeff6d524880e8ca2c717" kind="define"><name>SLEEP_TIME_SET</name></member>
+    <member refid="users_8h_1a44e89d523436fcbbf2c56e4fb335d509" kind="define"><name>SLEEP</name></member>
+    <member refid="users_8h_1a2419f7ac6a2d2282e04a8535b4b5c2f9" kind="function"><name>user_transactions_handle</name></member>
+    <member refid="users_8h_1a9aab3bf870349762f604cebd8633aea5" kind="function"><name>user_interrupt_handle</name></member>
+    <member refid="users_8h_1a7f41cf6401b33c2055d553d8315decaa" kind="function"><name>get_pid_userIndex</name></member>
+    <member refid="users_8h_1aaf15d0912c5fa42321118d1c652551d2" kind="function"><name>get_random_userPID</name></member>
+    <member refid="users_8h_1a7a26cf1c5a9c15d42c4f3caeaa179b0e" kind="function"><name>get_random_nodePID</name></member>
+    <member refid="users_8h_1a9cceef0ffc7483e71c1cc4652a05cc1c" kind="function"><name>queue_to_pid</name></member>
+    <member refid="users_8h_1a1e2d07708f3abf72150e65545e8bef23" kind="function"><name>transaction_init</name></member>
+    <member refid="users_8h_1af881b5c5f39090e7fc6c5c5d6630c7cb" kind="function"><name>send_transaction</name></member>
+  </compound>
+  <compound refid="master_8c" kind="file"><name>master.c</name>
+    <member refid="master_8c_1a153c8fd37ad2953f8ea58a227f97eb9d" kind="define"><name>SHM_NUM</name></member>
+    <member refid="master_8c_1a337d58ae606f3a5ec19972a7cbc4348f" kind="define"><name>SEM_NUM</name></member>
+    <member refid="master_8c_1a7c551e7044ac9e4c3b9bd15add5824f5" kind="define"><name>IPC_NUM</name></member>
+    <member refid="master_8c_1af55e8c51eb649983dc307ddf43a46ee6" kind="define"><name>USER_NAME</name></member>
+    <member refid="master_8c_1a8cc8d559acdd2f74085b20977182d5b7" kind="define"><name>NODE_NAME</name></member>
+    <member refid="master_8c_1a963935917aae796fbb8f2728703adf04" kind="variable"><name>par</name></member>
+    <member refid="master_8c_1af667a518a4feef7b7540ebac0cd618cf" kind="variable"><name>usersPID</name></member>
+    <member refid="master_8c_1a803b35477f039b41487c3b1abee12b80" kind="variable"><name>nodesPID</name></member>
+    <member refid="master_8c_1a61246e5e608d3240fbbee97c978af351" kind="variable"><name>mainLedger</name></member>
+    <member refid="master_8c_1ae520355298e7bac453a556eeab7df45f" kind="variable"><name>semID</name></member>
+    <member refid="master_8c_1a0a7e9839ec9892b7a45bcc5fa69dd988" kind="function"><name>make_arguments</name></member>
+    <member refid="master_8c_1ae58c1750af2fc1502557fa91b9258315" kind="function"><name>spawn_user</name></member>
+    <member refid="master_8c_1ab9c901d29850514f861a3760fffd505f" kind="function"><name>spawn_node</name></member>
+    <member refid="master_8c_1a402674278f054cd8161d84815dcdd7cc" kind="function"><name>shared_memory_objects_init</name></member>
+    <member refid="master_8c_1a808faa6034b867dc92c3878d95cec5d0" kind="function"><name>semaphores_init</name></member>
+    <member refid="master_8c_1ac58bbbc0433b1fd55eff29fd2040e88c" kind="function"><name>make_ipc_array</name></member>
+    <member refid="master_8c_1a6732beb5ef32cd411a23cf0d8c915e37" kind="function"><name>master_interrupt_handle</name></member>
+    <member refid="master_8c_1a0ddf1224851353fc92bfbff6f499fa97" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="nodes_8c" kind="file"><name>nodes.c</name>
+    <member refid="nodes_8c_1a963935917aae796fbb8f2728703adf04" kind="variable"><name>par</name></member>
+    <member refid="nodes_8c_1af667a518a4feef7b7540ebac0cd618cf" kind="variable"><name>usersPID</name></member>
+    <member refid="nodes_8c_1a803b35477f039b41487c3b1abee12b80" kind="variable"><name>nodesPID</name></member>
+    <member refid="nodes_8c_1a61246e5e608d3240fbbee97c978af351" kind="variable"><name>mainLedger</name></member>
+    <member refid="nodes_8c_1ae520355298e7bac453a556eeab7df45f" kind="variable"><name>semID</name></member>
+    <member refid="nodes_8c_1abba475816ec0c77dd5821e7fa9ab4207" kind="variable"><name>queueID</name></member>
+    <member refid="nodes_8c_1af97c23712a0bab92e0ca95694e85282e" kind="variable"><name>myPID</name></member>
+    <member refid="nodes_8c_1a0ddf1224851353fc92bfbff6f499fa97" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="parser_8c" kind="file"><name>parser.c</name>
+    <member refid="parser_8c_1aa4f4f74bc94c9506ecdce2e5b3ef35df" kind="function"><name>assign_defaults</name></member>
+    <member refid="parser_8c_1aa51f83495fd93bbb234b08030216c91a" kind="function"><name>parse_parameters</name></member>
+  </compound>
+  <compound refid="print_8c" kind="file"><name>print.c</name>
+    <member refid="print_8c_1abba0d38395714b105fe448566b916b24" kind="function"><name>print_time_to_die</name></member>
+    <member refid="print_8c_1ac04c3524bda40db9d223b33d141accee" kind="function"><name>print_user_nodes_table</name></member>
+    <member refid="print_8c_1a5360a76a02aff83178fa550d60c3d464" kind="function"><name>print_kill_signal</name></member>
+    <member refid="print_8c_1a859f47c0058e4d60975aff4750031a82" kind="function"><name>print_user_balance</name></member>
+    <member refid="print_8c_1ae96b17109a900709ef5355bc84720e9c" kind="function"><name>print_node_balance</name></member>
+    <member refid="print_8c_1a153f1f994e981d23912535871cb742bb" kind="function"><name>print_num_aborted</name></member>
+    <member refid="print_8c_1a692dfc8fc42a6b304aa4aa200bba4186" kind="function"><name>print_num_blocks</name></member>
+    <member refid="print_8c_1ad4abfc9577091b1339716d5a34ef57cb" kind="function"><name>print_transactions_still_in_pool</name></member>
+    <member refid="print_8c_1a3210b536ef064414b1736cd2e9b7d3bd" kind="function"><name>final_print</name></member>
+    <member refid="print_8c_1a7632b11ea6036c833f5c2cd3cd0bb087" kind="function"><name>print_parameters</name></member>
+    <member refid="print_8c_1a0d2d8efd9ece9ba96b0a15b7d471c3bc" kind="function"><name>print_transaction</name></member>
+    <member refid="print_8c_1a0adafcfb5ee991d673e8c71c84f0d4da" kind="function"><name>print_block</name></member>
+    <member refid="print_8c_1ab1c0c4107a8f068374cff27e2997f0f7" kind="function"><name>print_ledger</name></member>
+    <member refid="print_8c_1a694b7105f14c48043dbf079031abd5be" kind="function"><name>formatted_timestamp</name></member>
+  </compound>
+  <compound refid="users_8c" kind="file"><name>users.c</name>
+    <member refid="users_8c_1a6552301543b6d6d55cb62f88d40300a0" kind="define"><name>REWARD</name></member>
+    <member refid="users_8c_1a963935917aae796fbb8f2728703adf04" kind="variable"><name>par</name></member>
+    <member refid="users_8c_1af667a518a4feef7b7540ebac0cd618cf" kind="variable"><name>usersPID</name></member>
+    <member refid="users_8c_1a803b35477f039b41487c3b1abee12b80" kind="variable"><name>nodesPID</name></member>
+    <member refid="users_8c_1a61246e5e608d3240fbbee97c978af351" kind="variable"><name>mainLedger</name></member>
+    <member refid="users_8c_1ae520355298e7bac453a556eeab7df45f" kind="variable"><name>semID</name></member>
+    <member refid="users_8c_1abba475816ec0c77dd5821e7fa9ab4207" kind="variable"><name>queueID</name></member>
+    <member refid="users_8c_1a2ac06e48b5c5d403186f052dbefc3fe7" kind="variable"><name>currBalance</name></member>
+    <member refid="users_8c_1af97c23712a0bab92e0ca95694e85282e" kind="variable"><name>myPID</name></member>
+    <member refid="users_8c_1af230afc0b56da7230ff9dacabbac1e25" kind="variable"><name>outGoingTransactions</name></member>
+    <member refid="users_8c_1ad315771a76938636b622d7af42c8afd7" kind="variable"><name>currTrans</name></member>
+    <member refid="users_8c_1a7f41cf6401b33c2055d553d8315decaa" kind="function"><name>get_pid_userIndex</name></member>
+    <member refid="users_8c_1aaf15d0912c5fa42321118d1c652551d2" kind="function"><name>get_random_userPID</name></member>
+    <member refid="users_8c_1a7a26cf1c5a9c15d42c4f3caeaa179b0e" kind="function"><name>get_random_nodePID</name></member>
+    <member refid="users_8c_1a959cd23eec8cbe2e56f5cc915e24ec2b" kind="function"><name>update_status</name></member>
+    <member refid="users_8c_1add037018869db8fbc785a9e0b24dd020" kind="function"><name>attach_ipc_objects</name></member>
+    <member refid="users_8c_1a9cceef0ffc7483e71c1cc4652a05cc1c" kind="function"><name>queue_to_pid</name></member>
+    <member refid="users_8c_1aad9c23bdb64131e376665a8dd7085f9b" kind="function"><name>transaction_init</name></member>
+    <member refid="users_8c_1a54d1d8f51781e0b3c58e16d3e04f2f74" kind="function"><name>signal_handlers_init</name></member>
+    <member refid="users_8c_1af881b5c5f39090e7fc6c5c5d6630c7cb" kind="function"><name>send_transaction</name></member>
+    <member refid="users_8c_1a2419f7ac6a2d2282e04a8535b4b5c2f9" kind="function"><name>user_transactions_handle</name></member>
+    <member refid="users_8c_1a9aab3bf870349762f604cebd8633aea5" kind="function"><name>user_interrupt_handle</name></member>
+    <member refid="users_8c_1a0ddf1224851353fc92bfbff6f499fa97" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="debug_8c" kind="file"><name>debug.c</name>
+    <member refid="debug_8c_1ad9dde2c4e4def50c7e04145a08a59f6f" kind="function"><name>dbg_printf</name></member>
+  </compound>
+  <compound refid="debug_8h" kind="file"><name>debug.h</name>
+    <member refid="debug_8h_1a494d31903e7b0333dfa03b0778679113" kind="define"><name>TRACE</name></member>
+    <member refid="debug_8h_1ad9dde2c4e4def50c7e04145a08a59f6f" kind="function"><name>dbg_printf</name></member>
+  </compound>
+  <compound refid="lists_8c" kind="file"><name>lists.c</name>
+  </compound>
+  <compound refid="lists_8h" kind="file"><name>lists.h</name>
+  </compound>
+  <compound refid="sem_8c" kind="file"><name>sem.c</name>
+    <member refid="sem_8c_1a8251bcdfc5c83845e0834adf211de033" kind="define"><name>TEST_ERROR</name></member>
+    <member refid="sem_8c_1ad65a8842cc674e3ddf69355898c0ecbf" kind="variable"><name>errno</name></member>
+    <member refid="sem_8c_1a69c382a53528227d1164f00a6e6e6d49" kind="function"><name>sem_set_val</name></member>
+    <member refid="sem_8c_1a8a9bfe4b1b46fa8a09858b192d6e8764" kind="function"><name>sem_reserve</name></member>
+    <member refid="sem_8c_1a3fbb448c9f985007f6030b3927357b5c" kind="function"><name>sem_release</name></member>
+    <member refid="sem_8c_1a8f04187bfc8f247398ab8ba5d7bdd196" kind="function"><name>sem_getall</name></member>
+  </compound>
+  <compound refid="sem_8h" kind="file"><name>sem.h</name>
+    <member refid="sem_8h_1a0376b2ead2de10bb7ab6a4d21ec304e9" kind="define"><name>LOCK</name></member>
+    <member refid="sem_8h_1ac82effb31e82e32254efc8b57251d59e" kind="define"><name>UNLOCK</name></member>
+    <member refid="sem_8h_1a69c382a53528227d1164f00a6e6e6d49" kind="function"><name>sem_set_val</name></member>
+    <member refid="sem_8h_1a8a9bfe4b1b46fa8a09858b192d6e8764" kind="function"><name>sem_reserve</name></member>
+    <member refid="sem_8h_1a3fbb448c9f985007f6030b3927357b5c" kind="function"><name>sem_release</name></member>
+    <member refid="sem_8h_1a8f04187bfc8f247398ab8ba5d7bdd196" kind="function"><name>sem_getall</name></member>
+  </compound>
+  <compound refid="dir_b0856f6b0d80ccb263b2f415c91f9e17" kind="dir"><name>src/include</name>
+  </compound>
+  <compound refid="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir"><name>src</name>
+  </compound>
+  <compound refid="dir_313caf1132e152dd9b58bea13a4052ca" kind="dir"><name>src/utils</name>
+  </compound>
+</doxygenindex>

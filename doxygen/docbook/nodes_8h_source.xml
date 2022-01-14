@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_nodes_8h_source" xml:lang="en-US">
+<title>nodes.h</title>
+<indexterm><primary>src/include/nodes.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_nodes_8h_source_1l00001"/><link linkend="_nodes_8h_1a3a6bc37f09273282c75d2fcc8b27f09e">00001</link> <emphasis role="keyword">struct&#32;</emphasis>timespec&#32;<link linkend="_nodes_8h_1a3a6bc37f09273282c75d2fcc8b27f09e">randSleepTime</link>;
+<anchor xml:id="_nodes_8h_source_1l00002"/><link linkend="_nodes_8h_1a45ff1b670dbcc1a3ff3c2657aba0b66b">00002</link> <emphasis role="keyword">struct&#32;</emphasis>timespec&#32;<link linkend="_nodes_8h_1a45ff1b670dbcc1a3ff3c2657aba0b66b">sleepTimeRemaining</link>;
+</programlisting></section>

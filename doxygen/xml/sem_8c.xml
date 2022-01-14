@@ -1,0 +1,268 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.3" xml:lang="en-US">
+  <compounddef id="sem_8c" kind="file" language="C++">
+    <compoundname>sem.c</compoundname>
+    <includes refid="sem_8h" local="yes">sem.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>src/utils/sem.c</label>
+        <link refid="sem_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>sem.h</label>
+        <link refid="sem_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>errno.h</label>
+      </node>
+      <node id="7">
+        <label>stdio.h</label>
+      </node>
+      <node id="8">
+        <label>stdlib.h</label>
+      </node>
+      <node id="6">
+        <label>string.h</label>
+      </node>
+      <node id="4">
+        <label>sys/ipc.h</label>
+      </node>
+      <node id="5">
+        <label>sys/sem.h</label>
+      </node>
+      <node id="3">
+        <label>sys/types.h</label>
+      </node>
+      <node id="10">
+        <label>unistd.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="sem_8c_1a8251bcdfc5c83845e0834adf211de033" prot="public" static="no">
+        <name>TEST_ERROR</name>
+        <initializer>    if (<ref refid="sem_8c_1ad65a8842cc674e3ddf69355898c0ecbf" kindref="member">errno</ref>)                                     \
+    {                                              \
+        fprintf(stderr,                            \
+                &quot;%s:%d: PID=%5d: Error %d (%s)\n&quot;, \
+                __FILE__,                          \
+                __LINE__,                          \
+                getpid(),                          \
+                <ref refid="sem_8c_1ad65a8842cc674e3ddf69355898c0ecbf" kindref="member">errno</ref>,                             \
+                strerror(<ref refid="sem_8c_1ad65a8842cc674e3ddf69355898c0ecbf" kindref="member">errno</ref>));                  \
+    }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/sem.c" line="4" column="9" bodyfile="src/utils/sem.c" bodystart="4" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="sem_8c_1ad65a8842cc674e3ddf69355898c0ecbf" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int errno</definition>
+        <argsstring></argsstring>
+        <name>errno</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/sem.c" line="17" column="5" bodyfile="src/utils/sem.c" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="sem_8c_1a69c382a53528227d1164f00a6e6e6d49" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int sem_set_val</definition>
+        <argsstring>(int sem_id, int sem_num, int sem_val)</argsstring>
+        <name>sem_set_val</name>
+        <param>
+          <type>int</type>
+          <declname>sem_id</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>sem_num</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>sem_val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/sem.c" line="20" column="5" bodyfile="src/utils/sem.c" bodystart="20" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="sem_8c_1a8a9bfe4b1b46fa8a09858b192d6e8764" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int sem_reserve</definition>
+        <argsstring>(int sem_id, int sem_num)</argsstring>
+        <name>sem_reserve</name>
+        <param>
+          <type>int</type>
+          <declname>sem_id</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>sem_num</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/sem.c" line="26" column="5" bodyfile="src/utils/sem.c" bodystart="26" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="sem_8c_1a3fbb448c9f985007f6030b3927357b5c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int sem_release</definition>
+        <argsstring>(int sem_id, int sem_num)</argsstring>
+        <name>sem_release</name>
+        <param>
+          <type>int</type>
+          <declname>sem_id</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>sem_num</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/sem.c" line="37" column="5" bodyfile="src/utils/sem.c" bodystart="37" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="sem_8c_1a8f04187bfc8f247398ab8ba5d7bdd196" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int sem_getall</definition>
+        <argsstring>(char *my_string, int sem_id)</argsstring>
+        <name>sem_getall</name>
+        <param>
+          <type>char *</type>
+          <declname>my_string</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>sem_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/utils/sem.c" line="49" column="5" bodyfile="src/utils/sem.c" bodystart="49" bodyend="75"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;<ref refid="sem_8h" kindref="compound">sem.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>TEST_ERROR</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4" refid="sem_8c_1a8251bcdfc5c83845e0834adf211de033" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TEST_ERROR<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="5"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>if<sp/>(errno)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="6"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="7"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(stderr,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="8"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&quot;%s:%d:<sp/>PID=%5d:<sp/>Error<sp/>%d<sp/>(%s)\n&quot;</highlight><highlight class="normal">,<sp/>\</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>__FILE__,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>__LINE__,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>getpid(),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>errno,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>strerror(errno));<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="common_8h_1ad65a8842cc674e3ddf69355898c0ecbf" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="sem_8c_1ad65a8842cc674e3ddf69355898c0ecbf" kindref="member">errno</ref>;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Set<sp/>a<sp/>semaphore<sp/>to<sp/>a<sp/>user<sp/>defined<sp/>value<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="sem_8c_1a69c382a53528227d1164f00a6e6e6d49" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="sem_8c_1a69c382a53528227d1164f00a6e6e6d49" kindref="member">sem_set_val</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>sem_id,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>sem_num,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>sem_val)</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>semctl(sem_id,<sp/>sem_num,<sp/>SETVAL,<sp/>sem_val);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Try<sp/>to<sp/>access<sp/>the<sp/>resource<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26" refid="sem_8c_1a8a9bfe4b1b46fa8a09858b192d6e8764" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="sem_8c_1a8a9bfe4b1b46fa8a09858b192d6e8764" kindref="member">sem_reserve</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>sem_id,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>sem_num)</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">sembuf<sp/>sops;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>sops.sem_num<sp/>=<sp/>sem_num;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>sops.sem_op<sp/>=<sp/>-1;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>sops.sem_flg<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>semop(sem_id,<sp/>&amp;sops,<sp/>1);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Release<sp/>the<sp/>resource<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="sem_8c_1a3fbb448c9f985007f6030b3927357b5c" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="sem_8c_1a3fbb448c9f985007f6030b3927357b5c" kindref="member">sem_release</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>sem_id,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>sem_num)</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">sembuf<sp/>sops;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>sops.sem_num<sp/>=<sp/>sem_num;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>sops.sem_op<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>sops.sem_flg<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>semop(sem_id,<sp/>&amp;sops,<sp/>1);</highlight></codeline>
+<codeline lineno="46"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Print<sp/>all<sp/>semaphore<sp/>values<sp/>to<sp/>a<sp/>string<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49" refid="sem_8c_1a8f04187bfc8f247398ab8ba5d7bdd196" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="sem_8c_1a8f04187bfc8f247398ab8ba5d7bdd196" kindref="member">sem_getall</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*my_string,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>sem_id)</highlight></codeline>
+<codeline lineno="50"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">union<sp/></highlight><highlight class="normal"><ref refid="unionsemun" kindref="compound">semun</ref><sp/>arg;<sp/></highlight><highlight class="comment">/*<sp/>man<sp/>semctl<sp/>per<sp/>vedere<sp/>def<sp/>della<sp/>union<sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">short</highlight><highlight class="normal"><sp/>*sem_vals,<sp/>i;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>num_sem;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>cur_str[10];</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">semid_ds<sp/>my_ds;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Get<sp/>the<sp/>number<sp/>of<sp/>semaphores<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>arg.<ref refid="unionsemun_1abfe50c0b29f1681cd94b5b59650f9778" kindref="member">buf</ref><sp/>=<sp/>&amp;my_ds;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>semctl(sem_id,<sp/>0,<sp/>IPC_STAT,<sp/>arg);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="sem_8c_1a8251bcdfc5c83845e0834adf211de033" kindref="member">TEST_ERROR</ref>;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>num_sem<sp/>=<sp/>arg.<ref refid="unionsemun_1abfe50c0b29f1681cd94b5b59650f9778" kindref="member">buf</ref>-&gt;sem_nsems;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Get<sp/>the<sp/>values<sp/>of<sp/>all<sp/>semaphores<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>sem_vals<sp/>=<sp/>malloc(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(*sem_vals)<sp/>*<sp/>num_sem);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>arg.<ref refid="unionsemun_1aa1a8ce34333758f6f17d0c24136d287b" kindref="member">array</ref><sp/>=<sp/>sem_vals;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>semctl(sem_id,<sp/>0,<sp/>GETALL,<sp/>arg);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Initialize<sp/>the<sp/>string.<sp/>MUST<sp/>be<sp/>allocated<sp/>by<sp/>the<sp/>caller<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>my_string[0]<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>num_sem;<sp/>i++)</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sprintf(cur_str,<sp/></highlight><highlight class="stringliteral">&quot;%d<sp/>&quot;</highlight><highlight class="normal">,<sp/>sem_vals[i]);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>strcat(my_string,<sp/>cur_str);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="75"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/utils/sem.c"/>
+  </compounddef>
+</doxygen>

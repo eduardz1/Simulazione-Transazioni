@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_dir_b0856f6b0d80ccb263b2f415c91f9e17" xml:lang="en-US">
+<title>src/include Directory Reference</title>
+<indexterm><primary>src/include Directory Reference</primary></indexterm>
+Directory dependency graph for include:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="dir_b0856f6b0d80ccb263b2f415c91f9e17_dep.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Files    </title>
+        <itemizedlist>
+            <listitem><para>file <link linkend="_balance_8h">balance.h</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_common_8h">common.h</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_master_8h">master.h</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_nodes_8h">nodes.h</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_parser_8h">parser.h</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_print_8h">print.h</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_users_8h">users.h</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

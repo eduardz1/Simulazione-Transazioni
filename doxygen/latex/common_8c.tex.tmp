@@ -1,0 +1,47 @@
+\hypertarget{common_8c}{}\doxysection{src/common.c File Reference}
+\label{common_8c}\index{src/common.c@{src/common.c}}
+{\ttfamily \#include \char`\"{}include/common.\+h\char`\"{}}\newline
+Include dependency graph for common.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{common_8h_af8b2bdfa2bfa44284c83a9d6994b13f1}{ledger}} $\ast$ \mbox{\hyperlink{common_8c_a92d436f484409e36c57caaa0b45ae9da}{ledger\+\_\+init}} ()
+\item 
+\mbox{\hyperlink{common_8h_acc02c32db194c6d92ce82de8c99eacbc}{block}} $\ast$ \mbox{\hyperlink{common_8c_ab670b223f506d8bc9ee5286f6e37b1cd}{new\+\_\+block}} ()
+\item 
+void \mbox{\hyperlink{common_8c_a870e971fe7155d42f50beaa446dfd874}{add\+\_\+transaction\+\_\+to\+\_\+block}} (\mbox{\hyperlink{common_8h_acc02c32db194c6d92ce82de8c99eacbc}{block}} $\ast$\mbox{\hyperlink{common_8h_acc02c32db194c6d92ce82de8c99eacbc}{block}}, \mbox{\hyperlink{common_8h_a96717a5adf375b5328bde513e91bf658}{transaction}} $\ast$new\+Trans, int index)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{common_8c_a870e971fe7155d42f50beaa446dfd874}\label{common_8c_a870e971fe7155d42f50beaa446dfd874}} 
+\index{common.c@{common.c}!add\_transaction\_to\_block@{add\_transaction\_to\_block}}
+\index{add\_transaction\_to\_block@{add\_transaction\_to\_block}!common.c@{common.c}}
+\doxysubsubsection{\texorpdfstring{add\_transaction\_to\_block()}{add\_transaction\_to\_block()}}
+{\footnotesize\ttfamily void add\+\_\+transaction\+\_\+to\+\_\+block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{common_8h_acc02c32db194c6d92ce82de8c99eacbc}{block}} $\ast$}]{block,  }\item[{\mbox{\hyperlink{common_8h_a96717a5adf375b5328bde513e91bf658}{transaction}} $\ast$}]{new\+Trans,  }\item[{int}]{index }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{common_8c_source_l00046}{46}} of file \mbox{\hyperlink{common_8c_source}{common.\+c}}.
+
+\mbox{\Hypertarget{common_8c_a92d436f484409e36c57caaa0b45ae9da}\label{common_8c_a92d436f484409e36c57caaa0b45ae9da}} 
+\index{common.c@{common.c}!ledger\_init@{ledger\_init}}
+\index{ledger\_init@{ledger\_init}!common.c@{common.c}}
+\doxysubsubsection{\texorpdfstring{ledger\_init()}{ledger\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{common_8h_af8b2bdfa2bfa44284c83a9d6994b13f1}{ledger}} $\ast$ ledger\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{common_8c_source_l00003}{3}} of file \mbox{\hyperlink{common_8c_source}{common.\+c}}.
+
+\mbox{\Hypertarget{common_8c_ab670b223f506d8bc9ee5286f6e37b1cd}\label{common_8c_ab670b223f506d8bc9ee5286f6e37b1cd}} 
+\index{common.c@{common.c}!new\_block@{new\_block}}
+\index{new\_block@{new\_block}!common.c@{common.c}}
+\doxysubsubsection{\texorpdfstring{new\_block()}{new\_block()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{common_8h_acc02c32db194c6d92ce82de8c99eacbc}{block}} $\ast$ new\+\_\+block (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{common_8c_source_l00024}{24}} of file \mbox{\hyperlink{common_8c_source}{common.\+c}}.
+

@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.3" xml:lang="en-US">
+  <compounddef id="nodes_8h" kind="file" language="C++">
+    <compoundname>nodes.h</compoundname>
+    <includedby refid="nodes_8c" local="yes">src/nodes.c</includedby>
+    <invincdepgraph>
+      <node id="1">
+        <label>src/include/nodes.h</label>
+        <link refid="nodes_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>src/nodes.c</label>
+        <link refid="nodes_8c"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="nodes_8h_1a3a6bc37f09273282c75d2fcc8b27f09e" prot="public" static="no" mutable="no">
+        <type>struct timespec</type>
+        <definition>struct timespec randSleepTime</definition>
+        <argsstring></argsstring>
+        <name>randSleepTime</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/nodes.h" line="1" column="15" bodyfile="src/include/nodes.h" bodystart="1" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nodes_8h_1a45ff1b670dbcc1a3ff3c2657aba0b66b" prot="public" static="no" mutable="no">
+        <type>struct timespec</type>
+        <definition>struct timespec sleepTimeRemaining</definition>
+        <argsstring></argsstring>
+        <name>sleepTimeRemaining</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/nodes.h" line="2" column="15" bodyfile="src/include/nodes.h" bodystart="2" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1" refid="nodes_8h_1a3a6bc37f09273282c75d2fcc8b27f09e" refkind="member"><highlight class="keyword">struct<sp/></highlight><highlight class="normal">timespec<sp/><ref refid="nodes_8h_1a3a6bc37f09273282c75d2fcc8b27f09e" kindref="member">randSleepTime</ref>;</highlight></codeline>
+<codeline lineno="2" refid="nodes_8h_1a45ff1b670dbcc1a3ff3c2657aba0b66b" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">timespec<sp/><ref refid="nodes_8h_1a45ff1b670dbcc1a3ff3c2657aba0b66b" kindref="member">sleepTimeRemaining</ref>;</highlight></codeline>
+    </programlisting>
+    <location file="src/include/nodes.h"/>
+  </compounddef>
+</doxygen>

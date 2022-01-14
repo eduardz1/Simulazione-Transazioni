@@ -1,0 +1,55 @@
+\hypertarget{common_8c_source}{}\doxysection{common.\+c}
+\label{common_8c_source}\index{src/common.c@{src/common.c}}
+\mbox{\hyperlink{common_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00001}00001 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{common_8h}{include/common.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00002}00002 }
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00003}\mbox{\hyperlink{common_8c_a92d436f484409e36c57caaa0b45ae9da}{00003}} \mbox{\hyperlink{structledger__t}{ledger}} *\mbox{\hyperlink{common_8c_a92d436f484409e36c57caaa0b45ae9da}{ledger\_init}}()}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00004}00004 \{}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00005}00005     \mbox{\hyperlink{structledger__t}{ledger}} *newLedger;}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00006}00006     \textcolor{keywordtype}{int} shmID; \textcolor{comment}{/* ID of "{}ledger"{} shared memory segment */}}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00008}00008     \textcolor{comment}{/* -\/-\/ LEDGER INITIALIZATION -\/-\/}}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00009}00009 \textcolor{comment}{     * save the ID of our new (IPC\_PRIVATE) shared memory segment of size -\/ledger-\/}}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00010}00010 \textcolor{comment}{     * smctl will deallocate the shared memory segment only when every process detaches it}}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00011}00011 \textcolor{comment}{     * tells OS that ledger of type ledger is our shared memory of shmID}}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00012}00012 \textcolor{comment}{     */}}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00013}00013     shmID = shmget(IPC\_PRIVATE, \textcolor{keyword}{sizeof}(newLedger), 0600);}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00014}00014     shmctl(shmID, IPC\_RMID, \mbox{\hyperlink{common_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}});}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00015}00015 }
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00016}00016     newLedger-\/>\mbox{\hyperlink{structledger__t_ae8b38edd17a3a5769aea3c05f4e2b432}{head}} = \mbox{\hyperlink{common_8c_ab670b223f506d8bc9ee5286f6e37b1cd}{new\_block}}();}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00017}00017     newLedger-\/>\mbox{\hyperlink{structledger__t_a3687d896ad2d77106df256f1db753c18}{registryCurrSize}} = 1;}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00018}00018 }
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00019}00019     newLedger = (\mbox{\hyperlink{structledger__t}{ledger}} *)shmat(shmID, \mbox{\hyperlink{common_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}}, 0);}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00020}00020 }
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00021}00021     \textcolor{keywordflow}{return} newLedger;}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00022}00022 \}}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00024}\mbox{\hyperlink{common_8c_ab670b223f506d8bc9ee5286f6e37b1cd}{00024}} \mbox{\hyperlink{structblock__t}{block}} *\mbox{\hyperlink{common_8c_ab670b223f506d8bc9ee5286f6e37b1cd}{new\_block}}()}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00025}00025 \{}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00026}00026     \mbox{\hyperlink{structblock__t}{block}} *newBlock = malloc(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structblock__t}{block}}));}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00027}00027     \mbox{\hyperlink{structtransaction__t}{transaction}} reward;}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00028}00028     \textcolor{keyword}{struct }timespec timestamp;}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00029}00029 }
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00030}00030     \textcolor{comment}{/* memset(newBlock-\/>transList, 0, SO\_BLOCK\_SIZE); */}}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00031}00031     clock\_gettime(CLOCK\_REALTIME, \&timestamp);}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00032}00032 }
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00033}00033     reward.\mbox{\hyperlink{structtransaction__t_a2aace03835c4d951b3dee117b328ef87}{timestamp}} = timestamp;}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00034}00034     reward.\mbox{\hyperlink{structtransaction__t_a36060e3785ebad7b278cb01d5159c0c5}{sender}} = \mbox{\hyperlink{common_8h_a6233123742aa307f2a5ce737acca67f0}{SELF}};}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00035}00035     reward.\mbox{\hyperlink{structtransaction__t_a3c01e8bf1e61ee67a25113f3db1a32b8}{receiver}} = getpid();}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00036}00036     reward.\mbox{\hyperlink{structtransaction__t_a14236de313193a14b4dbdf442bcf2bb9}{amount}} = 0;}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00037}00037     reward.\mbox{\hyperlink{structtransaction__t_af571e76d8e59b8452f38407799272e4a}{reward}} = 0;}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00038}00038 }
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00039}00039     newBlock-\/>\mbox{\hyperlink{structblock__t_a75735b68381e6c25555bb53c163abfe9}{transList}}[0] = reward;}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00040}00040     newBlock-\/>\mbox{\hyperlink{structblock__t_aa72742d9d7c1c8631aa36c0077f13b1d}{blockIndex}} = 0;}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00041}00041     newBlock-\/>\mbox{\hyperlink{structblock__t_a063b51ee50d55219236d2e4db6ce97a8}{next}} = \mbox{\hyperlink{common_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{NULL}};}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00042}00042 }
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00043}00043     \textcolor{keywordflow}{return} newBlock;}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00044}00044 \}}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00045}00045 }
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00046}\mbox{\hyperlink{common_8c_a870e971fe7155d42f50beaa446dfd874}{00046}} \textcolor{keywordtype}{void} \mbox{\hyperlink{common_8c_a870e971fe7155d42f50beaa446dfd874}{add\_transaction\_to\_block}}(\mbox{\hyperlink{structblock__t}{block}} *\mbox{\hyperlink{structblock__t}{block}}, \mbox{\hyperlink{structtransaction__t}{transaction}} *newTrans, \textcolor{keywordtype}{int} index)}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00047}00047 \{}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00048}00048     \mbox{\hyperlink{structblock__t}{block}}-\/>\mbox{\hyperlink{structblock__t_a75735b68381e6c25555bb53c163abfe9}{transList}}[index] = *newTrans; \textcolor{comment}{/* ye probably we don't need a whole ass function for that*/}}
+\DoxyCodeLine{\Hypertarget{common_8c_source_l00049}00049 \}}
+
+\end{DoxyCode}

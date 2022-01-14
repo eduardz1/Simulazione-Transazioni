@@ -2,9 +2,11 @@
 #define SIMULAZIONE_TRANSAZIONI_USERS_H
 
 #include <signal.h>
-#include <stdlib.h>
-#include <time.h>
-#include <signal.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <sys/sem.h>
+#include <sys/msg.h>
+#include <errno.h>
 
 /* sets sleep time with nsec precision for trans_gen */
 #define SLEEP_TIME_SET        \
@@ -14,7 +16,6 @@
 #define SLEEP                                                                            \
     clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &randSleepTime, &sleepTimeRemaining); \
     clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &sleepTimeRemaining, NULL);
-
 
 void user_transactions_handle(int signum);
 void user_interrupt_handle(int signum);

@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_balance_8h" xml:lang="en-US">
+<title>src/include/balance.h File Reference</title>
+<indexterm><primary>src/include/balance.h</primary></indexterm>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_balance_8h_1a7b4d059bad2052af60d26aa64718a219">balance</link> (int budget)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_balance_8h_1a7b4d059bad2052af60d26aa64718a219"/><section>
+    <title>balance()</title>
+<indexterm><primary>balance</primary><secondary>balance.h</secondary></indexterm>
+<indexterm><primary>balance.h</primary><secondary>balance</secondary></indexterm>
+<para><computeroutput>int balance (int budget)</computeroutput></para><para>
+Definition at line <link linkend="_balance_8h_source_1l00001">1</link> of file <link linkend="_balance_8h_source">balance.h</link>.</para>
+</section>
+</section>
+</section>

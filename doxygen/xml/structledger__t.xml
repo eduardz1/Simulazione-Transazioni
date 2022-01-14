@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.3" xml:lang="en-US">
+  <compounddef id="structledger__t" kind="struct" language="C++" prot="public">
+    <compoundname>ledger_t</compoundname>
+    <includes refid="common_8h" local="no">common.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structledger__t_1ae8b38edd17a3a5769aea3c05f4e2b432" prot="public" static="no" mutable="no">
+        <type><ref refid="common_8h_1acc02c32db194c6d92ce82de8c99eacbc" kindref="member">block</ref> *</type>
+        <definition>block* head</definition>
+        <argsstring></argsstring>
+        <name>head</name>
+        <qualifiedname>ledger_t::head</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="150" column="11" bodyfile="src/include/common.h" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structledger__t_1a3687d896ad2d77106df256f1db753c18" prot="public" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int registryCurrSize</definition>
+        <argsstring></argsstring>
+        <name>registryCurrSize</name>
+        <qualifiedname>ledger_t::registryCurrSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="151" column="18" bodyfile="src/include/common.h" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>block_t</label>
+        <link refid="structblock__t"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>transList</edgelabel>
+        </childnode>
+        <childnode refid="2" relation="usage">
+          <edgelabel>next</edgelabel>
+          <edgelabel>prev</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>ledger_t</label>
+        <link refid="structledger__t"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>head</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>transaction_t</label>
+        <link refid="structtransaction__t"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/include/common.h" line="148" column="1" bodyfile="src/include/common.h" bodystart="149" bodyend="152"/>
+    <listofallmembers>
+      <member refid="structledger__t_1ae8b38edd17a3a5769aea3c05f4e2b432" prot="public" virt="non-virtual"><scope>ledger_t</scope><name>head</name></member>
+      <member refid="structledger__t_1a3687d896ad2d77106df256f1db753c18" prot="public" virt="non-virtual"><scope>ledger_t</scope><name>registryCurrSize</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

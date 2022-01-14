@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_debug_8h_source" xml:lang="en-US">
+<title>debug.h</title>
+<indexterm><primary>src/utils/debug.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_debug_8h_source_1l00001"/>00001 <emphasis role="preprocessor">#ifndef&#32;SIMULAZIONE_TRANSAZIONI_DEBUG_H</emphasis>
+<anchor xml:id="_debug_8h_source_1l00002"/>00002 <emphasis role="preprocessor">#define&#32;SIMULAZIONE_TRANSAZIONI_DEBUG_H</emphasis>
+<anchor xml:id="_debug_8h_source_1l00003"/>00003 
+<anchor xml:id="_debug_8h_source_1l00004"/>00004 <emphasis role="preprocessor">#include&#32;&lt;stdarg.h&gt;</emphasis>
+<anchor xml:id="_debug_8h_source_1l00005"/>00005 <emphasis role="preprocessor">#include&#32;&lt;stdio.h&gt;</emphasis>
+<anchor xml:id="_debug_8h_source_1l00006"/>00006 <emphasis role="comment">/*&#32;kudos&#32;to&#32;https://stackoverflow.com/questions/1644868/define-macro-for-debug-printing-in-c/1644898#1644898?newreg=f3d84f0e4a0846b6ab71f2eac2374d70&#32;*/</emphasis>
+<anchor xml:id="_debug_8h_source_1l00007"/>00007 
+<anchor xml:id="_debug_8h_source_1l00008"/>00008 <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_debug_8h_1ad9dde2c4e4def50c7e04145a08a59f6f">dbg_printf</link>(<emphasis role="keyword">const</emphasis>&#32;<emphasis role="keywordtype">char</emphasis>&#32;*fmt,&#32;...);
+<anchor xml:id="_debug_8h_source_1l00009"/>00009 <emphasis role="preprocessor">#ifdef&#32;DEBUG</emphasis>
+<anchor xml:id="_debug_8h_source_1l00010"/>00010 <emphasis role="preprocessor">#define&#32;TRACE(x)&#32;dbg_printf&#32;x;</emphasis>
+<anchor xml:id="_debug_8h_source_1l00011"/>00011 <emphasis role="preprocessor">#else</emphasis>
+<anchor xml:id="_debug_8h_source_1l00012"/><link linkend="_debug_8h_1a494d31903e7b0333dfa03b0778679113">00012</link> <emphasis role="preprocessor">#define&#32;TRACE(x)</emphasis>
+<anchor xml:id="_debug_8h_source_1l00013"/>00013 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_debug_8h_source_1l00014"/>00014 
+<anchor xml:id="_debug_8h_source_1l00015"/>00015 <emphasis role="preprocessor">#endif&#32;</emphasis><emphasis role="comment">/*&#32;SIMULAZIONE_TRANSAZIONI_DEBUG_H&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+</programlisting></section>

@@ -1,0 +1,898 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.3" xml:lang="en-US">
+  <compounddef id="common_8h" kind="file" language="C++">
+    <compoundname>common.h</compoundname>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">stddef.h</includes>
+    <includes local="no">stdint.h</includes>
+    <includes local="no">unistd.h</includes>
+    <includes local="no">errno.h</includes>
+    <includes local="no">time.h</includes>
+    <includes local="no">math.h</includes>
+    <includes local="no">string.h</includes>
+    <includes local="no">sys/ipc.h</includes>
+    <includes local="no">sys/shm.h</includes>
+    <includes local="no">sys/sem.h</includes>
+    <includes local="no">sys/msg.h</includes>
+    <includes local="no">sys/types.h</includes>
+    <includes refid="debug_8h" local="yes">../utils/debug.h</includes>
+    <includes refid="sem_8h" local="yes">../utils/sem.h</includes>
+    <includes refid="lists_8h" local="yes">../utils/lists.h</includes>
+    <includedby refid="common_8c" local="yes">src/common.c</includedby>
+    <includedby refid="print_8h" local="yes">src/include/print.h</includedby>
+    <includedby refid="master_8c" local="yes">src/master.c</includedby>
+    <includedby refid="nodes_8c" local="yes">src/nodes.c</includedby>
+    <includedby refid="parser_8c" local="yes">src/parser.c</includedby>
+    <includedby refid="print_8c" local="yes">src/print.c</includedby>
+    <includedby refid="users_8c" local="yes">src/users.c</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/include/common.h</label>
+        <link refid="common_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>../utils/debug.h</label>
+        <link refid="debug_8h"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>../utils/lists.h</label>
+        <link refid="lists_8h"/>
+      </node>
+      <node id="18">
+        <label>../utils/sem.h</label>
+        <link refid="sem_8h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>errno.h</label>
+      </node>
+      <node id="9">
+        <label>math.h</label>
+      </node>
+      <node id="17">
+        <label>stdarg.h</label>
+      </node>
+      <node id="4">
+        <label>stddef.h</label>
+      </node>
+      <node id="5">
+        <label>stdint.h</label>
+      </node>
+      <node id="3">
+        <label>stdio.h</label>
+      </node>
+      <node id="2">
+        <label>stdlib.h</label>
+      </node>
+      <node id="10">
+        <label>string.h</label>
+      </node>
+      <node id="11">
+        <label>sys/ipc.h</label>
+      </node>
+      <node id="14">
+        <label>sys/msg.h</label>
+      </node>
+      <node id="13">
+        <label>sys/sem.h</label>
+      </node>
+      <node id="12">
+        <label>sys/shm.h</label>
+      </node>
+      <node id="15">
+        <label>sys/types.h</label>
+      </node>
+      <node id="8">
+        <label>time.h</label>
+      </node>
+      <node id="6">
+        <label>unistd.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>src/common.c</label>
+        <link refid="common_8c"/>
+      </node>
+      <node id="1">
+        <label>src/include/common.h</label>
+        <link refid="common_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>src/include/print.h</label>
+        <link refid="print_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>src/master.c</label>
+        <link refid="master_8c"/>
+      </node>
+      <node id="6">
+        <label>src/nodes.c</label>
+        <link refid="nodes_8c"/>
+      </node>
+      <node id="7">
+        <label>src/parser.c</label>
+        <link refid="parser_8c"/>
+      </node>
+      <node id="5">
+        <label>src/print.c</label>
+        <link refid="print_8c"/>
+      </node>
+      <node id="8">
+        <label>src/users.c</label>
+        <link refid="users_8c"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structparameters" prot="public">parameters</innerclass>
+    <innerclass refid="structuser__t" prot="public">user_t</innerclass>
+    <innerclass refid="structnode__t" prot="public">node_t</innerclass>
+    <innerclass refid="structtransaction__t" prot="public">transaction_t</innerclass>
+    <innerclass refid="structmessage" prot="public">message</innerclass>
+    <innerclass refid="structblock__t" prot="public">block_t</innerclass>
+    <innerclass refid="structledger__t" prot="public">ledger_t</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="common_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4" prot="public" static="no">
+        <name>NULL</name>
+        <initializer>0 /* thre&apos;s a problem with NULL for some reason */</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="24" column="9" bodyfile="src/include/common.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1a369266c24eacffb87046522897a570d5" prot="public" static="no">
+        <name>_GNU_SOURCE</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="28" column="9" bodyfile="src/include/common.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1a6242a25f9d996f0cc4f4cdb911218b75" prot="public" static="no">
+        <name>ARRAY_SIZE</name>
+        <param><defname>x</defname></param>
+        <initializer>(sizeof(x) / sizeof((x)[0]))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="31" column="9" bodyfile="src/include/common.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1a0d7644a795aa2dd33f01ef184f3f672a" prot="public" static="no">
+        <name>RAND</name>
+        <param><defname>min</defname></param>
+        <param><defname>max</defname></param>
+        <initializer>((rand() % (max - min + 1)) + min)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="32" column="9" bodyfile="src/include/common.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1a8d3bb11cd2b49f5181b881aac93d069a" prot="public" static="no">
+        <name>IPC_ERROR</name>
+        <initializer>-1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="35" column="9" bodyfile="src/include/common.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1a682c31ec4c2347e42bb80ea43ccb4438" prot="public" static="no">
+        <name>SHM_PARAMETERS</name>
+        <initializer>1337</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="36" column="9" bodyfile="src/include/common.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1a3baba14bf322fc6a6367f5ae6795d440" prot="public" static="no">
+        <name>SHM_USERS_ARRAY</name>
+        <initializer>1338</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="37" column="9" bodyfile="src/include/common.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1a55de6fde37952d6cbbf28f2ed2299ace" prot="public" static="no">
+        <name>SHM_NODES_ARRAY</name>
+        <initializer>1339</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="38" column="9" bodyfile="src/include/common.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1a5de1e6971273cfe0a7fdd4570401eb53" prot="public" static="no">
+        <name>SHM_LEDGER</name>
+        <initializer>1340</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="39" column="9" bodyfile="src/include/common.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1a1abb954531733b3c7b64d0d78a75df2a" prot="public" static="no">
+        <name>SEM_MASTER</name>
+        <initializer>420</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="40" column="9" bodyfile="src/include/common.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1aa4f1eb96a74b0e784972e897bcead9ef" prot="public" static="no">
+        <name>M_QUEUE_KEY</name>
+        <initializer>0x5AD</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="41" column="9" bodyfile="src/include/common.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1a320169181de72ba0b5203555e14103c4" prot="public" static="no">
+        <name>SO_BLOCK_SIZE</name>
+        <initializer>100     /* number of <ref refid="common_8h_1a96717a5adf375b5328bde513e91bf658" kindref="member">transaction</ref> per <ref refid="common_8h_1acc02c32db194c6d92ce82de8c99eacbc" kindref="member">block</ref>*/</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="43" column="9" bodyfile="src/include/common.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1aae9d8904fbca80e9986482d75e345f98" prot="public" static="no">
+        <name>SO_REGISTRY_SIZE</name>
+        <initializer>1000 /* max length of consecutive blocks */</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="44" column="9" bodyfile="src/include/common.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1a6233123742aa307f2a5ce737acca67f0" prot="public" static="no">
+        <name>SELF</name>
+        <initializer>-1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="45" column="9" bodyfile="src/include/common.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1a0584f5b77b23fd251570a4c60806f8a9" prot="public" static="no">
+        <name>EVERYONE_BROKE</name>
+        <initializer>&apos;$&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="46" column="9" bodyfile="src/include/common.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1abdb8ae9e0caeeaa6b02791a1991ec34e" prot="public" static="no">
+        <name>USERS_PID_ARGV</name>
+        <initializer>(atoi(argv[1]))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="49" column="9" bodyfile="src/include/common.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1aa26907b48e282ee32e55a0f21d90c651" prot="public" static="no">
+        <name>NODES_PID_ARGV</name>
+        <initializer>(atoi(argv[2]))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="50" column="9" bodyfile="src/include/common.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1a8dc6d4d682e4f826ef23717f1b28d60c" prot="public" static="no">
+        <name>PARAMETERS_ARGV</name>
+        <initializer>(atoi(argv[3]))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="51" column="9" bodyfile="src/include/common.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1acbabb34d7448290aade7aa93bb0c09ca" prot="public" static="no">
+        <name>LEDGER_ARGV</name>
+        <initializer>(atoi(argv[4]))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="52" column="9" bodyfile="src/include/common.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1a6b6ae98a167eeb9050cca5e9f9e5cf37" prot="public" static="no">
+        <name>SEM_ID_ARGV</name>
+        <initializer>(atoi(argv[5]))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="53" column="9" bodyfile="src/include/common.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1ae1712c33caea2a8ca5b5dcade31aab99" prot="public" static="no">
+        <name>WENT_BROKE</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="56" column="9" bodyfile="src/include/common.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1a01c3892c16d6330e486637967ab0289b" prot="public" static="no">
+        <name>MAX_RETRY</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="57" column="9" bodyfile="src/include/common.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1a8fe83ac76edc595f6b98cd4a4127aed5" prot="public" static="no">
+        <name>ERROR</name>
+        <initializer>-1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="58" column="9" bodyfile="src/include/common.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1aa90cac659d18e8ef6294c7ae337f6b58" prot="public" static="no">
+        <name>SUCCESS</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="59" column="9" bodyfile="src/include/common.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="common_8h_1a8251bcdfc5c83845e0834adf211de033" prot="public" static="no">
+        <name>TEST_ERROR</name>
+        <initializer>    if (<ref refid="sem_8c_1ad65a8842cc674e3ddf69355898c0ecbf" kindref="member">errno</ref>)                                     \
+    {                                              \
+        fprintf(stderr,                            \
+                &quot;%s:%d: PID=%5d: Error %d (%s)\n&quot;, \
+                __FILE__,                          \
+                __LINE__,                          \
+                getpid(),                          \
+                <ref refid="sem_8c_1ad65a8842cc674e3ddf69355898c0ecbf" kindref="member">errno</ref>,                             \
+                strerror(<ref refid="sem_8c_1ad65a8842cc674e3ddf69355898c0ecbf" kindref="member">errno</ref>));                  \
+    }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="64" column="9" bodyfile="src/include/common.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="common_8h_1a75285f7670649ccfb5ccbbc952a15bfd" prot="public" static="no">
+        <type>struct <ref refid="structuser__t" kindref="compound">user_t</ref></type>
+        <definition>typedef struct user_t user</definition>
+        <argsstring></argsstring>
+        <name>user</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="103" column="6"/>
+      </memberdef>
+      <memberdef kind="typedef" id="common_8h_1a85b4f4124a5616dea92c9e8a221a8db5" prot="public" static="no">
+        <type>struct <ref refid="structnode__t" kindref="compound">node_t</ref></type>
+        <definition>typedef struct node_t node</definition>
+        <argsstring></argsstring>
+        <name>node</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="113" column="6"/>
+      </memberdef>
+      <memberdef kind="typedef" id="common_8h_1a96717a5adf375b5328bde513e91bf658" prot="public" static="no">
+        <type>struct <ref refid="structtransaction__t" kindref="compound">transaction_t</ref></type>
+        <definition>typedef struct transaction_t transaction</definition>
+        <argsstring></argsstring>
+        <name>transaction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="130" column="13"/>
+      </memberdef>
+      <memberdef kind="typedef" id="common_8h_1acc02c32db194c6d92ce82de8c99eacbc" prot="public" static="no">
+        <type>struct <ref refid="structblock__t" kindref="compound">block_t</ref></type>
+        <definition>typedef struct block_t block</definition>
+        <argsstring></argsstring>
+        <name>block</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="145" column="7"/>
+      </memberdef>
+      <memberdef kind="typedef" id="common_8h_1af8b2bdfa2bfa44284c83a9d6994b13f1" prot="public" static="no">
+        <type>struct <ref refid="structledger__t" kindref="compound">ledger_t</ref></type>
+        <definition>typedef struct ledger_t ledger</definition>
+        <argsstring></argsstring>
+        <name>ledger</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="152" column="8"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="common_8h_1ad65a8842cc674e3ddf69355898c0ecbf" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int errno</definition>
+        <argsstring></argsstring>
+        <name>errno</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="61" column="12" bodyfile="src/utils/sem.c" bodystart="17" bodyend="-1" declfile="src/include/common.h" declline="61" declcolumn="12"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="common_8h_1a92d436f484409e36c57caaa0b45ae9da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="common_8h_1af8b2bdfa2bfa44284c83a9d6994b13f1" kindref="member">ledger</ref> *</type>
+        <definition>ledger * ledger_init</definition>
+        <argsstring>()</argsstring>
+        <name>ledger_init</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="154" column="8" bodyfile="src/common.c" bodystart="3" bodyend="22" declfile="src/include/common.h" declline="154" declcolumn="8"/>
+      </memberdef>
+      <memberdef kind="function" id="common_8h_1ab670b223f506d8bc9ee5286f6e37b1cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="common_8h_1acc02c32db194c6d92ce82de8c99eacbc" kindref="member">block</ref> *</type>
+        <definition>block * new_block</definition>
+        <argsstring>()</argsstring>
+        <name>new_block</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="155" column="7" bodyfile="src/common.c" bodystart="24" bodyend="44" declfile="src/include/common.h" declline="155" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="common_8h_1a99970dbc1175970ecba0e7c5e03d2f84" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void add_block</definition>
+        <argsstring>(block)</argsstring>
+        <name>add_block</name>
+        <param>
+          <type><ref refid="common_8h_1acc02c32db194c6d92ce82de8c99eacbc" kindref="member">block</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="156" column="6" declfile="src/include/common.h" declline="156" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="common_8h_1aa0f3746a3fc31a06a45c8356c406b8aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void add_transaction_to_block</definition>
+        <argsstring>(block *, transaction *, int index)</argsstring>
+        <name>add_transaction_to_block</name>
+        <param>
+          <type><ref refid="common_8h_1acc02c32db194c6d92ce82de8c99eacbc" kindref="member">block</ref> *</type>
+          <declname>block</declname>
+        </param>
+        <param>
+          <type><ref refid="common_8h_1a96717a5adf375b5328bde513e91bf658" kindref="member">transaction</ref> *</type>
+          <declname>newTrans</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="157" column="6" bodyfile="src/common.c" bodystart="46" bodyend="49" declfile="src/include/common.h" declline="157" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="common_8h_1a8b859d92497767ee0f9608993b7157e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void add_block_to_ledger</definition>
+        <argsstring>(block *)</argsstring>
+        <name>add_block_to_ledger</name>
+        <param>
+          <type><ref refid="common_8h_1acc02c32db194c6d92ce82de8c99eacbc" kindref="member">block</ref> *</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="158" column="6" declfile="src/include/common.h" declline="158" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="common_8h_1a023050d658b039c99f82511175fbfdb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void find_transaction</definition>
+        <argsstring>(struct timespec timestamp, pid_t sender, pid_t receiver)</argsstring>
+        <name>find_transaction</name>
+        <param>
+          <type>struct timespec</type>
+          <declname>timestamp</declname>
+        </param>
+        <param>
+          <type>pid_t</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type>pid_t</type>
+          <declname>receiver</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="159" column="6" declfile="src/include/common.h" declline="159" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="common_8h_1a4751fd07d9dcd6444d3761b6e1398523" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void search_timestamp</definition>
+        <argsstring>()</argsstring>
+        <name>search_timestamp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="162" column="6" declfile="src/include/common.h" declline="162" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="common_8h_1ab17517bd1393b9e236afecac072a08c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void search_sender</definition>
+        <argsstring>()</argsstring>
+        <name>search_sender</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="163" column="6" declfile="src/include/common.h" declline="163" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="common_8h_1a95cfd78671315484af4af4158c12349d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void search_receiver</definition>
+        <argsstring>()</argsstring>
+        <name>search_receiver</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="164" column="6" declfile="src/include/common.h" declline="164" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>SIMULAZIONE_TRANSAZIONI_COMMON_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SIMULAZIONE_TRANSAZIONI_COMMON_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stddef.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unistd.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;errno.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;time.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;math.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;sys/ipc.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;sys/shm.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;sys/sem.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;sys/msg.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;sys/types.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../utils/debug.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../utils/sem.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../utils/lists.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>NULL</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24" refid="common_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NULL<sp/>0<sp/></highlight><highlight class="comment">/*<sp/>thre&apos;s<sp/>a<sp/>problem<sp/>with<sp/>NULL<sp/>for<sp/>some<sp/>reason<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>_GNU_SOURCE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28" refid="common_8h_1a369266c24eacffb87046522897a570d5" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_GNU_SOURCE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="common_8h_1a6242a25f9d996f0cc4f4cdb911218b75" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ARRAY_SIZE(x)<sp/>(sizeof(x)<sp/>/<sp/>sizeof((x)[0]))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="common_8h_1a0d7644a795aa2dd33f01ef184f3f672a" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RAND(min,<sp/>max)<sp/>((rand()<sp/>%<sp/>(max<sp/>-<sp/>min<sp/>+<sp/>1))<sp/>+<sp/>min)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>--<sp/>IPC<sp/>OBJECTS<sp/>--<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="common_8h_1a8d3bb11cd2b49f5181b881aac93d069a" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>IPC_ERROR<sp/>-1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="common_8h_1a682c31ec4c2347e42bb80ea43ccb4438" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SHM_PARAMETERS<sp/>1337</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="common_8h_1a3baba14bf322fc6a6367f5ae6795d440" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SHM_USERS_ARRAY<sp/>1338</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38" refid="common_8h_1a55de6fde37952d6cbbf28f2ed2299ace" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SHM_NODES_ARRAY<sp/>1339</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39" refid="common_8h_1a5de1e6971273cfe0a7fdd4570401eb53" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SHM_LEDGER<sp/>1340</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="common_8h_1a1abb954531733b3c7b64d0d78a75df2a" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SEM_MASTER<sp/>420</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41" refid="common_8h_1aa4f1eb96a74b0e784972e897bcead9ef" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>M_QUEUE_KEY<sp/>0x5AD</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43" refid="common_8h_1a320169181de72ba0b5203555e14103c4" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SO_BLOCK_SIZE<sp/>100<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>number<sp/>of<sp/>transaction<sp/>per<sp/>block*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44" refid="common_8h_1aae9d8904fbca80e9986482d75e345f98" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SO_REGISTRY_SIZE<sp/>1000<sp/></highlight><highlight class="comment">/*<sp/>max<sp/>length<sp/>of<sp/>consecutive<sp/>blocks<sp/>*/</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="common_8h_1a6233123742aa307f2a5ce737acca67f0" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SELF<sp/>-1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="common_8h_1a0584f5b77b23fd251570a4c60806f8a9" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>EVERYONE_BROKE<sp/>&apos;$&apos;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>--<sp/>ARGV<sp/>LOCATION<sp/>OF<sp/>IPC<sp/>OBJECTS<sp/>--<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49" refid="common_8h_1abdb8ae9e0caeeaa6b02791a1991ec34e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>USERS_PID_ARGV<sp/>(atoi(argv[1]))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50" refid="common_8h_1aa26907b48e282ee32e55a0f21d90c651" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NODES_PID_ARGV<sp/>(atoi(argv[2]))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="common_8h_1a8dc6d4d682e4f826ef23717f1b28d60c" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PARAMETERS_ARGV<sp/>(atoi(argv[3]))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="common_8h_1acbabb34d7448290aade7aa93bb0c09ca" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LEDGER_ARGV<sp/>(atoi(argv[4]))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="common_8h_1a6b6ae98a167eeb9050cca5e9f9e5cf37" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SEM_ID_ARGV<sp/>(atoi(argv[5]))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>--<sp/>USER<sp/>RETURN<sp/>STATUS<sp/>--<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56" refid="common_8h_1ae1712c33caea2a8ca5b5dcade31aab99" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>WENT_BROKE<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57" refid="common_8h_1a01c3892c16d6330e486637967ab0289b" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MAX_RETRY<sp/>2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58" refid="common_8h_1a8fe83ac76edc595f6b98cd4a4127aed5" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ERROR<sp/>-1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59" refid="common_8h_1aa90cac659d18e8ef6294c7ae337f6b58" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SUCCESS<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="common_8h_1ad65a8842cc674e3ddf69355898c0ecbf" kindref="member">errno</ref>;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>TEST_ERROR</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64" refid="common_8h_1a8251bcdfc5c83845e0834adf211de033" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TEST_ERROR<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="65"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>if<sp/>(errno)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="66"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="67"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(stderr,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="68"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&quot;%s:%d:<sp/>PID=%5d:<sp/>Error<sp/>%d<sp/>(%s)\n&quot;</highlight><highlight class="normal">,<sp/>\</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>__FILE__,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>__LINE__,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>getpid(),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>errno,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>strerror(errno));<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77" refid="structparameters" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structparameters" kindref="compound">parameters</ref></highlight></codeline>
+<codeline lineno="78"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="79" refid="structparameters_1a1a7bfa0882f03d573b4e419d02f041f8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structparameters_1a1a7bfa0882f03d573b4e419d02f041f8" kindref="member">SO_USER_NUM</ref>;</highlight></codeline>
+<codeline lineno="80" refid="structparameters_1a379d08051847c4f98268a27001b06261" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structparameters_1a379d08051847c4f98268a27001b06261" kindref="member">SO_NODES_NUM</ref>;</highlight></codeline>
+<codeline lineno="81" refid="structparameters_1a375c541a19818ce43b6ae275d0a80365" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structparameters_1a375c541a19818ce43b6ae275d0a80365" kindref="member">SO_BUDGET_INIT</ref>;</highlight></codeline>
+<codeline lineno="82" refid="structparameters_1a1e8968a80441b4a641d5ff3566af04f1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/><ref refid="structparameters_1a1e8968a80441b4a641d5ff3566af04f1" kindref="member">SO_REWARD</ref>;<sp/></highlight><highlight class="comment">/*<sp/>max<sp/>value<sp/>100<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="structparameters_1a213ccb7b7e150d7bf584f35cc824ead6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="structparameters_1a213ccb7b7e150d7bf584f35cc824ead6" kindref="member">SO_MIN_TRANS_GEN_NSEC</ref>;</highlight></codeline>
+<codeline lineno="84" refid="structparameters_1abca064afd6b392e1f9e24b5fda8cdecb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="structparameters_1abca064afd6b392e1f9e24b5fda8cdecb" kindref="member">SO_MAX_TRANS_GEN_NSEC</ref>;</highlight></codeline>
+<codeline lineno="85" refid="structparameters_1ac2861693c2d9121c5ecad90de2189690" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structparameters_1ac2861693c2d9121c5ecad90de2189690" kindref="member">SO_RETRY</ref>;</highlight></codeline>
+<codeline lineno="86" refid="structparameters_1a8fe346ee9f21d4a40e15388b72579fbe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structparameters_1a8fe346ee9f21d4a40e15388b72579fbe" kindref="member">SO_TP_SIZE</ref>;</highlight></codeline>
+<codeline lineno="87" refid="structparameters_1a19a5fe1068e3e1ceceab49114d856628" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="structparameters_1a19a5fe1068e3e1ceceab49114d856628" kindref="member">SO_MIN_TRANS_PROC_NSEC</ref>;</highlight></codeline>
+<codeline lineno="88" refid="structparameters_1af7fbb0805dd6c4e1729d70a30164bc1c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="structparameters_1af7fbb0805dd6c4e1729d70a30164bc1c" kindref="member">SO_MAX_TRANS_PROC_NSEC</ref>;</highlight></codeline>
+<codeline lineno="89" refid="structparameters_1a86c91cb21e43e2f92651c149f93f0dc5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structparameters_1a86c91cb21e43e2f92651c149f93f0dc5" kindref="member">SO_SIM_SEC</ref>;</highlight></codeline>
+<codeline lineno="90" refid="structparameters_1a6d8f5bd80c3eda4ed6d9f2440f9105b2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structparameters_1a6d8f5bd80c3eda4ed6d9f2440f9105b2" kindref="member">SO_FRIENDS_NUM</ref>;</highlight></codeline>
+<codeline lineno="91" refid="structparameters_1a85ca4a1c61f11babff7ccd10ec58ee70" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structparameters_1a85ca4a1c61f11babff7ccd10ec58ee70" kindref="member">SO_HOPS</ref>;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94" refid="structuser__t" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structuser__t" kindref="compound">user_t</ref></highlight></codeline>
+<codeline lineno="95"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="96" refid="structuser__t_1ae0d46a978d5cd6707411f276ad869b9c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>pid_t<sp/><ref refid="structuser__t_1ae0d46a978d5cd6707411f276ad869b9c" kindref="member">pid</ref>;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="99" refid="structuser__t_1a06fc87d81c62e9abb8790b6e5713c55bac188eabb2d61ddb1e8632280be9b0dd5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structuser__t_1a06fc87d81c62e9abb8790b6e5713c55bac188eabb2d61ddb1e8632280be9b0dd5" kindref="member">alive</ref>,</highlight></codeline>
+<codeline lineno="100" refid="structuser__t_1a06fc87d81c62e9abb8790b6e5713c55bab67cb4169c109061885309cc2199cbba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structuser__t_1a06fc87d81c62e9abb8790b6e5713c55bab67cb4169c109061885309cc2199cbba" kindref="member">broke</ref>,</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structuser__t_1a06fc87d81c62e9abb8790b6e5713c55ba2bc11c916ebf99c8bd8b66b416de6d62" kindref="member">dead</ref></highlight></codeline>
+<codeline lineno="102" refid="structuser__t_1a06fc87d81c62e9abb8790b6e5713c55ba2bc11c916ebf99c8bd8b66b416de6d62" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/><ref refid="structuser__t_1a2f25fcb4ca138820780f3fc6ee156d17" kindref="member">status</ref>;</highlight></codeline>
+<codeline lineno="103" refid="common_8h_1a75285f7670649ccfb5ccbbc952a15bfd" refkind="member"><highlight class="normal">}<sp/><ref refid="common_8h_1a75285f7670649ccfb5ccbbc952a15bfd" kindref="member">user</ref>;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105" refid="structnode__t" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structnode__t" kindref="compound">node_t</ref></highlight></codeline>
+<codeline lineno="106"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="107" refid="structnode__t_1ae0d46a978d5cd6707411f276ad869b9c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>pid_t<sp/><ref refid="structnode__t_1ae0d46a978d5cd6707411f276ad869b9c" kindref="member">pid</ref>;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="110" refid="structnode__t_1adf764cbdea00d65edcd07bb9953ad2b7a5d20e160566f0b85357fd5a3c87a985e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structnode__t_1adf764cbdea00d65edcd07bb9953ad2b7a5d20e160566f0b85357fd5a3c87a985e" kindref="member">available</ref>,</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structnode__t_1adf764cbdea00d65edcd07bb9953ad2b7a0a601c9076b9914da4a237c8688b1c88" kindref="member">full</ref></highlight></codeline>
+<codeline lineno="112" refid="structnode__t_1adf764cbdea00d65edcd07bb9953ad2b7a0a601c9076b9914da4a237c8688b1c88" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/><ref refid="structnode__t_1a3298103f7912ec98c0f00205b2ac218d" kindref="member">status</ref>;</highlight></codeline>
+<codeline lineno="113" refid="common_8h_1a85b4f4124a5616dea92c9e8a221a8db5" refkind="member"><highlight class="normal">}<sp/><ref refid="common_8h_1a85b4f4124a5616dea92c9e8a221a8db5" kindref="member">node</ref>;</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Transaction<sp/>struct<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="116" refid="structtransaction__t" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtransaction__t" kindref="compound">transaction_t</ref></highlight></codeline>
+<codeline lineno="117"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="118" refid="structtransaction__t_1a2aace03835c4d951b3dee117b328ef87" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">timespec<sp/><ref refid="structtransaction__t_1a2aace03835c4d951b3dee117b328ef87" kindref="member">timestamp</ref>;</highlight></codeline>
+<codeline lineno="119" refid="structtransaction__t_1a36060e3785ebad7b278cb01d5159c0c5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>pid_t<sp/><ref refid="structtransaction__t_1a36060e3785ebad7b278cb01d5159c0c5" kindref="member">sender</ref>;</highlight></codeline>
+<codeline lineno="120" refid="structtransaction__t_1a3c01e8bf1e61ee67a25113f3db1a32b8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>pid_t<sp/><ref refid="structtransaction__t_1a3c01e8bf1e61ee67a25113f3db1a32b8" kindref="member">receiver</ref>;</highlight></codeline>
+<codeline lineno="121" refid="structtransaction__t_1a14236de313193a14b4dbdf442bcf2bb9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structtransaction__t_1a14236de313193a14b4dbdf442bcf2bb9" kindref="member">amount</ref>;</highlight></codeline>
+<codeline lineno="122" refid="structtransaction__t_1af571e76d8e59b8452f38407799272e4a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structtransaction__t_1af571e76d8e59b8452f38407799272e4a" kindref="member">reward</ref>;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="125" refid="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5a6a6b4e7520e01adba9632dc9d9229e2f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5a6a6b4e7520e01adba9632dc9d9229e2f" kindref="member">pending</ref>,</highlight></codeline>
+<codeline lineno="126" refid="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5ac87aff6c8e5d399b301672280549ea3e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5ac87aff6c8e5d399b301672280549ea3e" kindref="member">processing</ref>,</highlight></codeline>
+<codeline lineno="127" refid="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5ad6daa5d32ad2d7b003a0178c8eb07178" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5ad6daa5d32ad2d7b003a0178c8eb07178" kindref="member">confirmed</ref>,</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5aaf2b197bcf14794c85c5f313dab0ca31" kindref="member">aborted</ref></highlight></codeline>
+<codeline lineno="129" refid="structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5aaf2b197bcf14794c85c5f313dab0ca31" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/><ref refid="structtransaction__t_1a95a086466eb975b4da063388dd397dd3" kindref="member">status</ref>;</highlight></codeline>
+<codeline lineno="130" refid="common_8h_1a96717a5adf375b5328bde513e91bf658" refkind="member"><highlight class="normal">}<sp/><ref refid="common_8h_1a96717a5adf375b5328bde513e91bf658" kindref="member">transaction</ref>;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132" refid="structmessage" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structmessage" kindref="compound">message</ref></highlight></codeline>
+<codeline lineno="133"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="134" refid="structmessage_1a6e71692f0e74d6cd516fa62386afcfb4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="structmessage_1a6e71692f0e74d6cd516fa62386afcfb4" kindref="member">mtype</ref>;</highlight></codeline>
+<codeline lineno="135" refid="structmessage_1a16b3f182630755c893589f24a779c143" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structtransaction__t" kindref="compound">transaction</ref><sp/><ref refid="structmessage_1a16b3f182630755c893589f24a779c143" kindref="member">userTrans</ref>;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Block<sp/>struct<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="139" refid="structblock__t" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structblock__t" kindref="compound">block_t</ref></highlight></codeline>
+<codeline lineno="140"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="141" refid="structblock__t_1a75735b68381e6c25555bb53c163abfe9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structtransaction__t" kindref="compound">transaction</ref><sp/><ref refid="structblock__t_1a75735b68381e6c25555bb53c163abfe9" kindref="member">transList</ref>[<ref refid="common_8h_1a320169181de72ba0b5203555e14103c4" kindref="member">SO_BLOCK_SIZE</ref>];</highlight></codeline>
+<codeline lineno="142" refid="structblock__t_1aa72742d9d7c1c8631aa36c0077f13b1d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structblock__t_1aa72742d9d7c1c8631aa36c0077f13b1d" kindref="member">blockIndex</ref>;<sp/></highlight><highlight class="comment">/*<sp/>when<sp/>a<sp/>block<sp/>is<sp/>written<sp/>on<sp/>ledger<sp/>it&apos;s<sp/>Index<sp/>needs<sp/>to<sp/>be<sp/>updated<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="143" refid="structblock__t_1a063b51ee50d55219236d2e4db6ce97a8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structblock__t" kindref="compound">block</ref><sp/>*<ref refid="structblock__t_1a063b51ee50d55219236d2e4db6ce97a8" kindref="member">next</ref>;</highlight></codeline>
+<codeline lineno="144" refid="structblock__t_1a203e7b65bebf69e2be0878ee3c322c0c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structblock__t" kindref="compound">block</ref><sp/>*<ref refid="structblock__t_1a203e7b65bebf69e2be0878ee3c322c0c" kindref="member">prev</ref>;</highlight></codeline>
+<codeline lineno="145" refid="common_8h_1acc02c32db194c6d92ce82de8c99eacbc" refkind="member"><highlight class="normal">}<sp/><ref refid="common_8h_1acc02c32db194c6d92ce82de8c99eacbc" kindref="member">block</ref>;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Libro<sp/>Mastro<sp/>(ledger)<sp/>struct<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="148" refid="structledger__t" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structledger__t" kindref="compound">ledger_t</ref></highlight></codeline>
+<codeline lineno="149"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="150" refid="structledger__t_1ae8b38edd17a3a5769aea3c05f4e2b432" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structblock__t" kindref="compound">block</ref><sp/>*<ref refid="structledger__t_1ae8b38edd17a3a5769aea3c05f4e2b432" kindref="member">head</ref>;</highlight></codeline>
+<codeline lineno="151" refid="structledger__t_1a3687d896ad2d77106df256f1db753c18" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structledger__t_1a3687d896ad2d77106df256f1db753c18" kindref="member">registryCurrSize</ref>;<sp/></highlight><highlight class="comment">/*<sp/>initialize<sp/>to<sp/>SO_REGISTRY_SIZE,<sp/>update<sp/>with<sp/>every<sp/>new<sp/>block<sp/>added<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="152" refid="common_8h_1af8b2bdfa2bfa44284c83a9d6994b13f1" refkind="member"><highlight class="normal">}<sp/><ref refid="common_8h_1af8b2bdfa2bfa44284c83a9d6994b13f1" kindref="member">ledger</ref>;</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><ref refid="structledger__t" kindref="compound">ledger</ref><sp/>*<ref refid="common_8h_1a92d436f484409e36c57caaa0b45ae9da" kindref="member">ledger_init</ref>();</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><ref refid="structblock__t" kindref="compound">block</ref><sp/>*<ref refid="common_8h_1ab670b223f506d8bc9ee5286f6e37b1cd" kindref="member">new_block</ref>();</highlight></codeline>
+<codeline lineno="156" refid="common_8h_1a99970dbc1175970ecba0e7c5e03d2f84" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="common_8h_1a99970dbc1175970ecba0e7c5e03d2f84" kindref="member">add_block</ref>(<ref refid="structblock__t" kindref="compound">block</ref>);</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="common_8h_1aa0f3746a3fc31a06a45c8356c406b8aa" kindref="member">add_transaction_to_block</ref>(<ref refid="structblock__t" kindref="compound">block</ref><sp/>*,<sp/><ref refid="structtransaction__t" kindref="compound">transaction</ref><sp/>*,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>index);</highlight></codeline>
+<codeline lineno="158" refid="common_8h_1a8b859d92497767ee0f9608993b7157e9" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="common_8h_1a8b859d92497767ee0f9608993b7157e9" kindref="member">add_block_to_ledger</ref>(<ref refid="structblock__t" kindref="compound">block</ref><sp/>*);</highlight></codeline>
+<codeline lineno="159" refid="common_8h_1a023050d658b039c99f82511175fbfdb9" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="common_8h_1a023050d658b039c99f82511175fbfdb9" kindref="member">find_transaction</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>timespec<sp/>timestamp,<sp/>pid_t<sp/>sender,<sp/>pid_t<sp/>receiver);<sp/></highlight><highlight class="comment">/*<sp/>NULL<sp/>used<sp/>to<sp/>group<sp/>results<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>listparser.c<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="162" refid="common_8h_1a4751fd07d9dcd6444d3761b6e1398523" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="common_8h_1a4751fd07d9dcd6444d3761b6e1398523" kindref="member">search_timestamp</ref>();</highlight></codeline>
+<codeline lineno="163" refid="common_8h_1ab17517bd1393b9e236afecac072a08c5" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="common_8h_1ab17517bd1393b9e236afecac072a08c5" kindref="member">search_sender</ref>();</highlight></codeline>
+<codeline lineno="164" refid="common_8h_1a95cfd78671315484af4af4158c12349d" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="common_8h_1a95cfd78671315484af4af4158c12349d" kindref="member">search_receiver</ref>();</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>SIMULAZIONE_TRANSAZIONI_COMMON_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="src/include/common.h"/>
+  </compounddef>
+</doxygen>

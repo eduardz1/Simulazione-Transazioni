@@ -1,0 +1,119 @@
+\hypertarget{sem_8h}{}\doxysection{src/utils/sem.h File Reference}
+\label{sem_8h}\index{src/utils/sem.h@{src/utils/sem.h}}
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/ipc.\+h$>$}\newline
+{\ttfamily \#include $<$sys/sem.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+Include dependency graph for sem.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+union \mbox{\hyperlink{unionsemun}{semun}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{sem_8h_a0376b2ead2de10bb7ab6a4d21ec304e9}{LOCK}}
+\item 
+\#define \mbox{\hyperlink{sem_8h_ac82effb31e82e32254efc8b57251d59e}{UNLOCK}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{sem_8h_a69c382a53528227d1164f00a6e6e6d49}{sem\+\_\+set\+\_\+val}} (int sem\+\_\+id, int sem\+\_\+num, int sem\+\_\+val)
+\item 
+int \mbox{\hyperlink{sem_8h_a8a9bfe4b1b46fa8a09858b192d6e8764}{sem\+\_\+reserve}} (int sem\+\_\+id, int sem\+\_\+num)
+\item 
+int \mbox{\hyperlink{sem_8h_a3fbb448c9f985007f6030b3927357b5c}{sem\+\_\+release}} (int sem\+\_\+id, int sem\+\_\+num)
+\item 
+int \mbox{\hyperlink{sem_8h_a8f04187bfc8f247398ab8ba5d7bdd196}{sem\+\_\+getall}} (char $\ast$my\+\_\+string, int sem\+\_\+id)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{sem_8h_a0376b2ead2de10bb7ab6a4d21ec304e9}\label{sem_8h_a0376b2ead2de10bb7ab6a4d21ec304e9}} 
+\index{sem.h@{sem.h}!LOCK@{LOCK}}
+\index{LOCK@{LOCK}!sem.h@{sem.h}}
+\doxysubsubsection{\texorpdfstring{LOCK}{LOCK}}
+{\footnotesize\ttfamily \#define LOCK}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    sops.sem\_num = 1;           \(\backslash\)}
+\DoxyCodeLine{    sops.sem\_op = -\/1;           \(\backslash\)}
+\DoxyCodeLine{    sops.sem\_flg = 0;           \(\backslash\)}
+\DoxyCodeLine{    semop(\mbox{\hyperlink{master_8c_ae520355298e7bac453a556eeab7df45f}{semID}}, \&sops, 1);}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{sem_8h_source_l00014}{14}} of file \mbox{\hyperlink{sem_8h_source}{sem.\+h}}.
+
+\mbox{\Hypertarget{sem_8h_ac82effb31e82e32254efc8b57251d59e}\label{sem_8h_ac82effb31e82e32254efc8b57251d59e}} 
+\index{sem.h@{sem.h}!UNLOCK@{UNLOCK}}
+\index{UNLOCK@{UNLOCK}!sem.h@{sem.h}}
+\doxysubsubsection{\texorpdfstring{UNLOCK}{UNLOCK}}
+{\footnotesize\ttfamily \#define UNLOCK}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    sops.sem\_num = 1;           \(\backslash\)}
+\DoxyCodeLine{    sops.sem\_op = 1;            \(\backslash\)}
+\DoxyCodeLine{    sops.sem\_flg = 0;           \(\backslash\)}
+\DoxyCodeLine{    semop(\mbox{\hyperlink{master_8c_ae520355298e7bac453a556eeab7df45f}{semID}}, \&sops, 1);}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{sem_8h_source_l00019}{19}} of file \mbox{\hyperlink{sem_8h_source}{sem.\+h}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{sem_8h_a8f04187bfc8f247398ab8ba5d7bdd196}\label{sem_8h_a8f04187bfc8f247398ab8ba5d7bdd196}} 
+\index{sem.h@{sem.h}!sem\_getall@{sem\_getall}}
+\index{sem\_getall@{sem\_getall}!sem.h@{sem.h}}
+\doxysubsubsection{\texorpdfstring{sem\_getall()}{sem\_getall()}}
+{\footnotesize\ttfamily int sem\+\_\+getall (\begin{DoxyParamCaption}\item[{char $\ast$}]{my\+\_\+string,  }\item[{int}]{sem\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{sem_8c_source_l00049}{49}} of file \mbox{\hyperlink{sem_8c_source}{sem.\+c}}.
+
+\mbox{\Hypertarget{sem_8h_a3fbb448c9f985007f6030b3927357b5c}\label{sem_8h_a3fbb448c9f985007f6030b3927357b5c}} 
+\index{sem.h@{sem.h}!sem\_release@{sem\_release}}
+\index{sem\_release@{sem\_release}!sem.h@{sem.h}}
+\doxysubsubsection{\texorpdfstring{sem\_release()}{sem\_release()}}
+{\footnotesize\ttfamily int sem\+\_\+release (\begin{DoxyParamCaption}\item[{int}]{sem\+\_\+id,  }\item[{int}]{sem\+\_\+num }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{sem_8c_source_l00037}{37}} of file \mbox{\hyperlink{sem_8c_source}{sem.\+c}}.
+
+\mbox{\Hypertarget{sem_8h_a8a9bfe4b1b46fa8a09858b192d6e8764}\label{sem_8h_a8a9bfe4b1b46fa8a09858b192d6e8764}} 
+\index{sem.h@{sem.h}!sem\_reserve@{sem\_reserve}}
+\index{sem\_reserve@{sem\_reserve}!sem.h@{sem.h}}
+\doxysubsubsection{\texorpdfstring{sem\_reserve()}{sem\_reserve()}}
+{\footnotesize\ttfamily int sem\+\_\+reserve (\begin{DoxyParamCaption}\item[{int}]{sem\+\_\+id,  }\item[{int}]{sem\+\_\+num }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{sem_8c_source_l00026}{26}} of file \mbox{\hyperlink{sem_8c_source}{sem.\+c}}.
+
+\mbox{\Hypertarget{sem_8h_a69c382a53528227d1164f00a6e6e6d49}\label{sem_8h_a69c382a53528227d1164f00a6e6e6d49}} 
+\index{sem.h@{sem.h}!sem\_set\_val@{sem\_set\_val}}
+\index{sem\_set\_val@{sem\_set\_val}!sem.h@{sem.h}}
+\doxysubsubsection{\texorpdfstring{sem\_set\_val()}{sem\_set\_val()}}
+{\footnotesize\ttfamily int sem\+\_\+set\+\_\+val (\begin{DoxyParamCaption}\item[{int}]{sem\+\_\+id,  }\item[{int}]{sem\+\_\+num,  }\item[{int}]{sem\+\_\+val }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{sem_8c_source_l00020}{20}} of file \mbox{\hyperlink{sem_8c_source}{sem.\+c}}.
+

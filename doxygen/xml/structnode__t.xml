@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.3" xml:lang="en-US">
+  <compounddef id="structnode__t" kind="struct" language="C++" prot="public">
+    <compoundname>node_t</compoundname>
+    <includes refid="common_8h" local="no">common.h</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="structnode__t_1adf764cbdea00d65edcd07bb9953ad2b7" prot="public" static="no" strong="no">
+        <type></type>
+        <name>@1</name>
+        <qualifiedname>node_t::@1</qualifiedname>
+        <enumvalue id="structnode__t_1adf764cbdea00d65edcd07bb9953ad2b7a5d20e160566f0b85357fd5a3c87a985e" prot="public">
+          <name>available</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structnode__t_1adf764cbdea00d65edcd07bb9953ad2b7a0a601c9076b9914da4a237c8688b1c88" prot="public">
+          <name>full</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="108" column="5" bodyfile="src/include/common.h" bodystart="109" bodyend="112"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structnode__t_1ae0d46a978d5cd6707411f276ad869b9c" prot="public" static="no" mutable="no">
+        <type>pid_t</type>
+        <definition>pid_t pid</definition>
+        <argsstring></argsstring>
+        <name>pid</name>
+        <qualifiedname>node_t::pid</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="107" column="11" bodyfile="src/include/common.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structnode__t_1a3298103f7912ec98c0f00205b2ac218d" prot="public" static="no" mutable="no">
+        <type>enum node_t::@1</type>
+        <definition>enum node_t::@1 status</definition>
+        <argsstring></argsstring>
+        <name>status</name>
+        <qualifiedname>node_t::status</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/include/common.h" line="112" column="12"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/include/common.h" line="105" column="1" bodyfile="src/include/common.h" bodystart="106" bodyend="113"/>
+    <listofallmembers>
+      <member refid="structnode__t_1adf764cbdea00d65edcd07bb9953ad2b7a5d20e160566f0b85357fd5a3c87a985e" prot="public" virt="non-virtual"><scope>node_t</scope><name>available</name></member>
+      <member refid="structnode__t_1adf764cbdea00d65edcd07bb9953ad2b7a0a601c9076b9914da4a237c8688b1c88" prot="public" virt="non-virtual"><scope>node_t</scope><name>full</name></member>
+      <member refid="structnode__t_1ae0d46a978d5cd6707411f276ad869b9c" prot="public" virt="non-virtual"><scope>node_t</scope><name>pid</name></member>
+      <member refid="structnode__t_1a3298103f7912ec98c0f00205b2ac218d" prot="public" virt="non-virtual"><scope>node_t</scope><name>status</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

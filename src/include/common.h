@@ -10,6 +10,7 @@
 #include <time.h>
 #include <math.h>
 #include <string.h>
+#include <signal.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <sys/sem.h>
@@ -153,8 +154,13 @@ typedef struct ledger_t
 } ledger;
 
 ledger *ledger_init();
+<<<<<<< HEAD
 block *new_block(transaction** blockTransaction);
+=======
+block *new_block(transaction **);
+>>>>>>> 186ae1ddadc5020fa84654c5c27098ed17907a91
 void add_block(block);
+int sum_reward(transaction **);
 void add_transaction_to_block(block *, transaction *, int index);
 void add_block_to_ledger(block *);
 void find_transaction(struct timespec timestamp, pid_t sender, pid_t receiver); /* NULL used to group results */

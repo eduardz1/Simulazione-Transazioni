@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_structparameters" xml:lang="en-US">
+<title>parameters Struct Reference</title>
+<indexterm><primary>parameters</primary></indexterm>
+<para>
+<computeroutput>#include &lt;common.h&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Data Fields    </title>
+        <itemizedlist>
+            <listitem><para>unsigned int <link linkend="_structparameters_1a1a7bfa0882f03d573b4e419d02f041f8">SO_USER_NUM</link></para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_structparameters_1a379d08051847c4f98268a27001b06261">SO_NODES_NUM</link></para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_structparameters_1a375c541a19818ce43b6ae275d0a80365">SO_BUDGET_INIT</link></para>
+</listitem>
+            <listitem><para>char <link linkend="_structparameters_1a1e8968a80441b4a641d5ff3566af04f1">SO_REWARD</link></para>
+</listitem>
+            <listitem><para>unsigned long <link linkend="_structparameters_1a213ccb7b7e150d7bf584f35cc824ead6">SO_MIN_TRANS_GEN_NSEC</link></para>
+</listitem>
+            <listitem><para>unsigned long <link linkend="_structparameters_1abca064afd6b392e1f9e24b5fda8cdecb">SO_MAX_TRANS_GEN_NSEC</link></para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_structparameters_1ac2861693c2d9121c5ecad90de2189690">SO_RETRY</link></para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_structparameters_1a8fe346ee9f21d4a40e15388b72579fbe">SO_TP_SIZE</link></para>
+</listitem>
+            <listitem><para>unsigned long <link linkend="_structparameters_1a19a5fe1068e3e1ceceab49114d856628">SO_MIN_TRANS_PROC_NSEC</link></para>
+</listitem>
+            <listitem><para>unsigned long <link linkend="_structparameters_1af7fbb0805dd6c4e1729d70a30164bc1c">SO_MAX_TRANS_PROC_NSEC</link></para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_structparameters_1a86c91cb21e43e2f92651c149f93f0dc5">SO_SIM_SEC</link></para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_structparameters_1a6d8f5bd80c3eda4ed6d9f2440f9105b2">SO_FRIENDS_NUM</link></para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_structparameters_1a85ca4a1c61f11babff7ccd10ec58ee70">SO_HOPS</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<para>
+Definition at line <link linkend="_common_8h_source_1l00077">77</link> of file <link linkend="_common_8h_source">common.h</link>.</para>
+</section>
+<section>
+<title>Field Documentation</title>
+<anchor xml:id="_structparameters_1a375c541a19818ce43b6ae275d0a80365"/><section>
+    <title>SO_BUDGET_INIT</title>
+<indexterm><primary>SO_BUDGET_INIT</primary><secondary>parameters</secondary></indexterm>
+<indexterm><primary>parameters</primary><secondary>SO_BUDGET_INIT</secondary></indexterm>
+<para><computeroutput>unsigned int SO_BUDGET_INIT</computeroutput></para><para>
+Definition at line <link linkend="_common_8h_source_1l00081">81</link> of file <link linkend="_common_8h_source">common.h</link>.</para>
+</section>
+<anchor xml:id="_structparameters_1a6d8f5bd80c3eda4ed6d9f2440f9105b2"/><section>
+    <title>SO_FRIENDS_NUM</title>
+<indexterm><primary>SO_FRIENDS_NUM</primary><secondary>parameters</secondary></indexterm>
+<indexterm><primary>parameters</primary><secondary>SO_FRIENDS_NUM</secondary></indexterm>
+<para><computeroutput>unsigned int SO_FRIENDS_NUM</computeroutput></para><para>
+Definition at line <link linkend="_common_8h_source_1l00090">90</link> of file <link linkend="_common_8h_source">common.h</link>.</para>
+</section>
+<anchor xml:id="_structparameters_1a85ca4a1c61f11babff7ccd10ec58ee70"/><section>
+    <title>SO_HOPS</title>
+<indexterm><primary>SO_HOPS</primary><secondary>parameters</secondary></indexterm>
+<indexterm><primary>parameters</primary><secondary>SO_HOPS</secondary></indexterm>
+<para><computeroutput>unsigned int SO_HOPS</computeroutput></para><para>
+Definition at line <link linkend="_common_8h_source_1l00091">91</link> of file <link linkend="_common_8h_source">common.h</link>.</para>
+</section>
+<anchor xml:id="_structparameters_1abca064afd6b392e1f9e24b5fda8cdecb"/><section>
+    <title>SO_MAX_TRANS_GEN_NSEC</title>
+<indexterm><primary>SO_MAX_TRANS_GEN_NSEC</primary><secondary>parameters</secondary></indexterm>
+<indexterm><primary>parameters</primary><secondary>SO_MAX_TRANS_GEN_NSEC</secondary></indexterm>
+<para><computeroutput>unsigned long SO_MAX_TRANS_GEN_NSEC</computeroutput></para><para>
+Definition at line <link linkend="_common_8h_source_1l00084">84</link> of file <link linkend="_common_8h_source">common.h</link>.</para>
+</section>
+<anchor xml:id="_structparameters_1af7fbb0805dd6c4e1729d70a30164bc1c"/><section>
+    <title>SO_MAX_TRANS_PROC_NSEC</title>
+<indexterm><primary>SO_MAX_TRANS_PROC_NSEC</primary><secondary>parameters</secondary></indexterm>
+<indexterm><primary>parameters</primary><secondary>SO_MAX_TRANS_PROC_NSEC</secondary></indexterm>
+<para><computeroutput>unsigned long SO_MAX_TRANS_PROC_NSEC</computeroutput></para><para>
+Definition at line <link linkend="_common_8h_source_1l00088">88</link> of file <link linkend="_common_8h_source">common.h</link>.</para>
+</section>
+<anchor xml:id="_structparameters_1a213ccb7b7e150d7bf584f35cc824ead6"/><section>
+    <title>SO_MIN_TRANS_GEN_NSEC</title>
+<indexterm><primary>SO_MIN_TRANS_GEN_NSEC</primary><secondary>parameters</secondary></indexterm>
+<indexterm><primary>parameters</primary><secondary>SO_MIN_TRANS_GEN_NSEC</secondary></indexterm>
+<para><computeroutput>unsigned long SO_MIN_TRANS_GEN_NSEC</computeroutput></para><para>
+Definition at line <link linkend="_common_8h_source_1l00083">83</link> of file <link linkend="_common_8h_source">common.h</link>.</para>
+</section>
+<anchor xml:id="_structparameters_1a19a5fe1068e3e1ceceab49114d856628"/><section>
+    <title>SO_MIN_TRANS_PROC_NSEC</title>
+<indexterm><primary>SO_MIN_TRANS_PROC_NSEC</primary><secondary>parameters</secondary></indexterm>
+<indexterm><primary>parameters</primary><secondary>SO_MIN_TRANS_PROC_NSEC</secondary></indexterm>
+<para><computeroutput>unsigned long SO_MIN_TRANS_PROC_NSEC</computeroutput></para><para>
+Definition at line <link linkend="_common_8h_source_1l00087">87</link> of file <link linkend="_common_8h_source">common.h</link>.</para>
+</section>
+<anchor xml:id="_structparameters_1a379d08051847c4f98268a27001b06261"/><section>
+    <title>SO_NODES_NUM</title>
+<indexterm><primary>SO_NODES_NUM</primary><secondary>parameters</secondary></indexterm>
+<indexterm><primary>parameters</primary><secondary>SO_NODES_NUM</secondary></indexterm>
+<para><computeroutput>unsigned int SO_NODES_NUM</computeroutput></para><para>
+Definition at line <link linkend="_common_8h_source_1l00080">80</link> of file <link linkend="_common_8h_source">common.h</link>.</para>
+</section>
+<anchor xml:id="_structparameters_1ac2861693c2d9121c5ecad90de2189690"/><section>
+    <title>SO_RETRY</title>
+<indexterm><primary>SO_RETRY</primary><secondary>parameters</secondary></indexterm>
+<indexterm><primary>parameters</primary><secondary>SO_RETRY</secondary></indexterm>
+<para><computeroutput>unsigned int SO_RETRY</computeroutput></para><para>
+Definition at line <link linkend="_common_8h_source_1l00085">85</link> of file <link linkend="_common_8h_source">common.h</link>.</para>
+</section>
+<anchor xml:id="_structparameters_1a1e8968a80441b4a641d5ff3566af04f1"/><section>
+    <title>SO_REWARD</title>
+<indexterm><primary>SO_REWARD</primary><secondary>parameters</secondary></indexterm>
+<indexterm><primary>parameters</primary><secondary>SO_REWARD</secondary></indexterm>
+<para><computeroutput>char SO_REWARD</computeroutput></para><para>
+Definition at line <link linkend="_common_8h_source_1l00082">82</link> of file <link linkend="_common_8h_source">common.h</link>.</para>
+</section>
+<anchor xml:id="_structparameters_1a86c91cb21e43e2f92651c149f93f0dc5"/><section>
+    <title>SO_SIM_SEC</title>
+<indexterm><primary>SO_SIM_SEC</primary><secondary>parameters</secondary></indexterm>
+<indexterm><primary>parameters</primary><secondary>SO_SIM_SEC</secondary></indexterm>
+<para><computeroutput>unsigned int SO_SIM_SEC</computeroutput></para><para>
+Definition at line <link linkend="_common_8h_source_1l00089">89</link> of file <link linkend="_common_8h_source">common.h</link>.</para>
+</section>
+<anchor xml:id="_structparameters_1a8fe346ee9f21d4a40e15388b72579fbe"/><section>
+    <title>SO_TP_SIZE</title>
+<indexterm><primary>SO_TP_SIZE</primary><secondary>parameters</secondary></indexterm>
+<indexterm><primary>parameters</primary><secondary>SO_TP_SIZE</secondary></indexterm>
+<para><computeroutput>unsigned int SO_TP_SIZE</computeroutput></para><para>
+Definition at line <link linkend="_common_8h_source_1l00086">86</link> of file <link linkend="_common_8h_source">common.h</link>.</para>
+</section>
+<anchor xml:id="_structparameters_1a1a7bfa0882f03d573b4e419d02f041f8"/><section>
+    <title>SO_USER_NUM</title>
+<indexterm><primary>SO_USER_NUM</primary><secondary>parameters</secondary></indexterm>
+<indexterm><primary>parameters</primary><secondary>SO_USER_NUM</secondary></indexterm>
+<para><computeroutput>unsigned int SO_USER_NUM</computeroutput></para><para>
+Definition at line <link linkend="_common_8h_source_1l00079">79</link> of file <link linkend="_common_8h_source">common.h</link>.</para>
+</section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+src/include/<link linkend="_common_8h">common.h</link></section>
+</section>

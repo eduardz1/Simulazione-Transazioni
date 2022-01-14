@@ -1,0 +1,21 @@
+\hypertarget{debug_8h_source}{}\doxysection{debug.\+h}
+\label{debug_8h_source}\index{src/utils/debug.h@{src/utils/debug.h}}
+\mbox{\hyperlink{debug_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{debug_8h_source_l00001}00001 \textcolor{preprocessor}{\#ifndef SIMULAZIONE\_TRANSAZIONI\_DEBUG\_H}}
+\DoxyCodeLine{\Hypertarget{debug_8h_source_l00002}00002 \textcolor{preprocessor}{\#define SIMULAZIONE\_TRANSAZIONI\_DEBUG\_H}}
+\DoxyCodeLine{\Hypertarget{debug_8h_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{debug_8h_source_l00004}00004 \textcolor{preprocessor}{\#include <stdarg.h>}}
+\DoxyCodeLine{\Hypertarget{debug_8h_source_l00005}00005 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{debug_8h_source_l00006}00006 \textcolor{comment}{/* kudos to https://stackoverflow.com/questions/1644868/define-\/macro-\/for-\/debug-\/printing-\/in-\/c/1644898\#1644898?newreg=f3d84f0e4a0846b6ab71f2eac2374d70 */}}
+\DoxyCodeLine{\Hypertarget{debug_8h_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{debug_8h_source_l00008}00008 \textcolor{keywordtype}{void} \mbox{\hyperlink{debug_8h_ad9dde2c4e4def50c7e04145a08a59f6f}{dbg\_printf}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *fmt, ...);}
+\DoxyCodeLine{\Hypertarget{debug_8h_source_l00009}00009 \textcolor{preprocessor}{\#ifdef DEBUG}}
+\DoxyCodeLine{\Hypertarget{debug_8h_source_l00010}00010 \textcolor{preprocessor}{\#define TRACE(x) dbg\_printf x;}}
+\DoxyCodeLine{\Hypertarget{debug_8h_source_l00011}00011 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{debug_8h_source_l00012}\mbox{\hyperlink{debug_8h_a494d31903e7b0333dfa03b0778679113}{00012}} \textcolor{preprocessor}{\#define TRACE(x)}}
+\DoxyCodeLine{\Hypertarget{debug_8h_source_l00013}00013 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{debug_8h_source_l00014}00014 }
+\DoxyCodeLine{\Hypertarget{debug_8h_source_l00015}00015 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* SIMULAZIONE\_TRANSAZIONI\_DEBUG\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

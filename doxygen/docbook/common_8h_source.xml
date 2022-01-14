@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_common_8h_source" xml:lang="en-US">
+<title>common.h</title>
+<indexterm><primary>src/include/common.h</primary></indexterm>
+Go to the documentation of this file.<programlisting linenumbering="unnumbered"><anchor xml:id="_common_8h_source_1l00001"/>00001 <emphasis role="preprocessor">#ifndef&#32;SIMULAZIONE_TRANSAZIONI_COMMON_H</emphasis>
+<anchor xml:id="_common_8h_source_1l00002"/>00002 <emphasis role="preprocessor">#define&#32;SIMULAZIONE_TRANSAZIONI_COMMON_H</emphasis>
+<anchor xml:id="_common_8h_source_1l00003"/>00003 
+<anchor xml:id="_common_8h_source_1l00004"/>00004 <emphasis role="preprocessor">#include&#32;&lt;stdlib.h&gt;</emphasis>
+<anchor xml:id="_common_8h_source_1l00005"/>00005 <emphasis role="preprocessor">#include&#32;&lt;stdio.h&gt;</emphasis>
+<anchor xml:id="_common_8h_source_1l00006"/>00006 <emphasis role="preprocessor">#include&#32;&lt;stddef.h&gt;</emphasis>
+<anchor xml:id="_common_8h_source_1l00007"/>00007 <emphasis role="preprocessor">#include&#32;&lt;stdint.h&gt;</emphasis>
+<anchor xml:id="_common_8h_source_1l00008"/>00008 <emphasis role="preprocessor">#include&#32;&lt;unistd.h&gt;</emphasis>
+<anchor xml:id="_common_8h_source_1l00009"/>00009 <emphasis role="preprocessor">#include&#32;&lt;errno.h&gt;</emphasis>
+<anchor xml:id="_common_8h_source_1l00010"/>00010 <emphasis role="preprocessor">#include&#32;&lt;time.h&gt;</emphasis>
+<anchor xml:id="_common_8h_source_1l00011"/>00011 <emphasis role="preprocessor">#include&#32;&lt;math.h&gt;</emphasis>
+<anchor xml:id="_common_8h_source_1l00012"/>00012 <emphasis role="preprocessor">#include&#32;&lt;string.h&gt;</emphasis>
+<anchor xml:id="_common_8h_source_1l00013"/>00013 <emphasis role="preprocessor">#include&#32;&lt;sys/ipc.h&gt;</emphasis>
+<anchor xml:id="_common_8h_source_1l00014"/>00014 <emphasis role="preprocessor">#include&#32;&lt;sys/shm.h&gt;</emphasis>
+<anchor xml:id="_common_8h_source_1l00015"/>00015 <emphasis role="preprocessor">#include&#32;&lt;sys/sem.h&gt;</emphasis>
+<anchor xml:id="_common_8h_source_1l00016"/>00016 <emphasis role="preprocessor">#include&#32;&lt;sys/msg.h&gt;</emphasis>
+<anchor xml:id="_common_8h_source_1l00017"/>00017 <emphasis role="preprocessor">#include&#32;&lt;sys/types.h&gt;</emphasis>
+<anchor xml:id="_common_8h_source_1l00018"/>00018 
+<anchor xml:id="_common_8h_source_1l00019"/>00019 <emphasis role="preprocessor">#include&#32;&quot;../utils/debug.h&quot;</emphasis>
+<anchor xml:id="_common_8h_source_1l00020"/>00020 <emphasis role="preprocessor">#include&#32;&quot;../utils/sem.h&quot;</emphasis>
+<anchor xml:id="_common_8h_source_1l00021"/>00021 <emphasis role="preprocessor">#include&#32;&quot;../utils/lists.h&quot;</emphasis>
+<anchor xml:id="_common_8h_source_1l00022"/>00022 
+<anchor xml:id="_common_8h_source_1l00023"/>00023 <emphasis role="preprocessor">#ifndef&#32;NULL</emphasis>
+<anchor xml:id="_common_8h_source_1l00024"/><link linkend="_common_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4">00024</link> <emphasis role="preprocessor">#define&#32;NULL&#32;0&#32;</emphasis><emphasis role="comment">/*&#32;thre&apos;s&#32;a&#32;problem&#32;with&#32;NULL&#32;for&#32;some&#32;reason&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_common_8h_source_1l00025"/>00025 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_common_8h_source_1l00026"/>00026 
+<anchor xml:id="_common_8h_source_1l00027"/>00027 <emphasis role="preprocessor">#ifndef&#32;_GNU_SOURCE</emphasis>
+<anchor xml:id="_common_8h_source_1l00028"/><link linkend="_common_8h_1a369266c24eacffb87046522897a570d5">00028</link> <emphasis role="preprocessor">#define&#32;_GNU_SOURCE</emphasis>
+<anchor xml:id="_common_8h_source_1l00029"/>00029 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_common_8h_source_1l00030"/>00030 
+<anchor xml:id="_common_8h_source_1l00031"/><link linkend="_common_8h_1a6242a25f9d996f0cc4f4cdb911218b75">00031</link> <emphasis role="preprocessor">#define&#32;ARRAY_SIZE(x)&#32;(sizeof(x)&#32;/&#32;sizeof((x)[0]))</emphasis>
+<anchor xml:id="_common_8h_source_1l00032"/><link linkend="_common_8h_1a0d7644a795aa2dd33f01ef184f3f672a">00032</link> <emphasis role="preprocessor">#define&#32;RAND(min,&#32;max)&#32;((rand()&#32;%&#32;(max&#32;-&#32;min&#32;+&#32;1))&#32;+&#32;min)</emphasis>
+<anchor xml:id="_common_8h_source_1l00033"/>00033 
+<anchor xml:id="_common_8h_source_1l00034"/>00034 <emphasis role="comment">/*&#32;--&#32;IPC&#32;OBJECTS&#32;--&#32;*/</emphasis>
+<anchor xml:id="_common_8h_source_1l00035"/><link linkend="_common_8h_1a8d3bb11cd2b49f5181b881aac93d069a">00035</link> <emphasis role="preprocessor">#define&#32;IPC_ERROR&#32;-1</emphasis>
+<anchor xml:id="_common_8h_source_1l00036"/><link linkend="_common_8h_1a682c31ec4c2347e42bb80ea43ccb4438">00036</link> <emphasis role="preprocessor">#define&#32;SHM_PARAMETERS&#32;1337</emphasis>
+<anchor xml:id="_common_8h_source_1l00037"/><link linkend="_common_8h_1a3baba14bf322fc6a6367f5ae6795d440">00037</link> <emphasis role="preprocessor">#define&#32;SHM_USERS_ARRAY&#32;1338</emphasis>
+<anchor xml:id="_common_8h_source_1l00038"/><link linkend="_common_8h_1a55de6fde37952d6cbbf28f2ed2299ace">00038</link> <emphasis role="preprocessor">#define&#32;SHM_NODES_ARRAY&#32;1339</emphasis>
+<anchor xml:id="_common_8h_source_1l00039"/><link linkend="_common_8h_1a5de1e6971273cfe0a7fdd4570401eb53">00039</link> <emphasis role="preprocessor">#define&#32;SHM_LEDGER&#32;1340</emphasis>
+<anchor xml:id="_common_8h_source_1l00040"/><link linkend="_common_8h_1a1abb954531733b3c7b64d0d78a75df2a">00040</link> <emphasis role="preprocessor">#define&#32;SEM_MASTER&#32;420</emphasis>
+<anchor xml:id="_common_8h_source_1l00041"/><link linkend="_common_8h_1aa4f1eb96a74b0e784972e897bcead9ef">00041</link> <emphasis role="preprocessor">#define&#32;M_QUEUE_KEY&#32;0x5AD</emphasis>
+<anchor xml:id="_common_8h_source_1l00042"/>00042 
+<anchor xml:id="_common_8h_source_1l00043"/><link linkend="_common_8h_1a320169181de72ba0b5203555e14103c4">00043</link> <emphasis role="preprocessor">#define&#32;SO_BLOCK_SIZE&#32;100&#32;&#32;&#32;&#32;&#32;</emphasis><emphasis role="comment">/*&#32;number&#32;of&#32;transaction&#32;per&#32;block*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_common_8h_source_1l00044"/><link linkend="_common_8h_1aae9d8904fbca80e9986482d75e345f98">00044</link> <emphasis role="preprocessor">#define&#32;SO_REGISTRY_SIZE&#32;1000&#32;</emphasis><emphasis role="comment">/*&#32;max&#32;length&#32;of&#32;consecutive&#32;blocks&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+<anchor xml:id="_common_8h_source_1l00045"/><link linkend="_common_8h_1a6233123742aa307f2a5ce737acca67f0">00045</link> <emphasis role="preprocessor">#define&#32;SELF&#32;-1</emphasis>
+<anchor xml:id="_common_8h_source_1l00046"/><link linkend="_common_8h_1a0584f5b77b23fd251570a4c60806f8a9">00046</link> <emphasis role="preprocessor">#define&#32;EVERYONE_BROKE&#32;&apos;$&apos;</emphasis>
+<anchor xml:id="_common_8h_source_1l00047"/>00047 
+<anchor xml:id="_common_8h_source_1l00048"/>00048 <emphasis role="comment">/*&#32;--&#32;ARGV&#32;LOCATION&#32;OF&#32;IPC&#32;OBJECTS&#32;--&#32;*/</emphasis>
+<anchor xml:id="_common_8h_source_1l00049"/><link linkend="_common_8h_1abdb8ae9e0caeeaa6b02791a1991ec34e">00049</link> <emphasis role="preprocessor">#define&#32;USERS_PID_ARGV&#32;(atoi(argv[1]))</emphasis>
+<anchor xml:id="_common_8h_source_1l00050"/><link linkend="_common_8h_1aa26907b48e282ee32e55a0f21d90c651">00050</link> <emphasis role="preprocessor">#define&#32;NODES_PID_ARGV&#32;(atoi(argv[2]))</emphasis>
+<anchor xml:id="_common_8h_source_1l00051"/><link linkend="_common_8h_1a8dc6d4d682e4f826ef23717f1b28d60c">00051</link> <emphasis role="preprocessor">#define&#32;PARAMETERS_ARGV&#32;(atoi(argv[3]))</emphasis>
+<anchor xml:id="_common_8h_source_1l00052"/><link linkend="_common_8h_1acbabb34d7448290aade7aa93bb0c09ca">00052</link> <emphasis role="preprocessor">#define&#32;LEDGER_ARGV&#32;(atoi(argv[4]))</emphasis>
+<anchor xml:id="_common_8h_source_1l00053"/><link linkend="_common_8h_1a6b6ae98a167eeb9050cca5e9f9e5cf37">00053</link> <emphasis role="preprocessor">#define&#32;SEM_ID_ARGV&#32;(atoi(argv[5]))</emphasis>
+<anchor xml:id="_common_8h_source_1l00054"/>00054 
+<anchor xml:id="_common_8h_source_1l00055"/>00055 <emphasis role="comment">/*&#32;--&#32;USER&#32;RETURN&#32;STATUS&#32;--&#32;*/</emphasis>
+<anchor xml:id="_common_8h_source_1l00056"/><link linkend="_common_8h_1ae1712c33caea2a8ca5b5dcade31aab99">00056</link> <emphasis role="preprocessor">#define&#32;WENT_BROKE&#32;1</emphasis>
+<anchor xml:id="_common_8h_source_1l00057"/><link linkend="_common_8h_1a01c3892c16d6330e486637967ab0289b">00057</link> <emphasis role="preprocessor">#define&#32;MAX_RETRY&#32;2</emphasis>
+<anchor xml:id="_common_8h_source_1l00058"/><link linkend="_common_8h_1a8fe83ac76edc595f6b98cd4a4127aed5">00058</link> <emphasis role="preprocessor">#define&#32;ERROR&#32;-1</emphasis>
+<anchor xml:id="_common_8h_source_1l00059"/><link linkend="_common_8h_1aa90cac659d18e8ef6294c7ae337f6b58">00059</link> <emphasis role="preprocessor">#define&#32;SUCCESS&#32;0</emphasis>
+<anchor xml:id="_common_8h_source_1l00060"/>00060 
+<anchor xml:id="_common_8h_source_1l00061"/>00061 <emphasis role="keyword">extern</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_common_8h_1ad65a8842cc674e3ddf69355898c0ecbf">errno</link>;
+<anchor xml:id="_common_8h_source_1l00062"/>00062 
+<anchor xml:id="_common_8h_source_1l00063"/>00063 <emphasis role="preprocessor">#ifndef&#32;TEST_ERROR</emphasis>
+<anchor xml:id="_common_8h_source_1l00064"/><link linkend="_common_8h_1a8251bcdfc5c83845e0834adf211de033">00064</link> <emphasis role="preprocessor">#define&#32;TEST_ERROR&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<anchor xml:id="_common_8h_source_1l00065"/>00065 <emphasis role="preprocessor">&#32;&#32;&#32;&#32;if&#32;(errno)&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<anchor xml:id="_common_8h_source_1l00066"/>00066 <emphasis role="preprocessor">&#32;&#32;&#32;&#32;{&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<anchor xml:id="_common_8h_source_1l00067"/>00067 <emphasis role="preprocessor">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;fprintf(stderr,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<anchor xml:id="_common_8h_source_1l00068"/>00068 <emphasis role="preprocessor">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&quot;%s:%d:&#32;PID=%5d:&#32;Error&#32;%d&#32;(%s)\n&quot;</emphasis>,&#32;\
+<anchor xml:id="_common_8h_source_1l00069"/>00069 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;__FILE__,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+<anchor xml:id="_common_8h_source_1l00070"/>00070 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;__LINE__,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+<anchor xml:id="_common_8h_source_1l00071"/>00071 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;getpid(),&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+<anchor xml:id="_common_8h_source_1l00072"/>00072 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;errno,&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+<anchor xml:id="_common_8h_source_1l00073"/>00073 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;strerror(errno));&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+<anchor xml:id="_common_8h_source_1l00074"/>00074 &#32;&#32;&#32;&#32;}
+<anchor xml:id="_common_8h_source_1l00075"/>00075 <emphasis role="preprocessor">#endif</emphasis>
+<anchor xml:id="_common_8h_source_1l00076"/>00076 
+<anchor xml:id="_common_8h_source_1l00077"/><link linkend="_structparameters">00077</link> <emphasis role="keyword">struct&#32;</emphasis><link linkend="_structparameters">parameters</link>
+<anchor xml:id="_common_8h_source_1l00078"/>00078 {
+<anchor xml:id="_common_8h_source_1l00079"/><link linkend="_structparameters_1a1a7bfa0882f03d573b4e419d02f041f8">00079</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">unsigned</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_structparameters_1a1a7bfa0882f03d573b4e419d02f041f8">SO_USER_NUM</link>;
+<anchor xml:id="_common_8h_source_1l00080"/><link linkend="_structparameters_1a379d08051847c4f98268a27001b06261">00080</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">unsigned</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_structparameters_1a379d08051847c4f98268a27001b06261">SO_NODES_NUM</link>;
+<anchor xml:id="_common_8h_source_1l00081"/><link linkend="_structparameters_1a375c541a19818ce43b6ae275d0a80365">00081</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">unsigned</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_structparameters_1a375c541a19818ce43b6ae275d0a80365">SO_BUDGET_INIT</link>;
+<anchor xml:id="_common_8h_source_1l00082"/><link linkend="_structparameters_1a1e8968a80441b4a641d5ff3566af04f1">00082</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">char</emphasis>&#32;<link linkend="_structparameters_1a1e8968a80441b4a641d5ff3566af04f1">SO_REWARD</link>;&#32;<emphasis role="comment">/*&#32;max&#32;value&#32;100&#32;*/</emphasis>
+<anchor xml:id="_common_8h_source_1l00083"/><link linkend="_structparameters_1a213ccb7b7e150d7bf584f35cc824ead6">00083</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">unsigned</emphasis>&#32;<emphasis role="keywordtype">long</emphasis>&#32;<link linkend="_structparameters_1a213ccb7b7e150d7bf584f35cc824ead6">SO_MIN_TRANS_GEN_NSEC</link>;
+<anchor xml:id="_common_8h_source_1l00084"/><link linkend="_structparameters_1abca064afd6b392e1f9e24b5fda8cdecb">00084</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">unsigned</emphasis>&#32;<emphasis role="keywordtype">long</emphasis>&#32;<link linkend="_structparameters_1abca064afd6b392e1f9e24b5fda8cdecb">SO_MAX_TRANS_GEN_NSEC</link>;
+<anchor xml:id="_common_8h_source_1l00085"/><link linkend="_structparameters_1ac2861693c2d9121c5ecad90de2189690">00085</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">unsigned</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_structparameters_1ac2861693c2d9121c5ecad90de2189690">SO_RETRY</link>;
+<anchor xml:id="_common_8h_source_1l00086"/><link linkend="_structparameters_1a8fe346ee9f21d4a40e15388b72579fbe">00086</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">unsigned</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_structparameters_1a8fe346ee9f21d4a40e15388b72579fbe">SO_TP_SIZE</link>;
+<anchor xml:id="_common_8h_source_1l00087"/><link linkend="_structparameters_1a19a5fe1068e3e1ceceab49114d856628">00087</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">unsigned</emphasis>&#32;<emphasis role="keywordtype">long</emphasis>&#32;<link linkend="_structparameters_1a19a5fe1068e3e1ceceab49114d856628">SO_MIN_TRANS_PROC_NSEC</link>;
+<anchor xml:id="_common_8h_source_1l00088"/><link linkend="_structparameters_1af7fbb0805dd6c4e1729d70a30164bc1c">00088</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">unsigned</emphasis>&#32;<emphasis role="keywordtype">long</emphasis>&#32;<link linkend="_structparameters_1af7fbb0805dd6c4e1729d70a30164bc1c">SO_MAX_TRANS_PROC_NSEC</link>;
+<anchor xml:id="_common_8h_source_1l00089"/><link linkend="_structparameters_1a86c91cb21e43e2f92651c149f93f0dc5">00089</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">unsigned</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_structparameters_1a86c91cb21e43e2f92651c149f93f0dc5">SO_SIM_SEC</link>;
+<anchor xml:id="_common_8h_source_1l00090"/><link linkend="_structparameters_1a6d8f5bd80c3eda4ed6d9f2440f9105b2">00090</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">unsigned</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_structparameters_1a6d8f5bd80c3eda4ed6d9f2440f9105b2">SO_FRIENDS_NUM</link>;
+<anchor xml:id="_common_8h_source_1l00091"/><link linkend="_structparameters_1a85ca4a1c61f11babff7ccd10ec58ee70">00091</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">unsigned</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_structparameters_1a85ca4a1c61f11babff7ccd10ec58ee70">SO_HOPS</link>;
+<anchor xml:id="_common_8h_source_1l00092"/>00092 };
+<anchor xml:id="_common_8h_source_1l00093"/>00093 
+<anchor xml:id="_common_8h_source_1l00094"/><link linkend="_structuser__t">00094</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">struct&#32;</emphasis><link linkend="_structuser__t">user_t</link>
+<anchor xml:id="_common_8h_source_1l00095"/>00095 {
+<anchor xml:id="_common_8h_source_1l00096"/><link linkend="_structuser__t_1ae0d46a978d5cd6707411f276ad869b9c">00096</link> &#32;&#32;&#32;&#32;pid_t&#32;<link linkend="_structuser__t_1ae0d46a978d5cd6707411f276ad869b9c">pid</link>;
+<anchor xml:id="_common_8h_source_1l00097"/>00097 &#32;&#32;&#32;&#32;<emphasis role="keyword">enum</emphasis>
+<anchor xml:id="_common_8h_source_1l00098"/>00098 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_common_8h_source_1l00099"/><link linkend="_structuser__t_1a06fc87d81c62e9abb8790b6e5713c55bac188eabb2d61ddb1e8632280be9b0dd5">00099</link> &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_structuser__t_1a06fc87d81c62e9abb8790b6e5713c55bac188eabb2d61ddb1e8632280be9b0dd5">alive</link>,
+<anchor xml:id="_common_8h_source_1l00100"/><link linkend="_structuser__t_1a06fc87d81c62e9abb8790b6e5713c55bab67cb4169c109061885309cc2199cbba">00100</link> &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_structuser__t_1a06fc87d81c62e9abb8790b6e5713c55bab67cb4169c109061885309cc2199cbba">broke</link>,
+<anchor xml:id="_common_8h_source_1l00101"/>00101 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_structuser__t_1a06fc87d81c62e9abb8790b6e5713c55ba2bc11c916ebf99c8bd8b66b416de6d62">dead</link>
+<anchor xml:id="_common_8h_source_1l00102"/><link linkend="_structuser__t_1a06fc87d81c62e9abb8790b6e5713c55ba2bc11c916ebf99c8bd8b66b416de6d62">00102</link> &#32;&#32;&#32;&#32;}&#32;<link linkend="_structuser__t_1a2f25fcb4ca138820780f3fc6ee156d17">status</link>;
+<anchor xml:id="_common_8h_source_1l00103"/><link linkend="_common_8h_1a75285f7670649ccfb5ccbbc952a15bfd">00103</link> }&#32;<link linkend="_common_8h_1a75285f7670649ccfb5ccbbc952a15bfd">user</link>;
+<anchor xml:id="_common_8h_source_1l00104"/>00104 
+<anchor xml:id="_common_8h_source_1l00105"/><link linkend="_structnode__t">00105</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">struct&#32;</emphasis><link linkend="_structnode__t">node_t</link>
+<anchor xml:id="_common_8h_source_1l00106"/>00106 {
+<anchor xml:id="_common_8h_source_1l00107"/><link linkend="_structnode__t_1ae0d46a978d5cd6707411f276ad869b9c">00107</link> &#32;&#32;&#32;&#32;pid_t&#32;<link linkend="_structnode__t_1ae0d46a978d5cd6707411f276ad869b9c">pid</link>;
+<anchor xml:id="_common_8h_source_1l00108"/>00108 &#32;&#32;&#32;&#32;<emphasis role="keyword">enum</emphasis>
+<anchor xml:id="_common_8h_source_1l00109"/>00109 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_common_8h_source_1l00110"/><link linkend="_structnode__t_1adf764cbdea00d65edcd07bb9953ad2b7a5d20e160566f0b85357fd5a3c87a985e">00110</link> &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_structnode__t_1adf764cbdea00d65edcd07bb9953ad2b7a5d20e160566f0b85357fd5a3c87a985e">available</link>,
+<anchor xml:id="_common_8h_source_1l00111"/>00111 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_structnode__t_1adf764cbdea00d65edcd07bb9953ad2b7a0a601c9076b9914da4a237c8688b1c88">full</link>
+<anchor xml:id="_common_8h_source_1l00112"/><link linkend="_structnode__t_1adf764cbdea00d65edcd07bb9953ad2b7a0a601c9076b9914da4a237c8688b1c88">00112</link> &#32;&#32;&#32;&#32;}&#32;<link linkend="_structnode__t_1a3298103f7912ec98c0f00205b2ac218d">status</link>;
+<anchor xml:id="_common_8h_source_1l00113"/><link linkend="_common_8h_1a85b4f4124a5616dea92c9e8a221a8db5">00113</link> }&#32;<link linkend="_common_8h_1a85b4f4124a5616dea92c9e8a221a8db5">node</link>;
+<anchor xml:id="_common_8h_source_1l00114"/>00114 
+<anchor xml:id="_common_8h_source_1l00115"/>00115 <emphasis role="comment">/*&#32;Transaction&#32;struct&#32;*/</emphasis>
+<anchor xml:id="_common_8h_source_1l00116"/><link linkend="_structtransaction__t">00116</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">struct&#32;</emphasis><link linkend="_structtransaction__t">transaction_t</link>
+<anchor xml:id="_common_8h_source_1l00117"/>00117 {
+<anchor xml:id="_common_8h_source_1l00118"/><link linkend="_structtransaction__t_1a2aace03835c4d951b3dee117b328ef87">00118</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis>timespec&#32;<link linkend="_structtransaction__t_1a2aace03835c4d951b3dee117b328ef87">timestamp</link>;
+<anchor xml:id="_common_8h_source_1l00119"/><link linkend="_structtransaction__t_1a36060e3785ebad7b278cb01d5159c0c5">00119</link> &#32;&#32;&#32;&#32;pid_t&#32;<link linkend="_structtransaction__t_1a36060e3785ebad7b278cb01d5159c0c5">sender</link>;
+<anchor xml:id="_common_8h_source_1l00120"/><link linkend="_structtransaction__t_1a3c01e8bf1e61ee67a25113f3db1a32b8">00120</link> &#32;&#32;&#32;&#32;pid_t&#32;<link linkend="_structtransaction__t_1a3c01e8bf1e61ee67a25113f3db1a32b8">receiver</link>;
+<anchor xml:id="_common_8h_source_1l00121"/><link linkend="_structtransaction__t_1a14236de313193a14b4dbdf442bcf2bb9">00121</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_structtransaction__t_1a14236de313193a14b4dbdf442bcf2bb9">amount</link>;
+<anchor xml:id="_common_8h_source_1l00122"/><link linkend="_structtransaction__t_1af571e76d8e59b8452f38407799272e4a">00122</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_structtransaction__t_1af571e76d8e59b8452f38407799272e4a">reward</link>;
+<anchor xml:id="_common_8h_source_1l00123"/>00123 &#32;&#32;&#32;&#32;<emphasis role="keyword">enum</emphasis>
+<anchor xml:id="_common_8h_source_1l00124"/>00124 &#32;&#32;&#32;&#32;{
+<anchor xml:id="_common_8h_source_1l00125"/><link linkend="_structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5a6a6b4e7520e01adba9632dc9d9229e2f">00125</link> &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5a6a6b4e7520e01adba9632dc9d9229e2f">pending</link>,
+<anchor xml:id="_common_8h_source_1l00126"/><link linkend="_structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5ac87aff6c8e5d399b301672280549ea3e">00126</link> &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5ac87aff6c8e5d399b301672280549ea3e">processing</link>,
+<anchor xml:id="_common_8h_source_1l00127"/><link linkend="_structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5ad6daa5d32ad2d7b003a0178c8eb07178">00127</link> &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5ad6daa5d32ad2d7b003a0178c8eb07178">confirmed</link>,
+<anchor xml:id="_common_8h_source_1l00128"/>00128 &#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5aaf2b197bcf14794c85c5f313dab0ca31">aborted</link>
+<anchor xml:id="_common_8h_source_1l00129"/><link linkend="_structtransaction__t_1a99fb83031ce9923c84392b4e92f956b5aaf2b197bcf14794c85c5f313dab0ca31">00129</link> &#32;&#32;&#32;&#32;}&#32;<link linkend="_structtransaction__t_1a95a086466eb975b4da063388dd397dd3">status</link>;
+<anchor xml:id="_common_8h_source_1l00130"/><link linkend="_common_8h_1a96717a5adf375b5328bde513e91bf658">00130</link> }&#32;<link linkend="_common_8h_1a96717a5adf375b5328bde513e91bf658">transaction</link>;
+<anchor xml:id="_common_8h_source_1l00131"/>00131 
+<anchor xml:id="_common_8h_source_1l00132"/><link linkend="_structmessage">00132</link> <emphasis role="keyword">struct&#32;</emphasis><link linkend="_structmessage">message</link>
+<anchor xml:id="_common_8h_source_1l00133"/>00133 {
+<anchor xml:id="_common_8h_source_1l00134"/><link linkend="_structmessage_1a6e71692f0e74d6cd516fa62386afcfb4">00134</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">long</emphasis>&#32;<link linkend="_structmessage_1a6e71692f0e74d6cd516fa62386afcfb4">mtype</link>;
+<anchor xml:id="_common_8h_source_1l00135"/><link linkend="_structmessage_1a16b3f182630755c893589f24a779c143">00135</link> &#32;&#32;&#32;&#32;<link linkend="_structtransaction__t">transaction</link>&#32;<link linkend="_structmessage_1a16b3f182630755c893589f24a779c143">userTrans</link>;
+<anchor xml:id="_common_8h_source_1l00136"/>00136 };
+<anchor xml:id="_common_8h_source_1l00137"/>00137 
+<anchor xml:id="_common_8h_source_1l00138"/>00138 <emphasis role="comment">/*&#32;Block&#32;struct&#32;*/</emphasis>
+<anchor xml:id="_common_8h_source_1l00139"/><link linkend="_structblock__t">00139</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">struct&#32;</emphasis><link linkend="_structblock__t">block_t</link>
+<anchor xml:id="_common_8h_source_1l00140"/>00140 {
+<anchor xml:id="_common_8h_source_1l00141"/><link linkend="_structblock__t_1a75735b68381e6c25555bb53c163abfe9">00141</link> &#32;&#32;&#32;&#32;<link linkend="_structtransaction__t">transaction</link>&#32;<link linkend="_structblock__t_1a75735b68381e6c25555bb53c163abfe9">transList</link>[<link linkend="_common_8h_1a320169181de72ba0b5203555e14103c4">SO_BLOCK_SIZE</link>];
+<anchor xml:id="_common_8h_source_1l00142"/><link linkend="_structblock__t_1aa72742d9d7c1c8631aa36c0077f13b1d">00142</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">unsigned</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_structblock__t_1aa72742d9d7c1c8631aa36c0077f13b1d">blockIndex</link>;&#32;<emphasis role="comment">/*&#32;when&#32;a&#32;block&#32;is&#32;written&#32;on&#32;ledger&#32;it&apos;s&#32;Index&#32;needs&#32;to&#32;be&#32;updated&#32;*/</emphasis>
+<anchor xml:id="_common_8h_source_1l00143"/><link linkend="_structblock__t_1a063b51ee50d55219236d2e4db6ce97a8">00143</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis><link linkend="_structblock__t">block</link>&#32;*<link linkend="_structblock__t_1a063b51ee50d55219236d2e4db6ce97a8">next</link>;
+<anchor xml:id="_common_8h_source_1l00144"/><link linkend="_structblock__t_1a203e7b65bebf69e2be0878ee3c322c0c">00144</link> &#32;&#32;&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis><link linkend="_structblock__t">block</link>&#32;*<link linkend="_structblock__t_1a203e7b65bebf69e2be0878ee3c322c0c">prev</link>;
+<anchor xml:id="_common_8h_source_1l00145"/><link linkend="_common_8h_1acc02c32db194c6d92ce82de8c99eacbc">00145</link> }&#32;<link linkend="_common_8h_1acc02c32db194c6d92ce82de8c99eacbc">block</link>;
+<anchor xml:id="_common_8h_source_1l00146"/>00146 
+<anchor xml:id="_common_8h_source_1l00147"/>00147 <emphasis role="comment">/*&#32;Libro&#32;Mastro&#32;(ledger)&#32;struct&#32;*/</emphasis>
+<anchor xml:id="_common_8h_source_1l00148"/><link linkend="_structledger__t">00148</link> <emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">struct&#32;</emphasis><link linkend="_structledger__t">ledger_t</link>
+<anchor xml:id="_common_8h_source_1l00149"/>00149 {
+<anchor xml:id="_common_8h_source_1l00150"/><link linkend="_structledger__t_1ae8b38edd17a3a5769aea3c05f4e2b432">00150</link> &#32;&#32;&#32;&#32;<link linkend="_structblock__t">block</link>&#32;*<link linkend="_structledger__t_1ae8b38edd17a3a5769aea3c05f4e2b432">head</link>;
+<anchor xml:id="_common_8h_source_1l00151"/><link linkend="_structledger__t_1a3687d896ad2d77106df256f1db753c18">00151</link> &#32;&#32;&#32;&#32;<emphasis role="keywordtype">unsigned</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;<link linkend="_structledger__t_1a3687d896ad2d77106df256f1db753c18">registryCurrSize</link>;&#32;<emphasis role="comment">/*&#32;initialize&#32;to&#32;SO_REGISTRY_SIZE,&#32;update&#32;with&#32;every&#32;new&#32;block&#32;added&#32;*/</emphasis>
+<anchor xml:id="_common_8h_source_1l00152"/><link linkend="_common_8h_1af8b2bdfa2bfa44284c83a9d6994b13f1">00152</link> }&#32;<link linkend="_common_8h_1af8b2bdfa2bfa44284c83a9d6994b13f1">ledger</link>;
+<anchor xml:id="_common_8h_source_1l00153"/>00153 
+<anchor xml:id="_common_8h_source_1l00154"/>00154 <link linkend="_structledger__t">ledger</link>&#32;*<link linkend="_common_8h_1a92d436f484409e36c57caaa0b45ae9da">ledger_init</link>();
+<anchor xml:id="_common_8h_source_1l00155"/>00155 <link linkend="_structblock__t">block</link>&#32;*<link linkend="_common_8h_1ab670b223f506d8bc9ee5286f6e37b1cd">new_block</link>();
+<anchor xml:id="_common_8h_source_1l00156"/><link linkend="_common_8h_1a99970dbc1175970ecba0e7c5e03d2f84">00156</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_common_8h_1a99970dbc1175970ecba0e7c5e03d2f84">add_block</link>(<link linkend="_structblock__t">block</link>);
+<anchor xml:id="_common_8h_source_1l00157"/>00157 <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_common_8h_1aa0f3746a3fc31a06a45c8356c406b8aa">add_transaction_to_block</link>(<link linkend="_structblock__t">block</link>&#32;*,&#32;<link linkend="_structtransaction__t">transaction</link>&#32;*,&#32;<emphasis role="keywordtype">int</emphasis>&#32;index);
+<anchor xml:id="_common_8h_source_1l00158"/><link linkend="_common_8h_1a8b859d92497767ee0f9608993b7157e9">00158</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_common_8h_1a8b859d92497767ee0f9608993b7157e9">add_block_to_ledger</link>(<link linkend="_structblock__t">block</link>&#32;*);
+<anchor xml:id="_common_8h_source_1l00159"/><link linkend="_common_8h_1a023050d658b039c99f82511175fbfdb9">00159</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_common_8h_1a023050d658b039c99f82511175fbfdb9">find_transaction</link>(<emphasis role="keyword">struct</emphasis>&#32;timespec&#32;timestamp,&#32;pid_t&#32;sender,&#32;pid_t&#32;receiver);&#32;<emphasis role="comment">/*&#32;NULL&#32;used&#32;to&#32;group&#32;results&#32;*/</emphasis>
+<anchor xml:id="_common_8h_source_1l00160"/>00160 
+<anchor xml:id="_common_8h_source_1l00161"/>00161 <emphasis role="comment">/*&#32;listparser.c&#32;*/</emphasis>
+<anchor xml:id="_common_8h_source_1l00162"/><link linkend="_common_8h_1a4751fd07d9dcd6444d3761b6e1398523">00162</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_common_8h_1a4751fd07d9dcd6444d3761b6e1398523">search_timestamp</link>();
+<anchor xml:id="_common_8h_source_1l00163"/><link linkend="_common_8h_1ab17517bd1393b9e236afecac072a08c5">00163</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_common_8h_1ab17517bd1393b9e236afecac072a08c5">search_sender</link>();
+<anchor xml:id="_common_8h_source_1l00164"/><link linkend="_common_8h_1a95cfd78671315484af4af4158c12349d">00164</link> <emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_common_8h_1a95cfd78671315484af4af4158c12349d">search_receiver</link>();
+<anchor xml:id="_common_8h_source_1l00165"/>00165 
+<anchor xml:id="_common_8h_source_1l00166"/>00166 <emphasis role="preprocessor">#endif&#32;</emphasis><emphasis role="comment">/*&#32;SIMULAZIONE_TRANSAZIONI_COMMON_H&#32;*/</emphasis><emphasis role="preprocessor"></emphasis>
+</programlisting></section>
