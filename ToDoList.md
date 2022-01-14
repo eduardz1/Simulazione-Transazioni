@@ -13,7 +13,7 @@
 
 ## Master Specific
 - [x] **Eduard ->** handler can't have arguments, need to implement it without or use an extern variable (avoid if possible)
-- [ ] print every second of num proc users and node active
+- [x]**Rick(ci prova)-->** print every second of num proc users and node active
 - [ ] print every second of current_budget of every user and node (max 32 lines, ordered by most budget)
 
 ## User Specific
