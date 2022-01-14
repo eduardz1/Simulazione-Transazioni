@@ -13,6 +13,9 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
 {
     int userNum = par->SO_USER_NUM;
     int nodesNum = par->SO_NODES_NUM;
+    int statusNum = 0;
+    char statusStr[] = "available";
+    
 
     printf("\n ------- Master Process PID is %d ----------\n", mainPID);
     printf("|                                             |\n");
@@ -20,12 +23,37 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
     printf(" ---------------------------------------------\n");
     while (userNum--)
     {
-        printf("|  User         %d            %d             |\n", userPID[userNum].pid, userPID[userNum].status);
+        statusNum = userPID[userNum].status;
+        TEST_ERROR
+        switch (statusNum)
+        {
+        case 0:
+            strcpy(statusStr, "alive    ");
+            break;
+        case 1:
+            strcpy(statusStr, "broke    ");
+            break;
+        case 2:
+            strcpy(statusStr, "dead     ");
+            break;
+        }
+        printf("|  User         %d            %s             |\n", userPID[userNum].pid, statusStr);
     }
     printf(" ---------------------------------------------\n");
     while (nodesNum--)
     {
-        printf("|  Node         %d            %d             |\n", nodePID[nodesNum].pid, nodePID[nodesNum].status);
+        statusNum = nodePID[nodesNum].status;
+        TEST_ERROR
+        switch (statusNum)
+        {
+        case 0:
+            strcpy(statusStr, "available");
+            break;
+        case 1:
+            strcpy(statusStr, "full     ");
+            break;
+        }
+        printf("|  Node         %d            %s             |\n", nodePID[nodesNum].pid, statusStr);
     }
     printf(" ---------------------------------------------\n");
 }

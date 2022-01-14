@@ -57,7 +57,7 @@ int get_pid_userIndex(int PID_toSearch)
 			return i;
 	}
 
-	return -1;
+	return ERROR;
 }
 
 /* returns a random PID of a non-dead user from usersPID[] */
