@@ -56,7 +56,7 @@ void node_interrupt_handle(int signum)
 
 int main(int argc, char *argv[])
 {
-     transaction** sumBlock;
+    transaction** sumBlock;
     transaction** blockTransaction;
    
     int myPID = getpid();
