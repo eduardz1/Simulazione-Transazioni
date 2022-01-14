@@ -10,7 +10,7 @@
  */
 
 transaction *pool;
-
+int currBalance;
 /* parameters of simulation */
 struct parameters *par;
 user *usersPID;
@@ -56,6 +56,51 @@ int sleepMethod(int argc, char *argv[])
     randSleepTime.tv_nsec = RAND(SO_MIN_TRANS_PROC_NSEC, SO_MAX_TRANS_PROC_NSEC);
 }*/
 
+
+
+
+/* sums rewards of sumBlock[SO_BLOCK_SIZE-1] transactions */
+int sum_reward(transaction **sumBlock)
+{
+    int i = 0;
+    int sum;
+
+    for (i = 0; i < (SO_BLOCK_SIZE - 1); i++)
+    {
+        sum += sumBlock[i]->reward;
+    }
+
+    currBalance += sum;
+    
+    
+    return sum;
+    }
+
+
+/* initializes new block with transList[0] as reward transaction */
+block *new_block(transaction **blockTransaction)
+{
+
+    block *newBlock = malloc(sizeof(block));
+
+    transaction reward;
+    struct timespec timestamp;
+    clock_gettime(CLOCK_REALTIME, &timestamp);
+
+
+    reward.timestamp= timestamp;
+    reward.sender= SELF;
+    reward.receiver=getpid();
+    reward.amount= sum_reward(blockTransaction); /*sum of each reward of transaction in the block */
+    reward.reward=0;
+
+    memcpy(newBlock->transList+1, *blockTransaction,(SO_BLOCK_SIZE-1)*(sizeof(transaction)));
+
+    newBlock->next = NULL;
+
+    return newBlock;
+}
+
 /* attaches ipc objects based on IDs passed via arguments */
 void attach_ipc_objects(char **argv)
 {
@@ -80,11 +125,25 @@ void signal_handler_init(struct sigaction *saINT_node)
     saINT_node->sa_handler = node_interrupt_handle;
     sigaction(SIGINT, saINT_node, NULL);
 }
-
+int get_pid_nodeIndex()
+{
+    int i=0;
+        for(i=0;i<par->SO_NODES_NUM;i++)
+        {
+            if(nodesPID[i].pid == myPID)
+                return i;
+        }
+        return ERROR;    
+}
 /* CTRL-C handler */
 void node_interrupt_handle(int signum)
 {
+
+    int nodeIndex=get_pid_nodeIndex();
     write(1, "::Node:: SIGINT received\n", 26);
+    sem_reserve(semID, 1);
+    nodesPID[nodeIndex]->balance=currBalance;
+    sem_release(semID, 1);
     msgctl(queueID, IPC_RMID, NULL);
     TRACE((":node: queue removed\n"))
     TEST_ERROR

@@ -16,6 +16,7 @@
 #include <sys/sem.h>
 #include <sys/msg.h>
 #include <sys/types.h>
+#include <signal.h>
 
 #include "../utils/debug.h"
 #include "../utils/sem.h"
@@ -95,6 +96,7 @@ struct parameters
 typedef struct user_t
 {
     pid_t pid;
+    int balance;
     enum
     {
         alive,
@@ -106,6 +108,7 @@ typedef struct user_t
 typedef struct node_t
 {
     pid_t pid;
+    int balance;
     enum
     {
         available,
@@ -153,7 +156,8 @@ typedef struct ledger_t
 } ledger;
 
 ledger *ledger_init();
-block *new_block(transaction **);
+
+
 void add_block(block);
 int sum_reward(transaction **);
 void add_transaction_to_block(block *, transaction *, int index);

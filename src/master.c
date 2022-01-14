@@ -241,6 +241,7 @@ int main(int argc, char *argv[])
         LOCK
             nodesPID[nCounter]
                 .status = available;
+            nodesPID[nCounter].balance = 0;
         nodesPID[nCounter].pid = spawn_node(argvSpawns);
         UNLOCK
         if (getpid() != myPID)
@@ -256,6 +257,7 @@ int main(int argc, char *argv[])
         LOCK
             usersPID[uCounter]
                 .status = alive;
+            usersPID[uCounter].balance=0;
         usersPID[uCounter].pid = spawn_user(argvSpawns);
         UNLOCK
         if (getpid() != myPID)

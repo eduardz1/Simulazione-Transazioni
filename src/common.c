@@ -22,39 +22,7 @@ ledger *ledger_init()
     return newLedger;
 }
 
-/* sums rewards of sumBlock[SO_BLOCK_SIZE-1] transactions */
-int sum_reward(transaction **sumBlock)
-{
-    int i = 0;
-    int sum;
 
-    for (i = 0; i < (SO_BLOCK_SIZE - 1); i++)
-    {
-        sum += sumBlock[i]->reward;
-    }
-    return sum;
-}
-
-/* initializes new block with transList[0] as reward transaction */
-block *new_block(transaction **blockTransactions)
-{
-
-    block *newBlock = malloc(sizeof(block));
-    transaction reward;
-    struct timespec timestamp;
-    clock_gettime(CLOCK_REALTIME, &timestamp);
-
-    reward.timestamp = timestamp;
-    reward.sender = SELF;
-    reward.receiver = getpid();
-    reward.amount = sum_reward(blockTransactions); /*sum of each reward of transaction in the block */
-    reward.reward = 0;
-
-    memcpy(newBlock->transList + 1, *blockTransactions, (SO_BLOCK_SIZE - 1) * (sizeof(transaction)));
-    newBlock->next = NULL;
-
-    return newBlock;
-}
 
 void add_transaction_to_block(block *block, transaction *newTrans, int index)
 {

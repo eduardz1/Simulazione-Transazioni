@@ -13,4 +13,7 @@
 /*void signal_handler_init(struct sigaction *saINT); */
 void node_interrupt_handle(int signum);
 
+block *new_block(transaction** blockTransaction);
+
+
 #endif /* SIMULAZIONE_TRANSAZIONI_NODES_H */
