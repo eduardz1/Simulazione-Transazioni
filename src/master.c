@@ -5,7 +5,7 @@
 
 #define SHM_NUM 4
 #define SEM_NUM 2
-#define IPC_NUM 8
+#define IPC_NUM SHM_NUM+SEM_NUM
 
 #define USER_NAME "./users"
 #define NODE_NAME "./nodes"
@@ -61,7 +61,7 @@ void make_arguments(int *IPC_array, char **argv)
     argv[5] = semPIDs_ID;
     TRACE(("[MASTER] argv[sem_pids] = %s\n", semPIDs_ID))
     argv[6] = semLedger_ID;
-    TRACE(("[MASTER] argv[sem_ledger] = %s\n", semLedger_ID))
+    TRACE(("[MASTER] argv[sem_ledger] = %s\n", argv[6]))
     argv[8] = NULL; /* Terminating argv with NULL value */
 }
 
@@ -69,7 +69,6 @@ void make_arguments(int *IPC_array, char **argv)
 pid_t spawn_user(char *userArgv[])
 {
     pid_t myPID = fork();
-    TRACE((":master: argv values: %s %s %s %s %s %s\n", userArgv[0], userArgv[1], userArgv[2], userArgv[3], userArgv[4], userArgv[5]))
     switch (myPID)
     {
     case -1: /* Error case */
@@ -92,7 +91,6 @@ pid_t spawn_user(char *userArgv[])
 pid_t spawn_node(char *nodeArgv[])
 {
     pid_t myPID = fork();
-    TRACE((":master: argv values: %s %s %s %s %s %s\n", nodeArgv[0], nodeArgv[1], nodeArgv[2], nodeArgv[3], nodeArgv[4], nodeArgv[5]))
     switch (myPID)
     {
     case -1: /* Error case */
@@ -184,20 +182,21 @@ void semaphores_init()
 void make_ipc_array(int *IPC_array)
 {
     int shmIDs[SHM_NUM]; /* array containing every shared memory ID */
-    int semIDs[2] = {0};
+    int semIDs[SEM_NUM];
 
     shared_memory_objects_init(shmIDs);
     semIDs[0] = semPIDs_ID;
     semIDs[1] = semLedger_ID;
     /* semaphores_init(semIDs); */
     memcpy(IPC_array, shmIDs, SHM_NUM * sizeof(int));
-    memcpy(IPC_array + SHM_NUM, shmIDs, SEM_NUM * sizeof(int));
+    memcpy(IPC_array + SHM_NUM, semIDs, SEM_NUM * sizeof(int));
+    TRACE(("[MASTER] IPC_array={%d,%d,%d,%d,%d,%d}\n", IPC_array[0], IPC_array[1], IPC_array[2], IPC_array[3], IPC_array[4], IPC_array[5]))
 }
 
 /* CTRL-C handler */
 void master_interrupt_handle(int signum)
 {
-    write(1, "::Master:: SIGINT ricevuto\n", 28);
+    write(1, "::MASTER:: SIGINT ricevuto\n", 28);
     killpg(0, SIGINT);
 
     /* just to avoid printing before everyone has finished*/
@@ -210,10 +209,11 @@ void master_interrupt_handle(int signum)
     while (wait(&status) != -1)
     {
         status >> 8; /* no idea about what it does please help *
-    } 
+    }
     */
 
     semctl(semPIDs_ID, 1, IPC_RMID);
+    semctl(semLedger_ID, 1, IPC_RMID);
     exit(0);
 }
 
@@ -224,16 +224,18 @@ int main(int argc, char *argv[])
     int uCounter, nCounter, returnVal;
     int simTime;
     int ipcObjectsIDs[IPC_NUM];
-    char **argvSpawns = malloc(8*32);
+    char *argvSpawns[9 * (3 * sizeof(int) + 1)] = {0};
 
     struct sigaction sa;
     struct sembuf sops;
 
-    semaphores_init(); 
+    semaphores_init();
     make_ipc_array(ipcObjectsIDs);
+    /*TRACE(("1ARGV[6] is %s\n", argvSpawns[6]))*/
     make_arguments(ipcObjectsIDs, argvSpawns);
-    mainLedger = ledger_init();
-
+    /*TRACE(("2ARGV[6] is %s\n", argvSpawns[6]))*/
+    /*mainLedger = ledger_init();
+    /*TRACE(("3ARGV[6] is %s\n", argvSpawns[6]))*/
     simTime = par->SO_SIM_SEC;
 
     /* -- SIGNAL HANDLER --
@@ -246,12 +248,14 @@ int main(int argc, char *argv[])
     sigaction(SIGINT, &sa, NULL);
 
     argvSpawns[0] = NODE_NAME;
+    TRACE(("4ARGV[6] is %d\n", argvSpawns[6]))
+    TRACE(("[MASTER] argv values for nodes: %s %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7], argvSpawns[8]))
     for (nCounter = 0; nCounter < par->SO_NODES_NUM; nCounter++)
     {
         LOCK
             nodesPID[nCounter]
                 .status = available;
-            nodesPID[nCounter].balance = 0;
+        nodesPID[nCounter].balance = 0;
         nodesPID[nCounter].pid = spawn_node(argvSpawns);
         UNLOCK
         if (getpid() != myPID)
@@ -262,12 +266,14 @@ int main(int argc, char *argv[])
 
     /*usersPrematurelyDead = 0;*/
     argvSpawns[0] = USER_NAME;
+    TRACE(("ARGV[6] is %d\n", argvSpawns[6]))
+    TRACE(("[MASTER] argv values for users: %s %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7], argvSpawns[8]))
     for (uCounter = 0; uCounter < par->SO_USER_NUM; uCounter++)
     {
         LOCK
             usersPID[uCounter]
                 .status = alive;
-            usersPID[uCounter].balance=0;
+        usersPID[uCounter].balance = 0;
         usersPID[uCounter].pid = spawn_user(argvSpawns);
         UNLOCK
         if (getpid() != myPID)

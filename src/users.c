@@ -257,6 +257,7 @@ void user_interrupt_handle(int signum)
 
 int main(int argc, char *argv[])
 {
+	int temp = 10;
 	int amount, reward, retry;
 	pid_t userPID, nodePID;
 
@@ -292,7 +293,7 @@ int main(int argc, char *argv[])
 
 	currBalance = par->SO_BUDGET_INIT;
 	retry = par->SO_RETRY;
-	while (1)
+	while (temp)
 	{
 		SLEEP_TIME_SET
 		/*
@@ -334,5 +335,7 @@ int main(int argc, char *argv[])
 
 			/*wait_for_incoming_transaction(); ///////// */
 		}
+		temp--;
 	}
+	kill(0, SIGINT);
 }

@@ -37,7 +37,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
             strcpy(statusStr, "dead     ");
             break;
         }
-        printf("|  User         %d            %s             |\n", userPID[userNum].pid, statusStr);
+        printf("|  User         %d            %s \n", userPID[userNum].pid, statusStr);
     }
     printf(" ---------------------------------------------\n");
     while (nodesNum--)
@@ -53,7 +53,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
             strcpy(statusStr, "full     ");
             break;
         }
-        printf("|  Node         %d            %s             |\n", nodePID[nodesNum].pid, statusStr);
+        printf("|  Node         %d            %s\n", nodePID[nodesNum].pid, statusStr);
     }
     printf(" ---------------------------------------------\n");
 }

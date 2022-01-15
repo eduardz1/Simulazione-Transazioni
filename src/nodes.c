@@ -24,8 +24,6 @@ pid_t myPID;
 
 struct msqid_ds msgType;
 
-
-
 /*void Node()
 {
     int t_pool[SO_TP_SIZE];
@@ -143,8 +141,8 @@ void append_block_to_ledger(block *newBlock)
         temp->head = (block *)temp->head->next;
     }
 
-    temp->head->next = (struct block*)newBlock;
-    newBlock->prev = (struct block*)temp->head;
+    temp->head->next = (struct block *)newBlock;
+    newBlock->prev = (struct block *)temp->head;
     mainLedger->registryCurrSize++;
 
     for (i = 0; i < SO_BLOCK_SIZE - 1; i++)
@@ -177,12 +175,28 @@ void attach_ipc_objects(char **argv)
 void message_queue_init()
 {
     /* gets ID of message queue of key=myPID and assigns it to queueID */
-    queueID = msgget(myPID, IPC_CREAT | 0600);
+    queueID = msgget(myPID, IPC_CREAT | IPC_EXCL | 0600);
     TEST_ERROR
 
     /* sets size of message queue to be equal to SO_TP_SIZE num of transactions */
+    msgType.msg_qbytes = (par->SO_TP_SIZE * sizeof(transaction));
+    printf("Message queue size: %ld\n", msgType.msg_qbytes);
+    msgType.msg_perm.uid = myPID;
+    msgType.msg_perm.gid = getpgid(myPID);
+    msgType.msg_perm.mode = 0600;
     msgctl(queueID, IPC_SET, &msgType);
-    TEST_ERROR
+    switch (errno)
+    {
+    case EIDRM:
+        printf("[NODE %d] queue %d was removed\n", myPID, queueID);
+        break;
+    case EINVAL:
+        printf("[NODE %d] queue %d invalid value for cmd or msqid\n", myPID, queueID);
+        break;
+    case EPERM:
+        printf("[NODE %d] queue %d the effective user ID of the calling process is not the creator or the owner\n", myPID, queueID);
+        break;
+    }
     TRACE(("[NODE %d] queueID is %d\n", myPID, queueID))
 }
 
@@ -213,8 +227,10 @@ void node_interrupt_handle(int signum)
     write(1, "::Node:: SIGINT received\n", 26);
 
     sem_reserve(semPIDs_ID, 1);
+    TEST_ERROR
     nodesPID[nodeIndex].balance = currBalance;
     sem_release(semPIDs_ID, 1);
+    TEST_ERROR
 
     msgctl(queueID, IPC_RMID, NULL);
     TRACE((":node: queue removed\n"))
@@ -224,6 +240,7 @@ void node_interrupt_handle(int signum)
 
 int main(int argc, char *argv[])
 {
+    int temp = 10;
     transaction **blockBuffer = malloc(sizeof(transaction) * (SO_BLOCK_SIZE - 1));
     block *newBlock = malloc(sizeof(block));
 
@@ -240,20 +257,26 @@ int main(int argc, char *argv[])
     signal_handler_init(&saINT_node); /* no idea why it isn't working, it's literally the same implementation as user */
     TRACE((":node: %d sighandler init\n", myPID));
 
-    msgType.msg_qnum = par->SO_TP_SIZE;
     message_queue_init();
-
-    while (1)
+    TEST_ERROR
+    while (temp)
     {
         SLEEP_TIME_SET
 
         fill_block_buffer(blockBuffer);
+        TEST_ERROR
         new_block(blockBuffer, newBlock);
+        TEST_ERROR
 
         sem_reserve(semLedger_ID, 1);
+        TEST_ERROR
         append_block_to_ledger(newBlock);
+        TEST_ERROR
 
         SLEEP
         sem_release(semLedger_ID, 1);
+        TEST_ERROR
+        temp--;
     }
+    kill(0, SIGINT);
 }
