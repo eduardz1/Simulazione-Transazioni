@@ -33,7 +33,7 @@ user *usersPID;
 node *nodesPID;
 ledger *mainLedger;
 
-int semID;
+int semPIDs_ID;
 int queueID;
 
 int currBalance;
@@ -105,14 +105,14 @@ void update_status(int statusToSet)
 		TRACE((":user: %d failed to find myself in usersPID[]", myPID));
 	}
 
-	sem_reserve(semID, 1);
+	sem_reserve(semPIDs_ID, 1);
 	usersPID[i].status = statusToSet;
 	if (statusToSet == 2)
 	{
 		/*usersPrematurelyDead++;*/
 		TRACE((":user: dead increased\n"));
 	}
-	sem_release(semID, 1);
+	sem_release(semPIDs_ID, 1);
 }
 
 /* attaches ipc objects based on IDs passed via arguments */
@@ -129,19 +129,19 @@ void attach_ipc_objects(char **argv)
 	TEST_ERROR
 	mainLedger = shmat(LEDGER_ARGV, NULL, 0);
 	TEST_ERROR
-	semID = SEM_ID_ARGV;
-	TRACE((":user: %d semID is %d\n", myPID, semID));
+	semPIDs_ID = SEM_PIDS_ARGV;
+	TRACE((":user: %d semPIDs_ID is %d\n", myPID, semPIDs_ID));
 }
 
-/* use nodePID as key for 
- and check for errors */
+/* try to attach to queue of nodePID key until it succeeds */
 void queue_to_pid(pid_t nodePID)
 {
-	/* NO QUEUES UNTIL NODES HANDLER WORKS! */
-
-	queueID = msgget(nodePID, IPC_CREAT | 0600);
-	TEST_ERROR
-	TRACE((":user: %d -> %d queueID %d\n", myPID, nodePID, queueID))
+	do
+	{
+		queueID = msgget(nodePID, 0);
+		TRACE(("[USER %d] is trying to attach to id=%d queue\n", myPID, queueID))
+	} while (errno == ENOENT);
+	TRACE(("[USER %d] succedeed in attaching to queue %d\n", myPID, queueID))
 }
 
 /* initializes transaction values and sets it to pending */
@@ -179,35 +179,34 @@ int send_transaction()
 {
 	/* accumulate amount of transactions sent but yet to be received */
 	int outGoingTransactions = 0;
+
 	msgsnd(queueID, &currTrans, sizeof(transaction), 0);
 	TEST_ERROR
+
 	currBalance -= (currTrans.amount + currTrans.reward);
 	outGoingTransactions += (currTrans.amount + currTrans.reward);
 	switch (errno)
 	{
 	case EACCES:
-		printf(":user %d no write permission on queue\n", myPID);
-		break;
-	case EAGAIN:
-		printf(":user: %d queue full\n", myPID); /* keep if we decide to use IPC_NOWAIT */
+		printf("[USER %d] no write permission on queue\n", myPID);
 		break;
 	case EFAULT:
-		printf(":user: %d address pointed by msgp inaccessible\n", myPID);
+		printf("[USER %d] address pointed by msgp inaccessible\n", myPID);
 		break;
 	case EIDRM:
-		printf(":user: %d message queue removed\n", myPID);
+		printf("[USER %d] message queue removed\n", myPID);
 		break;
 	case EINTR:
-		TRACE((":user: %d signal caught when waiting for queue to free\n", myPID));
+		TRACE(("[USER %d] signal caught when waiting for queue to free\n", myPID));
 		break;
 	case EINVAL:
-		printf(":user: %d invalid  msqid  value,  or nonpositive mtype value, or invalid msgsz value\n", myPID);
+		printf("[USER %d] invalid  msqid  value,  or nonpositive mtype value, or invalid msgsz value\n", myPID);
 		break;
 	case ENOMEM:
-		printf(":user: %d system out of memory\n", myPID); /* should basically never happen I hope */
+		printf("[USER %d] system out of memory\n", myPID); /* should basically never happen I hope */
 		break;
 	default:
-		TRACE(("Transaction sent\n"))
+		TRACE(("[USER %d] sent a transaction of %d UC to %d user via %d queue\n", myPID, currTrans.amount, currTrans.receiver, queueID))
 		return SUCCESS;
 	}
 	currTrans.status = aborted;
@@ -215,6 +214,28 @@ int send_transaction()
 	outGoingTransactions -= (currTrans.amount + currTrans.reward);
 	/* we can then track this type of aborted transactions but rn there's no need to */
 	return ERROR;
+}
+
+void get_balance()
+{
+	ledger tmp;
+	int i;
+
+	for (tmp = *mainLedger; tmp.head->next != NULL; tmp.head = (block *)tmp.head->next)
+	{
+		for (i = 1; i < SO_BLOCK_SIZE; i++)
+		{
+			if (tmp.head->transList[i].sender = myPID)
+			{
+				currBalance -= tmp.head->transList[i].amount;
+			}
+
+			if (tmp.head->transList[i].receiver = myPID)
+			{
+				currBalance += tmp.head->transList[i].amount;
+			}
+		}
+	}
 }
 
 /* SIGUSR1 handler, sends a transaction */
@@ -255,7 +276,7 @@ int main(int argc, char *argv[])
 	TRACE((":user: %d NODES_PID_ARGV %d\n", myPID, NODES_PID_ARGV))
 	TRACE((":user: %d PARAMETERS_ARGV %d\n", myPID, PARAMETERS_ARGV))
 	TRACE((":user: %d LEDGER_ARGV %d\n", myPID, LEDGER_ARGV))
-	TRACE((":user: %d SEM_ID_PID_ARGV %d\n", myPID, SEM_ID_ARGV))
+	TRACE((":user: %d SEM_ID_PID_ARGV %d\n", myPID, SEM_PIDS_ARGV))
 
 	if (argc == 0)
 	{
@@ -269,6 +290,7 @@ int main(int argc, char *argv[])
 	signal_handlers_init(&saUSR1, &saINT_user);
 	transMsg.mtype = atol("transaction");
 
+	currBalance = par->SO_BUDGET_INIT;
 	retry = par->SO_RETRY;
 	while (1)
 	{
@@ -281,7 +303,7 @@ int main(int argc, char *argv[])
 		 */
 		bzero(&sleepTimeRemaining, sizeof(sleepTimeRemaining));
 
-		currBalance = 100 /*balance(myPID)*/;
+		get_balance();
 		if (currBalance >= 2)
 		{
 			userPID = get_random_userPID();

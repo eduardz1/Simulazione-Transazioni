@@ -4,7 +4,7 @@
 #include "include/parser.h"
 
 #define SHM_NUM 4
-#define SEM_NUM 1
+#define SEM_NUM 2
 #define IPC_NUM 8
 
 #define USER_NAME "./users"
@@ -22,7 +22,8 @@ user *usersPID;
 node *nodesPID;
 ledger *mainLedger;
 
-int semID;
+int semPIDs_ID;
+int semLedger_ID;
 
 /*extern int usersPrematurelyDead = 0;*/
 
@@ -39,24 +40,28 @@ void make_arguments(int *IPC_array, char **argv)
     char *nPID_array = malloc(3 * sizeof(IPC_array[0]) + 1);
     char *parameters = malloc(3 * sizeof(IPC_array[0]) + 1);
     char *ledger = malloc(3 * sizeof(IPC_array[0]) + 1);
-    char *semID = malloc(3 * sizeof(IPC_array[0]) + 1);
+    char *semPIDs_ID = malloc(3 * sizeof(IPC_array[0]) + 1);
+    char *semLedger_ID = malloc(3 * sizeof(IPC_array[0]) + 1);
 
     sprintf(uPID_array, "%d", IPC_array[0]);
     sprintf(nPID_array, "%d", IPC_array[1]);
     sprintf(parameters, "%d", IPC_array[2]);
     sprintf(ledger, "%d", IPC_array[3]);
-    sprintf(semID, "%d", IPC_array[4]);
+    sprintf(semPIDs_ID, "%d", IPC_array[4]);
+    sprintf(semLedger_ID, "%d", IPC_array[5]);
 
     argv[1] = uPID_array;
-    TRACE((":master: argv[uPID] = %s\n", uPID_array))
+    TRACE(("[MASTER] argv[uPID] = %s\n", uPID_array))
     argv[2] = nPID_array;
-    TRACE((":master: argv[nPID] = %s\n", nPID_array))
+    TRACE(("[MASTER] argv[nPID] = %s\n", nPID_array))
     argv[3] = parameters;
-    TRACE((":master: argv[par] = %s\n", parameters))
+    TRACE(("[MASTER] argv[par] = %s\n", parameters))
     argv[4] = ledger;
-    TRACE((":master: argv[ledger] = %s\n", ledger))
-    argv[5] = semID;
-    TRACE((":master: argv[sem] = %s\n", semID))
+    TRACE(("[MASTER] argv[ledger] = %s\n", ledger))
+    argv[5] = semPIDs_ID;
+    TRACE(("[MASTER] argv[sem_pids] = %s\n", semPIDs_ID))
+    argv[6] = semLedger_ID;
+    TRACE(("[MASTER] argv[sem_ledger] = %s\n", semLedger_ID))
     argv[8] = NULL; /* Terminating argv with NULL value */
 }
 
@@ -166,19 +171,24 @@ void shared_memory_objects_init(int *shmArray)
 
 void semaphores_init()
 {
-    semID = semget(SEM_MASTER, 1, 0600 | IPC_CREAT | IPC_EXCL);
+    semPIDs_ID = semget(SEM_PIDS_KEY, 1, 0600 | IPC_CREAT | IPC_EXCL);
     TEST_ERROR
-    TRACE((":master: semID is %d\n", semID));
+    TRACE(("[MASTER] semPIDs_ID is %d\n", semPIDs_ID));
+
+    semLedger_ID = semget(SEM_LEDGER_KEY, 1, 0600 | IPC_CREAT | IPC_EXCL);
+    TEST_ERROR
+    TRACE(("[MASTER] semLedger_ID is %d\n", semLedger_ID));
 }
 
 /* makes an array with every IPC object ID */
 void make_ipc_array(int *IPC_array)
 {
     int shmIDs[SHM_NUM]; /* array containing every shared memory ID */
-    int semIDs[1] = {0};
+    int semIDs[2] = {0};
 
     shared_memory_objects_init(shmIDs);
-    semIDs[0] = semID;
+    semIDs[0] = semPIDs_ID;
+    semIDs[1] = semLedger_ID;
     /* semaphores_init(semIDs); */
     memcpy(IPC_array, shmIDs, SHM_NUM * sizeof(int));
     memcpy(IPC_array + SHM_NUM, shmIDs, SEM_NUM * sizeof(int));
@@ -203,7 +213,7 @@ void master_interrupt_handle(int signum)
     } 
     */
 
-    semctl(semID, 1, IPC_RMID);
+    semctl(semPIDs_ID, 1, IPC_RMID);
     exit(0);
 }
 
@@ -219,7 +229,7 @@ int main(int argc, char *argv[])
     struct sigaction sa;
     struct sembuf sops;
 
-    semaphores_init();
+    semaphores_init(); 
     make_ipc_array(ipcObjectsIDs);
     make_arguments(ipcObjectsIDs, argvSpawns);
     mainLedger = ledger_init();

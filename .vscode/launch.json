@@ -3,15 +3,47 @@
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": [
-        
+    "configurations": [        
         {
-            "name": "(gdb) Launch",
+            "name": "debug Nodes",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/master",
-            "args": ["5", "5", "2", "120", "3", "100", "5", "200", "400", "5", "20", "5"],
-            "stopAtEntry": false,
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Follows node when forked",
+                    "text": "-gdb-set follow-fork-mode child",
+                    "ignoreFailures": false
+                },
+                {
+                    "description": "Follows node when exec'd",
+                    "text": "-gdb-set follow-exec-mode new",
+                    "ignoreFailures": false
+                },/*
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },*/
+                {
+                    "description":  "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "debug Master",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/master",
+            "stopAtEntry": true,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
@@ -30,10 +62,10 @@
             ]
         },
         {
-            "name": "(gdb) Attach",
+            "name": "(gdb) Attach to Node",
             "type": "cppdbg",
             "request": "attach",
-            "program": "${workspaceFolder}/master",
+            "program": "${workspaceFolder}/nodes",
             "processId": "${command:pickProcess}",
             "MIMode": "gdb",
             "setupCommands": [

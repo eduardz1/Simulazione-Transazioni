@@ -22,8 +22,6 @@ ledger *ledger_init()
     return newLedger;
 }
 
-
-
 void add_transaction_to_block(block *block, transaction *newTrans, int index)
 {
     block->transList[index] = *newTrans; /* ye probably we don't need a whole ass function for that*/

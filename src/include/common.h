@@ -39,7 +39,8 @@
 #define SHM_USERS_ARRAY 1338
 #define SHM_NODES_ARRAY 1339
 #define SHM_LEDGER 1340
-#define SEM_MASTER 420
+#define SEM_PIDS_KEY 420
+#define SEM_LEDGER_KEY 421
 #define M_QUEUE_KEY 0x5AD
 
 #define SO_BLOCK_SIZE 100     /* number of transaction per block*/
@@ -52,7 +53,8 @@
 #define NODES_PID_ARGV (atoi(argv[2]))
 #define PARAMETERS_ARGV (atoi(argv[3]))
 #define LEDGER_ARGV (atoi(argv[4]))
-#define SEM_ID_ARGV (atoi(argv[5]))
+#define SEM_PIDS_ARGV (atoi(argv[5]))
+#define SEM_LEDGER_ARGV (atoi(argv[6]))
 
 /* -- USER RETURN STATUS -- */
 #define WENT_BROKE 1

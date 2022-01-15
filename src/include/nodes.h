@@ -12,8 +12,9 @@
 
 /*void signal_handler_init(struct sigaction *saINT); */
 void node_interrupt_handle(int signum);
+void message_queue_init();
 
-block *new_block(transaction** blockTransaction);
-
+void new_block(transaction** blockTransaction, block *newBlock);
+void fill_block_buffer(transaction **buffer);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_NODES_H */
