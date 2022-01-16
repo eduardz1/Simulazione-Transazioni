@@ -94,14 +94,14 @@ pid_t spawn_node(char *nodeArgv[])
     switch (myPID)
     {
     case -1: /* Error case */
-        printf("!! Error forking for node\n");
+        printf("*** Error forking for node ***\n");
         break;
 
     case 0: /* Child case */
-        TRACE((":master: Spawning node\n"));
+        TRACE(("[MASTER] Spawning node\n"));
         execve(NODE_NAME, nodeArgv, NULL);
         TEST_ERROR
-        TRACE(("!! Message that should never be seen\n"));
+        TRACE(("!!! Message that should never be seen !!!\n"));
         break;
 
     default:
@@ -110,25 +110,10 @@ pid_t spawn_node(char *nodeArgv[])
 }
 
 
-ledger *ledger_init()
+void ledger_init(ledger *newLedger)
 {
-    ledger *newLedger;
-    int shmID; /* ID of "ledger" shared memory segment */
-
-    /* -- LEDGER INITIALIZATION --
-     * save the ID of our new (IPC_PRIVATE) shared memory segment of size -ledger-
-     * smctl will deallocate the shared memory segment only when every process detaches it
-     * tells OS that ledger of type ledger is our shared memory of shmID
-     */
-    shmID = shmget(IPC_PRIVATE, sizeof(newLedger), 0600);
-    shmctl(shmID, IPC_RMID, NULL);
-
     newLedger->head = NULL;
-    newLedger->registryCurrSize = 1;
-
-    newLedger = (ledger *)shmat(shmID, NULL, 0);
-
-    return newLedger;
+    newLedger->registryCurrSize = 0;
 }
 
 /* attach usersPID, nodesPID, par and mainLedger to shared memory, returns an array with respective IDs */
@@ -146,11 +131,11 @@ void shared_memory_objects_init(int *shmArray)
     par = (struct parameters *)shmat(par_ID, NULL, 0);
     if (parse_parameters(par) == CONF_ERROR)
     {
-        TRACE(("-- Error reading conf file, defaulting to conf#1\n"));
+        TRACE(("*** Error reading conf file, defaulting to conf#1 ***\n"));
     }
     else
     {
-        TRACE(("-- Conf file read successful\n"));
+        TRACE(("[MASTER] conf file read successful\n"));
     }
 #ifdef DEBUG
     print_parameters(par);
@@ -169,7 +154,7 @@ void shared_memory_objects_init(int *shmArray)
 
     /* mainLedger */
     mainLedger_ID = shmget(SHM_LEDGER,
-                           (par->SO_NODES_NUM) * sizeof(node),
+                           SIZE_OF_LEDGER,
                            0600 | IPC_CREAT | IPC_EXCL);
     TEST_ERROR
     mainLedger = (ledger *)shmat(mainLedger_ID, NULL, 0);
@@ -253,11 +238,8 @@ int main(int argc, char *argv[])
 
     semaphores_init();
     make_ipc_array(ipcObjectsIDs);
-    /*TRACE(("1ARGV[6] is %s\n", argvSpawns[6]))*/
     make_arguments(ipcObjectsIDs, argvSpawns);
-    /*TRACE(("2ARGV[6] is %s\n", argvSpawns[6]))*/
-    /*mainLedger = ledger_init();
-    /*TRACE(("3ARGV[6] is %s\n", argvSpawns[6]))*/
+    ledger_init(mainLedger);
     simTime = par->SO_SIM_SEC;
 
     /* -- SIGNAL HANDLER --
@@ -270,7 +252,6 @@ int main(int argc, char *argv[])
     sigaction(SIGINT, &sa, NULL);
 
     argvSpawns[0] = NODE_NAME;
-    TRACE(("4ARGV[6] is %d\n", argvSpawns[6]))
     TRACE(("[MASTER] argv values for nodes: %s %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7], argvSpawns[8]))
     for (nCounter = 0; nCounter < par->SO_NODES_NUM; nCounter++)
     {
@@ -288,7 +269,6 @@ int main(int argc, char *argv[])
 
     /*usersPrematurelyDead = 0;*/
     argvSpawns[0] = USER_NAME;
-    TRACE(("ARGV[6] is %d\n", argvSpawns[6]))
     TRACE(("[MASTER] argv values for users: %s %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7], argvSpawns[8]))
     for (uCounter = 0; uCounter < par->SO_USER_NUM; uCounter++)
     {

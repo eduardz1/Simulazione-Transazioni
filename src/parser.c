@@ -3,6 +3,7 @@
 #include "include/parser.h"
 
 #define CONF_FILE "conf.txt"
+
 /*enum paramID
 {
     SO_USER_NUM,

@@ -223,8 +223,8 @@ int get_pid_nodeIndex()
 void node_interrupt_handle(int signum)
 {
     int nodeIndex = get_pid_nodeIndex();
-
-    write(1, "::Node:: SIGINT received\n", 26);
+    TEST_ERROR
+    write(1, "::NODE:: SIGINT received\n", 26);
 
     sem_reserve(semPIDs_ID, 1);
     TEST_ERROR
@@ -233,14 +233,13 @@ void node_interrupt_handle(int signum)
     TEST_ERROR
 
     msgctl(queueID, IPC_RMID, NULL);
-    TRACE((":node: queue removed\n"))
+    TRACE(("[NODE] queue removed\n"))
     TEST_ERROR
     exit(0);
 }
 
 int main(int argc, char *argv[])
 {
-    int temp = 10;
     transaction **blockBuffer = malloc(sizeof(transaction) * (SO_BLOCK_SIZE - 1));
     block *newBlock = malloc(sizeof(block));
 
@@ -255,11 +254,11 @@ int main(int argc, char *argv[])
 
     attach_ipc_objects(argv);
     signal_handler_init(&saINT_node); /* no idea why it isn't working, it's literally the same implementation as user */
-    TRACE((":node: %d sighandler init\n", myPID));
+    TRACE(("[NODE %d] sighandler init\n", myPID));
 
     message_queue_init();
     TEST_ERROR
-    while (temp)
+    while (1)
     {
         SLEEP_TIME_SET
 
@@ -276,7 +275,5 @@ int main(int argc, char *argv[])
         SLEEP
         sem_release(semLedger_ID, 1);
         TEST_ERROR
-        temp--;
     }
-    kill(0, SIGINT);
 }

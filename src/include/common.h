@@ -44,6 +44,7 @@
 
 #define SO_BLOCK_SIZE 100     /* number of transaction per block*/
 #define SO_REGISTRY_SIZE 1000 /* max length of consecutive blocks */
+#define SIZE_OF_LEDGER (sizeof(ledger) + sizeof(block) * SO_REGISTRY_SIZE)
 #define SELF -1
 #define EVERYONE_BROKE '$'
 
@@ -155,9 +156,6 @@ typedef struct ledger_t
     block *head;
     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added */
 } ledger;
-
-ledger *ledger_init();
-
 
 void add_block(block);
 int sum_reward(transaction **);

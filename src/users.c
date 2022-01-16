@@ -216,48 +216,57 @@ int send_transaction()
 	return ERROR;
 }
 
+/* searches transactionList of blockToSearch and returns total of UC sent and received */
+int search_trans_list(block *blockToSearch)
+{
+	int i, accumulate = 0;
+
+	for (i = 1; i < SO_BLOCK_SIZE - 1; i++)
+	{
+		if (blockToSearch->transList[i].sender = myPID)
+			accumulate -= blockToSearch->transList[i].amount;
+		else if (blockToSearch->transList[i].receiver = myPID)
+			accumulate += blockToSearch->transList[i].amount;
+	}
+
+	return accumulate;
+}
+
+/* saves balance of calling user in currBalance */
 void get_balance()
 {
-	ledger tmp;
-	int i;
+	block *tmp = mainLedger->head;
+	int accumulate = 0;
 
-	for (tmp = *mainLedger; tmp.head->next != NULL; tmp.head = (block *)tmp.head->next)
+	while (tmp != NULL)
 	{
-		for (i = 1; i < SO_BLOCK_SIZE; i++)
-		{
-			if (tmp.head->transList[i].sender = myPID)
-			{
-				currBalance -= tmp.head->transList[i].amount;
-			}
-
-			if (tmp.head->transList[i].receiver = myPID)
-			{
-				currBalance += tmp.head->transList[i].amount;
-			}
-		}
+		accumulate += search_trans_list(tmp);
+		tmp = (block *)tmp->next;
 	}
+
+	free(tmp);
 }
 
 /* SIGUSR1 handler, sends a transaction */
 void user_transactions_handle(int signum)
 {
-	write(1, "::User:: SIGUSR1 received\n", 27);
+	write(1, "::USER:: SIGUSR1 received\n", 27);
 	if (currBalance > 2)
 		send_transaction(); /* we're calling a printf which is not thread safe, need to fix somehow*/
 	else
-		write(1, "::User:: sorry balance too low\n", 32);
+		write(1, "::USER:: sorry balance too low\n", 32);
 }
 
 /* CTRL-C handler */
 void user_interrupt_handle(int signum)
 {
-	write(1, "::User:: SIGINT received\n", 26);
+	write(1, "::USER:: SIGINT received\n", 26);
 	exit(0);
 }
 
 int main(int argc, char *argv[])
 {
-	int temp = 10;
+	int brokeFlag = 1;
 	int amount, reward, retry;
 	pid_t userPID, nodePID;
 
@@ -273,15 +282,15 @@ int main(int argc, char *argv[])
 	bzero(&saINT_user, sizeof(saINT_user));
 
 	myPID = getpid(); /* set myPID value */
-	TRACE((":user: %d USERS_PID_ARGV %d\n", myPID, USERS_PID_ARGV))
-	TRACE((":user: %d NODES_PID_ARGV %d\n", myPID, NODES_PID_ARGV))
-	TRACE((":user: %d PARAMETERS_ARGV %d\n", myPID, PARAMETERS_ARGV))
-	TRACE((":user: %d LEDGER_ARGV %d\n", myPID, LEDGER_ARGV))
-	TRACE((":user: %d SEM_ID_PID_ARGV %d\n", myPID, SEM_PIDS_ARGV))
+	TRACE(("[USER %d] USERS_PID_ARGV %d\n", myPID, USERS_PID_ARGV))
+	TRACE(("[USER %d] NODES_PID_ARGV %d\n", myPID, NODES_PID_ARGV))
+	TRACE(("[USER %d] PARAMETERS_ARGV %d\n", myPID, PARAMETERS_ARGV))
+	TRACE(("[USER %d] LEDGER_ARGV %d\n", myPID, LEDGER_ARGV))
+	TRACE(("[USER %d] SEM_ID_PID_ARGV %d\n", myPID, SEM_PIDS_ARGV))
 
 	if (argc == 0)
 	{
-		printf(":user: %d, no arguments passed, can't continue like this any more :C\n", myPID);
+		printf("[USER %d] no arguments passed, can't continue like this any more :C\n", myPID);
 		return ERROR;
 	}
 
@@ -293,7 +302,7 @@ int main(int argc, char *argv[])
 
 	currBalance = par->SO_BUDGET_INIT;
 	retry = par->SO_RETRY;
-	while (temp)
+	while (1)
 	{
 		SLEEP_TIME_SET
 		/*
@@ -330,12 +339,12 @@ int main(int argc, char *argv[])
 		}
 		else
 		{
-			printf(":user: %d went broke :/\n", myPID);
+			if (brokeFlag = 1)
+				printf("[USER %d] went broke :/\n", myPID);
+			brokeFlag = 0;
 			update_status(1);
-
+			sleep(1);
 			/*wait_for_incoming_transaction(); ///////// */
 		}
-		temp--;
 	}
-	kill(0, SIGINT);
 }
