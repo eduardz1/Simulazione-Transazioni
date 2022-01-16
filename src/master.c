@@ -72,14 +72,14 @@ pid_t spawn_user(char *userArgv[])
     switch (myPID)
     {
     case -1: /* Error case */
-        printf("-- Error forking for user\n");
+        printf("*** Error forking for user ***\n");
         break;
 
     case 0: /* Child case */
-        TRACE((":master: Spawning user\n"));
+        TRACE(("[MASTER] Spawning user\n"));
         execve(USER_NAME, userArgv, NULL);
         TEST_ERROR
-        TRACE(("!! Message that should never be seen\n"));
+        TRACE(("!!! Message that should never be seen !!!\n"));
         break;
 
     default:
@@ -107,6 +107,28 @@ pid_t spawn_node(char *nodeArgv[])
     default:
         return myPID;
     }
+}
+
+
+ledger *ledger_init()
+{
+    ledger *newLedger;
+    int shmID; /* ID of "ledger" shared memory segment */
+
+    /* -- LEDGER INITIALIZATION --
+     * save the ID of our new (IPC_PRIVATE) shared memory segment of size -ledger-
+     * smctl will deallocate the shared memory segment only when every process detaches it
+     * tells OS that ledger of type ledger is our shared memory of shmID
+     */
+    shmID = shmget(IPC_PRIVATE, sizeof(newLedger), 0600);
+    shmctl(shmID, IPC_RMID, NULL);
+
+    newLedger->head = NULL;
+    newLedger->registryCurrSize = 1;
+
+    newLedger = (ledger *)shmat(shmID, NULL, 0);
+
+    return newLedger;
 }
 
 /* attach usersPID, nodesPID, par and mainLedger to shared memory, returns an array with respective IDs */
