@@ -5,7 +5,7 @@
 
 #define SHM_NUM 4
 #define SEM_NUM 2
-#define IPC_NUM SHM_NUM+SEM_NUM
+#define IPC_NUM SHM_NUM + SEM_NUM
 
 #define USER_NAME "./users"
 #define NODE_NAME "./nodes"
@@ -109,7 +109,6 @@ pid_t spawn_node(char *nodeArgv[])
     }
 }
 
-
 void ledger_init(ledger *newLedger)
 {
     newLedger->head = NULL;
@@ -203,21 +202,19 @@ void make_ipc_array(int *IPC_array)
 /* CTRL-C handler */
 void master_interrupt_handle(int signum)
 {
+    int status, wpid;
     write(1, "::MASTER:: SIGINT ricevuto\n", 28);
     killpg(0, SIGINT);
 
     /* just to avoid printing before everyone has finished*/
-    sleep(1);
-    final_print(getpid(), usersPID, nodesPID, par);
-
-    /*
-    int status;
-
-    while (wait(&status) != -1)
+    /*while (wait(&status) != -1)
     {
         status >> 8; /* no idea about what it does please help *
-    }
-    */
+    }*/
+
+    while ((wpid = wait(&status)) > 0)
+        ;
+    final_print(getpid(), usersPID, nodesPID, par);
 
     semctl(semPIDs_ID, 1, IPC_RMID);
     semctl(semLedger_ID, 1, IPC_RMID);
@@ -236,6 +233,7 @@ int main(int argc, char *argv[])
     struct sigaction sa;
     struct sembuf sops;
 
+    TRACE(("[MASTER] ledger is %d bytes of size", SIZE_OF_LEDGER))
     semaphores_init();
     make_ipc_array(ipcObjectsIDs);
     make_arguments(ipcObjectsIDs, argvSpawns);

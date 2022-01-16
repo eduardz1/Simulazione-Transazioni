@@ -4,15 +4,15 @@ gcc -std=c89 -g -O0 -pedantic -D_GNU_SOURCE -DDEBUG src/master.c  src/print.c sr
 gcc -std=c89 -g -O0 -pedantic -D_GNU_SOURCE -DDEBUG src/users.c *.o -lm -o users
 gcc -std=c89 -g -O0 -pedantic -D_GNU_SOURCE -DDEBUG src/nodes.c *.o -lm -o nodes
 ./master
-[MASTER] semPIDs_ID is 44
-[MASTER] semLedger_ID is 45
+[MASTER] ledger is 4024016 bytes of size[MASTER] semPIDs_ID is 32798
+[MASTER] semLedger_ID is 32799
 [PARSER] assigned defaults
 --------------------------------------------
 ----------- Configuration input ------------
 SO_USER_NUM 9
 SO_NODES_NUM 6
 SO_FRIENDS_NUM 999
-SO_SIM_SEC 10
+SO_SIM_SEC 1000
 SO_HOPS 7
 SO_BUDGET_INIT 998
 SO_REWARD 14
@@ -24,373 +24,175 @@ SO_MIN_TRANS_PROC_NSEC 100000002
 SO_MAX_TRANS_PROC_NSEC 200000002
 --------------------------------------------
 [MASTER] conf file read successful
-[MASTER] IPC_array={32790,32791,32789,32792,44,45}
-[MASTER] argv[uPID] = 32790
-[MASTER] argv[nPID] = 32791
-[MASTER] argv[par] = 32789
-[MASTER] argv[ledger] = 32792
-[MASTER] argv[sem_pids] = 44
-[MASTER] argv[sem_ledger] = 45
-[MASTER] argv values for nodes: ./nodes 32790 32791 32789 32792 44 45 (null) (null)
+[MASTER] IPC_array={65594,65595,65593,65596,32798,32799}
+[MASTER] argv[uPID] = 65594
+[MASTER] argv[nPID] = 65595
+[MASTER] argv[par] = 65593
+[MASTER] argv[ledger] = 65596
+[MASTER] argv[sem_pids] = 32798
+[MASTER] argv[sem_ledger] = 32799
+[MASTER] argv values for nodes: ./nodes 65594 65595 65593 65596 32798 32799 (null) (null)
 [MASTER] Spawning node
 [MASTER] Spawning node
 [MASTER] Spawning node
 [MASTER] Spawning node
-[NODE 14957] par->SO_RETRY 21
-[NODE 14958] par->SO_RETRY 21
-[NODE 14957] usersPID[0] = 0, usersPID[3] = 0
-[NODE 14958] usersPID[0] = 0, usersPID[3] = 0
-[NODE 14957] nodesPID[0] = 14957, nodesPID[3] = 0
-[NODE 14958] nodesPID[0] = 14957, nodesPID[3] = 0
-[NODE 14957] semPIDs_ID is 44
-[NODE 14958] semPIDs_ID is 44
-[NODE 14957] semLedger_ID is 45
-[NODE 14958] semLedger_ID is 45
-[NODE 14957] sighandler init
-[NODE 14958] sighandler init
 [MASTER] Spawning node
-[NODE 14957] queueID is 65548
-[NODE 14958] queueID is 65549
-[MASTER] argv values for users: ./users 32790 32791 32789 32792 44 45 (null) (null)
+[MASTER] argv values for users: ./users 65594 65595 65593 65596 32798 32799 (null) (null)
 [MASTER] Spawning node
-[NODE 14959] par->SO_RETRY 21
+[NODE 2698] sighandler init
 [MASTER] Spawning user
-[NODE 14959] usersPID[0] = 14963, usersPID[3] = 0
-[NODE 14959] nodesPID[0] = 14957, nodesPID[3] = 0
-[NODE 14959] semPIDs_ID is 44
-[NODE 14959] semLedger_ID is 45
-[NODE 14959] sighandler init
-[NODE 14959] queueID is 65550
-[NODE 14960] par->SO_RETRY 21
+[NODE 2698] queueID is 131103
+[NODE 2698] Trying to receive message of size(transaction) from queue 131103
+[NODE 2699] sighandler init
+[NODE 2699] queueID is 131104
 [MASTER] Spawning user
-[NODE 14960] usersPID[0] = 14963, usersPID[3] = 0
-[NODE 14960] nodesPID[0] = 14957, nodesPID[3] = 0
-[NODE 14960] semPIDs_ID is 44
-[NODE 14960] semLedger_ID is 45
-[NODE 14960] sighandler init
-[NODE 14960] queueID is 65551
+[NODE 2699] Trying to receive message of size(transaction) from queue 131104
 [MASTER] Spawning user
-[NODE 14961] par->SO_RETRY 21
 [MASTER] Spawning user
-[NODE 14961] usersPID[0] = 14963, usersPID[3] = 0
-[NODE 14961] nodesPID[0] = 14957, nodesPID[3] = 0
-[NODE 14961] semPIDs_ID is 44
-[NODE 14961] semLedger_ID is 45
-[NODE 14961] sighandler init
-[NODE 14961] queueID is 65552
-[NODE 14962] par->SO_RETRY 21
+[NODE 2700] sighandler init
+[NODE 2701] sighandler init
+[NODE 2700] queueID is 131105
+[NODE 2700] Trying to receive message of size(transaction) from queue 131105
+[NODE 2701] queueID is 131106
+[NODE 2701] Trying to receive message of size(transaction) from queue 131106
 [MASTER] Spawning user
-[NODE 14962] usersPID[0] = 14963, usersPID[3] = 0
+[NODE 2702] sighandler init
+[NODE 2702] queueID is 131107
+[NODE 2703] sighandler init
+[NODE 2702] Trying to receive message of size(transaction) from queue 131107
 [MASTER] Spawning user
-[NODE 14962] nodesPID[0] = 14957, nodesPID[3] = 0
-[NODE 14962] semPIDs_ID is 44
-[NODE 14962] semLedger_ID is 45
-[NODE 14962] sighandler init
-[NODE 14962] queueID is 65553
-[USER 14963] USERS_PID_ARGV 32790
-[USER 14963] NODES_PID_ARGV 32791
-[USER 14963] PARAMETERS_ARGV 32789
+[NODE 2703] queueID is 131108
+[NODE 2703] Trying to receive message of size(transaction) from queue 131108
 [MASTER] Spawning user
-[USER 14963] LEDGER_ARGV 32792
-[USER 14963] SEM_ID_PID_ARGV 44
-:user 14963 par->SO_RETRY 21
-:user: 14963 usersPID[0] = 14963, usersPID[3] = 0
-:user: 14963 nodesPID[0] = 14957, nodesPID[3] = 0
-:user: 14963 semPIDs_ID is 44
 [MASTER] Spawning user
-:user: 14963 index is 4
-:user: 14963 usersPID[4]
-:user: 14963 index is 3
-:user: 14963 nodesPID[3]
-[USER 14963] is trying to attach to id=65551 queue
-[USER 14963] succedeed in attaching to queue 65551
-[USER 14964] USERS_PID_ARGV 32790
+[USER 2704] extracted usersPID[1]
+[USER 2704] extracted nodesPID[5]
+[USER 2704] succedeed in attaching to queue 131108
+[USER 2705] extracted usersPID[1]
+[USER 2704] sent a transaction of 568 UC to 2705 user via 131108 queue
 [MASTER] Spawning user
-[USER 14963] sent a transaction of 85 UC to 14967 user via 65551 queue
-[NODE 14960] has enough transactions to create a block
-[USER 14964] NODES_PID_ARGV 32791
-[USER 14964] PARAMETERS_ARGV 32789
-[USER 14965] USERS_PID_ARGV 32790
-[USER 14964] LEDGER_ARGV 32792
-:user: 14963 index is 3
-[USER 14966] USERS_PID_ARGV 32790
-[USER 14965] NODES_PID_ARGV 32791
-[USER 14964] SEM_ID_PID_ARGV 44
-:user: 14963 usersPID[3]
-[USER 14966] NODES_PID_ARGV 32791
-[USER 14965] PARAMETERS_ARGV 32789
-:user: 14963 index is 1
-:user 14964 par->SO_RETRY 21
-[USER 14967] USERS_PID_ARGV 32790
-[USER 14966] PARAMETERS_ARGV 32789
-[USER 14965] LEDGER_ARGV 32792
-:user: 14963 nodesPID[1]
-:user: 14964 usersPID[0] = 14963, usersPID[3] = 0
-[USER 14967] NODES_PID_ARGV 32791
-[USER 14966] LEDGER_ARGV 32792
-[USER 14965] SEM_ID_PID_ARGV 44
-[USER 14963] is trying to attach to id=65549 queue
-[USER 14967] PARAMETERS_ARGV 32789
-:user: 14964 nodesPID[0] = 14957, nodesPID[3] = 0
-[USER 14966] SEM_ID_PID_ARGV 44
-[USER 14963] succedeed in attaching to queue 65549
-[USER 14967] LEDGER_ARGV 32792
-:user: 14964 semPIDs_ID is 44
-:user 14965 par->SO_RETRY 21
-[USER 14967] SEM_ID_PID_ARGV 44
-:user 14966 par->SO_RETRY 21
-:user: 14964 index is 4
-:user: 14965 usersPID[0] = 14963, usersPID[3] = 0
-:user: 14964 usersPID[4]
-:user: 14966 usersPID[0] = 14963, usersPID[3] = 0
-[USER 14963] sent a transaction of 325 UC to 14966 user via 65549 queue
-:user 14967 par->SO_RETRY 21
-:user: 14964 index is 3
-:user: 14965 nodesPID[0] = 14957, nodesPID[3] = 0
-:user: 14966 nodesPID[0] = 14957, nodesPID[3] = 0
-[USER 14968] USERS_PID_ARGV 32790
-:user: 14964 nodesPID[3]
-:user: 14967 usersPID[0] = 14963, usersPID[3] = 0
-[NODE 14958] has enough transactions to create a block
-:user: 14965 semPIDs_ID is 44
-:user: 14966 semPIDs_ID is 44
-:user: 14963 index is 0
-[USER 14968] NODES_PID_ARGV 32791
-[USER 14969] USERS_PID_ARGV 32790
-:user: 14967 nodesPID[0] = 14957, nodesPID[3] = 0
-[USER 14964] is trying to attach to id=65551 queue
-:user: 14965 index is 4
-:user: 14963 usersPID[0]
-:user: 14966 index is 4
-[USER 14968] PARAMETERS_ARGV 32789
-[USER 14969] NODES_PID_ARGV 32791
-[USER 14964] succedeed in attaching to queue 65551
-:user: 14967 semPIDs_ID is 44
-:user: 14965 usersPID[4]
-:user: 14963 index is 3
-:user: 14966 usersPID[4]
-[USER 14968] LEDGER_ARGV 32792
-[USER 14969] PARAMETERS_ARGV 32789
-[USER 14964] sent a transaction of 85 UC to 14967 user via 65551 queue
-:user: 14965 index is 3
-:user: 14967 index is 4
-:user: 14963 nodesPID[3]
-:user: 14966 index is 3
-[USER 14968] SEM_ID_PID_ARGV 44
-[USER 14969] LEDGER_ARGV 32792
-:user: 14965 nodesPID[3]
-:user: 14967 usersPID[4]
-[USER 14970] USERS_PID_ARGV 32790
-[USER 14963] is trying to attach to id=65551 queue
-:user: 14966 nodesPID[3]
-[USER 14969] SEM_ID_PID_ARGV 44
-:user: 14964 index is 3
-:user 14968 par->SO_RETRY 21
-[USER 14965] is trying to attach to id=65551 queue
-:user: 14967 index is 3
-[USER 14970] NODES_PID_ARGV 32791
-[USER 14963] succedeed in attaching to queue 65551
-[USER 14966] is trying to attach to id=65551 queue
-:user: 14964 usersPID[3]
-[USER 14965] succedeed in attaching to queue 65551
-:user: 14968 usersPID[0] = 14963, usersPID[3] = 0
-:user 14969 par->SO_RETRY 21
-[USER 14971] USERS_PID_ARGV 32790
-:user: 14967 nodesPID[3]
-[USER 14970] PARAMETERS_ARGV 32789
-[USER 14963] sent a transaction of 67 UC to 14963 user via 65551 queue
-[USER 14966] succedeed in attaching to queue 65551
-:user: 14964 index is 1
-[USER 14965] sent a transaction of 85 UC to 14967 user via 65551 queue
-:user: 14968 nodesPID[0] = 14957, nodesPID[3] = 0
-:user: 14969 usersPID[0] = 14963, usersPID[3] = 0
-[USER 14971] NODES_PID_ARGV 32791
-:user: 14968 semPIDs_ID is 44
-[USER 14970] LEDGER_ARGV 32792
-[USER 14967] is trying to attach to id=65551 queue
-:user: 14964 nodesPID[1]
-[USER 14966] sent a transaction of 85 UC to 14967 user via 65551 queue
-:user: 14963 index is 4
-[USER 14971] PARAMETERS_ARGV 32789
-:user: 14969 nodesPID[0] = 14957, nodesPID[3] = 0
-[USER 14970] SEM_ID_PID_ARGV 44
-:user: 14968 index is 4
-[USER 14967] succedeed in attaching to queue 65551
-:user: 14965 index is 3
-[USER 14964] is trying to attach to id=65549 queue
-:user: 14966 index is 3
-:user: 14963 usersPID[4]
-[USER 14971] LEDGER_ARGV 32792
-:user: 14969 semPIDs_ID is 44
-:user: 14968 usersPID[4]
-:user: 14965 usersPID[3]
-[USER 14967] sent a transaction of 85 UC to 14967 user via 65551 queue
-:user 14970 par->SO_RETRY 21
-[USER 14964] succedeed in attaching to queue 65549
-:user: 14966 usersPID[3]
-:user: 14963 index is 1
-[USER 14971] SEM_ID_PID_ARGV 44
-:user: 14968 index is 3
-:user: 14969 index is 4
-:user: 14965 index is 1
-[USER 14964] sent a transaction of 325 UC to 14966 user via 65549 queue
-:user: 14970 usersPID[0] = 14963, usersPID[3] = 0
-:user: 14966 index is 1
-:user: 14963 nodesPID[1]
-:user: 14967 index is 3
-:user: 14968 nodesPID[3]
-:user 14971 par->SO_RETRY 21
-:user: 14969 usersPID[4]
-:user: 14965 nodesPID[1]
-:user: 14966 nodesPID[1]
-:user: 14970 nodesPID[0] = 14957, nodesPID[3] = 0
-[USER 14963] is trying to attach to id=65549 queue
-:user: 14967 usersPID[3]
-:user: 14964 index is 0
-[USER 14968] is trying to attach to id=65551 queue
-:user: 14969 index is 3
-:user: 14971 usersPID[0] = 14963, usersPID[3] = 0
-[USER 14965] is trying to attach to id=65549 queue
-[USER 14966] is trying to attach to id=65549 queue
-[USER 14963] succedeed in attaching to queue 65549
-:user: 14970 semPIDs_ID is 44
-:user: 14967 index is 1
-:user: 14964 usersPID[0]
-[USER 14968] succedeed in attaching to queue 65551
-:user: 14969 nodesPID[3]
-[USER 14965] succedeed in attaching to queue 65549
-:user: 14971 nodesPID[0] = 14957, nodesPID[3] = 0
-[USER 14966] succedeed in attaching to queue 65549
-[USER 14963] sent a transaction of 330 UC to 14967 user via 65549 queue
-:user: 14967 nodesPID[1]
-:user: 14970 index is 4
-:user: 14964 index is 3
-[USER 14968] sent a transaction of 85 UC to 14967 user via 65551 queue
-[USER 14969] is trying to attach to id=65551 queue
-[USER 14965] sent a transaction of 325 UC to 14966 user via 65549 queue
-:user: 14971 semPIDs_ID is 44
-[USER 14966] sent a transaction of 325 UC to 14966 user via 65549 queue
-[USER 14967] is trying to attach to id=65549 queue
-:user: 14970 usersPID[4]
-:user: 14964 nodesPID[3]
-[USER 14969] succedeed in attaching to queue 65551
-:user: 14963 index is 4
-[USER 14967] succedeed in attaching to queue 65549
-:user: 14971 index is 4
-:user: 14970 index is 3
-[USER 14964] is trying to attach to id=65551 queue
-:user: 14965 index is 0
-:user: 14968 index is 3
-:user: 14963 usersPID[4]
-[USER 14969] sent a transaction of 85 UC to 14967 user via 65551 queue
-:user: 14966 index is 0
-[USER 14967] sent a transaction of 325 UC to 14966 user via 65549 queue
-:user: 14971 usersPID[4]
-:user: 14970 nodesPID[3]
-[USER 14964] succedeed in attaching to queue 65551
-:user: 14965 usersPID[0]
-[USER 14970] is trying to attach to id=65551 queue
-:user: 14968 usersPID[3]
-:user: 14963 index is 3
-:user: 14966 usersPID[0]
-:user: 14971 index is 3
-[USER 14964] sent a transaction of 67 UC to 14963 user via 65551 queue
-:user: 14965 index is 3
-:user: 14969 index is 3
-[USER 14970] succedeed in attaching to queue 65551
-:user: 14968 index is 1
-:user: 14967 index is 0
-:user: 14963 nodesPID[3]
-:user: 14966 index is 3
-:user: 14971 nodesPID[3]
-:user: 14965 nodesPID[3]
-:user: 14969 usersPID[3]
-[USER 14970] sent a transaction of 85 UC to 14967 user via 65551 queue
-:user: 14968 nodesPID[1]
-:user: 14964 index is 4
-:user: 14967 usersPID[0]
-[USER 14963] is trying to attach to id=65551 queue
-:user: 14966 nodesPID[3]
-[USER 14965] is trying to attach to id=65551 queue
-[USER 14971] is trying to attach to id=65551 queue
-:user: 14969 index is 1
-[USER 14968] is trying to attach to id=65549 queue
-:user: 14964 usersPID[4]
-:user: 14967 index is 3
-[USER 14963] succedeed in attaching to queue 65551
-:user: 14970 index is 3
-[USER 14966] is trying to attach to id=65551 queue
-[USER 14965] succedeed in attaching to queue 65551
-[USER 14971] succedeed in attaching to queue 65551
-:user: 14969 nodesPID[1]
-[USER 14968] succedeed in attaching to queue 65549
-:user: 14964 index is 1
-:user: 14967 nodesPID[3]
-[USER 14963] sent a transaction of 26 UC to 14967 user via 65551 queue
-:user: 14970 usersPID[3]
-[USER 14966] succedeed in attaching to queue 65551
-[USER 14969] is trying to attach to id=65549 queue
-[USER 14968] sent a transaction of 325 UC to 14966 user via 65549 queue
-:user: 14964 nodesPID[1]
-[USER 14967] is trying to attach to id=65551 queue
-:user: 14970 index is 1
-[USER 14969] succedeed in attaching to queue 65549
-[USER 14964] is trying to attach to id=65549 queue
-:user: 14963 index is 3
-:user: 14968 index is 0
-[USER 14967] succedeed in attaching to queue 65551
-:user: 14970 nodesPID[1]
-[USER 14969] sent a transaction of 325 UC to 14966 user via 65549 queue
-[USER 14964] succedeed in attaching to queue 65549
-:user: 14963 usersPID[3]
-:user: 14968 usersPID[0]
-[USER 14970] is trying to attach to id=65549 queue
-[USER 14964] sent a transaction of 330 UC to 14967 user via 65549 queue
-:user: 14963 index is 5
-:user: 14968 index is 3
-[USER 14970] succedeed in attaching to queue 65549
-:user: 14969 index is 0
-:user: 14963 nodesPID[5]
-:user: 14968 nodesPID[3]
-[USER 14970] sent a transaction of 325 UC to 14966 user via 65549 queue
-:user: 14969 usersPID[0]
-[USER 14963] is trying to attach to id=65553 queue
-:user: 14964 index is 4
-[USER 14968] is trying to attach to id=65551 queue
-:user: 14969 index is 3
-[USER 14963] succedeed in attaching to queue 65553
-:user: 14964 usersPID[4]
-[USER 14968] succedeed in attaching to queue 65551
-:user: 14969 nodesPID[3]
-:user: 14970 index is 0
-:user: 14964 index is 3
-[USER 14969] is trying to attach to id=65551 queue
-:user: 14970 usersPID[0]
-:user: 14964 nodesPID[3]
-[USER 14969] succedeed in attaching to queue 65551
-:user: 14970 index is 3
-[USER 14963] sent a transaction of 6 UC to 14966 user via 65553 queue
-[USER 14964] is trying to attach to id=65551 queue
-:user: 14970 nodesPID[3]
-[USER 14964] succedeed in attaching to queue 65551
-[NODE 14962] has enough transactions to create a block
-[USER 14970] is trying to attach to id=65551 queue
-:user: 14963 index is 2
-[USER 14970] succedeed in attaching to queue 65551
-:user: 14963 usersPID[2]
-:user: 14963 index is 2
-:user: 14963 nodesPID[2]
-[USER 14963] is trying to attach to id=65550 queue
-[USER 14963] succedeed in attaching to queue 65550
-[USER 14963] sent a transaction of 9 UC to 14965 user via 65550 queue
-[NODE 14959] has enough transactions to create a block
-:user: 14963 index is 6
-:user: 14963 usersPID[6]
-:user: 14963 index is 2
-:user: 14963 nodesPID[2]
-[USER 14963] is trying to attach to id=65550 queue
-[USER 14963] succedeed in attaching to queue 65550
-[USER 14963] sent a transaction of 5 UC to 14969 user via 65550 queue
+[USER 2705] extracted nodesPID[5]
+[USER 2704] extracted usersPID[3]
+[USER 2705] succedeed in attaching to queue 131108
+[USER 2704] extracted nodesPID[1]
+[USER 2705] sent a transaction of 568 UC to 2705 user via 131108 queue
+[USER 2704] succedeed in attaching to queue 131104
+[USER 2704] sent a transaction of 179 UC to 2707 user via 131104 queue
+[USER 2705] extracted usersPID[3]
+[USER 2706] extracted usersPID[1]
+[USER 2705] extracted nodesPID[1]
+[USER 2706] extracted nodesPID[5]
+[USER 2705] succedeed in attaching to queue 131104
+[USER 2706] succedeed in attaching to queue 131108
+[USER 2705] sent a transaction of 179 UC to 2707 user via 131104 queue
+[USER 2707] extracted usersPID[1]
+[USER 2706] sent a transaction of 568 UC to 2705 user via 131108 queue
+[USER 2704] extracted usersPID[5]
+[USER 2707] extracted nodesPID[5]
+[USER 2708] extracted usersPID[1]
+[USER 2705] extracted usersPID[5]
+[USER 2704] extracted nodesPID[3]
+[USER 2707] succedeed in attaching to queue 131108
+[USER 2708] extracted nodesPID[5]
+[USER 2706] extracted usersPID[3]
+[USER 2705] extracted nodesPID[3]
+[USER 2704] succedeed in attaching to queue 131106
+[USER 2707] sent a transaction of 568 UC to 2705 user via 131108 queue
+[USER 2706] extracted nodesPID[1]
+[USER 2708] succedeed in attaching to queue 131108
+[USER 2705] succedeed in attaching to queue 131106
+[USER 2706] succedeed in attaching to queue 131104
+[USER 2704] sent a transaction of 25 UC to 2709 user via 131106 queue
+[USER 2708] sent a transaction of 568 UC to 2705 user via 131108 queue
+[USER 2705] sent a transaction of 25 UC to 2709 user via 131106 queue
+[USER 2706] sent a transaction of 179 UC to 2707 user via 131104 queue
+[USER 2704] extracted usersPID[3]
+[USER 2704] extracted nodesPID[5]
+[USER 2704] succedeed in attaching to queue 131108
+[USER 2704] sent a transaction of 11 UC to 2707 user via 131108 queue
+[USER 2705] extracted usersPID[3]
+[USER 2705] extracted nodesPID[5]
+[USER 2706] extracted usersPID[5]
+[USER 2708] extracted usersPID[3]
+[USER 2705] succedeed in attaching to queue 131108
+[USER 2706] extracted nodesPID[3]
+[USER 2708] extracted nodesPID[1]
+[USER 2705] sent a transaction of 11 UC to 2707 user via 131108 queue
+[USER 2706] succedeed in attaching to queue 131106
+[USER 2704] extracted usersPID[2]
+[USER 2708] succedeed in attaching to queue 131104
+[USER 2709] extracted usersPID[1]
+[USER 2705] extracted usersPID[2]
+[USER 2709] extracted nodesPID[5]
+[USER 2706] sent a transaction of 25 UC to 2709 user via 131106 queue
+[USER 2704] extracted nodesPID[5]
+[USER 2708] sent a transaction of 179 UC to 2707 user via 131104 queue
+[USER 2705] extracted nodesPID[5]
+[USER 2709] succedeed in attaching to queue 131108
+[USER 2704] succedeed in attaching to queue 131108
+[USER 2705] succedeed in attaching to queue 131108
+[USER 2706] extracted usersPID[3]
+[USER 2709] sent a transaction of 568 UC to 2705 user via 131108 queue
+[USER 2704] sent a transaction of 43 UC to 2706 user via 131108 queue
+[USER 2705] sent a transaction of 43 UC to 2706 user via 131108 queue
+[USER 2706] extracted nodesPID[5]
+[USER 2708] extracted usersPID[5]
+[USER 2706] succedeed in attaching to queue 131108
+[USER 2708] extracted nodesPID[3]
+[USER 2706] sent a transaction of 11 UC to 2707 user via 131108 queue
+[USER 2708] succedeed in attaching to queue 131106
+[USER 2704] extracted usersPID[5]
+[USER 2705] extracted usersPID[5]
+[USER 2708] sent a transaction of 25 UC to 2709 user via 131106 queue
+[USER 2704] extracted nodesPID[0]
+[USER 2709] extracted usersPID[3]
+[USER 2705] extracted nodesPID[0]
+[USER 2704] succedeed in attaching to queue 131103
+[USER 2709] extracted nodesPID[1]
+[USER 2705] succedeed in attaching to queue 131103
+[USER 2709] succedeed in attaching to queue 131104
+[USER 2705] sent a transaction of 6 UC to 2709 user via 131103 queue
+[USER 2709] sent a transaction of 179 UC to 2707 user via 131104 queue
+[USER 2706] extracted usersPID[2]
+[USER 2708] extracted usersPID[3]
+[USER 2710] extracted usersPID[1]
+[USER 2706] extracted nodesPID[5]
+[USER 2708] extracted nodesPID[5]
+[USER 2704] sent a transaction of 6 UC to 2709 user via 131103 queue
+[USER 2711] extracted usersPID[1]
+[USER 2705] extracted usersPID[2]
+[USER 2710] extracted nodesPID[5]
+[USER 2706] succedeed in attaching to queue 131108
+[USER 2709] extracted usersPID[5]
+[USER 2708] succedeed in attaching to queue 131108
+[USER 2711] extracted nodesPID[5]
+[USER 2705] extracted nodesPID[5]
+[USER 2704] extracted usersPID[2]
+[USER 2710] succedeed in attaching to queue 131108
+[USER 2709] extracted nodesPID[3]
+[USER 2705] succedeed in attaching to queue 131108
+[USER 2711] succedeed in attaching to queue 131108
+[USER 2704] extracted nodesPID[5]
+[USER 2709] succedeed in attaching to queue 131106
+[USER 2712] extracted usersPID[1]
+[USER 2707] extracted usersPID[3]
+[USER 2704] succedeed in attaching to queue 131108
+[USER 2709] sent a transaction of 25 UC to 2709 user via 131106 queue
+[USER 2712] extracted nodesPID[5]
+[USER 2707] extracted nodesPID[1]
+[USER 2707] succedeed in attaching to queue 131104
+[USER 2712] succedeed in attaching to queue 131108
+[USER 2707] sent a transaction of 179 UC to 2707 user via 131104 queue
+[USER 2709] extracted usersPID[3]
+[USER 2709] extracted nodesPID[5]
+[USER 2709] succedeed in attaching to queue 131108
+[USER 2707] extracted usersPID[5]
+[USER 2707] extracted nodesPID[3]
+[USER 2707] succedeed in attaching to queue 131106
+[USER 2707] sent a transaction of 25 UC to 2709 user via 131106 queue
+[USER 2707] extracted usersPID[3]
+[USER 2707] extracted nodesPID[5]
+[USER 2707] succedeed in attaching to queue 131108
 ::USER:: SIGINT received
  ::USER:: SIGINT received
  ::USER:: SIGINT received
@@ -398,46 +200,30 @@ SO_MAX_TRANS_PROC_NSEC 200000002
  ::USER:: SIGINT received
  ::USER:: SIGINT received
  ::USER:: SIGINT received
+ ::NODE:: SIGINT received
  ::USER:: SIGINT received
  ::USER:: SIGINT received
  ::MASTER:: SIGINT ricevuto
- ::NODE:: SIGINT received
- ::NODE:: SIGINT received
- [USER 14963] went broke :/
-[USER 14963] went broke :/
-[USER 14963] went broke :/
-[USER 14963] went broke :/
-[USER 14963] went broke :/
-[USER 14963] went broke :/
-[USER 14963] went broke :/
-[USER 14963] went broke :/
-[USER 14963] went broke :/
-[USER 14963] went broke :/
-src/nodes.c:230: PID=14961: Error 27 (File too large)
-src/nodes.c:233: PID=14961: Error 27 (File too large)
-[NODE] queue removed
-src/nodes.c:237: PID=14961: Error 27 (File too large)
+ [NODE] queue removed
 Message queue size: 400
-src/nodes.c:230: PID=14957: Error 27 (File too large)
-src/nodes.c:233: PID=14957: Error 27 (File too large)
-[NODE] queue removed
-src/nodes.c:237: PID=14957: Error 27 (File too large)
+::NODE:: SIGINT received
+ [NODE] queue removed
 Message queue size: 400
-src/print.c:27: PID=14956: Error 27 (File too large)
-src/print.c:27: PID=14956: Error 27 (File too large)
-src/print.c:27: PID=14956: Error 27 (File too large)
-src/print.c:27: PID=14956: Error 27 (File too large)
-src/print.c:27: PID=14956: Error 27 (File too large)
-src/print.c:27: PID=14956: Error 27 (File too large)
-src/print.c:27: PID=14956: Error 27 (File too large)
-src/print.c:27: PID=14956: Error 27 (File too large)
-src/print.c:27: PID=14956: Error 27 (File too large)
-src/print.c:46: PID=14956: Error 27 (File too large)
-src/print.c:46: PID=14956: Error 27 (File too large)
-src/print.c:46: PID=14956: Error 27 (File too large)
-src/print.c:46: PID=14956: Error 27 (File too large)
-src/print.c:46: PID=14956: Error 27 (File too large)
-src/print.c:46: PID=14956: Error 27 (File too large)
+src/print.c:27: PID= 2697: Error 10 (No child processes)
+src/print.c:27: PID= 2697: Error 10 (No child processes)
+src/print.c:27: PID= 2697: Error 10 (No child processes)
+src/print.c:27: PID= 2697: Error 10 (No child processes)
+src/print.c:27: PID= 2697: Error 10 (No child processes)
+src/print.c:27: PID= 2697: Error 10 (No child processes)
+src/print.c:27: PID= 2697: Error 10 (No child processes)
+src/print.c:27: PID= 2697: Error 10 (No child processes)
+src/print.c:27: PID= 2697: Error 10 (No child processes)
+src/print.c:46: PID= 2697: Error 10 (No child processes)
+src/print.c:46: PID= 2697: Error 10 (No child processes)
+src/print.c:46: PID= 2697: Error 10 (No child processes)
+src/print.c:46: PID= 2697: Error 10 (No child processes)
+src/print.c:46: PID= 2697: Error 10 (No child processes)
+src/print.c:46: PID= 2697: Error 10 (No child processes)
 --------------------------------------------
 ----------- Configuration value ------------
 SO_USER_NUM->9
@@ -450,34 +236,29 @@ SO_RETRY->21
 SO_TP_SIZE->10
 SO_MIN_TRANS_PROC_NSEC->100000002
 SO_MAX_TRANS_PROC_NSEC->200000002
-SO_SIM_SEC->10
+SO_SIM_SEC->1000
 SO_FRIENDS_NUM->999
 SO_HOPS->7
 --------------------------------------------
 
-***********************
-|| The time has come ||
-***********************
-
-
- ------- Master Process PID is 14956 ----------
+ ------- Master Process PID is 2697 ----------
 |                                             |
  - Type ------- PID --------- Status ---------
  ---------------------------------------------
-|  User         14971            alive     
-|  User         14970            alive     
-|  User         14969            alive     
-|  User         14968            alive     
-|  User         14967            alive     
-|  User         14966            alive     
-|  User         14965            alive     
-|  User         14964            alive     
-|  User         14963            broke     
+|  User         2712            alive     
+|  User         2711            alive     
+|  User         2710            alive     
+|  User         2709            alive     
+|  User         2708            alive     
+|  User         2707            alive     
+|  User         2706            alive     
+|  User         2705            alive     
+|  User         2704            alive     
  ---------------------------------------------
-|  Node         14962            available
-|  Node         14961            available
-|  Node         14960            available
-|  Node         14959            available
-|  Node         14958            available
-|  Node         14957            available
+|  Node         2703            available
+|  Node         2702            available
+|  Node         2701            available
+|  Node         2700            available
+|  Node         2699            available
+|  Node         2698            available
  ---------------------------------------------

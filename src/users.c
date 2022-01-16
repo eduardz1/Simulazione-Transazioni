@@ -69,8 +69,7 @@ pid_t get_random_userPID()
 	do
 	{
 		index = RAND(0, par->SO_USER_NUM - 1);
-		TRACE((":user: %d index is %d\n", myPID, index))
-		TRACE((":user: %d usersPID[%d]\n", myPID, index));
+		TRACE(("[USER %d] extracted usersPID[%d]\n", myPID, index));
 		if (usersPID[index].status != dead)
 			val = usersPID[index].pid;
 	} while (!val);
@@ -87,8 +86,7 @@ pid_t get_random_nodePID()
 	do
 	{
 		index = RAND(0, par->SO_NODES_NUM - 1);
-		TRACE((":user: %d index is %d\n", myPID, index))
-		TRACE((":user: %d nodesPID[%d]\n", myPID, index));
+		TRACE(("[USER %d] extracted nodesPID[%d]\n", myPID, index));
 		if (nodesPID[index].status == available)
 			val = nodesPID[index].pid;
 	} while (!val);
@@ -102,7 +100,7 @@ void update_status(int statusToSet)
 	int i = get_pid_userIndex(myPID);
 	if (i == -1)
 	{
-		TRACE((":user: %d failed to find myself in usersPID[]", myPID));
+		TRACE(("[USER %d] failed to find myself in usersPID[]", myPID));
 	}
 
 	sem_reserve(semPIDs_ID, 1);
@@ -110,7 +108,7 @@ void update_status(int statusToSet)
 	if (statusToSet == 2)
 	{
 		/*usersPrematurelyDead++;*/
-		TRACE((":user: dead increased\n"));
+		TRACE(("[USERS] dead increased\n"));
 	}
 	sem_release(semPIDs_ID, 1);
 }
@@ -119,18 +117,14 @@ void update_status(int statusToSet)
 void attach_ipc_objects(char **argv)
 {
 	par = shmat(PARAMETERS_ARGV, NULL, 0);
-	TRACE((":user %d par->SO_RETRY %d\n", myPID, par->SO_RETRY))
 	TEST_ERROR
 	usersPID = shmat(USERS_PID_ARGV, NULL, 0);
-	TRACE((":user: %d usersPID[0] = %d, usersPID[3] = %d\n", myPID, usersPID[0], usersPID[3]))
 	TEST_ERROR
 	nodesPID = shmat(NODES_PID_ARGV, NULL, 0);
-	TRACE((":user: %d nodesPID[0] = %d, nodesPID[3] = %d\n", myPID, nodesPID[0], nodesPID[3]))
 	TEST_ERROR
 	mainLedger = shmat(LEDGER_ARGV, NULL, 0);
 	TEST_ERROR
 	semPIDs_ID = SEM_PIDS_ARGV;
-	TRACE((":user: %d semPIDs_ID is %d\n", myPID, semPIDs_ID));
 }
 
 /* try to attach to queue of nodePID key until it succeeds */
@@ -139,7 +133,7 @@ void queue_to_pid(pid_t nodePID)
 	do
 	{
 		queueID = msgget(nodePID, 0);
-		TRACE(("[USER %d] is trying to attach to id=%d queue\n", myPID, queueID))
+		/* TRACE(("[USER %d] is trying to attach to id=%d queue\n", myPID, queueID)) */
 	} while (errno == ENOENT);
 	TRACE(("[USER %d] succedeed in attaching to queue %d\n", myPID, queueID))
 }
@@ -282,11 +276,6 @@ int main(int argc, char *argv[])
 	bzero(&saINT_user, sizeof(saINT_user));
 
 	myPID = getpid(); /* set myPID value */
-	TRACE(("[USER %d] USERS_PID_ARGV %d\n", myPID, USERS_PID_ARGV))
-	TRACE(("[USER %d] NODES_PID_ARGV %d\n", myPID, NODES_PID_ARGV))
-	TRACE(("[USER %d] PARAMETERS_ARGV %d\n", myPID, PARAMETERS_ARGV))
-	TRACE(("[USER %d] LEDGER_ARGV %d\n", myPID, LEDGER_ARGV))
-	TRACE(("[USER %d] SEM_ID_PID_ARGV %d\n", myPID, SEM_PIDS_ARGV))
 
 	if (argc == 0)
 	{
@@ -339,9 +328,9 @@ int main(int argc, char *argv[])
 		}
 		else
 		{
-			if (brokeFlag = 1)
+			/*if (brokeFlag = 1)
 				printf("[USER %d] went broke :/\n", myPID);
-			brokeFlag = 0;
+			brokeFlag = 0;*/
 			update_status(1);
 			sleep(1);
 			/*wait_for_incoming_transaction(); ///////// */

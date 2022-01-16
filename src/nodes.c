@@ -98,7 +98,10 @@ void fill_block_buffer(transaction **buffer)
     int i;
     for (i = 0; i < (SO_BLOCK_SIZE - 1); i++)
     {
-        msgrcv(queueID, &buffer[i], sizeof(transaction), 0, 0);
+        TRACE(("[NODE %d] Trying to receive message of size(transaction) from queue %d\n", myPID, queueID))
+        msgrcv(queueID, &buffer[i], sizeof(transaction), atol("transaction"), 0);
+        TEST_ERROR
+        TRACE(("[NODE %d] is processing a transaction of %d UC\n", myPID, buffer[i]->amount))
         switch (errno)
         {
         case E2BIG:
@@ -120,6 +123,7 @@ void fill_block_buffer(transaction **buffer)
             TRACE(("[NODE %d] has enough transactions to create a block\n", myPID));
         }
         buffer[i]->status = processing;
+        TRACE(("[NODE %d] is processing a transaction of %d UC\n", myPID, buffer[i]->amount))
     }
 }
 
@@ -155,20 +159,15 @@ void append_block_to_ledger(block *newBlock)
 void attach_ipc_objects(char **argv)
 {
     par = shmat(PARAMETERS_ARGV, NULL, 0);
-    TRACE(("[NODE %d] par->SO_RETRY %d\n", myPID, par->SO_RETRY))
     TEST_ERROR
     usersPID = shmat(USERS_PID_ARGV, NULL, 0);
-    TRACE(("[NODE %d] usersPID[0] = %d, usersPID[3] = %d\n", myPID, usersPID[0], usersPID[3]))
     TEST_ERROR
     nodesPID = shmat(NODES_PID_ARGV, NULL, 0);
-    TRACE(("[NODE %d] nodesPID[0] = %d, nodesPID[3] = %d\n", myPID, nodesPID[0], nodesPID[3]))
     TEST_ERROR
     mainLedger = shmat(LEDGER_ARGV, NULL, 0);
     TEST_ERROR
     semPIDs_ID = SEM_PIDS_ARGV;
-    TRACE(("[NODE %d] semPIDs_ID is %d\n", myPID, semPIDs_ID));
     semLedger_ID = SEM_LEDGER_ARGV;
-    TRACE(("[NODE %d] semLedger_ID is %d\n", myPID, semLedger_ID));
 }
 
 /* initializes message queue specific to own PID and sets it's size to SO_TP_SIZE */
@@ -226,10 +225,10 @@ void node_interrupt_handle(int signum)
     TEST_ERROR
     write(1, "::NODE:: SIGINT received\n", 26);
 
-    sem_reserve(semPIDs_ID, 1);
+    /*sem_reserve(semPIDs_ID, 1);*/
     TEST_ERROR
     nodesPID[nodeIndex].balance = currBalance;
-    sem_release(semPIDs_ID, 1);
+    /*sem_release(semPIDs_ID, 1);*/
     TEST_ERROR
 
     msgctl(queueID, IPC_RMID, NULL);
