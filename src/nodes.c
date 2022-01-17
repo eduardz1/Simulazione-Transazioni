@@ -258,6 +258,8 @@ void node_interrupt_handle(int signum)
     msgctl(queueID, IPC_RMID, NULL);
     TRACE(("[NODE] queue removed\n"))
     TEST_ERROR
+
+    report_mem_leak_nodes();
     exit(0);
 }
 

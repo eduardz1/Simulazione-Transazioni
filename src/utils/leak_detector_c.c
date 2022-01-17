@@ -171,12 +171,76 @@ void report_mem_leak(void)
 	unsigned short index;
 	MEM_LEAK * leak_info;
 
-	FILE * fp_write = fopen (OUTPUT_FILE, "wt");
+	FILE * fp_write = fopen (OUTPUT_FILE_MASTER, "wt");
 	char info[1024];
 
 	if(fp_write != NULL)
 	{
 		sprintf(info, "%s\n", "Memory Leak Summary");
+		fwrite(info, (strlen(info) + 1) , 1, fp_write);
+		sprintf(info, "%s\n", "-----------------------------------");	
+		fwrite(info, (strlen(info) + 1) , 1, fp_write);
+		
+		for(leak_info = ptr_start; leak_info != NULL; leak_info = leak_info->next)
+		{
+			sprintf(info, "address : %d\n", leak_info->mem_info.address);
+			fwrite(info, (strlen(info) + 1) , 1, fp_write);
+			sprintf(info, "size    : %d bytes\n", leak_info->mem_info.size);			
+			fwrite(info, (strlen(info) + 1) , 1, fp_write);
+			sprintf(info, "file    : %s\n", leak_info->mem_info.file_name);
+			fwrite(info, (strlen(info) + 1) , 1, fp_write);
+			sprintf(info, "line    : %d\n", leak_info->mem_info.line);
+			fwrite(info, (strlen(info) + 1) , 1, fp_write);
+			sprintf(info, "%s\n", "-----------------------------------");	
+			fwrite(info, (strlen(info) + 1) , 1, fp_write);
+		}
+	}	
+	clear();
+}
+
+void report_mem_leak_nodes(void)
+{
+	unsigned short index;
+	MEM_LEAK * leak_info;
+
+	FILE * fp_write = fopen (OUTPUT_FILE_NODES, "wt");
+	char info[1024];
+
+	if(fp_write != NULL)
+	{
+		sprintf(info, "%s\n", "Memory Leak Summary for Nodes");
+		fwrite(info, (strlen(info) + 1) , 1, fp_write);
+		sprintf(info, "%s\n", "-----------------------------------");	
+		fwrite(info, (strlen(info) + 1) , 1, fp_write);
+		
+		for(leak_info = ptr_start; leak_info != NULL; leak_info = leak_info->next)
+		{
+			sprintf(info, "address : %d\n", leak_info->mem_info.address);
+			fwrite(info, (strlen(info) + 1) , 1, fp_write);
+			sprintf(info, "size    : %d bytes\n", leak_info->mem_info.size);			
+			fwrite(info, (strlen(info) + 1) , 1, fp_write);
+			sprintf(info, "file    : %s\n", leak_info->mem_info.file_name);
+			fwrite(info, (strlen(info) + 1) , 1, fp_write);
+			sprintf(info, "line    : %d\n", leak_info->mem_info.line);
+			fwrite(info, (strlen(info) + 1) , 1, fp_write);
+			sprintf(info, "%s\n", "-----------------------------------");	
+			fwrite(info, (strlen(info) + 1) , 1, fp_write);
+		}
+	}	
+	clear();
+}
+
+void report_mem_leak_users(void)
+{
+	unsigned short index;
+	MEM_LEAK * leak_info;
+
+	FILE * fp_write = fopen (OUTPUT_FILE_USERS, "wt");
+	char info[1024];
+
+	if(fp_write != NULL)
+	{
+		sprintf(info, "%s\n", "Memory Leak Summary for Users");
 		fwrite(info, (strlen(info) + 1) , 1, fp_write);
 		sprintf(info, "%s\n", "-----------------------------------");	
 		fwrite(info, (strlen(info) + 1) , 1, fp_write);

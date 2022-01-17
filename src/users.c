@@ -262,6 +262,8 @@ void user_transactions_handle(int signum)
 void user_interrupt_handle(int signum)
 {
 	write(1, "::USER:: SIGINT received\n", 26);
+
+	report_mem_leak_users();
 	exit(0);
 }
 
