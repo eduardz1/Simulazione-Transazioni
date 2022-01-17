@@ -175,7 +175,6 @@ typedef struct pool_t
 } pool;
 
 void add_block(block);
-int sum_reward(transaction **);
 void add_transaction_to_block(block *, transaction *, int index);
 void add_block_to_ledger(block *);
 void find_transaction(struct timespec timestamp, pid_t sender, pid_t receiver); /* NULL used to group results */

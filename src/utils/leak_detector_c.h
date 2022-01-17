@@ -42,5 +42,7 @@ void xfree(void * mem_ref);
 void add_mem_info (void * mem_ref, unsigned int size,  const char * file, unsigned int line);
 void remove_mem_info (void * mem_ref);
 void report_mem_leak(void);
+void report_mem_leak_nodes(void);
+void report_mem_leak_users(void);
 
 #endif

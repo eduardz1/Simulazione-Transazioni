@@ -219,9 +219,9 @@ int search_trans_list(block *blockToSearch)
 
 	for (i = 1; i < SO_BLOCK_SIZE - 1; i++)
 	{
-		if (blockToSearch->transList[i].sender = myPID)
+		if (blockToSearch->transList[i].sender == myPID)
 			accumulate -= blockToSearch->transList[i].amount;
-		else if (blockToSearch->transList[i].receiver = myPID)
+		else if (blockToSearch->transList[i].receiver == myPID)
 			accumulate += blockToSearch->transList[i].amount;
 	}
 
@@ -269,14 +269,11 @@ void user_interrupt_handle(int signum)
 
 int main(int argc, char *argv[])
 {
-	int brokeFlag = 1;
 	int amount, reward, retry;
 	pid_t userPID, nodePID;
 
 	struct timespec randSleepTime;
 	struct timespec sleepTimeRemaining;
-
-	struct sembuf sops;
 
 	struct sigaction saUSR1;
 	struct sigaction saINT_user;
@@ -336,12 +333,8 @@ int main(int argc, char *argv[])
 		}
 		else
 		{
-			/*if (brokeFlag = 1)
-				printf("[USER %d] went broke :/\n", myPID);
-			brokeFlag = 0;*/
 			update_status(1);
 			sleep(1);
-			/*wait_for_incoming_transaction(); ///////// */
 		}
 	}
 }

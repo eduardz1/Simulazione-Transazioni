@@ -13,7 +13,8 @@
 /*void signal_handler_init(struct sigaction *saINT); */
 void node_interrupt_handle(int signum);
 
-void new_block(transaction** blockTransaction, block *newBlock);
+void new_block(transaction* blockTransaction, block *newBlock);
+int sum_reward(transaction *);
 void fill_block_transList(transaction *buffer);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_NODES_H */

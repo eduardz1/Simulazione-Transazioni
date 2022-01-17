@@ -73,11 +73,11 @@ transaction remove_from_pool()
     struct msgbuf_trans *tmp = transPool.head;
     transaction poppedTrans = tmp->transactionMessage.userTrans;
 
-    if (transPool.head == NULL){
+    if (transPool.head == NULL)
+    {
         poppedTrans.amount = ERROR;
         return poppedTrans;
     }
-        
 
     transPool.head = transPool.head->transactionMessage.next;
 
@@ -98,8 +98,12 @@ transaction remove_from_pool()
 /* attaches to message queue initialized with myPID as key */
 void message_queue_attach()
 {
-    queueID = msgget(myPID, 0);
-    TEST_ERROR
+    do
+	{
+		queueID = msgget(myPID, 0);
+		/* TRACE(("[USER %d] is trying to attach to id=%d queue\n", myPID, queueID)) */
+	} while (errno == ENOENT);
+	TRACE(("[NODE %d] succedeed in attaching to queue %d\n", myPID, queueID))
 }
 
 /* process starts fetching transactions from it's msg_q until transPool is full */
@@ -109,7 +113,6 @@ void fetch_messages()
     {
         TRACE(("[NODE %d] Trying to receive message of size(transaction) from queue %d\n", myPID, queueID))
         msgrcv(queueID, &fetchedMex, sizeof(struct msgbuf_trans), TRANSACTION_MTYPE, 0);
-        TEST_ERROR
         switch (errno)
         {
         case E2BIG:
@@ -128,10 +131,13 @@ void fetch_messages()
             printf("[NODE %d] signal caught while receiving a message\n", myPID);
             break;
         default:
-            TRACE(("[NODE %d] has enough transactions to create a block\n", myPID));
+            TRACE(("[NODE %d] fetched a transaction\n", myPID));
         }
         add_to_pool();
         transPool.size++;
+    } else {
+        TRACE(("[NODE %d] pool is full\n", myPID))
+        sleep(1);
     }
 }
 
@@ -142,8 +148,9 @@ void fetch_messages()
  */
 
 /* initializes new block with transList[0] as reward transaction */
-void new_block(transaction **blockTransaction, block *newBlock)
+void new_block(transaction *blockTransaction, block *newBlock)
 {
+    int i;
     transaction reward;
     struct timespec timestamp;
     clock_gettime(CLOCK_REALTIME, &timestamp);
@@ -154,7 +161,12 @@ void new_block(transaction **blockTransaction, block *newBlock)
     reward.amount = sum_reward(blockTransaction); /*sum of each reward of transaction in the block */
     reward.reward = 0;
 
-    memcpy(newBlock->transList + 1, *blockTransaction, (SO_BLOCK_SIZE - 1) * (sizeof(transaction)));
+    newBlock->transList[0] = reward;
+
+    for (i = 1; i < SO_BLOCK_SIZE - 1; i++)
+    {
+        newBlock->transList[i] = blockTransaction[i - 1];
+    }
 }
 
 /* fills the buffer with SO_BLOCK_SIZE-1 transactions */
@@ -172,13 +184,15 @@ void fill_block_transList(transaction *transListWithoutReward)
 void insert_block_in_ledger(block *newBlock)
 {
     int i;
-    for (i = 0; i < SO_REGISTRY_SIZE; i++){
+    for (i = 0; i < SO_REGISTRY_SIZE; i++)
+    {
         /* a bit of and hack: shm segments are 0ed and our processes can't have pid 0 */
-        if(ledger[i].transList[1].sender == 0){ 
+        if (ledger[i].transList[1].sender == 0)
+        {
             sem_reserve(semLedger_ID, 1);
             ledger[i] = *newBlock;
             sem_release(semLedger_ID, 1);
-            return SUCCESS;
+            return;
         }
     }
 
@@ -193,14 +207,14 @@ void insert_block_in_ledger(block *newBlock)
  */
 
 /* sums rewards of sumBlock[SO_BLOCK_SIZE-1] transactions */
-int sum_reward(transaction **sumBlock)
+int sum_reward(transaction *sumBlock)
 {
     int i = 0;
     int sum;
 
     for (i = 0; i < (SO_BLOCK_SIZE - 1); i++)
     {
-        sum += sumBlock[i]->reward;
+        sum += sumBlock[i].reward;
     }
 
     currBalance += sum;
@@ -267,7 +281,7 @@ void node_sigchld_handle(int signum);
 
 int main(int argc, char *argv[])
 {
-    transaction **transBuffer = malloc(sizeof(transaction) * (SO_BLOCK_SIZE - 1));
+    transaction transBuffer[sizeof(transaction) * (SO_BLOCK_SIZE - 1)];
 
     struct timespec randSleepTime;
     struct timespec sleepTimeRemaining;
@@ -305,22 +319,24 @@ int main(int argc, char *argv[])
             switch (fork())
             {
             case -1: /* error */
-                printf("[NODE %d] error while forking to create a block\n");
+                printf("[NODE %d] error while forking to create a block\n", myPID);
                 break;
 
             case 0: /* child creates a new block and appends it to ledger */
-                SLEEP_TIME_SET
+            {
                 block *newBlock = malloc(sizeof(block));
 
+                SLEEP_TIME_SET;
                 fill_block_transList(transBuffer);
                 new_block(transBuffer, newBlock);
                 insert_block_in_ledger(newBlock);
 
                 free(newBlock);
 
-                SLEEP
+                SLEEP;
                 exit(0);
                 break;
+            }
 
             default: /* parent case */
                 break;

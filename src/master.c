@@ -107,7 +107,7 @@ void spawn_user(char *userArgv[], int uCounter)
 
     default:
         usersPID[uCounter].pid = userPID;
-        return userPID;
+        return;
     }
 }
 
@@ -133,7 +133,7 @@ void spawn_node(char *nodeArgv[], int nCounter)
 
     default:
         nodesPID[nCounter].pid = nodePID;
-        break;
+        return;
     }
 }
 
@@ -281,7 +281,7 @@ int main(int argc, char *argv[])
         UNLOCK
         if (getpid() != myPID)
         {
-            return;
+            return 0;
         }
     }
     TRACE(("[MASTER] nodesPID = {%d, %d, %d, %d, %d, ...}\n", nodesPID[0].pid, nodesPID[1].pid, nodesPID[2].pid, nodesPID[3].pid, nodesPID[4].pid))
@@ -306,7 +306,7 @@ int main(int argc, char *argv[])
                 break;
             }
 
-            return;
+            return 0;
         }
     }
     TRACE(("[MASTER] usersPID = {%d, %d, %d, %d, %d, ...}\n", usersPID[0].pid, usersPID[1].pid, usersPID[2].pid, usersPID[3].pid, usersPID[4].pid))
