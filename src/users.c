@@ -145,8 +145,6 @@ void transaction_init(pid_t userPID, int amount, int reward)
 	clock_gettime(CLOCK_REALTIME, &exactTime);
 
 	transMsg.mtype = TRANSACTION_MTYPE;
-	printf("Transaction mtype %d\n", transMsg.mtype);
-
 	transMsg.transactionMessage.userTrans.sender = myPID;
 	transMsg.transactionMessage.userTrans.receiver = userPID;
 	transMsg.transactionMessage.userTrans.amount = amount;

@@ -20,6 +20,7 @@
 
 #include "../utils/debug.h"
 #include "../utils/sem.h"
+#include "../utils/leak_detector_c.h"
 
 #ifndef NULL
 #define NULL 0 /* thre's a problem with NULL for some reason */
