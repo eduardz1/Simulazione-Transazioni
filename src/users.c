@@ -31,14 +31,14 @@
 struct parameters *par;
 user *usersPID;
 node *nodesPID;
-ledger *mainLedger;
+block *ledger;
 
 int semPIDs_ID;
 int queueID;
 
 int currBalance;
 pid_t myPID;
-transaction currTrans;
+struct msgbuf_trans transMsg;
 
 /*
  ======================
@@ -122,7 +122,7 @@ void attach_ipc_objects(char **argv)
 	TEST_ERROR
 	nodesPID = shmat(NODES_PID_ARGV, NULL, 0);
 	TEST_ERROR
-	mainLedger = shmat(LEDGER_ARGV, NULL, 0);
+	ledger = shmat(LEDGER_ARGV, NULL, 0);
 	TEST_ERROR
 	semPIDs_ID = SEM_PIDS_ARGV;
 }
@@ -142,14 +142,19 @@ void queue_to_pid(pid_t nodePID)
 void transaction_init(pid_t userPID, int amount, int reward)
 {
 	struct timespec exactTime;
-
-	currTrans.sender = myPID;
-	currTrans.receiver = userPID;
-	currTrans.amount = amount;
-	currTrans.reward = reward;
-	currTrans.status = pending;
 	clock_gettime(CLOCK_REALTIME, &exactTime);
-	currTrans.timestamp = exactTime;
+
+	transMsg.mtype = TRANSACTION_MTYPE;
+	printf("Transaction mtype %d\n", transMsg.mtype);
+
+	transMsg.transactionMessage.userTrans.sender = myPID;
+	transMsg.transactionMessage.userTrans.receiver = userPID;
+	transMsg.transactionMessage.userTrans.amount = amount;
+	transMsg.transactionMessage.userTrans.reward = reward;
+	transMsg.transactionMessage.userTrans.status = pending;
+	
+	transMsg.transactionMessage.userTrans.timestamp = exactTime;
+	transMsg.transactionMessage.hops = 0;
 }
 
 /* initializes signal handlers for SIGINT and SIGUSR1 */
@@ -174,11 +179,7 @@ int send_transaction()
 	/* accumulate amount of transactions sent but yet to be received */
 	int outGoingTransactions = 0;
 
-	msgsnd(queueID, &currTrans, sizeof(transaction), 0);
-	TEST_ERROR
-
-	currBalance -= (currTrans.amount + currTrans.reward);
-	outGoingTransactions += (currTrans.amount + currTrans.reward);
+	msgsnd(queueID, &transMsg, sizeof(struct msgbuf_trans), 0);
 	switch (errno)
 	{
 	case EACCES:
@@ -200,12 +201,15 @@ int send_transaction()
 		printf("[USER %d] system out of memory\n", myPID); /* should basically never happen I hope */
 		break;
 	default:
-		TRACE(("[USER %d] sent a transaction of %d UC to %d user via %d queue\n", myPID, currTrans.amount, currTrans.receiver, queueID))
+		TRACE(("[USER %d] sent a transaction of %d UC to %d user via %d queue\n", myPID, transMsg.transactionMessage.userTrans.amount, transMsg.transactionMessage.userTrans.receiver, queueID))
 		return SUCCESS;
 	}
-	currTrans.status = aborted;
-	currBalance += (currTrans.amount + currTrans.reward);
-	outGoingTransactions -= (currTrans.amount + currTrans.reward);
+	currBalance -= (transMsg.transactionMessage.userTrans.amount + transMsg.transactionMessage.userTrans.reward);
+	outGoingTransactions += (transMsg.transactionMessage.userTrans.amount + transMsg.transactionMessage.userTrans.reward);
+
+	transMsg.transactionMessage.userTrans.status = aborted;
+	currBalance += (transMsg.transactionMessage.userTrans.amount + transMsg.transactionMessage.userTrans.reward);
+	outGoingTransactions -= (transMsg.transactionMessage.userTrans.amount + transMsg.transactionMessage.userTrans.reward);
 	/* we can then track this type of aborted transactions but rn there's no need to */
 	return ERROR;
 }
@@ -229,16 +233,21 @@ int search_trans_list(block *blockToSearch)
 /* saves balance of calling user in currBalance */
 void get_balance()
 {
-	block *tmp = mainLedger->head;
+	int i, j;
 	int accumulate = 0;
 
-	while (tmp != NULL)
+	for (i = 0; i < SO_REGISTRY_SIZE; i++)
 	{
-		accumulate += search_trans_list(tmp);
-		tmp = (block *)tmp->next;
+		for (j = 1; j < SO_BLOCK_SIZE - 1; j++)
+		{
+			if (ledger[i].transList[j].sender == myPID)
+				accumulate -= ledger[i].transList[j].amount;
+			else if (ledger[i].transList[j].receiver == myPID)
+				accumulate += ledger[i].transList[j].amount;
+		}
 	}
 
-	free(tmp);
+	currBalance += accumulate;
 }
 
 /* SIGUSR1 handler, sends a transaction */
@@ -268,7 +277,6 @@ int main(int argc, char *argv[])
 	struct timespec sleepTimeRemaining;
 
 	struct sembuf sops;
-	struct message transMsg;
 
 	struct sigaction saUSR1;
 	struct sigaction saINT_user;
@@ -283,7 +291,7 @@ int main(int argc, char *argv[])
 		return ERROR;
 	}
 
-	srand(time(NULL)); /* initialize rand function */
+	srand(myPID); /* initialize rand function, time(NULL) uses the seconds and the pattern is the same for every user */
 
 	attach_ipc_objects(argv);
 	signal_handlers_init(&saUSR1, &saINT_user);

@@ -44,9 +44,10 @@
 
 #define SO_BLOCK_SIZE 100     /* number of transaction per block*/
 #define SO_REGISTRY_SIZE 1000 /* max length of consecutive blocks */
-#define SIZE_OF_LEDGER (sizeof(ledger) + sizeof(block) * SO_REGISTRY_SIZE)
 #define SELF -1
 #define EVERYONE_BROKE '$'
+#define TRANSACTION_MTYPE 28410
+#define FRIENDS_MTYPE 28411
 
 /* -- ARGV LOCATION OF IPC OBJECTS -- */
 #define USERS_PID_ARGV (atoi(argv[1]))
@@ -135,27 +136,42 @@ typedef struct transaction_t
     } status;
 } transaction;
 
-struct message
-{
-    long mtype;
-    transaction userTrans;
-};
-
 /* Block struct */
 typedef struct block_t
 {
     transaction transList[SO_BLOCK_SIZE];
     unsigned int blockIndex; /* when a block is written on ledger it's Index needs to be updated */
-    struct block *next;
-    struct block *prev;
 } block;
 
-/* Libro Mastro (ledger) struct */
+/* Libro Mastro (ledger) struct *
 typedef struct ledger_t
 {
     block *head;
-    unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added */
-} ledger;
+    unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+} ledger; */
+
+struct msgbuf_trans
+{
+    long mtype; /* atol("transaction") */
+    struct message
+    {
+        int hops; /* number of times the transaction has hopped */
+        transaction userTrans;
+        struct msgbuf_trans *next; /*pointer to the next message in the pool*/
+    } transactionMessage;
+};
+
+struct msgbuf_friends
+{
+    long mtype; /* atol("friendList") */
+    pid_t *friendList;
+};
+typedef struct pool_t
+{
+    struct msgbuf_trans *head;
+    struct msgbuf_trans *tail;
+    unsigned int size;
+} pool;
 
 void add_block(block);
 int sum_reward(transaction **);

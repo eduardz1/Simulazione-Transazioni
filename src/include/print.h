@@ -18,7 +18,7 @@ void print_parameters(struct parameters *par);
 /* formatting ledger and blocks */
 void print_block(FILE *fp, block *b);
 void print_transaction(FILE *fp, transaction *t);
-void print_ledger(ledger *l);
+void print_ledger(block *l);
 
 void formatted_timestamp(FILE *fp);
 

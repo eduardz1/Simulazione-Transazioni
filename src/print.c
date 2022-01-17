@@ -154,31 +154,16 @@ void print_transaction(FILE *fp, transaction *t)
 
 void print_block(FILE *fp, block *b)
 {
-    int i;
-    block *curr;
-
-    for (curr = b; curr != NULL; curr = (block*)curr->next)
-    {
-        fprintf(fp, "= %.3d =======================\n", b->blockIndex);
-        for (i = 0; i < SO_BLOCK_SIZE; i++)
-        {
-            print_transaction(fp, &(b->transList[i]));
-        }
-        fprintf(fp, "============================\n");
-    }
+   
 }
 
-void print_ledger(ledger *l)
+void print_ledger(block *l)
 {
     FILE *fp = fopen("ledger.txt", "w");
     if (fp == NULL)
     {
         printf(":print: coudln't open file pointer ledger.txt\n");
     }
-
-    fprintf(fp, "Registry Real Size is %d blocks\n", l->registryCurrSize);
-    print_block(fp, l->head);
-    fclose(fp);
 }
 
 /* print without /n */

@@ -1,8 +1,6 @@
 #include "include/common.h"
 #include "include/nodes.h"
 
-/* transaction pool==transaction's array */
-
 /*
  ======================
  || GLOBAL VARIABLES ||
@@ -14,7 +12,7 @@ int currBalance;
 struct parameters *par;
 user *usersPID;
 node *nodesPID;
-ledger *mainLedger;
+block *ledger;
 
 int semPIDs_ID;
 int semLedger_ID;
@@ -22,86 +20,96 @@ int queueID;
 
 pid_t myPID;
 
-struct msqid_ds msgType;
+pool transPool;
 
-/*void Node()
+/* acts as buffer for currently fetched message to be copied into pool */
+struct msgbuf_trans fetchedMex;
+
+/*
+ ======================
+ ||  POOL FUNCTIONS  ||
+ ======================
+ */
+
+/* initialize linked list transaction pool */
+void transaction_pool_init()
 {
-    int t_pool[SO_TP_SIZE];
-    checkTpFull(t_pool[SO_TP_SIZE]);
-    arrayProcesser();
-    createBlock();
+    transPool.head = NULL;
+    transPool.tail = NULL;
+    transPool.size = 0;
 }
 
-int checkTpFull(int t_pool[SO_TP_SIZE])
+/* append a msgbuf_trans to pool */
+int add_to_pool()
 {
-    if (t_pool[SO_TP_SIZE] == SO_TP_SIZE)
+    struct msgbuf_trans *newTransaction = malloc(sizeof(struct msgbuf_trans));
+    if (newTransaction == NULL)
+        TRACE(("*** [NODE %d] malloc failed, system out of memory ***", myPID))
+
+    newTransaction->transactionMessage = fetchedMex.transactionMessage;
+    newTransaction->transactionMessage.next = NULL;
+
+    /* there's already some transactions in pool so I attach the pointer to this
+     * new transaction to the next of the last
+     */
+    if (transPool.tail != NULL)
     {
-        return 0;
-    }
-}
-
-void arrayProcesser()
-{
-    int i = 0;
-    for (i; i < SO_TP_SIZE - 1; i++)
-    {
-    }
-}
-
-int createBlock()
-{
-}
-
-int sleepMethod(int argc, char *argv[])
-{
-    randSleepTime.tv_sec = 0;
-    randSleepTime.tv_nsec = RAND(SO_MIN_TRANS_PROC_NSEC, SO_MAX_TRANS_PROC_NSEC);
-}*/
-
-/* sums rewards of sumBlock[SO_BLOCK_SIZE-1] transactions */
-int sum_reward(transaction **sumBlock)
-{
-    int i = 0;
-    int sum;
-
-    for (i = 0; i < (SO_BLOCK_SIZE - 1); i++)
-    {
-        sum += sumBlock[i]->reward;
+        transPool.tail->transactionMessage.next = newTransaction;
     }
 
-    currBalance += sum;
+    transPool.tail = newTransaction;
 
-    return sum;
+    /* if head is NULL then this is the first transaction */
+    if (transPool.head == NULL)
+    {
+        transPool.head = newTransaction;
+    }
+    return SUCCESS;
 }
 
-/* initializes new block with transList[0] as reward transaction */
-void new_block(transaction **blockTransaction, block *newBlock)
+/* remove a msgbuf_trans from pool, returns directly the transaction associated */
+transaction remove_from_pool()
 {
-    transaction reward;
-    struct timespec timestamp;
-    clock_gettime(CLOCK_REALTIME, &timestamp);
+    struct msgbuf_trans *tmp = transPool.head;
+    transaction poppedTrans = tmp->transactionMessage.userTrans;
 
-    reward.timestamp = timestamp;
-    reward.sender = SELF;
-    reward.receiver = getpid();
-    reward.amount = sum_reward(blockTransaction); /*sum of each reward of transaction in the block */
-    reward.reward = 0;
+    if (transPool.head == NULL){
+        poppedTrans.amount = ERROR;
+        return poppedTrans;
+    }
+        
 
-    memcpy(newBlock->transList + 1, *blockTransaction, (SO_BLOCK_SIZE - 1) * (sizeof(transaction)));
+    transPool.head = transPool.head->transactionMessage.next;
 
-    newBlock->next = NULL;
+    /* if head is NULL tail shoul become NULL too */
+    if (transPool.head == NULL)
+        transPool.tail = NULL;
+
+    free(tmp);
+    return poppedTrans;
 }
 
-/* fills the buffer with SO_BLOCK_SIZE-1 transactions and test for erros */
-void fill_block_buffer(transaction **buffer)
+/*
+ ======================
+ || QUEUE FUNCTIONS  ||
+ ======================
+ */
+
+/* attaches to message queue initialized with myPID as key */
+void message_queue_attach()
 {
-    int i;
-    for (i = 0; i < (SO_BLOCK_SIZE - 1); i++)
+    queueID = msgget(myPID, 0);
+    TEST_ERROR
+}
+
+/* process starts fetching transactions from it's msg_q until transPool is full */
+void fetch_messages()
+{
+    if (transPool.size < par->SO_TP_SIZE)
     {
         TRACE(("[NODE %d] Trying to receive message of size(transaction) from queue %d\n", myPID, queueID))
-        msgrcv(queueID, &buffer[i], sizeof(transaction), atol("transaction"), 0);
+        msgrcv(queueID, &fetchedMex, sizeof(struct msgbuf_trans), TRANSACTION_MTYPE, 0);
         TEST_ERROR
-        TRACE(("[NODE %d] is processing a transaction of %d UC\n", myPID, buffer[i]->amount))
         switch (errno)
         {
         case E2BIG:
@@ -122,37 +130,82 @@ void fill_block_buffer(transaction **buffer)
         default:
             TRACE(("[NODE %d] has enough transactions to create a block\n", myPID));
         }
-        buffer[i]->status = processing;
-        TRACE(("[NODE %d] is processing a transaction of %d UC\n", myPID, buffer[i]->amount))
+        add_to_pool();
+        transPool.size++;
     }
 }
 
-void append_block_to_ledger(block *newBlock)
+/*
+ ======================
+ || LEDGER FUNCTIONS ||
+ ======================
+ */
+
+/* initializes new block with transList[0] as reward transaction */
+void new_block(transaction **blockTransaction, block *newBlock)
 {
-    ledger *temp = mainLedger;
+    transaction reward;
+    struct timespec timestamp;
+    clock_gettime(CLOCK_REALTIME, &timestamp);
+
+    reward.timestamp = timestamp;
+    reward.sender = SELF;
+    reward.receiver = getpid();
+    reward.amount = sum_reward(blockTransaction); /*sum of each reward of transaction in the block */
+    reward.reward = 0;
+
+    memcpy(newBlock->transList + 1, *blockTransaction, (SO_BLOCK_SIZE - 1) * (sizeof(transaction)));
+}
+
+/* fills the buffer with SO_BLOCK_SIZE-1 transactions */
+void fill_block_transList(transaction *transListWithoutReward)
+{
     int i;
+    TRACE(("[NODE %d] is starting to process a block\n", myPID))
 
-    /* if head is NULL it means that ledger is still empty */
-    if (temp->head == NULL)
+    for (i = 0; i < (SO_BLOCK_SIZE - 1); i++)
     {
-        mainLedger->head = newBlock;
-        mainLedger->registryCurrSize = 1;
-        return;
+        transListWithoutReward[i] = remove_from_pool();
+    }
+}
+
+void insert_block_in_ledger(block *newBlock)
+{
+    int i;
+    for (i = 0; i < SO_REGISTRY_SIZE; i++){
+        /* a bit of and hack: shm segments are 0ed and our processes can't have pid 0 */
+        if(ledger[i].transList[1].sender == 0){ 
+            sem_reserve(semLedger_ID, 1);
+            ledger[i] = *newBlock;
+            sem_release(semLedger_ID, 1);
+            return SUCCESS;
+        }
     }
 
-    while (temp->head->next != NULL)
+    printf("[NODE %d] tried to add block but ledger is full\n", myPID);
+    killpg(0, SIGINT);
+}
+
+/*
+ ======================
+ ||  NODE FUNCTIONS  ||
+ ======================
+ */
+
+/* sums rewards of sumBlock[SO_BLOCK_SIZE-1] transactions */
+int sum_reward(transaction **sumBlock)
+{
+    int i = 0;
+    int sum;
+
+    for (i = 0; i < (SO_BLOCK_SIZE - 1); i++)
     {
-        temp->head = (block *)temp->head->next;
+        sum += sumBlock[i]->reward;
     }
 
-    temp->head->next = (struct block *)newBlock;
-    newBlock->prev = (struct block *)temp->head;
-    mainLedger->registryCurrSize++;
+    currBalance += sum;
 
-    for (i = 0; i < SO_BLOCK_SIZE - 1; i++)
-    {
-        newBlock->transList[i].status = confirmed;
-    }
+    return sum;
 }
 
 /* attaches ipc objects based on IDs passed via arguments */
@@ -164,46 +217,10 @@ void attach_ipc_objects(char **argv)
     TEST_ERROR
     nodesPID = shmat(NODES_PID_ARGV, NULL, 0);
     TEST_ERROR
-    mainLedger = shmat(LEDGER_ARGV, NULL, 0);
+    ledger = shmat(LEDGER_ARGV, NULL, 0);
     TEST_ERROR
     semPIDs_ID = SEM_PIDS_ARGV;
     semLedger_ID = SEM_LEDGER_ARGV;
-}
-
-/* initializes message queue specific to own PID and sets it's size to SO_TP_SIZE */
-void message_queue_init()
-{
-    /* gets ID of message queue of key=myPID and assigns it to queueID */
-    queueID = msgget(myPID, IPC_CREAT | IPC_EXCL | 0600);
-    TEST_ERROR
-
-    /* sets size of message queue to be equal to SO_TP_SIZE num of transactions */
-    msgType.msg_qbytes = (par->SO_TP_SIZE * sizeof(transaction));
-    printf("Message queue size: %ld\n", msgType.msg_qbytes);
-    msgType.msg_perm.uid = myPID;
-    msgType.msg_perm.gid = getpgid(myPID);
-    msgType.msg_perm.mode = 0600;
-    msgctl(queueID, IPC_SET, &msgType);
-    switch (errno)
-    {
-    case EIDRM:
-        printf("[NODE %d] queue %d was removed\n", myPID, queueID);
-        break;
-    case EINVAL:
-        printf("[NODE %d] queue %d invalid value for cmd or msqid\n", myPID, queueID);
-        break;
-    case EPERM:
-        printf("[NODE %d] queue %d the effective user ID of the calling process is not the creator or the owner\n", myPID, queueID);
-        break;
-    }
-    TRACE(("[NODE %d] queueID is %d\n", myPID, queueID))
-}
-
-/* initializes signal handlers for SIGINT */
-void signal_handler_init(struct sigaction *saINT_node)
-{
-    saINT_node->sa_handler = node_interrupt_handle;
-    sigaction(SIGINT, saINT_node, NULL);
 }
 
 /* returns index of where current node nodesPID[] */
@@ -216,6 +233,13 @@ int get_pid_nodeIndex()
             return i;
     }
     return ERROR;
+}
+
+/* initializes signal handlers for SIGINT */
+void signal_handler_init(struct sigaction *saINT_node)
+{
+    saINT_node->sa_handler = node_interrupt_handle;
+    sigaction(SIGINT, saINT_node, NULL);
 }
 
 /* CTRL-C handler */
@@ -237,10 +261,11 @@ void node_interrupt_handle(int signum)
     exit(0);
 }
 
+void node_sigchld_handle(int signum);
+
 int main(int argc, char *argv[])
 {
-    transaction **blockBuffer = malloc(sizeof(transaction) * (SO_BLOCK_SIZE - 1));
-    block *newBlock = malloc(sizeof(block));
+    transaction **transBuffer = malloc(sizeof(transaction) * (SO_BLOCK_SIZE - 1));
 
     struct timespec randSleepTime;
     struct timespec sleepTimeRemaining;
@@ -255,24 +280,49 @@ int main(int argc, char *argv[])
     signal_handler_init(&saINT_node); /* no idea why it isn't working, it's literally the same implementation as user */
     TRACE(("[NODE %d] sighandler init\n", myPID));
 
-    message_queue_init();
+    message_queue_attach();
+    transaction_pool_init();
     TEST_ERROR
     while (1)
     {
-        SLEEP_TIME_SET
 
-        fill_block_buffer(blockBuffer);
-        TEST_ERROR
-        new_block(blockBuffer, newBlock);
-        TEST_ERROR
+        /*
+         * msgrcv transactions in loop until pool is full
+         * if size is >= SO_BLOCK_SIZE-1 fork and create a block
+         * append to ledger said block
+         * SLEEP
+         * exit(0)
+         * if process is killed it will receive a SIGCHLD signal
+         * it means that the process was killed while processing a block
+         * need to manage
+         */
 
-        sem_reserve(semLedger_ID, 1);
-        TEST_ERROR
-        append_block_to_ledger(newBlock);
-        TEST_ERROR
+        fetch_messages();
+        if (transPool.size >= (SO_BLOCK_SIZE - 1))
+        {
+            switch (fork())
+            {
+            case -1: /* error */
+                printf("[NODE %d] error while forking to create a block\n");
+                break;
 
-        SLEEP
-        sem_release(semLedger_ID, 1);
-        TEST_ERROR
+            case 0: /* child creates a new block and appends it to ledger */
+                SLEEP_TIME_SET
+                block *newBlock = malloc(sizeof(block));
+
+                fill_block_transList(transBuffer);
+                new_block(transBuffer, newBlock);
+                insert_block_in_ledger(newBlock);
+
+                free(newBlock);
+
+                SLEEP
+                exit(0);
+                break;
+
+            default: /* parent case */
+                break;
+            }
+        }
     }
 }

@@ -20,7 +20,8 @@
 struct parameters *par;
 user *usersPID;
 node *nodesPID;
-ledger *mainLedger;
+block ledger[SO_REGISTRY_SIZE];
+block *ledger_ptr;
 
 int semPIDs_ID;
 int semLedger_ID;
@@ -65,11 +66,33 @@ void make_arguments(int *IPC_array, char **argv)
     argv[8] = NULL; /* Terminating argv with NULL value */
 }
 
-/* fork and execve a "./users" */
-pid_t spawn_user(char *userArgv[])
+/* initializes message queue specific to own PID and sets it's size to SO_TP_SIZE */
+void message_queue_init()
 {
-    pid_t myPID = fork();
-    switch (myPID)
+    int ownPID = getpid();
+    /* gets ID of message queue of key=myPID and assigns it to queueID */
+    int queueID = msgget(ownPID, IPC_CREAT | IPC_EXCL | 0600);
+    TEST_ERROR
+    switch (errno)
+    {
+    case EIDRM:
+        printf("[NODE %d] queue %d was removed\n", ownPID, queueID);
+        break;
+    case EINVAL:
+        printf("[NODE %d] queue %d invalid value for cmd or msqid\n", ownPID, queueID);
+        break;
+    case EPERM:
+        printf("[NODE %d] queue %d the effective user ID of the calling process is not the creator or the owner\n", ownPID, queueID);
+        break;
+    }
+    TRACE(("[NODE %d] queueID is %d\n", ownPID, queueID))
+}
+
+/* fork and execve a "./users" */
+void spawn_user(char *userArgv[], int uCounter)
+{
+    pid_t userPID = fork();
+    switch (userPID)
     {
     case -1: /* Error case */
         printf("*** Error forking for user ***\n");
@@ -83,36 +106,35 @@ pid_t spawn_user(char *userArgv[])
         break;
 
     default:
-        return myPID;
+        usersPID[uCounter].pid = userPID;
+        return userPID;
     }
 }
 
 /* fork and execve a "./nodes" */
-pid_t spawn_node(char *nodeArgv[])
+void spawn_node(char *nodeArgv[], int nCounter)
 {
-    pid_t myPID = fork();
-    switch (myPID)
+    pid_t nodePID = fork();
+    switch (nodePID)
     {
     case -1: /* Error case */
         printf("*** Error forking for node ***\n");
         break;
 
     case 0: /* Child case */
-        TRACE(("[MASTER] Spawning node\n"));
+        TRACE(("[MASTER] Spawning node with associated queue\n"));
+
+        /* initialize a separate message queue for every node */
+        message_queue_init();
         execve(NODE_NAME, nodeArgv, NULL);
         TEST_ERROR
         TRACE(("!!! Message that should never be seen !!!\n"));
         break;
 
     default:
-        return myPID;
+        nodesPID[nCounter].pid = nodePID;
+        break;
     }
-}
-
-void ledger_init(ledger *newLedger)
-{
-    newLedger->head = NULL;
-    newLedger->registryCurrSize = 0;
 }
 
 /* attach usersPID, nodesPID, par and mainLedger to shared memory, returns an array with respective IDs */
@@ -121,7 +143,7 @@ void shared_memory_objects_init(int *shmArray)
     /* shared memory segments IDs */
     int usersPID_ID;
     int nodesPID_ID;
-    int mainLedger_ID;
+    int ledger_ID;
     int par_ID;
 
     /* parameters init and read from conf file */
@@ -151,12 +173,10 @@ void shared_memory_objects_init(int *shmArray)
     usersPID = (user *)shmat(usersPID_ID, NULL, 0);
     nodesPID = (node *)shmat(nodesPID_ID, NULL, 0);
 
-    /* mainLedger */
-    mainLedger_ID = shmget(SHM_LEDGER,
-                           SIZE_OF_LEDGER,
-                           0600 | IPC_CREAT | IPC_EXCL);
+    /* ledger */
+    ledger_ID = shmget(SHM_LEDGER, sizeof(ledger), 0600 | IPC_CREAT | IPC_EXCL);
     TEST_ERROR
-    mainLedger = (ledger *)shmat(mainLedger_ID, NULL, 0);
+    ledger_ptr = (block *)shmat(ledger_ID, NULL, 0);
 
     /* mark for deallocation so that they are automatically
      * removed once master dies
@@ -165,12 +185,12 @@ void shared_memory_objects_init(int *shmArray)
     shmctl(usersPID_ID, IPC_RMID, NULL);
     shmctl(nodesPID_ID, IPC_RMID, NULL);
     shmctl(par_ID, IPC_RMID, NULL);
-    shmctl(mainLedger_ID, IPC_RMID, NULL);
+    shmctl(ledger_ID, IPC_RMID, NULL);
 
     shmArray[0] = usersPID_ID;
     shmArray[1] = nodesPID_ID;
     shmArray[2] = par_ID;
-    shmArray[3] = mainLedger_ID;
+    shmArray[3] = ledger_ID;
 }
 
 void semaphores_init()
@@ -233,11 +253,10 @@ int main(int argc, char *argv[])
     struct sigaction sa;
     struct sembuf sops;
 
-    TRACE(("[MASTER] ledger is %d bytes of size", SIZE_OF_LEDGER))
+    ledger_ptr = ledger;
     semaphores_init();
     make_ipc_array(ipcObjectsIDs);
     make_arguments(ipcObjectsIDs, argvSpawns);
-    ledger_init(mainLedger);
     simTime = par->SO_SIM_SEC;
 
     /* -- SIGNAL HANDLER --
@@ -253,28 +272,27 @@ int main(int argc, char *argv[])
     TRACE(("[MASTER] argv values for nodes: %s %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7], argvSpawns[8]))
     for (nCounter = 0; nCounter < par->SO_NODES_NUM; nCounter++)
     {
-        LOCK
-            nodesPID[nCounter]
-                .status = available;
+        LOCK;
+        nodesPID[nCounter].status = available;
         nodesPID[nCounter].balance = 0;
-        nodesPID[nCounter].pid = spawn_node(argvSpawns);
+        spawn_node(argvSpawns, nCounter);
         UNLOCK
         if (getpid() != myPID)
         {
             return;
         }
     }
+    TRACE(("[MASTER] nodesPID = {%d, %d, %d, %d, %d, ...}\n", nodesPID[0].pid, nodesPID[1].pid, nodesPID[2].pid, nodesPID[3].pid, nodesPID[4].pid))
 
     /*usersPrematurelyDead = 0;*/
     argvSpawns[0] = USER_NAME;
     TRACE(("[MASTER] argv values for users: %s %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7], argvSpawns[8]))
     for (uCounter = 0; uCounter < par->SO_USER_NUM; uCounter++)
     {
-        LOCK
-            usersPID[uCounter]
-                .status = alive;
+        LOCK;
+        usersPID[uCounter].status = alive;
         usersPID[uCounter].balance = 0;
-        usersPID[uCounter].pid = spawn_user(argvSpawns);
+        spawn_user(argvSpawns, uCounter);
         UNLOCK
         if (getpid() != myPID)
         {
@@ -289,6 +307,7 @@ int main(int argc, char *argv[])
             return;
         }
     }
+    TRACE(("[MASTER] usersPID = {%d, %d, %d, %d, %d, ...}\n", usersPID[0].pid, usersPID[1].pid, usersPID[2].pid, usersPID[3].pid, usersPID[4].pid))
 
     sleep(simTime);
 

@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-std=c89 -g -O0 -pedantic -D_GNU_SOURCE
+CFLAGS=-std=c89 -g -O0 -pedantic -Wall -D_GNU_SOURCE
 DEBUG=-DDEBUG
 
 # Dependencies
