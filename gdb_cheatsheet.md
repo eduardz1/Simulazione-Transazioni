@@ -5,7 +5,7 @@ refresh
 set print pretty on
 
 set follow-fork-mode child/parent
-set follow_exec_mode new/old
+set follow-exec-mode new/old
 
 run (start to run with b on main)
 n, next

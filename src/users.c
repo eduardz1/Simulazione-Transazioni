@@ -292,7 +292,7 @@ int main(int argc, char *argv[])
 
 	attach_ipc_objects(argv);
 	signal_handlers_init(&saUSR1, &saINT_user);
-	transMsg.mtype = atol("transaction");
+	transMsg.mtype = TRANSACTION_MTYPE;
 
 	currBalance = par->SO_BUDGET_INIT;
 	retry = par->SO_RETRY;
@@ -321,14 +321,14 @@ int main(int argc, char *argv[])
 			transaction_init(userPID, amount, reward);
 			if (send_transaction() == 0)
 				retry = par->SO_RETRY;
-			else
+			/*else
 				retry--;
 
 			if (retry == 0)
 			{
 				update_status(2);
 				return MAX_RETRY;
-			}
+			}*/
 			SLEEP
 		}
 		else
