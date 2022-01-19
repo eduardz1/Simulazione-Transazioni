@@ -69,11 +69,11 @@ pid_t get_random_userPID()
 	do
 	{
 		index = RAND(0, par->SO_USER_NUM - 1);
-		TRACE(("[USER %d] extracted usersPID[%d]\n", myPID, index));
-		if (usersPID[index].status != dead)
+		if (usersPID[index].status != dead && usersPID[index].pid!=myPID)
 			val = usersPID[index].pid;
 	} while (!val);
 
+	TRACE(("[USER %d] extracted usersPID[%d]\n", myPID, index));
 	return val;
 }
 
@@ -199,7 +199,7 @@ int send_transaction()
 		printf("[USER %d] system out of memory\n", myPID); /* should basically never happen I hope */
 		break;
 	default:
-		TRACE(("[USER %d] sent a transaction of %d UC to %d user via %d queue\n", myPID, transMsg.transactionMessage.userTrans.amount, transMsg.transactionMessage.userTrans.receiver, queueID))
+		TRACE(("[USER %d] sent a transaction of %d UC to [USER %d] via queue %d\n", myPID, transMsg.transactionMessage.userTrans.amount, transMsg.transactionMessage.userTrans.receiver, queueID))
 		return SUCCESS;
 	}
 	currBalance -= (transMsg.transactionMessage.userTrans.amount + transMsg.transactionMessage.userTrans.reward);

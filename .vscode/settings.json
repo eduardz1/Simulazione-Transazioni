@@ -15,6 +15,7 @@
         80,
         120
     ],
-    //"editor.fontFamily": "Fira Code Retina",
-    "C_Cpp.errorSquiggles": "Disabled"
+    "editor.fontFamily": "Fira Code Retina",
+    "C_Cpp.errorSquiggles": "Disabled",
+    "editor.codeLensFontFamily": "Fira Code"
 }
