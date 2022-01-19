@@ -1,35 +1,35 @@
 rm -f *.o master users nodes *~
 gcc -c -std=c89 -g -O0 -pedantic -Wall -D_GNU_SOURCE -DDEBUG src/utils/*.c
 src/utils/leak_detector_c.c: In function ‘report_mem_leak’:
-src/utils/leak_detector_c.c:186:30: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘void *’ [-Wformat=]
-  186 |    sprintf(info, "address : %d\n", leak_info->mem_info.address);
-      |                             ~^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      |                              |                        |
-      |                              int                      void *
-      |                             %p
-src/utils/leak_detector_c.c:171:17: warning: unused variable ‘index’ [-Wunused-variable]
-  171 |  unsigned short index;
-      |                 ^~~~~
+src/utils/leak_detector_c.c:186:51: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘void *’ [-Wformat=]
+  186 |                         sprintf(info, "address : %d\n", leak_info->mem_info.address);
+      |                                                  ~^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                   |                        |
+      |                                                   int                      void *
+      |                                                  %p
+src/utils/leak_detector_c.c:171:24: warning: unused variable ‘index’ [-Wunused-variable]
+  171 |         unsigned short index;
+      |                        ^~~~~
 src/utils/leak_detector_c.c: In function ‘report_mem_leak_nodes’:
-src/utils/leak_detector_c.c:218:30: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘void *’ [-Wformat=]
-  218 |    sprintf(info, "address : %d\n", leak_info->mem_info.address);
-      |                             ~^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      |                              |                        |
-      |                              int                      void *
-      |                             %p
-src/utils/leak_detector_c.c:203:17: warning: unused variable ‘index’ [-Wunused-variable]
-  203 |  unsigned short index;
-      |                 ^~~~~
+src/utils/leak_detector_c.c:218:51: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘void *’ [-Wformat=]
+  218 |                         sprintf(info, "address : %d\n", leak_info->mem_info.address);
+      |                                                  ~^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                   |                        |
+      |                                                   int                      void *
+      |                                                  %p
+src/utils/leak_detector_c.c:203:24: warning: unused variable ‘index’ [-Wunused-variable]
+  203 |         unsigned short index;
+      |                        ^~~~~
 src/utils/leak_detector_c.c: In function ‘report_mem_leak_users’:
-src/utils/leak_detector_c.c:250:30: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘void *’ [-Wformat=]
-  250 |    sprintf(info, "address : %d\n", leak_info->mem_info.address);
-      |                             ~^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      |                              |                        |
-      |                              int                      void *
-      |                             %p
-src/utils/leak_detector_c.c:235:17: warning: unused variable ‘index’ [-Wunused-variable]
-  235 |  unsigned short index;
-      |                 ^~~~~
+src/utils/leak_detector_c.c:250:51: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘void *’ [-Wformat=]
+  250 |                         sprintf(info, "address : %d\n", leak_info->mem_info.address);
+      |                                                  ~^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                   |                        |
+      |                                                   int                      void *
+      |                                                  %p
+src/utils/leak_detector_c.c:235:24: warning: unused variable ‘index’ [-Wunused-variable]
+  235 |         unsigned short index;
+      |                        ^~~~~
 src/utils/sem.c: In function ‘sem_getall’:
 src/utils/sem.c:76:1: warning: control reaches end of non-void function [-Wreturn-type]
    76 | }
@@ -85,17 +85,17 @@ src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
   151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
       |                                     
 src/users.c: In function ‘main’:
-src/users.c:272:22: warning: variable ‘retry’ set but not used [-Wunused-but-set-variable]
-  272 |  int amount, reward, retry;
-      |                      ^~~~~
+src/users.c:272:29: warning: variable ‘retry’ set but not used [-Wunused-but-set-variable]
+  272 |         int amount, reward, retry;
+      |                             ^~~~~
 gcc -std=c89 -g -O0 -pedantic -Wall -D_GNU_SOURCE -DDEBUG src/nodes.c *.o -lm -o nodes
 In file included from src/nodes.c:1:
 src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
   151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
       |                                     
 ./master
-[MASTER] semPIDs_ID is 18
-[MASTER] semLedger_ID is 19
+[MASTER] semPIDs_ID is 4
+[MASTER] semLedger_ID is 5
 [PARSER] assigned defaults
 --------------------------------------------
 ----------- Configuration input ------------
@@ -114,1960 +114,642 @@ SO_MIN_TRANS_PROC_NSEC 100000002
 SO_MAX_TRANS_PROC_NSEC 200000002
 --------------------------------------------
 [MASTER] conf file read successful
-[MASTER] IPC_array={37,38,36,39,18,19}
-[MASTER] argv[uPID] = 37
-[MASTER] argv[nPID] = 38
-[MASTER] argv[par] = 36
-[MASTER] argv[ledger] = 39
-[MASTER] argv[sem_pids] = 18
-[MASTER] argv[sem_ledger] = 19
-[MASTER] argv values for nodes: ./nodes 37 38 36 39 18 19 (null) (null)
-[MASTER] nodesPID = {16019, 0, 0, 0, 0, ...}
+[MASTER] IPC_array={491561,491562,491560,491563,4,5}
+[MASTER] argv[uPID] = 491561
+[MASTER] argv[nPID] = 491562
+[MASTER] argv[par] = 491560
+[MASTER] argv[ledger] = 491563
+[MASTER] argv[sem_pids] = 4
+[MASTER] argv[sem_ledger] = 5
+[MASTER] argv values for nodes: ./nodes 491561 491562 491560 491563 4 5 (null) (null)
+[MASTER] nodesPID = {36766, 0, 0, 0, 0, ...}
+[MASTER] argv values for users: ./users 491561 491562 491560 491563 4 5 (null) (null)
 [MASTER] Spawning node with associated queue
-[MASTER] argv values for users: ./users 37 38 36 39 18 19 (null) (null)
-src/master.c:75: PID=16019: Error 27 (File too large)
-[NODE 16019] queueID is 9
-[MASTER] usersPID = {16020, 16021, 0, 0, 0, ...}
+src/master.c:75: PID=36766: Error 27 (File too large)
+[NODE 36766] queueID is 1
 [MASTER] Spawning user
+[MASTER] usersPID = {36767, 36768, 0, 0, 0, ...}
 [MASTER] Spawning user
-[NODE 16019] sighandler init
-[NODE 16019] succedeed in attaching to queue 9
-[NODE 16019] Trying to receive message of size(transaction) from queue 9
-[USER 16021] extracted usersPID[1]
-[USER 16020] extracted usersPID[1]
-[USER 16021] extracted nodesPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16021] succedeed in attaching to queue 9
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 367 UC to 16021 user via 9 queue
-[USER 16021] sent a transaction of 297 UC to 16021 user via 9 queue
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[USER 16021] extracted usersPID[0]
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted usersPID[0]
-[USER 16021] extracted nodesPID[0]
-[NODE 16019] fetched a transaction
-[USER 16020] extracted nodesPID[0]
-[USER 16021] succedeed in attaching to queue 9
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] succedeed in attaching to queue 9
-[USER 16021] sent a transaction of 739 UC to 16020 user via 9 queue
-[NODE 16019] fetched a transaction
-[USER 16020] sent a transaction of 211 UC to 16020 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16021] extracted usersPID[1]
-[USER 16020] extracted usersPID[1]
-[USER 16021] extracted nodesPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16021] succedeed in attaching to queue 9
-[USER 16020] succedeed in attaching to queue 9
-[USER 16021] sent a transaction of 140 UC to 16021 user via 9 queue
-[USER 16020] sent a transaction of 234 UC to 16021 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 430 UC to 16020 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 183 UC to 16020 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] is starting to process a block
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] is starting to process a block
-[NODE 16019] fetched a transaction
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 679 UC to 16021 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] is starting to process a block
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 476 UC to 16021 user via 9 queue
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] is starting to process a block
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[NODE 16019] fetched a transaction
-[USER 16020] sent a transaction of 295 UC to 16020 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 288 UC to 16021 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[NODE 16019] fetched a transaction
-[USER 16020] sent a transaction of 263 UC to 16021 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] is starting to process a block
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 580 UC to 16020 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 410 UC to 16020 user via 9 queue
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] is starting to process a block
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[NODE 16019] fetched a transaction
-[USER 16020] sent a transaction of 823 UC to 16021 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[0]
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted nodesPID[0]
-[NODE 16019] fetched a transaction
-[USER 16020] succedeed in attaching to queue 9
-[NODE 16019] is starting to process a block
-[USER 16020] sent a transaction of 28 UC to 16020 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[1]
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted nodesPID[0]
-[NODE 16019] fetched a transaction
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 302 UC to 16021 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] is starting to process a block
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[1]
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted nodesPID[0]
-[NODE 16019] fetched a transaction
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 353 UC to 16021 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 693 UC to 16020 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[0]
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted nodesPID[0]
-[NODE 16019] fetched a transaction
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 819 UC to 16020 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[1]
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted nodesPID[0]
-[NODE 16019] fetched a transaction
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 334 UC to 16021 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[0]
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[NODE 16019] fetched a transaction
-[USER 16020] sent a transaction of 255 UC to 16020 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[NODE 16019] fetched a transaction
-[USER 16020] sent a transaction of 663 UC to 16020 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[1]
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted nodesPID[0]
-[NODE 16019] fetched a transaction
-[USER 16020] succedeed in attaching to queue 9
-[NODE 16019] is starting to process a block
-[USER 16020] sent a transaction of 130 UC to 16021 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[1]
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted nodesPID[0]
-[NODE 16019] fetched a transaction
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 134 UC to 16021 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted usersPID[0]
-[NODE 16019] fetched a transaction
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 641 UC to 16020 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted usersPID[1]
-[NODE 16019] fetched a transaction
-[USER 16020] extracted nodesPID[0]
-[NODE 16019] is starting to process a block
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 645 UC to 16021 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[0]
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted nodesPID[0]
-[NODE 16019] fetched a transaction
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 516 UC to 16020 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] is starting to process a block
-[NODE 16019] fetched a transaction
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] sent a transaction of 269 UC to 16020 user via 9 queue
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[USER 16020] extracted usersPID[0]
-[NODE 16019] is starting to process a block
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 503 UC to 16020 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[NODE 16019] fetched a transaction
-[USER 16020] sent a transaction of 281 UC to 16021 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] is starting to process a block
-[NODE 16019] fetched a transaction
-[USER 16020] extracted usersPID[1]
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted nodesPID[0]
-[NODE 16019] fetched a transaction
-[USER 16020] succedeed in attaching to queue 9
-[NODE 16019] is starting to process a block
-[USER 16020] sent a transaction of 165 UC to 16021 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 50 UC to 16021 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] is starting to process a block
-[NODE 16019] fetched a transaction
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[NODE 16019] fetched a transaction
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 410 UC to 16021 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted usersPID[0]
-[NODE 16019] fetched a transaction
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 374 UC to 16020 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[1]
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted nodesPID[0]
-[NODE 16019] fetched a transaction
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 18 UC to 16021 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 455 UC to 16020 user via 9 queue
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 798 UC to 16021 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[1]
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[NODE 16019] fetched a transaction
-[USER 16020] sent a transaction of 294 UC to 16021 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 737 UC to 16020 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] is starting to process a block
-[NODE 16019] fetched a transaction
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 12 UC to 16020 user via 9 queue
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] is starting to process a block
-[NODE 16019] fetched a transaction
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 92 UC to 16021 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 638 UC to 16021 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] sent a transaction of 450 UC to 16020 user via 9 queue
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[NODE 16019] fetched a transaction
-[USER 16020] sent a transaction of 551 UC to 16021 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] sent a transaction of 824 UC to 16021 user via 9 queue
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 787 UC to 16021 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[USER 16020] extracted usersPID[1]
-[NODE 16019] is starting to process a block
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 784 UC to 16021 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[NODE 16019] fetched a transaction
-[USER 16020] sent a transaction of 97 UC to 16020 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 555 UC to 16020 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 334 UC to 16020 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[0]
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[USER 16020] extracted nodesPID[0]
-[NODE 16019] fetched a transaction
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 60 UC to 16020 user via 9 queue
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[USER 16020] extracted usersPID[1]
-[NODE 16019] is starting to process a block
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 319 UC to 16021 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 331 UC to 16020 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 709 UC to 16020 user via 9 queue
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] Trying to receive message of size(transaction) from queue -339968
-[NODE 16019] fetched a transaction
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[USER 16020] extracted usersPID[0]
-[NODE 16019] is starting to process a block
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 262 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 705 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 703 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 710 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 713 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 686 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 572 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 236 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 835 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 86 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 515 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 188 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 364 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 387 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 94 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 525 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 323 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 579 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 754 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 344 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 33 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 733 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 15 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 621 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 328 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 326 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 545 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 564 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 485 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 440 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 576 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 132 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 538 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 158 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 89 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 645 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 217 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 54 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 387 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 419 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 691 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 716 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 130 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 4 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 338 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 584 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 788 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 435 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 674 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 178 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 782 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 7 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 452 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 566 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 357 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 81 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 724 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 674 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 807 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 174 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 110 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 265 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 812 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 3 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 481 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 116 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 436 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 61 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 546 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 186 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 258 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 738 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 618 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 786 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 496 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 745 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 442 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 673 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 528 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 760 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 158 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 60 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 345 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 684 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 549 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 35 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 133 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 31 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 220 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 501 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 501 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 62 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 349 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 239 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 122 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 265 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 706 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 579 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 649 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 241 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 161 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 790 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 469 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 73 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 403 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 657 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 374 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 6 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 586 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 341 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 36 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 540 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 106 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 142 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 689 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 685 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 343 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 733 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 221 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 718 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 4 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 847 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 169 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 374 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 332 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 807 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 822 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 702 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 823 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 476 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 824 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 442 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 769 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 656 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 477 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 315 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 44 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 52 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 762 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 351 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 62 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 305 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 382 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 421 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 669 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 824 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 153 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 448 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 99 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 698 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 594 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 249 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 578 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 839 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 112 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 347 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 205 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 669 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 597 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 579 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 341 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 700 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 270 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 850 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 518 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 195 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 78 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 470 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 7 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 138 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 178 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 227 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 220 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 386 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 623 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 307 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 511 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 822 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 326 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 831 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 552 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 816 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 850 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 374 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 654 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 342 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 503 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 127 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 229 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 115 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 71 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 500 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 92 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 12 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 679 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 595 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 377 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 681 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 415 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[1]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 790 UC to 16021 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[USER 16020] sent a transaction of 363 UC to 16020 user via 9 queue
-[USER 16020] extracted usersPID[0]
-[USER 16020] extracted nodesPID[0]
-[USER 16020] succedeed in attaching to queue 9
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
-[NODE 16019] pool is full
-[NODE 16019] is starting to process a block
+[NODE 36766] sighandler init
+[NODE 36766] succedeed in attaching to queue 1
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36767] extracted usersPID[0]
+[USER 36768] extracted nodesPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 446 UC to 36767 user via 1 queue
+[USER 36768] sent a transaction of 206 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36767] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36767] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 693 UC to 36768 user via 1 queue
+[USER 36767] sent a transaction of 777 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[0]
+[USER 36767] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36767] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 638 UC to 36767 user via 1 queue
+[USER 36767] sent a transaction of 540 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36767] extracted usersPID[1]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36767] extracted nodesPID[0]
+[USER 36768] sent a transaction of 437 UC to 36768 user via 1 queue
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 419 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[0]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36767] extracted usersPID[0]
+[USER 36768] sent a transaction of 357 UC to 36767 user via 1 queue
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 422 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[0]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 192 UC to 36767 user via 1 queue
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 622 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 763 UC to 36768 user via 1 queue
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 442 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36767] extracted usersPID[1]
+[USER 36768] sent a transaction of 252 UC to 36768 user via 1 queue
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 482 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[0]
+[USER 36768] extracted usersPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36768] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36768] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 613 UC to 36767 user via 1 queue
+[USER 36768] sent a transaction of 523 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 262 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 624 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 465 UC to 36767 user via 1 queue
+[USER 36768] extracted usersPID[1]
+[NODE 36766] fetched a transaction
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] sent a transaction of 329 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 614 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 373 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 477 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 583 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 142 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 663 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 479 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 679 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 752 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 461 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 767 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[0]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 297 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 809 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[0]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 132 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 536 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[0]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 666 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 525 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 818 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 109 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 674 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 839 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 801 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 770 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 349 UC to 36768 user via 1 queue
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 471 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[0]
+[USER 36767] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36767] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 630 UC to 36767 user via 1 queue
+[USER 36767] sent a transaction of 369 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[0]
+[USER 36767] extracted usersPID[0]
+[USER 36768] extracted nodesPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36767] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 417 UC to 36767 user via 1 queue
+[USER 36767] sent a transaction of 431 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36767] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36767] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 791 UC to 36768 user via 1 queue
+[USER 36767] sent a transaction of 472 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36767] extracted usersPID[0]
+[USER 36768] extracted nodesPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36767] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 301 UC to 36768 user via 1 queue
+[USER 36767] sent a transaction of 190 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36767] extracted usersPID[0]
+[USER 36768] extracted nodesPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36767] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 414 UC to 36768 user via 1 queue
+[USER 36767] sent a transaction of 532 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36767] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36767] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 418 UC to 36768 user via 1 queue
+[USER 36767] sent a transaction of 741 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[0]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 18 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 72 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[0]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 586 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 211 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[0]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 816 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 39 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 611 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 104 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[0]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 422 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 311 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 835 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 647 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 719 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 67 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[0]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 575 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 724 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 141 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 425 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[0]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 799 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 218 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 470 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 425 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 8 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 831 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 241 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 664 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[0]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 498 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 332 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 172 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 64 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[0]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 500 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 56 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[0]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 427 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 425 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 657 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 600 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[0]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 159 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 281 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 589 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[USER 36767] extracted usersPID[1]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 36 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[NODE 36766] is starting to process a block
+[USER 36768] extracted usersPID[1]
+[USER 36768] extracted nodesPID[0]
+[USER 36768] succedeed in attaching to queue 1
+[USER 36768] sent a transaction of 251 UC to 36768 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[NODE 36766] is starting to process a block
+[USER 36767] extracted usersPID[0]
+[USER 36767] extracted nodesPID[0]
+[USER 36767] succedeed in attaching to queue 1
+[USER 36767] sent a transaction of 252 UC to 36767 user via 1 queue
+[NODE 36766] fetched a transaction
+[NODE 36766] Trying to receive message of size(transaction) from queue 1
+[NODE 36766] is starting to process a block
 ::USER:: SIGINT received
  ::USER:: SIGINT received
  ::MASTER:: SIGINT ricevuto
- src/nodes.c:263: PID=16019: Error 22 (Invalid argument)
-::NODE:: SIGINT received
- src/nodes.c:267: PID=16019: Error 22 (Invalid argument)
-src/nodes.c:270: PID=16019: Error 22 (Invalid argument)
-[NODE] queue removed
-src/nodes.c:274: PID=16019: Error 22 (Invalid argument)
-src/print.c:27: PID=16018: Error 10 (No child processes)
-src/print.c:27: PID=16018: Error 10 (No child processes)
-src/print.c:46: PID=16018: Error 10 (No child processes)
+ ::NODE:: SIGINT received
+ [NODE] queue removed
+src/print.c:27: PID=36765: Error 10 (No child processes)
+src/print.c:27: PID=36765: Error 10 (No child processes)
+src/print.c:46: PID=36765: Error 10 (No child processes)
 --------------------------------------------
 ----------- Configuration value ------------
 SO_USER_NUM->2
@@ -2085,12 +767,12 @@ SO_FRIENDS_NUM->999
 SO_HOPS->7
 --------------------------------------------
 
- ------- Master Process PID is 16018 ----------
+ ------- Master Process PID is 36765 ----------
 |                                             |
  - Type ------- PID --------- Status ---------
  ---------------------------------------------
-|  User         16021            broke     
-|  User         16020            alive     
+|  User         36768            broke     
+|  User         36767            broke     
  ---------------------------------------------
-|  Node         16019            available
+|  Node         36766            available
  ---------------------------------------------
