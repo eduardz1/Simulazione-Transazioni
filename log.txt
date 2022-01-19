@@ -94,8 +94,8 @@ src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
   151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
       |                                     
 ./master
-[MASTER] semPIDs_ID is 4
-[MASTER] semLedger_ID is 5
+[MASTER] semPIDs_ID is 7
+[MASTER] semLedger_ID is 8
 [PARSER] assigned defaults
 --------------------------------------------
 ----------- Configuration input ------------
@@ -114,642 +114,649 @@ SO_MIN_TRANS_PROC_NSEC 100000002
 SO_MAX_TRANS_PROC_NSEC 200000002
 --------------------------------------------
 [MASTER] conf file read successful
-[MASTER] IPC_array={491561,491562,491560,491563,4,5}
-[MASTER] argv[uPID] = 491561
-[MASTER] argv[nPID] = 491562
-[MASTER] argv[par] = 491560
-[MASTER] argv[ledger] = 491563
-[MASTER] argv[sem_pids] = 4
-[MASTER] argv[sem_ledger] = 5
-[MASTER] argv values for nodes: ./nodes 491561 491562 491560 491563 4 5 (null) (null)
-[MASTER] nodesPID = {36766, 0, 0, 0, 0, ...}
-[MASTER] argv values for users: ./users 491561 491562 491560 491563 4 5 (null) (null)
+[MASTER] IPC_array={491576,491577,491575,491578,7,8}
+[MASTER] argv[uPID] = 491576
+[MASTER] argv[nPID] = 491577
+[MASTER] argv[par] = 491575
+[MASTER] argv[ledger] = 491578
+[MASTER] argv[sem_pids] = 7
+[MASTER] argv[sem_ledger] = 8
+[MASTER] argv values for nodes: ./nodes 491576 491577 491575 491578 7 8 (null) (null)
+[MASTER] nodesPID = {38915, 0, 0, 0, 0, ...}
+[MASTER] argv values for users: ./users 491576 491577 491575 491578 7 8 (null) (null)
 [MASTER] Spawning node with associated queue
-src/master.c:75: PID=36766: Error 27 (File too large)
-[NODE 36766] queueID is 1
+src/master.c:75: PID=38915: Error 27 (File too large)
 [MASTER] Spawning user
-[MASTER] usersPID = {36767, 36768, 0, 0, 0, ...}
+[NODE 38915] queueID is 2
+[MASTER] usersPID = {38916, 38917, 0, 0, 0, ...}
 [MASTER] Spawning user
-[NODE 36766] sighandler init
-[NODE 36766] succedeed in attaching to queue 1
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36767] extracted usersPID[0]
-[USER 36768] extracted nodesPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 446 UC to 36767 user via 1 queue
-[USER 36768] sent a transaction of 206 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36767] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36767] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 693 UC to 36768 user via 1 queue
-[USER 36767] sent a transaction of 777 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[0]
-[USER 36767] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36767] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 638 UC to 36767 user via 1 queue
-[USER 36767] sent a transaction of 540 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36767] extracted usersPID[1]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36767] extracted nodesPID[0]
-[USER 36768] sent a transaction of 437 UC to 36768 user via 1 queue
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 419 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[0]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36767] extracted usersPID[0]
-[USER 36768] sent a transaction of 357 UC to 36767 user via 1 queue
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 422 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[0]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 192 UC to 36767 user via 1 queue
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 622 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 763 UC to 36768 user via 1 queue
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 442 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36767] extracted usersPID[1]
-[USER 36768] sent a transaction of 252 UC to 36768 user via 1 queue
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 482 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[0]
-[USER 36768] extracted usersPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36768] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36768] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 613 UC to 36767 user via 1 queue
-[USER 36768] sent a transaction of 523 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 262 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 624 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 465 UC to 36767 user via 1 queue
-[USER 36768] extracted usersPID[1]
-[NODE 36766] fetched a transaction
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] sent a transaction of 329 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 614 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 373 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 477 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 583 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 142 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 663 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 479 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 679 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 752 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 461 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 767 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[0]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 297 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 809 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[0]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 132 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 536 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[0]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 666 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 525 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 818 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 109 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 674 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 839 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 801 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 770 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 349 UC to 36768 user via 1 queue
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 471 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[0]
-[USER 36767] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36767] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 630 UC to 36767 user via 1 queue
-[USER 36767] sent a transaction of 369 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[0]
-[USER 36767] extracted usersPID[0]
-[USER 36768] extracted nodesPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36767] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 417 UC to 36767 user via 1 queue
-[USER 36767] sent a transaction of 431 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36767] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36767] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 791 UC to 36768 user via 1 queue
-[USER 36767] sent a transaction of 472 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36767] extracted usersPID[0]
-[USER 36768] extracted nodesPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36767] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 301 UC to 36768 user via 1 queue
-[USER 36767] sent a transaction of 190 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36767] extracted usersPID[0]
-[USER 36768] extracted nodesPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36767] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 414 UC to 36768 user via 1 queue
-[USER 36767] sent a transaction of 532 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36767] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36767] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 418 UC to 36768 user via 1 queue
-[USER 36767] sent a transaction of 741 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[0]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 18 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 72 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[0]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 586 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 211 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[0]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 816 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 39 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 611 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 104 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[0]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 422 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 311 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 835 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 647 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 719 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 67 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[0]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 575 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 724 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 141 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 425 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[0]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 799 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 218 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 470 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 425 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 8 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 831 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 241 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 664 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[0]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 498 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 332 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 172 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 64 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[0]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 500 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 56 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[0]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 427 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 425 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 657 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 600 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[0]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 159 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 281 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 589 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[USER 36767] extracted usersPID[1]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 36 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[NODE 36766] is starting to process a block
-[USER 36768] extracted usersPID[1]
-[USER 36768] extracted nodesPID[0]
-[USER 36768] succedeed in attaching to queue 1
-[USER 36768] sent a transaction of 251 UC to 36768 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[NODE 36766] is starting to process a block
-[USER 36767] extracted usersPID[0]
-[USER 36767] extracted nodesPID[0]
-[USER 36767] succedeed in attaching to queue 1
-[USER 36767] sent a transaction of 252 UC to 36767 user via 1 queue
-[NODE 36766] fetched a transaction
-[NODE 36766] Trying to receive message of size(transaction) from queue 1
-[NODE 36766] is starting to process a block
+[NODE 38915] sighandler init
+[NODE 38915] succedeed in attaching to queue 2
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38916] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38916] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 374 UC to 38917 user via 2 queue
+[USER 38916] sent a transaction of 603 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38917] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38917] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 230 UC to 38917 user via 2 queue
+[USER 38917] sent a transaction of 511 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 351 UC to 38916 user via 2 queue
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 725 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 327 UC to 38917 user via 2 queue
+[USER 38917] extracted usersPID[1]
+[NODE 38915] fetched a transaction
+[USER 38917] extracted nodesPID[0]
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 821 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 491 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 135 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 814 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 518 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 785 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 592 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 10 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 277 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 689 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 362 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 615 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 370 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 147 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 256 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 208 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 796 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 115 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 95 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 215 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 76 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 111 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 44 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 756 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 620 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 89 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 733 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 488 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 114 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 331 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 452 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 793 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 357 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 724 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 13 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 777 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 82 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[USER 38916] extracted usersPID[0]
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 425 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38916] extracted usersPID[0]
+[NODE 38915] fetched a transaction
+[USER 38917] sent a transaction of 172 UC to 38917 user via 2 queue
+[USER 38916] extracted nodesPID[0]
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 114 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38917] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38917] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 95 UC to 38916 user via 2 queue
+[USER 38917] sent a transaction of 41 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 423 UC to 38917 user via 2 queue
+[USER 38917] extracted usersPID[0]
+[NODE 38915] fetched a transaction
+[USER 38917] extracted nodesPID[0]
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 356 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 770 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 93 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 288 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 855 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 86 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 270 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 640 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 98 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 177 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 183 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 697 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 231 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 473 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 111 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 643 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 657 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 700 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 646 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 372 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 721 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 805 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 678 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 209 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 341 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 336 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 742 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 652 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 811 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 534 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 301 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 272 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 133 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 240 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 347 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 765 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38917] sent a transaction of 153 UC to 38916 user via 2 queue
+[USER 38916] extracted nodesPID[0]
+[NODE 38915] fetched a transaction
+[USER 38916] succedeed in attaching to queue 2
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] sent a transaction of 258 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38917] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38917] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 406 UC to 38917 user via 2 queue
+[USER 38917] sent a transaction of 32 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 446 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 817 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 662 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 463 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 393 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 18 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[1]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 295 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 542 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 282 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[0]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 445 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] is starting to process a block
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[NODE 38915] is starting to process a block
+[USER 38916] extracted usersPID[0]
+[USER 38916] extracted nodesPID[0]
+[USER 38916] succedeed in attaching to queue 2
+[USER 38916] sent a transaction of 349 UC to 38916 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[USER 38917] extracted usersPID[1]
+[USER 38917] extracted nodesPID[0]
+[USER 38917] succedeed in attaching to queue 2
+[USER 38917] sent a transaction of 494 UC to 38917 user via 2 queue
+[NODE 38915] fetched a transaction
+[NODE 38915] is starting to process a block
+[NODE 38915] Trying to receive message of size(transaction) from queue 2
+[NODE 38915] is starting to process a block
 ::USER:: SIGINT received
+ ::NODE:: SIGINT received
  ::USER:: SIGINT received
  ::MASTER:: SIGINT ricevuto
- ::NODE:: SIGINT received
  [NODE] queue removed
-src/print.c:27: PID=36765: Error 10 (No child processes)
-src/print.c:27: PID=36765: Error 10 (No child processes)
-src/print.c:46: PID=36765: Error 10 (No child processes)
+src/print.c:27: PID=38914: Error 10 (No child processes)
+src/print.c:27: PID=38914: Error 10 (No child processes)
+src/print.c:46: PID=38914: Error 10 (No child processes)
 --------------------------------------------
 ----------- Configuration value ------------
 SO_USER_NUM->2
@@ -767,12 +774,12 @@ SO_FRIENDS_NUM->999
 SO_HOPS->7
 --------------------------------------------
 
- ------- Master Process PID is 36765 ----------
+ ------- Master Process PID is 38914 ----------
 |                                             |
  - Type ------- PID --------- Status ---------
  ---------------------------------------------
-|  User         36768            broke     
-|  User         36767            broke     
+|  User         38917            broke     
+|  User         38916            broke     
  ---------------------------------------------
-|  Node         36766            available
+|  Node         38915            available
  ---------------------------------------------
