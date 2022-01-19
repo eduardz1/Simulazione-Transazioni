@@ -133,6 +133,7 @@ void fetch_messages()
         default:
             TRACE(("[NODE %d] fetched a transaction\n", myPID));
         }
+        TRACE(("[NODE %d] received %d UC to process from [USER %d] to [USER %d]\n", myPID, fetchedMex.transactionMessage.userTrans.amount, fetchedMex.transactionMessage.userTrans.sender, fetchedMex.transactionMessage.userTrans.receiver))
         add_to_pool();
         transPool.size++;
     } else {
