@@ -1,5 +1,6 @@
 #include "include/common.h"
 #include "include/nodes.h"
+#include "include/print.h"
 
 /*
  ======================
@@ -161,13 +162,16 @@ void new_block(transaction *blockTransaction, block *newBlock)
     reward.receiver = getpid();
     reward.amount = sum_reward(blockTransaction); /*sum of each reward of transaction in the block */
     reward.reward = 0;
+    reward.status = pending;
 
     newBlock->transList[0] = reward;
 
-    for (i = 1; i < SO_BLOCK_SIZE - 1; i++)
+    for (i = 1; i < SO_BLOCK_SIZE; i++)
     {
         newBlock->transList[i] = blockTransaction[i - 1];
     }
+
+    print_block(newBlock);
 }
 
 /* fills the buffer with SO_BLOCK_SIZE-1 transactions */
@@ -179,19 +183,24 @@ void fill_block_transList(transaction *transListWithoutReward)
     for (i = 0; i < (SO_BLOCK_SIZE - 1); i++)
     {
         transListWithoutReward[i] = remove_from_pool();
+        transPool.size--;
     }
 }
 
 void insert_block_in_ledger(block *newBlock)
 {
     int i;
+    block tmp;
     for (i = 0; i < SO_REGISTRY_SIZE; i++)
     {
         /* a bit of and hack: shm segments are 0ed and our processes can't have pid 0 */
         if (ledger[i].transList[1].sender == 0)
         {
+            tmp = *newBlock;
             sem_reserve(semLedger_ID, 1);
-            ledger[i] = *newBlock;
+            ledger[i] = tmp;
+            TRACE(("[LEDGER %d] = \n", i))
+            print_block(&ledger[i]);
             sem_release(semLedger_ID, 1);
             return;
         }
@@ -211,7 +220,7 @@ void insert_block_in_ledger(block *newBlock)
 int sum_reward(transaction *sumBlock)
 {
     int i = 0;
-    int sum;
+    int sum = 0;
 
     for (i = 0; i < (SO_BLOCK_SIZE - 1); i++)
     {
@@ -232,7 +241,7 @@ void attach_ipc_objects(char **argv)
     TEST_ERROR
     nodesPID = shmat(NODES_PID_ARGV, NULL, 0);
     TEST_ERROR
-    ledger = shmat(LEDGER_ARGV, NULL, 0);
+    ledger = (block *) shmat(LEDGER_ARGV, NULL, 0);
     TEST_ERROR
     semPIDs_ID = SEM_PIDS_ARGV;
     semLedger_ID = SEM_LEDGER_ARGV;
@@ -264,6 +273,8 @@ void node_interrupt_handle(int signum)
     TEST_ERROR
     write(1, "::NODE:: SIGINT received\n", 26);
 
+    print_transaction_pool(&transPool);
+
     /*sem_reserve(semPIDs_ID, 1);*/
     TEST_ERROR
     nodesPID[nodeIndex].balance = currBalance;
@@ -294,6 +305,7 @@ int main(int argc, char *argv[])
     bzero(&saINT_node, sizeof(saINT_node));
 
     attach_ipc_objects(argv);
+    ledger[0].transList[0].amount = 69;
     signal_handler_init(&saINT_node); /* no idea why it isn't working, it's literally the same implementation as user */
     TRACE(("[NODE %d] sighandler init\n", myPID));
 
@@ -317,6 +329,8 @@ int main(int argc, char *argv[])
         fetch_messages();
         if (transPool.size >= (SO_BLOCK_SIZE - 1))
         {
+            /* this removes SO-BLOCK-SIZE-1 transactions from pool */
+            fill_block_transList(transBuffer);
             switch (fork())
             {
             case -1: /* error */
@@ -328,7 +342,7 @@ int main(int argc, char *argv[])
                 block *newBlock = malloc(sizeof(block));
 
                 SLEEP_TIME_SET;
-                fill_block_transList(transBuffer);
+        
                 new_block(transBuffer, newBlock);
                 insert_block_in_ledger(newBlock);
 

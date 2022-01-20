@@ -68,6 +68,7 @@ void print_transactions_still_in_pool();
 void final_print(pid_t masterPID, user *usersPID, node *nodesPID, struct parameters *par)
 {
     print_user_nodes_table(masterPID, usersPID, nodesPID, par);
+    
     /*print_kill_signal();
     print_user_balance();
     print_node_balance();*
@@ -123,7 +124,7 @@ void print_transactions_still_in_pool()
     printf("----TOTAL TRANSACTION STILL IN POLL:%d----");
 }*/
 
-void print_transaction(FILE *fp, transaction *t)
+void print_transaction(transaction *t)
 {
     char tmp[10];
     switch (t->status)
@@ -142,27 +143,38 @@ void print_transaction(FILE *fp, transaction *t)
         break;
     }
 
-    fprintf(fp, " -------------------------- \n");
-    formatted_timestamp(fp);
-    fprintf(fp, "    %s", tmp);
-    fprintf(fp, "|  %d --> %d\n", t->sender, t->receiver);
-    fprintf(fp, "|  Amount:    %d\n", t->amount);
-    fprintf(fp, "|  Reward:    %d\n", t->reward);
-    fprintf(fp, "|  Reward:    %d\n", t->reward);
-    fprintf(fp, " -------------------------- \n");
+    printf(" -------------------------- \n");
+    /*formattimestamp(fp);*/
+    printf("    %s\n", tmp);
+    printf("|  %d --> %d\n", t->sender, t->receiver);
+    printf("|  Amount:    %d\n", t->amount);
+    printf("|  Reward:    %d\n", t->reward);
+    printf(" -------------------------- \n");
 }
 
-void print_block(FILE *fp, block *b)
+void print_block(block *b)
 {
-   
+    int i;
+    transaction printable;
+    printf("[BLOCK %d] =================\n", b->blockIndex);
+    for (i = 0; i < SO_BLOCK_SIZE; i++){
+        printable = b->transList[i];
+        print_transaction(&printable);
+    }
+    printf("============================\n");
 }
 
 void print_ledger(block *l)
 {
-    FILE *fp = fopen("ledger.txt", "w");
-    if (fp == NULL)
-    {
-        printf(":print: coudln't open file pointer ledger.txt\n");
+    int i=0;
+    int flag = l[i].transList[0].sender;
+    TRACE(("FLAG %lu\n", flag))
+
+    printf( "~{LEDGER}~\n\n");
+    for (i; flag != 0 ;i++){
+        print_block(&l[i]);
+
+        flag = l[i].transList[0].timestamp.tv_nsec;
     }
 }
 
@@ -187,4 +199,20 @@ void formatted_timestamp(FILE *fp)
     printf("%s\n", buf);
 
     elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC; /* time ./a.out*/
+}
+
+void print_transaction_pool(pool *transPool){
+    pool *tmp = transPool;
+    int i = 0;
+    pid_t pidCaller = getpid();
+    transaction printable;
+
+    printf("[NODE %d] printing transaction pool:\n", pidCaller);
+    while(tmp->head != NULL){
+        printf("[%d]", i);
+        printable = tmp->head->transactionMessage.userTrans;
+        print_transaction(&printable);
+        tmp->head = tmp->head->transactionMessage.next;
+        i++;
+    }
 }

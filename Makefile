@@ -18,7 +18,7 @@ users: shared $(USER)
 	$(CC) $(CFLAGS) src/users.c *.o -lm -o users
 
 nodes: shared $(NODE)
-	$(CC) $(CFLAGS) src/nodes.c *.o -lm -o nodes
+	$(CC) $(CFLAGS) src/nodes.c src/print.c *.o -lm -o nodes
 
 shared: $(SHARED)
 	$(CC) -c $(CFLAGS) src/utils/*.c
@@ -28,7 +28,7 @@ debug:
 	$(CC) -c $(CFLAGS) $(DEBUG) src/utils/*.c
 	$(CC) $(CFLAGS) $(DEBUG) src/master.c  src/print.c src/parser.c *.o -lm -o master
 	$(CC) $(CFLAGS) $(DEBUG) src/users.c *.o -lm -o users
-	$(CC) $(CFLAGS) $(DEBUG) src/nodes.c *.o -lm -o nodes
+	$(CC) $(CFLAGS) $(DEBUG) src/nodes.c src/print.c *.o -lm -o nodes
 	./master
 
 clean:

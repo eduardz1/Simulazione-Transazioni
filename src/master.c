@@ -223,6 +223,8 @@ void make_ipc_array(int *IPC_array)
 void master_interrupt_handle(int signum)
 {
     int status, wpid;
+    FILE *fp;
+
     write(1, "::MASTER:: SIGINT ricevuto\n", 28);
     killpg(0, SIGINT);
 
@@ -235,6 +237,10 @@ void master_interrupt_handle(int signum)
     while ((wpid = wait(&status)) > 0)
         ;
     final_print(getpid(), usersPID, nodesPID, par);
+
+    fp = fopen("ledger.txt", "w");
+    print_ledger(ledger);
+    fclose(fp);
 
     semctl(semPIDs_ID, 1, IPC_RMID);
     semctl(semLedger_ID, 1, IPC_RMID);
@@ -314,6 +320,11 @@ int main(int argc, char *argv[])
     sleep(simTime);
 
     print_time_to_die();
+    print_block(&ledger[0]);
+    print_block(&ledger[1]);
+    print_block(&ledger[2]);
+    print_block(&ledger[3]);
+
     killpg(0, SIGINT); /* our sigint handler needs to do quite a lot of things to print the wall of test below */
 
     return 0;
