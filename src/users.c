@@ -180,7 +180,6 @@ int send_transaction()
 {
 	/* accumulate amount of transactions sent but yet to be received */
 	int out = 0;
-	struct node *newNode;
 	transaction sent;
 
 	msgsnd(queueID, &transMsg, sizeof(struct msgbuf_trans), 0);
@@ -205,18 +204,17 @@ int send_transaction()
 		printf("[USER %d] system out of memory\n", myPID); /* should basically never happen I hope */
 		break;
 	default:
+	{
 		TRACE(("[USER %d] sent a transaction of %d UC to [USER %d] via queue %d\n", myPID, transMsg.transactionMessage.userTrans.amount, transMsg.transactionMessage.userTrans.receiver, queueID))
 
 		sent = transMsg.transactionMessage.userTrans;
-
 		/* track transactions that are yet to be received */
 		if (outGoingTransactions == NULL)
 		{
-			print_transaction(&sent);
-			new_node(newNode, sent);
+			
 			TEST_ERROR
 
-			outGoingTransactions = &newNode;
+			outGoingTransactions = new_node(sent);;
 		}
 		else
 		{
@@ -224,6 +222,7 @@ int send_transaction()
 			TEST_ERROR
 		}
 		return SUCCESS;
+	}
 	}
 	currBalance -= (transMsg.transactionMessage.userTrans.amount + transMsg.transactionMessage.userTrans.reward);
 	out += (transMsg.transactionMessage.userTrans.amount + transMsg.transactionMessage.userTrans.reward);
@@ -321,7 +320,6 @@ int main(int argc, char *argv[])
 
 	attach_ipc_objects(argv);
 	signal_handlers_init(&saUSR1, &saINT_user);
-	transaction_pool_init(&outGoingTransactions);
 	transMsg.mtype = TRANSACTION_MTYPE;
 
 	currBalance = par->SO_BUDGET_INIT;
