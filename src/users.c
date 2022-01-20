@@ -1,5 +1,6 @@
 #include "include/common.h"
 #include "include/users.h"
+#include "include/print.h"
 #include "utils/lklist.h"
 
 #define REWARD(amount, reward) (ceil(((reward * (amount)) / 100.0)))
@@ -179,7 +180,8 @@ int send_transaction()
 {
 	/* accumulate amount of transactions sent but yet to be received */
 	int out = 0;
-	struct node newNode;
+	struct node *newNode;
+	transaction sent;
 
 	msgsnd(queueID, &transMsg, sizeof(struct msgbuf_trans), 0);
 	switch (errno)
@@ -204,13 +206,22 @@ int send_transaction()
 		break;
 	default:
 		TRACE(("[USER %d] sent a transaction of %d UC to [USER %d] via queue %d\n", myPID, transMsg.transactionMessage.userTrans.amount, transMsg.transactionMessage.userTrans.receiver, queueID))
-		
+
+		sent = transMsg.transactionMessage.userTrans;
+
 		/* track transactions that are yet to be received */
-		if(outGoingTransactions == NULL){
-			newNode = new_node(&transMsg.transactionMessage.userTrans);
+		if (outGoingTransactions == NULL)
+		{
+			print_transaction(&sent);
+			new_node(newNode, sent);
+			TEST_ERROR
+
 			outGoingTransactions = &newNode;
-		} else {
-			push(outGoingTransactions, &transMsg.transactionMessage.userTrans);
+		}
+		else
+		{
+			push(outGoingTransactions, sent);
+			TEST_ERROR
 		}
 		return SUCCESS;
 	}
@@ -239,8 +250,6 @@ int search_trans_list(block *blockToSearch)
 
 	return accumulate;
 }
-
-
 
 /* saves balance of calling user in currBalance */
 void get_balance()

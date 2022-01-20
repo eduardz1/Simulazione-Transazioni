@@ -35,10 +35,22 @@ In file included from src/utils/lklist.h:4,
 src/utils/../include/common.h:151:36: warning: "/*" within comment [-Wcomment]
   151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
       |                                     
-src/utils/lklist.c: In function ‘new_node’:
-src/utils/lklist.c:21:1: warning: control reaches end of non-void function [-Wreturn-type]
-   21 | }
-      | ^
+src/utils/lklist.c: In function ‘find_and_remove’:
+src/utils/lklist.c:63:9: warning: this ‘else’ clause does not guard... [-Wmisleading-indentation]
+   63 |         else
+      |         ^~~~
+In file included from src/utils/lklist.h:4,
+                 from src/utils/lklist.c:1:
+src/utils/../include/common.h:71:5: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘else’
+   71 |     if (errno)                                     \
+      |     ^~
+src/utils/lklist.c:65:13: note: in expansion of macro ‘TEST_ERROR’
+   65 |             TEST_ERROR
+      |             ^~~~~~~~~~
+src/utils/lklist.c: In function ‘push’:
+src/utils/lklist.c:32:5: warning: ‘newNode’ is used uninitialized [-Wuninitialized]
+   32 |     new_node(newNode, t);
+      |     ^~~~~~~~~~~~~~~~~~~~
 In file included from src/utils/pool.h:4,
                  from src/utils/pool.c:1:
 src/utils/../include/common.h:151:36: warning: "/*" within comment [-Wcomment]
@@ -109,28 +121,79 @@ In file included from src/parser.c:1:
 src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
   151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
       |                                     
-gcc -std=c89 -g -O0 -pedantic -Wall -D_GNU_SOURCE -DDEBUG src/users.c *.o -lm -o users
+gcc -std=c89 -g -O0 -pedantic -Wall -D_GNU_SOURCE -DDEBUG src/users.c src/print.c *.o -lm -o users
 In file included from src/users.c:1:
 src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
   151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
       |                                     
-In file included from src/utils/lklist.h:4,
+In file included from src/include/print.h:4,
                  from src/users.c:3:
+src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+In file included from src/include/../utils/pool.h:4,
+                 from src/include/print.h:5,
+                 from src/users.c:3:
+src/include/../utils/../include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+In file included from src/utils/lklist.h:4,
+                 from src/users.c:4:
 src/utils/../include/common.h:151:36: warning: "/*" within comment [-Wcomment]
   151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
       |                                     
 src/users.c: In function ‘send_transaction’:
-src/users.c:213:25: warning: implicit declaration of function ‘push’ [-Wimplicit-function-declaration]
-  213 |                         push(outGoingTransactions, &transMsg.transactionMessage.userTrans);
-      |                         ^~~~
+src/users.c:219:46: warning: assignment to ‘struct node *’ from incompatible pointer type ‘struct node **’ [-Wincompatible-pointer-types]
+  219 |                         outGoingTransactions = &newNode;
+      |                                              ^
 src/users.c: In function ‘main’:
-src/users.c:315:9: warning: implicit declaration of function ‘transaction_pool_init’; did you mean ‘transaction_init’? [-Wimplicit-function-declaration]
-  315 |         transaction_pool_init(&outGoingTransactions);
-      |         ^~~~~~~~~~~~~~~~~~~~~
-      |         transaction_init
-src/users.c:292:29: warning: variable ‘retry’ set but not used [-Wunused-but-set-variable]
-  292 |         int amount, reward, retry;
+src/users.c:324:31: warning: passing argument 1 of ‘transaction_pool_init’ from incompatible pointer type [-Wincompatible-pointer-types]
+  324 |         transaction_pool_init(&outGoingTransactions);
+      |                               ^~~~~~~~~~~~~~~~~~~~~
+      |                               |
+      |                               struct node **
+In file included from src/include/print.h:5,
+                 from src/users.c:3:
+src/include/../utils/pool.h:13:34: note: expected ‘pool *’ {aka ‘struct pool_t *’} but argument is of type ‘struct node **’
+   13 | void transaction_pool_init(pool *transPool);
+      |                            ~~~~~~^~~~~~~~~
+src/users.c:301:29: warning: variable ‘retry’ set but not used [-Wunused-but-set-variable]
+  301 |         int amount, reward, retry;
       |                             ^~~~~
+In file included from src/print.c:2:
+src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+In file included from src/include/print.h:4,
+                 from src/print.c:3:
+src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+In file included from src/include/../utils/pool.h:4,
+                 from src/include/print.h:5,
+                 from src/print.c:3:
+src/include/../utils/../include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+src/print.c: In function ‘final_print’:
+src/print.c:75:5: warning: "/*" within comment [-Wcomment]
+   75 |     /*
+      |      
+src/print.c: At top level:
+src/print.c:99:43: warning: "/*" within comment [-Wcomment]
+   99 | /*void print_kill_signal(mainPID, userPid /* other process *)
+      |                                            
+src/print.c:116:1: warning: "/*" within comment [-Wcomment]
+  116 | /*
+      |  
+src/print.c: In function ‘print_ledger’:
+src/print.c:175:5: warning: statement with no effect [-Wunused-value]
+  175 |     for (i; flag != 0; i++)
+      |     ^~~
+src/print.c: In function ‘formatted_timestamp’:
+src/print.c:204:65: warning: "/*" within comment [-Wcomment]
+  204 |     elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC; /* time ./a.out*/
+      |                                                                  
 gcc -std=c89 -g -O0 -pedantic -Wall -D_GNU_SOURCE -DDEBUG src/nodes.c src/print.c *.o -lm -o nodes
 In file included from src/nodes.c:1:
 src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
@@ -182,15 +245,15 @@ src/print.c:204:65: warning: "/*" within comment [-Wcomment]
   204 |     elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC; /* time ./a.out*/
       |                                                                  
 ./master
-[MASTER] semPIDs_ID is 32786
-[MASTER] semLedger_ID is 32787
+[MASTER] semPIDs_ID is 34
+[MASTER] semLedger_ID is 35
 [PARSER] assigned defaults
 --------------------------------------------
 ----------- Configuration input ------------
-SO_USER_NUM 2
+SO_USER_NUM 3
 SO_NODES_NUM 1
 SO_FRIENDS_NUM 999
-SO_SIM_SEC 5
+SO_SIM_SEC 300
 SO_HOPS 7
 SO_BUDGET_INIT 998
 SO_REWARD 14
@@ -202,62 +265,77 @@ SO_MIN_TRANS_PROC_NSEC 100000002
 SO_MAX_TRANS_PROC_NSEC 200000002
 --------------------------------------------
 [MASTER] conf file read successful
-[MASTER] IPC_array={491594,491595,491593,491596,32786,32787}
-[MASTER] argv[uPID] = 491594
-[MASTER] argv[nPID] = 491595
-[MASTER] argv[par] = 491593
-[MASTER] argv[ledger] = 491596
-[MASTER] argv[sem_pids] = 32786
-[MASTER] argv[sem_ledger] = 32787
-[MASTER] argv values for nodes: ./nodes 491594 491595 491593 491596 32786 32787 (null) (null)
-[MASTER] nodesPID = {49323, 0, 0, 0, 0, ...}
-[MASTER] argv values for users: ./users 491594 491595 491593 491596 32786 32787 (null) (null)
+[MASTER] IPC_array={32811,32812,32810,32813,34,35}
+[MASTER] argv[uPID] = 32811
+[MASTER] argv[nPID] = 32812
+[MASTER] argv[par] = 32810
+[MASTER] argv[ledger] = 32813
+[MASTER] argv[sem_pids] = 34
+[MASTER] argv[sem_ledger] = 35
+[MASTER] argv values for nodes: ./nodes 32811 32812 32810 32813 34 35 (null) (null)
+[MASTER] nodesPID = {28320, 0, 0, 0, 0, ...}
+[MASTER] argv values for users: ./users 32811 32812 32810 32813 34 35 (null) (null)
 [MASTER] Spawning node with associated queue
-src/master.c:75: PID=49323: Error 27 (File too large)
-[MASTER] usersPID = {49324, 49325, 0, 0, 0, ...}
-[NODE 49323] queueID is 37
 [MASTER] Spawning user
+src/master.c:75: PID=28320: Error 27 (File too large)
+[NODE 28320] queueID is 28
 [MASTER] Spawning user
-[NODE 49323] sighandler init
-[NODE 49323] succedeed in attaching to queue 37
-[NODE 49323] Trying to receive message of size(transaction) from queue 37
-[USER 0] extracted usersPID[0]
-[USER 0] extracted nodesPID[0]
+[MASTER] usersPID = {28321, 28322, 28323, 0, 0, ...}
+[MASTER] Spawning user
+[NODE 28320] sighandler init
+[NODE 28320] succedeed in attaching to queue 28
+[NODE 28320] Trying to receive message of size(transaction) from queue 28
 [USER 0] extracted usersPID[1]
-[USER 0] succedeed in attaching to queue 37
+[USER 0] extracted usersPID[2]
 [USER 0] extracted nodesPID[0]
-[USER 0] succedeed in attaching to queue 37
-[USER 0] sent a transaction of 659 UC to [USER 49324] via queue 37
-[USER 0] sent a transaction of 68 UC to [USER 49325] via queue 37
-[NODE 49323] fetched a transaction
-[NODE 49323] received 659 UC to process from [USER 0] to [USER 49324]
-[NODE 49323] Trying to receive message of size(transaction) from queue 37
-[NODE 49323] fetched a transaction
-[NODE 49323] received 68 UC to process from [USER 0] to [USER 49325]
-[NODE 49323] Trying to receive message of size(transaction) from queue 37
+[USER 0] extracted nodesPID[0]
+[USER 0] succedeed in attaching to queue 28
+[USER 0] succedeed in attaching to queue 28
+[USER 0] sent a transaction of 559 UC to [USER 28323] via queue 28
+[USER 0] sent a transaction of 17 UC to [USER 28322] via queue 28
+[NODE 28320] fetched a transaction
+[NODE 28320] received 17 UC to process from [USER 0] to [USER 28322]
+[USER 0] extracted usersPID[1]
+[USER 0] extracted nodesPID[0]
+[NODE 28320] Trying to receive message of size(transaction) from queue 28
+[NODE 28320] fetched a transaction
+[USER 0] succedeed in attaching to queue 28
+[NODE 28320] received 559 UC to process from [USER 0] to [USER 28323]
+[NODE 28320] Trying to receive message of size(transaction) from queue 28
+[USER 0] sent a transaction of 848 UC to [USER 28322] via queue 28
+[NODE 28320] fetched a transaction
+[NODE 28320] received 848 UC to process from [USER 0] to [USER 28322]
+[NODE 28320] Trying to receive message of size(transaction) from queue 28
 ::MASTER:: SIGINT ricevuto
  ::NODE:: SIGINT received
  [NODE] queue removed
-[NODE 49323] printing transaction pool:
+[NODE 28320] printing transaction pool:
 [0] -------------------------- 
     pending
-|  0 --> 49324
-|  Amount:    659
-|  Reward:    108
+|  0 --> 28322
+|  Amount:    17
+|  Reward:    3
  -------------------------- 
 [1] -------------------------- 
     pending
-|  0 --> 49325
-|  Amount:    68
-|  Reward:    12
+|  0 --> 28323
+|  Amount:    559
+|  Reward:    92
  -------------------------- 
-src/print.c:26: PID=49322: Error 10 (No child processes)
-src/print.c:26: PID=49322: Error 10 (No child processes)
-src/print.c:45: PID=49322: Error 10 (No child processes)
+[2] -------------------------- 
+    pending
+|  0 --> 28322
+|  Amount:    848
+|  Reward:    139
+ -------------------------- 
+src/print.c:26: PID=28319: Error 10 (No child processes)
+src/print.c:26: PID=28319: Error 10 (No child processes)
+src/print.c:26: PID=28319: Error 10 (No child processes)
+src/print.c:45: PID=28319: Error 10 (No child processes)
 FLAG 0
 --------------------------------------------
 ----------- Configuration value ------------
-SO_USER_NUM->2
+SO_USER_NUM->3
 SO_NODES_NUM->1
 SO_BUDGET_INIT->998
 SO_REWARD->14
@@ -267,24 +345,20 @@ SO_RETRY->21
 SO_TP_SIZE->10
 SO_MIN_TRANS_PROC_NSEC->100000002
 SO_MAX_TRANS_PROC_NSEC->200000002
-SO_SIM_SEC->5
+SO_SIM_SEC->300
 SO_FRIENDS_NUM->999
 SO_HOPS->7
 --------------------------------------------
 
-***********************
-|| The time has come ||
-***********************
-
-
- ------- Master Process PID is 49322 ----------
+ ------- Master Process PID is 28319 ----------
 |                                             |
  - Type ------- PID --------- Status ---------
  ---------------------------------------------
-|  User         49325            alive     
-|  User         49324            alive     
+|  User         28323            alive     
+|  User         28322            alive     
+|  User         28321            alive     
  ---------------------------------------------
-|  Node         49323            available
+|  Node         28320            available
  ---------------------------------------------
 ~{LEDGER}~
 

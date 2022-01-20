@@ -13,24 +13,24 @@ int compare_transactions(transaction *t1, transaction *t2)
 }
 
 /* allocates and returns a new node */
-struct node new_node(transaction *t)
+void new_node(struct node* nodePtr, transaction t)
 {
-    struct node *link = malloc(sizeof(struct node));
-    link->trans = *t;
-    link->next = NULL;
+    nodePtr = malloc(sizeof(struct node));
+    nodePtr->trans = t;
+    nodePtr->next = NULL;
 }
 
-void push(struct node *head, transaction *t)
+void push(struct node *head, transaction t)
 {
     struct node *curr = head;
-    struct node newNode;
+    struct node *newNode;
     while (curr->next != NULL)
     {
         curr = curr->next;
     }
 
-    newNode = new_node(t);
-    curr->next = &newNode;
+    new_node(newNode, t);
+    curr->next = newNode;
 }
 
 /* finds and removes a message from pool */
@@ -62,6 +62,7 @@ void find_and_remove(struct node *head, transaction *toSearch)
             head = head->next;
         else
             prev->next = curr->next; /* SIGSEGV */
+            TEST_ERROR
 
         t = curr->trans;
     }

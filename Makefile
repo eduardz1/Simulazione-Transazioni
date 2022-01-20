@@ -15,7 +15,7 @@ master: shared $(MASTER)
 	$(CC) $(CFLAGS) src/master.c  src/print.c src/parser.c *.o -lm -o master
 
 users: shared $(USER)
-	$(CC) $(CFLAGS) src/users.c *.o -lm -o users
+	$(CC) $(CFLAGS) src/users.c src/print.c *.o -lm -o users
 
 nodes: shared $(NODE)
 	$(CC) $(CFLAGS) src/nodes.c src/print.c *.o -lm -o nodes
@@ -27,7 +27,7 @@ debug:
 	rm -f *.o master users nodes *~
 	$(CC) -c $(CFLAGS) $(DEBUG) src/utils/*.c
 	$(CC) $(CFLAGS) $(DEBUG) src/master.c  src/print.c src/parser.c *.o -lm -o master
-	$(CC) $(CFLAGS) $(DEBUG) src/users.c *.o -lm -o users
+	$(CC) $(CFLAGS) $(DEBUG) src/users.c src/print.c *.o -lm -o users
 	$(CC) $(CFLAGS) $(DEBUG) src/nodes.c src/print.c *.o -lm -o nodes
 	./master
 
