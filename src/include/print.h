@@ -2,6 +2,7 @@
 #define SIMULAZIONE_TRANSAZIONI_PRINT_H
 
 #include "common.h"
+#include "../utils/pool.h"
 
 void print_time_to_die();
 void print_user_nodes_table(pid_t main, user *user, node *nodes, struct parameters *par); /* function that prints on terminal the PID of every user and node process */
@@ -16,10 +17,11 @@ void final_print(pid_t masterPID, user *usersPID, node *nodesPID, struct paramet
 void print_parameters(struct parameters *par);
 
 /* formatting ledger and blocks */
-void print_block(FILE *fp, block *b);
-void print_transaction(FILE *fp, transaction *t);
+void print_block(block *b);
+void print_transaction(transaction *t);
 void print_ledger(block *l);
 
 void formatted_timestamp(FILE *fp);
+void print_transaction_pool(pool *transPool);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_PRINT_H */

@@ -43,8 +43,8 @@
 #define SEM_LEDGER_KEY 421
 #define M_QUEUE_KEY 0x5AD
 
-#define SO_BLOCK_SIZE 100     /* number of transaction per block*/
-#define SO_REGISTRY_SIZE 1000 /* max length of consecutive blocks */
+#define SO_BLOCK_SIZE 5     /* number of transaction per block*/
+#define SO_REGISTRY_SIZE 100 /* max length of consecutive blocks */
 #define SELF -1
 #define EVERYONE_BROKE '$'
 #define TRANSACTION_MTYPE 28410
@@ -167,12 +167,7 @@ struct msgbuf_friends
     long mtype; /* atol("friendList") */
     pid_t *friendList;
 };
-typedef struct pool_t
-{
-    struct msgbuf_trans *head;
-    struct msgbuf_trans *tail;
-    unsigned int size;
-} pool;
+
 
 void add_block(block);
 void add_transaction_to_block(block *, transaction *, int index);

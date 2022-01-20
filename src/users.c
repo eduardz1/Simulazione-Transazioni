@@ -1,5 +1,7 @@
 #include "include/common.h"
 #include "include/users.h"
+#include "include/print.h"
+#include "utils/lklist.h"
 
 #define REWARD(amount, reward) (ceil(((reward * (amount)) / 100.0)))
 /*
@@ -36,6 +38,8 @@ block *ledger;
 int semPIDs_ID;
 int queueID;
 
+struct node *outGoingTransactions = NULL;
+
 int currBalance;
 pid_t myPID;
 struct msgbuf_trans transMsg;
@@ -69,7 +73,7 @@ pid_t get_random_userPID()
 	do
 	{
 		index = RAND(0, par->SO_USER_NUM - 1);
-		if (usersPID[index].status != dead && usersPID[index].pid!=myPID)
+		if (usersPID[index].status != dead && usersPID[index].pid != myPID)
 			val = usersPID[index].pid;
 	} while (!val);
 
@@ -150,7 +154,7 @@ void transaction_init(pid_t userPID, int amount, int reward)
 	transMsg.transactionMessage.userTrans.amount = amount;
 	transMsg.transactionMessage.userTrans.reward = reward;
 	transMsg.transactionMessage.userTrans.status = pending;
-	
+
 	transMsg.transactionMessage.userTrans.timestamp = exactTime;
 	transMsg.transactionMessage.hops = 0;
 }
@@ -175,7 +179,9 @@ void signal_handlers_init(struct sigaction *saUSR1, struct sigaction *saINT)
 int send_transaction()
 {
 	/* accumulate amount of transactions sent but yet to be received */
-	int outGoingTransactions = 0;
+	int out = 0;
+	struct node *newNode;
+	transaction sent;
 
 	msgsnd(queueID, &transMsg, sizeof(struct msgbuf_trans), 0);
 	switch (errno)
@@ -200,14 +206,31 @@ int send_transaction()
 		break;
 	default:
 		TRACE(("[USER %d] sent a transaction of %d UC to [USER %d] via queue %d\n", myPID, transMsg.transactionMessage.userTrans.amount, transMsg.transactionMessage.userTrans.receiver, queueID))
+
+		sent = transMsg.transactionMessage.userTrans;
+
+		/* track transactions that are yet to be received */
+		if (outGoingTransactions == NULL)
+		{
+			print_transaction(&sent);
+			new_node(newNode, sent);
+			TEST_ERROR
+
+			outGoingTransactions = &newNode;
+		}
+		else
+		{
+			push(outGoingTransactions, sent);
+			TEST_ERROR
+		}
 		return SUCCESS;
 	}
 	currBalance -= (transMsg.transactionMessage.userTrans.amount + transMsg.transactionMessage.userTrans.reward);
-	outGoingTransactions += (transMsg.transactionMessage.userTrans.amount + transMsg.transactionMessage.userTrans.reward);
+	out += (transMsg.transactionMessage.userTrans.amount + transMsg.transactionMessage.userTrans.reward);
 
 	transMsg.transactionMessage.userTrans.status = aborted;
 	currBalance += (transMsg.transactionMessage.userTrans.amount + transMsg.transactionMessage.userTrans.reward);
-	outGoingTransactions -= (transMsg.transactionMessage.userTrans.amount + transMsg.transactionMessage.userTrans.reward);
+	out -= (transMsg.transactionMessage.userTrans.amount + transMsg.transactionMessage.userTrans.reward);
 	/* we can then track this type of aborted transactions but rn there's no need to */
 	return ERROR;
 }
@@ -238,10 +261,16 @@ void get_balance()
 	{
 		for (j = 1; j < SO_BLOCK_SIZE - 1; j++)
 		{
+			find_and_remove(outGoingTransactions, &ledger[i].transList[j]); /* SEGFAULT */
 			if (ledger[i].transList[j].sender == myPID)
+			{
 				accumulate -= ledger[i].transList[j].amount;
+			}
 			else if (ledger[i].transList[j].receiver == myPID)
+			{
+				TRACE(("[USER %d] found myself as receiver of %d UC\n", myPID, ledger[i].transList[j].amount))
 				accumulate += ledger[i].transList[j].amount;
+			}
 		}
 	}
 
@@ -292,6 +321,7 @@ int main(int argc, char *argv[])
 
 	attach_ipc_objects(argv);
 	signal_handlers_init(&saUSR1, &saINT_user);
+	transaction_pool_init(&outGoingTransactions);
 	transMsg.mtype = TRANSACTION_MTYPE;
 
 	currBalance = par->SO_BUDGET_INIT;
