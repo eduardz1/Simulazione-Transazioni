@@ -167,12 +167,7 @@ struct msgbuf_friends
     long mtype; /* atol("friendList") */
     pid_t *friendList;
 };
-typedef struct pool_t
-{
-    struct msgbuf_trans *head;
-    struct msgbuf_trans *tail;
-    unsigned int size;
-} pool;
+
 
 void add_block(block);
 void add_transaction_to_block(block *, transaction *, int index);

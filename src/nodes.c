@@ -1,6 +1,7 @@
 #include "include/common.h"
 #include "include/nodes.h"
 #include "include/print.h"
+#include "utils/pool.h"
 
 /*
  ======================
@@ -28,70 +29,6 @@ struct msgbuf_trans fetchedMex;
 
 /*
  ======================
- ||  POOL FUNCTIONS  ||
- ======================
- */
-
-/* initialize linked list transaction pool */
-void transaction_pool_init()
-{
-    transPool.head = NULL;
-    transPool.tail = NULL;
-    transPool.size = 0;
-}
-
-/* append a msgbuf_trans to pool */
-int add_to_pool()
-{
-    struct msgbuf_trans *newTransaction = malloc(sizeof(struct msgbuf_trans));
-    if (newTransaction == NULL)
-        TRACE(("*** [NODE %d] malloc failed, system out of memory ***", myPID))
-
-    newTransaction->transactionMessage = fetchedMex.transactionMessage;
-    newTransaction->transactionMessage.next = NULL;
-
-    /* there's already some transactions in pool so I attach the pointer to this
-     * new transaction to the next of the last
-     */
-    if (transPool.tail != NULL)
-    {
-        transPool.tail->transactionMessage.next = newTransaction;
-    }
-
-    transPool.tail = newTransaction;
-
-    /* if head is NULL then this is the first transaction */
-    if (transPool.head == NULL)
-    {
-        transPool.head = newTransaction;
-    }
-    return SUCCESS;
-}
-
-/* remove a msgbuf_trans from pool, returns directly the transaction associated */
-transaction remove_from_pool()
-{
-    struct msgbuf_trans *tmp = transPool.head;
-    transaction poppedTrans = tmp->transactionMessage.userTrans;
-
-    if (transPool.head == NULL)
-    {
-        poppedTrans.amount = ERROR;
-        return poppedTrans;
-    }
-
-    transPool.head = transPool.head->transactionMessage.next;
-
-    /* if head is NULL tail shoul become NULL too */
-    if (transPool.head == NULL)
-        transPool.tail = NULL;
-
-    free(tmp);
-    return poppedTrans;
-}
-
-/*
- ======================
  || QUEUE FUNCTIONS  ||
  ======================
  */
@@ -100,11 +37,11 @@ transaction remove_from_pool()
 void message_queue_attach()
 {
     do
-	{
-		queueID = msgget(myPID, 0);
-		/* TRACE(("[USER %d] is trying to attach to id=%d queue\n", myPID, queueID)) */
-	} while (errno == ENOENT);
-	TRACE(("[NODE %d] succedeed in attaching to queue %d\n", myPID, queueID))
+    {
+        queueID = msgget(myPID, 0);
+        /* TRACE(("[USER %d] is trying to attach to id=%d queue\n", myPID, queueID)) */
+    } while (errno == ENOENT);
+    TRACE(("[NODE %d] succedeed in attaching to queue %d\n", myPID, queueID))
 }
 
 /* process starts fetching transactions from it's msg_q until transPool is full */
@@ -135,9 +72,11 @@ void fetch_messages()
             TRACE(("[NODE %d] fetched a transaction\n", myPID));
         }
         TRACE(("[NODE %d] received %d UC to process from [USER %d] to [USER %d]\n", myPID, fetchedMex.transactionMessage.userTrans.amount, fetchedMex.transactionMessage.userTrans.sender, fetchedMex.transactionMessage.userTrans.receiver))
-        add_to_pool();
+        add_to_pool(&transPool, &fetchedMex);
         transPool.size++;
-    } else {
+    }
+    else
+    {
         TRACE(("[NODE %d] pool is full\n", myPID))
         sleep(1);
     }
@@ -182,7 +121,7 @@ void fill_block_transList(transaction *transListWithoutReward)
 
     for (i = 0; i < (SO_BLOCK_SIZE - 1); i++)
     {
-        transListWithoutReward[i] = remove_from_pool();
+        transListWithoutReward[i] = remove_from_pool(&transPool);
         transPool.size--;
     }
 }
@@ -197,11 +136,12 @@ void insert_block_in_ledger(block *newBlock)
         if (ledger[i].transList[1].sender == 0)
         {
             tmp = *newBlock;
+            tmp.blockIndex = i;
+
             sem_reserve(semLedger_ID, 1);
             ledger[i] = tmp;
-            TRACE(("[LEDGER %d] = \n", i))
-            print_block(&ledger[i]);
             sem_release(semLedger_ID, 1);
+
             return;
         }
     }
@@ -241,7 +181,7 @@ void attach_ipc_objects(char **argv)
     TEST_ERROR
     nodesPID = shmat(NODES_PID_ARGV, NULL, 0);
     TEST_ERROR
-    ledger = (block *) shmat(LEDGER_ARGV, NULL, 0);
+    ledger = (block *)shmat(LEDGER_ARGV, NULL, 0);
     TEST_ERROR
     semPIDs_ID = SEM_PIDS_ARGV;
     semLedger_ID = SEM_LEDGER_ARGV;
@@ -310,7 +250,7 @@ int main(int argc, char *argv[])
     TRACE(("[NODE %d] sighandler init\n", myPID));
 
     message_queue_attach();
-    transaction_pool_init();
+    transaction_pool_init(&transPool);
     TEST_ERROR
     while (1)
     {
@@ -342,7 +282,7 @@ int main(int argc, char *argv[])
                 block *newBlock = malloc(sizeof(block));
 
                 SLEEP_TIME_SET;
-        
+
                 new_block(transBuffer, newBlock);
                 insert_block_in_ledger(newBlock);
 

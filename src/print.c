@@ -15,7 +15,6 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
     int nodesNum = par->SO_NODES_NUM;
     int statusNum = 0;
     char statusStr[] = "available";
-    
 
     printf("\n ------- Master Process PID is %d ----------\n", mainPID);
     printf("|                                             |\n");
@@ -68,7 +67,7 @@ void print_transactions_still_in_pool();
 void final_print(pid_t masterPID, user *usersPID, node *nodesPID, struct parameters *par)
 {
     print_user_nodes_table(masterPID, usersPID, nodesPID, par);
-    
+
     /*print_kill_signal();
     print_user_balance();
     print_node_balance();*
@@ -157,7 +156,8 @@ void print_block(block *b)
     int i;
     transaction printable;
     printf("[BLOCK %d] =================\n", b->blockIndex);
-    for (i = 0; i < SO_BLOCK_SIZE; i++){
+    for (i = 0; i < SO_BLOCK_SIZE; i++)
+    {
         printable = b->transList[i];
         print_transaction(&printable);
     }
@@ -166,16 +166,19 @@ void print_block(block *b)
 
 void print_ledger(block *l)
 {
-    int i=0;
+    FILE *fp = fopen("ledger.txt", "w");
+    int i = 0;
     int flag = l[i].transList[0].sender;
     TRACE(("FLAG %lu\n", flag))
 
-    printf( "~{LEDGER}~\n\n");
-    for (i; flag != 0 ;i++){
+    printf("~{LEDGER}~\n\n");
+    for (i; flag != 0; i++)
+    {
         print_block(&l[i]);
 
         flag = l[i].transList[0].timestamp.tv_nsec;
     }
+    fclose(fp);
 }
 
 /* print without /n */
@@ -201,14 +204,16 @@ void formatted_timestamp(FILE *fp)
     elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC; /* time ./a.out*/
 }
 
-void print_transaction_pool(pool *transPool){
+void print_transaction_pool(pool *transPool)
+{
     pool *tmp = transPool;
     int i = 0;
     pid_t pidCaller = getpid();
     transaction printable;
 
     printf("[NODE %d] printing transaction pool:\n", pidCaller);
-    while(tmp->head != NULL){
+    while (tmp->head != NULL)
+    {
         printf("[%d]", i);
         printable = tmp->head->transactionMessage.userTrans;
         print_transaction(&printable);

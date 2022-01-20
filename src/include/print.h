@@ -2,6 +2,7 @@
 #define SIMULAZIONE_TRANSAZIONI_PRINT_H
 
 #include "common.h"
+#include "../utils/pool.h"
 
 void print_time_to_die();
 void print_user_nodes_table(pid_t main, user *user, node *nodes, struct parameters *par); /* function that prints on terminal the PID of every user and node process */
