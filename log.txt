@@ -227,8 +227,8 @@ src/print.c:204:65: warning: "/*" within comment [-Wcomment]
   204 |     elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC; /* time ./a.out*/
       |                                                                  
 ./master
-[MASTER] semPIDs_ID is 32776
-[MASTER] semLedger_ID is 32777
+[MASTER] semPIDs_ID is 32782
+[MASTER] semLedger_ID is 32783
 [PARSER] assigned defaults
 --------------------------------------------
 ----------- Configuration input ------------
@@ -247,1433 +247,1096 @@ SO_MIN_TRANS_PROC_NSEC 100000002
 SO_MAX_TRANS_PROC_NSEC 200000002
 --------------------------------------------
 [MASTER] conf file read successful
-[MASTER] IPC_array={294946,294949,294945,294950,32776,32777}
-[MASTER] argv[uPID] = 294946
-[MASTER] argv[nPID] = 294949
-[MASTER] argv[par] = 294945
-[MASTER] argv[ledger] = 294950
-[MASTER] argv[sem_pids] = 32776
-[MASTER] argv[sem_ledger] = 32777
-[MASTER] argv values for nodes: ./nodes 294946 294949 294945 294950 32776 32777 (null) (null)
-[MASTER] nodesPID = {808518, 0, 0, 0, 0, ...}
-[MASTER] argv values for users: ./users 294946 294949 294945 294950 32776 32777 (null) (null)
+[MASTER] IPC_array={360468,360469,360467,360471,32782,32783}
+[MASTER] argv[uPID] = 360468
+[MASTER] argv[nPID] = 360469
+[MASTER] argv[par] = 360467
+[MASTER] argv[ledger] = 360471
+[MASTER] argv[sem_pids] = 32782
+[MASTER] argv[sem_ledger] = 32783
+[MASTER] argv values for nodes: ./nodes 360468 360469 360467 360471 32782 32783 (null) (null)
+[MASTER] nodesPID = {843117, 0, 0, 0, 0, ...}
+[MASTER] argv values for users: ./users 360468 360469 360467 360471 32782 32783 (null) (null)
 [MASTER] Spawning node with associated queue
-src/master.c:75: PID=808518: Error 27 (File too large)
-[NODE 808518] queueID is 50
-[MASTER] Spawning user
-[MASTER] usersPID = {808519, 808520, 808521, 0, 0, ...}
+src/master.c:75: PID=843117: Error 27 (File too large)
+[NODE 843117] queueID is 53
 [MASTER] Spawning user
 [MASTER] Spawning user
-[NODE 808518] sighandler init
-[NODE 808518] succedeed in attaching to queue 50
-[NODE 808518] Trying to receive message of size(transaction) from queue 50
-[USER 808519] extracted usersPID[2]
-[USER 808519] extracted nodesPID[0]
-[USER 808519] succedeed in attaching to queue 50
-[USER 808519] sent a transaction of 700 UC to [USER 808521] via queue 50
-[NODE 808518] fetched a transaction
-[NODE 808518] received 700 UC to process from [USER 808519] to [USER 808521]
-[NODE 808518] Trying to receive message of size(transaction) from queue 50
-[USER 808519] extracted usersPID[2]
-[USER 808519] extracted nodesPID[0]
-[USER 808519] succedeed in attaching to queue 50
-[USER 808519] sent a transaction of 574 UC to [USER 808521] via queue 50
-[NODE 808518] fetched a transaction
-[NODE 808518] received 574 UC to process from [USER 808519] to [USER 808521]
-[NODE 808518] Trying to receive message of size(transaction) from queue 50
-[USER 808519] extracted usersPID[2]
-[USER 808519] extracted nodesPID[0]
-[USER 808519] succedeed in attaching to queue 50
-[USER 808519] sent a transaction of 237 UC to [USER 808521] via queue 50
-[USER 808520] extracted usersPID[0]
-[NODE 808518] fetched a transaction
-[USER 808520] extracted nodesPID[0]
-[NODE 808518] received 237 UC to process from [USER 808519] to [USER 808521]
-[USER 808519] extracted usersPID[2]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted usersPID[0]
-[NODE 808518] Trying to receive message of size(transaction) from queue 50
-[USER 808519] extracted nodesPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] sent a transaction of 56 UC to [USER 808519] via queue 50
-[NODE 808518] fetched a transaction
-[USER 808519] succedeed in attaching to queue 50
-[NODE 808518] received 56 UC to process from [USER 808520] to [USER 808519]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808519] sent a transaction of 542 UC to [USER 808521] via queue 50
-[NODE 808518] is starting to process a block
-[USER 808521] sent a transaction of 431 UC to [USER 808519] via queue 50
-[USER 808519] extracted usersPID[1]
-[USER 808520] extracted usersPID[2]
-[USER 808519] extracted nodesPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808519] succedeed in attaching to queue 50
-[USER 808520] succedeed in attaching to queue 50
-[USER 808519] sent a transaction of 461 UC to [USER 808520] via queue 50
-[USER 808520] sent a transaction of 554 UC to [USER 808521] via queue 50
-[USER 808519] extracted usersPID[2]
-[USER 808520] extracted usersPID[2]
-[USER 808521] extracted usersPID[0]
-[USER 808519] extracted nodesPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808519] succedeed in attaching to queue 50
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808519] sent a transaction of 552 UC to [USER 808521] via queue 50
-[NODE 808518] Trying to receive message of size(transaction) from queue 50
-[USER 808520] sent a transaction of 153 UC to [USER 808521] via queue 50
-[USER 808521] sent a transaction of 627 UC to [USER 808519] via queue 50
-[NODE 808518] fetched a transaction
-[NODE 808518] received 542 UC to process from [USER 808519] to [USER 808521]
-[USER 808519] extracted usersPID[1]
-[NODE 808518] Trying to receive message of size(transaction) from queue 50
-[USER 808519] extracted nodesPID[0]
-[USER 808520] extracted usersPID[2]
-[NODE 808518] fetched a transaction
-[USER 808519] succedeed in attaching to queue 50
-[USER 808520] extracted nodesPID[0]
-[NODE 808518] received 431 UC to process from [USER 808521] to [USER 808519]
-[USER 808519] sent a transaction of 96 UC to [USER 808520] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808520] succedeed in attaching to queue 50
-[NODE 808518] Trying to receive message of size(transaction) from queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808520] sent a transaction of 609 UC to [USER 808521] via queue 50
-[NODE 808518] fetched a transaction
-[USER 808521] succedeed in attaching to queue 50
-[USER 808519] extracted usersPID[1]
-[NODE 808518] received 461 UC to process from [USER 808519] to [USER 808520]
-[USER 808521] sent a transaction of 67 UC to [USER 808520] via queue 50
-[USER 808519] extracted nodesPID[0]
-[NODE 808518] Trying to receive message of size(transaction) from queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808519] succedeed in attaching to queue 50
-[NODE 808518] fetched a transaction
-[USER 808520] extracted nodesPID[0]
-[USER 808519] sent a transaction of 762 UC to [USER 808520] via queue 50
-[NODE 808518] received 554 UC to process from [USER 808520] to [USER 808521]
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] succedeed in attaching to queue 50
-[NODE 808518] is starting to process a block
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] sent a transaction of 838 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 237 UC
-[BLOCK 0] =================
- -------------------------- 
-    pending
-|  -1 --> 808522
-|  Amount:    257
-|  Reward:    0
- -------------------------- 
- -------------------------- 
-    pending
-|  808519 --> 808521
-|  Amount:    700
-|  Reward:    114
- -------------------------- 
- -------------------------- 
-    pending
-|  808519 --> 808521
-|  Amount:    574
-|  Reward:    94
- -------------------------- 
- -------------------------- 
-    pending
-|  808519 --> 808521
-|  Amount:    237
-|  Reward:    39
- -------------------------- 
- -------------------------- 
-    pending
-|  808520 --> 808519
-|  Amount:    56
-|  Reward:    10
- -------------------------- 
-============================
-[USER 808521] extracted usersPID[1]
-[USER 808520] extracted usersPID[2]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 140 UC to [USER 808520] via queue 50
-[USER 808520] sent a transaction of 555 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] extracted usersPID[0]
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 382 UC to [USER 808519] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808521] sent a transaction of 2330 UC to [USER 808520] via queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 393 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 303 UC to [USER 808521] via queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 4004 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 430 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted usersPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808520] sent a transaction of 284 UC to [USER 808519] via queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 3390 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] sent a transaction of 21 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808521] extracted usersPID[1]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 435 UC to [USER 808521] via queue 50
-[USER 808521] sent a transaction of 175 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] sent a transaction of 741 UC to [USER 808519] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] extracted usersPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808521] sent a transaction of 3592 UC to [USER 808520] via queue 50
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 530 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] extracted usersPID[2]
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 791 UC to [USER 808521] via queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808521] sent a transaction of 3138 UC to [USER 808519] via queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 472 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] extracted usersPID[0]
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 332 UC to [USER 808519] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 11026 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 476 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 232 UC to [USER 808519] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 7978 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 183 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808520] sent a transaction of 351 UC to [USER 808521] via queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 13246 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 466 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted usersPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808520] sent a transaction of 290 UC to [USER 808519] via queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 10106 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] sent a transaction of 731 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808521] extracted usersPID[1]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 603 UC to [USER 808519] via queue 50
-[USER 808521] sent a transaction of 13385 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] sent a transaction of 838 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 237 UC
-[USER 808521] extracted usersPID[1]
-[USER 808520] extracted usersPID[2]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 5290 UC to [USER 808520] via queue 50
-[USER 808520] sent a transaction of 846 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] extracted usersPID[2]
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 497 UC to [USER 808521] via queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808521] sent a transaction of 1946 UC to [USER 808519] via queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 572 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 583 UC to [USER 808521] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 7790 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 407 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808520] sent a transaction of 248 UC to [USER 808519] via queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 8616 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 420 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted usersPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808520] sent a transaction of 352 UC to [USER 808519] via queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 15266 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] sent a transaction of 487 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808521] extracted usersPID[1]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 36 UC to [USER 808521] via queue 50
-[USER 808521] sent a transaction of 4723 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] sent a transaction of 18 UC to [USER 808519] via queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808521] sent a transaction of 693 UC to [USER 808519] via queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 505 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] extracted usersPID[2]
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 43 UC to [USER 808521] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808521] sent a transaction of 24161 UC to [USER 808520] via queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 233 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 752 UC to [USER 808521] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 27031 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 348 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 774 UC to [USER 808519] via queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 6144 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 736 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808520] sent a transaction of 423 UC to [USER 808521] via queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 27042 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 521 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted usersPID[1]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808520] sent a transaction of 110 UC to [USER 808519] via queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 19880 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] sent a transaction of 26 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808521] extracted usersPID[0]
-[USER 808520] extracted usersPID[2]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 13658 UC to [USER 808519] via queue 50
-[USER 808520] sent a transaction of 458 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808520] sent a transaction of 294 UC to [USER 808519] via queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 22617 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] sent a transaction of 730 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 237 UC
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] extracted usersPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808521] sent a transaction of 26310 UC to [USER 808520] via queue 50
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 832 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808520] sent a transaction of 556 UC to [USER 808519] via queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 24795 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] sent a transaction of 822 UC to [USER 808521] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 25383 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 817 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808521] extracted usersPID[1]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 138 UC to [USER 808519] via queue 50
-[USER 808521] sent a transaction of 444 UC to [USER 808520] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] extracted usersPID[2]
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 239 UC to [USER 808521] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 7113 UC to [USER 808520] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808521] extracted usersPID[0]
-[USER 808520] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 31205 UC to [USER 808519] via queue 50
-[USER 808520] sent a transaction of 532 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808520] sent a transaction of 327 UC to [USER 808521] via queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 23846 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] sent a transaction of 273 UC to [USER 808521] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 34995 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 393 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808521] extracted usersPID[1]
-[USER 808520] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 6462 UC to [USER 808520] via queue 50
-[USER 808520] sent a transaction of 453 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808520] sent a transaction of 449 UC to [USER 808519] via queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 15554 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] sent a transaction of 185 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 237 UC
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808521] sent a transaction of 12916 UC to [USER 808520] via queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 331 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808521] extracted usersPID[1]
-[USER 808520] extracted usersPID[2]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 39553 UC to [USER 808520] via queue 50
-[USER 808520] sent a transaction of 823 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808520] sent a transaction of 583 UC to [USER 808521] via queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 36748 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] sent a transaction of 760 UC to [USER 808519] via queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 50371 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] sent a transaction of 420 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808521] extracted usersPID[1]
-[USER 808520] extracted usersPID[2]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 9589 UC to [USER 808520] via queue 50
-[USER 808520] sent a transaction of 418 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] extracted usersPID[0]
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 651 UC to [USER 808519] via queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808521] sent a transaction of 39456 UC to [USER 808519] via queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 251 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] extracted usersPID[0]
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 422 UC to [USER 808519] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 26541 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 355 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808520] sent a transaction of 350 UC to [USER 808521] via queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 17218 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 595 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808520] sent a transaction of 793 UC to [USER 808519] via queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 4397 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 566 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808520] sent a transaction of 310 UC to [USER 808521] via queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 8580 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 263 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted usersPID[1]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808520] sent a transaction of 88 UC to [USER 808521] via queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 46066 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] sent a transaction of 40 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808521] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 715 UC to [USER 808521] via queue 50
-[USER 808521] sent a transaction of 24016 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] sent a transaction of 519 UC to [USER 808521] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808521] sent a transaction of 35151 UC to [USER 808520] via queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 335 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted usersPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808520] sent a transaction of 79 UC to [USER 808521] via queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 16216 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808521] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 26919 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808521] sent a transaction of 27487 UC to [USER 808520] via queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 11 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808520] sent a transaction of 436 UC to [USER 808521] via queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 35695 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 633 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted usersPID[1]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808520] sent a transaction of 700 UC to [USER 808519] via queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 32068 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 329 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808521] extracted usersPID[1]
-[USER 808520] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 43940 UC to [USER 808520] via queue 50
-[USER 808520] sent a transaction of 631 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] extracted usersPID[0]
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 55 UC to [USER 808519] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808521] sent a transaction of 42688 UC to [USER 808520] via queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 146 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted usersPID[1]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808520] sent a transaction of 98 UC to [USER 808519] via queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 51211 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] sent a transaction of 12 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808521] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 6 UC to [USER 808521] via queue 50
-[USER 808521] sent a transaction of 39388 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] sent a transaction of 558 UC to [USER 808519] via queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808521] sent a transaction of 29031 UC to [USER 808519] via queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 591 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 162 UC to [USER 808521] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 45521 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 548 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808520] sent a transaction of 179 UC to [USER 808521] via queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 63755 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 504 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted usersPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808520] sent a transaction of 654 UC to [USER 808521] via queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 70801 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] sent a transaction of 632 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 237 UC
-[USER 808521] extracted usersPID[0]
-[USER 808520] extracted usersPID[2]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 1095 UC to [USER 808519] via queue 50
-[USER 808520] sent a transaction of 283 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] extracted usersPID[0]
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 374 UC to [USER 808519] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808521] sent a transaction of 58966 UC to [USER 808520] via queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 524 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 798 UC to [USER 808519] via queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 61156 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 224 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] extracted usersPID[0]
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 679 UC to [USER 808519] via queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808521] sent a transaction of 85250 UC to [USER 808519] via queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 691 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 189 UC to [USER 808519] via queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 63188 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 515 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted usersPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808520] sent a transaction of 620 UC to [USER 808519] via queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 12818 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] sent a transaction of 620 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808521] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 829 UC to [USER 808521] via queue 50
-[USER 808521] sent a transaction of 7921 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] sent a transaction of 155 UC to [USER 808521] via queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808521] sent a transaction of 76163 UC to [USER 808519] via queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 429 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 24 UC to [USER 808521] via queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 73268 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 165 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 651 UC to [USER 808519] via queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 21571 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 780 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 847 UC to [USER 808519] via queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 50297 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 622 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 142 UC to [USER 808521] via queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 65762 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 813 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted usersPID[1]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808520] sent a transaction of 695 UC to [USER 808519] via queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 42864 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] sent a transaction of 856 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 237 UC
-[USER 808521] extracted usersPID[1]
-[USER 808520] extracted usersPID[2]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 80118 UC to [USER 808520] via queue 50
-[USER 808520] sent a transaction of 38 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] extracted usersPID[2]
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 749 UC to [USER 808521] via queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808521] sent a transaction of 94244 UC to [USER 808519] via queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 731 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] extracted usersPID[0]
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 750 UC to [USER 808519] via queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 87350 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 405 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808520] sent a transaction of 617 UC to [USER 808521] via queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 33631 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 294 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted usersPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808520] sent a transaction of 657 UC to [USER 808521] via queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 16201 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 383 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted usersPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808520] sent a transaction of 625 UC to [USER 808519] via queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 98091 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] sent a transaction of 658 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808521] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 571 UC to [USER 808521] via queue 50
-[USER 808521] sent a transaction of 76039 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] sent a transaction of 516 UC to [USER 808519] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808521] sent a transaction of 32697 UC to [USER 808520] via queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 762 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 171 UC to [USER 808519] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 32102 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 178 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808520] sent a transaction of 632 UC to [USER 808521] via queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 93805 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 663 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted usersPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808520] sent a transaction of 643 UC to [USER 808519] via queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 84242 UC to [USER 808519] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 438 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808521] extracted usersPID[1]
-[USER 808520] extracted nodesPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 844 UC to [USER 808521] via queue 50
-[USER 808521] sent a transaction of 58499 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] sent a transaction of 167 UC to [USER 808521] via queue 50
-[USER 808521] extracted usersPID[0]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808521] sent a transaction of 23305 UC to [USER 808519] via queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 604 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 566 UC to [USER 808521] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808521] sent a transaction of 82012 UC to [USER 808520] via queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 265 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808520] extracted usersPID[2]
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 550 UC to [USER 808521] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808521] sent a transaction of 27632 UC to [USER 808520] via queue 50
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 155 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808520] extracted usersPID[2]
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 127 UC to [USER 808521] via queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 32681 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 379 UC to [USER 808521] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808520] sent a transaction of 619 UC to [USER 808521] via queue 50
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
-[USER 808521] sent a transaction of 65548 UC to [USER 808520] via queue 50
-[USER 808520] extracted usersPID[0]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808520] sent a transaction of 265 UC to [USER 808519] via queue 50
-[USER 808521] found myself as receiver of 700 UC
-[USER 808521] found myself as receiver of 574 UC
-[USER 808521] found myself as receiver of 237 UC
-[USER 808520] extracted usersPID[2]
-[USER 808520] extracted nodesPID[0]
-[USER 808520] succedeed in attaching to queue 50
-[USER 808521] extracted usersPID[1]
-[USER 808521] extracted nodesPID[0]
-[USER 808521] succedeed in attaching to queue 50
+[MASTER] usersPID = {843118, 843119, 843120, 0, 0, ...}
+[MASTER] Spawning user
+[NODE 843117] sighandler init
+[NODE 843117] succedeed in attaching to queue 53
+[NODE 843117] Trying to receive message of size(transaction) from queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 302 UC to [USER 843120] via queue 53
+[NODE 843117] fetched a transaction
+[NODE 843117] received 302 UC to process from [USER 843118] to [USER 843120]
+[USER 843119] extracted usersPID[0]
+[NODE 843117] Trying to receive message of size(transaction) from queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843118] extracted usersPID[1]
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 486 UC to [USER 843119] via queue 53
+[NODE 843117] fetched a transaction
+[NODE 843117] received 486 UC to process from [USER 843118] to [USER 843119]
+[USER 843120] extracted usersPID[0]
+[NODE 843117] Trying to receive message of size(transaction) from queue 53
+[USER 843119] sent a transaction of 817 UC to [USER 843118] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted usersPID[2]
+[NODE 843117] fetched a transaction
+[USER 843118] extracted nodesPID[0]
+[NODE 843117] received 817 UC to process from [USER 843119] to [USER 843118]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] succedeed in attaching to queue 53
+[NODE 843117] Trying to receive message of size(transaction) from queue 53
+[USER 843118] sent a transaction of 831 UC to [USER 843120] via queue 53
+[USER 843119] extracted usersPID[0]
+[NODE 843117] fetched a transaction
+[USER 843119] extracted nodesPID[0]
+[USER 843120] sent a transaction of 86 UC to [USER 843118] via queue 53
+[NODE 843117] received 831 UC to process from [USER 843118] to [USER 843120]
+[USER 843119] succedeed in attaching to queue 53
+[NODE 843117] is starting to process a block
+[USER 843118] extracted usersPID[1]
+[USER 843119] sent a transaction of 27 UC to [USER 843118] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 651 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] extracted usersPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843118] extracted usersPID[2]
+[USER 843120] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 273 UC to [USER 843118] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 258 UC to [USER 843118] via queue 53
+[USER 843118] sent a transaction of 185 UC to [USER 843120] via queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843119] extracted usersPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843118] extracted usersPID[2]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843120] sent a transaction of 769 UC to [USER 843118] via queue 53
+[USER 843119] sent a transaction of 199 UC to [USER 843118] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 73 UC to [USER 843120] via queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843119] extracted usersPID[2]
+[USER 843120] extracted nodesPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843118] extracted usersPID[1]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843120] sent a transaction of 409 UC to [USER 843118] via queue 53
+[USER 843119] sent a transaction of 841 UC to [USER 843120] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 751 UC to [USER 843119] via queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843119] extracted usersPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843118] extracted usersPID[2]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843120] sent a transaction of 521 UC to [USER 843119] via queue 53
+[USER 843119] sent a transaction of 360 UC to [USER 843118] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 768 UC to [USER 843120] via queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843119] extracted usersPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843118] extracted usersPID[1]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843120] sent a transaction of 181 UC to [USER 843119] via queue 53
+[USER 843119] sent a transaction of 684 UC to [USER 843118] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 43 UC to [USER 843119] via queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843119] extracted usersPID[2]
+[USER 843120] extracted nodesPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843118] extracted usersPID[2]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843120] sent a transaction of 422 UC to [USER 843119] via queue 53
+[USER 843119] sent a transaction of 374 UC to [USER 843120] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 525 UC to [USER 843120] via queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843119] extracted usersPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[1]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 1 UC to [USER 843119] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 282 UC to [USER 843118] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 460 UC to [USER 843119] via queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843120] extracted nodesPID[0]
+[USER 843119] extracted usersPID[2]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843118] extracted usersPID[2]
+[USER 843120] sent a transaction of 796 UC to [USER 843119] via queue 53
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 436 UC to [USER 843120] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 357 UC to [USER 843120] via queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 95 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843118] extracted usersPID[1]
+[USER 843119] extracted nodesPID[0]
+[USER 843118] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 615 UC to [USER 843118] via queue 53
+[USER 843118] sent a transaction of 709 UC to [USER 843119] via queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 842 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843118] extracted usersPID[1]
+[USER 843119] extracted nodesPID[0]
+[USER 843118] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843119] sent a transaction of 491 UC to [USER 843118] via queue 53
+[USER 843118] sent a transaction of 192 UC to [USER 843119] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 268 UC to [USER 843118] via queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843118] extracted usersPID[1]
+[USER 843119] extracted nodesPID[0]
+[USER 843118] extracted nodesPID[0]
+[USER 843120] extracted usersPID[1]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843119] sent a transaction of 147 UC to [USER 843120] via queue 53
+[USER 843118] sent a transaction of 466 UC to [USER 843119] via queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 12 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843118] extracted usersPID[1]
+[USER 843119] extracted nodesPID[0]
+[USER 843118] extracted nodesPID[0]
+[USER 843120] extracted usersPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843119] sent a transaction of 562 UC to [USER 843118] via queue 53
+[USER 843118] sent a transaction of 729 UC to [USER 843119] via queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 440 UC to [USER 843118] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843118] extracted usersPID[2]
+[USER 843119] extracted nodesPID[0]
+[USER 843120] extracted usersPID[1]
+[USER 843118] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 501 UC to [USER 843118] via queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 352 UC to [USER 843120] via queue 53
+[USER 843120] sent a transaction of 61 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843118] extracted usersPID[1]
+[USER 843120] extracted usersPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 815 UC to [USER 843118] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 607 UC to [USER 843119] via queue 53
+[USER 843120] sent a transaction of 727 UC to [USER 843118] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 681 UC to [USER 843118] via queue 53
+[USER 843118] extracted usersPID[1]
+[USER 843120] extracted usersPID[0]
+[USER 843118] extracted nodesPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 292 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] sent a transaction of 704 UC to [USER 843118] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 193 UC to [USER 843118] via queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843118] extracted nodesPID[0]
+[USER 843120] extracted usersPID[1]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843118] sent a transaction of 507 UC to [USER 843120] via queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843120] sent a transaction of 24 UC to [USER 843119] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 450 UC to [USER 843120] via queue 53
+[USER 843118] extracted usersPID[1]
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843118] sent a transaction of 440 UC to [USER 843119] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843119] extracted usersPID[2]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843120] sent a transaction of 435 UC to [USER 843119] via queue 53
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843119] sent a transaction of 220 UC to [USER 843120] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 527 UC to [USER 843120] via queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] sent a transaction of 565 UC to [USER 843119] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[1]
+[USER 843119] sent a transaction of 90 UC to [USER 843118] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843118] sent a transaction of 458 UC to [USER 843119] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843120] sent a transaction of 571 UC to [USER 843119] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[1]
+[USER 843119] sent a transaction of 559 UC to [USER 843120] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843120] extracted usersPID[1]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843118] sent a transaction of 281 UC to [USER 843119] via queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 400 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 794 UC to [USER 843120] via queue 53
+[USER 843118] extracted usersPID[1]
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843118] sent a transaction of 270 UC to [USER 843119] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843119] extracted usersPID[2]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843120] sent a transaction of 127 UC to [USER 843118] via queue 53
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843119] sent a transaction of 821 UC to [USER 843120] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 415 UC to [USER 843120] via queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] sent a transaction of 681 UC to [USER 843119] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843118] extracted usersPID[1]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 175 UC to [USER 843118] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843118] sent a transaction of 525 UC to [USER 843119] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 326 UC to [USER 843118] via queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[1]
+[USER 843119] sent a transaction of 307 UC to [USER 843120] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843120] extracted usersPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843118] sent a transaction of 768 UC to [USER 843119] via queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843120] sent a transaction of 34 UC to [USER 843118] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 369 UC to [USER 843120] via queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843118] sent a transaction of 36 UC to [USER 843120] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843119] extracted usersPID[2]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843120] sent a transaction of 691 UC to [USER 843118] via queue 53
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843119] sent a transaction of 825 UC to [USER 843120] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 181 UC to [USER 843120] via queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] sent a transaction of 841 UC to [USER 843119] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843118] extracted usersPID[2]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 796 UC to [USER 843118] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843118] sent a transaction of 479 UC to [USER 843120] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 22 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843119] sent a transaction of 760 UC to [USER 843118] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843120] extracted usersPID[1]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843118] sent a transaction of 374 UC to [USER 843120] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843120] sent a transaction of 377 UC to [USER 843119] via queue 53
+[USER 843119] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 654 UC to [USER 843118] via queue 53
+[USER 843118] extracted usersPID[1]
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 166 UC to [USER 843119] via queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843119] extracted usersPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843120] sent a transaction of 40 UC to [USER 843118] via queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 381 UC to [USER 843118] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 552 UC to [USER 843120] via queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 68 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843119] sent a transaction of 575 UC to [USER 843120] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843120] extracted usersPID[1]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843118] sent a transaction of 701 UC to [USER 843120] via queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] sent a transaction of 32 UC to [USER 843119] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 92 UC to [USER 843118] via queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843118] sent a transaction of 429 UC to [USER 843120] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843120] sent a transaction of 738 UC to [USER 843118] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843119] sent a transaction of 198 UC to [USER 843120] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 594 UC to [USER 843120] via queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] sent a transaction of 199 UC to [USER 843118] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843118] extracted usersPID[2]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 82 UC to [USER 843118] via queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843118] sent a transaction of 109 UC to [USER 843120] via queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 475 UC to [USER 843118] via queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 144 UC to [USER 843120] via queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843118] extracted nodesPID[0]
+[USER 843120] extracted usersPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843118] sent a transaction of 635 UC to [USER 843120] via queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] sent a transaction of 167 UC to [USER 843118] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 855 UC to [USER 843118] via queue 53
+[USER 843118] extracted usersPID[1]
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843118] sent a transaction of 738 UC to [USER 843119] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843119] extracted usersPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843120] sent a transaction of 737 UC to [USER 843118] via queue 53
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[1]
+[USER 843119] sent a transaction of 92 UC to [USER 843118] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 86 UC to [USER 843119] via queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843120] sent a transaction of 391 UC to [USER 843119] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843118] extracted usersPID[2]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 277 UC to [USER 843120] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843118] sent a transaction of 365 UC to [USER 843120] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 511 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843119] sent a transaction of 645 UC to [USER 843120] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843120] extracted usersPID[1]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843118] sent a transaction of 707 UC to [USER 843120] via queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843120] sent a transaction of 564 UC to [USER 843119] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 483 UC to [USER 843120] via queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843118] sent a transaction of 631 UC to [USER 843120] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843119] extracted usersPID[2]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843120] sent a transaction of 375 UC to [USER 843118] via queue 53
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843119] sent a transaction of 114 UC to [USER 843120] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843118] sent a transaction of 251 UC to [USER 843120] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843120] sent a transaction of 822 UC to [USER 843118] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843119] sent a transaction of 507 UC to [USER 843120] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843118] sent a transaction of 696 UC to [USER 843120] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843120] sent a transaction of 620 UC to [USER 843119] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843119] sent a transaction of 760 UC to [USER 843120] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843118] sent a transaction of 767 UC to [USER 843120] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 150 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843119] extracted nodesPID[0]
+[USER 843118] extracted usersPID[1]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 617 UC to [USER 843120] via queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843118] sent a transaction of 809 UC to [USER 843119] via queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 328 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843119] extracted nodesPID[0]
+[USER 843118] extracted usersPID[1]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 510 UC to [USER 843120] via queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843118] sent a transaction of 49 UC to [USER 843119] via queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 315 UC to [USER 843118] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[1]
+[USER 843120] extracted usersPID[0]
+[USER 843119] sent a transaction of 326 UC to [USER 843118] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 798 UC to [USER 843119] via queue 53
+[USER 843120] sent a transaction of 196 UC to [USER 843118] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 52 UC to [USER 843118] via queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843118] extracted usersPID[2]
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] sent a transaction of 120 UC to [USER 843119] via queue 53
+[USER 843118] sent a transaction of 413 UC to [USER 843120] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 368 UC to [USER 843118] via queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843118] extracted usersPID[2]
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 81 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843118] sent a transaction of 86 UC to [USER 843120] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 332 UC to [USER 843118] via queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted usersPID[2]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843120] sent a transaction of 102 UC to [USER 843119] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843118] sent a transaction of 449 UC to [USER 843120] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843119] sent a transaction of 784 UC to [USER 843120] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted usersPID[2]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843120] sent a transaction of 196 UC to [USER 843119] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 218 UC to [USER 843120] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843119] sent a transaction of 478 UC to [USER 843118] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted usersPID[2]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843120] sent a transaction of 694 UC to [USER 843119] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843118] sent a transaction of 462 UC to [USER 843120] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 291 UC to [USER 843118] via queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843120] sent a transaction of 699 UC to [USER 843118] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] extracted usersPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843118] sent a transaction of 552 UC to [USER 843120] via queue 53
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843119] sent a transaction of 750 UC to [USER 843118] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 225 UC to [USER 843119] via queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843118] sent a transaction of 662 UC to [USER 843120] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843120] extracted usersPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843119] sent a transaction of 555 UC to [USER 843118] via queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 246 UC to [USER 843118] via queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843118] sent a transaction of 210 UC to [USER 843120] via queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 72 UC to [USER 843120] via queue 53
+[USER 843118] extracted usersPID[1]
+[USER 843120] sent a transaction of 286 UC to [USER 843118] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 32 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] extracted usersPID[1]
+[USER 843119] extracted nodesPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted usersPID[2]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 10 UC to [USER 843118] via queue 53
+[USER 843120] sent a transaction of 247 UC to [USER 843119] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 667 UC to [USER 843120] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] extracted usersPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted usersPID[1]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 190 UC to [USER 843118] via queue 53
+[USER 843120] sent a transaction of 570 UC to [USER 843118] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 525 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] extracted usersPID[1]
+[USER 843119] extracted nodesPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted usersPID[1]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 201 UC to [USER 843118] via queue 53
+[USER 843120] sent a transaction of 161 UC to [USER 843119] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 248 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] extracted usersPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted usersPID[1]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 751 UC to [USER 843118] via queue 53
+[USER 843120] sent a transaction of 18 UC to [USER 843118] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 688 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843120] extracted usersPID[1]
+[USER 843119] extracted nodesPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted usersPID[1]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 243 UC to [USER 843120] via queue 53
+[USER 843120] sent a transaction of 188 UC to [USER 843119] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 559 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] extracted usersPID[1]
+[USER 843119] extracted nodesPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted usersPID[1]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 445 UC to [USER 843118] via queue 53
+[USER 843120] sent a transaction of 725 UC to [USER 843119] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 581 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] extracted usersPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted usersPID[1]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 538 UC to [USER 843118] via queue 53
+[USER 843120] sent a transaction of 235 UC to [USER 843118] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 581 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] extracted usersPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted usersPID[2]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 747 UC to [USER 843118] via queue 53
+[USER 843120] sent a transaction of 535 UC to [USER 843118] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 415 UC to [USER 843120] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] extracted usersPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted usersPID[2]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 621 UC to [USER 843118] via queue 53
+[USER 843120] sent a transaction of 304 UC to [USER 843118] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 247 UC to [USER 843120] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] extracted usersPID[1]
+[USER 843119] extracted nodesPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted usersPID[2]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 104 UC to [USER 843118] via queue 53
+[USER 843120] sent a transaction of 503 UC to [USER 843119] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 430 UC to [USER 843120] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] extracted usersPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted usersPID[2]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] sent a transaction of 798 UC to [USER 843118] via queue 53
+[USER 843120] sent a transaction of 122 UC to [USER 843118] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 48 UC to [USER 843120] via queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843120] extracted usersPID[1]
+[USER 843118] extracted usersPID[2]
+[USER 843119] extracted nodesPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 149 UC to [USER 843120] via queue 53
+[USER 843120] sent a transaction of 473 UC to [USER 843119] via queue 53
+[USER 843118] sent a transaction of 349 UC to [USER 843120] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843120] extracted usersPID[1]
+[USER 843119] extracted nodesPID[0]
+[USER 843118] extracted usersPID[2]
+[USER 843120] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 47 UC to [USER 843118] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 666 UC to [USER 843119] via queue 53
+[USER 843118] sent a transaction of 231 UC to [USER 843120] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843120] extracted usersPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[1]
+[USER 843120] extracted nodesPID[0]
+[USER 843119] sent a transaction of 278 UC to [USER 843118] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 540 UC to [USER 843118] via queue 53
+[USER 843118] sent a transaction of 740 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 230 UC to [USER 843118] via queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843118] extracted usersPID[1]
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 497 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843118] sent a transaction of 504 UC to [USER 843119] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 718 UC to [USER 843120] via queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted usersPID[1]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843120] sent a transaction of 479 UC to [USER 843119] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843118] sent a transaction of 809 UC to [USER 843119] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 327 UC to [USER 843118] via queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[1]
+[USER 843120] sent a transaction of 814 UC to [USER 843119] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] extracted usersPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843118] sent a transaction of 61 UC to [USER 843119] via queue 53
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843119] sent a transaction of 724 UC to [USER 843118] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 166 UC to [USER 843118] via queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843118] sent a transaction of 450 UC to [USER 843120] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843119] sent a transaction of 339 UC to [USER 843120] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843120] sent a transaction of 302 UC to [USER 843119] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843118] sent a transaction of 768 UC to [USER 843120] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843119] sent a transaction of 448 UC to [USER 843118] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[1]
+[USER 843120] sent a transaction of 730 UC to [USER 843118] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843118] sent a transaction of 856 UC to [USER 843119] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843119] sent a transaction of 831 UC to [USER 843118] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843118] extracted nodesPID[0]
+[USER 843120] sent a transaction of 63 UC to [USER 843119] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843118] sent a transaction of 187 UC to [USER 843120] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 188 UC to [USER 843118] via queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[1]
+[USER 843120] sent a transaction of 159 UC to [USER 843118] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] extracted usersPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843118] sent a transaction of 526 UC to [USER 843119] via queue 53
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843119] sent a transaction of 696 UC to [USER 843118] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 159 UC to [USER 843118] via queue 53
+[USER 843118] extracted usersPID[1]
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 489 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843119] sent a transaction of 462 UC to [USER 843120] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted usersPID[2]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843120] sent a transaction of 408 UC to [USER 843119] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843118] sent a transaction of 228 UC to [USER 843120] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 747 UC to [USER 843120] via queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843120] sent a transaction of 333 UC to [USER 843118] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] extracted usersPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843118] sent a transaction of 276 UC to [USER 843120] via queue 53
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843119] sent a transaction of 9 UC to [USER 843118] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843120] sent a transaction of 640 UC to [USER 843119] via queue 53
+[USER 843118] extracted usersPID[1]
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843118] sent a transaction of 772 UC to [USER 843119] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843120] extracted usersPID[1]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843119] sent a transaction of 293 UC to [USER 843118] via queue 53
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[1]
+[USER 843120] sent a transaction of 727 UC to [USER 843119] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843118] sent a transaction of 482 UC to [USER 843119] via queue 53
+[USER 843119] extracted usersPID[0]
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843119] sent a transaction of 91 UC to [USER 843118] via queue 53
+[USER 843120] extracted nodesPID[0]
+[USER 843118] extracted usersPID[2]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843120] sent a transaction of 660 UC to [USER 843119] via queue 53
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] extracted usersPID[2]
+[USER 843118] sent a transaction of 28 UC to [USER 843120] via queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843119] succedeed in attaching to queue 53
+[USER 843119] sent a transaction of 336 UC to [USER 843120] via queue 53
+[USER 843120] extracted usersPID[1]
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843120] sent a transaction of 454 UC to [USER 843119] via queue 53
+[USER 843118] extracted nodesPID[0]
+[USER 843119] extracted usersPID[2]
+[USER 843118] succedeed in attaching to queue 53
+[USER 843119] extracted nodesPID[0]
+[USER 843118] sent a transaction of 626 UC to [USER 843120] via queue 53
+[USER 843119] succedeed in attaching to queue 53
+[USER 843120] extracted usersPID[0]
+[USER 843120] extracted nodesPID[0]
+[USER 843120] succedeed in attaching to queue 53
+[USER 843118] extracted usersPID[2]
+[USER 843118] extracted nodesPID[0]
+[USER 843118] succedeed in attaching to queue 53
 ::USER:: SIGINT received
  ::USER:: SIGINT received
- ::USER:: SIGINT received
  ::MASTER:: SIGINT ricevuto
- src/print.c:26: PID=808517: Error 10 (No child processes)
-src/print.c:26: PID=808517: Error 10 (No child processes)
-src/print.c:26: PID=808517: Error 10 (No child processes)
-src/print.c:45: PID=808517: Error 10 (No child processes)
-FLAG 4294967295
+ ::USER:: SIGINT received
+ src/print.c:26: PID=843116: Error 10 (No child processes)
+src/print.c:26: PID=843116: Error 10 (No child processes)
+src/print.c:26: PID=843116: Error 10 (No child processes)
+src/print.c:45: PID=843116: Error 10 (No child processes)
+FLAG 0
 --------------------------------------------
 ----------- Configuration value ------------
 SO_USER_NUM->3
@@ -1691,79 +1354,15 @@ SO_FRIENDS_NUM->999
 SO_HOPS->7
 --------------------------------------------
 
- ------- Master Process PID is 808517 ----------
+ ------- Master Process PID is 843116 ----------
 |                                             |
  - Type ------- PID --------- Status ---------
  ---------------------------------------------
-|  User         808521            alive     
-|  User         808520            alive     
-|  User         808519            broke     
+|  User         843120            alive     
+|  User         843119            alive     
+|  User         843118            alive     
  ---------------------------------------------
-|  Node         808518            available
+|  Node         843117            available
  ---------------------------------------------
 ~{LEDGER}~
 
-[BLOCK 0] =================
- -------------------------- 
-    pending
-|  -1 --> 808522
-|  Amount:    257
-|  Reward:    0
- -------------------------- 
- -------------------------- 
-    pending
-|  808519 --> 808521
-|  Amount:    700
-|  Reward:    114
- -------------------------- 
- -------------------------- 
-    pending
-|  808519 --> 808521
-|  Amount:    574
-|  Reward:    94
- -------------------------- 
- -------------------------- 
-    pending
-|  808519 --> 808521
-|  Amount:    237
-|  Reward:    39
- -------------------------- 
- -------------------------- 
-    pending
-|  808520 --> 808519
-|  Amount:    56
-|  Reward:    10
- -------------------------- 
-============================
-[BLOCK 0] =================
- -------------------------- 
-    pending
-|  0 --> 0
-|  Amount:    0
-|  Reward:    0
- -------------------------- 
- -------------------------- 
-    pending
-|  0 --> 0
-|  Amount:    0
-|  Reward:    0
- -------------------------- 
- -------------------------- 
-    pending
-|  0 --> 0
-|  Amount:    0
-|  Reward:    0
- -------------------------- 
- -------------------------- 
-    pending
-|  0 --> 0
-|  Amount:    0
-|  Reward:    0
- -------------------------- 
- -------------------------- 
-    pending
-|  0 --> 0
-|  Amount:    0
-|  Reward:    0
- -------------------------- 
-============================

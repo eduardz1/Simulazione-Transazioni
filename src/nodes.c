@@ -245,7 +245,7 @@ int main(int argc, char *argv[])
     bzero(&saINT_node, sizeof(saINT_node));
 
     attach_ipc_objects(argv);
-    ledger[0].transList[0].amount = 69;
+    
     signal_handler_init(&saINT_node); /* no idea why it isn't working, it's literally the same implementation as user */
     TRACE(("[NODE %d] sighandler init\n", myPID));
 

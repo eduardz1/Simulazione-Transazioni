@@ -211,10 +211,11 @@ int send_transaction()
 		/* track transactions that are yet to be received */
 		if (outGoingTransactions == NULL)
 		{
-			
+
 			TEST_ERROR
 
-			outGoingTransactions = new_node(sent);;
+			outGoingTransactions = new_node(sent);
+			;
 		}
 		else
 		{
@@ -253,6 +254,7 @@ int search_trans_list(block *blockToSearch)
 /* saves balance of calling user in currBalance */
 void get_balance()
 {
+	struct node *tmp;
 	int i, j;
 	int accumulate = 0;
 
@@ -271,6 +273,11 @@ void get_balance()
 				accumulate += ledger[i].transList[j].amount;
 			}
 		}
+	}
+
+	for (tmp = outGoingTransactions; tmp != NULL; tmp = tmp->next)
+	{
+		accumulate -= tmp->trans.amount;
 	}
 
 	currBalance += accumulate;
