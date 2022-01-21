@@ -9,7 +9,8 @@
         "common.h": "c",
         "sem.h": "c",
         "cstdint": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "nodes.h": "c"
     },
     "editor.rulers": [
         80,

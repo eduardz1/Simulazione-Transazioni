@@ -265,73 +265,73 @@ SO_MIN_TRANS_PROC_NSEC 100000002
 SO_MAX_TRANS_PROC_NSEC 200000002
 --------------------------------------------
 [MASTER] conf file read successful
-[MASTER] IPC_array={163858,163859,163857,163861,2,3}
-[MASTER] argv[uPID] = 163858
-[MASTER] argv[nPID] = 163859
-[MASTER] argv[par] = 163857
-[MASTER] argv[ledger] = 163861
+[MASTER] IPC_array={57,58,56,59,2,3}
+[MASTER] argv[uPID] = 57
+[MASTER] argv[nPID] = 58
+[MASTER] argv[par] = 56
+[MASTER] argv[ledger] = 59
 [MASTER] argv[sem_pids] = 2
 [MASTER] argv[sem_ledger] = 3
-[MASTER] argv values for nodes: ./nodes 163858 163859 163857 163861 2 3 (null) (null)
-[MASTER] nodesPID = {17530, 0, 0, 0, 0, ...}
-[MASTER] argv values for users: ./users 163858 163859 163857 163861 2 3 (null) (null)
+[MASTER] argv values for nodes: ./nodes 57 58 56 59 2 3 (null) (null)
+[MASTER] nodesPID = {11642, 0, 0, 0, 0, ...}
+[MASTER] argv values for users: ./users 57 58 56 59 2 3 (null) (null)
 [MASTER] Spawning node with associated queue
-src/master.c:75: PID=17530: Error 27 (File too large)
-[NODE 17530] queueID is 0
-[MASTER] Spawning user
-[MASTER] usersPID = {17531, 17532, 17533, 0, 0, ...}
+src/master.c:75: PID=11642: Error 27 (File too large)
+[NODE 11642] queueID is 0
 [MASTER] Spawning user
 [MASTER] Spawning user
-[NODE 17530] sighandler init
-[NODE 17530] succedeed in attaching to queue 0
-[NODE 17530] Trying to receive message of size(transaction) from queue 0
-[USER 0] extracted usersPID[2]
-[USER 0] extracted nodesPID[0]
-[USER 0] succedeed in attaching to queue 0
-[USER 0] sent a transaction of 167 UC to [USER 17533] via queue 0
-[NODE 17530] fetched a transaction
-[NODE 17530] received 167 UC to process from [USER 0] to [USER 17533]
-[NODE 17530] Trying to receive message of size(transaction) from queue 0
+[MASTER] usersPID = {11643, 11644, 11645, 0, 0, ...}
+[MASTER] Spawning user
+[NODE 11642] sighandler init
+[NODE 11642] succedeed in attaching to queue 0
+[NODE 11642] Trying to receive message of size(transaction) from queue 0
 [USER 0] extracted usersPID[1]
-[USER 0] extracted usersPID[0]
 [USER 0] extracted nodesPID[0]
+[USER 0] extracted usersPID[2]
+[USER 0] succedeed in attaching to queue 0
 [USER 0] extracted nodesPID[0]
 [USER 0] succedeed in attaching to queue 0
+[USER 0] sent a transaction of 88 UC to [USER 11644] via queue 0
+[USER 0] sent a transaction of 218 UC to [USER 11645] via queue 0
+[USER 0] extracted usersPID[2]
+[NODE 11642] fetched a transaction
+[USER 0] extracted nodesPID[0]
+[NODE 11642] received 88 UC to process from [USER 0] to [USER 11644]
 [USER 0] succedeed in attaching to queue 0
-[USER 0] sent a transaction of 460 UC to [USER 17532] via queue 0
-[USER 0] sent a transaction of 150 UC to [USER 17531] via queue 0
-[NODE 17530] fetched a transaction
-[NODE 17530] received 460 UC to process from [USER 0] to [USER 17532]
-[NODE 17530] Trying to receive message of size(transaction) from queue 0
-[NODE 17530] fetched a transaction
-[NODE 17530] received 150 UC to process from [USER 0] to [USER 17531]
-[NODE 17530] Trying to receive message of size(transaction) from queue 0
+[NODE 11642] Trying to receive message of size(transaction) from queue 0
+[NODE 11642] fetched a transaction
+[USER 0] sent a transaction of 589 UC to [USER 11645] via queue 0
+[NODE 11642] received 218 UC to process from [USER 0] to [USER 11645]
+[NODE 11642] Trying to receive message of size(transaction) from queue 0
+[NODE 11642] fetched a transaction
+[NODE 11642] received 589 UC to process from [USER 0] to [USER 11645]
+[NODE 11642] Trying to receive message of size(transaction) from queue 0
 ::MASTER:: SIGINT ricevuto
  ::NODE:: SIGINT received
  [NODE] queue removed
-[NODE 17530] printing transaction pool:
+[NODE 11642] printing transaction pool:
 [0] -------------------------- 
     pending
-|  0 --> 17533
-|  Amount:    167
-|  Reward:    28
+|  0 --> 11644
+|  Amount:    88
+|  Reward:    15
  -------------------------- 
 [1] -------------------------- 
     pending
-|  0 --> 17532
-|  Amount:    460
-|  Reward:    75
+|  0 --> 11645
+|  Amount:    218
+|  Reward:    36
  -------------------------- 
 [2] -------------------------- 
     pending
-|  0 --> 17531
-|  Amount:    150
-|  Reward:    25
+|  0 --> 11645
+|  Amount:    589
+|  Reward:    96
  -------------------------- 
-src/print.c:26: PID=17529: Error 10 (No child processes)
-src/print.c:26: PID=17529: Error 10 (No child processes)
-src/print.c:26: PID=17529: Error 10 (No child processes)
-src/print.c:45: PID=17529: Error 10 (No child processes)
+src/print.c:26: PID=11641: Error 10 (No child processes)
+src/print.c:26: PID=11641: Error 10 (No child processes)
+src/print.c:26: PID=11641: Error 10 (No child processes)
+src/print.c:45: PID=11641: Error 10 (No child processes)
 FLAG 0
 --------------------------------------------
 ----------- Configuration value ------------
@@ -350,15 +350,15 @@ SO_FRIENDS_NUM->999
 SO_HOPS->7
 --------------------------------------------
 
- ------- Master Process PID is 17529 ----------
+ ------- Master Process PID is 11641 ----------
 |                                             |
  - Type ------- PID --------- Status ---------
  ---------------------------------------------
-|  User         17533            alive     
-|  User         17532            alive     
-|  User         17531            alive     
+|  User         11645            alive     
+|  User         11644            alive     
+|  User         11643            alive     
  ---------------------------------------------
-|  Node         17530            available
+|  Node         11642            available
  ---------------------------------------------
 ~{LEDGER}~
 
