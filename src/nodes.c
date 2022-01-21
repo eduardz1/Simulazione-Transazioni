@@ -121,7 +121,9 @@ void fill_block_transList(transaction *transListWithoutReward)
 
     for (i = 0; i < (SO_BLOCK_SIZE - 1); i++)
     {
+        TRACE(("[NODE %d] trying to remove transaction from pool\n", myPID))
         transListWithoutReward[i] = remove_from_pool(&transPool);
+        TRACE(("[NODE %d] removed transaction from pool\n", myPID))
         transPool.size--;
     }
 }
@@ -246,9 +248,7 @@ int main(int argc, char *argv[])
 
     attach_ipc_objects(argv);
     
-    signal_handler_init(&saINT_node); /* no idea why it isn't working, it's literally the same implementation as user */
-    TRACE(("[NODE %d] sighandler init\n", myPID));
-
+    signal_handler_init(&saINT_node);
     message_queue_attach();
     transaction_pool_init(&transPool);
     TEST_ERROR
@@ -256,11 +256,6 @@ int main(int argc, char *argv[])
     {
 
         /*
-         * msgrcv transactions in loop until pool is full
-         * if size is >= SO_BLOCK_SIZE-1 fork and create a block
-         * append to ledger said block
-         * SLEEP
-         * exit(0)
          * if process is killed it will receive a SIGCHLD signal
          * it means that the process was killed while processing a block
          * need to manage
@@ -274,7 +269,7 @@ int main(int argc, char *argv[])
             switch (fork())
             {
             case -1: /* error */
-                printf("[NODE %d] error while forking to create a block\n", myPID);
+                TRACE(("[NODE %d] error while forking to create a block\n", myPID));
                 break;
 
             case 0: /* child creates a new block and appends it to ledger */
@@ -298,4 +293,6 @@ int main(int argc, char *argv[])
             }
         }
     }
+
+    TRACE(("[NODE %d] somehow I broke free from an endless while loop\n", myPID))
 }

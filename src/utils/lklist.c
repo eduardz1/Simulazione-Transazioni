@@ -13,15 +13,19 @@ int compare_transactions(transaction *t1, transaction *t2)
 }
 
 /* allocates and returns a new node */
-struct node * new_node(transaction t)
+struct node *new_node(transaction t)
 {
     struct node *newNode = malloc(sizeof(struct node));
+    if (newNode == NULL)
+        TRACE(("*** malloc failed in %s:%d, system out of memory ***\n", __FILE__, __LINE__))
+
     newNode->trans = t;
     newNode->next = NULL;
 
     return newNode;
 }
 
+/* pushes transaction 't' at the end of the list */
 void push(struct node *head, transaction t)
 {
     struct node *curr = head;
@@ -32,7 +36,10 @@ void push(struct node *head, transaction t)
     }
 
     newNode = new_node(t);
+    TRACE(("[PUSH] transaction amount: %u, sender: %d, receiver: %d\n", newNode->trans.amount, newNode->trans.sender, newNode->trans.receiver))
     curr->next = newNode;
+    TRACE(("[PUSH] head->next: %p\n", head->next))
+    TRACE(("[PUSH] next->trans = amount: %u, sender: %d, receiver: %d\n", newNode->trans.amount, newNode->trans.sender, newNode->trans.receiver))
 }
 
 /* finds and removes a message from pool */
@@ -63,7 +70,6 @@ void find_and_remove(struct node *head, transaction *toSearch)
             head = head->next;
         else
             prev->next = curr->next; /* SIGSEGV */
-            TEST_ERROR
 
         t = curr->trans;
     }

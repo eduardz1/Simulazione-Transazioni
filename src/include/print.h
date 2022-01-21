@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include "../utils/pool.h"
+#include "../utils/lklist.h"
 
 void print_time_to_die();
 void print_user_nodes_table(pid_t main, user *user, node *nodes, struct parameters *par); /* function that prints on terminal the PID of every user and node process */
@@ -23,5 +24,6 @@ void print_ledger(block *l);
 
 void formatted_timestamp(FILE *fp);
 void print_transaction_pool(pool *transPool);
+void print_outgoing_pool(struct node *outPool);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_PRINT_H */

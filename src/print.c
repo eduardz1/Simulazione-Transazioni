@@ -16,10 +16,10 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
     int statusNum = 0;
     char statusStr[] = "available";
 
-    printf("\n ------- Master Process PID is %d ----------\n", mainPID);
-    printf("|                                             |\n");
-    printf(" - Type ------- PID --------- Status ---------\n");
-    printf(" ---------------------------------------------\n");
+    printf("\n          Master Process PID is %d\n", mainPID);
+    printf("|                                                |\n");
+    printf(" - Type ----- PID ----- Status ----- Balance -----\n");
+    printf(" -------------------------------------------------\n");
     while (userNum--)
     {
         statusNum = userPID[userNum].status;
@@ -36,7 +36,9 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
             strcpy(statusStr, "dead     ");
             break;
         }
-        printf("|  User         %d            %s \n", userPID[userNum].pid, statusStr);
+
+    /* we should place it in a buffer so that they print a fixed length */
+    printf("|  User      %7d    %s    %10u\n", userPID[userNum].pid, statusStr, userPID[userNum].balance);
     }
     printf(" ---------------------------------------------\n");
     while (nodesNum--)
@@ -52,7 +54,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
             strcpy(statusStr, "full     ");
             break;
         }
-        printf("|  Node         %d            %s\n", nodePID[nodesNum].pid, statusStr);
+    printf("|  Node       %d    %s\n", nodePID[nodesNum].pid, statusStr);
     }
     printf(" ---------------------------------------------\n");
 }
@@ -217,7 +219,27 @@ void print_transaction_pool(pool *transPool)
         printf("[%d]", i);
         printable = tmp->head->transactionMessage.userTrans;
         print_transaction(&printable);
+
         tmp->head = tmp->head->transactionMessage.next;
+        i++;
+    }
+}
+
+void print_outgoing_pool(struct node *outPool)
+{
+    struct node *tmp = outPool;
+    int i = 0;
+    pid_t pidCaller = getpid();
+    transaction printable;
+
+    printf("[USER %d] printing out pool:\n", pidCaller);
+    while (tmp->next != NULL)
+    {
+        printf("[%d]", i);
+        printable = tmp->trans;
+        print_transaction(&printable);
+
+        tmp = tmp->next;
         i++;
     }
 }
