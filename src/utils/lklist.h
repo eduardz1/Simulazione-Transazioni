@@ -10,7 +10,7 @@ struct node
 };
 
 int compare_transactions(transaction *t1, transaction *t2);
-void new_node(struct node *ptr, transaction t);
+struct node *new_node(transaction t);
 void push(struct node *head, transaction t);
 void find_and_remove(struct node *head, transaction *toSearch);
 

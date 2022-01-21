@@ -13,11 +13,13 @@ int compare_transactions(transaction *t1, transaction *t2)
 }
 
 /* allocates and returns a new node */
-void new_node(struct node* nodePtr, transaction t)
+struct node * new_node(transaction t)
 {
-    nodePtr = malloc(sizeof(struct node));
-    nodePtr->trans = t;
-    nodePtr->next = NULL;
+    struct node *newNode = malloc(sizeof(struct node));
+    newNode->trans = t;
+    newNode->next = NULL;
+
+    return newNode;
 }
 
 void push(struct node *head, transaction t)
@@ -29,7 +31,7 @@ void push(struct node *head, transaction t)
         curr = curr->next;
     }
 
-    new_node(newNode, t);
+    newNode = new_node(t);
     curr->next = newNode;
 }
 
@@ -47,7 +49,6 @@ void find_and_remove(struct node *head, transaction *toSearch)
 
     while (!compare_transactions(&t, toSearch))
     {
-
         if (curr->next == NULL)
         {
             return;
