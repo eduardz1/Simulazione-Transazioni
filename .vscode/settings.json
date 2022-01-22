@@ -11,5 +11,11 @@
         "cstdint": "c",
         "string.h": "c"
     },
-    "editor.rulers": [80,120]
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "editor.fontFamily": "Fira Code Retina",
+    "C_Cpp.errorSquiggles": "Disabled",
+    "editor.codeLensFontFamily": "Fira Code"
 }

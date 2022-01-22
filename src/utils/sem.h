@@ -15,12 +15,12 @@
 	sops.sem_num = 1;			\
 	sops.sem_op = -1;			\
 	sops.sem_flg = 0;			\
-	semop(semID, &sops, 1);
+	semop(semPIDs_ID, &sops, 1);
 #define UNLOCK					\
 	sops.sem_num = 1;			\
 	sops.sem_op = 1;			\
 	sops.sem_flg = 0;			\
-	semop(semID, &sops, 1);
+	semop(semPIDs_ID, &sops, 1);
 
 /* from prof. Bini examples */
 

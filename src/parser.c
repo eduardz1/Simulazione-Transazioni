@@ -2,6 +2,8 @@
 #include "utils/debug.h"
 #include "include/parser.h"
 
+#define CONF_FILE "conf.txt"
+
 /*enum paramID
 {
     SO_USER_NUM,
@@ -70,7 +72,7 @@ int parse_parameters(struct parameters *par)
 
     /*struct parameters *par = malloc(sizeof(struct parameters));*/
     assign_defaults(par);
-    TRACE((":parser: assigned defaults\n"));
+    TRACE(("[PARSER] assigned defaults\n"));
 
     fp = fopen(CONF_FILE, "r");
     if (fp == NULL)
@@ -129,7 +131,7 @@ int parse_parameters(struct parameters *par)
             if (values[i] >= 0 && values[i] <= 100)
                 par->SO_REWARD = values[i];
             else
-                printf(":parser: SO_REWARD incorrect value, resetting default\n");
+                printf("[PARSER] SO_REWARD incorrect value, resetting default\n");
         }
         else if (!strcmp(tokens[i], "SO_MIN_TRANS_GEN_NSEC"))
         {
@@ -172,17 +174,17 @@ int parse_parameters(struct parameters *par)
     /* -- CONF ERRORS CORRECTION -- */
     if (errno == ERANGE)
     {
-        TRACE((":parser: one or multiple values out of bound, resetting defaults\n"));
+        TRACE(("[PARSER] one or multiple values out of bound, resetting defaults\n"));
         assign_defaults(par);
     }
     if (par->SO_MIN_TRANS_GEN_NSEC > par->SO_MAX_TRANS_GEN_NSEC)
     {
-        TRACE((":parser: SO_MIN_TRANS_GEN_NSEC greater than SO_MAX_TRANS_GEN_NSEC, will be normalized\n"));
+        TRACE(("[PARSER] SO_MIN_TRANS_GEN_NSEC greater than SO_MAX_TRANS_GEN_NSEC, will be normalized\n"));
         par->SO_MIN_TRANS_GEN_NSEC = par->SO_MAX_TRANS_GEN_NSEC;
     }
     if (par->SO_MIN_TRANS_PROC_NSEC > par->SO_MAX_TRANS_PROC_NSEC)
     {
-        TRACE((":parser: SO_MIN_TRANS_PROC_NSEC greater than SO_MAX_TRANS_PROC_NSEC, will be normalized\n"));
+        TRACE(("[PARSER] SO_MIN_TRANS_PROC_NSEC greater than SO_MAX_TRANS_PROC_NSEC, will be normalized\n"));
         par->SO_MIN_TRANS_PROC_NSEC = par->SO_MAX_TRANS_PROC_NSEC;
     }
 

@@ -31,6 +31,7 @@ int sem_reserve(int sem_id, int sem_num)
     sops.sem_op = -1;
     sops.sem_flg = 0;
     return semop(sem_id, &sops, 1);
+    TEST_ERROR
 }
 
 /* Release the resource */
