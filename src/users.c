@@ -214,9 +214,6 @@ int send_transaction()
 		{
 			push(outGoingTransactions, sent);
 		}
-
-		if (myPID % 2 == 0)
-			print_outgoing_pool(outGoingTransactions);
 		return SUCCESS;
 	}
 	}
@@ -260,20 +257,25 @@ void get_balance()
 	block ledgerTemp[SO_REGISTRY_SIZE];
 	memcpy(&ledgerTemp, ledger, sizeof(ledgerTemp));
 
+	long flag = 1;
+
 	/* balance is buffere in tempBalance so that if the program is interrupted
 	 * while get_balance() is running the user doesn't suddently get his
 	 * balance reset to SO_BUDGET_INIT
 	 */
 	unsigned int tempBalance = par->SO_BUDGET_INIT;
 
-	for (i = 0; i < SO_REGISTRY_SIZE; i++)
+	for (i = 0; i < SO_REGISTRY_SIZE && flag != 0; i++)
 	{
-		for (j = 1; j < SO_BLOCK_SIZE; j++)
+		/* can't have time = 0 unless the block is not initialized */
+		flag = (ledgerTemp[i].transList->timestamp.tv_nsec) + (ledgerTemp[i].transList->timestamp.tv_sec);
+
+		for (j = 1; j < SO_BLOCK_SIZE && flag != 0; j++)
 		{
-			find_and_remove(outGoingTransactions, &ledgerTemp[i].transList[j]);
 			/*TEST_ERROR file too large an absurd amount of times */
 			if (ledgerTemp[i].transList[j].sender == myPID)
 			{
+				find_and_remove(&outGoingTransactions, &ledgerTemp[i].transList[j]);
 				accumulate -= (ledgerTemp[i].transList[j].amount + ledgerTemp[i].transList[j].reward);
 			}
 			else if (ledgerTemp[i].transList[j].receiver == myPID)
@@ -307,6 +309,7 @@ void get_balance()
 	if (accumulate * (-1) > tempBalance)
 	{
 		printf("*** [USER %d] errror in calculating balance, overflow ***\n", myPID);
+		print_outgoing_pool(outGoingTransactions);
 		killpg(0, SIGINT);
 	}
 

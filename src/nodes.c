@@ -217,8 +217,6 @@ void node_interrupt_handle(int signum)
     TEST_ERROR
     write(1, "::NODE:: SIGINT received\n", 26);
 
-    print_transaction_pool(&transPool);
-
     /*sem_reserve(semPIDs_ID, 1);*/
     TEST_ERROR
     nodesPID[nodeIndex].balance = currBalance;
