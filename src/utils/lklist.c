@@ -47,14 +47,11 @@ void find_and_remove(struct node *head, transaction *toSearch)
 {
     struct node *curr = head;
     struct node *prev = NULL;
-    transaction t;
 
     if (head == NULL)
         return;
 
-    t = curr->trans;
-
-    while (!compare_transactions(&t, toSearch))
+    while (!compare_transactions(&curr->trans, toSearch))
     {
         if (curr->next == NULL)
         {
@@ -65,14 +62,13 @@ void find_and_remove(struct node *head, transaction *toSearch)
             prev = curr;
             curr = curr->next;
         }
-
-        if (curr == head)
-            head = head->next;
-        else
-            prev->next = curr->next; /* SIGSEGV */
-
-        t = curr->trans;
     }
 
-    free(prev);
+    /* if no transaction is found the function returns in the while loop */
+    if (curr == head)
+        head = head->next;
+    else
+        prev->next = curr->next;
+
+    /* free(prev); */
 }

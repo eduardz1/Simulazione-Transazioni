@@ -39,9 +39,7 @@ void message_queue_attach()
     do
     {
         queueID = msgget(myPID, 0);
-        /* TRACE(("[USER %d] is trying to attach to id=%d queue\n", myPID, queueID)) */
     } while (errno == ENOENT);
-    TRACE(("[NODE %d] succedeed in attaching to queue %d\n", myPID, queueID))
 }
 
 /* process starts fetching transactions from it's msg_q until transPool is full */
@@ -49,7 +47,6 @@ void fetch_messages()
 {
     if (transPool.size < par->SO_TP_SIZE)
     {
-        TRACE(("[NODE %d] Trying to receive message of size(transaction) from queue %d\n", myPID, queueID))
         msgrcv(queueID, &fetchedMex, sizeof(struct msgbuf_trans), TRANSACTION_MTYPE, 0);
         switch (errno)
         {
@@ -69,7 +66,7 @@ void fetch_messages()
             printf("[NODE %d] signal caught while receiving a message\n", myPID);
             break;
         default:
-            TRACE(("[NODE %d] fetched a transaction\n", myPID));
+            break;
         }
         TRACE(("[NODE %d] received %d UC to process from [USER %d] to [USER %d]\n", myPID, fetchedMex.transactionMessage.userTrans.amount, fetchedMex.transactionMessage.userTrans.sender, fetchedMex.transactionMessage.userTrans.receiver))
         add_to_pool(&transPool, &fetchedMex);
@@ -78,7 +75,6 @@ void fetch_messages()
     else
     {
         TRACE(("[NODE %d] pool is full\n", myPID))
-        sleep(1);
     }
 }
 
@@ -121,10 +117,15 @@ void fill_block_transList(transaction *transListWithoutReward)
 
     for (i = 0; i < (SO_BLOCK_SIZE - 1); i++)
     {
-        TRACE(("[NODE %d] trying to remove transaction from pool\n", myPID))
         transListWithoutReward[i] = remove_from_pool(&transPool);
-        TRACE(("[NODE %d] removed transaction from pool\n", myPID))
         transPool.size--;
+    }
+}
+
+void confirm_block(block *toConfirm){
+    int i;
+    for (i = 0; i < SO_BLOCK_SIZE; i++){
+        toConfirm->transList[i].status = confirmed;
     }
 }
 
@@ -142,6 +143,7 @@ void insert_block_in_ledger(block *newBlock)
 
             sem_reserve(semLedger_ID, 1);
             ledger[i] = tmp;
+            confirm_block(&ledger[i]);
             sem_release(semLedger_ID, 1);
 
             return;

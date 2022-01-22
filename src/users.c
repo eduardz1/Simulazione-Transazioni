@@ -79,7 +79,6 @@ pid_t get_random_userPID()
 			val = usersPID[index].pid;
 	} while (!val);
 
-	TRACE(("[USER %d] extracted usersPID[%d]\n", myPID, index));
 	return val;
 }
 
@@ -92,7 +91,6 @@ pid_t get_random_nodePID()
 	do
 	{
 		index = RAND(0, par->SO_NODES_NUM - 1);
-		TRACE(("[USER %d] extracted nodesPID[%d]\n", myPID, index));
 		if (nodesPID[index].status == available)
 			val = nodesPID[index].pid;
 	} while (!val);
@@ -139,9 +137,7 @@ void queue_to_pid(pid_t nodePID)
 	do
 	{
 		queueID = msgget(nodePID, 0);
-		/* TRACE(("[USER %d] is trying to attach to id=%d queue\n", myPID, queueID)) */
 	} while (errno == ENOENT);
-	TRACE(("[USER %d] succedeed in attaching to queue %d\n", myPID, queueID))
 }
 
 /* initializes transaction values and sets it to pending */
@@ -217,9 +213,6 @@ int send_transaction()
 		else
 		{
 			push(outGoingTransactions, sent);
-			/*TRACE(("[USER %d] outGoingTransactions->next: %p\n", myPID, outGoingTransactions->next))
-			TRACE(("[USER %d] outGoingTransactions->next->trans = amount: %u, sender: %d, receiver: %d\n", myPID, outGoingTransactions->next->trans.amount, outGoingTransactions->next->trans.sender, outGoingTransactions->next->trans.receiver))
-			*/
 		}
 
 		if (myPID % 2 == 0)
@@ -258,26 +251,35 @@ void get_balance()
 	int i, j;
 	long accumulate = 0; /* needs to fit two unsigned ints inside */
 
-	/* balance is buffere in tempBalance so that if the program is interrupted 
-	 * while get_balance() is running the user doesn't suddently get his 
+	/* create a local copy to avoid inconsistencies, we could use semaphores
+	 * but parsing the entire ledger and the outGoing list takes an awful lot
+	 * and would make our program very inefficient, memory is relatively cheap,
+	 * even with real blockchains you have to save the entire chain to the hard drive
+	 * if you want to make a local keychain so it should make sense
+	 */
+	block ledgerTemp[SO_REGISTRY_SIZE];
+	memcpy(&ledgerTemp, ledger, sizeof(ledgerTemp));
+
+	/* balance is buffere in tempBalance so that if the program is interrupted
+	 * while get_balance() is running the user doesn't suddently get his
 	 * balance reset to SO_BUDGET_INIT
 	 */
 	unsigned int tempBalance = par->SO_BUDGET_INIT;
 
 	for (i = 0; i < SO_REGISTRY_SIZE; i++)
 	{
-		for (j = 1; j < SO_BLOCK_SIZE - 1; j++)
+		for (j = 1; j < SO_BLOCK_SIZE; j++)
 		{
-			find_and_remove(outGoingTransactions, &ledger[i].transList[j]); /* SEGFAULT */
+			find_and_remove(outGoingTransactions, &ledgerTemp[i].transList[j]);
 			/*TEST_ERROR file too large an absurd amount of times */
-			if (ledger[i].transList[j].sender == myPID)
+			if (ledgerTemp[i].transList[j].sender == myPID)
 			{
-				accumulate -= (ledger[i].transList[j].amount + ledger[i].transList[j].reward);
+				accumulate -= (ledgerTemp[i].transList[j].amount + ledgerTemp[i].transList[j].reward);
 			}
-			else if (ledger[i].transList[j].receiver == myPID)
+			else if (ledgerTemp[i].transList[j].receiver == myPID)
 			{
-				TRACE(("[USER %d] found myself as receiver of %d UC\n", myPID, ledger[i].transList[j].amount))
-				accumulate += ledger[i].transList[j].amount;
+				TRACE(("[USER %d] found myself as receiver of %d UC\n", myPID, ledgerTemp[i].transList[j].amount))
+				accumulate += ledgerTemp[i].transList[j].amount;
 			}
 		}
 	}
@@ -297,27 +299,31 @@ void get_balance()
 
 	while (tmp != NULL)
 	{
-		if(tmp->next != NULL)
-			accumulate -= (tmp->trans.amount + tmp->trans.reward);
+		accumulate -= (tmp->trans.amount + tmp->trans.reward);
 		tmp = tmp->next;
 	}
 
 	TRACE(("[USER %d] accumulate=%d\n", myPID, accumulate))
+	if (accumulate * (-1) > tempBalance)
+	{
+		printf("*** [USER %d] errror in calculating balance, overflow ***\n", myPID);
+		killpg(0, SIGINT);
+	}
 
 	tempBalance += accumulate;
-	if(errno == ERANGE){
+	if (errno == ERANGE) /* not working as intended */
+	{
 		printf("[USER %d] went out of bound, punishment for being that rich is death\n", myPID);
 		update_status(2);
 		kill(0, SIGINT);
 	}
 
 	update_balance(tempBalance);
-
-	TRACE(("[USER %d] calculated balance: %u\n", myPID, tempBalance))
 }
 
 /* safely updates balance of user */
-void update_balance(unsigned int tempBalance){
+void update_balance(unsigned int tempBalance)
+{
 	int i = get_pid_userIndex(myPID);
 
 	sem_reserve(semPIDs_ID, 1);

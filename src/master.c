@@ -72,7 +72,6 @@ void message_queue_init()
     int ownPID = getpid();
     /* gets ID of message queue of key=myPID and assigns it to queueID */
     int queueID = msgget(ownPID, IPC_CREAT | IPC_EXCL | 0600);
-    TEST_ERROR
     switch (errno)
     {
     case EIDRM:
