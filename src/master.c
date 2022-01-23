@@ -270,7 +270,6 @@ void master_interrupt_handle(int signum)
     semctl(semPIDs_ID, 1, IPC_RMID);
     semctl(semLedger_ID, 1, IPC_RMID);
 
-    report_mem_leak();
     exit(0);
 }
 

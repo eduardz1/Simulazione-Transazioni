@@ -15,7 +15,7 @@ int compare_transactions(transaction *t1, transaction *t2)
 /* allocates and returns a new node */
 struct node *new_node(transaction t)
 {
-    struct node *newNode = malloc(sizeof(struct node));
+    struct node *newNode = malloc(sizeof(struct node)); /* might be a memory leak but I have no idea about the way I should dinamically deallocate it */
     if (newNode == NULL)
         TRACE(("*** malloc failed in %s:%d, system out of memory ***\n", __FILE__, __LINE__))
 
