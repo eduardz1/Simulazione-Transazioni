@@ -39,6 +39,7 @@ void message_queue_attach()
     do
     {
         queueID = msgget(myPID, 0);
+        TEST_ERROR
     } while (errno == ENOENT);
 }
 
@@ -227,7 +228,6 @@ void node_interrupt_handle(int signum)
     TRACE(("[NODE] queue removed\n"))
     TEST_ERROR
 
-    report_mem_leak_nodes();
     exit(0);
 }
 
