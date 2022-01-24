@@ -9,6 +9,7 @@
 - [ ] finish every print function
 - [ ] clean general print formatting
 - [ ] make ledger effectively print inside a ledger.txt, I've tried but it didnt't work
+- [ ] fix all reported issues
 - [ ] **Eduard ->** instead of sleeping for 1 second maybe we could make master sleep with a timer
 - [ ] **Eduard ->** general cleanup of the code
 - [x] **Eduard ->** implement semaphores to access "usersPID" and "nodesPID" structs
