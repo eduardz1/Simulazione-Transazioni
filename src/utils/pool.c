@@ -56,3 +56,21 @@ transaction remove_from_pool(pool *transPool)
 
     return poppedTrans;
 }
+
+struct msgbuf_trans remove_tail(pool *transPool){
+    struct msgbuf_trans tmp;
+
+    if(transPool->head == NULL)
+    {
+        tmp.mtype = ERROR;
+        return tmp;
+    }else if(transPool -> tail == NULL){
+        tmp = *transPool->head;
+        transPool->head = NULL;
+        return tmp;
+    }
+
+    tmp = *transPool->tail;
+    transPool->tail = NULL;
+    return tmp;
+}

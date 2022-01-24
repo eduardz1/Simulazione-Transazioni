@@ -13,5 +13,6 @@ typedef struct pool_t
 void transaction_pool_init(pool *transPool);
 int add_to_pool(pool *transPool, struct msgbuf_trans *message);
 transaction remove_from_pool(pool *transPool);
+struct msgbuf_trans remove_tail(pool *transPool);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_POOL_H */

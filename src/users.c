@@ -154,7 +154,7 @@ void transaction_init(pid_t userPID, int amount, int reward)
 	transMsg.transactionMessage.userTrans.status = pending;
 
 	transMsg.transactionMessage.userTrans.timestamp = exactTime;
-	transMsg.transactionMessage.hops = 0;
+	transMsg.transactionMessage.hops = par->SO_HOPS;
 }
 
 /* initializes signal handlers for SIGINT and SIGUSR1 */
@@ -178,7 +178,7 @@ int send_transaction()
 {
 	transaction sent;
 
-	if (send_message(queueID, &transMsg, sizeof(struct msgbuf_trans), 1) == 0)
+	if (send_message(queueID, &transMsg, sizeof(struct msgbuf_trans), IPC_NOWAIT) == 0)
 	{
 
 		TRACE(("[USER %d] sent a transaction of %d UC to [USER %d] via queue %d\n", myPID, transMsg.transactionMessage.userTrans.amount, transMsg.transactionMessage.userTrans.receiver, queueID))
@@ -313,11 +313,38 @@ void get_balance()
 /* SIGUSR1 handler, sends a transaction */
 void user_transactions_handle(int signum)
 {
+	int retry = par->SO_RETRY;
 	write(1, "::USER:: SIGUSR1 received\n", 27);
+
 	if (currBalance > 2)
-		send_transaction(); /* we're calling a printf which is not thread safe, need to fix somehow*/
+	{
+		pid_t userPID = get_random_userPID();
+		pid_t nodePID = get_random_nodePID();
+
+		unsigned int amount = RAND(2, currBalance);
+		unsigned int reward = REWARD(amount, par->SO_REWARD);
+		amount -= reward;
+
+		update_status(0);
+
+		queue_to_pid(nodePID);
+		transaction_init(userPID, amount, reward);
+		if (send_transaction() == 0)
+			retry = par->SO_RETRY;
+		else
+			retry--;
+
+		if (retry == 0)
+		{
+			update_status(2);
+			TRACE(("[USER %d] max retry reached, life has no meaning any more\n", myPID))
+			kill(myPID, SIGINT);
+		}
+	}
 	else
+	{
 		write(1, "::USER:: sorry balance too low\n", 32);
+	}
 }
 
 /* CTRL-C handler */
@@ -330,7 +357,7 @@ void user_interrupt_handle(int signum)
 
 int main(int argc, char *argv[])
 {
-	int amount, reward, retry;
+	unsigned int amount, reward, retry;
 	pid_t userPID, nodePID;
 
 	struct timespec randSleepTime;

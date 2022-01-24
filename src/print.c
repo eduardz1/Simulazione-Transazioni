@@ -37,7 +37,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
         }
 
         /* we should place it in a buffer so that they print a fixed length */
-        printf("|  User      %7d    %s    %10u\n", userPID[userNum].pid, statusStr, userPID[userNum].balance);
+        printf("|  User      %7d    %s    %lu\n", userPID[userNum].pid, statusStr, userPID[userNum].balance);
     }
     printf(" -------------------------------------------------\n");
     while (nodesNum--)
@@ -52,7 +52,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
             strcpy(statusStr, "full     ");
             break;
         }
-        printf("|  Node       %d    %s\n", nodePID[nodesNum].pid, statusStr);
+        printf("|  Node      %d    %s    %10u\n", nodePID[nodesNum].pid, statusStr, nodePID[nodesNum].balance);
     }
     printf(" -------------------------------------------------\n");
 }
@@ -141,13 +141,13 @@ void print_block(block *b)
 {
     int i;
     transaction printable;
-    printf("[BLOCK %d] =================\n", b->blockIndex);
+    printf("[BLOCK %d] ==========================================\n", b->blockIndex);
     for (i = 0; i < SO_BLOCK_SIZE; i++)
     {
         printable = b->transList[i];
         print_transaction(&printable);
     }
-    printf("============================\n");
+    printf("=====================================================\n");
 }
 
 void print_ledger(block *l)

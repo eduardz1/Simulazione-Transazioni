@@ -18,5 +18,7 @@ void node_interrupt_handle(int signum);
 void new_block(transaction* blockTransaction, block *newBlock);
 int sum_reward(transaction *);
 void fill_block_transList(transaction *buffer);
+void send_to_random_friend();
+int get_pid_nodeIndex();
 
 #endif /* SIMULAZIONE_TRANSAZIONI_NODES_H */
