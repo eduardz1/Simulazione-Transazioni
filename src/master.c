@@ -257,6 +257,7 @@ void master_interrupt_handle(int signum)
 
     /* just to avoid printing before everyone has finished*/
     /*while (wait(&status) != -1)
+
     {
         status >> 8; /* no idea about what it does please help *
     }*/
