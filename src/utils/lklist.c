@@ -36,10 +36,7 @@ void push(struct node *head, transaction t)
     }
 
     newNode = new_node(t);
-    TRACE(("[PUSH] transaction amount: %u, sender: %d, receiver: %d\n", newNode->trans.amount, newNode->trans.sender, newNode->trans.receiver))
     curr->next = newNode;
-    TRACE(("[PUSH] head->next: %p\n", head->next))
-    TRACE(("[PUSH] next->trans = amount: %u, sender: %d, receiver: %d\n", newNode->trans.amount, newNode->trans.sender, newNode->trans.receiver))
 }
 
 /* finds and removes a message from pool if present */
@@ -66,7 +63,6 @@ void find_and_remove(struct node **head, transaction *toSearch)
 
     if (curr == head)
     {
-        TRACE(("[USER %d][FIND AND REMOVE] I should remove a transaction from the head of %d UC\n", getpid(), curr->trans.amount))
         *head = (*head)->next;
     }
     else

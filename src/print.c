@@ -139,7 +139,7 @@ void print_block(block *b)
 
 void print_ledger(block *l)
 {
-    FILE *fp = fopen("ledger.txt", "w");
+    /*FILE *fp = fopen("ledger.txt", "w");*/
     int i = 0;
 
     long flag = 1;
@@ -160,7 +160,7 @@ void print_ledger(block *l)
             print_block(&l[i]);
     }
 
-    fclose(fp);
+    /*fclose(fp);*/
 }
 
 /* print without /n */
