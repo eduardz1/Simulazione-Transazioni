@@ -32,7 +32,7 @@ debug:
 	./master
 
 clean:
-	rm -f *.o master users nodes *~
+	rm -f *.o master users nodes log.txt *~
 
 run: all
 	./master

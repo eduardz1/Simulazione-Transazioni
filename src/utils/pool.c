@@ -13,7 +13,7 @@ int add_to_pool(pool *transPool, struct msgbuf_trans *message)
 {
     struct msgbuf_trans *newTransaction = malloc(sizeof(struct msgbuf_trans));
     if (newTransaction == NULL)
-        TRACE(("*** malloc failed, system out of memory ***"))
+        TRACE(("*** malloc failed in %s:%d, system out of memory ***\n", __FILE__, __LINE__))
 
     newTransaction->transactionMessage = message->transactionMessage;
     newTransaction->transactionMessage.next = NULL;
@@ -54,6 +54,27 @@ transaction remove_from_pool(pool *transPool)
     if (transPool->head == NULL)
         transPool->tail = NULL;
 
+<<<<<<< HEAD
     /*free(tmp); */ 
+=======
+>>>>>>> 79f3000b115e4d9b4aa1a408a589966f7d53442b
     return poppedTrans;
+}
+
+struct msgbuf_trans remove_tail(pool *transPool){
+    struct msgbuf_trans tmp;
+
+    if(transPool->head == NULL)
+    {
+        tmp.mtype = ERROR;
+        return tmp;
+    }else if(transPool -> tail == NULL){
+        tmp = *transPool->head;
+        transPool->head = NULL;
+        return tmp;
+    }
+
+    tmp = *transPool->tail;
+    transPool->tail = NULL;
+    return tmp;
 }

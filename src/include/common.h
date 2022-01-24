@@ -16,11 +16,11 @@
 #include <sys/sem.h>
 #include <sys/msg.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <signal.h>
 
 #include "../utils/debug.h"
 #include "../utils/sem.h"
-#include "../utils/leak_detector_c.h"
 
 #ifndef NULL
 #define NULL 0 /* thre's a problem with NULL for some reason */
@@ -43,8 +43,8 @@
 #define SEM_LEDGER_KEY 421
 #define M_QUEUE_KEY 0x5AD
 
-#define SO_BLOCK_SIZE 5     /* number of transaction per block*/
-#define SO_REGISTRY_SIZE 100 /* max length of consecutive blocks */
+#define SO_BLOCK_SIZE 10  /* number of transaction per block*/
+#define SO_REGISTRY_SIZE 1000 /* max length of consecutive blocks */
 #define SELF -1
 #define EVERYONE_BROKE '$'
 #define TRANSACTION_MTYPE 28410
@@ -100,7 +100,7 @@ struct parameters
 typedef struct user_t
 {
     pid_t pid;
-    int balance;
+    unsigned int balance;
     enum
     {
         alive,
@@ -112,7 +112,7 @@ typedef struct user_t
 typedef struct node_t
 {
     pid_t pid;
-    int balance;
+    unsigned long balance;
     enum
     {
         available,

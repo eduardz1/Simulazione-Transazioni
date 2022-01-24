@@ -3,6 +3,8 @@
 #include "include/print.h"
 
 /* #define HYPHEN "--------" */
+/*GLOBAL VARIABLES */
+FILE *fp;
 
 void print_time_to_die()
 {
@@ -15,15 +17,14 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
     int nodesNum = par->SO_NODES_NUM;
     int statusNum = 0;
     char statusStr[] = "available";
-
-    printf("\n ------- Master Process PID is %d ----------\n", mainPID);
-    printf("|                                             |\n");
-    printf(" - Type ------- PID --------- Status ---------\n");
-    printf(" ---------------------------------------------\n");
+    
+    printf(" -------------------------------------------------\n|          Master Process PID is %d\n", mainPID);
+    printf("|                                                 \n");
+    printf(" - Type ----- PID ----- Status ----- Balance -----\n");
+    printf(" -------------------------------------------------\n");
     while (userNum--)
     {
         statusNum = userPID[userNum].status;
-        TEST_ERROR
         switch (statusNum)
         {
         case 0:
@@ -36,13 +37,14 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
             strcpy(statusStr, "dead     ");
             break;
         }
-        printf("|  User         %d            %s \n", userPID[userNum].pid, statusStr);
+
+        /* we should place it in a buffer so that they print a fixed length */
+        printf("|  User      %7d    %s    %lu\n", userPID[userNum].pid, statusStr, userPID[userNum].balance);
     }
-    printf(" ---------------------------------------------\n");
+    printf(" -------------------------------------------------\n");
     while (nodesNum--)
     {
         statusNum = nodePID[nodesNum].status;
-        TEST_ERROR
         switch (statusNum)
         {
         case 0:
@@ -52,16 +54,29 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
             strcpy(statusStr, "full     ");
             break;
         }
-        printf("|  Node         %d            %s\n", nodePID[nodesNum].pid, statusStr);
+        printf("|  Node      %d    %s    %10u\n", nodePID[nodesNum].pid, statusStr, nodePID[nodesNum].balance);
     }
-    printf(" ---------------------------------------------\n");
+    printf(" -------------------------------------------------\n");
 }
 
 void print_kill_signal();
 void print_user_balance();
 void print_node_balance();
 void print_num_aborted();
-void print_num_blocks();
+void print_num_blocks(block *l){
+    int i = 0;
+    int blockIndex = 0;
+
+    if(l[i].transList[0].timestamp.tv_nsec + l[i].transList->timestamp.tv_sec == 0)
+        return;
+
+    for (i = 0; i < SO_REGISTRY_SIZE && blockIndex == 0; i++)
+    {
+        if(l[i].transList[0].timestamp.tv_nsec + l[i].transList->timestamp.tv_sec == 0)
+            blockIndex = l[i-1].blockIndex;
+    }
+    printf("NUM BLOCKS: %d\n", blockIndex);
+}
 void print_transactions_still_in_pool();
 
 void final_print(pid_t masterPID, user *usersPID, node *nodesPID, struct parameters *par)
@@ -96,35 +111,9 @@ void print_parameters(struct parameters *par)
     printf("--------------------------------------------\n");
 }
 
-/*void print_kill_signal(mainPID, userPid /* other process *)
-{
-    printf("-----PROCESS PID NUM %d KILL----", mainPID);
-}
-void print_user_balance(int balance)
-{
-    printf("-----CURRENT BALANCE IS:%d-----", balance);
-}
-
-void print_node_balance(int balamce)
-{
-    printf("----CURRENT NODE BALANCE IS:%d", balance);
-} */
-/*void print_num_aborted()
-{
-    printf("\n-- Num of aborted users: %d\n", usersPrematurelyDead);
-}
-/*
-void print_num_blocks()
-{
-    printf("---TOTAL BLOCK:%d");
-}
-void print_transactions_still_in_pool()
-{
-    printf("----TOTAL TRANSACTION STILL IN POLL:%d----");
-}*/
-
 void print_transaction(transaction *t)
 {
+fp=fopen("ledger.txt","w");
     char tmp[10];
     switch (t->status)
     {
@@ -142,42 +131,49 @@ void print_transaction(transaction *t)
         break;
     }
 
-    printf(" -------------------------- \n");
+    fprintf(fp," -------------------------- \n");
     /*formattimestamp(fp);*/
-    printf("    %s\n", tmp);
-    printf("|  %d --> %d\n", t->sender, t->receiver);
-    printf("|  Amount:    %d\n", t->amount);
-    printf("|  Reward:    %d\n", t->reward);
-    printf(" -------------------------- \n");
+    fprintf(fp,"|  %s\n", tmp);
+    fprintf(fp,"|  %d --> %d\n", t->sender, t->receiver);
+    fprintf(fp,"|  Amount:    %d\n", t->amount);
+    fprintf(fp,"|  Reward:    %d\n", t->reward);
+    fprintf(fp," -------------------------- \n");
 }
 
 void print_block(block *b)
 {
+
     int i;
     transaction printable;
-    printf("[BLOCK %d] =================\n", b->blockIndex);
+
+    fp= fopen("ledger.txt", "w");
+    fprintf(fp,"[BLOCK %d] =================\n", b->blockIndex);
     for (i = 0; i < SO_BLOCK_SIZE; i++)
     {
         printable = b->transList[i];
         print_transaction(&printable);
     }
-    printf("============================\n");
+    fprintf(fp,"============================\n");
 }
 
 void print_ledger(block *l)
 {
-    FILE *fp = fopen("ledger.txt", "w");
+   
     int i = 0;
-    int flag = l[i].transList[0].sender;
-    TRACE(("FLAG %lu\n", flag))
 
-    printf("~{LEDGER}~\n\n");
-    for (i; flag != 0; i++)
+    long flag = 1;
+    fp=fopen("ledger.txt","w");
+    fprintf(fp,"ledger \n");
+    for (i = 0; i < SO_REGISTRY_SIZE && flag != 0; i++)
     {
-        print_block(&l[i]);
-
         flag = l[i].transList[0].timestamp.tv_nsec;
+
+        if (flag){
+            print_block(&l[i]);
     }
+
+    }
+
     fclose(fp);
 }
 
@@ -217,7 +213,27 @@ void print_transaction_pool(pool *transPool)
         printf("[%d]", i);
         printable = tmp->head->transactionMessage.userTrans;
         print_transaction(&printable);
+
         tmp->head = tmp->head->transactionMessage.next;
+        i++;
+    }
+}
+
+void print_outgoing_pool(struct node *outPool)
+{
+    struct node *tmp = outPool;
+    int i = 0;
+    pid_t pidCaller = getpid();
+    transaction printable;
+
+    printf("[USER %d] printing out pool:\n", pidCaller);
+    while (tmp->next != NULL)
+    {
+        printf("[%d]", i);
+        printable = tmp->trans;
+        print_transaction(&printable);
+
+        tmp = tmp->next;
         i++;
     }
 }

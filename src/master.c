@@ -25,6 +25,7 @@ block *ledger_ptr;
 
 int semPIDs_ID;
 int semLedger_ID;
+int masterQ;
 
 /*extern int usersPrematurelyDead = 0;*/
 
@@ -66,26 +67,26 @@ void make_arguments(int *IPC_array, char **argv)
     argv[8] = NULL; /* Terminating argv with NULL value */
 }
 
-/* initializes message queue specific to own PID and sets it's size to SO_TP_SIZE */
-void message_queue_init()
+/* initializes message queue specific to own PID */
+int message_queue_init()
 {
     int ownPID = getpid();
     /* gets ID of message queue of key=myPID and assigns it to queueID */
     int queueID = msgget(ownPID, IPC_CREAT | IPC_EXCL | 0600);
-    TEST_ERROR
     switch (errno)
     {
     case EIDRM:
-        printf("[NODE %d] queue %d was removed\n", ownPID, queueID);
+        printf("[PROCESS %d] queue %d was removed\n", ownPID, queueID);
         break;
     case EINVAL:
-        printf("[NODE %d] queue %d invalid value for cmd or msqid\n", ownPID, queueID);
+        printf("[PROCESS %d] queue %d invalid value for cmd or msqid\n", ownPID, queueID);
         break;
     case EPERM:
-        printf("[NODE %d] queue %d the effective user ID of the calling process is not the creator or the owner\n", ownPID, queueID);
+        printf("[PROCESS %d] queue %d the effective user ID of the calling process is not the creator or the owner\n", ownPID, queueID);
         break;
     }
-    TRACE(("[NODE %d] queueID is %d\n", ownPID, queueID))
+    TRACE(("[PROCESS %d] queueID is %d\n", ownPID, queueID))
+    return queueID;
 }
 
 /* fork and execve a "./users" */
@@ -112,9 +113,24 @@ void spawn_user(char *userArgv[], int uCounter)
 }
 
 /* fork and execve a "./nodes" */
-void spawn_node(char *nodeArgv[], int nCounter)
+int spawn_node(char *nodeArgv[], int nCounter)
 {
+    static int overBuf = 0;
+    struct msgbuf_friends friendsMsg;
     pid_t nodePID = fork();
+    pid_t *friends = malloc(sizeof(pid_t) * par->SO_FRIENDS_NUM);
+    make_friend_list(friends);
+
+    friendsMsg.mtype = FRIENDS_MTYPE;
+    friendsMsg.friendList = friends;
+
+    if (overBuf == 0)
+        overBuf = par->SO_NODES_NUM;
+    if (overBuf >= par->SO_NODES_NUM * 2 - 1) /* maximum capacity reached */
+        return ERROR;
+    else if (nCounter == -1)
+        nCounter = overBuf++;
+
     switch (nodePID)
     {
     case -1: /* Error case */
@@ -125,7 +141,9 @@ void spawn_node(char *nodeArgv[], int nCounter)
         TRACE(("[MASTER] Spawning node with associated queue\n"));
 
         /* initialize a separate message queue for every node */
-        message_queue_init();
+
+        send_message(message_queue_init(), &friendsMsg, sizeof(struct msgbuf_friends), 0);
+
         execve(NODE_NAME, nodeArgv, NULL);
         TEST_ERROR
         TRACE(("!!! Message that should never be seen !!!\n"));
@@ -133,8 +151,47 @@ void spawn_node(char *nodeArgv[], int nCounter)
 
     default:
         nodesPID[nCounter].pid = nodePID;
-        return;
+        break;
     }
+    return SUCCESS;
+}
+
+/* generates a friend list based on Knuth algorithm */
+void make_friend_list(pid_t *friends)
+{
+    /* the problem is that with num friends close to num nodes extracting
+     * the last few friends becomes increasingly less likely to succedeed;
+     * Using the knoth algoritm we generate an array of random indexes
+     * in ascending order, that's not a problem because the nodes will extract
+     * a random index anyway when "hopping" a transaction to a different node
+     */
+
+    /* Knuth algorithm */ /*friends = m, nodes = n */
+    const int numNodes = par->SO_NODES_NUM;
+    const int numFriends = par->SO_FRIENDS_NUM;
+
+    int iFriends = 0, iNodes;
+
+    int toIterate, toFind;
+
+    int *friendsIndexes = malloc(sizeof(int) * numNodes);
+    int i;
+
+    srand(time(NULL));
+    for (iNodes = 0; iFriends < numFriends && iNodes < numNodes; ++iNodes)
+    {
+        toIterate = numNodes - iNodes;
+        toFind = numFriends - iFriends;
+        if (rand() % toIterate < toFind)
+            friendsIndexes[iFriends++] = iNodes + 1; /* +1 since your range begins from 1 */
+    }
+
+    for (i = 0; i < numFriends; i++)
+    {
+        friends[i] = nodesPID[friendsIndexes[i]].pid;
+    }
+
+    free(friendsIndexes);
 }
 
 /* attach usersPID, nodesPID, par and mainLedger to shared memory, returns an array with respective IDs */
@@ -166,8 +223,11 @@ void shared_memory_objects_init(int *shmArray)
                          (par->SO_USER_NUM) * sizeof(user),
                          0600 | IPC_CREAT | IPC_EXCL);
     TEST_ERROR
+    /* make it twice as big to account for extra nodes and avoid reallocating
+     * a shared memory resource
+     */
     nodesPID_ID = shmget(SHM_NODES_ARRAY,
-                         (par->SO_NODES_NUM) * sizeof(node),
+                         (par->SO_NODES_NUM) * sizeof(node) * 2,
                          0600 | IPC_CREAT | IPC_EXCL);
     TEST_ERROR
     usersPID = (user *)shmat(usersPID_ID, NULL, 0);
@@ -219,16 +279,48 @@ void make_ipc_array(int *IPC_array)
     TRACE(("[MASTER] IPC_array={%d,%d,%d,%d,%d,%d}\n", IPC_array[0], IPC_array[1], IPC_array[2], IPC_array[3], IPC_array[4], IPC_array[5]))
 }
 
+void start_continuous_print()
+{
+    int i, activeUsers, activeNodes;
+    int time = par->SO_SIM_SEC;
+
+    while (time)
+    {
+        activeNodes = 0;
+        activeUsers = 0;
+
+        for (i = 0; i < par->SO_USER_NUM; i++)
+        {
+            if (usersPID[i].status == alive)
+                activeUsers++;
+        }
+
+        for (i = 0; i < par->SO_NODES_NUM; i++)
+        {
+            if (nodesPID[i].status == available)
+                activeNodes++;
+        }
+
+        /*printf("\r\nNUM ACTIVE USERS: %d\nNUM ACTIVE NODES: %d\n\n", activeUsers, activeNodes);
+        fflush(stdout);*/
+
+        sleep(time--);
+    }
+
+    printf("\r\nNUM ACTIVE USERS: %d\nNUM ACTIVE NODES: %d\n\n", activeUsers, activeNodes);
+}
+
 /* CTRL-C handler */
 void master_interrupt_handle(int signum)
 {
     int status, wpid;
-    
+
     write(1, "::MASTER:: SIGINT ricevuto\n", 28);
     killpg(0, SIGINT);
 
     /* just to avoid printing before everyone has finished*/
     /*while (wait(&status) != -1)
+
     {
         status >> 8; /* no idea about what it does please help *
     }*/
@@ -241,8 +333,8 @@ void master_interrupt_handle(int signum)
 
     semctl(semPIDs_ID, 1, IPC_RMID);
     semctl(semLedger_ID, 1, IPC_RMID);
+    msgctl(masterQ, IPC_RMID, NULL);
 
-    report_mem_leak();
     exit(0);
 }
 
@@ -251,7 +343,6 @@ int main(int argc, char *argv[])
     pid_t myPID = getpid();
 
     int uCounter, nCounter, returnVal;
-    int simTime;
     int ipcObjectsIDs[IPC_NUM];
     char *argvSpawns[9 * (3 * sizeof(int) + 1)] = {0};
 
@@ -262,7 +353,6 @@ int main(int argc, char *argv[])
     semaphores_init();
     make_ipc_array(ipcObjectsIDs);
     make_arguments(ipcObjectsIDs, argvSpawns);
-    simTime = par->SO_SIM_SEC;
 
     /* -- SIGNAL HANDLER --
      * first set all bytes of sigation to 0
@@ -272,6 +362,10 @@ int main(int argc, char *argv[])
     bzero(&sa, sizeof(sa));
     sa.sa_handler = master_interrupt_handle;
     sigaction(SIGINT, &sa, NULL);
+    sigaction(SIGALRM, &sa, NULL);
+
+    /* init message queue to receive transactions that have hopped too much */
+    masterQ = message_queue_init();
 
     argvSpawns[0] = NODE_NAME;
     TRACE(("[MASTER] argv values for nodes: %s %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7], argvSpawns[8]))
@@ -287,7 +381,6 @@ int main(int argc, char *argv[])
             return 0;
         }
     }
-    TRACE(("[MASTER] nodesPID = {%d, %d, %d, %d, %d, ...}\n", nodesPID[0].pid, nodesPID[1].pid, nodesPID[2].pid, nodesPID[3].pid, nodesPID[4].pid))
 
     /*usersPrematurelyDead = 0;*/
     argvSpawns[0] = USER_NAME;
@@ -312,13 +405,49 @@ int main(int argc, char *argv[])
             return 0;
         }
     }
-    TRACE(("[MASTER] usersPID = {%d, %d, %d, %d, %d, ...}\n", usersPID[0].pid, usersPID[1].pid, usersPID[2].pid, usersPID[3].pid, usersPID[4].pid))
 
-    sleep(simTime);
+    alarm(par->SO_SIM_SEC);
+    switch (fork())
+    {
+    case -1:
+        TRACE(("[MASTER] error forking\n"))
+        break;
 
-    print_time_to_die();
+    case 0:
+    {
+        struct msgbuf_trans transHopped;
+        signal(SIGINT, SIG_DFL); /* else it would print ledger and all twice */
+        while (1)
+        {
+            receive_message(masterQ, &transHopped, sizeof(struct msgbuf_trans), TRANSACTION_MTYPE, 0);
+            argvSpawns[0] = NODE_NAME;
 
-    killpg(0, SIGINT); /* our sigint handler needs to do quite a lot of things to print the wall of test below */
+            LOCK;
+            nodesPID[nCounter].status = available;
+            nodesPID[nCounter].balance = 0;
+            if (spawn_node(argvSpawns, -1) != 0)
+            {
+                TRACE(("[MASTER] too many nodes created to compensate for hopping already\n"))
+                UNLOCK
+                break;
+            }
+            TRACE(("[MASTER] spawned a node due to hopped transaction\n"))
+            UNLOCK
+            if (getpid() != myPID)
+                return 0;
 
+            /* missing section where master orders to existing nodes to add this one to
+             * their list of friends
+             */
+        }
+    }
+    break;
+
+    default:
+        start_continuous_print();
+
+        killpg(0, SIGINT); /* our sigint handler needs to do quite a lot of things to print the wall of test below */
+        return 0;
+    }
     return 0;
 }

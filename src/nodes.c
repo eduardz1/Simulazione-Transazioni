@@ -9,11 +9,12 @@
  ======================
  */
 
-int currBalance;
+unsigned long currBalanceNode = 0;
 /* parameters of simulation */
 struct parameters *par;
 user *usersPID;
 node *nodesPID;
+pid_t *friends;
 block *ledger;
 
 int semPIDs_ID;
@@ -23,6 +24,8 @@ int queueID;
 pid_t myPID;
 
 pool transPool;
+
+int flag = 0; /* every 20 transactions I send 1 to a friend */
 
 /* acts as buffer for currently fetched message to be copied into pool */
 struct msgbuf_trans fetchedMex;
@@ -39,46 +42,48 @@ void message_queue_attach()
     do
     {
         queueID = msgget(myPID, 0);
-        /* TRACE(("[USER %d] is trying to attach to id=%d queue\n", myPID, queueID)) */
+        TEST_ERROR
     } while (errno == ENOENT);
-    TRACE(("[NODE %d] succedeed in attaching to queue %d\n", myPID, queueID))
 }
 
 /* process starts fetching transactions from it's msg_q until transPool is full */
 void fetch_messages()
 {
-    if (transPool.size < par->SO_TP_SIZE)
+    /* tried initializing flag as static, didnt work */
+    TRACE(("[NODE %d] flag: %d\n", myPID, flag))
+    if (transPool.size < par->SO_TP_SIZE && flag < 20)
     {
-        TRACE(("[NODE %d] Trying to receive message of size(transaction) from queue %d\n", myPID, queueID))
-        msgrcv(queueID, &fetchedMex, sizeof(struct msgbuf_trans), TRANSACTION_MTYPE, 0);
-        switch (errno)
-        {
-        case E2BIG:
-            printf("[NODE %d] the message length is greater than sizeof(transaction)\n", myPID);
-            break;
-        case EACCES:
-            printf("[NODE %d] no read permission on queue\n", myPID);
-            break;
-        case EFAULT:
-            printf("[NODE %d] address pointed by msgp inaccessible\n", myPID);
-            break;
-        case EIDRM:
-            printf("[NODE %d] mesage queue removed\n", myPID);
-            break;
-        case EINTR:
-            printf("[NODE %d] signal caught while receiving a message\n", myPID);
-            break;
-        default:
-            TRACE(("[NODE %d] fetched a transaction\n", myPID));
-        }
+        receive_message(queueID, &fetchedMex, sizeof(struct msgbuf_trans), TRANSACTION_MTYPE, 0);
         TRACE(("[NODE %d] received %d UC to process from [USER %d] to [USER %d]\n", myPID, fetchedMex.transactionMessage.userTrans.amount, fetchedMex.transactionMessage.userTrans.sender, fetchedMex.transactionMessage.userTrans.receiver))
         add_to_pool(&transPool, &fetchedMex);
         transPool.size++;
+        flag++;
     }
     else
     {
-        TRACE(("[NODE %d] pool is full\n", myPID))
-        sleep(1);
+        send_to_random_friend();
+        flag = 0;
+    }
+}
+
+void send_to_random_friend()
+{
+    int i = RAND(0, par->SO_FRIENDS_NUM - 1);
+    struct msgbuf_trans tMex = remove_tail(&transPool);
+
+    if (tMex.mtype != TRANSACTION_MTYPE)
+        return; /* no message coudl be extracted */
+
+    if (tMex.transactionMessage.hops <= 0)
+    {
+        TRACE(("[NODE %d] asking master to create new node\n", myPID))
+        send_message(msgget(getppid(), 0), &tMex, sizeof(struct msgbuf_trans), 0);
+    }
+    else
+    {
+        tMex.transactionMessage.hops--;
+        TRACE(("[NODE %d] hop!\n", myPID))
+        send_message(msgget(friends[i], 0), &tMex, sizeof(struct msgbuf_trans), 0);
     }
 }
 
@@ -110,7 +115,7 @@ void new_block(transaction *blockTransaction, block *newBlock)
         newBlock->transList[i] = blockTransaction[i - 1];
     }
 
-    print_block(newBlock);
+    /*print_block(newBlock);*/
 }
 
 /* fills the buffer with SO_BLOCK_SIZE-1 transactions */
@@ -123,6 +128,15 @@ void fill_block_transList(transaction *transListWithoutReward)
     {
         transListWithoutReward[i] = remove_from_pool(&transPool);
         transPool.size--;
+    }
+}
+
+void confirm_block(block *toConfirm)
+{
+    int i;
+    for (i = 0; i < SO_BLOCK_SIZE; i++)
+    {
+        toConfirm->transList[i].status = confirmed;
     }
 }
 
@@ -140,6 +154,7 @@ void insert_block_in_ledger(block *newBlock)
 
             sem_reserve(semLedger_ID, 1);
             ledger[i] = tmp;
+            confirm_block(&ledger[i]);
             sem_release(semLedger_ID, 1);
 
             return;
@@ -167,7 +182,11 @@ int sum_reward(transaction *sumBlock)
         sum += sumBlock[i].reward;
     }
 
-    currBalance += sum;
+    currBalanceNode += sum;
+    sem_reserve(semPIDs_ID, 1);
+    nodesPID[get_pid_nodeIndex()].balance = currBalanceNode;
+    sem_release(semPIDs_ID, 1);
+    TRACE(("[NODE %d] curr balance is %lu UC\n", myPID, currBalanceNode))
 
     return sum;
 }
@@ -191,7 +210,7 @@ void attach_ipc_objects(char **argv)
 int get_pid_nodeIndex()
 {
     int i = 0;
-    for (i = 0; i < par->SO_NODES_NUM; i++)
+    for (i = 0; i < par->SO_NODES_NUM * 2; i++)
     {
         if (nodesPID[i].pid == myPID)
             return i;
@@ -209,23 +228,14 @@ void signal_handler_init(struct sigaction *saINT_node)
 /* CTRL-C handler */
 void node_interrupt_handle(int signum)
 {
-    int nodeIndex = get_pid_nodeIndex();
+
     TEST_ERROR
     write(1, "::NODE:: SIGINT received\n", 26);
-
-    print_transaction_pool(&transPool);
-
-    /*sem_reserve(semPIDs_ID, 1);*/
-    TEST_ERROR
-    nodesPID[nodeIndex].balance = currBalance;
-    /*sem_release(semPIDs_ID, 1);*/
-    TEST_ERROR
 
     msgctl(queueID, IPC_RMID, NULL);
     TRACE(("[NODE] queue removed\n"))
     TEST_ERROR
 
-    report_mem_leak_nodes();
     exit(0);
 }
 
@@ -239,28 +249,27 @@ int main(int argc, char *argv[])
     struct timespec sleepTimeRemaining;
     struct sigaction saINT_node;
 
+    struct msgbuf_friends friendMex;
+
     myPID = getpid();
-    currBalance = 0;
 
     bzero(&saINT_node, sizeof(saINT_node));
 
     attach_ipc_objects(argv);
-    
-    signal_handler_init(&saINT_node); /* no idea why it isn't working, it's literally the same implementation as user */
-    TRACE(("[NODE %d] sighandler init\n", myPID));
 
+    signal_handler_init(&saINT_node);
     message_queue_attach();
+
+    friends = malloc(par->SO_FRIENDS_NUM * sizeof(pid_t));
+    receive_message(queueID, &friendMex, sizeof(struct msgbuf_friends), FRIENDS_MTYPE, 0);
+    friends = friendMex.friendList;
+
     transaction_pool_init(&transPool);
     TEST_ERROR
     while (1)
     {
 
         /*
-         * msgrcv transactions in loop until pool is full
-         * if size is >= SO_BLOCK_SIZE-1 fork and create a block
-         * append to ledger said block
-         * SLEEP
-         * exit(0)
          * if process is killed it will receive a SIGCHLD signal
          * it means that the process was killed while processing a block
          * need to manage
@@ -274,7 +283,7 @@ int main(int argc, char *argv[])
             switch (fork())
             {
             case -1: /* error */
-                printf("[NODE %d] error while forking to create a block\n", myPID);
+                TRACE(("[NODE %d] error while forking to create a block\n", myPID));
                 break;
 
             case 0: /* child creates a new block and appends it to ledger */
@@ -298,4 +307,6 @@ int main(int argc, char *argv[])
             }
         }
     }
+
+    TRACE(("[NODE %d] somehow I broke free from an endless while loop\n", myPID))
 }
