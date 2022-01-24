@@ -1,6 +1,8 @@
 #ifndef SIMULAZIONE_TRANSAZIONI_NODES_H
 #define SIMULAZIONE_TRANSAZIONI_NODES_H
 
+#include "../utils/msg.h"
+
 /* sets sleep time with nsec precision for trans_proc */
 #define SLEEP_TIME_SET        \
     randSleepTime.tv_sec = 0; \

@@ -61,7 +61,20 @@ void print_kill_signal();
 void print_user_balance();
 void print_node_balance();
 void print_num_aborted();
-void print_num_blocks();
+void print_num_blocks(block *l){
+    int i = 0;
+    int blockIndex = 0;
+
+    if(l[i].transList[0].timestamp.tv_nsec + l[i].transList->timestamp.tv_sec == 0)
+        return;
+
+    for (i = 0; i < SO_REGISTRY_SIZE && blockIndex == 0; i++)
+    {
+        if(l[i].transList[0].timestamp.tv_nsec + l[i].transList->timestamp.tv_sec == 0)
+            blockIndex = l[i-1].blockIndex;
+    }
+    printf("NUM BLOCKS: %d\n", blockIndex);
+}
 void print_transactions_still_in_pool();
 
 void final_print(pid_t masterPID, user *usersPID, node *nodesPID, struct parameters *par)

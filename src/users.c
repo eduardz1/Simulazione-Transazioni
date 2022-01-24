@@ -178,44 +178,20 @@ int send_transaction()
 {
 	transaction sent;
 
-	msgsnd(queueID, &transMsg, sizeof(struct msgbuf_trans), IPC_NOWAIT);
-	switch (errno)
+	if (send_message(queueID, &transMsg, sizeof(struct msgbuf_trans), 1) == 0)
 	{
-	case EACCES:
-		printf("[USER %d] no write permission on queue\n", myPID);
-		break;
-	case EFAULT:
-		printf("[USER %d] address pointed by msgp inaccessible\n", myPID);
-		break;
-	case EIDRM:
-		printf("[USER %d] message queue removed\n", myPID);
-		break;
-	case EINTR:
-		TRACE(("[USER %d] signal caught when waiting for queue to free\n", myPID));
-		break;
-	case EINVAL:
-		printf("[USER %d] invalid  msqid  value,  or nonpositive mtype value, or invalid msgsz value\n", myPID);
-		break;
-	case ENOMEM:
-		printf("[USER %d] system out of memory\n", myPID); /* should basically never happen I hope */
-		break;
-	default:
-	{
+
 		TRACE(("[USER %d] sent a transaction of %d UC to [USER %d] via queue %d\n", myPID, transMsg.transactionMessage.userTrans.amount, transMsg.transactionMessage.userTrans.receiver, queueID))
 		currBalance -= (transMsg.transactionMessage.userTrans.amount + transMsg.transactionMessage.userTrans.reward);
 
 		sent = transMsg.transactionMessage.userTrans;
 		/* track transactions that are yet to be received */
 		if (outGoingTransactions == NULL)
-		{
 			outGoingTransactions = new_node(sent);
-		}
 		else
-		{
 			push(outGoingTransactions, sent);
-		}
+
 		return SUCCESS;
-	}
 	}
 
 	transMsg.transactionMessage.userTrans.status = aborted;
@@ -241,12 +217,30 @@ int search_trans_list(block *blockToSearch)
 	return accumulate;
 }
 
+/* safely updates balance of user */
+void update_balance(unsigned int tempBalance)
+{
+	int i = get_pid_userIndex(myPID);
+
+	sem_reserve(semPIDs_ID, 1);
+	currBalance = tempBalance;
+	usersPID[i].balance = currBalance;
+	sem_release(semPIDs_ID, 1);
+}
+
 /* saves balance of calling user in currBalance */
 void get_balance()
 {
 	struct node *tmp;
 	int i, j;
 	long accumulate = 0; /* needs to fit two unsigned ints inside */
+	long flag = 1;
+
+	/* balance is buffere in tempBalance so that if the program is interrupted
+	 * while get_balance() is running the user doesn't suddently get his
+	 * balance reset to SO_BUDGET_INIT
+	 */
+	unsigned int tempBalance = par->SO_BUDGET_INIT;
 
 	/* create a local copy to avoid inconsistencies, we could use semaphores
 	 * but parsing the entire ledger and the outGoing list takes an awful lot
@@ -256,14 +250,6 @@ void get_balance()
 	 */
 	block ledgerTemp[SO_REGISTRY_SIZE];
 	memcpy(&ledgerTemp, ledger, sizeof(ledgerTemp));
-
-	long flag = 1;
-
-	/* balance is buffere in tempBalance so that if the program is interrupted
-	 * while get_balance() is running the user doesn't suddently get his
-	 * balance reset to SO_BUDGET_INIT
-	 */
-	unsigned int tempBalance = par->SO_BUDGET_INIT;
 
 	for (i = 0; i < SO_REGISTRY_SIZE && flag != 0; i++)
 	{
@@ -318,21 +304,10 @@ void get_balance()
 	{
 		printf("[USER %d] went out of bound, punishment for being that rich is death\n", myPID);
 		update_status(2);
-		kill(0, SIGINT);
+		kill(myPID, SIGINT);
 	}
 
 	update_balance(tempBalance);
-}
-
-/* safely updates balance of user */
-void update_balance(unsigned int tempBalance)
-{
-	int i = get_pid_userIndex(myPID);
-
-	sem_reserve(semPIDs_ID, 1);
-	currBalance = tempBalance;
-	usersPID[i].balance = currBalance;
-	sem_release(semPIDs_ID, 1);
 }
 
 /* SIGUSR1 handler, sends a transaction */
@@ -418,7 +393,7 @@ int main(int argc, char *argv[])
 			{
 				update_status(2);
 				TRACE(("[USER %d] max retry reached, life has no meaning any more\n", myPID))
-				kill(0, SIGINT);
+				kill(myPID, SIGINT);
 			}
 
 			SLEEP

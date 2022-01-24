@@ -7,6 +7,7 @@
 #include <sys/sem.h>
 #include <sys/msg.h>
 #include <errno.h>
+#include "../utils/msg.h"
 
 /* sets sleep time with nsec precision for trans_gen */
 #define SLEEP_TIME_SET        \

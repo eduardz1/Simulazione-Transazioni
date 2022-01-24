@@ -114,6 +114,9 @@ void spawn_user(char *userArgv[], int uCounter)
 void spawn_node(char *nodeArgv[], int nCounter)
 {
     pid_t nodePID = fork();
+    pid_t *friends = malloc(sizeof(pid_t) * par->SO_FRIENDS_NUM);
+    make_friend_list(friends);
+
     switch (nodePID)
     {
     case -1: /* Error case */
@@ -125,6 +128,7 @@ void spawn_node(char *nodeArgv[], int nCounter)
 
         /* initialize a separate message queue for every node */
         message_queue_init();
+
         execve(NODE_NAME, nodeArgv, NULL);
         TEST_ERROR
         TRACE(("!!! Message that should never be seen !!!\n"));
@@ -134,6 +138,42 @@ void spawn_node(char *nodeArgv[], int nCounter)
         nodesPID[nCounter].pid = nodePID;
         return;
     }
+}
+
+/* generates a friend list based on Knuth algorithm */
+void make_friend_list(pid_t *friends)
+{
+    /* the problem is that with num friends close to num nodes extracting
+     * the last few friends becomes increasingly less likely to succedeed;
+     * Using the knoth algoritm we generate an array of random indexes 
+     * in ascending order, that's not a problem because the nodes will extract
+     * a random index anyway when "hopping" a transaction to a different node
+     */
+
+    /* Knuth algorithm */
+    const int numNodes = par->SO_NODES_NUM;
+    const int numFriends = par->SO_FRIENDS_NUM;
+
+    int iFriends, iNodes = 0;
+
+    int toIterate, toFind;
+
+    int *friendsIndexes = malloc(sizeof(int) * numNodes);
+    int i;
+
+    for (iFriends = 0; iFriends < numFriends && iNodes < numFriends; ++iFriends)
+    {
+        toIterate = numFriends - iFriends;
+        toFind = numNodes - iNodes;
+        if (rand() % toIterate < toFind)
+            friendsIndexes[iNodes++] = iFriends + 1; /* +1 since your range begins from 1 */
+    }
+
+    for(i = 0; i<numNodes; i++){
+        friends[i] = nodesPID[friendsIndexes[i]].pid;
+    }
+
+    free(friendsIndexes);
 }
 
 /* attach usersPID, nodesPID, par and mainLedger to shared memory, returns an array with respective IDs */
@@ -240,11 +280,13 @@ void start_continuous_print()
                 activeNodes++;
         }
 
-        printf("\r\nNUM ACTIVE USERS: %d\nNUM ACTIVE NODES: %d\n\n", activeUsers);
-        fflush(stdout);
+        /*printf("\r\nNUM ACTIVE USERS: %d\nNUM ACTIVE NODES: %d\n\n", activeUsers, activeNodes);
+        fflush(stdout);*/
 
         sleep(time--);
     }
+
+    printf("\r\nNUM ACTIVE USERS: %d\nNUM ACTIVE NODES: %d\n\n", activeUsers, activeNodes);
 }
 
 /* CTRL-C handler */
@@ -278,7 +320,6 @@ int main(int argc, char *argv[])
     pid_t myPID = getpid();
 
     int uCounter, nCounter, returnVal;
-    int simTime;
     int ipcObjectsIDs[IPC_NUM];
     char *argvSpawns[9 * (3 * sizeof(int) + 1)] = {0};
 
@@ -289,7 +330,6 @@ int main(int argc, char *argv[])
     semaphores_init();
     make_ipc_array(ipcObjectsIDs);
     make_arguments(ipcObjectsIDs, argvSpawns);
-    simTime = par->SO_SIM_SEC;
 
     /* -- SIGNAL HANDLER --
      * first set all bytes of sigation to 0
