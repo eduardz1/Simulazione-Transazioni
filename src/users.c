@@ -29,6 +29,8 @@
  ======================
  */
 
+extern int errno;
+
 /* parameters of simulation */
 struct parameters *par;
 user *usersPID;
@@ -40,7 +42,7 @@ int queueID;
 
 struct node *outGoingTransactions = NULL;
 
-int currBalance;
+unsigned int currBalance;
 pid_t myPID;
 struct msgbuf_trans transMsg;
 
@@ -77,7 +79,6 @@ pid_t get_random_userPID()
 			val = usersPID[index].pid;
 	} while (!val);
 
-	TRACE(("[USER %d] extracted usersPID[%d]\n", myPID, index));
 	return val;
 }
 
@@ -90,7 +91,6 @@ pid_t get_random_nodePID()
 	do
 	{
 		index = RAND(0, par->SO_NODES_NUM - 1);
-		TRACE(("[USER %d] extracted nodesPID[%d]\n", myPID, index));
 		if (nodesPID[index].status == available)
 			val = nodesPID[index].pid;
 	} while (!val);
@@ -137,9 +137,7 @@ void queue_to_pid(pid_t nodePID)
 	do
 	{
 		queueID = msgget(nodePID, 0);
-		/* TRACE(("[USER %d] is trying to attach to id=%d queue\n", myPID, queueID)) */
 	} while (errno == ENOENT);
-	TRACE(("[USER %d] succedeed in attaching to queue %d\n", myPID, queueID))
 }
 
 /* initializes transaction values and sets it to pending */
@@ -178,11 +176,9 @@ void signal_handlers_init(struct sigaction *saUSR1, struct sigaction *saINT)
 /* send transaction currTrans to user userPID via node nodePID */
 int send_transaction()
 {
-	/* accumulate amount of transactions sent but yet to be received */
-	int out = 0;
 	transaction sent;
 
-	msgsnd(queueID, &transMsg, sizeof(struct msgbuf_trans), 0);
+	msgsnd(queueID, &transMsg, sizeof(struct msgbuf_trans), IPC_NOWAIT);
 	switch (errno)
 	{
 	case EACCES:
@@ -206,31 +202,25 @@ int send_transaction()
 	default:
 	{
 		TRACE(("[USER %d] sent a transaction of %d UC to [USER %d] via queue %d\n", myPID, transMsg.transactionMessage.userTrans.amount, transMsg.transactionMessage.userTrans.receiver, queueID))
+		currBalance -= (transMsg.transactionMessage.userTrans.amount + transMsg.transactionMessage.userTrans.reward);
 
 		sent = transMsg.transactionMessage.userTrans;
 		/* track transactions that are yet to be received */
 		if (outGoingTransactions == NULL)
 		{
-
-			TEST_ERROR
-
 			outGoingTransactions = new_node(sent);
-			;
 		}
 		else
 		{
 			push(outGoingTransactions, sent);
-			TEST_ERROR
 		}
 		return SUCCESS;
 	}
 	}
-	currBalance -= (transMsg.transactionMessage.userTrans.amount + transMsg.transactionMessage.userTrans.reward);
-	out += (transMsg.transactionMessage.userTrans.amount + transMsg.transactionMessage.userTrans.reward);
 
 	transMsg.transactionMessage.userTrans.status = aborted;
 	currBalance += (transMsg.transactionMessage.userTrans.amount + transMsg.transactionMessage.userTrans.reward);
-	out -= (transMsg.transactionMessage.userTrans.amount + transMsg.transactionMessage.userTrans.reward);
+
 	/* we can then track this type of aborted transactions but rn there's no need to */
 	return ERROR;
 }
@@ -256,31 +246,93 @@ void get_balance()
 {
 	struct node *tmp;
 	int i, j;
-	int accumulate = 0;
+	long accumulate = 0; /* needs to fit two unsigned ints inside */
 
-	for (i = 0; i < SO_REGISTRY_SIZE; i++)
+	/* create a local copy to avoid inconsistencies, we could use semaphores
+	 * but parsing the entire ledger and the outGoing list takes an awful lot
+	 * and would make our program very inefficient, memory is relatively cheap,
+	 * even with real blockchains you have to save the entire chain to the hard drive
+	 * if you want to make a local keychain so it should make sense
+	 */
+	block ledgerTemp[SO_REGISTRY_SIZE];
+	memcpy(&ledgerTemp, ledger, sizeof(ledgerTemp));
+
+	long flag = 1;
+
+	/* balance is buffere in tempBalance so that if the program is interrupted
+	 * while get_balance() is running the user doesn't suddently get his
+	 * balance reset to SO_BUDGET_INIT
+	 */
+	unsigned int tempBalance = par->SO_BUDGET_INIT;
+
+	for (i = 0; i < SO_REGISTRY_SIZE && flag != 0; i++)
 	{
-		for (j = 1; j < SO_BLOCK_SIZE - 1; j++)
+		/* can't have time = 0 unless the block is not initialized */
+		flag = (ledgerTemp[i].transList->timestamp.tv_nsec) + (ledgerTemp[i].transList->timestamp.tv_sec);
+
+		for (j = 1; j < SO_BLOCK_SIZE && flag != 0; j++)
 		{
-			find_and_remove(outGoingTransactions, &ledger[i].transList[j]); /* SEGFAULT */
-			if (ledger[i].transList[j].sender == myPID)
+			/*TEST_ERROR file too large an absurd amount of times */
+			if (ledgerTemp[i].transList[j].sender == myPID)
 			{
-				accumulate -= ledger[i].transList[j].amount;
+				find_and_remove(&outGoingTransactions, &ledgerTemp[i].transList[j]);
+				accumulate -= (ledgerTemp[i].transList[j].amount + ledgerTemp[i].transList[j].reward);
 			}
-			else if (ledger[i].transList[j].receiver == myPID)
+			else if (ledgerTemp[i].transList[j].receiver == myPID)
 			{
-				TRACE(("[USER %d] found myself as receiver of %d UC\n", myPID, ledger[i].transList[j].amount))
-				accumulate += ledger[i].transList[j].amount;
+				/* TRACE(("[USER %d] found myself as receiver of %d UC\n", myPID, ledgerTemp[i].transList[j].amount)) */
+				accumulate += ledgerTemp[i].transList[j].amount;
 			}
 		}
 	}
 
-	for (tmp = outGoingTransactions; tmp != NULL; tmp = tmp->next)
+	tmp = outGoingTransactions;
+
+	/*if (tmp != NULL) /* just for testing, can be removed later *
 	{
-		accumulate -= tmp->trans.amount;
+		TRACE(("[USER %d] accumulate before removing out=%d\n", myPID, accumulate))
+		TRACE(("[USER %d] tmp->next: %p\n", myPID, tmp->next))
+		if (tmp->next != NULL)
+		{
+			TRACE(("[USER %d] outGoingTransactions->next: %p\n", myPID, outGoingTransactions->next))
+			TRACE(("[USER %d] outGoingTransactions->next->trans = amount: %u, sender: %d, receiver: %d\n", myPID, outGoingTransactions->next->trans.amount, outGoingTransactions->next->trans.sender, outGoingTransactions->next->trans.receiver))
+		}
+	}*/
+
+	while (tmp != NULL)
+	{
+		accumulate -= (tmp->trans.amount + tmp->trans.reward);
+		tmp = tmp->next;
 	}
 
-	currBalance += accumulate;
+	TRACE(("[USER %d] accumulate=%d\n", myPID, accumulate))
+	if (accumulate * (-1) > tempBalance)
+	{
+		printf("*** [USER %d] errror in calculating balance, overflow ***\n", myPID);
+		print_outgoing_pool(outGoingTransactions);
+		killpg(0, SIGINT);
+	}
+
+	tempBalance += accumulate;
+	if (errno == ERANGE) /* not working as intended */
+	{
+		printf("[USER %d] went out of bound, punishment for being that rich is death\n", myPID);
+		update_status(2);
+		kill(0, SIGINT);
+	}
+
+	update_balance(tempBalance);
+}
+
+/* safely updates balance of user */
+void update_balance(unsigned int tempBalance)
+{
+	int i = get_pid_userIndex(myPID);
+
+	sem_reserve(semPIDs_ID, 1);
+	currBalance = tempBalance;
+	usersPID[i].balance = currBalance;
+	sem_release(semPIDs_ID, 1);
 }
 
 /* SIGUSR1 handler, sends a transaction */
@@ -298,7 +350,6 @@ void user_interrupt_handle(int signum)
 {
 	write(1, "::USER:: SIGINT received\n", 26);
 
-	report_mem_leak_users();
 	exit(0);
 }
 
@@ -331,6 +382,7 @@ int main(int argc, char *argv[])
 
 	currBalance = par->SO_BUDGET_INIT;
 	retry = par->SO_RETRY;
+
 	while (1)
 	{
 		SLEEP_TIME_SET
@@ -343,8 +395,11 @@ int main(int argc, char *argv[])
 		bzero(&sleepTimeRemaining, sizeof(sleepTimeRemaining));
 
 		get_balance();
+		TRACE(("[USER %d] curr balance: %u\n", myPID, currBalance))
 		if (currBalance >= 2)
 		{
+			update_status(0);
+
 			userPID = get_random_userPID();
 			nodePID = get_random_nodePID();
 
@@ -356,20 +411,22 @@ int main(int argc, char *argv[])
 			transaction_init(userPID, amount, reward);
 			if (send_transaction() == 0)
 				retry = par->SO_RETRY;
-			/*else
+			else
 				retry--;
 
 			if (retry == 0)
 			{
 				update_status(2);
-				return MAX_RETRY;
-			}*/
+				TRACE(("[USER %d] max retry reached, life has no meaning any more\n", myPID))
+				kill(0, SIGINT);
+			}
+
 			SLEEP
 		}
 		else
 		{
 			update_status(1);
-			sleep(1);
+			sleep(2);
 		}
 	}
 }

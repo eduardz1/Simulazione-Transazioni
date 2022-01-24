@@ -72,7 +72,6 @@ void message_queue_init()
     int ownPID = getpid();
     /* gets ID of message queue of key=myPID and assigns it to queueID */
     int queueID = msgget(ownPID, IPC_CREAT | IPC_EXCL | 0600);
-    TEST_ERROR
     switch (errno)
     {
     case EIDRM:
@@ -219,11 +218,40 @@ void make_ipc_array(int *IPC_array)
     TRACE(("[MASTER] IPC_array={%d,%d,%d,%d,%d,%d}\n", IPC_array[0], IPC_array[1], IPC_array[2], IPC_array[3], IPC_array[4], IPC_array[5]))
 }
 
+void start_continuous_print()
+{
+    int i, activeUsers, activeNodes;
+    int time = par->SO_SIM_SEC;
+
+    while (time)
+    {
+        activeNodes = 0;
+        activeUsers = 0;
+
+        for (i = 0; i < par->SO_USER_NUM; i++)
+        {
+            if (usersPID[i].status == alive)
+                activeUsers++;
+        }
+
+        for (i = 0; i < par->SO_NODES_NUM; i++)
+        {
+            if (nodesPID[i].status == available)
+                activeNodes++;
+        }
+
+        printf("\r\nNUM ACTIVE USERS: %d\nNUM ACTIVE NODES: %d\n\n", activeUsers);
+        fflush(stdout);
+
+        sleep(time--);
+    }
+}
+
 /* CTRL-C handler */
 void master_interrupt_handle(int signum)
 {
     int status, wpid;
-    
+
     write(1, "::MASTER:: SIGINT ricevuto\n", 28);
     killpg(0, SIGINT);
 
@@ -242,7 +270,6 @@ void master_interrupt_handle(int signum)
     semctl(semPIDs_ID, 1, IPC_RMID);
     semctl(semLedger_ID, 1, IPC_RMID);
 
-    report_mem_leak();
     exit(0);
 }
 
@@ -287,7 +314,6 @@ int main(int argc, char *argv[])
             return 0;
         }
     }
-    TRACE(("[MASTER] nodesPID = {%d, %d, %d, %d, %d, ...}\n", nodesPID[0].pid, nodesPID[1].pid, nodesPID[2].pid, nodesPID[3].pid, nodesPID[4].pid))
 
     /*usersPrematurelyDead = 0;*/
     argvSpawns[0] = USER_NAME;
@@ -312,9 +338,8 @@ int main(int argc, char *argv[])
             return 0;
         }
     }
-    TRACE(("[MASTER] usersPID = {%d, %d, %d, %d, %d, ...}\n", usersPID[0].pid, usersPID[1].pid, usersPID[2].pid, usersPID[3].pid, usersPID[4].pid))
 
-    sleep(simTime);
+    start_continuous_print();
 
     print_time_to_die();
 

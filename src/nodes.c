@@ -39,9 +39,8 @@ void message_queue_attach()
     do
     {
         queueID = msgget(myPID, 0);
-        /* TRACE(("[USER %d] is trying to attach to id=%d queue\n", myPID, queueID)) */
+        TEST_ERROR
     } while (errno == ENOENT);
-    TRACE(("[NODE %d] succedeed in attaching to queue %d\n", myPID, queueID))
 }
 
 /* process starts fetching transactions from it's msg_q until transPool is full */
@@ -49,7 +48,6 @@ void fetch_messages()
 {
     if (transPool.size < par->SO_TP_SIZE)
     {
-        TRACE(("[NODE %d] Trying to receive message of size(transaction) from queue %d\n", myPID, queueID))
         msgrcv(queueID, &fetchedMex, sizeof(struct msgbuf_trans), TRANSACTION_MTYPE, 0);
         switch (errno)
         {
@@ -69,17 +67,16 @@ void fetch_messages()
             printf("[NODE %d] signal caught while receiving a message\n", myPID);
             break;
         default:
-            TRACE(("[NODE %d] fetched a transaction\n", myPID));
+            break;
         }
         TRACE(("[NODE %d] received %d UC to process from [USER %d] to [USER %d]\n", myPID, fetchedMex.transactionMessage.userTrans.amount, fetchedMex.transactionMessage.userTrans.sender, fetchedMex.transactionMessage.userTrans.receiver))
         add_to_pool(&transPool, &fetchedMex);
         transPool.size++;
     }
-    else
+    /*else
     {
         TRACE(("[NODE %d] pool is full\n", myPID))
-        sleep(1);
-    }
+    }*/
 }
 
 /*
@@ -110,7 +107,7 @@ void new_block(transaction *blockTransaction, block *newBlock)
         newBlock->transList[i] = blockTransaction[i - 1];
     }
 
-    print_block(newBlock);
+    /*print_block(newBlock);*/
 }
 
 /* fills the buffer with SO_BLOCK_SIZE-1 transactions */
@@ -123,6 +120,13 @@ void fill_block_transList(transaction *transListWithoutReward)
     {
         transListWithoutReward[i] = remove_from_pool(&transPool);
         transPool.size--;
+    }
+}
+
+void confirm_block(block *toConfirm){
+    int i;
+    for (i = 0; i < SO_BLOCK_SIZE; i++){
+        toConfirm->transList[i].status = confirmed;
     }
 }
 
@@ -140,6 +144,7 @@ void insert_block_in_ledger(block *newBlock)
 
             sem_reserve(semLedger_ID, 1);
             ledger[i] = tmp;
+            confirm_block(&ledger[i]);
             sem_release(semLedger_ID, 1);
 
             return;
@@ -213,8 +218,6 @@ void node_interrupt_handle(int signum)
     TEST_ERROR
     write(1, "::NODE:: SIGINT received\n", 26);
 
-    print_transaction_pool(&transPool);
-
     /*sem_reserve(semPIDs_ID, 1);*/
     TEST_ERROR
     nodesPID[nodeIndex].balance = currBalance;
@@ -225,7 +228,6 @@ void node_interrupt_handle(int signum)
     TRACE(("[NODE] queue removed\n"))
     TEST_ERROR
 
-    report_mem_leak_nodes();
     exit(0);
 }
 
@@ -246,9 +248,7 @@ int main(int argc, char *argv[])
 
     attach_ipc_objects(argv);
     
-    signal_handler_init(&saINT_node); /* no idea why it isn't working, it's literally the same implementation as user */
-    TRACE(("[NODE %d] sighandler init\n", myPID));
-
+    signal_handler_init(&saINT_node);
     message_queue_attach();
     transaction_pool_init(&transPool);
     TEST_ERROR
@@ -256,11 +256,6 @@ int main(int argc, char *argv[])
     {
 
         /*
-         * msgrcv transactions in loop until pool is full
-         * if size is >= SO_BLOCK_SIZE-1 fork and create a block
-         * append to ledger said block
-         * SLEEP
-         * exit(0)
          * if process is killed it will receive a SIGCHLD signal
          * it means that the process was killed while processing a block
          * need to manage
@@ -274,7 +269,7 @@ int main(int argc, char *argv[])
             switch (fork())
             {
             case -1: /* error */
-                printf("[NODE %d] error while forking to create a block\n", myPID);
+                TRACE(("[NODE %d] error while forking to create a block\n", myPID));
                 break;
 
             case 0: /* child creates a new block and appends it to ledger */
@@ -298,4 +293,6 @@ int main(int argc, char *argv[])
             }
         }
     }
+
+    TRACE(("[NODE %d] somehow I broke free from an endless while loop\n", myPID))
 }
