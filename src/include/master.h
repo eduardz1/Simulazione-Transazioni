@@ -52,12 +52,8 @@ void spawn_user(char *argv[], int counter);
 void spawn_node(char *argv[], int counter);
 
 void shared_memory_objects_init(int *shared_memory_objects_IDs);
-void semaphores_init();
-void message_queue_init();
-void make_ipc_array(int *IPC_objects_IDs);
-
+/*void make_ipc_array(int *IPC_objects_IDs);*/
 void master_interrupt_handle(int signum);
-
 void message_queue_init();
 void spawn_user(char *userArgv[], int uCounter);
 void spawn_node(char *nodeArgv[], int nCounter); 
@@ -65,8 +61,6 @@ void shared_memory_objects_init(int *shmArray);
 void semaphores_init(); 
 void make_ipc_array(int *IPC_array);
 void start_continuous_print(); 
-void master_interrupt_handle(int signum); 
-
 
 
 #endif /* SIMULAZIONE_TRANSAZIONI_MASTER_H */
