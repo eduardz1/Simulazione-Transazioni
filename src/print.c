@@ -145,22 +145,15 @@ void print_block(block *b)
 
     int i;
     transaction printable;
-<<<<<<< HEAD
+
     fp= fopen("ledger.txt", "w");
     fprintf(fp,"[BLOCK %d] =================\n", b->blockIndex);
-=======
-    printf("[BLOCK %d] ==========================================\n", b->blockIndex);
->>>>>>> 72537d1e62b36737b4b6aba6d800f8c6af7a00b5
     for (i = 0; i < SO_BLOCK_SIZE; i++)
     {
         printable = b->transList[i];
         print_transaction(&printable);
     }
-<<<<<<< HEAD
     fprintf(fp,"============================\n");
-=======
-    printf("=====================================================\n");
->>>>>>> 72537d1e62b36737b4b6aba6d800f8c6af7a00b5
 }
 
 void print_ledger(block *l)
