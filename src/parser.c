@@ -2,7 +2,7 @@
 #include "utils/debug.h"
 #include "include/parser.h"
 
-#define CONF_FILE "conf2.txt"
+#define CONF_FILE "conf.txt"
 
 /*enum paramID
 {

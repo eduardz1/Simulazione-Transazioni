@@ -25,6 +25,8 @@ pid_t myPID;
 
 pool transPool;
 
+int flag = 0; /* every 20 transactions I send 1 to a friend */
+
 /* acts as buffer for currently fetched message to be copied into pool */
 struct msgbuf_trans fetchedMex;
 
@@ -47,7 +49,8 @@ void message_queue_attach()
 /* process starts fetching transactions from it's msg_q until transPool is full */
 void fetch_messages()
 {
-    static int flag = 0; /* every 20 transactions I send 1 to a friend */
+    /* tried initializing flag as static, didnt work */
+    TRACE(("[NODE %d] flag: %d\n", myPID, flag))
     if (transPool.size < par->SO_TP_SIZE && flag < 20)
     {
         receive_message(queueID, &fetchedMex, sizeof(struct msgbuf_trans), TRANSACTION_MTYPE, 0);
@@ -73,6 +76,7 @@ void send_to_random_friend()
 
     if (tMex.transactionMessage.hops <= 0)
     {
+        TRACE(("[NODE %d] asking master to create new node\n", myPID))
         send_message(msgget(getppid(), 0), &tMex, sizeof(struct msgbuf_trans), 0);
     }
     else
@@ -206,7 +210,7 @@ void attach_ipc_objects(char **argv)
 int get_pid_nodeIndex()
 {
     int i = 0;
-    for (i = 0; i < par->SO_NODES_NUM; i++)
+    for (i = 0; i < par->SO_NODES_NUM * 2; i++)
     {
         if (nodesPID[i].pid == myPID)
             return i;
