@@ -22,6 +22,7 @@ ask to update ledger basically)
 ## Master Specific
 - [ ] print every second of current_budget of every user and node (max 32 lines,
 ordered by most budget)
+- [ ] stop simulation when a certain number of users are dead
 - [x] **Eduard ->** handler can't have arguments, need to implement it without or
 use an extern variable (avoid if possible)
 - [x] **Rick(ci prova)-->** print every second of num proc users and node active
