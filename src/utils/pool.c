@@ -54,6 +54,6 @@ transaction remove_from_pool(pool *transPool)
     if (transPool->head == NULL)
         transPool->tail = NULL;
 
-    free(tmp);
+    /*free(tmp); */ 
     return poppedTrans;
 }
