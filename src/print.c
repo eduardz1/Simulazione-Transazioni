@@ -3,6 +3,8 @@
 #include "include/print.h"
 
 /* #define HYPHEN "--------" */
+/*GLOBAL VARIABLES */
+FILE *fp;
 
 void print_time_to_die()
 {
@@ -15,7 +17,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
     int nodesNum = par->SO_NODES_NUM;
     int statusNum = 0;
     char statusStr[] = "available";
-
+    
     printf(" -------------------------------------------------\n|          Master Process PID is %d\n", mainPID);
     printf("|                                                 \n");
     printf(" - Type ----- PID ----- Status ----- Balance -----\n");
@@ -98,6 +100,7 @@ void print_parameters(struct parameters *par)
 
 void print_transaction(transaction *t)
 {
+fp=fopen("ledger.txt","w");
     char tmp[10];
     switch (t->status)
     {
@@ -115,52 +118,49 @@ void print_transaction(transaction *t)
         break;
     }
 
-    printf(" -------------------------- \n");
+    fprintf(fp," -------------------------- \n");
     /*formattimestamp(fp);*/
-    printf("|  %s\n", tmp);
-    printf("|  %d --> %d\n", t->sender, t->receiver);
-    printf("|  Amount:    %d\n", t->amount);
-    printf("|  Reward:    %d\n", t->reward);
-    printf(" -------------------------- \n");
+    fprintf(fp,"|  %s\n", tmp);
+    fprintf(fp,"|  %d --> %d\n", t->sender, t->receiver);
+    fprintf(fp,"|  Amount:    %d\n", t->amount);
+    fprintf(fp,"|  Reward:    %d\n", t->reward);
+    fprintf(fp," -------------------------- \n");
 }
 
 void print_block(block *b)
 {
+
     int i;
     transaction printable;
-    printf("[BLOCK %d] =================\n", b->blockIndex);
+    fp= fopen("ledger.txt", "w");
+    fprintf(fp,"[BLOCK %d] =================\n", b->blockIndex);
     for (i = 0; i < SO_BLOCK_SIZE; i++)
     {
         printable = b->transList[i];
         print_transaction(&printable);
     }
-    printf("============================\n");
+    fprintf(fp,"============================\n");
 }
 
 void print_ledger(block *l)
 {
-    /*FILE *fp = fopen("ledger.txt", "w");*/
+   
     int i = 0;
 
     long flag = 1;
-
-    printf("\n\
-:::        :::::::::: :::::::::   ::::::::  :::::::::: :::::::::\n\
-:+:        :+:        :+:    :+: :+:    :+: :+:        :+:    :+:\n\
-+:+        +:+        +:+    +:+ +:+        +:+        +:+    +:+\n\
-+#+        +#++:++#   +#+    +:+ :#:        +#++:++#   +#++:++#:\n\
-+#+        +#+        +#+    +#+ +#+   +#+# +#+        +#+    +#+\n\
-#+#        #+#        #+#    #+# #+#    #+# #+#        #+#    #+#\n\
-########## ########## #########   ########  ########## ###    ###\n");
+    fp=fopen("ledger.txt","w");
+    fprintf(fp,"ledger \n");
     for (i = 0; i < SO_REGISTRY_SIZE && flag != 0; i++)
     {
         flag = l[i].transList[0].timestamp.tv_nsec;
 
-        if (flag)
+        if (flag){
             print_block(&l[i]);
     }
 
-    /*fclose(fp);*/
+    }
+
+    fclose(fp);
 }
 
 /* print without /n */
