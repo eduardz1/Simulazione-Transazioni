@@ -73,10 +73,10 @@ void fetch_messages()
         add_to_pool(&transPool, &fetchedMex);
         transPool.size++;
     }
-    else
+    /*else
     {
         TRACE(("[NODE %d] pool is full\n", myPID))
-    }
+    }*/
 }
 
 /*
@@ -107,7 +107,7 @@ void new_block(transaction *blockTransaction, block *newBlock)
         newBlock->transList[i] = blockTransaction[i - 1];
     }
 
-    print_block(newBlock);
+    /*print_block(newBlock);*/
 }
 
 /* fills the buffer with SO_BLOCK_SIZE-1 transactions */

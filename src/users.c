@@ -280,7 +280,7 @@ void get_balance()
 			}
 			else if (ledgerTemp[i].transList[j].receiver == myPID)
 			{
-				TRACE(("[USER %d] found myself as receiver of %d UC\n", myPID, ledgerTemp[i].transList[j].amount))
+				/* TRACE(("[USER %d] found myself as receiver of %d UC\n", myPID, ledgerTemp[i].transList[j].amount)) */
 				accumulate += ledgerTemp[i].transList[j].amount;
 			}
 		}
@@ -288,7 +288,7 @@ void get_balance()
 
 	tmp = outGoingTransactions;
 
-	if (tmp != NULL) /* just for testing, can be removed later */
+	/*if (tmp != NULL) /* just for testing, can be removed later *
 	{
 		TRACE(("[USER %d] accumulate before removing out=%d\n", myPID, accumulate))
 		TRACE(("[USER %d] tmp->next: %p\n", myPID, tmp->next))
@@ -297,7 +297,7 @@ void get_balance()
 			TRACE(("[USER %d] outGoingTransactions->next: %p\n", myPID, outGoingTransactions->next))
 			TRACE(("[USER %d] outGoingTransactions->next->trans = amount: %u, sender: %d, receiver: %d\n", myPID, outGoingTransactions->next->trans.amount, outGoingTransactions->next->trans.sender, outGoingTransactions->next->trans.receiver))
 		}
-	}
+	}*/
 
 	while (tmp != NULL)
 	{
