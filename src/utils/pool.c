@@ -54,6 +54,10 @@ transaction remove_from_pool(pool *transPool)
     if (transPool->head == NULL)
         transPool->tail = NULL;
 
+<<<<<<< HEAD
+    /*free(tmp); */ 
+=======
+>>>>>>> 79f3000b115e4d9b4aa1a408a589966f7d53442b
     return poppedTrans;
 }
 

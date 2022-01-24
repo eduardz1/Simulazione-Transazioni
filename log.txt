@@ -1,0 +1,475 @@
+rm -f *.o master users nodes *~
+gcc -c -std=c89 -g -O0 -pedantic -Wall -D_GNU_SOURCE -DDEBUG src/utils/*.c
+src/utils/leak_detector_c.c: In function ‘report_mem_leak’:
+src/utils/leak_detector_c.c:186:51: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘void *’ [-Wformat=]
+  186 |                         sprintf(info, "address : %d\n", leak_info->mem_info.address);
+      |                                                  ~^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                   |                        |
+      |                                                   int                      void *
+      |                                                  %p
+src/utils/leak_detector_c.c:171:24: warning: unused variable ‘index’ [-Wunused-variable]
+  171 |         unsigned short index;
+      |                        ^~~~~
+src/utils/leak_detector_c.c: In function ‘report_mem_leak_nodes’:
+src/utils/leak_detector_c.c:218:51: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘void *’ [-Wformat=]
+  218 |                         sprintf(info, "address : %d\n", leak_info->mem_info.address);
+      |                                                  ~^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                   |                        |
+      |                                                   int                      void *
+      |                                                  %p
+src/utils/leak_detector_c.c:203:24: warning: unused variable ‘index’ [-Wunused-variable]
+  203 |         unsigned short index;
+      |                        ^~~~~
+src/utils/leak_detector_c.c: In function ‘report_mem_leak_users’:
+src/utils/leak_detector_c.c:250:51: warning: format ‘%d’ expects argument of type ‘int’, but argument 3 has type ‘void *’ [-Wformat=]
+  250 |                         sprintf(info, "address : %d\n", leak_info->mem_info.address);
+      |                                                  ~^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                                   |                        |
+      |                                                   int                      void *
+      |                                                  %p
+src/utils/leak_detector_c.c:235:24: warning: unused variable ‘index’ [-Wunused-variable]
+  235 |         unsigned short index;
+      |                        ^~~~~
+In file included from src/utils/lklist.h:4,
+                 from src/utils/lklist.c:1:
+src/utils/../include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+src/utils/lklist.c: In function ‘find_and_remove’:
+src/utils/lklist.c:64:9: warning: this ‘else’ clause does not guard... [-Wmisleading-indentation]
+   64 |         else
+      |         ^~~~
+In file included from src/utils/lklist.h:4,
+                 from src/utils/lklist.c:1:
+src/utils/../include/common.h:71:5: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘else’
+   71 |     if (errno)                                     \
+      |     ^~
+src/utils/lklist.c:66:13: note: in expansion of macro ‘TEST_ERROR’
+   66 |             TEST_ERROR
+      |             ^~~~~~~~~~
+In file included from src/utils/pool.h:4,
+                 from src/utils/pool.c:1:
+src/utils/../include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+src/utils/sem.c: In function ‘sem_getall’:
+src/utils/sem.c:76:1: warning: control reaches end of non-void function [-Wreturn-type]
+   76 | }
+      | ^
+gcc -std=c89 -g -O0 -pedantic -Wall -D_GNU_SOURCE -DDEBUG src/master.c  src/print.c src/parser.c *.o -lm -o master
+In file included from src/master.c:1:
+src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+In file included from src/include/print.h:4,
+                 from src/master.c:3:
+src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+In file included from src/include/../utils/pool.h:4,
+                 from src/include/print.h:5,
+                 from src/master.c:3:
+src/include/../utils/../include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+src/master.c: In function ‘master_interrupt_handle’:
+src/master.c:233:22: warning: "/*" within comment [-Wcomment]
+  233 |         status >> 8; /* no idea about what it does please help *
+      |                       
+src/master.c:236:20: warning: implicit declaration of function ‘wait’ [-Wimplicit-function-declaration]
+  236 |     while ((wpid = wait(&status)) > 0)
+      |                    ^~~~
+In file included from src/print.c:2:
+src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+In file included from src/include/print.h:4,
+                 from src/print.c:3:
+src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+In file included from src/include/../utils/pool.h:4,
+                 from src/include/print.h:5,
+                 from src/print.c:3:
+src/include/../utils/../include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+src/print.c: In function ‘final_print’:
+src/print.c:75:5: warning: "/*" within comment [-Wcomment]
+   75 |     /*
+      |      
+src/print.c: At top level:
+src/print.c:99:43: warning: "/*" within comment [-Wcomment]
+   99 | /*void print_kill_signal(mainPID, userPid /* other process *)
+      |                                            
+src/print.c:116:1: warning: "/*" within comment [-Wcomment]
+  116 | /*
+      |  
+src/print.c: In function ‘print_ledger’:
+src/print.c:175:5: warning: statement with no effect [-Wunused-value]
+  175 |     for (i; flag != 0; i++)
+      |     ^~~
+src/print.c: In function ‘formatted_timestamp’:
+src/print.c:204:65: warning: "/*" within comment [-Wcomment]
+  204 |     elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC; /* time ./a.out*/
+      |                                                                  
+In file included from src/parser.c:1:
+src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+gcc -std=c89 -g -O0 -pedantic -Wall -D_GNU_SOURCE -DDEBUG src/users.c src/print.c *.o -lm -o users
+In file included from src/users.c:1:
+src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+In file included from src/include/print.h:4,
+                 from src/users.c:3:
+src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+In file included from src/include/../utils/pool.h:4,
+                 from src/include/print.h:5,
+                 from src/users.c:3:
+src/include/../utils/../include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+In file included from src/utils/lklist.h:4,
+                 from src/users.c:4:
+src/utils/../include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+src/users.c: In function ‘main’:
+src/users.c:307:29: warning: variable ‘retry’ set but not used [-Wunused-but-set-variable]
+  307 |         int amount, reward, retry;
+      |                             ^~~~~
+In file included from src/print.c:2:
+src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+In file included from src/include/print.h:4,
+                 from src/print.c:3:
+src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+In file included from src/include/../utils/pool.h:4,
+                 from src/include/print.h:5,
+                 from src/print.c:3:
+src/include/../utils/../include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+src/print.c: In function ‘final_print’:
+src/print.c:75:5: warning: "/*" within comment [-Wcomment]
+   75 |     /*
+      |      
+src/print.c: At top level:
+src/print.c:99:43: warning: "/*" within comment [-Wcomment]
+   99 | /*void print_kill_signal(mainPID, userPid /* other process *)
+      |                                            
+src/print.c:116:1: warning: "/*" within comment [-Wcomment]
+  116 | /*
+      |  
+src/print.c: In function ‘print_ledger’:
+src/print.c:175:5: warning: statement with no effect [-Wunused-value]
+  175 |     for (i; flag != 0; i++)
+      |     ^~~
+src/print.c: In function ‘formatted_timestamp’:
+src/print.c:204:65: warning: "/*" within comment [-Wcomment]
+  204 |     elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC; /* time ./a.out*/
+      |                                                                  
+gcc -std=c89 -g -O0 -pedantic -Wall -D_GNU_SOURCE -DDEBUG src/nodes.c src/print.c *.o -lm -o nodes
+In file included from src/nodes.c:1:
+src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+In file included from src/include/print.h:4,
+                 from src/nodes.c:3:
+src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+In file included from src/include/../utils/pool.h:4,
+                 from src/include/print.h:5,
+                 from src/nodes.c:3:
+src/include/../utils/../include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+In file included from src/print.c:2:
+src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+In file included from src/include/print.h:4,
+                 from src/print.c:3:
+src/include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+In file included from src/include/../utils/pool.h:4,
+                 from src/include/print.h:5,
+                 from src/print.c:3:
+src/include/../utils/../include/common.h:151:36: warning: "/*" within comment [-Wcomment]
+  151 |     unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
+      |                                     
+src/print.c: In function ‘final_print’:
+src/print.c:75:5: warning: "/*" within comment [-Wcomment]
+   75 |     /*
+      |      
+src/print.c: At top level:
+src/print.c:99:43: warning: "/*" within comment [-Wcomment]
+   99 | /*void print_kill_signal(mainPID, userPid /* other process *)
+      |                                            
+src/print.c:116:1: warning: "/*" within comment [-Wcomment]
+  116 | /*
+      |  
+src/print.c: In function ‘print_ledger’:
+src/print.c:175:5: warning: statement with no effect [-Wunused-value]
+  175 |     for (i; flag != 0; i++)
+      |     ^~~
+src/print.c: In function ‘formatted_timestamp’:
+src/print.c:204:65: warning: "/*" within comment [-Wcomment]
+  204 |     elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC; /* time ./a.out*/
+      |                                                                  
+./master
+[MASTER] semPIDs_ID is 11
+[MASTER] semLedger_ID is 12
+[PARSER] assigned defaults
+--------------------------------------------
+----------- Configuration input ------------
+SO_USER_NUM 3
+SO_NODES_NUM 1
+SO_FRIENDS_NUM 999
+SO_SIM_SEC 300
+SO_HOPS 7
+SO_BUDGET_INIT 998
+SO_REWARD 14
+SO_MIN_TRANS_GEN_NSEC 100000001
+SO_MAX_TRANS_GEN_NSEC 200000001
+SO_RETRY 21
+SO_TP_SIZE 10
+SO_MIN_TRANS_PROC_NSEC 100000002
+SO_MAX_TRANS_PROC_NSEC 200000002
+--------------------------------------------
+[MASTER] conf file read successful
+[MASTER] IPC_array={262205,262206,262204,262207,11,12}
+[MASTER] argv[uPID] = 262205
+[MASTER] argv[nPID] = 262206
+[MASTER] argv[par] = 262204
+[MASTER] argv[ledger] = 262207
+[MASTER] argv[sem_pids] = 11
+[MASTER] argv[sem_ledger] = 12
+[MASTER] argv values for nodes: ./nodes 262205 262206 262204 262207 11 12 (null) (null)
+[MASTER] nodesPID = {40890, 0, 0, 0, 0, ...}
+[MASTER] argv values for users: ./users 262205 262206 262204 262207 11 12 (null) (null)
+[MASTER] Spawning node with associated queue
+src/master.c:75: PID=40890: Error 27 (File too large)
+[NODE 40890] queueID is 5
+[MASTER] Spawning user
+[MASTER] Spawning user
+[MASTER] usersPID = {40891, 40892, 40893, 0, 0, ...}
+[MASTER] Spawning user
+[NODE 40890] sighandler init
+[NODE 40890] succedeed in attaching to queue 5
+[NODE 40890] Trying to receive message of size(transaction) from queue 5
+[USER 40891] extracted usersPID[2]
+[USER 40891] extracted nodesPID[0]
+[USER 40891] succedeed in attaching to queue 5
+[USER 40891] sent a transaction of 843 UC to [USER 40893] via queue 5
+[NODE 40890] fetched a transaction
+[NODE 40890] received 843 UC to process from [USER 40891] to [USER 40893]
+[NODE 40890] Trying to receive message of size(transaction) from queue 5
+[USER 40891] extracted usersPID[1]
+[USER 40891] extracted nodesPID[0]
+[USER 40891] succedeed in attaching to queue 5
+[USER 40891] sent a transaction of 83 UC to [USER 40892] via queue 5
+[NODE 40890] fetched a transaction
+[NODE 40890] received 83 UC to process from [USER 40891] to [USER 40892]
+[NODE 40890] Trying to receive message of size(transaction) from queue 5
+[USER 40892] extracted usersPID[0]
+[USER 40892] extracted nodesPID[0]
+[USER 40892] succedeed in attaching to queue 5
+[USER 40892] sent a transaction of 454 UC to [USER 40891] via queue 5
+[NODE 40890] fetched a transaction
+[NODE 40890] received 454 UC to process from [USER 40892] to [USER 40891]
+[NODE 40890] Trying to receive message of size(transaction) from queue 5
+[USER 40892] extracted usersPID[2]
+[USER 40892] extracted nodesPID[0]
+[USER 40893] extracted usersPID[0]
+[USER 40892] succedeed in attaching to queue 5
+[USER 40893] extracted nodesPID[0]
+[USER 40892] sent a transaction of 260 UC to [USER 40893] via queue 5
+[NODE 40890] fetched a transaction
+[USER 40893] succedeed in attaching to queue 5
+[NODE 40890] received 260 UC to process from [USER 40892] to [USER 40893]
+[NODE 40890] is starting to process a block
+[USER 40893] sent a transaction of 485 UC to [USER 40891] via queue 5
+[USER 40892] extracted usersPID[0]
+[USER 40892] extracted nodesPID[0]
+[USER 40892] succedeed in attaching to queue 5
+[USER 40892] sent a transaction of 55 UC to [USER 40891] via queue 5
+[USER 40893] extracted usersPID[0]
+[USER 40893] extracted nodesPID[0]
+[USER 40893] succedeed in attaching to queue 5
+[USER 40893] sent a transaction of 86 UC to [USER 40891] via queue 5
+[USER 40893] extracted usersPID[0]
+[USER 40893] extracted nodesPID[0]
+[USER 40893] succedeed in attaching to queue 5
+[USER 40893] sent a transaction of 11 UC to [USER 40891] via queue 5
+[NODE 40890] Trying to receive message of size(transaction) from queue 5
+[NODE 40890] fetched a transaction
+[NODE 40890] received 485 UC to process from [USER 40893] to [USER 40891]
+[NODE 40890] Trying to receive message of size(transaction) from queue 5
+[NODE 40890] fetched a transaction
+[NODE 40890] received 55 UC to process from [USER 40892] to [USER 40891]
+[NODE 40890] Trying to receive message of size(transaction) from queue 5
+[NODE 40890] fetched a transaction
+[NODE 40890] received 86 UC to process from [USER 40893] to [USER 40891]
+[NODE 40890] Trying to receive message of size(transaction) from queue 5
+[NODE 40890] fetched a transaction
+[NODE 40890] received 11 UC to process from [USER 40893] to [USER 40891]
+[NODE 40890] is starting to process a block
+[NODE 40890] Trying to receive message of size(transaction) from queue 5
+[USER 40891] found myself as receiver of 454 UC
+[USER 40891] found myself as receiver of 485 UC
+[USER 40891] found myself as receiver of 55 UC
+[USER 40891] found myself as receiver of 86 UC
+[USER 40892] found myself as receiver of 83 UC
+[USER 40893] found myself as receiver of 843 UC
+[USER 40891] found myself as receiver of 454 UC
+[USER 40892] found myself as receiver of 83 UC
+[USER 40891] found myself as receiver of 485 UC
+[USER 40893] found myself as receiver of 843 UC
+[USER 40891] found myself as receiver of 55 UC
+[USER 40891] found myself as receiver of 86 UC
+::USER:: SIGINT received
+ ::USER:: SIGINT received
+ ::USER:: SIGINT received
+ ::MASTER:: SIGINT ricevuto
+ ::NODE:: SIGINT received
+ [NODE] queue removed
+src/print.c:26: PID=40889: Error 10 (No child processes)
+src/print.c:26: PID=40889: Error 10 (No child processes)
+src/print.c:26: PID=40889: Error 10 (No child processes)
+src/print.c:45: PID=40889: Error 10 (No child processes)
+FLAG 4294967295
+--------------------------------------------
+----------- Configuration value ------------
+SO_USER_NUM->3
+SO_NODES_NUM->1
+SO_BUDGET_INIT->998
+SO_REWARD->14
+SO_MIN_TRANS_GEN_NSEC->100000001
+SO_MAX_TRANS_GEN_NSEC->200000001
+SO_RETRY->21
+SO_TP_SIZE->10
+SO_MIN_TRANS_PROC_NSEC->100000002
+SO_MAX_TRANS_PROC_NSEC->200000002
+SO_SIM_SEC->300
+SO_FRIENDS_NUM->999
+SO_HOPS->7
+--------------------------------------------
+
+ ------- Master Process PID is 40889 ----------
+|                                             |
+ - Type ------- PID --------- Status ---------
+ ---------------------------------------------
+|  User         40893            broke     
+|  User         40892            broke     
+|  User         40891            broke     
+ ---------------------------------------------
+|  Node         40890            available
+ ---------------------------------------------
+~{LEDGER}~
+
+[BLOCK 0] =================
+ -------------------------- 
+    pending
+|  -1 --> 40894
+|  Amount:    270
+|  Reward:    0
+ -------------------------- 
+ -------------------------- 
+    pending
+|  40891 --> 40893
+|  Amount:    843
+|  Reward:    138
+ -------------------------- 
+ -------------------------- 
+    pending
+|  40891 --> 40892
+|  Amount:    83
+|  Reward:    14
+ -------------------------- 
+ -------------------------- 
+    pending
+|  40892 --> 40891
+|  Amount:    454
+|  Reward:    75
+ -------------------------- 
+ -------------------------- 
+    pending
+|  40892 --> 40893
+|  Amount:    260
+|  Reward:    43
+ -------------------------- 
+============================
+[BLOCK 1] =================
+ -------------------------- 
+    pending
+|  -1 --> 40895
+|  Amount:    106
+|  Reward:    0
+ -------------------------- 
+ -------------------------- 
+    pending
+|  40893 --> 40891
+|  Amount:    485
+|  Reward:    80
+ -------------------------- 
+ -------------------------- 
+    pending
+|  40892 --> 40891
+|  Amount:    55
+|  Reward:    9
+ -------------------------- 
+ -------------------------- 
+    pending
+|  40893 --> 40891
+|  Amount:    86
+|  Reward:    15
+ -------------------------- 
+ -------------------------- 
+    pending
+|  40893 --> 40891
+|  Amount:    11
+|  Reward:    2
+ -------------------------- 
+============================
+[BLOCK 0] =================
+ -------------------------- 
+    pending
+|  0 --> 0
+|  Amount:    0
+|  Reward:    0
+ -------------------------- 
+ -------------------------- 
+    pending
+|  0 --> 0
+|  Amount:    0
+|  Reward:    0
+ -------------------------- 
+ -------------------------- 
+    pending
+|  0 --> 0
+|  Amount:    0
+|  Reward:    0
+ -------------------------- 
+ -------------------------- 
+    pending
+|  0 --> 0
+|  Amount:    0
+|  Reward:    0
+ -------------------------- 
+ -------------------------- 
+    pending
+|  0 --> 0
+|  Amount:    0
+|  Reward:    0
+ -------------------------- 
+============================
