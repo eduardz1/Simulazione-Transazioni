@@ -9,11 +9,12 @@
  ======================
  */
 
-int currBalance;
+unsigned long currBalanceNode = 0;
 /* parameters of simulation */
 struct parameters *par;
 user *usersPID;
 node *nodesPID;
+pid_t *friends;
 block *ledger;
 
 int semPIDs_ID;
@@ -23,6 +24,8 @@ int queueID;
 pid_t myPID;
 
 pool transPool;
+
+int flag = 0; /* every 20 transactions I send 1 to a friend */
 
 /* acts as buffer for currently fetched message to be copied into pool */
 struct msgbuf_trans fetchedMex;
@@ -46,37 +49,42 @@ void message_queue_attach()
 /* process starts fetching transactions from it's msg_q until transPool is full */
 void fetch_messages()
 {
-    if (transPool.size < par->SO_TP_SIZE)
+    /* tried initializing flag as static, didnt work */
+    TRACE(("[NODE %d] flag: %d\n", myPID, flag))
+    if (transPool.size < par->SO_TP_SIZE && flag < 20)
     {
-        msgrcv(queueID, &fetchedMex, sizeof(struct msgbuf_trans), TRANSACTION_MTYPE, 0);
-        switch (errno)
-        {
-        case E2BIG:
-            printf("[NODE %d] the message length is greater than sizeof(transaction)\n", myPID);
-            break;
-        case EACCES:
-            printf("[NODE %d] no read permission on queue\n", myPID);
-            break;
-        case EFAULT:
-            printf("[NODE %d] address pointed by msgp inaccessible\n", myPID);
-            break;
-        case EIDRM:
-            printf("[NODE %d] mesage queue removed\n", myPID);
-            break;
-        case EINTR:
-            printf("[NODE %d] signal caught while receiving a message\n", myPID);
-            break;
-        default:
-            break;
-        }
+        receive_message(queueID, &fetchedMex, sizeof(struct msgbuf_trans), TRANSACTION_MTYPE, 0);
         TRACE(("[NODE %d] received %d UC to process from [USER %d] to [USER %d]\n", myPID, fetchedMex.transactionMessage.userTrans.amount, fetchedMex.transactionMessage.userTrans.sender, fetchedMex.transactionMessage.userTrans.receiver))
         add_to_pool(&transPool, &fetchedMex);
         transPool.size++;
+        flag++;
     }
-    /*else
+    else
     {
-        TRACE(("[NODE %d] pool is full\n", myPID))
-    }*/
+        send_to_random_friend();
+        flag = 0;
+    }
+}
+
+void send_to_random_friend()
+{
+    int i = RAND(0, par->SO_FRIENDS_NUM - 1);
+    struct msgbuf_trans tMex = remove_tail(&transPool);
+
+    if (tMex.mtype != TRANSACTION_MTYPE)
+        return; /* no message coudl be extracted */
+
+    if (tMex.transactionMessage.hops <= 0)
+    {
+        TRACE(("[NODE %d] asking master to create new node\n", myPID))
+        send_message(msgget(getppid(), 0), &tMex, sizeof(struct msgbuf_trans), 0);
+    }
+    else
+    {
+        tMex.transactionMessage.hops--;
+        TRACE(("[NODE %d] hop!\n", myPID))
+        send_message(msgget(friends[i], 0), &tMex, sizeof(struct msgbuf_trans), 0);
+    }
 }
 
 /*
@@ -123,9 +131,11 @@ void fill_block_transList(transaction *transListWithoutReward)
     }
 }
 
-void confirm_block(block *toConfirm){
+void confirm_block(block *toConfirm)
+{
     int i;
-    for (i = 0; i < SO_BLOCK_SIZE; i++){
+    for (i = 0; i < SO_BLOCK_SIZE; i++)
+    {
         toConfirm->transList[i].status = confirmed;
     }
 }
@@ -172,7 +182,11 @@ int sum_reward(transaction *sumBlock)
         sum += sumBlock[i].reward;
     }
 
-    currBalance += sum;
+    currBalanceNode += sum;
+    sem_reserve(semPIDs_ID, 1);
+    nodesPID[get_pid_nodeIndex()].balance = currBalanceNode;
+    sem_release(semPIDs_ID, 1);
+    TRACE(("[NODE %d] curr balance is %lu UC\n", myPID, currBalanceNode))
 
     return sum;
 }
@@ -196,7 +210,7 @@ void attach_ipc_objects(char **argv)
 int get_pid_nodeIndex()
 {
     int i = 0;
-    for (i = 0; i < par->SO_NODES_NUM; i++)
+    for (i = 0; i < par->SO_NODES_NUM * 2; i++)
     {
         if (nodesPID[i].pid == myPID)
             return i;
@@ -214,15 +228,9 @@ void signal_handler_init(struct sigaction *saINT_node)
 /* CTRL-C handler */
 void node_interrupt_handle(int signum)
 {
-    int nodeIndex = get_pid_nodeIndex();
+
     TEST_ERROR
     write(1, "::NODE:: SIGINT received\n", 26);
-
-    /*sem_reserve(semPIDs_ID, 1);*/
-    TEST_ERROR
-    nodesPID[nodeIndex].balance = currBalance;
-    /*sem_release(semPIDs_ID, 1);*/
-    TEST_ERROR
 
     msgctl(queueID, IPC_RMID, NULL);
     TRACE(("[NODE] queue removed\n"))
@@ -241,15 +249,21 @@ int main(int argc, char *argv[])
     struct timespec sleepTimeRemaining;
     struct sigaction saINT_node;
 
+    struct msgbuf_friends friendMex;
+
     myPID = getpid();
-    currBalance = 0;
 
     bzero(&saINT_node, sizeof(saINT_node));
 
     attach_ipc_objects(argv);
-    
+
     signal_handler_init(&saINT_node);
     message_queue_attach();
+
+    friends = malloc(par->SO_FRIENDS_NUM * sizeof(pid_t));
+    receive_message(queueID, &friendMex, sizeof(struct msgbuf_friends), FRIENDS_MTYPE, 0);
+    friends = friendMex.friendList;
+
     transaction_pool_init(&transPool);
     TEST_ERROR
     while (1)

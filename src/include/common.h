@@ -16,6 +16,7 @@
 #include <sys/sem.h>
 #include <sys/msg.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <signal.h>
 
 #include "../utils/debug.h"
@@ -99,7 +100,7 @@ struct parameters
 typedef struct user_t
 {
     pid_t pid;
-    int balance;
+    unsigned int balance;
     enum
     {
         alive,
@@ -111,7 +112,7 @@ typedef struct user_t
 typedef struct node_t
 {
     pid_t pid;
-    int balance;
+    unsigned long balance;
     enum
     {
         available,

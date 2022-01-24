@@ -39,7 +39,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
         }
 
         /* we should place it in a buffer so that they print a fixed length */
-        printf("|  User      %7d    %s    %10u\n", userPID[userNum].pid, statusStr, userPID[userNum].balance);
+        printf("|  User      %7d    %s    %lu\n", userPID[userNum].pid, statusStr, userPID[userNum].balance);
     }
     printf(" -------------------------------------------------\n");
     while (nodesNum--)
@@ -54,7 +54,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
             strcpy(statusStr, "full     ");
             break;
         }
-        printf("|  Node       %d    %s\n", nodePID[nodesNum].pid, statusStr);
+        printf("|  Node      %d    %s    %10u\n", nodePID[nodesNum].pid, statusStr, nodePID[nodesNum].balance);
     }
     printf(" -------------------------------------------------\n");
 }
@@ -63,7 +63,20 @@ void print_kill_signal();
 void print_user_balance();
 void print_node_balance();
 void print_num_aborted();
-void print_num_blocks();
+void print_num_blocks(block *l){
+    int i = 0;
+    int blockIndex = 0;
+
+    if(l[i].transList[0].timestamp.tv_nsec + l[i].transList->timestamp.tv_sec == 0)
+        return;
+
+    for (i = 0; i < SO_REGISTRY_SIZE && blockIndex == 0; i++)
+    {
+        if(l[i].transList[0].timestamp.tv_nsec + l[i].transList->timestamp.tv_sec == 0)
+            blockIndex = l[i-1].blockIndex;
+    }
+    printf("NUM BLOCKS: %d\n", blockIndex);
+}
 void print_transactions_still_in_pool();
 
 void final_print(pid_t masterPID, user *usersPID, node *nodesPID, struct parameters *par)
@@ -132,14 +145,22 @@ void print_block(block *b)
 
     int i;
     transaction printable;
+<<<<<<< HEAD
     fp= fopen("ledger.txt", "w");
     fprintf(fp,"[BLOCK %d] =================\n", b->blockIndex);
+=======
+    printf("[BLOCK %d] ==========================================\n", b->blockIndex);
+>>>>>>> 72537d1e62b36737b4b6aba6d800f8c6af7a00b5
     for (i = 0; i < SO_BLOCK_SIZE; i++)
     {
         printable = b->transList[i];
         print_transaction(&printable);
     }
+<<<<<<< HEAD
     fprintf(fp,"============================\n");
+=======
+    printf("=====================================================\n");
+>>>>>>> 72537d1e62b36737b4b6aba6d800f8c6af7a00b5
 }
 
 void print_ledger(block *l)

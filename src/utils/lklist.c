@@ -61,7 +61,7 @@ void find_and_remove(struct node **head, transaction *toSearch)
         }
     }
 
-    if (curr == head)
+    if (curr == *head)
     {
         *head = (*head)->next;
     }

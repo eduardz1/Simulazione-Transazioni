@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.rmd": "markdown",
         "users.h": "c",
         "reward.h": "c",
         "transaction.h": "c",
@@ -10,7 +11,11 @@
         "sem.h": "c",
         "cstdint": "c",
         "string.h": "c",
+<<<<<<< HEAD
         "nodes.h": "c"
+=======
+        "msg.h": "c"
+>>>>>>> 72537d1e62b36737b4b6aba6d800f8c6af7a00b5
     },
     "editor.rulers": [
         80,
