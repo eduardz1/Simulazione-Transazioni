@@ -6,7 +6,7 @@
 
 ## General Tasks
 - [ ] FIX ALL REPORTED ISSUES
-- [ ] MAKE A USEFUL README
+- [ ] MAKE A USEFUL README (some informations can be directly taken from Scheme.md)
 - [ ] **Rick ->** fix formatted_timestamp() in common.c
 - [ ] finish every print function
 - [ ] clean general print formatting
