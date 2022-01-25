@@ -57,7 +57,6 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
     printf(" -------------------------------------------------\n");
 }
 
-void print_kill_signal();
 void print_user_balance();
 void print_node_balance();
 void print_num_aborted();
@@ -77,6 +76,27 @@ void print_num_blocks(block *l)
     printf("NUM BLOCKS: %d\n", blockIndex);
 }
 void print_transactions_still_in_pool();
+
+void print_kill_signal(){
+   /* switch ()
+    {
+    case 0: /* too much time  
+       if(SO_SIM_SEC>=time(30)){
+         printf("TOO MUCH TIME SIMULATION ENDED",); 
+         exit(EXIT_FAILURE); 
+       }
+        break; 
+      case 1: /* Registry space is full 
+       if (SO_REGISTRY_SIZE>100) {
+           printf("REGISTRY IS FULL");
+           exit(EXIT_FAILURE); 
+       }
+        break; 
+
+    case 2 : 
+*/
+
+}
 
 void final_print(pid_t masterPID, user *usersPID, node *nodesPID, struct parameters *par)
 {
@@ -196,9 +216,9 @@ void formatted_timestamp(FILE *fp)
     strftime(buf, 128, "%Y/%m/%d", today);
     printf("%s\n", buf);
 
-    elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC; /* time ./a.out*/
+    elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC; 
+ */   
 }
-
 void print_transaction_pool(pool *transPool)
 {
     pool *tmp = transPool;
