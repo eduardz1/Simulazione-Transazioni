@@ -153,7 +153,7 @@ typedef struct ledger_t
 
 struct msgbuf_trans
 {
-    long mtype; /* atol("transaction") */
+    long mtype;
     struct message
     {
         int hops; /* number of times the transaction has hopped */
@@ -164,8 +164,8 @@ struct msgbuf_trans
 
 struct msgbuf_friends
 {
-    long mtype; /* atol("friendList") */
-    pid_t *friendList;
+    long mtype;
+    pid_t friend;
 };
 
 
