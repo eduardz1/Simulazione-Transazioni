@@ -29,6 +29,7 @@ int send_message(int queueID, void *msg, int size, int flag)
         break;
     default:
         return SUCCESS;
+        break;
     }
     return ERROR;
 }
