@@ -19,8 +19,8 @@ void final_print(pid_t masterPID, user *usersPID, node *nodesPID, struct paramet
 void print_parameters(struct parameters *par);
 
 /* formatting ledger and blocks */
-void print_block(block *b);
-void print_transaction(transaction *t);
+void print_block(block *b, FILE *fp);
+void print_transaction(transaction *t, FILE *fp);
 void print_ledger(block *l);
 
 void formatted_timestamp(FILE *fp);
