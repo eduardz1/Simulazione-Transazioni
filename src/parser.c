@@ -2,7 +2,7 @@
 #include "utils/debug.h"
 #include "include/parser.h"
 
-#define CONF_FILE "conf2.txt"
+#define CONF_FILE "conf.txt"
 
 /*enum paramID
 {
@@ -186,6 +186,10 @@ int parse_parameters(struct parameters *par)
     {
         TRACE(("[PARSER] SO_MIN_TRANS_PROC_NSEC greater than SO_MAX_TRANS_PROC_NSEC, will be normalized\n"));
         par->SO_MIN_TRANS_PROC_NSEC = par->SO_MAX_TRANS_PROC_NSEC;
+    }
+    if(par->SO_TP_SIZE <= SO_BLOCK_SIZE){
+        TRACE(("[PARSER] SO_TP_SIZE smaller or equal to SO_BLOCK_SIZE, will be normalized\n"));
+        par->SO_TP_SIZE = SO_BLOCK_SIZE + 1;
     }
 
     TRACE(("--------------------------------------------\n----------- Configuration input ------------\n"));
