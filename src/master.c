@@ -205,7 +205,6 @@ void shared_memory_objects_init(int *shmArray)
 
     /* parameters init and read from conf file */
     par_ID = shmget(SHM_PARAMETERS, sizeof(par), 0600 | IPC_CREAT | IPC_EXCL);
-    TEST_ERROR
     par = (struct parameters *)shmat(par_ID, NULL, 0);
     if (parse_parameters(par) == CONF_ERROR)
     {
@@ -215,28 +214,22 @@ void shared_memory_objects_init(int *shmArray)
     {
         TRACE(("[MASTER] conf file read successful\n"));
     }
-#ifdef DEBUG
-    print_parameters(par);
-#endif
-    /* (users_t) and (nodes_t) arrays */
-    usersPID_ID = shmget(SHM_USERS_ARRAY,
-                         (par->SO_USER_NUM) * sizeof(user),
-                         0600 | IPC_CREAT | IPC_EXCL);
-    TEST_ERROR
-    /* make it twice as big to account for extra nodes and avoid reallocating
-     * a shared memory resource
+
+    /* make node array twice as big to account for extra nodes when transactions
+     * have hopped out avoiding reallocating a shared memory resource
      */
-    nodesPID_ID = shmget(SHM_NODES_ARRAY,
-                         (par->SO_NODES_NUM) * sizeof(node) * 2,
-                         0600 | IPC_CREAT | IPC_EXCL);
-    TEST_ERROR
+    nodesPID_ID = shmget(SHM_NODES_ARRAY, (par->SO_NODES_NUM) * sizeof(node) * 2, 0600 | IPC_CREAT | IPC_EXCL);
+    usersPID_ID = shmget(SHM_USERS_ARRAY, (par->SO_USER_NUM) * sizeof(user), 0600 | IPC_CREAT | IPC_EXCL);
+    ledger_ID = shmget(SHM_LEDGER, sizeof(ledger), 0600 | IPC_CREAT | IPC_EXCL);
+    if (errno == EEXIST)
+    {
+        TRACE(("[MASTER] failed to initialize one or more shared memory objects, ipcrm the leftovers\n"))
+        exit(1); /* we could remove them at the start just in case, but I want the error not to be hidden */
+    }
+
+    ledger_ptr = (block *)shmat(ledger_ID, NULL, 0);
     usersPID = (user *)shmat(usersPID_ID, NULL, 0);
     nodesPID = (node *)shmat(nodesPID_ID, NULL, 0);
-
-    /* ledger */
-    ledger_ID = shmget(SHM_LEDGER, sizeof(ledger), 0600 | IPC_CREAT | IPC_EXCL);
-    TEST_ERROR
-    ledger_ptr = (block *)shmat(ledger_ID, NULL, 0);
 
     /* mark for deallocation so that they are automatically
      * removed once master dies
@@ -256,12 +249,26 @@ void shared_memory_objects_init(int *shmArray)
 void semaphores_init()
 {
     semPIDs_ID = semget(SEM_PIDS_KEY, 1, 0600 | IPC_CREAT | IPC_EXCL);
-    TEST_ERROR
-    TRACE(("[MASTER] semPIDs_ID is %d\n", semPIDs_ID));
-
     semLedger_ID = semget(SEM_LEDGER_KEY, 1, 0600 | IPC_CREAT | IPC_EXCL);
-    TEST_ERROR
-    TRACE(("[MASTER] semLedger_ID is %d\n", semLedger_ID));
+
+    /* check for only one of them is enough */
+    switch (errno)
+    {
+    case EEXIST:
+        TRACE(("[MASTER] one or more semaphores couldn't be created, ipcrm the leftovers\n"))
+        exit(1);
+        break;
+
+    case ENOSPC:
+        TRACE(("[MASTER] too many semaphores already in the system\n"))
+        exit(1);
+        break;
+
+    default:
+        TRACE(("[MASTER] semPIDs_ID is %d\n", semPIDs_ID));
+        TRACE(("[MASTER] semLedger_ID is %d\n", semLedger_ID));
+        break;
+    }
 }
 
 /* makes an array with every IPC object ID */
@@ -301,13 +308,11 @@ void start_continuous_print()
                 activeNodes++;
         }
 
-        /*printf("\r\nNUM ACTIVE USERS: %d\nNUM ACTIVE NODES: %d\n\n", activeUsers, activeNodes);
-        fflush(stdout);*/
+        printf("\r\nNUM ACTIVE USERS: %d\nNUM ACTIVE NODES: %d\n\n", activeUsers, activeNodes);
+        fflush(stdout);
 
         sleep(time--);
     }
-
-    printf("\r\nNUM ACTIVE USERS: %d\nNUM ACTIVE NODES: %d\n\n", activeUsers, activeNodes);
 }
 
 /* CTRL-C handler */
@@ -421,7 +426,6 @@ int main(int argc, char *argv[])
             receive_message(masterQ, &transHopped, sizeof(struct msgbuf_trans), TRANSACTION_MTYPE, 0);
             argvSpawns[0] = NODE_NAME;
             TRACE(("[MASTER] argv values for nodes extra: %s %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7], argvSpawns[8]))
-   
 
             LOCK;
             nodesPID[nCounter].status = available;

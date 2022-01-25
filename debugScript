@@ -1,4 +1,4 @@
 #!/bin/bash
 
-make debug &> log.txt
+make debug 2> log.txt
 ipcs
