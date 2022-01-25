@@ -178,6 +178,7 @@ int send_transaction()
 {
 	transaction sent;
 
+	TRACE(("[USER %d] queueID is %d\n", myPID, queueID))
 	if (send_message(queueID, &transMsg, sizeof(struct msgbuf_trans), IPC_NOWAIT) == 0)
 	{
 

@@ -420,6 +420,8 @@ int main(int argc, char *argv[])
         {
             receive_message(masterQ, &transHopped, sizeof(struct msgbuf_trans), TRANSACTION_MTYPE, 0);
             argvSpawns[0] = NODE_NAME;
+            TRACE(("[MASTER] argv values for nodes extra: %s %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7], argvSpawns[8]))
+   
 
             LOCK;
             nodesPID[nCounter].status = available;

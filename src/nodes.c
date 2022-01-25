@@ -85,6 +85,7 @@ void send_to_random_friend()
         TRACE(("[NODE %d] hop!\n", myPID))
         send_message(msgget(friends[i], 0), &tMex, sizeof(struct msgbuf_trans), 0);
     }
+    transPool.size--;
 }
 
 /*
