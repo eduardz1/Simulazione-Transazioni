@@ -4,42 +4,6 @@
 
 #define CONF_FILE "conf1.txt"
 
-/*enum paramID
-{
-    SO_USER_NUM,
-    SO_NODES_NUM,
-    SO_NUM_FRIENDS,
-    SO_SIM_SEC,
-    SO_HOPS,
-    SO_BUDGET_INIT,
-    SO_REWARD,
-    SO_MIN_TRANS_GEN_NSEC,
-    SO_MAX_TRANS_GEN_NSEC,
-    SO_RETRY,
-    SO_TP_SIZE,
-    SO_MIN_TRANS_PROC_NSEC,
-    SO_MAX_TRANS_PROC_NSEC
-};
-
-struct parameters
-{
-    char *string;
-    enum paramID id;
-} paramList[] = {
-    {"SO_USER_NUM", SO_USER_NUM},
-    {"SO_NODES_NUM", SO_NODES_NUM},
-    {"SO_NUM_FRIENDS", SO_NUM_FRIENDS},
-    {"SO_SIM_SEC", SO_SIM_SEC},
-    {"SO_HOPS", SO_HOPS},
-    {"SO_BUDGET_INIT", SO_BUDGET_INIT},
-    {"SO_REWARD", SO_REWARD},
-    {"SO_MIN_TRANS_GEN_NSEC", SO_MIN_TRANS_GEN_NSEC},
-    {"SO_MAX_TRANS_GEN_NSEC", SO_MAX_TRANS_GEN_NSEC},
-    {"SO_RETRY", SO_RETRY},
-    {"SO_TP_SIZE", SO_TP_SIZE},
-    {"SO_MIN_TRANS_PROC_NSEC", SO_MIN_TRANS_PROC_NSEC},
-    {"SO_MAX_TRANS_PROC_NSEC", SO_MAX_TRANS_PROC_NSEC}};*/
-
 void assign_defaults(struct parameters *par)
 {
     par->SO_USER_NUM = 100;
@@ -90,24 +54,6 @@ int parse_parameters(struct parameters *par)
 
     for (i = 0; i < NUM_PARAMETERS; i++)
     {
-        /*switch(tokensE){
-            case SO_USER_NUM:
-            case SO_NODES_NUM:
-            case SO_NUM_FRIENDS:
-            case SO_SIM_SEC:
-            case SO_HOPS:
-            case SO_BUDGET_INIT:
-            case SO_REWARD:
-            case SO_MIN_TRANS_GEN_NSEC:
-            case SO_MAX_TRANS_GEN_NSEC:
-            case SO_RETRY:
-            case SO_TP_SIZE:
-            case SO_MIN_TRANS_PROC_NSEC:
-            case SO_MAX_TRANS_PROC_NSEC:
-            default:
-            break;
-        } it can be implemented in a nicer to look at way, but not now */
-
         /*printf("%s\n",tokens[i]);*/
 
         if (!strcmp(tokens[i], "SO_USER_NUM"))
