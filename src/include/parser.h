@@ -6,9 +6,9 @@
 
 #define NUM_PARAMETERS 13
 #define CONF_ERROR -1
+/* Prototype*/
+void assign_defaults(struct parameters *par); 
+int parse_parameters(struct parameters *par); 
 
-int parse_parameters(struct parameters *par);
-
-void assign_defaults(struct parameters *par);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_PARSER_H */
