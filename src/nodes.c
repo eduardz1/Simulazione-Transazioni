@@ -72,11 +72,12 @@ void send_to_random_friend()
     struct msgbuf_trans tMex = remove_tail(&transPool);
 
     if (tMex.mtype != TRANSACTION_MTYPE)
-        return; /* no message coudl be extracted */
+        return; /* no message could be extracted */
 
     if (tMex.transactionMessage.hops <= 0)
     {
         TRACE(("[NODE %d] asking master to create new node\n", myPID))
+        tMex.transactionMessage.hops = 0;
         send_message(msgget(getppid(), 0), &tMex, sizeof(struct msgbuf_trans), 0);
     }
     else
@@ -129,6 +130,20 @@ void fill_block_transList(transaction *transListWithoutReward)
     {
         transListWithoutReward[i] = remove_from_pool(&transPool);
         transPool.size--;
+    }
+}
+
+void fill_friendList(pid_t *friendList)
+{
+    struct msgbuf_friends friendMex;
+    int i;
+
+    TRACE(("[NODE %d] trying to receive friends\n", myPID))
+    /* waits for a FRIENDS_MTYPE transactions before continuing */
+    for (i = 0; i < par->SO_FRIENDS_NUM; i++)
+    {
+        receive_message(queueID, &friendMex, sizeof(struct msgbuf_friends), FRIENDS_MTYPE, 0);
+        friendList[i] = friendMex.friend;
     }
 }
 
@@ -250,7 +265,7 @@ int main(int argc, char *argv[])
     struct timespec sleepTimeRemaining;
     struct sigaction saINT_node;
 
-    struct msgbuf_friends friendMex;
+    pid_t *friendList;
 
     myPID = getpid();
 
@@ -261,9 +276,8 @@ int main(int argc, char *argv[])
     signal_handler_init(&saINT_node);
     message_queue_attach();
 
-    friends = malloc(par->SO_FRIENDS_NUM * sizeof(pid_t));
-    receive_message(queueID, &friendMex, sizeof(struct msgbuf_friends), FRIENDS_MTYPE, 0);
-    friends = friendMex.friendList;
+    friendList = malloc(par->SO_FRIENDS_NUM * sizeof(pid_t));
+    fill_friendList(friendList);
 
     transaction_pool_init(&transPool);
     TEST_ERROR

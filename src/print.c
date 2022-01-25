@@ -37,7 +37,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
         }
 
         /* we should place it in a buffer so that they print a fixed length */
-        printf("|  User      %7d    %s    %lu\n", userPID[userNum].pid, statusStr, userPID[userNum].balance);
+        printf("|  User      %7d    %s    %u\n", userPID[userNum].pid, statusStr, userPID[userNum].balance);
     }
     printf(" -------------------------------------------------\n");
     while (nodesNum--)
@@ -52,7 +52,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
             strcpy(statusStr, "full     ");
             break;
         }
-        printf("|  Node      %d    %s    %10u\n", nodePID[nodesNum].pid, statusStr, nodePID[nodesNum].balance);
+        printf("|  Node      %d    %s    %10lu\n", nodePID[nodesNum].pid, statusStr, nodePID[nodesNum].balance);
     }
     printf(" -------------------------------------------------\n");
 }
@@ -61,17 +61,18 @@ void print_kill_signal();
 void print_user_balance();
 void print_node_balance();
 void print_num_aborted();
-void print_num_blocks(block *l){
+void print_num_blocks(block *l)
+{
     int i = 0;
     int blockIndex = 0;
 
-    if(l[i].transList[0].timestamp.tv_nsec + l[i].transList->timestamp.tv_sec == 0)
+    if (l[i].transList[0].timestamp.tv_nsec + l[i].transList->timestamp.tv_sec == 0)
         return;
 
     for (i = 0; i < SO_REGISTRY_SIZE && blockIndex == 0; i++)
     {
-        if(l[i].transList[0].timestamp.tv_nsec + l[i].transList->timestamp.tv_sec == 0)
-            blockIndex = l[i-1].blockIndex;
+        if (l[i].transList[0].timestamp.tv_nsec + l[i].transList->timestamp.tv_sec == 0)
+            blockIndex = l[i - 1].blockIndex;
     }
     printf("NUM BLOCKS: %d\n", blockIndex);
 }
@@ -109,7 +110,7 @@ void print_parameters(struct parameters *par)
     printf("--------------------------------------------\n");
 }
 
-void print_transaction(transaction *t)
+void print_transaction(transaction *t, FILE *fp)
 {
     char tmp[10];
     switch (t->status)
@@ -128,36 +129,35 @@ void print_transaction(transaction *t)
         break;
     }
 
-    printf(" -------------------------- \n");
-    /*formattimestamp(fp);*/
-    printf("|  %s\n", tmp);
-    printf("|  %d --> %d\n", t->sender, t->receiver);
-    printf("|  Amount:    %d\n", t->amount);
-    printf("|  Reward:    %d\n", t->reward);
-    printf(" -------------------------- \n");
+    fprintf(fp, " -------------------------- \n");
+    /*formafp, ttimestamp(fp);*/
+    fprintf(fp, "|  %s\n", tmp);
+    fprintf(fp, "|  %d --> %d\n", t->sender, t->receiver);
+    fprintf(fp, "|  Amount:    %d\n", t->amount);
+    fprintf(fp, "|  Reward:    %d\n", t->reward);
+    fprintf(fp, " -------------------------- \n");
 }
 
-void print_block(block *b)
+void print_block(block *b, FILE *fp)
 {
     int i;
     transaction printable;
-    printf("[BLOCK %d] ==========================================\n", b->blockIndex);
+    fprintf(fp, "[BLOCK %d] ==========================================\n", b->blockIndex);
     for (i = 0; i < SO_BLOCK_SIZE; i++)
     {
         printable = b->transList[i];
-        print_transaction(&printable);
+        print_transaction(&printable, fp);
     }
-    printf("=====================================================\n");
+    fprintf(fp, "=====================================================\n");
 }
 
 void print_ledger(block *l)
 {
-    /*FILE *fp = fopen("ledger.txt", "w");*/
     int i = 0;
-
     long flag = 1;
+    FILE *fp = fopen("ledger.txt", "w");
 
-    printf("\n\
+    fprintf(fp, "\n\
 :::        :::::::::: :::::::::   ::::::::  :::::::::: :::::::::\n\
 :+:        :+:        :+:    :+: :+:    :+: :+:        :+:    :+:\n\
 +:+        +:+        +:+    +:+ +:+        +:+        +:+    +:+\n\
@@ -170,10 +170,10 @@ void print_ledger(block *l)
         flag = l[i].transList[0].timestamp.tv_nsec;
 
         if (flag)
-            print_block(&l[i]);
+            print_block(&l[i], fp);
     }
 
-    /*fclose(fp);*/
+    fclose(fp);
 }
 
 /* print without /n */
@@ -211,7 +211,7 @@ void print_transaction_pool(pool *transPool)
     {
         printf("[%d]", i);
         printable = tmp->head->transactionMessage.userTrans;
-        print_transaction(&printable);
+        print_transaction(&printable, (FILE *)1);
 
         tmp->head = tmp->head->transactionMessage.next;
         i++;
@@ -230,7 +230,7 @@ void print_outgoing_pool(struct node *outPool)
     {
         printf("[%d]", i);
         printable = tmp->trans;
-        print_transaction(&printable);
+        print_transaction(&printable, (FILE *)1);
 
         tmp = tmp->next;
         i++;

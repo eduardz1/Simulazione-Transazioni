@@ -112,50 +112,6 @@ void spawn_user(char *userArgv[], int uCounter)
     }
 }
 
-/* fork and execve a "./nodes" */
-int spawn_node(char *nodeArgv[], int nCounter)
-{
-    static int overBuf = 0;
-    struct msgbuf_friends friendsMsg;
-    pid_t nodePID = fork();
-    pid_t *friends = malloc(sizeof(pid_t) * par->SO_FRIENDS_NUM);
-    make_friend_list(friends);
-
-    friendsMsg.mtype = FRIENDS_MTYPE;
-    friendsMsg.friendList = friends;
-
-    if (overBuf == 0)
-        overBuf = par->SO_NODES_NUM;
-    if (overBuf >= par->SO_NODES_NUM * 2 - 1) /* maximum capacity reached */
-        return ERROR;
-    else if (nCounter == -1)
-        nCounter = overBuf++;
-
-    switch (nodePID)
-    {
-    case -1: /* Error case */
-        printf("*** Error forking for node ***\n");
-        break;
-
-    case 0: /* Child case */
-        TRACE(("[MASTER] Spawning node with associated queue\n"));
-
-        /* initialize a separate message queue for every node */
-
-        send_message(message_queue_init(), &friendsMsg, sizeof(struct msgbuf_friends), 0);
-
-        execve(NODE_NAME, nodeArgv, NULL);
-        TEST_ERROR
-        TRACE(("!!! Message that should never be seen !!!\n"));
-        break;
-
-    default:
-        nodesPID[nCounter].pid = nodePID;
-        break;
-    }
-    return SUCCESS;
-}
-
 /* generates a friend list based on Knuth algorithm */
 void make_friend_list(pid_t *friends)
 {
@@ -189,9 +145,48 @@ void make_friend_list(pid_t *friends)
     for (i = 0; i < numFriends; i++)
     {
         friends[i] = nodesPID[friendsIndexes[i]].pid;
+        TRACE(("[MASTER] extracted friend: %d\n", friends[i]))
     }
 
     free(friendsIndexes);
+}
+
+/* fork and execve a "./nodes" */
+int spawn_node(char *nodeArgv[], int nCounter)
+{
+    static int overBuf = 0;
+    pid_t nodePID = fork();
+
+    if (overBuf == 0)
+        overBuf = par->SO_NODES_NUM;
+    if (overBuf >= par->SO_NODES_NUM * 2 - 1) /* maximum capacity reached */
+        return ERROR;
+    else if (nCounter == -1)
+        nCounter = overBuf++;
+
+    switch (nodePID)
+    {
+    case -1: /* Error case */
+        printf("*** Error forking for node ***\n");
+        break;
+
+    case 0: /* Child case */
+        TRACE(("[MASTER] Spawning node with associated queue\n"));
+
+        /* initialize a separate message queue for every node */
+
+        message_queue_init();
+
+        execve(NODE_NAME, nodeArgv, NULL);
+        TEST_ERROR
+        TRACE(("!!! Message that should never be seen !!!\n"));
+        break;
+
+    default:
+        nodesPID[nCounter].pid = nodePID;
+        break;
+    }
+    return SUCCESS;
 }
 
 /* attach usersPID, nodesPID, par and mainLedger to shared memory, returns an array with respective IDs */
@@ -345,6 +340,9 @@ void master_interrupt_handle(int signum)
 int main(int argc, char *argv[])
 {
     pid_t myPID = getpid();
+    pid_t *friends;
+    int nodeQueue;
+    int i;
 
     int uCounter, nCounter, returnVal;
     int ipcObjectsIDs[IPC_NUM];
@@ -352,11 +350,14 @@ int main(int argc, char *argv[])
 
     struct sigaction sa;
     struct sembuf sops;
+    struct msgbuf_friends friendsMsg;
 
     ledger_ptr = ledger;
     semaphores_init();
     make_ipc_array(ipcObjectsIDs);
     make_arguments(ipcObjectsIDs, argvSpawns);
+
+    friends = malloc(sizeof(pid_t) * par->SO_FRIENDS_NUM);
 
     /* -- SIGNAL HANDLER --
      * first set all bytes of sigation to 0
@@ -382,7 +383,26 @@ int main(int argc, char *argv[])
         UNLOCK
         if (getpid() != myPID)
         {
-            return 0;
+            exit(0);
+        }
+    }
+
+    usleep(500);
+
+    /* sends a message of type FRIENDS_MTYPE to every node */
+    for (nCounter = 0; nCounter < par->SO_NODES_NUM; nCounter++)
+    {
+        make_friend_list(friends);
+        nodeQueue = msgget(nodesPID[nCounter].pid, 0);
+        TRACE(("[MASTER] nodePID.pid=%d queue=%d\n", nodesPID[nCounter].pid, nodeQueue))
+
+        for (i = 0; i < par->SO_FRIENDS_NUM; i++)
+        {
+            friendsMsg.mtype = FRIENDS_MTYPE;
+            friendsMsg.friend = friends[i];
+
+            send_message(nodeQueue, &friendsMsg, sizeof(struct msgbuf_friends), 0);
+            TRACE(("[MASTER] sent friend to %d\n", nodesPID[nCounter].pid))
         }
     }
 
