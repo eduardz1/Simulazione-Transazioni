@@ -383,21 +383,24 @@ int main(int argc, char *argv[])
         UNLOCK
         if (getpid() != myPID)
         {
-            return 0;
+            exit(0);
         }
     }
+
+    usleep(500);
 
     /* sends a message of type FRIENDS_MTYPE to every node */
     for (nCounter = 0; nCounter < par->SO_NODES_NUM; nCounter++)
     {
         make_friend_list(friends);
         nodeQueue = msgget(nodesPID[nCounter].pid, 0);
+        TRACE(("[MASTER] nodePID.pid=%d queue=%d\n", nodesPID[nCounter].pid, nodeQueue))
 
         for (i = 0; i < par->SO_FRIENDS_NUM; i++)
         {
             friendsMsg.mtype = FRIENDS_MTYPE;
             friendsMsg.friend = friends[i];
-            
+
             send_message(nodeQueue, &friendsMsg, sizeof(struct msgbuf_friends), 0);
             TRACE(("[MASTER] sent friend to %d\n", nodesPID[nCounter].pid))
         }

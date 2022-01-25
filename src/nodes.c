@@ -145,8 +145,6 @@ void fill_friendList(pid_t *friendList)
         receive_message(queueID, &friendMex, sizeof(struct msgbuf_friends), FRIENDS_MTYPE, 0);
         friendList[i] = friendMex.friend;
     }
-
-    TRACE(("[NODE %d] received friends, friends[0]=%d, friends[1]=%d\n", myPID, friends[0], friends[1]))
 }
 
 void confirm_block(block *toConfirm)
