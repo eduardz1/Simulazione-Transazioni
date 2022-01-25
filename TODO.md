@@ -1,16 +1,17 @@
 # TO DO LIST
 *Sign which sections you're working on, tick when done and working*
 ## 30 Punti
-- [ ] Inviare i nodi amici attraverso un messaggio di tipo msg_friend
-- [ ] Decrement hops every time a transaction is sent (hops is already present in msg_trans, just need to literally write 1 line of code)
+- [x] **Eduard ->** Inviare i nodi amici attraverso un messaggio di tipo msg_friend
+- [x] **Eduard ->** Decrement hops every time a transaction is sent (hops is already present in msg_trans, just need to literally write 1 line of code)
 
 ## General Tasks
+- [ ] FIX ALL REPORTED ISSUES
+- [ ] MAKE A USEFUL README
 - [ ] **Rick ->** fix formatted_timestamp() in common.c
 - [ ] finish every print function
 - [ ] clean general print formatting
-- [ ] make ledger effectively print inside a ledger.txt, I've tried but it didnt't work
-- [ ] fix all reported issues
-- [ ] **Eduard ->** instead of sleeping for 1 second maybe we could make master sleep with a timer
+- [ ] **Francesco ->** make ledger effectively print inside a ledger.txt, I've tried but it didnt't work
+- [x] **Eduard ->** instead of sleeping for 1 second maybe we could make master sleep with a timer
 - [ ] **Eduard ->** general cleanup of the code
 - [x] **Eduard ->** implement semaphores to access "usersPID" and "nodesPID" structs
 - [x] **Eduard ->** implement message queue to send transactions (user communicates
