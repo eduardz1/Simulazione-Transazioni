@@ -3,10 +3,6 @@
 #include "include/print.h"
 #include "utils/pool.h"
 
-
-
-
-
 /*
  ======================
  || GLOBAL VARIABLES ||
@@ -18,7 +14,7 @@ unsigned long currBalanceNode = 0;
 struct parameters *par;
 user *usersPID;
 node *nodesPID;
-pid_t *friends;
+pid_t *friendList;
 block *ledger;
 
 int semPIDs_ID;
@@ -72,8 +68,12 @@ void fetch_messages()
 
 void send_to_random_friend()
 {
-    int i = RAND(0, par->SO_FRIENDS_NUM - 1);
+    int queue;
+    int i;
     struct msgbuf_trans tMex = remove_tail(&transPool);
+
+    srand(getpid());
+    i = RAND(0, par->SO_FRIENDS_NUM - 1);
 
     if (tMex.mtype != TRANSACTION_MTYPE)
         return; /* no message could be extracted */
@@ -82,13 +82,17 @@ void send_to_random_friend()
     {
         TRACE(("[NODE %d] asking master to create new node\n", myPID))
         tMex.transactionMessage.hops = 0;
-        send_message(msgget(getppid(), 0), &tMex, sizeof(struct msgbuf_trans), 0);
+        queue = msgget(getppid(), 0);
+        send_message(queue, &tMex, sizeof(struct msgbuf_trans), 0);
     }
     else
     {
         tMex.transactionMessage.hops--;
         TRACE(("[NODE %d] hop!\n", myPID))
-        send_message(msgget(friends[i], 0), &tMex, sizeof(struct msgbuf_trans), 0);
+        TRACE(("[NODE %d] queueID for friendList[%d] is %d\n", myPID, i, friendList[i]))
+        queue = msgget(friendList[i], 0);
+
+        send_message(queue, &tMex, sizeof(struct msgbuf_trans), 0);
     }
     transPool.size--;
 }
@@ -148,6 +152,8 @@ void fill_friendList(pid_t *friendList)
     {
         receive_message(queueID, &friendMex, sizeof(struct msgbuf_friends), FRIENDS_MTYPE, 0);
         friendList[i] = friendMex.friend;
+
+        TRACE(("[NODE %d] friend list is: %d\n", myPID, friendList[i]))
     }
 }
 
@@ -268,8 +274,6 @@ int main(int argc, char *argv[])
     struct timespec randSleepTime;
     struct timespec sleepTimeRemaining;
     struct sigaction saINT_node;
-
-    pid_t *friendList;
 
     myPID = getpid();
 
