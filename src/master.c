@@ -351,6 +351,7 @@ int main(int argc, char *argv[])
     struct sigaction sa;
     struct sembuf sops;
     struct msgbuf_friends friendsMsg;
+    struct sembuf friendSem;
 
     ledger_ptr = ledger;
     semaphores_init();

@@ -71,10 +71,12 @@ void send_to_random_friend()
     int queue;
     int i;
     struct msgbuf_trans tMex = remove_from_pool(&transPool);
-    tMex.mtype = TRANSACTION_MTYPE;
+    if (tMex.transactionMessage.userTrans.amount == ERROR)
+        return;
 
-    srand(getpid());
+    transPool.size--;
     i = RAND(0, par->SO_FRIENDS_NUM - 1);
+    tMex.mtype = TRANSACTION_MTYPE;
 
     TRACE(("[NODE %d] transaction mtype %d\n", myPID, tMex.mtype))
     if (tMex.mtype != TRANSACTION_MTYPE)
@@ -86,26 +88,34 @@ void send_to_random_friend()
         tMex.transactionMessage.hops = 0;
         queue = msgget(getppid(), 0);
         send_message(queue, &tMex, sizeof(struct msgbuf_trans), 0);
-        transPool.size--;
     }
     else
     {
         tMex.transactionMessage.hops--;
         TRACE(("[NODE %d] hop!\n", myPID))
         TRACE(("[NODE %d] queueID for friendList[%d] is %d\n", myPID, i, friendList[i]))
-        queue = msgget(friendList[i], 0);
 
+        queue = msgget(friendList[i], 0);
         /* instead of checking in master we just ignore same PID */
-        if (queue != queueID)
+        if (queue == queueID)
         {
-            if(send_message(queue, &tMex, sizeof(struct msgbuf_trans), 0) == 0){
-                TRACE(("[NODE %d] sent a transaction to friend %d via queue %d.\n\
+            add_to_pool(&transPool, &tMex);
+            transPool.size++;
+            return;
+        }
+
+        if (send_message(queue, &tMex, sizeof(struct msgbuf_trans), IPC_NOWAIT) == 0)
+        {
+            TRACE(("[NODE %d] sent a transaction to friend %d via queue %d.\n\
                 tMex.mtype = %d, tMex.transactionMessage.hops = %d, tMex.transactionMessage.next = %p,\n\
-                tMex.transactionMessage.userTrans.amount = %u, tMex.transactionMessage.userTrans.sender = %d, tMex.transactionMessage.userTrans.receiver = %d\n", myPID, friendList[i], queue, tMex.mtype, tMex.transactionMessage.hops, tMex.transactionMessage.next,tMex.transactionMessage.userTrans.amount, tMex.transactionMessage.userTrans.sender, tMex.transactionMessage.userTrans.receiver))
-                transPool.size--;
-                return;
-            }
+                tMex.transactionMessage.userTrans.amount = %u, tMex.transactionMessage.userTrans.sender = %d, tMex.transactionMessage.userTrans.receiver = %d\n",
+                   myPID, friendList[i], queue, tMex.mtype, tMex.transactionMessage.hops, tMex.transactionMessage.next, tMex.transactionMessage.userTrans.amount, tMex.transactionMessage.userTrans.sender, tMex.transactionMessage.userTrans.receiver))
+        }
+        else
+        {
             TRACE(("[NODE %d] failed to send a transaction to a friend\n"))
+            add_to_pool(&transPool, &tMex);
+            transPool.size++;
         }
     }
 }
@@ -151,6 +161,12 @@ void fill_block_transList(transaction *transListWithoutReward)
     for (i = 0; i < (SO_BLOCK_SIZE - 1); i++)
     {
         tmp = remove_from_pool(&transPool);
+        if (tmp.transactionMessage.userTrans.amount == ERROR)
+        {
+            TRACE(("*** [NODE %d] fatal error ***\n", myPID))
+            kill(myPID, SIGINT);
+        }
+
         transListWithoutReward[i] = tmp.transactionMessage.userTrans;
         transPool.size--;
     }
@@ -166,6 +182,7 @@ void fill_friendList(pid_t *friendList)
     for (i = 0; i < par->SO_FRIENDS_NUM; i++)
     {
         receive_message(queueID, &friendMex, sizeof(struct msgbuf_friends), FRIENDS_MTYPE, 0);
+        TEST_ERROR
         friendList[i] = friendMex.friend;
 
         TRACE(("[NODE %d] friend list is: %d\n", myPID, friendList[i]))
@@ -273,6 +290,7 @@ void node_interrupt_handle(int signum)
     TEST_ERROR
     write(1, "::NODE:: SIGINT received\n", 26);
 
+    TRACE(("[NODE %d] key of my queue %d\n", myPID, queueID))
     msgctl(queueID, IPC_RMID, NULL);
     TRACE(("[NODE] queue removed\n"))
     TEST_ERROR
@@ -295,7 +313,7 @@ int main(int argc, char *argv[])
     bzero(&saINT_node, sizeof(saINT_node));
 
     attach_ipc_objects(argv);
-
+    srand(getpid());
     signal_handler_init(&saINT_node);
     message_queue_attach();
 
@@ -332,6 +350,7 @@ int main(int argc, char *argv[])
 
                 new_block(transBuffer, newBlock);
                 insert_block_in_ledger(newBlock);
+                TEST_ERROR
 
                 free(newBlock);
 
