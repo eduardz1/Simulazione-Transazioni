@@ -22,7 +22,7 @@ ask to update ledger basically)
 - [x] **Eduard ->** function to append blocks to ledger
 
 ## Master Specific
-- [ ] print every second of current_budget of every user and node (max 32 lines,
+- [ ] Francesco->print every second of current_budget of every user and node (max 32 lines,
 ordered by most budget)
 - [ ] stop simulation when a certain number of users are dead
 - [x] **Eduard ->** handler can't have arguments, need to implement it without or
