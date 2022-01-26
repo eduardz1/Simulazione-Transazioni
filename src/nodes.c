@@ -70,11 +70,13 @@ void send_to_random_friend()
 {
     int queue;
     int i;
-    struct msgbuf_trans tMex = remove_tail(&transPool);
+    struct msgbuf_trans tMex = remove_from_pool(&transPool);
+    tMex.mtype = TRANSACTION_MTYPE;
 
     srand(getpid());
     i = RAND(0, par->SO_FRIENDS_NUM - 1);
 
+    TRACE(("[NODE %d] transaction mtype %d\n", myPID, tMex.mtype))
     if (tMex.mtype != TRANSACTION_MTYPE)
         return; /* no message could be extracted */
 
@@ -84,6 +86,7 @@ void send_to_random_friend()
         tMex.transactionMessage.hops = 0;
         queue = msgget(getppid(), 0);
         send_message(queue, &tMex, sizeof(struct msgbuf_trans), 0);
+        transPool.size--;
     }
     else
     {
@@ -92,9 +95,19 @@ void send_to_random_friend()
         TRACE(("[NODE %d] queueID for friendList[%d] is %d\n", myPID, i, friendList[i]))
         queue = msgget(friendList[i], 0);
 
-        send_message(queue, &tMex, sizeof(struct msgbuf_trans), 0);
+        /* instead of checking in master we just ignore same PID */
+        if (queue != queueID)
+        {
+            if(send_message(queue, &tMex, sizeof(struct msgbuf_trans), 0) == 0){
+                TRACE(("[NODE %d] sent a transaction to friend %d via queue %d.\n\
+                tMex.mtype = %d, tMex.transactionMessage.hops = %d, tMex.transactionMessage.next = %p,\n\
+                tMex.transactionMessage.userTrans.amount = %u, tMex.transactionMessage.userTrans.sender = %d, tMex.transactionMessage.userTrans.receiver = %d\n", myPID, friendList[i], queue, tMex.mtype, tMex.transactionMessage.hops, tMex.transactionMessage.next,tMex.transactionMessage.userTrans.amount, tMex.transactionMessage.userTrans.sender, tMex.transactionMessage.userTrans.receiver))
+                transPool.size--;
+                return;
+            }
+            TRACE(("[NODE %d] failed to send a transaction to a friend\n"))
+        }
     }
-    transPool.size--;
 }
 
 /*
@@ -131,12 +144,14 @@ void new_block(transaction *blockTransaction, block *newBlock)
 /* fills the buffer with SO_BLOCK_SIZE-1 transactions */
 void fill_block_transList(transaction *transListWithoutReward)
 {
+    struct msgbuf_trans tmp;
     int i;
     TRACE(("[NODE %d] is starting to process a block\n", myPID))
 
     for (i = 0; i < (SO_BLOCK_SIZE - 1); i++)
     {
-        transListWithoutReward[i] = remove_from_pool(&transPool);
+        tmp = remove_from_pool(&transPool);
+        transListWithoutReward[i] = tmp.transactionMessage.userTrans;
         transPool.size--;
     }
 }

@@ -387,7 +387,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    usleep(500);
+    usleep(5000);
 
     /* sends a message of type FRIENDS_MTYPE to every node */
     for (nCounter = 0; nCounter < par->SO_NODES_NUM; nCounter++)

@@ -37,15 +37,14 @@ int add_to_pool(pool *transPool, struct msgbuf_trans *message)
 }
 
 /* remove a msgbuf_trans from pool, returns directly the transaction associated */
-transaction remove_from_pool(pool *transPool)
+struct msgbuf_trans remove_from_pool(pool *transPool)
 {
-    struct msgbuf_trans *tmp = transPool->head;
-    transaction poppedTrans = tmp->transactionMessage.userTrans;
+    struct msgbuf_trans tmp = *transPool->head;
 
     if (transPool->head == NULL)
     {
-        poppedTrans.amount = ERROR;
-        return poppedTrans;
+        tmp.transactionMessage.userTrans.amount = ERROR;
+        return tmp;
     }
 
     transPool->head = transPool->head->transactionMessage.next;
@@ -54,10 +53,10 @@ transaction remove_from_pool(pool *transPool)
     if (transPool->head == NULL)
         transPool->tail = NULL;
 
-    return poppedTrans;
+    return tmp;
 }
 
-struct msgbuf_trans remove_tail(pool *transPool)
+/*struct msgbuf_trans remove_tail(pool *transPool)
 {
     struct msgbuf_trans tmp;
 
@@ -66,15 +65,17 @@ struct msgbuf_trans remove_tail(pool *transPool)
         tmp.mtype = ERROR;
         return tmp;
     }
-    else if (transPool->tail == NULL)
+    
+    if (transPool->tail != NULL)
     {
-        tmp = *transPool->head;
-        transPool->head = NULL;
+        tmp = *transPool->tail;
+        transPool->tail = NULL;
+        tmp.mtype = TRANSACTION_MTYPE; /* gets set to 0 otherwise *
         return tmp;
     }
 
-    tmp = *transPool->tail;
-    transPool->tail = NULL;
-    tmp.mtype = TRANSACTION_MTYPE; /* gets set to 0 otherwise */
+    tmp = *transPool->head;
+    transPool->head = NULL;
+    tmp.mtype = TRANSACTION_MTYPE; /* gets set to 0 otherwise *
     return tmp;
-}
+}*/
