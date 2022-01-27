@@ -32,6 +32,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
         /* we should place it in a buffer so that they print a fixed length */
         printf("|  User      %7d    %s  %10u                     |\n", userPID[userNum].pid, statusStr, userPID[userNum].balance);
     }
+    printf("|                                                                 |\n");
     printf(" - Type ----- PID ----- Status ----- Balance ----- Still in Pool -\n");
     printf(" -----------------------------------------------------------------\n");
     while (nodesNum++ < par->SO_NODES_NUM * 2 && nodePID[nodesNum].pid != 0)
@@ -127,38 +128,38 @@ void print_parameters(struct parameters *par)
 void print_transaction(transaction *t, FILE *fp)
 {
     char ts[31];
-    char tmp[10];
+    char tmp[11];
     switch (t->status)
     {
     case pending:
-        strcpy(tmp, "pending");
+        strcpy(tmp, "pending   ");
         break;
     case aborted:
-        strcpy(tmp, "aborted");
+        strcpy(tmp, "aborted   ");
         break;
     case confirmed:
-        strcpy(tmp, "confirmed");
+        strcpy(tmp, "confirmed ");
         break;
     case processing:
-        strcpy(tmp, "confirmed");
+        strcpy(tmp, "processing");
         break;
     }
     formatted_timestamp(ts, t->timestamp);
 
-    fprintf(fp, " ----------------------------------------------------------------\n");
-    fprintf(fp, "|  %s\n", ts);
-    fprintf(fp, "|  %s\n", tmp);
-    fprintf(fp, "|  %d --> %d\n", t->sender, t->receiver);
-    fprintf(fp, "|  Amount:    %d\n", t->amount);
-    fprintf(fp, "|  Reward:    %d\n", t->reward);
-    fprintf(fp, " ----------------------------------------------------------------\n");
+    fprintf(fp, " ---------------------------------------------------------------\n");   
+    fprintf(fp, "|  %s                                |\n", ts);
+    fprintf(fp, "|  %s                                                   |\n", tmp);
+    fprintf(fp, "|  %7d --> %7d                                          |\n", t->sender, t->receiver);
+    fprintf(fp, "|  Amount:    %10u                                        |\n", t->amount);
+    fprintf(fp, "|  Reward:    %10u                                        |\n", t->reward);
+    fprintf(fp, " ---------------------------------------------------------------\n");
 }
 
 void print_block(block *b, FILE *fp)
 {
     int i;
     transaction printable;
-    fprintf(fp, "[BLOCK %d] =======================================================\n", b->blockIndex);
+    fprintf(fp, "[BLOCK %5d] ===================================================\n", b->blockIndex);
     for (i = 0; i < SO_BLOCK_SIZE; i++)
     {
         printable = b->transList[i];
