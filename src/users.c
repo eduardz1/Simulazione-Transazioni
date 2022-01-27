@@ -353,7 +353,9 @@ void user_transactions_handle(int signum)
 void user_interrupt_handle(int signum)
 {
 	write(2, "::USER:: SIGINT received\n", 26);
-
+	get_balance();
+	if (currBalance >= 2)
+		update_status(0);
 	exit(0);
 }
 

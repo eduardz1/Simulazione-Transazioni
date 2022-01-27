@@ -9,10 +9,10 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
     int statusNum = 0;
     char statusStr[19];
 
-    printf(" -------------------------------------------------\n|          Master Process PID is %d\n", mainPID);
-    printf("|                                                 \n");
-    printf(" - Type ----- PID ----- Status ----- Balance -----\n");
-    printf(" -------------------------------------------------\n");
+    printf(" -----------------------------------------------------------------\n|                 Master Process PID is %7d                   |\n", mainPID);
+    printf("|                                                                 |\n");
+    printf(" - Type ----- PID ----- Status ----- Balance ---------------------\n");
+    printf(" -----------------------------------------------------------------\n");
     while (userNum--)
     {
         statusNum = userPID[userNum].status;
@@ -30,9 +30,10 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
         }
 
         /* we should place it in a buffer so that they print a fixed length */
-        printf("|  User      %7d    %s    %u\n", userPID[userNum].pid, statusStr, userPID[userNum].balance);
+        printf("|  User      %7d    %s  %10u                     |\n", userPID[userNum].pid, statusStr, userPID[userNum].balance);
     }
-    printf(" -------------------------------------------------\n");
+    printf(" - Type ----- PID ----- Status ----- Balance ----- Still in Pool -\n");
+    printf(" -----------------------------------------------------------------\n");
     while (nodesNum++ < par->SO_NODES_NUM * 2 && nodePID[nodesNum].pid != 0)
     {
         statusNum = nodePID[nodesNum].status;
@@ -45,9 +46,9 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
             strcpy(statusStr, "\033[33mfull\033[0m     ");
             break;
         }
-        printf("|  Node      %7d    %s    %10lu\n", nodePID[nodesNum].pid, statusStr, nodePID[nodesNum].balance);
+    printf("|  Node      %7d    %s  %10lu         %3d         |\n", nodePID[nodesNum].pid, statusStr, nodePID[nodesNum].balance, nodePID[nodesNum].tpSize);
     }
-    printf(" -------------------------------------------------\n");
+    printf(" -----------------------------------------------------------------\n");
 }
 
 void print_num_aborted(user *usersPID, struct parameters *par){
@@ -72,16 +73,6 @@ void print_num_blocks(block *l)
         i++;
     }
     printf("%d blocks have been confirmed on ledger\n", blockIndex);
-}
-
-void print_transactions_still_in_pool(node *nodesPID, struct parameters *par)
-{
-    int i, num = 0;
-    for (i = 0; i < par->SO_NODES_NUM * 2 && nodesPID[i].pid != 0; i++)
-    {
-        num += nodesPID[i].tpSize;
-    }
-    printf("%d transactions are still in nodes' pools\n", num);
 }
 
 void print_kill_signal()
@@ -112,7 +103,6 @@ void final_print(pid_t masterPID, user *usersPID, node *nodesPID, struct paramet
     /*print_kill_signal();*/
     print_num_aborted(usersPID, par);
     print_num_blocks(ledger);
-    print_transactions_still_in_pool(nodesPID, par);
 }
 
 void print_parameters(struct parameters *par)
