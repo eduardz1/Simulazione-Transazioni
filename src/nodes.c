@@ -9,8 +9,6 @@
  ======================
  */
 
-unsigned long currBalanceNode = 0;
-/* parameters of simulation */
 struct parameters *par;
 user *usersPID;
 node *nodesPID;
@@ -78,10 +76,6 @@ void send_to_random_friend()
     i = RAND(0, par->SO_FRIENDS_NUM - 1);
     tMex.mtype = TRANSACTION_MTYPE;
 
-    TRACE(("[NODE %d] transaction mtype %d\n", myPID, tMex.mtype))
-    if (tMex.mtype != TRANSACTION_MTYPE)
-        return; /* no message could be extracted */
-
     if (tMex.transactionMessage.hops <= 0)
     {
         TRACE(("[NODE %d] asking master to create new node\n", myPID))
@@ -89,38 +83,35 @@ void send_to_random_friend()
         queue = getppid();
         TRACE(("[NODE %d] ppid() %d\n", myPID, queue))
         queue = msgget(queue, 0);
-        send_message(queue, &tMex, sizeof(struct msgbuf_trans), 0);
+        if (send_message(queue, &tMex, sizeof(struct msgbuf_trans), IPC_NOWAIT) == SUCCESS)
+        {
+            TRACE(("[NODE %d] a transaction reached maximum hops and was sent to master\n"))
+        } /* else the transaction is discarded */
+        return;
+    }
+
+    tMex.transactionMessage.hops--;
+
+    if (friendList[i] == 0) /* an error occurred and a friend was not initialized correctly */
+        kill(myPID, SIGINT);
+    queue = msgget(friendList[i], 0);
+    /* instead of checking in master we just ignore same PID */
+    if (queue == queueID)
+    {
+        add_to_pool(&transPool, &tMex);
+        transPool.size++;
+        return;
+    }
+    
+    if (send_message(queue, &tMex, sizeof(struct msgbuf_trans), IPC_NOWAIT) == 0)
+    {
+        TRACE(("[NODE %d] sent a transaction to friend %d\n", myPID, friendList[i]))
     }
     else
     {
-        tMex.transactionMessage.hops--;
-        TRACE(("[NODE %d] hop!\n", myPID))
-        TRACE(("[NODE %d] queueID for friendList[%d] is %d\n", myPID, i, friendList[i]))
-
-        if(friendList[i] == 0)
-            kill(myPID, SIGINT);
-        queue = msgget(friendList[i], 0);
-        /* instead of checking in master we just ignore same PID */
-        if (queue == queueID)
-        {
-            add_to_pool(&transPool, &tMex);
-            transPool.size++;
-            return;
-        }
-
-        if (send_message(queue, &tMex, sizeof(struct msgbuf_trans), IPC_NOWAIT) == 0)
-        {
-            TRACE(("[NODE %d] sent a transaction to friend %d via queue %d.\n\
-                tMex.mtype = %d, tMex.transactionMessage.hops = %d, tMex.transactionMessage.next = %p,\n\
-                tMex.transactionMessage.userTrans.amount = %u, tMex.transactionMessage.userTrans.sender = %d, tMex.transactionMessage.userTrans.receiver = %d\n",
-                   myPID, friendList[i], queue, tMex.mtype, tMex.transactionMessage.hops, tMex.transactionMessage.next, tMex.transactionMessage.userTrans.amount, tMex.transactionMessage.userTrans.sender, tMex.transactionMessage.userTrans.receiver))
-        }
-        else
-        {
-            TRACE(("[NODE %d] failed to send a transaction to a friend\n"))
-            add_to_pool(&transPool, &tMex);
-            transPool.size++;
-        }
+        TRACE(("[NODE %d] failed to send a transaction to friend %d\n", myPID, friendList[i]))
+        add_to_pool(&transPool, &tMex);
+        transPool.size++;
     }
 }
 
@@ -244,11 +235,9 @@ int sum_reward(transaction *sumBlock)
         sum += sumBlock[i].reward;
     }
 
-    currBalanceNode += sum;
     sem_reserve(semPIDs_ID, 1);
-    nodesPID[get_pid_nodeIndex()].balance = currBalanceNode;
+    nodesPID[get_pid_nodeIndex()].balance += sum;
     sem_release(semPIDs_ID, 1);
-    TRACE(("[NODE %d] curr balance is %lu UC\n", myPID, currBalanceNode))
 
     return sum;
 }
@@ -354,7 +343,6 @@ int main(int argc, char *argv[])
 
                 new_block(transBuffer, newBlock);
                 insert_block_in_ledger(newBlock);
-                TEST_ERROR
 
                 free(newBlock);
 

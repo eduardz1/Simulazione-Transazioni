@@ -18,6 +18,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <limits.h>
 
 #include "../utils/debug.h"
 #include "../utils/sem.h"

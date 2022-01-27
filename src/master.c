@@ -27,8 +27,6 @@ int semPIDs_ID;
 int semLedger_ID;
 int masterQ;
 
-/*extern int usersPrematurelyDead = 0;*/
-
 /*
  ======================
  ||    FUNCTIONS     ||
@@ -289,7 +287,7 @@ void start_continuous_print()
     int i, activeUsers, activeNodes;
     int time = par->SO_SIM_SEC;
 
-    while (time)
+    while (time--)
     {
         activeNodes = 0;
         activeUsers = 0;
@@ -306,10 +304,11 @@ void start_continuous_print()
                 activeNodes++;
         }
 
-        printf("\r\nNUM ACTIVE USERS: %d\nNUM ACTIVE NODES: %d\n\n", activeUsers, activeNodes);
-        fflush(stdout);
+        printf("\nNUM ACTIVE USERS: %d     \nNUM ACTIVE NODES: %d     \n\n", activeUsers, activeNodes);
+        print_most_significant_processes(usersPID, nodesPID, par);
 
-        sleep(time--);
+        printf("\033[22A\r"); /*ESC[#A moves cursor up # lines, \r moves cursor to begging of the line */
+        sleep(1);
     }
 }
 
@@ -413,7 +412,6 @@ int main(int argc, char *argv[])
         }
     }
 
-    /*usersPrematurelyDead = 0;*/
     argvSpawns[0] = USER_NAME;
     TRACE(("[MASTER] argv values for users: %s %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7], argvSpawns[8]))
     for (uCounter = 0; uCounter < par->SO_USER_NUM; uCounter++)
@@ -465,8 +463,6 @@ int main(int argc, char *argv[])
             }
             TRACE(("[MASTER] spawned a node due to hopped transaction\n"))
             UNLOCK
-            if (getpid() != myPID)
-                return 0;
 
             /* missing section where master orders to existing nodes to add this one to
              * their list of friends
@@ -477,9 +473,7 @@ int main(int argc, char *argv[])
 
     default:
         start_continuous_print();
-
-        killpg(0, SIGINT); /* our sigint handler needs to do quite a lot of things to print the wall of test below */
-        return 0;
+        break;
     }
     return 0;
 }
