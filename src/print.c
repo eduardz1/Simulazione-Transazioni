@@ -130,6 +130,7 @@ void print_parameters(struct parameters *par)
 
 void print_transaction(transaction *t, FILE *fp)
 {
+    char ts[31];
     char tmp[10];
     switch (t->status)
     {
@@ -146,9 +147,10 @@ void print_transaction(transaction *t, FILE *fp)
         strcpy(tmp, "confirmed");
         break;
     }
+    formatted_timestamp(ts, t->timestamp);
 
     fprintf(fp, " -------------------------- \n");
-    /*formafp, ttimestamp(fp);*/
+    fprintf(fp, "|  %s\n", ts);
     fprintf(fp, "|  %s\n", tmp);
     fprintf(fp, "|  %d --> %d\n", t->sender, t->receiver);
     fprintf(fp, "|  Amount:    %d\n", t->amount);
@@ -195,28 +197,14 @@ void print_ledger(block *l)
 }
 
 /* print without /n */
-void formatted_timestamp(FILE *fp)
+void formatted_timestamp(char *tsString, struct timespec timestamp)
 {
-    printf("Hey");
-    /*clock_t tic = clock();
-    clock_t start = clock();
-    clock_t stop = clock();
-
-    time_t rawtime;
-    time_t now;
-    struct tm *info;
-    struct tm *today;
-    double elapsed;
-    char buf[128];
-
-    time(&now);
-    today = localtime(&now);
-    strftime(buf, 128, "%Y/%m/%d", today);
-    printf("%s\n", buf);
-
-    elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC;
- */
+    struct tm time;
+    gmtime_r(&timestamp.tv_sec, &time);
+    strftime(tsString, 31 - 10, "%Y-%m-%d %H:%M:%S.", &time);
+    sprintf(tsString + strlen(tsString), "%09lu", timestamp.tv_nsec);
 }
+
 void print_transaction_pool(pool *transPool)
 {
     pool *tmp = transPool;
