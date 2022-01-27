@@ -114,6 +114,7 @@ typedef struct node_t
 {
     pid_t pid;
     unsigned long balance;
+    int tpSize;
     enum
     {
         available,

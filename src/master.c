@@ -328,7 +328,7 @@ void master_interrupt_handle(int signum)
 
     while ((wpid = wait(&status)) > 0)
         ;
-    final_print(getpid(), usersPID, nodesPID, par);
+    final_print(getpid(), usersPID, nodesPID, par, ledger_ptr);
 
     print_ledger(ledger_ptr);
 

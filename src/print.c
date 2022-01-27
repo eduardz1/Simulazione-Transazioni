@@ -2,13 +2,6 @@
 #include "include/common.h"
 #include "include/print.h"
 
-/* #define HYPHEN "--------" */
-
-void print_time_to_die()
-{
-    printf("\n***********************\n|| The time has come ||\n***********************\n\n");
-}
-
 void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct parameters *par)
 {
     int userNum = par->SO_USER_NUM;
@@ -57,23 +50,39 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
     printf(" -------------------------------------------------\n");
 }
 
-void print_num_aborted();
+void print_num_aborted(user *usersPID, struct parameters *par){
+    int i;
+    int counter = 0;
+
+    for(i = 0; i<par->SO_USER_NUM; i++){
+        if(usersPID[i].status == dead)
+            counter++;
+    }
+    printf("%d users have died prematurely\n", counter);
+}
+
 void print_num_blocks(block *l)
 {
     int i = 0;
     int blockIndex = 0;
 
-    if (l[i].transList[0].timestamp.tv_nsec + l[i].transList->timestamp.tv_sec == 0)
-        return;
-
-    for (i = 0; i < SO_REGISTRY_SIZE && blockIndex == 0; i++)
+    while (l[i].transList[0].sender == -1 && i < SO_REGISTRY_SIZE)
     {
-        if (l[i].transList[0].timestamp.tv_nsec + l[i].transList->timestamp.tv_sec == 0)
-            blockIndex = l[i - 1].blockIndex;
+        blockIndex = l[i].blockIndex;
+        i++;
     }
-    printf("NUM BLOCKS: %d\n", blockIndex);
+    printf("%d blocks have been confirmed on ledger\n", blockIndex);
 }
-void print_transactions_still_in_pool();
+
+void print_transactions_still_in_pool(node *nodesPID, struct parameters *par)
+{
+    int i, num = 0;
+    for (i = 0; i < par->SO_NODES_NUM * 2 && nodesPID[i].pid != 0; i++)
+    {
+        num += nodesPID[i].tpSize;
+    }
+    printf("%d transactions are still in nodes' pools\n", num);
+}
 
 void print_kill_signal()
 {
@@ -96,17 +105,14 @@ void print_kill_signal()
  */
 }
 
-void final_print(pid_t masterPID, user *usersPID, node *nodesPID, struct parameters *par)
+void final_print(pid_t masterPID, user *usersPID, node *nodesPID, struct parameters *par, block *ledger)
 {
     print_user_nodes_table(masterPID, usersPID, nodesPID, par);
 
-    /*print_kill_signal();
-    print_user_balance();
-    print_node_balance();*
-    print_num_aborted();
-    /*
-    print_num_blocks();
-    print_transactions_still_in_pool();*/
+    /*print_kill_signal();*/
+    print_num_aborted(usersPID, par);
+    print_num_blocks(ledger);
+    print_transactions_still_in_pool(nodesPID, par);
 }
 
 void print_parameters(struct parameters *par)
@@ -148,7 +154,7 @@ void print_transaction(transaction *t, FILE *fp)
         break;
     }
     formatted_timestamp(ts, t->timestamp);
-                                                 
+
     fprintf(fp, " ----------------------------------------------------------------\n");
     fprintf(fp, "|  %s\n", ts);
     fprintf(fp, "|  %s\n", tmp);
@@ -161,7 +167,7 @@ void print_transaction(transaction *t, FILE *fp)
 void print_block(block *b, FILE *fp)
 {
     int i;
-    transaction printable;                                            
+    transaction printable;
     fprintf(fp, "[BLOCK %d] =======================================================\n", b->blockIndex);
     for (i = 0; i < SO_BLOCK_SIZE; i++)
     {

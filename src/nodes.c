@@ -102,7 +102,7 @@ void send_to_random_friend()
         transPool.size++;
         return;
     }
-    
+
     if (send_message(queue, &tMex, sizeof(struct msgbuf_trans), IPC_NOWAIT) == 0)
     {
         TRACE(("[NODE %d] sent a transaction to friend %d\n", myPID, friendList[i]))
@@ -325,6 +325,11 @@ int main(int argc, char *argv[])
          */
 
         fetch_messages();
+
+        sem_reserve(semPIDs_ID, 1);
+        nodesPID[get_pid_nodeIndex()].tpSize = transPool.size;
+        sem_release(semPIDs_ID, 1);
+
         if (transPool.size >= (SO_BLOCK_SIZE - 1))
         {
             /* this removes SO-BLOCK-SIZE-1 transactions from pool */
