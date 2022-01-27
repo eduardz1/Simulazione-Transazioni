@@ -9,7 +9,7 @@
 - [ ] MAKE A USEFUL README (some informations can be directly taken from Scheme.md)
 - [x] **Eduard ->** **Rick ->** fix formatted_timestamp() in common.c
 - [ ] finish every print function
-- [ ] clean general print formatting
+- [x] **Eduard ->** clean general print formatting
 - [x] **Francesco ->** make ledger effectively print inside a ledger.txt, I've tried but it didnt't work
 - [x] **Eduard ->** instead of sleeping for 1 second maybe we could make master sleep with a timer
 - [ ] **Eduard ->** general cleanup of the code
