@@ -352,7 +352,7 @@ void user_transactions_handle(int signum)
 /* CTRL-C handler */
 void user_interrupt_handle(int signum)
 {
-	write(1, "::USER:: SIGINT received\n", 26);
+	write(2, "::USER:: SIGINT received\n", 26);
 
 	exit(0);
 }
