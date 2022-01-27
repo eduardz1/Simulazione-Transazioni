@@ -12,7 +12,7 @@ void print_time_to_die()
 void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct parameters *par)
 {
     int userNum = par->SO_USER_NUM;
-    int nodesNum = par->SO_NODES_NUM;
+    int nodesNum = 0;
     int statusNum = 0;
     char statusStr[] = "available";
 
@@ -40,7 +40,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
         printf("|  User      %7d    %s    %u\n", userPID[userNum].pid, statusStr, userPID[userNum].balance);
     }
     printf(" -------------------------------------------------\n");
-    while (nodesNum--)
+    while (nodesNum++ < par->SO_NODES_NUM * 2 && nodePID[nodesNum].pid != 0)
     {
         statusNum = nodePID[nodesNum].status;
         switch (statusNum)
@@ -52,13 +52,11 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
             strcpy(statusStr, "full     ");
             break;
         }
-        printf("|  Node      %d    %s    %10lu\n", nodePID[nodesNum].pid, statusStr, nodePID[nodesNum].balance);
+        printf("|  Node      %7d    %s    %10lu\n", nodePID[nodesNum].pid, statusStr, nodePID[nodesNum].balance);
     }
     printf(" -------------------------------------------------\n");
 }
 
-void print_user_balance();
-void print_node_balance();
 void print_num_aborted();
 void print_num_blocks(block *l)
 {
@@ -77,25 +75,25 @@ void print_num_blocks(block *l)
 }
 void print_transactions_still_in_pool();
 
-void print_kill_signal(){
-   /* switch ()
-    {
-    case 0: /* too much time  
-       if(SO_SIM_SEC>=time(30)){
-         printf("TOO MUCH TIME SIMULATION ENDED",); 
-         exit(EXIT_FAILURE); 
-       }
-        break; 
-      case 1: /* Registry space is full 
-       if (SO_REGISTRY_SIZE>100) {
-           printf("REGISTRY IS FULL");
-           exit(EXIT_FAILURE); 
-       }
-        break; 
+void print_kill_signal()
+{
+    /* switch ()
+     {
+     case 0: /* too much time
+        if(SO_SIM_SEC>=time(30)){
+          printf("TOO MUCH TIME SIMULATION ENDED",);
+          exit(EXIT_FAILURE);
+        }
+         break;
+       case 1: /* Registry space is full
+        if (SO_REGISTRY_SIZE>100) {
+            printf("REGISTRY IS FULL");
+            exit(EXIT_FAILURE);
+        }
+         break;
 
-    case 2 : 
-*/
-
+     case 2 :
+ */
 }
 
 void final_print(pid_t masterPID, user *usersPID, node *nodesPID, struct parameters *par)
@@ -216,8 +214,8 @@ void formatted_timestamp(FILE *fp)
     strftime(buf, 128, "%Y/%m/%d", today);
     printf("%s\n", buf);
 
-    elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC; 
- */   
+    elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC;
+ */
 }
 void print_transaction_pool(pool *transPool)
 {
@@ -255,4 +253,107 @@ void print_outgoing_pool(struct node *outPool)
         tmp = tmp->next;
         i++;
     }
+}
+
+/* 18 lines long */
+void print_most_significant_processes(user *userPID, node *nodePID, struct parameters *par)
+{
+    int i;
+    static pid_t n1, n2, n3, n4, n5, n6;               /* pid of the most significant nodes */
+    static unsigned long bn1, bn2, bn3, bn4, bn5, bn6; /* balance of the ost significant nodes */
+    static pid_t u1, u2, u3, u4, u5, u6;
+    static unsigned int bu1, bu2, bu3, bu4, bu5, bu6;
+
+    n1 = n2 = n3 = n4 = n5 = n6 = 0;
+    bn1 = bn2 = bn3 = 0;
+    bn4 = bn5 = bn6 = ULONG_MAX;
+    u1 = u2 = u3 = u4 = u5 = u6 = 0;
+    bu1 = bu2 = bu3 = 0;
+    bu4 = bu5 = bu6 = UINT_MAX;
+
+    for (i = 0; i < par->SO_NODES_NUM; i++)
+    {
+        if (nodePID[i].balance > bn1)
+        {
+            bn1 = nodePID[i].balance;
+            n1 = nodePID[i].pid;
+        }
+        else if (nodePID[i].balance > bn2)
+        {
+            bn2 = nodePID[i].balance;
+            n2 = nodePID[i].pid;
+        }
+        else if (nodePID[i].balance > bn3)
+        {
+            bn3 = nodePID[i].balance;
+            n3 = nodePID[i].pid;
+        }
+        else if (nodePID[i].balance < bn6)
+        {
+            bn6 = nodePID[i].balance;
+            n6 = nodePID[i].pid;
+        }
+        else if (nodePID[i].balance < bn5)
+        {
+            bn5 = nodePID[i].balance;
+            n5 = nodePID[i].pid;
+        }
+        else if (nodePID[i].balance < bn4)
+        {
+            bn4 = nodePID[i].balance;
+            n4 = nodePID[i].pid;
+        }
+    }
+
+    for (i = 0; i < par->SO_USER_NUM; i++)
+    {
+        if (userPID[i].balance > bu1)
+        {
+            bu1 = userPID[i].balance;
+            u1 = userPID[i].pid;
+        }
+        else if (userPID[i].balance > bu2)
+        {
+            bu2 = userPID[i].balance;
+            u2 = userPID[i].pid;
+        }
+        else if (userPID[i].balance > bu3)
+        {
+            bu3 = userPID[i].balance;
+            u3 = userPID[i].pid;
+        }
+        else if (userPID[i].balance < bu6)
+        {
+            bu6 = userPID[i].balance;
+            u6 = userPID[i].pid;
+        }
+        else if (userPID[i].balance < bu5)
+        {
+            bu5 = userPID[i].balance;
+            u5 = userPID[i].pid;
+        }
+        else if (userPID[i].balance < bu4)
+        {
+            bu4 = userPID[i].balance;
+            u4 = userPID[i].pid;
+        }
+    }
+
+    /* the extra spaces are to clear extra digits when updating */
+    printf("[ Most significant nodes ]\n");
+    printf("| %7d   (%lu UC)                           \n", n1, bn1);
+    printf("| %7d   (%lu UC)                           \n", n2, bn2);
+    printf("| %7d   (%lu UC)                           \n", n3, bn3);
+    printf("| - - - - - - - - - - - -\n");
+    printf("| %7d   (%lu UC)                           \n", n4, bn4);
+    printf("| %7d   (%lu UC)                           \n", n5, bn5);
+    printf("| %7d   (%lu UC)                           \n", n6, bn6);
+    printf("\n[ Most significant users ]\n");
+    printf("| %7d   (%u UC)                 \n", u1, bu1);
+    printf("| %7d   (%u UC)                 \n", u2, bu2);
+    printf("| %7d   (%u UC)                 \n", u3, bu3);
+    printf("| - - - - - - - - - - - -\n");
+    printf("| %7d   (%u UC)                 \n", u4, bu4);
+    printf("| %7d   (%u UC)                 \n", u5, bu5);
+    printf("| %7d   (%u UC)                 \n\n", u6, bu6);
 }
