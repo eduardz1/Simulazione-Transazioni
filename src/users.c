@@ -136,6 +136,7 @@ void queue_to_pid(pid_t nodePID)
 {
 	do
 	{
+		errno = 0;
 		queueID = msgget(nodePID, 0);
 	} while (errno == ENOENT);
 }

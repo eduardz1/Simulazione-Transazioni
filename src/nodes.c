@@ -47,7 +47,7 @@ void message_queue_attach()
 }
 
 /* process starts fetching transactions from it's msg_q until transPool is full */
-void fetch_messages()
+void fetch_messages() /* need also to fetch friends just in case */
 {
     /* tried initializing flag as static, didnt work */
     TRACE(("[NODE %d] flag: %d\n", myPID, flag))
@@ -86,7 +86,9 @@ void send_to_random_friend()
     {
         TRACE(("[NODE %d] asking master to create new node\n", myPID))
         tMex.transactionMessage.hops = 0;
-        queue = msgget(getppid(), 0);
+        queue = getppid();
+        TRACE(("[NODE %d] ppid() %d\n", myPID, queue))
+        queue = msgget(queue, 0);
         send_message(queue, &tMex, sizeof(struct msgbuf_trans), 0);
     }
     else
@@ -95,6 +97,8 @@ void send_to_random_friend()
         TRACE(("[NODE %d] hop!\n", myPID))
         TRACE(("[NODE %d] queueID for friendList[%d] is %d\n", myPID, i, friendList[i]))
 
+        if(friendList[i] == 0)
+            kill(myPID, SIGINT);
         queue = msgget(friendList[i], 0);
         /* instead of checking in master we just ignore same PID */
         if (queue == queueID)
