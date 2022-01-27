@@ -28,7 +28,7 @@ ordered by most budget)
 - [ ] send new overbuf nodes pid as a new friend to x nodes
 - [x] **Eduard ->** handler can't have arguments, need to implement it without or
 use an extern variable (avoid if possible)
-- [x] **Rick(ci prova)-->** print every second of num proc users and node active
+- [x] **Eduard -> Rick(ci prova)-->** print every second of num proc users and node active
 
 ## User Specific
 - [x] **Eduard ->** function to extract random userPID from "usersPID" array of
