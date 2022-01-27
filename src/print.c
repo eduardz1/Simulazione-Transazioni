@@ -14,7 +14,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
     int userNum = par->SO_USER_NUM;
     int nodesNum = 0;
     int statusNum = 0;
-    char statusStr[] = "available";
+    char statusStr[19];
 
     printf(" -------------------------------------------------\n|          Master Process PID is %d\n", mainPID);
     printf("|                                                 \n");
@@ -26,13 +26,13 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
         switch (statusNum)
         {
         case 0:
-            strcpy(statusStr, "alive    ");
+            strcpy(statusStr, "\033[32malive\033[0m    ");
             break;
         case 1:
-            strcpy(statusStr, "broke    ");
+            strcpy(statusStr, "\033[33mbroke\033[0m    ");
             break;
         case 2:
-            strcpy(statusStr, "dead     ");
+            strcpy(statusStr, "\033[31mdead\033[0m     ");
             break;
         }
 
@@ -46,10 +46,10 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
         switch (statusNum)
         {
         case 0:
-            strcpy(statusStr, "available");
+            strcpy(statusStr, "\033[32mavailable\033[0m");
             break;
         case 1:
-            strcpy(statusStr, "full     ");
+            strcpy(statusStr, "\033[33mfull\033[0m     ");
             break;
         }
         printf("|  Node      %7d    %s    %10lu\n", nodePID[nodesNum].pid, statusStr, nodePID[nodesNum].balance);
