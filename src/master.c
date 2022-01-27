@@ -120,11 +120,12 @@ void make_friend_list(pid_t *friends)
      * Using the knoth algoritm we generate an array of random indexes
      * in ascending order, that's not a problem because the nodes will extract
      * a random index anyway when "hopping" a transaction to a different node
-     */
+     * idea from https://stackoverflow.com/questions/1608181/unique-random-number-generation-in-an-integer-array
+     * /
 
-    /* Knuth algorithm */ /*friends = m, nodes = n */
-    const int numNodes = par->SO_NODES_NUM;
-    const int numFriends = par->SO_FRIENDS_NUM;
+    /* Knuth algorithm */
+    const int numNodes = par->SO_NODES_NUM;     /* 2 */
+    const int numFriends = par->SO_FRIENDS_NUM; /* 1 */
 
     int iFriends = 0, iNodes;
 
@@ -136,10 +137,10 @@ void make_friend_list(pid_t *friends)
     srand(time(NULL));
     for (iNodes = 0; iFriends < numFriends && iNodes < numNodes; ++iNodes)
     {
-        toIterate = numNodes - iNodes;
-        toFind = numFriends - iFriends;
-        if (rand() % toIterate < toFind)
-            friendsIndexes[iFriends++] = iNodes + 1; /* +1 since your range begins from 1 */
+        toIterate = numNodes - iNodes;   /* 2-1 == 1 */
+        toFind = numFriends - iFriends;  /* 1-0 == 1*/
+        if (rand() % toIterate < toFind) /* iterate either 1 or 0 */
+            friendsIndexes[iFriends++] = iNodes;
     }
 
     for (i = 0; i < numFriends; i++)
@@ -183,7 +184,9 @@ int spawn_node(char *nodeArgv[], int nCounter)
         break;
 
     default:
+        TRACE(("[MASTER] filling nodesPID\n"))
         nodesPID[nCounter].pid = nodePID;
+        /*sem_reserve(semFriends_ID, 1);*/
         break;
     }
     return SUCCESS;
@@ -351,6 +354,7 @@ int main(int argc, char *argv[])
     struct sigaction sa;
     struct sembuf sops;
     struct msgbuf_friends friendsMsg;
+    struct sembuf semFriends;
 
     ledger_ptr = ledger;
     semaphores_init();
@@ -382,18 +386,21 @@ int main(int argc, char *argv[])
         spawn_node(argvSpawns, nCounter);
         UNLOCK
         if (getpid() != myPID)
-        {
             exit(0);
-        }
+        TRACE(("[MASTER SPAWN %d] timestamp=%lu\n", getpid(), time(NULL)))
     }
 
-    usleep(500);
-
-    /* sends a message of type FRIENDS_MTYPE to every node */
     for (nCounter = 0; nCounter < par->SO_NODES_NUM; nCounter++)
     {
+        TRACE(("[MASTER FRIEND %d] timestamp=%lu\n", getpid(), time(NULL)))
         make_friend_list(friends);
-        nodeQueue = msgget(nodesPID[nCounter].pid, 0);
+        TRACE(("[MASTER] please have this be a friend that makes sense: %d\n", friends[0]))
+        do
+        {
+            errno = 0;
+            TRACE(("[MASTER] trying msgget for nodesPID[%d].%d\n", nCounter, nodesPID[nCounter].pid))
+            nodeQueue = msgget(nodesPID[nCounter].pid, 0);
+        } while (errno == ENOENT);
         TRACE(("[MASTER] nodePID.pid=%d queue=%d\n", nodesPID[nCounter].pid, nodeQueue))
 
         for (i = 0; i < par->SO_FRIENDS_NUM; i++)
