@@ -22,7 +22,7 @@ void print_block(block *b, FILE *fp);
 void print_transaction(transaction *t, FILE *fp);
 void print_ledger(block *l);
 
-void formatted_timestamp(FILE *fp);
+void formatted_timestamp(char *, struct timespec);
 void print_transaction_pool(pool *transPool);
 void print_outgoing_pool(struct node *outPool);
 
