@@ -259,27 +259,46 @@ void print_outgoing_pool(struct node *outPool)
 void print_most_significant_processes(user *userPID, node *nodePID, struct parameters *par)
 {
     int i;
-    static pid_t n1, n2, n3, n4, n5, n6;               /* pid of the most significant nodes */
-    static unsigned long bn1, bn2, bn3, bn4, bn5, bn6; /* balance of the ost significant nodes */
-    static pid_t u1, u2, u3, u4, u5, u6;
-    static unsigned int bu1, bu2, bu3, bu4, bu5, bu6;
-
-    n1 = n2 = n3 = n4 = n5 = n6 = 0;
-    bn1 = bn2 = bn3 = 0;
-    bn4 = bn5 = bn6 = ULONG_MAX;
-    u1 = u2 = u3 = u4 = u5 = u6 = 0;
-    bu1 = bu2 = bu3 = 0;
-    bu4 = bu5 = bu6 = UINT_MAX;
+    pid_t n1 = 0;
+    pid_t n2 = 0;
+    pid_t n3 = 0;
+    pid_t n4 = 0;
+    pid_t n5 = 0;
+    pid_t n6 = 0;
+    unsigned long bn1 = 0;
+    unsigned long bn2 = 0;
+    unsigned long bn3 = 0;
+    unsigned long bn4 = ULONG_MAX;
+    unsigned long bn5 = ULONG_MAX;
+    unsigned long bn6 = ULONG_MAX;
+    pid_t u1 = 0;
+    pid_t u2 = 0;
+    pid_t u3 = 0;
+    pid_t u4 = 0;
+    pid_t u5 = 0;
+    pid_t u6 = 0;
+    unsigned int bu1 = 0;
+    unsigned int bu2 = 0;
+    unsigned int bu3 = 0;
+    unsigned int bu4 = UINT_MAX;
+    unsigned int bu5 = UINT_MAX;
+    unsigned int bu6 = UINT_MAX;
 
     for (i = 0; i < par->SO_NODES_NUM; i++)
     {
         if (nodePID[i].balance > bn1)
         {
+            bn2 = bn1;
+            n2 = n1;
+
             bn1 = nodePID[i].balance;
             n1 = nodePID[i].pid;
         }
         else if (nodePID[i].balance > bn2)
         {
+            bn3 = bn2;
+            n3 = n2;
+
             bn2 = nodePID[i].balance;
             n2 = nodePID[i].pid;
         }
@@ -290,11 +309,17 @@ void print_most_significant_processes(user *userPID, node *nodePID, struct param
         }
         else if (nodePID[i].balance < bn6)
         {
+            bn5 = bn6;
+            n5 = n6;
+
             bn6 = nodePID[i].balance;
             n6 = nodePID[i].pid;
         }
         else if (nodePID[i].balance < bn5)
         {
+            bn4 = bn5;
+            n4 = n5;
+
             bn5 = nodePID[i].balance;
             n5 = nodePID[i].pid;
         }
@@ -309,11 +334,17 @@ void print_most_significant_processes(user *userPID, node *nodePID, struct param
     {
         if (userPID[i].balance > bu1)
         {
+            bn2 = bn1;
+            u2 = u1;
+
             bu1 = userPID[i].balance;
             u1 = userPID[i].pid;
         }
         else if (userPID[i].balance > bu2)
         {
+            bu3 = bu2;
+            u3 = u2;
+
             bu2 = userPID[i].balance;
             u2 = userPID[i].pid;
         }
@@ -324,11 +355,17 @@ void print_most_significant_processes(user *userPID, node *nodePID, struct param
         }
         else if (userPID[i].balance < bu6)
         {
+            bu5 = bu6;
+            u5 = u6;
+
             bu6 = userPID[i].balance;
             u6 = userPID[i].pid;
         }
         else if (userPID[i].balance < bu5)
         {
+            bu4 = bu5;
+            u4 = u5;
+
             bu5 = userPID[i].balance;
             u5 = userPID[i].pid;
         }
