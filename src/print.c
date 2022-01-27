@@ -148,27 +148,27 @@ void print_transaction(transaction *t, FILE *fp)
         break;
     }
     formatted_timestamp(ts, t->timestamp);
-
-    fprintf(fp, " -------------------------- \n");
+                                                 
+    fprintf(fp, " ----------------------------------------------------------------\n");
     fprintf(fp, "|  %s\n", ts);
     fprintf(fp, "|  %s\n", tmp);
     fprintf(fp, "|  %d --> %d\n", t->sender, t->receiver);
     fprintf(fp, "|  Amount:    %d\n", t->amount);
     fprintf(fp, "|  Reward:    %d\n", t->reward);
-    fprintf(fp, " -------------------------- \n");
+    fprintf(fp, " ----------------------------------------------------------------\n");
 }
 
 void print_block(block *b, FILE *fp)
 {
     int i;
-    transaction printable;
-    fprintf(fp, "[BLOCK %d] ==========================================\n", b->blockIndex);
+    transaction printable;                                            
+    fprintf(fp, "[BLOCK %d] =======================================================\n", b->blockIndex);
     for (i = 0; i < SO_BLOCK_SIZE; i++)
     {
         printable = b->transList[i];
         print_transaction(&printable, fp);
     }
-    fprintf(fp, "=====================================================\n");
+    fprintf(fp, "=================================================================\n");
 }
 
 void print_ledger(block *l)

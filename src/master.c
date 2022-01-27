@@ -317,7 +317,7 @@ void master_interrupt_handle(int signum)
 {
     int status, wpid;
 
-    write(1, "::MASTER:: SIGINT ricevuto\n", 28);
+    write(2, "::MASTER:: SIGINT ricevuto\n", 28);
     killpg(0, SIGINT);
 
     /* just to avoid printing before everyone has finished*/

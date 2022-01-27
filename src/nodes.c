@@ -281,7 +281,7 @@ void node_interrupt_handle(int signum)
 {
 
     TEST_ERROR
-    write(1, "::NODE:: SIGINT received\n", 26);
+    write(2, "::NODE:: SIGINT received\n", 26);
 
     TRACE(("[NODE %d] key of my queue %d\n", myPID, queueID))
     msgctl(queueID, IPC_RMID, NULL);
