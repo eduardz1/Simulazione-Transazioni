@@ -7,7 +7,7 @@
 ## General Tasks
 - [ ] FIX ALL REPORTED ISSUES
 - [ ] MAKE A USEFUL README (some informations can be directly taken from Scheme.md)
-- [ ] **Rick ->** fix formatted_timestamp() in common.c
+- [x] **Eduard ->** **Rick ->** fix formatted_timestamp() in common.c
 - [ ] finish every print function
 - [ ] clean general print formatting
 - [x] **Francesco ->** make ledger effectively print inside a ledger.txt, I've tried but it didnt't work
@@ -22,9 +22,10 @@ ask to update ledger basically)
 - [x] **Eduard ->** function to append blocks to ledger
 
 ## Master Specific
-- [ ] Francesco->print every second of current_budget of every user and node (max 32 lines,
+- [x] **Edaurd -> Francesco->** print every second of current_budget of every user and node (max 32 lines,
 ordered by most budget)
 - [ ] stop simulation when a certain number of users are dead
+- [ ] send new overbuf nodes pid as a new friend to x nodes
 - [x] **Eduard ->** handler can't have arguments, need to implement it without or
 use an extern variable (avoid if possible)
 - [x] **Rick(ci prova)-->** print every second of num proc users and node active
