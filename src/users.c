@@ -349,6 +349,9 @@ void user_interrupt_handle(int signum)
 	get_balance();
 	if (currBalance >= 2)
 		update_status(0);
+	else
+		update_status(1);
+		
 	exit(0);
 }
 

@@ -47,18 +47,20 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
             strcpy(statusStr, "\033[33mfull\033[0m     ");
             break;
         }
-    printf("|  Node      %7d    %s  %10lu         %3d         |\n", nodePID[nodesNum].pid, statusStr, nodePID[nodesNum].balance, nodePID[nodesNum].tpSize);
-    nodesNum++;
+        printf("|  Node      %7d    %s  %10lu         %3d         |\n", nodePID[nodesNum].pid, statusStr, nodePID[nodesNum].balance, nodePID[nodesNum].tpSize);
+        nodesNum++;
     }
     printf(" -----------------------------------------------------------------\n");
 }
 
-void print_num_aborted(user *usersPID, struct parameters *par){
+void print_num_aborted(user *usersPID, struct parameters *par)
+{
     int i;
     int counter = 0;
 
-    for(i = 0; i<par->SO_USER_NUM; i++){
-        if(usersPID[i].status == dead)
+    for (i = 0; i < par->SO_USER_NUM; i++)
+    {
+        if (usersPID[i].status == dead)
             counter++;
     }
     printf("%d users have died prematurely\n", counter);
@@ -80,19 +82,20 @@ int print_num_blocks(block *l)
 
 void print_kill_signal(enum term termReason)
 {
-    switch(termReason){
-        case timeElapsed:
-            printf("KILL signal: time elapsed or interrupted by user\n");
-            break;
-        case usersDead:
-            printf("KILL signal: all or all-1 users dead\n");
-            break;
-        case ledgerFull:
-            printf("KILL signal: ledger full\n");
-            break;
-        default:
-            printf("%s/%d strange error\n", __FILE__, __LINE__);
-            break;
+    switch (termReason)
+    {
+    case timeElapsed:
+        printf("KILL signal: time elapsed or interrupted by user\n");
+        break;
+    case usersDead:
+        printf("KILL signal: all or all-1 users dead\n");
+        break;
+    case ledgerFull:
+        printf("KILL signal: ledger full\n");
+        break;
+    default:
+        printf("%s/%d strange error\n", __FILE__, __LINE__);
+        break;
     }
 }
 
@@ -136,7 +139,7 @@ void print_transaction(transaction *t, FILE *fp)
     }
     formatted_timestamp(ts, t->timestamp);
 
-    fprintf(fp, " ---------------------------------------------------------------\n");   
+    fprintf(fp, " ---------------------------------------------------------------\n");
     fprintf(fp, "|  %s                                |\n", ts);
     fprintf(fp, "|  %s                                                   |\n", tmp);
     fprintf(fp, "|  %7d --> %7d                                          |\n", t->sender, t->receiver);
@@ -231,15 +234,15 @@ void print_outgoing_pool(struct node *outPool)
 }
 
 /* 18 lines long */
-void print_most_significant_processes(user *userPID, node *nodePID, struct parameters *par)
+void print_most_significant_processes(user *usersPID, node *nodesPID, struct parameters *par)
 {
     int i;
-    pid_t n1 = 0;
-    pid_t n2 = 0;
-    pid_t n3 = 0;
-    pid_t n4 = 0;
-    pid_t n5 = 0;
-    pid_t n6 = 0;
+    static pid_t n1 = 0;
+    static pid_t n2 = 0;
+    static pid_t n3 = 0;
+    static pid_t n4 = 0;
+    static pid_t n5 = 0;
+    static pid_t n6 = 0;
     unsigned long bn1 = 0;
     unsigned long bn2 = 0;
     unsigned long bn3 = 0;
@@ -259,95 +262,104 @@ void print_most_significant_processes(user *userPID, node *nodePID, struct param
     unsigned int bu5 = UINT_MAX;
     unsigned int bu6 = UINT_MAX;
 
+    /* 4 for loops instead of 2 to avoid seeig ULONG_MAX, especially for nodes */
     for (i = 0; i < par->SO_NODES_NUM; i++)
     {
-        if (nodePID[i].balance > bn1)
+        if (nodesPID[i].balance > bn1)
         {
             bn2 = bn1;
             n2 = n1;
 
-            bn1 = nodePID[i].balance;
-            n1 = nodePID[i].pid;
+            bn1 = nodesPID[i].balance;
+            n1 = nodesPID[i].pid;
         }
-        else if (nodePID[i].balance > bn2)
+        else if (nodesPID[i].balance > bn2)
         {
             bn3 = bn2;
             n3 = n2;
 
-            bn2 = nodePID[i].balance;
-            n2 = nodePID[i].pid;
+            bn2 = nodesPID[i].balance;
+            n2 = nodesPID[i].pid;
         }
-        else if (nodePID[i].balance > bn3)
+        else if (nodesPID[i].balance > bn3)
         {
-            bn3 = nodePID[i].balance;
-            n3 = nodePID[i].pid;
+            bn3 = nodesPID[i].balance;
+            n3 = nodesPID[i].pid;
         }
-        else if (nodePID[i].balance < bn6)
+    }
+
+    for (i = 0; i < par->SO_NODES_NUM; i++)
+    {
+        if (nodesPID[i].balance < bn6)
         {
             bn5 = bn6;
             n5 = n6;
 
-            bn6 = nodePID[i].balance;
-            n6 = nodePID[i].pid;
+            bn6 = nodesPID[i].balance;
+            n6 = nodesPID[i].pid;
         }
-        else if (nodePID[i].balance < bn5)
+        else if (nodesPID[i].balance < bn5)
         {
             bn4 = bn5;
             n4 = n5;
 
-            bn5 = nodePID[i].balance;
-            n5 = nodePID[i].pid;
+            bn5 = nodesPID[i].balance;
+            n5 = nodesPID[i].pid;
         }
-        else if (nodePID[i].balance < bn4)
+        else if (nodesPID[i].balance < bn4)
         {
-            bn4 = nodePID[i].balance;
-            n4 = nodePID[i].pid;
+            bn4 = nodesPID[i].balance;
+            n4 = nodesPID[i].pid;
         }
     }
 
     for (i = 0; i < par->SO_USER_NUM; i++)
     {
-        if (userPID[i].balance > bu1)
+        if (usersPID[i].balance > bu1)
         {
             bn2 = bn1;
             u2 = u1;
 
-            bu1 = userPID[i].balance;
-            u1 = userPID[i].pid;
+            bu1 = usersPID[i].balance;
+            u1 = usersPID[i].pid;
         }
-        else if (userPID[i].balance > bu2)
+        else if (usersPID[i].balance > bu2)
         {
             bu3 = bu2;
             u3 = u2;
 
-            bu2 = userPID[i].balance;
-            u2 = userPID[i].pid;
+            bu2 = usersPID[i].balance;
+            u2 = usersPID[i].pid;
         }
-        else if (userPID[i].balance > bu3)
+        else if (usersPID[i].balance > bu3)
         {
-            bu3 = userPID[i].balance;
-            u3 = userPID[i].pid;
+            bu3 = usersPID[i].balance;
+            u3 = usersPID[i].pid;
         }
-        else if (userPID[i].balance < bu6)
+    }
+
+    for (i = 0; i < par->SO_USER_NUM; i++)
+    {
+        if (usersPID[i].balance < bu6)
         {
             bu5 = bu6;
             u5 = u6;
 
-            bu6 = userPID[i].balance;
-            u6 = userPID[i].pid;
+            bu6 = usersPID[i].balance;
+            u6 = usersPID[i].pid;
         }
-        else if (userPID[i].balance < bu5)
+        else if (usersPID[i].balance < bu5)
         {
             bu4 = bu5;
             u4 = u5;
 
-            bu5 = userPID[i].balance;
-            u5 = userPID[i].pid;
+            bu5 = usersPID[i].balance;
+            u5 = usersPID[i].pid;
         }
-        else if (userPID[i].balance < bu4)
+        else if (usersPID[i].balance < bu4)
         {
-            bu4 = userPID[i].balance;
-            u4 = userPID[i].pid;
+            bu4 = usersPID[i].balance;
+            u4 = usersPID[i].pid;
         }
     }
 
