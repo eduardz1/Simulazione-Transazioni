@@ -58,6 +58,7 @@ void shared_memory_objects_init(int *shared_memory_objects_IDs);
 void semaphores_init();
 int message_queue_init();
 void make_ipc_array(int *IPC_objects_IDs);
+void make_friend_list(pid_t *friends);
 
 void print_current_budget();
 void master_interrupt_handle(int signum);

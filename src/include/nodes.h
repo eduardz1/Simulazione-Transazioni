@@ -18,6 +18,7 @@ void node_interrupt_handle(int signum);
 void new_block(transaction* blockTransaction, block *newBlock);
 int sum_reward(transaction *);
 void fill_block_transList(transaction *buffer);
+void fill_friendList(pid_t *friendList);
 void send_to_random_friend();
 int get_pid_nodeIndex();
 

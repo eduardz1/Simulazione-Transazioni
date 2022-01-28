@@ -136,6 +136,7 @@ void queue_to_pid(pid_t nodePID)
 {
 	do
 	{
+		errno = 0;
 		queueID = msgget(nodePID, 0);
 	} while (errno == ENOENT);
 }
@@ -351,8 +352,10 @@ void user_transactions_handle(int signum)
 /* CTRL-C handler */
 void user_interrupt_handle(int signum)
 {
-	write(1, "::USER:: SIGINT received\n", 26);
-
+	write(2, "::USER:: SIGINT received\n", 26);
+	get_balance();
+	if (currBalance >= 2)
+		update_status(0);
 	exit(0);
 }
 

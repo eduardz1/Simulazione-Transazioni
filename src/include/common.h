@@ -18,6 +18,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <limits.h>
 
 #include "../utils/debug.h"
 #include "../utils/sem.h"
@@ -113,6 +114,7 @@ typedef struct node_t
 {
     pid_t pid;
     unsigned long balance;
+    int tpSize;
     enum
     {
         available,
@@ -153,7 +155,7 @@ typedef struct ledger_t
 
 struct msgbuf_trans
 {
-    long mtype; /* atol("transaction") */
+    long mtype;
     struct message
     {
         int hops; /* number of times the transaction has hopped */
@@ -164,8 +166,8 @@ struct msgbuf_trans
 
 struct msgbuf_friends
 {
-    long mtype; /* atol("friendList") */
-    pid_t *friendList;
+    long mtype;
+    pid_t friend;
 };
 
 

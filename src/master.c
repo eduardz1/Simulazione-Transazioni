@@ -27,8 +27,6 @@ int semPIDs_ID;
 int semLedger_ID;
 int masterQ;
 
-/*extern int usersPrematurelyDead = 0;*/
-
 /*
  ======================
  ||    FUNCTIONS     ||
@@ -112,17 +110,51 @@ void spawn_user(char *userArgv[], int uCounter)
     }
 }
 
+/* generates a friend list based on Knuth algorithm */
+void make_friend_list(pid_t *friends)
+{
+    /* the problem is that with num friends close to num nodes extracting
+     * the last few friends becomes increasingly less likely to succedeed;
+     * Using the knoth algoritm we generate an array of random indexes
+     * in ascending order, that's not a problem because the nodes will extract
+     * a random index anyway when "hopping" a transaction to a different node
+     * idea from https://stackoverflow.com/questions/1608181/unique-random-number-generation-in-an-integer-array
+     * /
+
+    /* Knuth algorithm */
+    const int numNodes = par->SO_NODES_NUM;     /* 2 */
+    const int numFriends = par->SO_FRIENDS_NUM; /* 1 */
+
+    int iFriends = 0, iNodes;
+
+    int toIterate, toFind;
+
+    int *friendsIndexes = malloc(sizeof(int) * numNodes);
+    int i;
+
+    srand(time(NULL));
+    for (iNodes = 0; iFriends < numFriends && iNodes < numNodes; ++iNodes)
+    {
+        toIterate = numNodes - iNodes;   /* 2-1 == 1 */
+        toFind = numFriends - iFriends;  /* 1-0 == 1*/
+        if (rand() % toIterate < toFind) /* iterate either 1 or 0 */
+            friendsIndexes[iFriends++] = iNodes;
+    }
+
+    for (i = 0; i < numFriends; i++)
+    {
+        friends[i] = nodesPID[friendsIndexes[i]].pid;
+        TRACE(("[MASTER] extracted friend: %d\n", friends[i]))
+    }
+
+    free(friendsIndexes);
+}
+
 /* fork and execve a "./nodes" */
 int spawn_node(char *nodeArgv[], int nCounter)
 {
     static int overBuf = 0;
-    struct msgbuf_friends friendsMsg;
     pid_t nodePID = fork();
-    pid_t *friends = malloc(sizeof(pid_t) * par->SO_FRIENDS_NUM);
-    make_friend_list(friends);
-
-    friendsMsg.mtype = FRIENDS_MTYPE;
-    friendsMsg.friendList = friends;
 
     if (overBuf == 0)
         overBuf = par->SO_NODES_NUM;
@@ -142,7 +174,7 @@ int spawn_node(char *nodeArgv[], int nCounter)
 
         /* initialize a separate message queue for every node */
 
-        send_message(message_queue_init(), &friendsMsg, sizeof(struct msgbuf_friends), 0);
+        message_queue_init();
 
         execve(NODE_NAME, nodeArgv, NULL);
         TEST_ERROR
@@ -150,48 +182,12 @@ int spawn_node(char *nodeArgv[], int nCounter)
         break;
 
     default:
+        TRACE(("[MASTER] filling nodesPID\n"))
         nodesPID[nCounter].pid = nodePID;
+        /*sem_reserve(semFriends_ID, 1);*/
         break;
     }
     return SUCCESS;
-}
-
-/* generates a friend list based on Knuth algorithm */
-void make_friend_list(pid_t *friends)
-{
-    /* the problem is that with num friends close to num nodes extracting
-     * the last few friends becomes increasingly less likely to succedeed;
-     * Using the knoth algoritm we generate an array of random indexes
-     * in ascending order, that's not a problem because the nodes will extract
-     * a random index anyway when "hopping" a transaction to a different node
-     */
-
-    /* Knuth algorithm */ /*friends = m, nodes = n */
-    const int numNodes = par->SO_NODES_NUM;
-    const int numFriends = par->SO_FRIENDS_NUM;
-
-    int iFriends = 0, iNodes;
-
-    int toIterate, toFind;
-
-    int *friendsIndexes = malloc(sizeof(int) * numNodes);
-    int i;
-
-    srand(time(NULL));
-    for (iNodes = 0; iFriends < numFriends && iNodes < numNodes; ++iNodes)
-    {
-        toIterate = numNodes - iNodes;
-        toFind = numFriends - iFriends;
-        if (rand() % toIterate < toFind)
-            friendsIndexes[iFriends++] = iNodes + 1; /* +1 since your range begins from 1 */
-    }
-
-    for (i = 0; i < numFriends; i++)
-    {
-        friends[i] = nodesPID[friendsIndexes[i]].pid;
-    }
-
-    free(friendsIndexes);
 }
 
 /* attach usersPID, nodesPID, par and mainLedger to shared memory, returns an array with respective IDs */
@@ -205,7 +201,6 @@ void shared_memory_objects_init(int *shmArray)
 
     /* parameters init and read from conf file */
     par_ID = shmget(SHM_PARAMETERS, sizeof(par), 0600 | IPC_CREAT | IPC_EXCL);
-    TEST_ERROR
     par = (struct parameters *)shmat(par_ID, NULL, 0);
     if (parse_parameters(par) == CONF_ERROR)
     {
@@ -215,28 +210,22 @@ void shared_memory_objects_init(int *shmArray)
     {
         TRACE(("[MASTER] conf file read successful\n"));
     }
-#ifdef DEBUG
-    print_parameters(par);
-#endif
-    /* (users_t) and (nodes_t) arrays */
-    usersPID_ID = shmget(SHM_USERS_ARRAY,
-                         (par->SO_USER_NUM) * sizeof(user),
-                         0600 | IPC_CREAT | IPC_EXCL);
-    TEST_ERROR
-    /* make it twice as big to account for extra nodes and avoid reallocating
-     * a shared memory resource
+
+    /* make node array twice as big to account for extra nodes when transactions
+     * have hopped out avoiding reallocating a shared memory resource
      */
-    nodesPID_ID = shmget(SHM_NODES_ARRAY,
-                         (par->SO_NODES_NUM) * sizeof(node) * 2,
-                         0600 | IPC_CREAT | IPC_EXCL);
-    TEST_ERROR
+    nodesPID_ID = shmget(SHM_NODES_ARRAY, (par->SO_NODES_NUM) * sizeof(node) * 2, 0600 | IPC_CREAT | IPC_EXCL);
+    usersPID_ID = shmget(SHM_USERS_ARRAY, (par->SO_USER_NUM) * sizeof(user), 0600 | IPC_CREAT | IPC_EXCL);
+    ledger_ID = shmget(SHM_LEDGER, sizeof(ledger), 0600 | IPC_CREAT | IPC_EXCL);
+    if (errno == EEXIST)
+    {
+        TRACE(("[MASTER] failed to initialize one or more shared memory objects, ipcrm the leftovers\n"))
+        exit(1); /* we could remove them at the start just in case, but I want the error not to be hidden */
+    }
+
+    ledger_ptr = (block *)shmat(ledger_ID, NULL, 0);
     usersPID = (user *)shmat(usersPID_ID, NULL, 0);
     nodesPID = (node *)shmat(nodesPID_ID, NULL, 0);
-
-    /* ledger */
-    ledger_ID = shmget(SHM_LEDGER, sizeof(ledger), 0600 | IPC_CREAT | IPC_EXCL);
-    TEST_ERROR
-    ledger_ptr = (block *)shmat(ledger_ID, NULL, 0);
 
     /* mark for deallocation so that they are automatically
      * removed once master dies
@@ -256,12 +245,26 @@ void shared_memory_objects_init(int *shmArray)
 void semaphores_init()
 {
     semPIDs_ID = semget(SEM_PIDS_KEY, 1, 0600 | IPC_CREAT | IPC_EXCL);
-    TEST_ERROR
-    TRACE(("[MASTER] semPIDs_ID is %d\n", semPIDs_ID));
-
     semLedger_ID = semget(SEM_LEDGER_KEY, 1, 0600 | IPC_CREAT | IPC_EXCL);
-    TEST_ERROR
-    TRACE(("[MASTER] semLedger_ID is %d\n", semLedger_ID));
+
+    /* check for only one of them is enough */
+    switch (errno)
+    {
+    case EEXIST:
+        TRACE(("[MASTER] one or more semaphores couldn't be created, ipcrm the leftovers\n"))
+        exit(1);
+        break;
+
+    case ENOSPC:
+        TRACE(("[MASTER] too many semaphores already in the system\n"))
+        exit(1);
+        break;
+
+    default:
+        TRACE(("[MASTER] semPIDs_ID is %d\n", semPIDs_ID));
+        TRACE(("[MASTER] semLedger_ID is %d\n", semLedger_ID));
+        break;
+    }
 }
 
 /* makes an array with every IPC object ID */
@@ -284,7 +287,7 @@ void start_continuous_print()
     int i, activeUsers, activeNodes;
     int time = par->SO_SIM_SEC;
 
-    while (time)
+    while (time--)
     {
         activeNodes = 0;
         activeUsers = 0;
@@ -301,13 +304,12 @@ void start_continuous_print()
                 activeNodes++;
         }
 
-        /*printf("\r\nNUM ACTIVE USERS: %d\nNUM ACTIVE NODES: %d\n\n", activeUsers, activeNodes);
-        fflush(stdout);*/
+        printf("\nNUM ACTIVE USERS: %d     \nNUM ACTIVE NODES: %d     \n\n", activeUsers, activeNodes);
+        print_most_significant_processes(usersPID, nodesPID, par);
 
-        sleep(time--);
+        printf("\033[22A\r"); /*ESC[#A moves cursor up # lines, \r moves cursor to begging of the line */
+        sleep(1);
     }
-
-    printf("\r\nNUM ACTIVE USERS: %d\nNUM ACTIVE NODES: %d\n\n", activeUsers, activeNodes);
 }
 
 
@@ -316,7 +318,7 @@ void master_interrupt_handle(int signum)
 {
     int status, wpid;
 
-    write(1, "::MASTER:: SIGINT ricevuto\n", 28);
+    write(2, "::MASTER:: SIGINT ricevuto\n", 28);
     killpg(0, SIGINT);
 
     /* just to avoid printing before everyone has finished*/
@@ -328,7 +330,7 @@ void master_interrupt_handle(int signum)
 
     while ((wpid = wait(&status)) > 0)
         ;
-    final_print(getpid(), usersPID, nodesPID, par);
+    final_print(getpid(), usersPID, nodesPID, par, ledger_ptr);
 
     print_ledger(ledger_ptr);
 
@@ -342,6 +344,9 @@ void master_interrupt_handle(int signum)
 int main(int argc, char *argv[])
 {
     pid_t myPID = getpid();
+    pid_t *friends;
+    int nodeQueue;
+    int i;
 
     int uCounter, nCounter, returnVal;
     int ipcObjectsIDs[IPC_NUM];
@@ -349,11 +354,15 @@ int main(int argc, char *argv[])
 
     struct sigaction sa;
     struct sembuf sops;
+    struct msgbuf_friends friendsMsg;
+    struct sembuf semFriends;
 
     ledger_ptr = ledger;
     semaphores_init();
     make_ipc_array(ipcObjectsIDs);
     make_arguments(ipcObjectsIDs, argvSpawns);
+
+    friends = malloc(sizeof(pid_t) * par->SO_FRIENDS_NUM);
 
     /* -- SIGNAL HANDLER --
      * first set all bytes of sigation to 0
@@ -378,12 +387,33 @@ int main(int argc, char *argv[])
         spawn_node(argvSpawns, nCounter);
         UNLOCK
         if (getpid() != myPID)
+            exit(0);
+        TRACE(("[MASTER SPAWN %d] timestamp=%lu\n", getpid(), time(NULL)))
+    }
+
+    for (nCounter = 0; nCounter < par->SO_NODES_NUM; nCounter++)
+    {
+        TRACE(("[MASTER FRIEND %d] timestamp=%lu\n", getpid(), time(NULL)))
+        make_friend_list(friends);
+        TRACE(("[MASTER] please have this be a friend that makes sense: %d\n", friends[0]))
+        do
         {
-            return 0;
+            errno = 0;
+            TRACE(("[MASTER] trying msgget for nodesPID[%d].%d\n", nCounter, nodesPID[nCounter].pid))
+            nodeQueue = msgget(nodesPID[nCounter].pid, 0);
+        } while (errno == ENOENT);
+        TRACE(("[MASTER] nodePID.pid=%d queue=%d\n", nodesPID[nCounter].pid, nodeQueue))
+
+        for (i = 0; i < par->SO_FRIENDS_NUM; i++)
+        {
+            friendsMsg.mtype = FRIENDS_MTYPE;
+            friendsMsg.friend = friends[i];
+
+            send_message(nodeQueue, &friendsMsg, sizeof(struct msgbuf_friends), 0);
+            TRACE(("[MASTER] sent friend to %d\n", nodesPID[nCounter].pid))
         }
     }
 
-    /*usersPrematurelyDead = 0;*/
     argvSpawns[0] = USER_NAME;
     TRACE(("[MASTER] argv values for users: %s %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7], argvSpawns[8]))
     for (uCounter = 0; uCounter < par->SO_USER_NUM; uCounter++)
@@ -423,7 +453,6 @@ int main(int argc, char *argv[])
             receive_message(masterQ, &transHopped, sizeof(struct msgbuf_trans), TRANSACTION_MTYPE, 0);
             argvSpawns[0] = NODE_NAME;
             TRACE(("[MASTER] argv values for nodes extra: %s %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7], argvSpawns[8]))
-   
 
             LOCK;
             nodesPID[nCounter].status = available;
@@ -436,8 +465,6 @@ int main(int argc, char *argv[])
             }
             TRACE(("[MASTER] spawned a node due to hopped transaction\n"))
             UNLOCK
-            if (getpid() != myPID)
-                return 0;
 
             /* missing section where master orders to existing nodes to add this one to
              * their list of friends
@@ -448,9 +475,7 @@ int main(int argc, char *argv[])
 
     default:
         start_continuous_print();
-
-        killpg(0, SIGINT); /* our sigint handler needs to do quite a lot of things to print the wall of test below */
-        return 0;
+        break;
     }
     return 0;
 }
