@@ -179,8 +179,9 @@ void print_ledger(block *l)
 /* print without /n */
 void formatted_timestamp(FILE *fp)
 {
+    /*
     printf("Hey");
-    /*clock_t tic = clock();
+    clock_t tic = clock();
     clock_t start = clock();
     clock_t stop = clock();
 
@@ -196,7 +197,7 @@ void formatted_timestamp(FILE *fp)
     strftime(buf, 128, "%Y/%m/%d", today);
     printf("%s\n", buf);
 
-    elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC; /* time ./a.out*/
+    elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC; time ./a.out*/
 }
 
 void print_transaction_pool(pool *transPool)
@@ -216,6 +217,24 @@ void print_transaction_pool(pool *transPool)
         tmp->head = tmp->head->transactionMessage.next;
         i++;
     }
+}
+
+void print_current_budget(struct parameters *par,struct user_t *usr,struct node_t *node)
+{
+    unsigned long currBalUsr=usr->balance;
+    unsigned int currBalNod=node->balance;
+    int i, k;
+
+    for(i=0;i<par->SO_NODES_NUM;i++)
+    {
+        printf("That's the current node's balance [%u]\n", currBalNod);
+    }
+
+    for(k=0;k<par->SO_USER_NUM;k++)
+    {
+        printf("That's the current user's balance [%lu]\n", currBalUsr);
+    }
+
 }
 
 void print_outgoing_pool(struct node *outPool)

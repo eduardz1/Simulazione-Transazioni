@@ -191,7 +191,9 @@ int sum_reward(transaction *sumBlock)
 
     return sum;
 }
-
+void print_curr_node_balance(){
+    for(i=0;i)
+}
 /* attaches ipc objects based on IDs passed via arguments */
 void attach_ipc_objects(char **argv)
 {

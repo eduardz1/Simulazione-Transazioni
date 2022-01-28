@@ -26,5 +26,5 @@ void print_ledger(block *l);
 void formatted_timestamp(FILE *fp);
 void print_transaction_pool(pool *transPool);
 void print_outgoing_pool(struct node *outPool);
-
+void print_current_budget(struct parameters *par,struct user_t *usr,struct node_t *node);
 #endif /* SIMULAZIONE_TRANSAZIONI_PRINT_H */

@@ -310,6 +310,7 @@ void start_continuous_print()
     printf("\r\nNUM ACTIVE USERS: %d\nNUM ACTIVE NODES: %d\n\n", activeUsers, activeNodes);
 }
 
+
 /* CTRL-C handler */
 void master_interrupt_handle(int signum)
 {
