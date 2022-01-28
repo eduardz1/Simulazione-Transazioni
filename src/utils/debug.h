@@ -7,7 +7,11 @@
 
 void dbg_printf(const char *fmt, ...);
 #ifdef DEBUG
-#define TRACE(x) dbg_printf x;
+#define TRACE(x)      \
+    do                \
+    {                 \
+        dbg_printf x; \
+    } while (0);
 #else
 #define TRACE(x)
 #endif

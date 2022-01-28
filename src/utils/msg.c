@@ -7,25 +7,25 @@ int send_message(int queueID, void *msg, int size, int flag)
     switch (errno)
     {
     case EACCES:
-        printf("[MSG SEND %d] no write permission on queue\n", getpid());
+        fprintf((FILE *)2,"[MSG SEND %d] no write permission on queue\n", getpid());
         break;
     case EAGAIN:
-        printf("[MSG SEND %d] couldn't write on queue\n", getpid());
+        fprintf((FILE *)2,"[MSG SEND %d] couldn't write on queue\n", getpid());
         break;
     case EFAULT:
-        printf("[MSG SEND %d] address pointed by msgp inaccessible\n", getpid());
+        fprintf((FILE *)2,"[MSG SEND %d] address pointed by msgp inaccessible\n", getpid());
         break;
     case EIDRM:
-        printf("[MSG SEND %d] message queue removed\n", getpid());
+        fprintf((FILE *)2,"[MSG SEND %d] message queue removed\n", getpid());
         break;
     case EINTR:
-        TRACE(("[MSG SEND %d] signal caught when waiting for queue to free\n", getpid()));
+        TRACE(("[MSG SEND %d] signal caught when waiting for queue to free\n", getpid()))
         break;
     case EINVAL:
-        printf("[MSG SEND %d] invalid  msqid  value,  or nonpositive mtype value, or invalid msgsz value\n", getpid());
+        fprintf((FILE *)2,"[MSG SEND %d] invalid  msqid  value,  or nonpositive mtype value, or invalid msgsz value\n", getpid());
         break;
     case ENOMEM:
-        printf("[MSG SEND %d] system out of memory\n", getpid()); /* should basically never happen I hope */
+        fprintf((FILE *)2,"[MSG SEND %d] system out of memory\n", getpid()); /* should basically never happen I hope */
         break;
     default:
         return SUCCESS;
@@ -40,19 +40,21 @@ int receive_message(int queueID, void *msg, int size, int mtype, int flag)
     switch (errno)
     {
     case E2BIG:
-        printf("[MSG RCV %d] the message length is greater than sizeof(transaction)\n", getpid());
+        fprintf((FILE *)2,"[MSG RCV %d] the message length is greater than sizeof(transaction)\n", getpid());
         break;
     case EACCES:
-        printf("[MSG RCV %d] no read permission on queue\n", getpid());
+        fprintf((FILE *)2,"[MSG RCV %d] no read permission on queue\n", getpid());
         break;
     case EFAULT:
-        printf("[MSG RCV %d] address pointed by msgp inaccessible\n", getpid());
+        fprintf((FILE *)2,"[MSG RCV %d] address pointed by msgp inaccessible\n", getpid());
         break;
     case EIDRM:
-        printf("[MSG RCV %d] mesage queue removed\n", getpid());
+        fprintf((FILE *)2,"[MSG RCV %d] mesage queue removed\n", getpid());
         break;
     case EINTR:
-        printf("[MSG RCV %d] signal caught while receiving a message\n", getpid());
+        fprintf((FILE *)2,"[MSG RCV %d] signal caught while receiving a message\n", getpid());
+        break;
+    case ENOMSG: /* no need to print every time */
         break;
     default:
         return SUCCESS;

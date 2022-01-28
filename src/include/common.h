@@ -146,13 +146,6 @@ typedef struct block_t
     unsigned int blockIndex; /* when a block is written on ledger it's Index needs to be updated */
 } block;
 
-/* Libro Mastro (ledger) struct *
-typedef struct ledger_t
-{
-    block *head;
-    unsigned int registryCurrSize; /* initialize to SO_REGISTRY_SIZE, update with every new block added *
-} ledger; */
-
 struct msgbuf_trans
 {
     long mtype;
@@ -170,6 +163,12 @@ struct msgbuf_friends
     pid_t friend;
 };
 
+enum term
+{
+    timeElapsed,
+    usersDead,
+    ledgerFull
+};
 
 void add_block(block);
 void add_transaction_to_block(block *, transaction *, int index);

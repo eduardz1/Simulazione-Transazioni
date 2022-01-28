@@ -36,7 +36,7 @@ int parse_parameters(struct parameters *par)
 
     /*struct parameters *par = malloc(sizeof(struct parameters));*/
     assign_defaults(par);
-    TRACE(("[PARSER] assigned defaults\n"));
+    TRACE(("[PARSER] assigned defaults\n"))
 
     fp = fopen(CONF_FILE, "r");
     if (fp == NULL)
@@ -120,31 +120,31 @@ int parse_parameters(struct parameters *par)
     /* -- CONF ERRORS CORRECTION -- */
     if (errno == ERANGE)
     {
-        TRACE(("[PARSER] one or multiple values out of bound, resetting defaults\n"));
+        TRACE(("[PARSER] one or multiple values out of bound, resetting defaults\n"))
         assign_defaults(par);
     }
     if (par->SO_MIN_TRANS_GEN_NSEC > par->SO_MAX_TRANS_GEN_NSEC)
     {
-        TRACE(("[PARSER] SO_MIN_TRANS_GEN_NSEC greater than SO_MAX_TRANS_GEN_NSEC, will be normalized\n"));
+        TRACE(("[PARSER] SO_MIN_TRANS_GEN_NSEC greater than SO_MAX_TRANS_GEN_NSEC, will be normalized\n"))
         par->SO_MIN_TRANS_GEN_NSEC = par->SO_MAX_TRANS_GEN_NSEC;
     }
     if (par->SO_MIN_TRANS_PROC_NSEC > par->SO_MAX_TRANS_PROC_NSEC)
     {
-        TRACE(("[PARSER] SO_MIN_TRANS_PROC_NSEC greater than SO_MAX_TRANS_PROC_NSEC, will be normalized\n"));
+        TRACE(("[PARSER] SO_MIN_TRANS_PROC_NSEC greater than SO_MAX_TRANS_PROC_NSEC, will be normalized\n"))
         par->SO_MIN_TRANS_PROC_NSEC = par->SO_MAX_TRANS_PROC_NSEC;
     }
     if(par->SO_TP_SIZE <= SO_BLOCK_SIZE){
-        TRACE(("[PARSER] SO_TP_SIZE smaller or equal to SO_BLOCK_SIZE, will be normalized\n"));
+        TRACE(("[PARSER] SO_TP_SIZE smaller or equal to SO_BLOCK_SIZE, will be normalized\n"))
         par->SO_TP_SIZE = SO_BLOCK_SIZE + 1;
     }
 
-    TRACE(("--------------------------------------------\n----------- Configuration input ------------\n"));
+    TRACE(("--------------------------------------------\n----------- Configuration input ------------\n"))
     for (i = 0; i < NUM_PARAMETERS; i++)
     {
-        TRACE(("%s %lu\n", tokens[i], values[i]));
+        TRACE(("%s %lu\n", tokens[i], values[i]))
         free(tokens[i]);
     }
-    TRACE(("--------------------------------------------\n"));
+    TRACE(("--------------------------------------------\n"))
 
     fclose(fp);
 

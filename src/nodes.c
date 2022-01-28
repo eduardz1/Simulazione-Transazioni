@@ -13,6 +13,7 @@ struct parameters *par;
 user *usersPID;
 node *nodesPID;
 pid_t *friendList;
+int friendList_size;
 block *ledger;
 
 int semPIDs_ID;
@@ -22,8 +23,6 @@ int queueID;
 pid_t myPID;
 
 pool transPool;
-
-int flag = 0; /* every 20 transactions I send 1 to a friend */
 
 /* acts as buffer for currently fetched message to be copied into pool */
 struct msgbuf_trans fetchedMex;
@@ -47,19 +46,45 @@ void message_queue_attach()
 /* process starts fetching transactions from it's msg_q until transPool is full */
 void fetch_messages() /* need also to fetch friends just in case */
 {
-    /* tried initializing flag as static, didnt work */
+    static int flag = 20; /* every 20 cycles it will send a transaction to a friend */
+    static struct msgbuf_friends friendReceived;
+    int sizeofFriend = friendList_size;
+
     TRACE(("[NODE %d] flag: %d\n", myPID, flag))
     if (transPool.size < par->SO_TP_SIZE && flag < 20)
     {
-        receive_message(queueID, &fetchedMex, sizeof(struct msgbuf_trans), TRANSACTION_MTYPE, 0);
-        TRACE(("[NODE %d] received %d UC to process from [USER %d] to [USER %d]\n", myPID, fetchedMex.transactionMessage.userTrans.amount, fetchedMex.transactionMessage.userTrans.sender, fetchedMex.transactionMessage.userTrans.receiver))
-        add_to_pool(&transPool, &fetchedMex);
-        transPool.size++;
+        /* This configuration causes deadlock when two friends are present on the
+         * queue one after another, given that only the master can send new friends
+         * to the nodes and the latter are extracted randomly, the deadlock is very
+         * unlikely to occour due to the frequency of which the transactions are
+         * sent on the queue compared to new friends from master.
+         * Solving the deadlock is just a matter of setting IPC_NOWAIT to the receive
+         * of transactions but the performance are so much worse that we end up
+         * processing only about half of the blocks
+         */
+        if (receive_message(queueID, &fetchedMex, sizeof(struct msgbuf_trans), TRANSACTION_MTYPE, 0) == 0)
+        {
+            TRACE(("[NODE %d] received %d UC to process from [USER %d] to [USER %d]\n", myPID, fetchedMex.transactionMessage.userTrans.amount, fetchedMex.transactionMessage.userTrans.sender, fetchedMex.transactionMessage.userTrans.receiver))
+            add_to_pool(&transPool, &fetchedMex);
+            transPool.size++;
+        }
+
+        /* don't wait for new friends, just fetch them if they are in queue */
+        if (receive_message(queueID, &friendReceived, sizeof(struct msgbuf_friends), FRIENDS_MTYPE, IPC_NOWAIT) == 0)
+        {
+            TRACE(("[NODE %d] I made a new friend!\n", myPID))
+            friendList = realloc(friendList, sizeofFriend * sizeof(pid_t) + 1);
+            friendList_size++;
+            friendList[sizeofFriend] = friendReceived.friend;
+        }
         flag++;
     }
     else
-    {
-        send_to_random_friend();
+    {   /* this basically prevents the node from ever being full, the most edge
+         * case is that in which tail gets sent to master but it can't create 
+         * new overbuf nodes but in that case the transaction gets discarded 
+         */
+        send_to_random_friend(); 
         flag = 0;
     }
 }
@@ -85,7 +110,7 @@ void send_to_random_friend()
         queue = msgget(queue, 0);
         if (send_message(queue, &tMex, sizeof(struct msgbuf_trans), IPC_NOWAIT) == SUCCESS)
         {
-            TRACE(("[NODE %d] a transaction reached maximum hops and was sent to master\n"))
+            TRACE(("[NODE %d] a transaction reached maximum hops and was sent to master\n", myPID))
         } /* else the transaction is discarded */
         return;
     }
@@ -279,14 +304,13 @@ void signal_handler_init(struct sigaction *saINT_node)
 /* CTRL-C handler */
 void node_interrupt_handle(int signum)
 {
-
-    TEST_ERROR
-    write(2, "::NODE:: SIGINT received\n", 26);
+#ifdef DEBUG
+    write((FILE *)2, "::NODE:: SIGINT received\n", 25);
+#endif
 
     TRACE(("[NODE %d] key of my queue %d\n", myPID, queueID))
     msgctl(queueID, IPC_RMID, NULL);
     TRACE(("[NODE] queue removed\n"))
-    TEST_ERROR
 
     exit(0);
 }
@@ -311,6 +335,7 @@ int main(int argc, char *argv[])
     message_queue_attach();
 
     friendList = malloc(par->SO_FRIENDS_NUM * sizeof(pid_t));
+    friendList_size = par->SO_FRIENDS_NUM;
     fill_friendList(friendList);
 
     transaction_pool_init(&transPool);
@@ -337,7 +362,7 @@ int main(int argc, char *argv[])
             switch (fork())
             {
             case -1: /* error */
-                TRACE(("[NODE %d] error while forking to create a block\n", myPID));
+                TRACE(("[NODE %d] error while forking to create a block\n", myPID))
                 break;
 
             case 0: /* child creates a new block and appends it to ledger */

@@ -35,7 +35,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
     printf("|                                                                 |\n");
     printf(" - Type ----- PID ----- Status ----- Balance ----- Still in Pool -\n");
     printf(" -----------------------------------------------------------------\n");
-    while (nodesNum++ < par->SO_NODES_NUM * 2 && nodePID[nodesNum].pid != 0)
+    while (nodesNum < par->SO_NODES_NUM * 2 && nodePID[nodesNum].pid != 0)
     {
         statusNum = nodePID[nodesNum].status;
         switch (statusNum)
@@ -48,6 +48,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
             break;
         }
     printf("|  Node      %7d    %s  %10lu         %3d         |\n", nodePID[nodesNum].pid, statusStr, nodePID[nodesNum].balance, nodePID[nodesNum].tpSize);
+    nodesNum++;
     }
     printf(" -----------------------------------------------------------------\n");
 }
@@ -63,7 +64,7 @@ void print_num_aborted(user *usersPID, struct parameters *par){
     printf("%d users have died prematurely\n", counter);
 }
 
-void print_num_blocks(block *l)
+int print_num_blocks(block *l)
 {
     int i = 0;
     int blockIndex = 0;
@@ -74,36 +75,25 @@ void print_num_blocks(block *l)
         i++;
     }
     printf("%d blocks have been confirmed on ledger\n", blockIndex);
+    return blockIndex;
 }
 
-void print_kill_signal()
+void print_kill_signal(enum term termReason)
 {
-    /* switch ()
-     {
-     case 0: /* too much time
-        if(SO_SIM_SEC>=time(30)){
-          printf("TOO MUCH TIME SIMULATION ENDED",);
-          exit(EXIT_FAILURE);
-        }
-         break;
-       case 1: /* Registry space is full
-        if (SO_REGISTRY_SIZE>100) {
-            printf("REGISTRY IS FULL");
-            exit(EXIT_FAILURE);
-        }
-         break;
-
-     case 2 :
- */
-}
-
-void final_print(pid_t masterPID, user *usersPID, node *nodesPID, struct parameters *par, block *ledger)
-{
-    print_user_nodes_table(masterPID, usersPID, nodesPID, par);
-
-    /*print_kill_signal();*/
-    print_num_aborted(usersPID, par);
-    print_num_blocks(ledger);
+    switch(termReason){
+        case timeElapsed:
+            printf("KILL signal: time elapsed or interrupted by user\n");
+            break;
+        case usersDead:
+            printf("KILL signal: all or all-1 users dead\n");
+            break;
+        case ledgerFull:
+            printf("KILL signal: ledger full\n");
+            break;
+        default:
+            printf("%s/%d strange error\n", __FILE__, __LINE__);
+            break;
+    }
 }
 
 void print_parameters(struct parameters *par)

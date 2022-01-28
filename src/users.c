@@ -90,8 +90,8 @@ pid_t get_random_nodePID()
 
 	do
 	{
-		index = RAND(0, par->SO_NODES_NUM - 1);
-		if (nodesPID[index].status == available)
+		index = RAND(0, par->SO_NODES_NUM*2 - 1);
+		if (nodesPID[index].status == available && nodesPID[index].pid != 0)
 			val = nodesPID[index].pid;
 	} while (!val);
 
@@ -104,7 +104,7 @@ void update_status(int statusToSet)
 	int i = get_pid_userIndex(myPID);
 	if (i == -1)
 	{
-		TRACE(("[USER %d] failed to find myself in usersPID[]", myPID));
+		TRACE(("[USER %d] failed to find myself in usersPID[]", myPID))
 	}
 
 	sem_reserve(semPIDs_ID, 1);
@@ -112,7 +112,7 @@ void update_status(int statusToSet)
 	if (statusToSet == 2)
 	{
 		/*usersPrematurelyDead++;*/
-		TRACE(("[USERS] dead increased\n"));
+		TRACE(("[USERS] dead increased\n"))
 	}
 	sem_release(semPIDs_ID, 1);
 }
@@ -276,17 +276,6 @@ void get_balance()
 
 	tmp = outGoingTransactions;
 
-	/*if (tmp != NULL) /* just for testing, can be removed later *
-	{
-		TRACE(("[USER %d] accumulate before removing out=%d\n", myPID, accumulate))
-		TRACE(("[USER %d] tmp->next: %p\n", myPID, tmp->next))
-		if (tmp->next != NULL)
-		{
-			TRACE(("[USER %d] outGoingTransactions->next: %p\n", myPID, outGoingTransactions->next))
-			TRACE(("[USER %d] outGoingTransactions->next->trans = amount: %u, sender: %d, receiver: %d\n", myPID, outGoingTransactions->next->trans.amount, outGoingTransactions->next->trans.sender, outGoingTransactions->next->trans.receiver))
-		}
-	}*/
-
 	while (tmp != NULL)
 	{
 		accumulate -= (tmp->trans.amount + tmp->trans.reward);
@@ -318,7 +307,8 @@ void user_transactions_handle(int signum)
 	int retry = par->SO_RETRY;
 	write(1, "::USER:: SIGUSR1 received\n", 27);
 
-	if (currBalance > 2)
+	get_balance();
+	if (currBalance >= 2)
 	{
 		pid_t userPID = get_random_userPID();
 		pid_t nodePID = get_random_nodePID();
@@ -352,7 +342,10 @@ void user_transactions_handle(int signum)
 /* CTRL-C handler */
 void user_interrupt_handle(int signum)
 {
-	write(2, "::USER:: SIGINT received\n", 26);
+	#ifdef DEBUG
+	write((FILE *)2, "::USER:: SIGINT received\n", 25);
+	#endif
+
 	get_balance();
 	if (currBalance >= 2)
 		update_status(0);
