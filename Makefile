@@ -4,23 +4,23 @@ DEBUG=-DDEBUG
 
 # Dependencies
 SHARED=src/include/common.h src/utils/*.h src/utils/*.c
+OBJS=lklist.o msg.o pool.o debug.o sem.o
 MASTER=src/master.c src/include/master.h src/print.c src/include/print.h src/parser.c src/include/parser.h
 USER=src/users.c src/include/users.h
 NODE=src/nodes.c src/include/nodes.h
 
 all: master users nodes
-	rm -f *.o *~
 
-master: shared $(MASTER)
+master: $(OBJS) $(MASTER)
 	$(CC) $(CFLAGS) src/master.c  src/print.c src/parser.c *.o -lm -o master
 
-users: shared $(USER)
+users: $(OBJS) $(USER)
 	$(CC) $(CFLAGS) src/users.c src/print.c *.o -lm -o users
 
-nodes: shared $(NODE)
+nodes: $(OBJS) $(NODE)
 	$(CC) $(CFLAGS) src/nodes.c src/print.c *.o -lm -o nodes
 
-shared: $(SHARED)
+%.o: src/utils/%.c $(SHARED)
 	$(CC) -c $(CFLAGS) src/utils/*.c
 
 debug:
