@@ -65,6 +65,13 @@ void make_arguments(int *IPC_array, char **argv)
     argv[6] = semLedger_ID;
     TRACE(("[MASTER] argv[sem_ledger] = %s\n", argv[6]))
     argv[8] = NULL; /* Terminating argv with NULL value */
+
+    free(uPID_array);
+    free(nPID_array);
+    free(parameters);
+    free(ledger);
+    free(semPIDs_ID);
+    free(semLedger_ID);
 }
 
 /* initializes message queue specific to own PID */
@@ -177,6 +184,8 @@ void send_friend_list(pid_t node)
         send_message(nodeQueue, &friendsMsg, sizeof(struct msgbuf_friends), 0);
         TRACE(("[MASTER] sent friend to %d\n", node))
     }
+
+    free(friends);
 }
 
 /* fork and execve a "./nodes" */
