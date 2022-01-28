@@ -47,7 +47,7 @@ int sem_release(int sem_id, int sem_num)
 }
 
 /* Print all semaphore values to a string */
-int sem_getall(char *my_string, int sem_id)
+void sem_getall(char *my_string, int sem_id)
 {
     union semun arg; /* man semctl per vedere def della union  */
     unsigned short *sem_vals, i;

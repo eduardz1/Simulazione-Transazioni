@@ -79,7 +79,7 @@ int sem_release(int sem_id, int sem_num);
  * Print all semaphore values to a string. my_string MUST be
  * previously allocated
  */
-int sem_getall(char * my_string, int sem_id);
+void sem_getall(char * my_string, int sem_id);
 
 
 #endif /* SIMULAZIONE_TRANSAZIONI_SEM_H */

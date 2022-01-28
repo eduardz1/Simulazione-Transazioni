@@ -122,7 +122,7 @@ void make_friend_list(pid_t *friends)
      * in ascending order, that's not a problem because the nodes will extract
      * a random index anyway when "hopping" a transaction to a different node
      * idea from https://stackoverflow.com/questions/1608181/unique-random-number-generation-in-an-integer-array
-     * /
+     */
 
     /* Knuth algorithm */
     const int numNodes = par->SO_NODES_NUM;     /* 2 */
@@ -363,11 +363,6 @@ void master_interrupt_handle(int signum)
     killpg(0, SIGINT);
 
     /* just to avoid printing before everyone has finished*/
-    /*while (wait(&status) != -1)
-    {
-        status >> 8; /* no idea about what it does please help *
-    }*/
-
     while ((wpid = wait(&status)) > 0)
         ;
 
@@ -399,7 +394,7 @@ int main(int argc, char *argv[])
     struct sembuf sops;
 
     int i;
-    for (i = 0; i < 9;i++)
+    for (i = 0; i < 9; i++)
         argvSpawns[i] = malloc(3 * sizeof(int) + 1);
 
     ledger_ptr = ledger;
