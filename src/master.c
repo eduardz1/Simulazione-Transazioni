@@ -37,34 +37,35 @@ enum term termReason = timeElapsed;
 
 /* make argv array with IPC IDs for user and nodes, mode 0 user, mode 1 nodes*/
 void make_arguments(int *IPC_array, char **argv)
-{   
-    char *uPID_array = malloc(3 * sizeof(IPC_array[0]) + 1);
-    char *nPID_array = malloc(3 * sizeof(IPC_array[0]) + 1);
-    char *parameters = malloc(3 * sizeof(IPC_array[0]) + 1);
-    char *ledger = malloc(3 * sizeof(IPC_array[0]) + 1);
-    char *semPIDs_ID = malloc(3 * sizeof(IPC_array[0]) + 1);
-    char *semLedger_ID = malloc(3 * sizeof(IPC_array[0]) + 1);
+{
+    char uPID_array[13] = {0};
+    char nPID_array[13] = {0};
+    char parameters[13] = {0};
+    char ledger[13] = {0};
+    char semPIDs_ID[13] = {0};
+    char semLedger_ID[13] = {0};
 
-    sprintf(uPID_array, "%d", IPC_array[0]);
-    sprintf(nPID_array, "%d", IPC_array[1]);
-    sprintf(parameters, "%d", IPC_array[2]);
-    sprintf(ledger, "%d", IPC_array[3]);
-    sprintf(semPIDs_ID, "%d", IPC_array[4]);
-    sprintf(semLedger_ID, "%d", IPC_array[5]);
+    snprintf(uPID_array, 13, "%d", IPC_array[0]);
+    snprintf(nPID_array, 13, "%d", IPC_array[1]);
+    snprintf(parameters, 13, "%d", IPC_array[2]);
+    snprintf(ledger, 13, "%d", IPC_array[3]);
+    snprintf(semPIDs_ID, 13, "%d", IPC_array[4]);
+    snprintf(semLedger_ID, 13, "%d", IPC_array[5]);
 
-    argv[1] = uPID_array;
-    TRACE(("[MASTER] argv[uPID] = %s\n", uPID_array))
-    argv[2] = nPID_array;
-    TRACE(("[MASTER] argv[nPID] = %s\n", nPID_array))
-    argv[3] = parameters;
-    TRACE(("[MASTER] argv[par] = %s\n", parameters))
-    argv[4] = ledger;
-    TRACE(("[MASTER] argv[ledger] = %s\n", ledger))
-    argv[5] = semPIDs_ID;
-    TRACE(("[MASTER] argv[sem_pids] = %s\n", semPIDs_ID))
-    argv[6] = semLedger_ID;
-    TRACE(("[MASTER] argv[sem_ledger] = %s\n", argv[6]))
+    strncpy(argv[1], uPID_array, 13);
+    strncpy(argv[2], nPID_array, 13);
+    strncpy(argv[3], parameters, 13);
+    strncpy(argv[4], ledger, 13);
+    strncpy(argv[5], semPIDs_ID, 13);
+    strncpy(argv[6], semLedger_ID, 13);
     argv[8] = NULL; /* Terminating argv with NULL value */
+
+    TRACE(("[MASTER] argv[uPID] = %s\n", argv[1]))
+    TRACE(("[MASTER] argv[nPID] = %s\n", argv2))
+    TRACE(("[MASTER] argv[par] = %s\n", argv[3]))
+    TRACE(("[MASTER] argv[ledger] = %s\n", argv[4]))
+    TRACE(("[MASTER] argv[sem_pids] = %s\n", argv[5]))
+    TRACE(("[MASTER] argv[sem_ledger] = %s\n", argv[6]))
 }
 
 /* initializes message queue specific to own PID */
@@ -392,10 +393,14 @@ int main(int argc, char *argv[])
 
     int uCounter, nCounter, returnVal;
     int ipcObjectsIDs[IPC_NUM];
-    char *argvSpawns[9 * (3 * sizeof(int) + 1)] = {0};
+    char *argvSpawns[9];
 
     struct sigaction sa;
     struct sembuf sops;
+
+    int i;
+    for (i = 0; i < 9;i++)
+        argvSpawns[i] = malloc(3 * sizeof(int) + 1);
 
     ledger_ptr = ledger;
     semaphores_init();

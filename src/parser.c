@@ -2,7 +2,7 @@
 #include "utils/debug.h"
 #include "include/parser.h"
 
-#define CONF_FILE "conf1.txt"
+#define CONF_FILE "conf.txt"
 
 void assign_defaults(struct parameters *par)
 {
@@ -25,8 +25,6 @@ int parse_parameters(struct parameters *par)
 {
     FILE *fp;
 
-    /*enum paramID tokensE;*/
-
     /* longer than NUM_PARAMETERS to account for comments and such */
     char buffer[128];
     int i = 0;
@@ -34,7 +32,6 @@ int parse_parameters(struct parameters *par)
     char *tokens[NUM_PARAMETERS];
     unsigned long values[NUM_PARAMETERS]; /* downcast is easy, upcast not so much */
 
-    /*struct parameters *par = malloc(sizeof(struct parameters));*/
     assign_defaults(par);
     TRACE(("[PARSER] assigned defaults\n"))
 
@@ -45,17 +42,12 @@ int parse_parameters(struct parameters *par)
     while (fgets(buffer, 127, fp))
     {
         tokens[i] = malloc(64);
-        /*values[i] = malloc(sizeof(int));*/
-
         sscanf(buffer, "%s %lu", tokens[i], &values[i]);
-
         i++;
     }
 
     for (i = 0; i < NUM_PARAMETERS; i++)
     {
-        /*printf("%s\n",tokens[i]);*/
-
         if (!strcmp(tokens[i], "SO_USER_NUM"))
         {
             par->SO_USER_NUM = values[i];
@@ -147,6 +139,5 @@ int parse_parameters(struct parameters *par)
     TRACE(("--------------------------------------------\n"))
 
     fclose(fp);
-
     return 0;
 }

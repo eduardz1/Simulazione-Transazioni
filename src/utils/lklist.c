@@ -64,12 +64,12 @@ void find_and_remove(struct node **head, transaction *toSearch)
 
     if (curr == *head)
     {
+        free(*head);
         *head = (*head)->next;
     }
     else
     {
+        free(curr);
         prev->next = curr->next;
     }
-
-    /* free(prev); */
 }

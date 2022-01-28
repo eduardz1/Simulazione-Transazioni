@@ -73,4 +73,6 @@ int sem_getall(char *my_string, int sem_id)
         sprintf(cur_str, "%d ", sem_vals[i]);
         strcat(my_string, cur_str);
     }
+
+    free(sem_vals);
 }

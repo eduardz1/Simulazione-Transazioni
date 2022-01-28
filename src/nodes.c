@@ -386,6 +386,4 @@ int main(int argc, char *argv[])
             }
         }
     }
-
-    TRACE(("[NODE %d] somehow I broke free from an endless while loop\n", myPID))
 }
