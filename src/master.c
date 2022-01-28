@@ -58,7 +58,7 @@ void make_arguments(int *IPC_array, char **argv)
     strncpy(argv[4], ledger, 13);
     strncpy(argv[5], semPIDs_ID, 13);
     strncpy(argv[6], semLedger_ID, 13);
-    argv[8] = NULL; /* Terminating argv with NULL value */
+    argv[7] = NULL; /* Terminating argv with NULL value */
 
     TRACE(("[MASTER] argv[uPID] = %s\n", argv[1]))
     TRACE(("[MASTER] argv[nPID] = %s\n", argv2))
@@ -388,13 +388,13 @@ int main(int argc, char *argv[])
 
     int uCounter, nCounter, returnVal;
     int ipcObjectsIDs[IPC_NUM];
-    char *argvSpawns[9];
+    char *argvSpawns[8];
 
     struct sigaction sa;
     struct sembuf sops;
 
     int i;
-    for (i = 0; i < 9; i++)
+    for (i = 0; i < 8; i++)
         argvSpawns[i] = malloc(3 * sizeof(int) + 1);
 
     ledger_ptr = ledger;
@@ -416,7 +416,7 @@ int main(int argc, char *argv[])
     masterQ = message_queue_init();
 
     argvSpawns[0] = NODE_NAME;
-    TRACE(("[MASTER] argv values for nodes: %s %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7], argvSpawns[8]))
+    TRACE(("[MASTER] argv values for nodes: %s %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7]))
     for (nCounter = 0; nCounter < par->SO_NODES_NUM; nCounter++)
     {
         LOCK;
@@ -435,7 +435,7 @@ int main(int argc, char *argv[])
     }
 
     argvSpawns[0] = USER_NAME;
-    TRACE(("[MASTER] argv values for users: %s %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7], argvSpawns[8]))
+    TRACE(("[MASTER] argv values for users: %s %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7]))
     for (uCounter = 0; uCounter < par->SO_USER_NUM; uCounter++)
     {
         LOCK;
