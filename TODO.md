@@ -5,10 +5,10 @@
 - [x] **Eduard ->** Decrement hops every time a transaction is sent (hops is already present in msg_trans, just need to literally write 1 line of code)
 
 ## General Tasks
-- [ ] FIX ALL REPORTED ISSUES
+- [x] **Eduard ->** FIX ALL REPORTED ISSUES
 - [ ] MAKE A USEFUL README (some informations can be directly taken from Scheme.md)
 - [x] **Eduard ->** **Rick ->** fix formatted_timestamp() in common.c
-- [ ] **Eduard ->** finish every print function
+- [x] **Eduard ->** finish every print function
 - [x] **Eduard ->** clean general print formatting
 - [x] **Francesco ->** make ledger effectively print inside a ledger.txt, I've tried but it didnt't work
 - [x] **Eduard ->** instead of sleeping for 1 second maybe we could make master sleep with a timer
@@ -24,8 +24,8 @@ ask to update ledger basically)
 ## Master Specific
 - [x] **Edaurd -> Francesco->** print every second of current_budget of every user and node (max 32 lines,
 ordered by most budget)
-- [ ] stop simulation when a certain number of users are dead
-- [ ] send new overbuf nodes pid as a new friend to x nodes
+- [x] **Eduard ->** stop simulation when a certain number of users are dead
+- [x] **Eduard ->** send new overbuf nodes pid as a new friend to x nodes
 - [x] **Eduard ->** handler can't have arguments, need to implement it without or
 use an extern variable (avoid if possible)
 - [x] **Eduard -> Rick(ci prova)-->** print every second of num proc users and node active
