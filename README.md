@@ -18,7 +18,7 @@ Gli ipc object che vengono inizalizzati nel progetto sono:
 
  ---
  ## NODES
- Ogni nodo ha una coda di messaggi corrispondente, questi si occupano di salvare
+ Ogni nodo ha una coda di messaggi corrispondente, questa viene attaccata usando come key il PID del processo nodo. I nodi creano un blocco con reward a 0, in seguito inserisce nei blocchi la lista delle transazioni da elaborare. 
  
  
  ---
