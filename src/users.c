@@ -322,20 +322,33 @@ void user_transactions_handle(int signum)
 /* CTRL-C handler */
 void user_interrupt_handle(int signum)
 {
+	struct node *tmp;
+	int i = get_pid_userIndex(myPID);
+
 #ifdef DEBUG
 	/* cast return value into the void, ! is needed because of gcc behaviour */
 	(void)!write(2, "::USER:: SIGINT received\n", 25);
 #endif
 
 	get_balance();
+	tmp = outGoingTransactions;
+	sem_reserve(semPIDs_ID, 1);
+	while (tmp != NULL)
+	{
+		usersPID[i].balance += (tmp->trans.amount + tmp->trans.reward);
+		tmp = tmp->next;
+	}
+	sem_release(semPIDs_ID, 1);
+
 	if (usersPID[get_pid_userIndex(myPID)].status != dead)
 	{
-		if (currBalance >= 2)
+		if (usersPID[i].balance >= 2)
 			update_status(0);
 		else
 			update_status(1);
 	}
 
+	free(tmp);
 	exit(0);
 }
 
