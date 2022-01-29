@@ -39,22 +39,18 @@ int add_to_pool(pool *transPool, struct msgbuf_trans *message)
 }
 
 /* remove a msgbuf_trans from pool, returns directly the transaction associated */
-struct msgbuf_trans remove_from_pool(pool *transPool)
+int remove_from_pool(pool *transPool, struct msgbuf_trans *tMex)
 {
-    struct msgbuf_trans tmp;
-
     if (transPool == NULL)
     {
-        tmp.transactionMessage.userTrans.amount = ERROR;
-        return tmp;
+        return ERROR;
     }
     else if (transPool->head == NULL)
     {
-        tmp.transactionMessage.userTrans.amount = ERROR;
-        return tmp;
+        return ERROR;
     }
 
-    tmp = *transPool->head;
+    *tMex = *transPool->head;
     free(transPool->head);
     transPool->head = transPool->head->transactionMessage.next;
 
@@ -62,5 +58,5 @@ struct msgbuf_trans remove_from_pool(pool *transPool)
     if (transPool->head == NULL)
         transPool->tail = NULL;
 
-    return tmp;
+    return SUCCESS;
 }

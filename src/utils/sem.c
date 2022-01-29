@@ -25,7 +25,7 @@ int sem_set_val(int sem_id, int sem_num, int sem_val)
 /* Try to access the resource */
 int sem_reserve(int sem_id, int sem_num)
 {
-    struct sembuf sops;
+    struct sembuf sops = {0};
 
     sops.sem_num = sem_num;
     sops.sem_op = -1;
@@ -37,7 +37,7 @@ int sem_reserve(int sem_id, int sem_num)
 /* Release the resource */
 int sem_release(int sem_id, int sem_num)
 {
-    struct sembuf sops;
+    struct sembuf sops = {0};
 
     sops.sem_num = sem_num;
     sops.sem_op = 1;
@@ -53,7 +53,7 @@ void sem_getall(char *my_string, int sem_id)
     unsigned short *sem_vals, i;
     unsigned long num_sem;
     char cur_str[10];
-    struct semid_ds my_ds;
+    struct semid_ds my_ds ={0};
 
     /* Get the number of semaphores */
     arg.buf = &my_ds;

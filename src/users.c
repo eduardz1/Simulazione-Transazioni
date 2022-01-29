@@ -144,7 +144,7 @@ void queue_to_pid(pid_t nodePID)
 /* initializes transaction values and sets it to pending */
 void transaction_init(pid_t userPID, int amount, int reward)
 {
-	struct timespec exactTime;
+	struct timespec exactTime = {0};
 	clock_gettime(CLOCK_REALTIME, &exactTime);
 
 	transMsg.mtype = TRANSACTION_MTYPE;
@@ -363,13 +363,13 @@ int main(int argc, char *argv[])
 	unsigned int amount, reward, retry;
 	pid_t userPID, nodePID;
 
-	struct timespec randSleepTime;
-	struct timespec sleepTimeRemaining;
+	struct timespec randSleepTime = {0};
+	struct timespec sleepTimeRemaining = {0};
 
 	struct sigaction saUSR1;
 	struct sigaction saINT_user;
-	bzero(&saUSR1, sizeof(saUSR1));
-	bzero(&saINT_user, sizeof(saINT_user));
+	BZERO(&saUSR1, sizeof(saUSR1));
+	BZERO(&saINT_user, sizeof(saINT_user));
 
 	myPID = getpid(); /* set myPID value */
 

@@ -80,11 +80,11 @@ void fetch_messages() /* need also to fetch friends just in case */
         flag++;
     }
     else
-    {   /* this basically prevents the node from ever being full, the most edge
-         * case is that in which tail gets sent to master but it can't create 
-         * new overbuf nodes but in that case the transaction gets discarded 
-         */
-        send_to_random_friend(); 
+    { /* this basically prevents the node from ever being full, the most edge
+       * case is that in which tail gets sent to master but it can't create
+       * new overbuf nodes but in that case the transaction gets discarded
+       */
+        send_to_random_friend();
         flag = 0;
     }
 }
@@ -93,8 +93,9 @@ void send_to_random_friend()
 {
     int queue;
     int i;
-    struct msgbuf_trans tMex = remove_from_pool(&transPool);
-    if (tMex.transactionMessage.userTrans.amount == ERROR)
+    struct msgbuf_trans tMex;
+    BZERO(&tMex, sizeof(tMex));
+    if (remove_from_pool(&transPool, &tMex) == ERROR)
         return;
 
     transPool.size--;
@@ -152,6 +153,7 @@ void new_block(transaction *blockTransaction, block *newBlock)
     int i;
     transaction reward;
     struct timespec timestamp;
+    BZERO(&timestamp, sizeof(timestamp));
     clock_gettime(CLOCK_REALTIME, &timestamp);
 
     reward.timestamp = timestamp;
@@ -174,14 +176,15 @@ void new_block(transaction *blockTransaction, block *newBlock)
 /* fills the buffer with SO_BLOCK_SIZE-1 transactions */
 void fill_block_transList(transaction *transListWithoutReward)
 {
-    struct msgbuf_trans tmp;
     int i;
+    struct msgbuf_trans tmp;
+    BZERO(&tmp, sizeof(tmp))
+
     TRACE(("[NODE %d] is starting to process a block\n", myPID))
 
     for (i = 0; i < (SO_BLOCK_SIZE - 1); i++)
     {
-        tmp = remove_from_pool(&transPool);
-        if (tmp.transactionMessage.userTrans.amount == ERROR)
+        if (remove_from_pool(&transPool, &tmp) == ERROR)
         {
             TRACE(("*** [NODE %d] fatal error ***\n", myPID))
             kill(myPID, SIGINT);
@@ -194,8 +197,9 @@ void fill_block_transList(transaction *transListWithoutReward)
 
 void fill_friendList(pid_t *friendList)
 {
-    struct msgbuf_friends friendMex;
     unsigned int i;
+    struct msgbuf_friends friendMex;
+    BZERO(&friendMex, sizeof(friendMex))
 
     TRACE(("[NODE %d] trying to receive friends\n", myPID))
     /* waits for a FRIENDS_MTYPE transactions before continuing */
@@ -316,8 +320,6 @@ void node_interrupt_handle(int signum)
     exit(0);
 }
 
-void node_sigchld_handle(int signum);
-
 int main(int argc, char *argv[])
 {
     transaction transBuffer[sizeof(transaction) * (SO_BLOCK_SIZE - 1)];
@@ -325,16 +327,17 @@ int main(int argc, char *argv[])
     struct timespec randSleepTime;
     struct timespec sleepTimeRemaining;
     struct sigaction saINT_node;
+    BZERO(&randSleepTime, sizeof(randSleepTime));
+    BZERO(&sleepTimeRemaining, sizeof(sleepTimeRemaining));
+    BZERO(&saINT_node, sizeof(saINT_node));
 
     myPID = getpid();
 
     if (argc == 0)
-	{
-		printf("[NODE %d] no arguments passed, can't continue like this any more :C\n", myPID);
-		return ERROR;
-	}
-
-    bzero(&saINT_node, sizeof(saINT_node));
+    {
+        printf("[NODE %d] no arguments passed, can't continue like this any more :C\n", myPID);
+        return ERROR;
+    }
 
     attach_ipc_objects(argv);
     srand(getpid());

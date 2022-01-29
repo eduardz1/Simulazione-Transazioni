@@ -12,7 +12,7 @@
     clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &randSleepTime, &sleepTimeRemaining); \
     clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &sleepTimeRemaining, NULL);
 
-/*void signal_handler_init(struct sigaction *saINT); */
+void signal_handler_init(struct sigaction *saINT);
 void node_interrupt_handle(int signum);
 
 void new_block(transaction* blockTransaction, block *newBlock);
