@@ -260,7 +260,6 @@ void get_balance()
 
 		for (j = 1; j < SO_BLOCK_SIZE && flag != 0; j++)
 		{
-			/*TEST_ERROR file too large an absurd amount of times */
 			if (ledgerTemp[i].transList[j].sender == myPID)
 			{
 				find_and_remove(&outGoingTransactions, &ledgerTemp[i].transList[j]);

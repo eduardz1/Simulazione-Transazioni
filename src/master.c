@@ -350,10 +350,10 @@ void start_continuous_print()
                 activeNodes++;
         }
 
-        printf("\nNUM ACTIVE USERS: %d     \nNUM ACTIVE NODES: %d     \n\n", activeUsers, activeNodes);
+        printf("\n[ Time left:  %9d\033[34ms\033[0m ]\n| Active users:%9d |\n[ Active nodes:%9d ]\n\n", time, activeUsers, activeNodes);
         print_most_significant_processes(usersPID, nodesPID, par);
 
-        printf("\033[22A\r"); /*ESC[#A moves cursor up # lines, \r moves cursor to begging of the line */
+        printf("\033[23A\r"); /*ESC[#A moves cursor up # lines, \r moves cursor to begging of the line */
         sleep(1);
     }
 }
