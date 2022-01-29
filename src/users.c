@@ -271,7 +271,7 @@ void get_balance()
 	tempBalance += accumulate;
 	if (errno == ERANGE) /* not working as intended */
 	{
-		fprintf((FILE*)2, "[USER %d] went out of bound, punishment for being that rich is death\n", myPID);
+		fprintf((FILE *)2, "[USER %d] went out of bound, punishment for being that rich is death\n", myPID);
 		update_status(2);
 		kill(myPID, SIGINT);
 	}
@@ -331,14 +331,6 @@ void user_interrupt_handle(int signum)
 #endif
 
 	get_balance();
-	tmp = outGoingTransactions;
-	sem_reserve(semPIDs_ID, 1);
-	while (tmp != NULL)
-	{
-		usersPID[i].balance += (tmp->trans.amount + tmp->trans.reward);
-		tmp = tmp->next;
-	}
-	sem_release(semPIDs_ID, 1);
 
 	if (usersPID[get_pid_userIndex(myPID)].status != dead)
 	{
@@ -347,6 +339,15 @@ void user_interrupt_handle(int signum)
 		else
 			update_status(1);
 	}
+
+	tmp = outGoingTransactions;
+	sem_reserve(semPIDs_ID, 1);
+	while (tmp != NULL)
+	{
+		usersPID[i].balance += (tmp->trans.amount + tmp->trans.reward);
+		tmp = tmp->next;
+	}
+	sem_release(semPIDs_ID, 1);
 
 	free(tmp);
 	exit(0);
