@@ -39,7 +39,6 @@ void message_queue_attach()
     do
     {
         queueID = msgget(myPID, 0);
-        TEST_ERROR
     } while (errno == ENOENT);
 }
 
@@ -206,7 +205,6 @@ void fill_friendList(pid_t *friendList)
     for (i = 0; i < par->SO_FRIENDS_NUM; i++)
     {
         receive_message(queueID, &friendMex, sizeof(struct msgbuf_friends), FRIENDS_MTYPE, 0);
-        TEST_ERROR
         friendList[i] = friendMex.friend;
 
         TRACE(("[NODE %d] friend list is: %d\n", myPID, friendList[i]))
@@ -349,7 +347,6 @@ int main(int argc, char *argv[])
     fill_friendList(friendList);
 
     transaction_pool_init(&transPool);
-    TEST_ERROR
     while (1)
     {
 
