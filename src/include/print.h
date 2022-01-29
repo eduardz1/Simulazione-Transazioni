@@ -21,6 +21,6 @@ void print_ledger(block *l);
 
 void formatted_timestamp(char *, struct timespec);
 void print_transaction_pool(pool *transPool);
-void print_outgoing_pool(struct node *outPool);
+void print_outgoing_pool(struct node *outPool, FILE *fp);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_PRINT_H */

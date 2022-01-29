@@ -86,7 +86,6 @@ int message_queue_init()
         printf("[PROCESS %d] queue %d the effective user ID of the calling process is not the creator or the owner\n", ownPID, queueID);
         break;
     }
-    TRACE(("[PROCESS %d] queueID is %d\n", ownPID, queueID))
     return queueID;
 }
 
@@ -162,15 +161,12 @@ void send_friend_list(pid_t node)
     BZERO(&friendsMsg, sizeof(friendsMsg));
 
     make_friend_list(friends);
-    TRACE(("[MASTER] please have this be a friend that makes sense: %d\n", friends[0]))
     do
     {
         errno = 0;
         TRACE(("[MASTER] trying msgget for nodesPID[x].%d\n", node))
         nodeQueue = msgget(node, 0);
     } while (errno == ENOENT);
-
-    TRACE(("[MASTER] nodePID.pid=%d queue=%d\n", node, nodeQueue))
 
     for (i = 0; i < par->SO_FRIENDS_NUM; i++)
     {
@@ -218,9 +214,7 @@ int spawn_node(char *nodeArgv[], int nCounter)
         break;
 
     default:
-        TRACE(("[MASTER] filling nodesPID\n"))
         nodesPID[nCounter].pid = nodePID;
-        /*sem_reserve(semFriends_ID, 1);*/
         break;
     }
     return nodePID;
@@ -350,7 +344,7 @@ void start_continuous_print()
                 activeNodes++;
         }
 
-        printf("\n[ Time left:  %9d\033[34ms\033[0m ]\n| Active users:%9d |\n[ Active nodes:%9d ]\n\n", time, activeUsers, activeNodes);
+        printf("\n[ Time left:  %9d\033[34ms\033[0m ]\n| Active users:%9d |\n| Active nodes:%9d |\n\n", time, activeUsers, activeNodes);
         print_most_significant_processes(usersPID, nodesPID, par);
 
         printf("\033[23A\r"); /*ESC[#A moves cursor up # lines, \r moves cursor to begging of the line */
@@ -433,7 +427,6 @@ int main(int argc, char *argv[])
         UNLOCK
         if (getpid() != myPID)
             exit(0);
-        TRACE(("[MASTER SPAWN %d] timestamp=%lu\n", getpid(), time(NULL)))
     }
 
     for (nCounter = 0; nCounter < par->SO_NODES_NUM; nCounter++)
@@ -468,7 +461,7 @@ int main(int argc, char *argv[])
     switch (fork())
     {
     case -1:
-        TRACE(("[MASTER] error forking\n"))
+        fprintf((FILE *)2, "[MASTER] error forking\n");
         break;
 
     case 0:
