@@ -188,7 +188,7 @@ void print_ledger(block *l)
 /* print without /n */
 void formatted_timestamp(char *tsString, struct timespec timestamp)
 {
-    struct tm time;
+    struct tm time = {0};
     gmtime_r(&timestamp.tv_sec, &time);
     strftime(tsString, 31 - 10, "%Y-%m-%d %H:%M:%S.", &time);
     sprintf(tsString + strlen(tsString), "%09lu", timestamp.tv_nsec);
@@ -269,6 +269,7 @@ void print_most_significant_processes(user *usersPID, node *nodesPID, struct par
             bn2 = bn1;
             n2 = n1;
 
+            
             bn1 = nodesPID[i].balance;
             n1 = nodesPID[i].pid;
         }
@@ -277,6 +278,7 @@ void print_most_significant_processes(user *usersPID, node *nodesPID, struct par
             bn3 = bn2;
             n3 = n2;
 
+            
             bn2 = nodesPID[i].balance;
             n2 = nodesPID[i].pid;
         }
@@ -316,7 +318,7 @@ void print_most_significant_processes(user *usersPID, node *nodesPID, struct par
     {
         if (usersPID[i].balance > bu1)
         {
-            bn2 = bn1;
+            bu2 = bu1;
             u2 = u1;
 
             bu1 = usersPID[i].balance;

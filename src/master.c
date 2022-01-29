@@ -157,7 +157,9 @@ void send_friend_list(pid_t node)
 {
     unsigned int nodeQueue, i;
     pid_t *friends = malloc(sizeof(pid_t) * par->SO_FRIENDS_NUM);
+
     struct msgbuf_friends friendsMsg;
+    BZERO(&friendsMsg, sizeof(friendsMsg));
 
     make_friend_list(friends);
     TRACE(("[MASTER] please have this be a friend that makes sense: %d\n", friends[0]))
@@ -175,8 +177,10 @@ void send_friend_list(pid_t node)
         friendsMsg.mtype = FRIENDS_MTYPE;
         friendsMsg.friend = friends[i];
 
-        send_message(nodeQueue, &friendsMsg, sizeof(struct msgbuf_friends), 0);
-        TRACE(("[MASTER] sent friend to %d\n", node))
+        if (send_message(nodeQueue, &friendsMsg, sizeof(struct msgbuf_friends), 0) == SUCCESS)
+        {
+            TRACE(("[MASTER] sent friend to %d\n", node))
+        }
     }
 
     free(friends);
@@ -386,6 +390,7 @@ void master_interrupt_handle(int signum)
 /* could use arguments to choose configuration but parser needs changes */
 int main(int argc, char *argv[])
 {
+    int i;
     pid_t myPID = getpid();
 
     unsigned int uCounter, nCounter, returnVal;
@@ -394,8 +399,8 @@ int main(int argc, char *argv[])
 
     struct sigaction sa;
     struct sembuf sops;
+    BZERO(&sops, sizeof(sops));
 
-    int i;
     for (i = 0; i < 8; i++)
         argvSpawns[i] = malloc(3 * sizeof(int) + 1);
 
@@ -409,7 +414,7 @@ int main(int argc, char *argv[])
      * then initialize sa.handler to a pointer to the function interrupt_handle
      * then set the handler to handle SIGINT signals ((struct sigaction *oldact) = NULL)
      */
-    bzero(&sa, sizeof(sa));
+    BZERO(&sa, sizeof(sa));
     sa.sa_handler = master_interrupt_handle;
     sigaction(SIGINT, &sa, NULL);
     sigaction(SIGALRM, &sa, NULL);
@@ -470,8 +475,12 @@ int main(int argc, char *argv[])
     {
         unsigned int i, tempPID;
         pid_t *privateFriends = malloc(par->SO_FRIENDS_NUM);
+
         struct msgbuf_friends newNode;
         struct msgbuf_trans transHopped;
+        BZERO(&newNode, sizeof(newNode));
+        BZERO(&transHopped, sizeof(transHopped));
+
         signal(SIGINT, SIG_DFL); /* else it would print ledger and all twice */
         while (1)
         {

@@ -81,6 +81,11 @@ extern int errno;
     }
 #endif
 
+/* bzero() is not a standard C function, contrary to memset().
+ * there's some bugs that can be avoided doing it that way 
+ */
+#define BZERO(x, x_size) memset(x, 0, x_size);
+
 struct parameters
 {
     unsigned int SO_USER_NUM;
