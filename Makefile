@@ -1,6 +1,6 @@
 CC=gcc
-CFLAGS=-std=c89 -g -O0 -pedantic -Wall -D_GNU_SOURCE
-DEBUG=-DDEBUG
+CFLAGS=-std=c89 -pedantic -D_GNU_SOURCE
+DEBUG=-DDEBUG -g -Wall
 
 # Dependencies
 SHARED=src/include/common.h src/utils/*.h src/utils/*.c
@@ -12,24 +12,23 @@ NODE=src/nodes.c src/include/nodes.h
 all: master users nodes
 
 master: $(OBJS) $(MASTER)
-	$(CC) $(CFLAGS) src/master.c  src/print.c src/parser.c *.o -lm -o master
+	$(CC) $(CFLAGS) -O1 src/master.c  src/print.c src/parser.c *.o -lm -o master
 
 users: $(OBJS) $(USER)
-	$(CC) $(CFLAGS) src/users.c src/print.c *.o -lm -o users
+	$(CC) $(CFLAGS) -O1 src/users.c src/print.c *.o -lm -o users
 
 nodes: $(OBJS) $(NODE)
-	$(CC) $(CFLAGS) src/nodes.c src/print.c *.o -lm -o nodes
+	$(CC) $(CFLAGS) -O1 src/nodes.c src/print.c *.o -lm -o nodes
 
 %.o: src/utils/%.c $(SHARED)
-	$(CC) -c $(CFLAGS) src/utils/*.c
+	$(CC) -c $(CFLAGS) -O1 src/utils/*.c
 
 debug:
 	rm -f *.o master users nodes *~
-	$(CC) -c $(CFLAGS) $(DEBUG) src/utils/*.c
-	$(CC) $(CFLAGS) $(DEBUG) src/master.c  src/print.c src/parser.c *.o -lm -o master
-	$(CC) $(CFLAGS) $(DEBUG) src/users.c src/print.c *.o -lm -o users
-	$(CC) $(CFLAGS) $(DEBUG) src/nodes.c src/print.c *.o -lm -o nodes
-	./master
+	$(CC) -c $(CFLAGS) $(DEBUG) -O1 src/utils/*.c
+	$(CC) $(CFLAGS) $(DEBUG) -O1 src/master.c  src/print.c src/parser.c *.o -lm -o master
+	$(CC) $(CFLAGS) $(DEBUG) -O1 src/users.c src/print.c *.o -lm -o users
+	$(CC) $(CFLAGS) $(DEBUG) -O1 src/nodes.c src/print.c *.o -lm -o nodes
 
 clean:
 	rm -f *.o master users nodes log.txt ledger.txt *~

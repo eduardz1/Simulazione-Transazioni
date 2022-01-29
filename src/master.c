@@ -61,7 +61,7 @@ void make_arguments(int *IPC_array, char **argv)
     argv[7] = NULL; /* Terminating argv with NULL value */
 
     TRACE(("[MASTER] argv[uPID] = %s\n", argv[1]))
-    TRACE(("[MASTER] argv[nPID] = %s\n", argv2))
+    TRACE(("[MASTER] argv[nPID] = %s\n", argv[2]))
     TRACE(("[MASTER] argv[par] = %s\n", argv[3]))
     TRACE(("[MASTER] argv[ledger] = %s\n", argv[4]))
     TRACE(("[MASTER] argv[sem_pids] = %s\n", argv[5]))
@@ -155,7 +155,7 @@ void make_friend_list(pid_t *friends)
 
 void send_friend_list(pid_t node)
 {
-    int nodeQueue, i;
+    unsigned int nodeQueue, i;
     pid_t *friends = malloc(sizeof(pid_t) * par->SO_FRIENDS_NUM);
     struct msgbuf_friends friendsMsg;
 
@@ -185,7 +185,7 @@ void send_friend_list(pid_t node)
 /* fork and execve a "./nodes" */
 int spawn_node(char *nodeArgv[], int nCounter)
 {
-    static int overBuf = 0;
+    static unsigned int overBuf = 0;
     pid_t nodePID = fork();
 
     if (overBuf == 0)
@@ -316,8 +316,8 @@ void make_ipc_array(int *IPC_array)
 
 void start_continuous_print()
 {
-    int i, activeUsers, deadUsers, activeNodes;
-    int time = par->SO_SIM_SEC;
+    unsigned int i, activeUsers, deadUsers, activeNodes;
+    unsigned int time = par->SO_SIM_SEC;
 
     while (time--)
     {
@@ -359,7 +359,8 @@ void master_interrupt_handle(int signum)
 {
     int status, wpid;
 
-    write(2, "::MASTER:: SIGINT ricevuto\n", 28);
+    /* cast return value into the void, ! is needed because of gcc behaviour */
+    (void)!write(2, "::MASTER:: SIGINT ricevuto\n", 28);
     killpg(0, SIGINT);
 
     /* just to avoid printing before everyone has finished*/
@@ -382,11 +383,12 @@ void master_interrupt_handle(int signum)
     exit(0);
 }
 
+/* could use arguments to choose configuration but parser needs changes */
 int main(int argc, char *argv[])
 {
     pid_t myPID = getpid();
 
-    int uCounter, nCounter, returnVal;
+    unsigned int uCounter, nCounter, returnVal;
     int ipcObjectsIDs[IPC_NUM];
     char *argvSpawns[8];
 
@@ -416,7 +418,7 @@ int main(int argc, char *argv[])
     masterQ = message_queue_init();
 
     argvSpawns[0] = NODE_NAME;
-    TRACE(("[MASTER] argv values for nodes: %s %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7]))
+    TRACE(("[MASTER] argv values for nodes: %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7]))
     for (nCounter = 0; nCounter < par->SO_NODES_NUM; nCounter++)
     {
         LOCK;
@@ -435,7 +437,7 @@ int main(int argc, char *argv[])
     }
 
     argvSpawns[0] = USER_NAME;
-    TRACE(("[MASTER] argv values for users: %s %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7]))
+    TRACE(("[MASTER] argv values for users: %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7]))
     for (uCounter = 0; uCounter < par->SO_USER_NUM; uCounter++)
     {
         LOCK;
@@ -466,7 +468,7 @@ int main(int argc, char *argv[])
 
     case 0:
     {
-        int i, tempPID;
+        unsigned int i, tempPID;
         pid_t *privateFriends = malloc(par->SO_FRIENDS_NUM);
         struct msgbuf_friends newNode;
         struct msgbuf_trans transHopped;
@@ -475,7 +477,7 @@ int main(int argc, char *argv[])
         {
             receive_message(masterQ, &transHopped, sizeof(struct msgbuf_trans), TRANSACTION_MTYPE, 0);
             argvSpawns[0] = NODE_NAME;
-            TRACE(("[MASTER] argv values for nodes extra: %s %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7], argvSpawns[8]))
+            TRACE(("[MASTER] argv values for nodes extra: %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7]))
 
             LOCK;
             nodesPID[nCounter].status = available;

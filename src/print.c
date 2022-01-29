@@ -4,8 +4,8 @@
 
 void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct parameters *par)
 {
-    int userNum = par->SO_USER_NUM;
-    int nodesNum = 0;
+    unsigned int userNum = par->SO_USER_NUM;
+    unsigned int nodesNum = 0;
     int statusNum = 0;
     char statusStr[19];
 
@@ -55,8 +55,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
 
 void print_num_aborted(user *usersPID, struct parameters *par)
 {
-    int i;
-    int counter = 0;
+    unsigned int i, counter = 0;
 
     for (i = 0; i < par->SO_USER_NUM; i++)
     {
@@ -236,7 +235,7 @@ void print_outgoing_pool(struct node *outPool)
 /* 18 lines long */
 void print_most_significant_processes(user *usersPID, node *nodesPID, struct parameters *par)
 {
-    int i;
+    unsigned int i;
     static pid_t n1 = 0;
     static pid_t n2 = 0;
     static pid_t n3 = 0;
@@ -263,7 +262,7 @@ void print_most_significant_processes(user *usersPID, node *nodesPID, struct par
     unsigned int bu6 = UINT_MAX;
 
     /* 4 for loops instead of 2 to avoid seeig ULONG_MAX, especially for nodes */
-    for (i = 0; i < par->SO_NODES_NUM; i++)
+    for (i = 0; i < par->SO_NODES_NUM*2; i++)
     {
         if (nodesPID[i].balance > bn1)
         {
@@ -288,9 +287,9 @@ void print_most_significant_processes(user *usersPID, node *nodesPID, struct par
         }
     }
 
-    for (i = 0; i < par->SO_NODES_NUM; i++)
+    for (i = 0; i < par->SO_NODES_NUM*2; i++)
     {
-        if (nodesPID[i].balance < bn6)
+        if (nodesPID[i].balance < bn6 && nodesPID[i].pid != 0)
         {
             bn5 = bn6;
             n5 = n6;
@@ -298,7 +297,7 @@ void print_most_significant_processes(user *usersPID, node *nodesPID, struct par
             bn6 = nodesPID[i].balance;
             n6 = nodesPID[i].pid;
         }
-        else if (nodesPID[i].balance < bn5)
+        else if (nodesPID[i].balance < bn5 && nodesPID[i].pid != 0)
         {
             bn4 = bn5;
             n4 = n5;
@@ -306,7 +305,7 @@ void print_most_significant_processes(user *usersPID, node *nodesPID, struct par
             bn5 = nodesPID[i].balance;
             n5 = nodesPID[i].pid;
         }
-        else if (nodesPID[i].balance < bn4)
+        else if (nodesPID[i].balance < bn4 && nodesPID[i].pid != 0)
         {
             bn4 = nodesPID[i].balance;
             n4 = nodesPID[i].pid;

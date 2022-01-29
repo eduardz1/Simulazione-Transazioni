@@ -66,7 +66,7 @@ int parse_parameters(struct parameters *par)
              * I prefer straight up normalizing it rather than resetting everything
              * because of ERANGE
              */
-            if (values[i] >= 0 && values[i] <= 100)
+            if (values[i] <= 100) /* no need to check >= 0 as it's unsigned */
                 par->SO_REWARD = values[i];
             else
                 printf("[PARSER] SO_REWARD incorrect value, resetting default\n");

@@ -12,7 +12,8 @@ void transaction_pool_init(pool *transPool)
 int add_to_pool(pool *transPool, struct msgbuf_trans *message)
 {
     struct msgbuf_trans *newTransaction = malloc(sizeof(struct msgbuf_trans));
-    if (newTransaction == NULL){
+    if (newTransaction == NULL)
+    {
         TRACE(("*** malloc failed in %s:%d, system out of memory ***\n", __FILE__, __LINE__))
     }
 
@@ -42,7 +43,12 @@ struct msgbuf_trans remove_from_pool(pool *transPool)
 {
     struct msgbuf_trans tmp;
 
-    if (transPool->head == NULL)
+    if (transPool == NULL)
+    {
+        tmp.transactionMessage.userTrans.amount = ERROR;
+        return tmp;
+    }
+    else if (transPool->head == NULL)
     {
         tmp.transactionMessage.userTrans.amount = ERROR;
         return tmp;

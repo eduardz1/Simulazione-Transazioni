@@ -195,7 +195,7 @@ void fill_block_transList(transaction *transListWithoutReward)
 void fill_friendList(pid_t *friendList)
 {
     struct msgbuf_friends friendMex;
-    int i;
+    unsigned int i;
 
     TRACE(("[NODE %d] trying to receive friends\n", myPID))
     /* waits for a FRIENDS_MTYPE transactions before continuing */
@@ -285,7 +285,7 @@ void attach_ipc_objects(char **argv)
 /* returns index of where current node nodesPID[] */
 int get_pid_nodeIndex()
 {
-    int i = 0;
+    unsigned int i = 0;
     for (i = 0; i < par->SO_NODES_NUM * 2; i++)
     {
         if (nodesPID[i].pid == myPID)
@@ -305,7 +305,8 @@ void signal_handler_init(struct sigaction *saINT_node)
 void node_interrupt_handle(int signum)
 {
 #ifdef DEBUG
-    write((FILE *)2, "::NODE:: SIGINT received\n", 25);
+    /* cast return value into the void, ! is needed because of gcc behaviour */
+    (void)!write(2, "::NODE:: SIGINT received\n", 25);
 #endif
 
     TRACE(("[NODE %d] key of my queue %d\n", myPID, queueID))
@@ -326,6 +327,12 @@ int main(int argc, char *argv[])
     struct sigaction saINT_node;
 
     myPID = getpid();
+
+    if (argc == 0)
+	{
+		printf("[NODE %d] no arguments passed, can't continue like this any more :C\n", myPID);
+		return ERROR;
+	}
 
     bzero(&saINT_node, sizeof(saINT_node));
 

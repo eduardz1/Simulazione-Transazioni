@@ -55,11 +55,11 @@ struct msgbuf_trans transMsg;
 /* returns index of where user with PID_toSearch is located in usersPID[] */
 int get_pid_userIndex(int PID_toSearch)
 {
-	int i;
+	unsigned int i;
 
 	for (i = 0; i < par->SO_USER_NUM; i++)
 	{
-		if (usersPID[i].pid == myPID)
+		if (usersPID[i].pid == PID_toSearch)
 			return i;
 	}
 
@@ -90,7 +90,7 @@ pid_t get_random_nodePID()
 
 	do
 	{
-		index = RAND(0, par->SO_NODES_NUM*2 - 1);
+		index = RAND(0, par->SO_NODES_NUM * 2 - 1);
 		if (nodesPID[index].status == available && nodesPID[index].pid != 0)
 			val = nodesPID[index].pid;
 	} while (!val);
@@ -305,7 +305,8 @@ void get_balance()
 void user_transactions_handle(int signum)
 {
 	int retry = par->SO_RETRY;
-	write(1, "::USER:: SIGUSR1 received\n", 27);
+	/* cast return value into the void, ! is needed because of gcc behaviour */
+	(void)!write(1, "::USER:: SIGUSR1 received\n", 27);
 
 	get_balance();
 	if (currBalance >= 2)
@@ -335,23 +336,25 @@ void user_transactions_handle(int signum)
 	}
 	else
 	{
-		write(1, "::USER:: sorry balance too low\n", 32);
+		/* cast return value into the void, ! is needed because of gcc behaviour */
+		(void)!write(1, "::USER:: sorry balance too low\n", 32);
 	}
 }
 
 /* CTRL-C handler */
 void user_interrupt_handle(int signum)
 {
-	#ifdef DEBUG
-	write((FILE *)2, "::USER:: SIGINT received\n", 25);
-	#endif
+#ifdef DEBUG
+	/* cast return value into the void, ! is needed because of gcc behaviour */
+    (void)!write(2, "::USER:: SIGINT received\n", 25);
+#endif
 
 	get_balance();
 	if (currBalance >= 2)
 		update_status(0);
 	else
 		update_status(1);
-		
+
 	exit(0);
 }
 
@@ -373,6 +376,7 @@ int main(int argc, char *argv[])
 	if (argc == 0)
 	{
 		printf("[USER %d] no arguments passed, can't continue like this any more :C\n", myPID);
+		update_status(2);
 		return ERROR;
 	}
 
