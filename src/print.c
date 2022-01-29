@@ -4,6 +4,7 @@
 
 void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct parameters *par)
 {
+    float finalBalance = 0;
     unsigned int userNum = par->SO_USER_NUM;
     unsigned int nodesNum = 0;
     int statusNum = 0;
@@ -15,6 +16,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
     printf(" -----------------------------------------------------------------\n");
     while (userNum--)
     {
+        finalBalance += userPID[userNum].balance;
         statusNum = userPID[userNum].status;
         switch (statusNum)
         {
@@ -37,6 +39,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
     printf(" -----------------------------------------------------------------\n");
     while (nodesNum < par->SO_NODES_NUM * 2 && nodePID[nodesNum].pid != 0)
     {
+        finalBalance += nodePID[nodesNum].balance;
         statusNum = nodePID[nodesNum].status;
         switch (statusNum)
         {
@@ -51,6 +54,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
         nodesNum++;
     }
     printf(" -----------------------------------------------------------------\n");
+    TRACE(("-- Percent diff %f\n", (100*finalBalance) / (par->SO_USER_NUM * par->SO_BUDGET_INIT)))
 }
 
 void print_num_aborted(user *usersPID, struct parameters *par)

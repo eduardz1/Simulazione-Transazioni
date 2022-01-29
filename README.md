@@ -1,5 +1,6 @@
 # Simulazione-Transazioni
-Progetto del corso di Sistemi Operativi 2021-2022 
+Progetto del corso di Sistemi Operativi 2021-2022
+A cura di: Eduard Antonovic Occhipinti, Francesco Mauro, Riccardo Oro
 
  ---
 ## Master
@@ -12,8 +13,11 @@ Progetto del corso di Sistemi Operativi 2021-2022
 - Effettua una *fork()*
 	-  il master inizia a mostrare a schermo ogni secondo il numero di processi attivi nonché quelli con bilancio più significativo
 	-  il figlio generato invece si metterà in ascolto per transazioni inviate sulla queue privata del *master* nella quale sono inviate le transazioni che non sono riuscite a trovare un *node* che le processasse entro `SO_HOPS`, quando ne riceve una crea un nuovo nodo (fino ad un massimo di `SO_NODES_NUM` nodi extra), nel caso ci siano giá troppi nodi extra generati la transazione viene semplicemente scartata[^1]
+
+
+
  
- ---
+ 
  ## Nodes
  - Attacca la propria coda usando come key il proprio PID
  - Attacca gli oggetti IPC a partire dagli ID che vengono passati come arguments
@@ -26,6 +30,7 @@ Progetto del corso di Sistemi Operativi 2021-2022
 	- il figlio crea e si occupa di generare e confermare le transazioni del nuovo blocco, dopodiché efettua una *sleep()* che simula l'elaborazione dei blocchi
 	- il padre ricomincia il loop in maniera tale da poter continuare a fare il *fetch* dei messaggi in parallelo con l'elaborazione del blocco  
  ---
+ <div style="page-break-after: always;"></div>
  ## Users
  - Attacca gli oggetti oggetti ipc a partire dagli ID passati come arguments
  - Inizializza il `SIGINT` handler che aggiornerà il bilancio del nodo in maniera tale da avere una rappresentazione più accurata del valore a terminazione[^5]
@@ -33,7 +38,7 @@ Progetto del corso di Sistemi Operativi 2021-2022
  - Entra in un loop nel quale calcola il proprio bilancio a partire dalle transazioni confermate sul ledger sottraendo quelle ancora in uscita, se questo é $\geq2$:
 	 -  imposta il proprio stato ad *alive*, estrae il PID di un _user_ casuale e il PID di un _node_ casuale e genera una transazione di *amount* compreso tra i valori 2 e _current balance_ e la invia allo *user* estratto sfruttando il *node* estratto, se non riesce ad inviare la transazione generata diminuisce il valore di retry, nel caso in cui questo arrivi a 0 cambia status in *dead* e termina la propria esecuzione. A prescindere dalla riuscita dell'invio di una transazione lo *user* a questo punto effettua una *sleep()*[^4]
 	- se il bilancio é minore lo stato viene impostato a _broke_
- ---
+
   ## IPC Objects
 
 - Tante code di messaggi quanti sono i nodi +1, che è quella del *master* per ricevere le transazioni scartate per insufficienti *hops*
@@ -44,6 +49,7 @@ Progetto del corso di Sistemi Operativi 2021-2022
 
 --- 
 ## Scelte Implementative
+> Il codice preso da lezioni o fonti esterne è stato opportunamente segnalato
 
 ### Common.h
 É un *header* dove sono defiite la maggior parte delle macro e delle _struct_ usate all'interno del progetto
@@ -52,6 +58,10 @@ Progetto del corso di Sistemi Operativi 2021-2022
 Tendenzialmente sono raggruppate in un unico file _print.c_ con corrispettivo *header* per diminuire il *clutter*. 
 Le funzioni di stampa si occupano di mostrare a schermo attraverso le apposite funzioni informazioni di output, lo stato delle transazioni, i *timestamp*,numero di processi nodo e user attivi in quell'istante, ecc...
 L'utilizzo di stampe a lunghezza fissa (i.e %10lu) è stato necessario per avere tutto allineato correttamente e l'utilizzo delle [ANSI Escape Sequences](https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797) ci ha permesso di avere una print più pulita e facile da leggere
+
+## Problemi noti
+Il bilancio totale a fine simulazione è leggermente diverso da quello iniziale, il problema potrebbe essere dovuto alle approssimazioni che avvengono calcolando tutto come int oppure nel modo in cui calcoliamo il bilancio dei *nodes*.
+Da una veloce analisi ci risulta che sia tendenzialmente $<0.1\%$
 
 
 [^1]: Utilizzando un sistema più complesso rispetto alla shared memory di linux si potrebbe allocare in maniera dinamica lo spazio necessario per memorizzare le informazioni relative ai nodi extra in maniera tale da rimuovere il limite massimo di *nodes* extra. Il valore scelto, pari a quello di `SO_NODES_NUM` è puramente arbitrario
