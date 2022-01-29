@@ -49,7 +49,6 @@ void fetch_messages() /* need also to fetch friends just in case */
     static struct msgbuf_friends friendReceived;
     int sizeofFriend = friendList_size;
 
-    TRACE(("[NODE %d] flag: %d\n", myPID, flag))
     if (transPool.size < par->SO_TP_SIZE && flag < 20)
     {
         /* This configuration causes deadlock when two friends are present on the
@@ -79,10 +78,11 @@ void fetch_messages() /* need also to fetch friends just in case */
         flag++;
     }
     else
-    { /* this basically prevents the node from ever being full, the most edge
-       * case is that in which tail gets sent to master but it can't create
-       * new overbuf nodes but in that case the transaction gets discarded
-       */
+    {
+        /* this basically prevents the node from ever being full, the most edge
+         * case is that in which tail gets sent to master but it can't create
+         * new overbuf nodes but in that case the transaction gets discarded
+         */
         send_to_random_friend();
         flag = 0;
     }
@@ -106,7 +106,6 @@ void send_to_random_friend()
         TRACE(("[NODE %d] asking master to create new node\n", myPID))
         tMex.transactionMessage.hops = 0;
         queue = getppid();
-        TRACE(("[NODE %d] ppid() %d\n", myPID, queue))
         queue = msgget(queue, 0);
         if (send_message(queue, &tMex, sizeof(struct msgbuf_trans), IPC_NOWAIT) == SUCCESS)
         {
@@ -349,13 +348,6 @@ int main(int argc, char *argv[])
     transaction_pool_init(&transPool);
     while (1)
     {
-
-        /*
-         * if process is killed it will receive a SIGCHLD signal
-         * it means that the process was killed while processing a block
-         * need to manage
-         */
-
         fetch_messages();
 
         sem_reserve(semPIDs_ID, 1);

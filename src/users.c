@@ -4,24 +4,6 @@
 #include "utils/lklist.h"
 
 #define REWARD(amount, reward) (ceil(((reward * (amount)) / 100.0)))
-/*
- * NON active wait, the time is equivalent to the
- * verification algorithms that happen in "real" blockchains
- */
-
-/*
- * Need to implement a way to send s transaction
- * signal, we can utilize a user defined signal
- * handler.
- * We also need to account for the signal SIGINT (CTRL-C).
- * Maybe we can implement some sort of graphic way to visualize
- * child processes (nodes and user) so that we can choose
- * the PID on which to send the signal to.
- * -- user-defined signal handlers are inherited by the child processes --
- * so it's better to handle them in the master program
- */
-
-/* void wait_for_incoming_transaction() */
 
 /*
  ======================
@@ -111,7 +93,6 @@ void update_status(int statusToSet)
 	usersPID[i].status = statusToSet;
 	if (statusToSet == 2)
 	{
-		/*usersPrematurelyDead++;*/
 		TRACE(("[USERS] dead increased\n"))
 	}
 	sem_release(semPIDs_ID, 1);
@@ -177,9 +158,8 @@ void signal_handlers_init(struct sigaction *saUSR1, struct sigaction *saINT)
 /* send transaction currTrans to user userPID via node nodePID */
 int send_transaction()
 {
-	transaction sent;
+	transaction sent = {0};
 
-	TRACE(("[USER %d] queueID is %d\n", myPID, queueID))
 	if (send_message(queueID, &transMsg, sizeof(struct msgbuf_trans), IPC_NOWAIT) == 0)
 	{
 
@@ -267,7 +247,6 @@ void get_balance()
 			}
 			else if (ledgerTemp[i].transList[j].receiver == myPID)
 			{
-				/* TRACE(("[USER %d] found myself as receiver of %d UC\n", myPID, ledgerTemp[i].transList[j].amount)) */
 				accumulate += ledgerTemp[i].transList[j].amount;
 			}
 		}
@@ -281,18 +260,18 @@ void get_balance()
 		tmp = tmp->next;
 	}
 
-	TRACE(("[USER %d] accumulate=%d\n", myPID, accumulate))
 	if (accumulate * (-1) > tempBalance)
 	{
-		printf("*** [USER %d] errror in calculating balance, overflow ***\n", myPID);
-		print_outgoing_pool(outGoingTransactions);
+		fprintf((FILE *)2, "*** [USER %d] errror in calculating balance, overflow ***\n", myPID);
+		update_status(2);
+		print_outgoing_pool(outGoingTransactions, (FILE *)2);
 		killpg(0, SIGINT);
 	}
 
 	tempBalance += accumulate;
 	if (errno == ERANGE) /* not working as intended */
 	{
-		printf("[USER %d] went out of bound, punishment for being that rich is death\n", myPID);
+		fprintf((FILE*)2, "[USER %d] went out of bound, punishment for being that rich is death\n", myPID);
 		update_status(2);
 		kill(myPID, SIGINT);
 	}
@@ -345,14 +324,17 @@ void user_interrupt_handle(int signum)
 {
 #ifdef DEBUG
 	/* cast return value into the void, ! is needed because of gcc behaviour */
-    (void)!write(2, "::USER:: SIGINT received\n", 25);
+	(void)!write(2, "::USER:: SIGINT received\n", 25);
 #endif
 
 	get_balance();
-	if (currBalance >= 2)
-		update_status(0);
-	else
-		update_status(1);
+	if (usersPID[get_pid_userIndex(myPID)].status != dead)
+	{
+		if (currBalance >= 2)
+			update_status(0);
+		else
+			update_status(1);
+	}
 
 	exit(0);
 }
@@ -431,7 +413,6 @@ int main(int argc, char *argv[])
 		else
 		{
 			update_status(1);
-			sleep(2);
 		}
 	}
 }

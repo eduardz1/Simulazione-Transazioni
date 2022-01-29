@@ -44,7 +44,7 @@
 #define SEM_LEDGER_KEY 421
 #define M_QUEUE_KEY 0x5AD
 
-#define SO_BLOCK_SIZE 10  /* number of transaction per block*/
+#define SO_BLOCK_SIZE 100  /* number of transaction per block*/
 #define SO_REGISTRY_SIZE 1000 /* max length of consecutive blocks */
 #define SELF -1
 #define EVERYONE_BROKE '$'
@@ -174,15 +174,5 @@ enum term
     usersDead,
     ledgerFull
 };
-
-void add_block(block);
-void add_transaction_to_block(block *, transaction *, int index);
-void add_block_to_ledger(block *);
-void find_transaction(struct timespec timestamp, pid_t sender, pid_t receiver); /* NULL used to group results */
-
-/* listparser.c */
-void search_timestamp();
-void search_sender();
-void search_receiver();
 
 #endif /* SIMULAZIONE_TRANSAZIONI_COMMON_H */

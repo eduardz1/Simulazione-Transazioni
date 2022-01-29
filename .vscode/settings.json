@@ -11,7 +11,9 @@
         "sem.h": "c",
         "cstdint": "c",
         "string.h": "c",
-        "msg.h": "c"
+        "msg.h": "c",
+        "ostream": "c",
+        "system_error": "c"
     },
     "editor.rulers": [
         80,

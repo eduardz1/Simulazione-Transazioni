@@ -30,7 +30,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
         }
 
         /* we should place it in a buffer so that they print a fixed length */
-        printf("|  User      %7d    %s  %10u                     |\n", userPID[userNum].pid, statusStr, userPID[userNum].balance);
+        printf("|  User      %7d    %s  %10u\033[34mUC\033[0m                   |\n", userPID[userNum].pid, statusStr, userPID[userNum].balance);
     }
     printf("|                                                                 |\n");
     printf(" - Type ----- PID ----- Status ----- Balance ----- Still in Pool -\n");
@@ -47,7 +47,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
             strcpy(statusStr, "\033[33mfull\033[0m     ");
             break;
         }
-        printf("|  Node      %7d    %s  %10lu         %3d         |\n", nodePID[nodesNum].pid, statusStr, nodePID[nodesNum].balance, nodePID[nodesNum].tpSize);
+        printf("|  Node      %7d    %s  %10lu\033[34mUC\033[0m         %3d       |\n", nodePID[nodesNum].pid, statusStr, nodePID[nodesNum].balance, nodePID[nodesNum].tpSize);
         nodesNum++;
     }
     printf(" -----------------------------------------------------------------\n");
@@ -75,7 +75,7 @@ int print_num_blocks(block *l)
         blockIndex = l[i].blockIndex;
         i++;
     }
-    printf("%d blocks have been confirmed on ledger\n", blockIndex);
+    printf("%d blocks have been confirmed on ledger\n", blockIndex+1);
     return blockIndex;
 }
 
@@ -213,19 +213,19 @@ void print_transaction_pool(pool *transPool)
     }
 }
 
-void print_outgoing_pool(struct node *outPool)
+void print_outgoing_pool(struct node *outPool, FILE *fp)
 {
     struct node *tmp = outPool;
     int i = 0;
     pid_t pidCaller = getpid();
     transaction printable;
 
-    printf("[USER %d] printing out pool:\n", pidCaller);
+    fprintf(fp, "[USER %d] printing out pool:\n", pidCaller);
     while (tmp->next != NULL)
     {
-        printf("[%d]", i);
+        fprintf(fp, "[%d]", i);
         printable = tmp->trans;
-        print_transaction(&printable, (FILE *)1);
+        print_transaction(&printable, fp);
 
         tmp = tmp->next;
         i++;
@@ -366,19 +366,19 @@ void print_most_significant_processes(user *usersPID, node *nodesPID, struct par
 
     /* the extra spaces are to clear extra digits when updating */
     printf("[ Most significant nodes ]\n");
-    printf("| %7d   (%lu UC)                           \n", n1, bn1);
-    printf("| %7d   (%lu UC)                           \n", n2, bn2);
-    printf("| %7d   (%lu UC)                           \n", n3, bn3);
-    printf("| - - - - - - - - - - - -\n");
-    printf("| %7d   (%lu UC)                           \n", n4, bn4);
-    printf("| %7d   (%lu UC)                           \n", n5, bn5);
-    printf("| %7d   (%lu UC)                           \n", n6, bn6);
+    printf("| %7d   %10lu\033[34mUC\033[0m |\n", n1, bn1);
+    printf("| %7d   %10lu\033[34mUC\033[0m |\n", n2, bn2);
+    printf("| %7d   %10lu\033[34mUC\033[0m |\n", n3, bn3);
+    printf("| - - - - - - - - - - - -|\n");
+    printf("| %7d   %10lu\033[34mUC\033[0m |\n", n4, bn4);
+    printf("| %7d   %10lu\033[34mUC\033[0m |\n", n5, bn5);
+    printf("| %7d   %10lu\033[34mUC\033[0m |\n", n6, bn6);
     printf("\n[ Most significant users ]\n");
-    printf("| %7d   (%u UC)                 \n", u1, bu1);
-    printf("| %7d   (%u UC)                 \n", u2, bu2);
-    printf("| %7d   (%u UC)                 \n", u3, bu3);
-    printf("| - - - - - - - - - - - -\n");
-    printf("| %7d   (%u UC)                 \n", u4, bu4);
-    printf("| %7d   (%u UC)                 \n", u5, bu5);
-    printf("| %7d   (%u UC)                 \n\n", u6, bu6);
+    printf("| %7d   %10u\033[34mUC\033[0m |\n", u1, bu1);
+    printf("| %7d   %10u\033[34mUC\033[0m |\n", u2, bu2);
+    printf("| %7d   %10u\033[34mUC\033[0m |\n", u3, bu3);
+    printf("| - - - - - - - - - - - -|\n");
+    printf("| %7d   %10u\033[34mUC\033[0m |\n", u4, bu4);
+    printf("| %7d   %10u\033[34mUC\033[0m |\n", u5, bu5);
+    printf("| %7d   %10u\033[34mUC\033[0m |\n\n", u6, bu6);
 }

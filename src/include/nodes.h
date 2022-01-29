@@ -12,14 +12,22 @@
     clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &randSleepTime, &sleepTimeRemaining); \
     clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &sleepTimeRemaining, NULL);
 
+void message_queue_attach();
+void fetch_messages();
+void send_to_random_friend();
+
 void signal_handler_init(struct sigaction *saINT);
 void node_interrupt_handle(int signum);
 
 void new_block(transaction* blockTransaction, block *newBlock);
-int sum_reward(transaction *);
+void confirm_block(block *toConfirm);
+void insert_block_in_ledger(block *newBlock);
+
 void fill_block_transList(transaction *buffer);
 void fill_friendList(pid_t *friendList);
-void send_to_random_friend();
+int sum_reward(transaction *);
+
+void attach_ipc_objects(char **argv);
 int get_pid_nodeIndex();
 
 #endif /* SIMULAZIONE_TRANSAZIONI_NODES_H */
