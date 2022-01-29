@@ -4,7 +4,7 @@ A cura di: Eduard Antonovic Occhipinti, Francesco Mauro, Riccardo Oro
 
  ---
 ## Master
- - Inizializza gli oggetti [IPC](##IPC) sfruttando il parser[^8] per leggere il file di configurazione e salvarne i valori in una struct di parametri
+ - Inizializza gli oggetti IPC sfruttando il parser[^8] per leggere il file di configurazione e salvarne i valori in una struct di parametri
  - Inizializza il signal handler al fine di poter usare il `SIGINT` per interrompere la simulazione in maniera pulita e a proprio piacimento usando la shortcut `CTRL-C`
  - Crea `SO_NUM_NODES` *nodes* usando una fork; il *children* generato assegna a ciascun nodo una coda di messaggi personale che utilizza il PID stesso del nodo come key ed effettua una *execve* a *./nodes* passandogli come _arguments_ gli ID degll oggetti IPC generati in precedenza
  - Crea una lista amici per ciascun nodo, la quale verrà inviata un amico alla volta sulla coda di messaggi corrispondente
@@ -27,7 +27,7 @@ A cura di: Eduard Antonovic Occhipinti, Francesco Mauro, Riccardo Oro
  - Entra in un *loop* nel quale inizia il *fetch* dei messaggi inviati sulla propria *queue* aspettando di ricevere una transazione da aggiungere alla *transaction pool*[^2], dopodiché controlla -con flag `IPC_NOWAIT`- se sono presenti nuovi *friends* da aggiungere alla lista di amici, in caso affermativo realloca l'array di friends in maniera tale da poter far posto a un nuovo *node* amico. 
 	 - Periodicamente[^3], e se la _transaction pool_ è piena, la transazione che è presente nella *pool* da più tempo viene inviata a un amico scelto casualmente, se invece la transazione ha già esaurito gli _hop_ dispnibili, questa viene inviata al *master*, il quale si occuperà di creare un nuovo nodo. 
 - Dopodiché il nodo controlla se ha abbastanza transazioni per creare un nuovo blocco, in caso affermativo effettua una *fork()* 
-	- il figlio crea e si occupa di generare e confermare le transazioni del nuovo blocco, dopodiché efettua una *sleep()* che simula l'elaborazione dei blocchi
+	- il figlio crea e si occupa di generare e confermare le transazioni del nuovo blocco, dopodiché effettua una *sleep()* che simula l'elaborazione dei blocchi
 	- il padre ricomincia il loop in maniera tale da poter continuare a fare il *fetch* dei messaggi in parallelo con l'elaborazione del blocco  
  ---
  <div style="page-break-after: always;"></div>
@@ -41,7 +41,7 @@ A cura di: Eduard Antonovic Occhipinti, Francesco Mauro, Riccardo Oro
 
   ## IPC Objects
 
-- Tante code di messaggi quanti sono i nodi +1, che è quella del *master* per ricevere le transazioni scartate per insufficienti *hops*
+- Tante code di messaggi quanti sono i nodi più una, che è quella del *master* per ricevere le transazioni scartate per insufficienti *hops*
 - In Shared memory un array contenente i parametri di ciascun *node* e uno contenente i parametri di ciascun _user_, il ledger[^7] e una struct contente tutti i parametri della simulazione, letti dal parser
 - 2 semafori
 	- Uno per gestire la scrittura su *nodesPID* e *userPID*[^6]
@@ -51,13 +51,20 @@ A cura di: Eduard Antonovic Occhipinti, Francesco Mauro, Riccardo Oro
 ## Scelte Implementative
 > Il codice preso da lezioni o fonti esterne è stato opportunamente segnalato
 
-### Common.h
-É un *header* dove sono defiite la maggior parte delle macro e delle _struct_ usate all'interno del progetto
+### common.h
+É un *header* dove sono definite la maggior parte delle macro e delle _struct_ usate all'interno del progetto
 
 ### Funzioni di stampa 
-Tendenzialmente sono raggruppate in un unico file _print.c_ con corrispettivo *header* per diminuire il *clutter*. 
+Tendenzialmente sono raggruppate in un unico file "print.c" con corrispettivo *header* per diminuire il *clutter*. 
 Le funzioni di stampa si occupano di mostrare a schermo attraverso le apposite funzioni informazioni di output, lo stato delle transazioni, i *timestamp*,numero di processi nodo e user attivi in quell'istante, ecc...
-L'utilizzo di stampe a lunghezza fissa (i.e %10lu) è stato necessario per avere tutto allineato correttamente e l'utilizzo delle [ANSI Escape Sequences](https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797) ci ha permesso di avere una print più pulita e facile da leggere
+L'utilizzo di stampe a lunghezza fissa (i.e %10lu) è stato necessario per avere tutto allineato correttamente e l'utilizzo delle [ANSI Escape Sequences](https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797) ci ha permesso di avere una print più pulita e facile da leggere.
+Il ledger viene stampato a fine simulazione sul file "ledger.txt"
+
+### Makefile
+Il progetto può essere compilato con "make debug" per abilitare le print aggiuntive stampate tramite la macro TRACE su standard error (altamente consigliato redirezionare lo standard error con "./master 2> log.txt" perché è molto verboso), *master*, *users* e *nodes*, possono essere compilati separatemente
+
+### Directory "Utils"
+Contiene codice "utlity" che viene compilato in file oggetto, successivamente linkati a *nodes* *users* e *master* dal makefile
 
 ## Problemi noti
 Il bilancio totale a fine simulazione è leggermente diverso da quello iniziale, il problema potrebbe essere dovuto alle approssimazioni che avvengono calcolando tutto come int oppure nel modo in cui calcoliamo il bilancio dei *nodes*.
