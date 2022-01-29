@@ -18,7 +18,7 @@ Gli ipc object che vengono inizalizzati nel progetto sono:
 
  ---
  ## NODES
- Ogni nodo ha una coda di messaggi corrispondente, questi si occupano di salvare 
+ Ogni nodo ha una coda di messaggi corrispondente, questi si occupano di salvare
  
  
  ---
