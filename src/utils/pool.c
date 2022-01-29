@@ -53,35 +53,4 @@ struct msgbuf_trans remove_from_pool(pool *transPool)
     /* if head is NULL tail shoul become NULL too */
     if (transPool->head == NULL)
         transPool->tail = NULL;
-
-<<<<<<< HEAD
-    /*free(tmp); */ 
-    return poppedTrans;
-=======
-    return tmp;
->>>>>>> 5f5bebc9c822f7e4cd63f33f4f0f4d0f898f548e
 }
-
-/*struct msgbuf_trans remove_tail(pool *transPool)
-{
-    struct msgbuf_trans tmp;
-
-    if (transPool->head == NULL)
-    {
-        tmp.mtype = ERROR;
-        return tmp;
-    }
-    
-    if (transPool->tail != NULL)
-    {
-        tmp = *transPool->tail;
-        transPool->tail = NULL;
-        tmp.mtype = TRANSACTION_MTYPE; /* gets set to 0 otherwise *
-        return tmp;
-    }
-
-    tmp = *transPool->head;
-    transPool->head = NULL;
-    tmp.mtype = TRANSACTION_MTYPE; /* gets set to 0 otherwise *
-    return tmp;
-}*/

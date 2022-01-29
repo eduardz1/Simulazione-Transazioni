@@ -30,11 +30,7 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
         }
 
         /* we should place it in a buffer so that they print a fixed length */
-<<<<<<< HEAD
-        printf("|  User      %7d    %s    %u\n", userPID[userNum].pid, statusStr, userPID[userNum].balance);
-=======
         printf("|  User      %7d    %s  %10u                     |\n", userPID[userNum].pid, statusStr, userPID[userNum].balance);
->>>>>>> 5f5bebc9c822f7e4cd63f33f4f0f4d0f898f548e
     }
     printf("|                                                                 |\n");
     printf(" - Type ----- PID ----- Status ----- Balance ----- Still in Pool -\n");
@@ -51,21 +47,11 @@ void print_user_nodes_table(pid_t mainPID, user *userPID, node *nodePID, struct 
             strcpy(statusStr, "\033[33mfull\033[0m     ");
             break;
         }
-<<<<<<< HEAD
-        printf("|  Node      %d    %s    %10lu\n", nodePID[nodesNum].pid, statusStr, nodePID[nodesNum].balance);
-=======
     printf("|  Node      %7d    %s  %10lu         %3d         |\n", nodePID[nodesNum].pid, statusStr, nodePID[nodesNum].balance, nodePID[nodesNum].tpSize);
->>>>>>> 5f5bebc9c822f7e4cd63f33f4f0f4d0f898f548e
     }
     printf(" -----------------------------------------------------------------\n");
 }
 
-<<<<<<< HEAD
-void print_kill_signal();
-void print_user_balance();
-void print_node_balance();
-void print_num_aborted();
-=======
 void print_num_aborted(user *usersPID, struct parameters *par){
     int i;
     int counter = 0;
@@ -77,26 +63,15 @@ void print_num_aborted(user *usersPID, struct parameters *par){
     printf("%d users have died prematurely\n", counter);
 }
 
->>>>>>> 5f5bebc9c822f7e4cd63f33f4f0f4d0f898f548e
 void print_num_blocks(block *l)
 {
     int i = 0;
     int blockIndex = 0;
 
-<<<<<<< HEAD
-    if (l[i].transList[0].timestamp.tv_nsec + l[i].transList->timestamp.tv_sec == 0)
-        return;
-
-    for (i = 0; i < SO_REGISTRY_SIZE && blockIndex == 0; i++)
-    {
-        if (l[i].transList[0].timestamp.tv_nsec + l[i].transList->timestamp.tv_sec == 0)
-            blockIndex = l[i - 1].blockIndex;
-=======
     while (l[i].transList[0].sender == -1 && i < SO_REGISTRY_SIZE)
     {
         blockIndex = l[i].blockIndex;
         i++;
->>>>>>> 5f5bebc9c822f7e4cd63f33f4f0f4d0f898f548e
     }
     printf("%d blocks have been confirmed on ledger\n", blockIndex);
 }
@@ -171,15 +146,6 @@ void print_transaction(transaction *t, FILE *fp)
     }
     formatted_timestamp(ts, t->timestamp);
 
-<<<<<<< HEAD
-    fprintf(fp, " -------------------------- \n");
-    /*formafp, ttimestamp(fp);*/
-    fprintf(fp, "|  %s\n", tmp);
-    fprintf(fp, "|  %d --> %d\n", t->sender, t->receiver);
-    fprintf(fp, "|  Amount:    %d\n", t->amount);
-    fprintf(fp, "|  Reward:    %d\n", t->reward);
-    fprintf(fp, " -------------------------- \n");
-=======
     fprintf(fp, " ---------------------------------------------------------------\n");   
     fprintf(fp, "|  %s                                |\n", ts);
     fprintf(fp, "|  %s                                                   |\n", tmp);
@@ -187,28 +153,19 @@ void print_transaction(transaction *t, FILE *fp)
     fprintf(fp, "|  Amount:    %10u                                        |\n", t->amount);
     fprintf(fp, "|  Reward:    %10u                                        |\n", t->reward);
     fprintf(fp, " ---------------------------------------------------------------\n");
->>>>>>> 5f5bebc9c822f7e4cd63f33f4f0f4d0f898f548e
 }
 
 void print_block(block *b, FILE *fp)
 {
     int i;
     transaction printable;
-<<<<<<< HEAD
-    fprintf(fp, "[BLOCK %d] ==========================================\n", b->blockIndex);
-=======
     fprintf(fp, "[BLOCK %5d] ===================================================\n", b->blockIndex);
->>>>>>> 5f5bebc9c822f7e4cd63f33f4f0f4d0f898f548e
     for (i = 0; i < SO_BLOCK_SIZE; i++)
     {
         printable = b->transList[i];
         print_transaction(&printable, fp);
     }
-<<<<<<< HEAD
-    fprintf(fp, "=====================================================\n");
-=======
     fprintf(fp, "=================================================================\n");
->>>>>>> 5f5bebc9c822f7e4cd63f33f4f0f4d0f898f548e
 }
 
 void print_ledger(block *l)
@@ -239,33 +196,12 @@ void print_ledger(block *l)
 /* print without /n */
 void formatted_timestamp(char *tsString, struct timespec timestamp)
 {
-<<<<<<< HEAD
-    /*
-    printf("Hey");
-    clock_t tic = clock();
-    clock_t start = clock();
-    clock_t stop = clock();
-
-    time_t rawtime;
-    time_t now;
-    struct tm *info;
-    struct tm *today;
-    double elapsed;
-    char buf[128];
-
-    time(&now);
-    today = localtime(&now);
-    strftime(buf, 128, "%Y/%m/%d", today);
-    printf("%s\n", buf);
-
-    elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC; time ./a.out*/
-=======
     struct tm time;
     gmtime_r(&timestamp.tv_sec, &time);
     strftime(tsString, 31 - 10, "%Y-%m-%d %H:%M:%S.", &time);
     sprintf(tsString + strlen(tsString), "%09lu", timestamp.tv_nsec);
->>>>>>> 5f5bebc9c822f7e4cd63f33f4f0f4d0f898f548e
 }
+
 
 void print_transaction_pool(pool *transPool)
 {
