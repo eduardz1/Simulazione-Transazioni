@@ -1,4 +1,5 @@
 #!/bin/bash
 
 make debug && ./master 2> log.txt
+tail log.txt
 ipcs

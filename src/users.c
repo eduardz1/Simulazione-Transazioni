@@ -176,9 +176,6 @@ int send_transaction()
 		return SUCCESS;
 	}
 
-	transMsg.transactionMessage.userTrans.status = aborted;
-	currBalance += (transMsg.transactionMessage.userTrans.amount + transMsg.transactionMessage.userTrans.reward);
-
 	/* we can then track this type of aborted transactions but rn there's no need to */
 	return ERROR;
 }

@@ -190,7 +190,7 @@ int spawn_node(char *nodeArgv[], int nCounter)
 
     if (overBuf == 0)
         overBuf = par->SO_NODES_NUM;
-    if (overBuf >= par->SO_NODES_NUM * 2 - 1) /* maximum capacity reached */
+    if (overBuf >= par->SO_NODES_NUM * 2) /* maximum capacity reached */
         return ERROR;
     else if (nCounter == -1)
         nCounter = overBuf++;
@@ -338,9 +338,9 @@ void start_continuous_print()
             killpg(0, SIGINT);
         }
 
-        for (i = 0; i < par->SO_NODES_NUM; i++)
+        for (i = 0; i < par->SO_NODES_NUM * 2; i++)
         {
-            if (nodesPID[i].status == available)
+            if (nodesPID[i].status == available && nodesPID[i].pid != 0)
                 activeNodes++;
         }
 
