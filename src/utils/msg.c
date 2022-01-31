@@ -7,25 +7,25 @@ int send_message(int queueID, void *msg, int size, int flag)
     switch (errno)
     {
     case EACCES:
-        fprintf((FILE *)2,"[MSG SEND %d] no write permission on queue\n", getpid());
+        fprintf(stderr,"[MSG SEND %d] no write permission on queue\n", getpid());
         break;
     case EAGAIN:
-        fprintf((FILE *)2,"[MSG SEND %d] couldn't write on queue\n", getpid());
+        fprintf(stderr,"[MSG SEND %d] couldn't write on queue\n", getpid());
         break;
     case EFAULT:
-        fprintf((FILE *)2,"[MSG SEND %d] address pointed by msgp inaccessible\n", getpid());
+        fprintf(stderr,"[MSG SEND %d] address pointed by msgp inaccessible\n", getpid());
         break;
     case EIDRM:
-        fprintf((FILE *)2,"[MSG SEND %d] message queue removed\n", getpid());
+        fprintf(stderr,"[MSG SEND %d] message queue removed\n", getpid());
         break;
     case EINTR:
         TRACE(("[MSG SEND %d] signal caught when waiting for queue to free\n", getpid()))
         break;
     case EINVAL:
-        fprintf((FILE *)2,"[MSG SEND %d] invalid  msqid  value,  or nonpositive mtype value, or invalid msgsz value\n", getpid());
+        fprintf(stderr,"[MSG SEND %d] invalid  msqid  value,  or nonpositive mtype value, or invalid msgsz value\n", getpid());
         break;
     case ENOMEM:
-        fprintf((FILE *)2,"[MSG SEND %d] system out of memory\n", getpid()); /* should basically never happen I hope */
+        fprintf(stderr,"[MSG SEND %d] system out of memory\n", getpid()); /* should basically never happen I hope */
         break;
     default:
         return SUCCESS;

@@ -30,14 +30,12 @@ struct node *new_node(transaction t)
 void push(struct node *head, transaction t)
 {
     struct node *curr = head;
-    struct node *newNode;
     while (curr->next != NULL)
     {
         curr = curr->next;
     }
 
-    newNode = new_node(t);
-    curr->next = newNode;
+    curr->next = new_node(t);
 }
 
 /* finds and removes a message from pool if present */

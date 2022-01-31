@@ -4,7 +4,7 @@
 #include "include/parser.h"
 
 #define SHM_NUM 4
-#define SEM_NUM 2
+#define SEM_NUM 3
 #define IPC_NUM SHM_NUM + SEM_NUM
 
 #define USER_NAME "./users"
@@ -23,7 +23,8 @@ node *nodesPID;
 block ledger[SO_REGISTRY_SIZE];
 block *ledger_ptr;
 
-int semPIDs_ID;
+int semUsersPIDs_ID;
+int semNodesPIDs_ID;
 int semLedger_ID;
 int masterQ;
 
@@ -42,29 +43,33 @@ void make_arguments(int *IPC_array, char **argv)
     char nPID_array[13] = {0};
     char parameters[13] = {0};
     char ledger[13] = {0};
-    char semPIDs_ID[13] = {0};
+    char semUsersPIDs_ID[13] = {0};
+    char semNodesPIDs_ID[13] = {0};
     char semLedger_ID[13] = {0};
 
     snprintf(uPID_array, 13, "%d", IPC_array[0]);
     snprintf(nPID_array, 13, "%d", IPC_array[1]);
     snprintf(parameters, 13, "%d", IPC_array[2]);
     snprintf(ledger, 13, "%d", IPC_array[3]);
-    snprintf(semPIDs_ID, 13, "%d", IPC_array[4]);
+    snprintf(semUsersPIDs_ID, 13, "%d", IPC_array[4]);
+    snprintf(semNodesPIDs_ID, 13, "%d", IPC_array[6]);
     snprintf(semLedger_ID, 13, "%d", IPC_array[5]);
 
     strncpy(argv[1], uPID_array, 13);
     strncpy(argv[2], nPID_array, 13);
     strncpy(argv[3], parameters, 13);
     strncpy(argv[4], ledger, 13);
-    strncpy(argv[5], semPIDs_ID, 13);
+    strncpy(argv[5], semUsersPIDs_ID, 13);
     strncpy(argv[6], semLedger_ID, 13);
-    argv[7] = NULL; /* Terminating argv with NULL value */
+    strncpy(argv[7], semNodesPIDs_ID, 13);
+    argv[8] = NULL; /* Terminating argv with NULL value */
 
     TRACE(("[MASTER] argv[uPID] = %s\n", argv[1]))
     TRACE(("[MASTER] argv[nPID] = %s\n", argv[2]))
     TRACE(("[MASTER] argv[par] = %s\n", argv[3]))
     TRACE(("[MASTER] argv[ledger] = %s\n", argv[4]))
-    TRACE(("[MASTER] argv[sem_pids] = %s\n", argv[5]))
+    TRACE(("[MASTER] argv[sem_users_pids] = %s\n", argv[5]))
+    TRACE(("[MASTER] argv[sem_nodes_pids] = %s\n", argv[7]))
     TRACE(("[MASTER] argv[sem_ledger] = %s\n", argv[6]))
 }
 
@@ -274,7 +279,8 @@ void shared_memory_objects_init(int *shmArray)
 
 void semaphores_init()
 {
-    semPIDs_ID = semget(SEM_PIDS_KEY, 1, 0600 | IPC_CREAT | IPC_EXCL);
+    semUsersPIDs_ID = semget(SEM_USERS_PIDS_KEY, 1, 0600 | IPC_CREAT | IPC_EXCL);
+    semNodesPIDs_ID = semget(SEM_NODES_PIDS_KEY, 1, 0600 | IPC_CREAT | IPC_EXCL);
     semLedger_ID = semget(SEM_LEDGER_KEY, 1, 0600 | IPC_CREAT | IPC_EXCL);
 
     /* check for only one of them is enough */
@@ -291,7 +297,8 @@ void semaphores_init()
         break;
 
     default:
-        TRACE(("[MASTER] semPIDs_ID is %d\n", semPIDs_ID))
+        TRACE(("[MASTER] semUsersPIDs_ID is %d\n", semUsersPIDs_ID))
+        TRACE(("[MASTER] semNodesPIDs_ID is %d\n", semNodesPIDs_ID))
         TRACE(("[MASTER] semLedger_ID is %d\n", semLedger_ID))
         break;
     }
@@ -304,12 +311,13 @@ void make_ipc_array(int *IPC_array)
     int semIDs[SEM_NUM];
 
     shared_memory_objects_init(shmIDs);
-    semIDs[0] = semPIDs_ID;
+    semIDs[0] = semUsersPIDs_ID;
     semIDs[1] = semLedger_ID;
+    semIDs[2] = semNodesPIDs_ID;
     /* semaphores_init(semIDs); */
     memcpy(IPC_array, shmIDs, SHM_NUM * sizeof(int));
     memcpy(IPC_array + SHM_NUM, semIDs, SEM_NUM * sizeof(int));
-    TRACE(("[MASTER] IPC_array={%d,%d,%d,%d,%d,%d}\n", IPC_array[0], IPC_array[1], IPC_array[2], IPC_array[3], IPC_array[4], IPC_array[5]))
+    TRACE(("[MASTER] IPC_array={%d,%d,%d,%d,%d,%d,%d}\n", IPC_array[0], IPC_array[1], IPC_array[2], IPC_array[3], IPC_array[4], IPC_array[5], IPC_array[6]))
 }
 
 void start_continuous_print()
@@ -374,7 +382,8 @@ void master_interrupt_handle(int signum)
     print_kill_signal(termReason);
     print_ledger(ledger_ptr);
 
-    semctl(semPIDs_ID, 1, IPC_RMID);
+    semctl(semUsersPIDs_ID, 1, IPC_RMID);
+    semctl(semNodesPIDs_ID, 1, IPC_RMID);
     semctl(semLedger_ID, 1, IPC_RMID);
     msgctl(masterQ, IPC_RMID, NULL);
 
@@ -385,9 +394,8 @@ void master_interrupt_handle(int signum)
 int main(int argc, char *argv[])
 {
     int i;
-    pid_t myPID = getpid();
 
-    unsigned int uCounter, nCounter, returnVal;
+    unsigned int uCounter, nCounter;
     int ipcObjectsIDs[IPC_NUM];
     char *argvSpawns[8];
 
@@ -420,13 +428,9 @@ int main(int argc, char *argv[])
     TRACE(("[MASTER] argv values for nodes: %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7]))
     for (nCounter = 0; nCounter < par->SO_NODES_NUM; nCounter++)
     {
-        LOCK;
         nodesPID[nCounter].status = available;
         nodesPID[nCounter].balance = 0;
         spawn_node(argvSpawns, nCounter);
-        UNLOCK
-        if (getpid() != myPID)
-            exit(0);
     }
 
     for (nCounter = 0; nCounter < par->SO_NODES_NUM; nCounter++)
@@ -438,23 +442,9 @@ int main(int argc, char *argv[])
     TRACE(("[MASTER] argv values for users: %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7]))
     for (uCounter = 0; uCounter < par->SO_USER_NUM; uCounter++)
     {
-        LOCK;
         usersPID[uCounter].status = alive;
         usersPID[uCounter].balance = 0;
         spawn_user(argvSpawns, uCounter);
-        UNLOCK
-        if (getpid() != myPID)
-        {
-            switch (returnVal = wait(NULL))
-            {
-            case MAX_RETRY:
-                /* change status in usersPID */
-                printf("User %d has died because of too many retries :(\n", getpid());
-                break;
-            }
-
-            return 0;
-        }
     }
 
     alarm(par->SO_SIM_SEC);
@@ -481,11 +471,10 @@ int main(int argc, char *argv[])
             argvSpawns[0] = NODE_NAME;
             TRACE(("[MASTER] argv values for nodes extra: %s %s %s %s %s %s %s %s\n", argvSpawns[0], argvSpawns[1], argvSpawns[2], argvSpawns[3], argvSpawns[4], argvSpawns[5], argvSpawns[6], argvSpawns[7]))
 
-            LOCK;
             nodesPID[nCounter].status = available;
             nodesPID[nCounter].balance = 0;
             tempPID = spawn_node(argvSpawns, -1);
-            UNLOCK
+    
             switch (tempPID)
             {
             case -1:

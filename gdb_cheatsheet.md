@@ -21,3 +21,7 @@ w var, watch var
 bt, backtrace full (when SEGFAULT or something similar)
 
 q, quit
+
+## To analize valgrind output via gdb:
+
+valgrind --log-file="val.txt" --trace-children=yes --leak-check=full -s --vgdb=yes --vgdb-error=0 --track-origins=yes ./master

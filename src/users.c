@@ -19,7 +19,7 @@ user *usersPID;
 node *nodesPID;
 block *ledger;
 
-int semPIDs_ID;
+int semUsersPIDs_ID;
 int queueID;
 
 struct node *outGoingTransactions = NULL;
@@ -89,13 +89,13 @@ void update_status(int statusToSet)
 		TRACE(("[USER %d] failed to find myself in usersPID[]", myPID))
 	}
 
-	sem_reserve(semPIDs_ID, 1);
+	sem_reserve(semUsersPIDs_ID, 1);
 	usersPID[i].status = statusToSet;
 	if (statusToSet == 2)
 	{
 		TRACE(("[USERS] dead increased\n"))
 	}
-	sem_release(semPIDs_ID, 1);
+	sem_release(semUsersPIDs_ID, 1);
 }
 
 /* attaches ipc objects based on IDs passed via arguments */
@@ -109,7 +109,7 @@ void attach_ipc_objects(char **argv)
 	TEST_ERROR
 	ledger = shmat(LEDGER_ARGV, NULL, 0);
 	TEST_ERROR
-	semPIDs_ID = SEM_PIDS_ARGV;
+	semUsersPIDs_ID = SEM_USERS_PIDS_ARGV;
 }
 
 /* try to attach to queue of nodePID key until it succeeds */
@@ -201,10 +201,10 @@ void update_balance(unsigned int tempBalance)
 {
 	int i = get_pid_userIndex(myPID);
 
-	sem_reserve(semPIDs_ID, 1);
+	sem_reserve(semUsersPIDs_ID, 1);
 	currBalance = tempBalance;
 	usersPID[i].balance = currBalance;
-	sem_release(semPIDs_ID, 1);
+	sem_release(semUsersPIDs_ID, 1);
 }
 
 /* saves balance of calling user in currBalance */
@@ -338,13 +338,13 @@ void user_interrupt_handle(int signum)
 	}
 
 	tmp = outGoingTransactions;
-	sem_reserve(semPIDs_ID, 1);
+	sem_reserve(semUsersPIDs_ID, 1);
 	while (tmp != NULL)
 	{
 		usersPID[i].balance += (tmp->trans.amount + tmp->trans.reward);
 		tmp = tmp->next;
 	}
-	sem_release(semPIDs_ID, 1);
+	sem_release(semUsersPIDs_ID, 1);
 
 	free(tmp);
 	exit(0);

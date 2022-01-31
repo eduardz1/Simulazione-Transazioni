@@ -16,7 +16,7 @@ pid_t *friendList;
 int friendList_size;
 block *ledger;
 
-int semPIDs_ID;
+int semNodesPIDs_ID;
 int semLedger_ID;
 int queueID;
 
@@ -92,8 +92,7 @@ void send_to_random_friend()
 {
     int queue;
     int i;
-    struct msgbuf_trans tMex;
-    BZERO(&tMex, sizeof(tMex));
+    struct msgbuf_trans tMex = {0};
     if (remove_from_pool(&transPool, &tMex) == ERROR)
         return;
 
@@ -156,7 +155,7 @@ void new_block(transaction *blockTransaction, block *newBlock)
 
     reward.timestamp = timestamp;
     reward.sender = SELF;
-    reward.receiver = getpid();
+    reward.receiver = myPID;
     reward.amount = sum_reward(blockTransaction); /*sum of each reward of transaction in the block */
     reward.reward = 0;
     reward.status = pending;
@@ -261,9 +260,9 @@ int sum_reward(transaction *sumBlock)
         sum += sumBlock[i].reward;
     }
 
-    sem_reserve(semPIDs_ID, 1);
+    sem_reserve(semNodesPIDs_ID, 1);
     nodesPID[get_pid_nodeIndex()].balance += sum;
-    sem_release(semPIDs_ID, 1);
+    sem_release(semNodesPIDs_ID, 1);
 
     return sum;
 }
@@ -279,7 +278,7 @@ void attach_ipc_objects(char **argv)
     TEST_ERROR
     ledger = (block *)shmat(LEDGER_ARGV, NULL, 0);
     TEST_ERROR
-    semPIDs_ID = SEM_PIDS_ARGV;
+    semNodesPIDs_ID = SEM_NODES_PIDS_ARGV;
     semLedger_ID = SEM_LEDGER_ARGV;
 }
 
@@ -305,14 +304,26 @@ void signal_handler_init(struct sigaction *saINT_node)
 /* CTRL-C handler */
 void node_interrupt_handle(int signum)
 {
+    int i, accurateBalance = 0;
 #ifdef DEBUG
     /* cast return value into the void, ! is needed because of gcc behaviour */
     (void)!write(2, "::NODE:: SIGINT received\n", 25);
 #endif
 
-    TRACE(("[NODE %d] key of my queue %d\n", myPID, queueID))
     msgctl(queueID, IPC_RMID, NULL);
     TRACE(("[NODE] queue removed\n"))
+
+    /* traverse ledger because only the balance written on ledger at the end is
+     * the one that should be displayed
+     */
+    for (i = 0; i < SO_REGISTRY_SIZE; i++)
+    {
+        if (ledger[i].transList[0].receiver == myPID)
+            accurateBalance += ledger[i].transList[0].amount;
+    }
+    sem_reserve(semNodesPIDs_ID, 1);
+    nodesPID[get_pid_nodeIndex()].balance = accurateBalance;
+    sem_release(semNodesPIDs_ID, 1);
 
     exit(0);
 }
@@ -350,12 +361,14 @@ int main(int argc, char *argv[])
     {
         fetch_messages();
 
-        sem_reserve(semPIDs_ID, 1);
+        sem_reserve(semNodesPIDs_ID, 1);
+        TRACE(("[NODE %d] I'm not in a deadlock!, tpSize = %d\n", myPID, transPool.size))
         nodesPID[get_pid_nodeIndex()].tpSize = transPool.size;
-        sem_release(semPIDs_ID, 1);
+        sem_release(semNodesPIDs_ID, 1);
 
         if (transPool.size >= (SO_BLOCK_SIZE - 1))
         {
+            TRACE(("[NODE %d] can finally process a block\n", myPID))
             /* this removes SO-BLOCK-SIZE-1 transactions from pool */
             fill_block_transList(transBuffer);
             switch (fork())

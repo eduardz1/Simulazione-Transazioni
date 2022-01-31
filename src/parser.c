@@ -129,6 +129,10 @@ int parse_parameters(struct parameters *par)
         TRACE(("[PARSER] SO_TP_SIZE smaller or equal to SO_BLOCK_SIZE, will be normalized\n"))
         par->SO_TP_SIZE = SO_BLOCK_SIZE + 1;
     }
+    if(par->SO_FRIENDS_NUM > par->SO_NODES_NUM){
+        TRACE(("[PARSER] SO_FRIENDS_NUM greater than SO_NODES_NUM, will be set to equal\n"))
+        par->SO_FRIENDS_NUM = par->SO_NODES_NUM;
+    }
 
     TRACE(("--------------------------------------------\n----------- Configuration input ------------\n"))
     for (i = 0; i < NUM_PARAMETERS; i++)

@@ -10,18 +10,6 @@
 #include <errno.h>
 #include <unistd.h>
 
-/* from prof. Schifanella examples */
-#define LOCK					\
-	sops.sem_num = 1;			\
-	sops.sem_op = -1;			\
-	sops.sem_flg = 0;			\
-	semop(semPIDs_ID, &sops, 1);
-#define UNLOCK					\
-	sops.sem_num = 1;			\
-	sops.sem_op = 1;			\
-	sops.sem_flg = 0;			\
-	semop(semPIDs_ID, &sops, 1);
-
 /* from prof. Bini examples */
 
 /*
