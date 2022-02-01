@@ -1,5 +1,5 @@
 #!/bin/bash
 
-make debug && ./master 2> log.txt
-tail log.txt
+make debug && time ./master 2> log.txt
 ipcs
+tail log.txt

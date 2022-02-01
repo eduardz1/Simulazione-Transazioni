@@ -1,6 +1,6 @@
 CC=gcc
-CFLAGS=-std=c89 -pedantic -O0 -D_GNU_SOURCE
-DEBUG=-DDEBUG -g -Wall
+CFLAGS=-std=c89 -pedantic -D_GNU_SOURCE
+DEBUG=-DDEBUG -g -Wall -O0
 
 # Dependencies
 SHARED=src/include/common.h src/utils/*.h src/utils/*.c
@@ -12,16 +12,16 @@ NODE=src/nodes.c src/include/nodes.h
 all: master users nodes
 
 master: $(OBJS) $(MASTER)
-	$(CC) $(CFLAGS) src/master.c  src/print.c src/parser.c *.o -lm -o master
+	$(CC) $(CFLAGS) -O2 src/master.c  src/print.c src/parser.c *.o -lm -o master
 
 users: $(OBJS) $(USER)
-	$(CC) $(CFLAGS) src/users.c src/print.c *.o -lm -o users
+	$(CC) $(CFLAGS) -O2 src/users.c src/print.c *.o -lm -o users
 
 nodes: $(OBJS) $(NODE)
-	$(CC) $(CFLAGS) src/nodes.c src/print.c *.o -lm -o nodes
+	$(CC) $(CFLAGS) -O0 src/nodes.c src/print.c *.o -lm -o nodes
 
 %.o: src/utils/%.c $(SHARED)
-	$(CC) -c $(CFLAGS) src/utils/*.c
+	$(CC) -c $(CFLAGS) -O2 src/utils/*.c
 
 debug:
 	rm -f *.o master users nodes *~
