@@ -2,7 +2,7 @@
 #include "utils/debug.h"
 #include "include/parser.h"
 
-#define CONF_FILE "conf.txt"
+#define CONF_FILE "conf3.txt"
 
 void assign_defaults(struct parameters *par)
 {

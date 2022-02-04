@@ -20,6 +20,7 @@ node *nodesPID;
 block *ledger;
 
 int semUsersPIDs_ID;
+int semLedger_ID;
 int queueID;
 
 struct node *outGoingTransactions = NULL;
@@ -110,6 +111,7 @@ void attach_ipc_objects(char **argv)
 	ledger = shmat(LEDGER_ARGV, NULL, 0);
 	TEST_ERROR
 	semUsersPIDs_ID = SEM_USERS_PIDS_ARGV;
+	semLedger_ID = SEM_LEDGER_ARGV;
 }
 
 /* try to attach to queue of nodePID key until it succeeds */
@@ -228,7 +230,9 @@ void get_balance()
 	 * if you want to make a local keychain so it should make sense
 	 */
 	block ledgerTemp[SO_REGISTRY_SIZE];
+	sem_reserve(semLedger_ID, 1);
 	memcpy(&ledgerTemp, ledger, sizeof(ledgerTemp));
+	sem_release(semLedger_ID, 1);
 
 	for (i = 0; i < SO_REGISTRY_SIZE && flag != 0; i++)
 	{
@@ -259,7 +263,7 @@ void get_balance()
 
 	if (accumulate * (-1) > tempBalance)
 	{
-		fprintf((FILE *)2, "*** [USER %d] errror in calculating balance, overflow ***\n", myPID);
+		fprintf(stderr, "*** [USER %d] errror in calculating balance, overflow ***\n", myPID);
 		update_status(2);
 		print_outgoing_pool(outGoingTransactions, (FILE *)2);
 		killpg(0, SIGINT);
@@ -268,7 +272,7 @@ void get_balance()
 	tempBalance += accumulate;
 	if (errno == ERANGE) /* not working as intended */
 	{
-		fprintf((FILE *)2, "[USER %d] went out of bound, punishment for being that rich is death\n", myPID);
+		fprintf(stderr, "[USER %d] went out of bound, punishment for being that rich is death\n", myPID);
 		update_status(2);
 		kill(myPID, SIGINT);
 	}

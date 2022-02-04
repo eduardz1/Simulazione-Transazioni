@@ -451,7 +451,7 @@ int main(int argc, char *argv[])
     switch (fork())
     {
     case -1:
-        fprintf((FILE *)2, "[MASTER] error forking\n");
+        fprintf(stderr, "[MASTER] error forking\n");
         break;
 
     case 0:

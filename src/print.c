@@ -210,7 +210,7 @@ void print_transaction_pool(pool *transPool)
     {
         printf("[%d]", i);
         printable = tmp->head->transactionMessage.userTrans;
-        print_transaction(&printable, (FILE *)1);
+        print_transaction(&printable, stdout);
 
         tmp->head = tmp->head->transactionMessage.next;
         i++;

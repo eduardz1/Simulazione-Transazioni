@@ -45,7 +45,7 @@
 #define SEM_LEDGER_KEY 422
 #define M_QUEUE_KEY 0x5AD
 
-#define SO_BLOCK_SIZE 100  /* number of transaction per block*/
+#define SO_BLOCK_SIZE 10  /* number of transaction per block*/
 #define SO_REGISTRY_SIZE 1000 /* max length of consecutive blocks */
 #define SELF -1
 #define EVERYONE_BROKE '$'
