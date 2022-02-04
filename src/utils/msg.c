@@ -3,7 +3,8 @@
 /* send a message and checks for errors */
 int send_message(int queueID, void *msg, int size, int flag)
 {
-    msgsnd(queueID, msg, size, flag);
+    if(msgsnd(queueID, msg, size, flag) == 0)
+        return SUCCESS;
     switch (errno)
     {
     case EACCES:
@@ -36,23 +37,24 @@ int send_message(int queueID, void *msg, int size, int flag)
 
 int receive_message(int queueID, void *msg, int size, int mtype, int flag)
 {
-    msgrcv(queueID, msg, size, mtype, flag);
+    if(msgrcv(queueID, msg, size, mtype, flag) == 0)
+        return SUCCESS;
     switch (errno)
     {
     case E2BIG:
-        fprintf((FILE *)2,"[MSG RCV %d] the message length is greater than sizeof(transaction)\n", getpid());
+        fprintf(stderr,"[MSG RCV %d] the message length is greater than sizeof(transaction)\n", getpid());
         break;
     case EACCES:
-        fprintf((FILE *)2,"[MSG RCV %d] no read permission on queue\n", getpid());
+        fprintf(stderr,"[MSG RCV %d] no read permission on queue\n", getpid());
         break;
     case EFAULT:
-        fprintf((FILE *)2,"[MSG RCV %d] address pointed by msgp inaccessible\n", getpid());
+        fprintf(stderr,"[MSG RCV %d] address pointed by msgp inaccessible\n", getpid());
         break;
     case EIDRM:
-        fprintf((FILE *)2,"[MSG RCV %d] mesage queue removed\n", getpid());
+        fprintf(stderr,"[MSG RCV %d] mesage queue removed\n", getpid());
         break;
     case EINTR:
-        fprintf((FILE *)2,"[MSG RCV %d] signal caught while receiving a message\n", getpid());
+        fprintf(stderr,"[MSG RCV %d] signal caught while receiving a message\n", getpid());
         break;
     case ENOMSG: /* no need to print every time */
         break;
