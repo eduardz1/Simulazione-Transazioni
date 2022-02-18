@@ -5,6 +5,7 @@ DEBUG= -DDEBUG -g -Wall
 
 
 
+all: master  users nodes
 
 
 
