@@ -1,0 +1,97 @@
+{
+  "main": {
+    "id": "714adaef424b347d",
+    "type": "split",
+    "children": [
+      {
+        "id": "83160c8208f6088c",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "TodoForSchifa (2).md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d293ad66e43bbb8f",
+    "type": "split",
+    "children": [
+      {
+        "id": "06b71c2675acfe27",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "59d24fd8dce37413",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "0e5ff226ae12ffce",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": ".c",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "20c6c3acc5a99edf",
+    "type": "split",
+    "children": [
+      {
+        "id": "683c9dbfcc301127",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a0dfefc35b865a95",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "TodoForSchifa (2).md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "83160c8208f6088c",
+  "lastOpenFiles": [
+    "TodoForSchifa (2).md",
+    "README.md",
+    "gdb_cheatsheet.md",
+    "2021.12.19_progetto.pdf"
+  ]
+}
