@@ -37,7 +37,7 @@ void NodeInit(){
 void master_Stop_handler(int sigum){
      char c;
      signal(sigum,SIG_IGN);
-     printf("did you pressed CTRL-C? \n" "would you like to quit?[y/n]");
+     printf("you pressed CTRL-C\n" "would you like to quit?[y/n]");
      c=getchar();
 
      if(c=='y'||c=='Y'){
