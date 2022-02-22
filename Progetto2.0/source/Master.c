@@ -39,7 +39,6 @@ void master_Stop_handler(int sigum){
      signal(sigum,SIG_IGN);
      printf("you pressed CTRL-C\n" "would you like to quit?[y/n]");
      c=getchar();
-
      if(c=='y'||c=='Y'){
           exit(0);
      } else {
