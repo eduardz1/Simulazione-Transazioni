@@ -18,17 +18,20 @@
 #include <sys/msg.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <signal.h>
 #include <limits.h>
 
 
+
+
+#define SO_BLOCK_SIZE
+#define SO_TP_SIZE
 
 struct ConfigParameters
 {
     unsigned int SO_USER_NUM;
     unsigned int SO_NODES_NUM;
     unsigned int SO_BUDGET_INIT;
-    char SO_REWARD; /* max value 100 */
+    char SO_REWARD; 
     unsigned long SO_MIN_TRANS_GEN_NSEC;
     unsigned long SO_MAX_TRANS_GEN_NSEC;
     unsigned int SO_RETRY;
@@ -40,7 +43,7 @@ struct ConfigParameters
     unsigned int SO_HOPS;
 };
 
-
+   
 typedef struct UserStatus
 {
     pid_t UsPid; 
@@ -52,6 +55,14 @@ typedef struct UserStatus
       dead 
     }status; 
 }user;
+
+ 
+ typedef struct StructNode
+{
+    int value; 
+    struct Node *head; 
+    struct Node *next; 
+}node;
 
 
 
@@ -68,7 +79,7 @@ typedef struct MoneyTransaction
        confirmed,
        aborted, 
 
-    } status; 
+    } T_status; 
 }transaction;
 
 
