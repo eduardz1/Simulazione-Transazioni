@@ -1,7 +1,8 @@
 #include "include/Master.h" 
 
 
-
+#define USER_NAME "./Users"
+#define USER_NODE "./Nodes"
 
 
 /*
@@ -10,7 +11,6 @@ void Shared_Memory( key_t key,size_t size,int shmflg){
      int Init=shmget(IPC_PRIVATE,sizeof(SO_REGISTRY_SIZE)*2,0666); //ShdMem Define Area 
      /*struct Shared_Data = shmat(m_id,NULL,0);   
 } */
-
 
 
 
@@ -29,8 +29,38 @@ void NodeInit(){
      NParent= getppid(); 
      NChild=getpid();
 }
+/* generate the user with fork and lauch ./users with execve*/
+void generateUser(char *userArgv[],int uCounter) {    /*need to implement uCounter !! */
+     pid_t uPid=fork();
 
+     switch(uPid){
+          case -1:
+               printf("error forking user");
+               break;
+          case 0:
+               execve(USER_NAME,userArgv,NULL);  /*look man execve in case of doubt*/
+               break;
 
+          default:
+               userPid[uCounter].pid=uPid;
+               return;
+     }
+}
+
+void generateNode(char *nodeArgv[],int nCounter) {
+     pid_t nPid=fork();
+          switch (nPid)
+          {
+          case -1:
+               printf("error in forking user");
+               break;
+          case 0:
+               execve(USER_NODE,nodeArgv,NULL); /*same of generateUser();*/
+          default:
+               nodesPid[nCounter].pid=nPid;
+               break;
+          }
+}
 
 
 /* Stop Simulation handler Ctrl-C */
@@ -45,9 +75,6 @@ void master_Stop_handler(int sigum){
           signal(SIGINT,master_Stop_handler);
           getchar();
      }
-
-
-     
 }
 
 
@@ -55,11 +82,12 @@ void master_Stop_handler(int sigum){
 
 
 int main(){
-int i;
+
      signal(SIGINT,master_Stop_handler);
      UsersInit();
      NodeInit();
-for(i=0;;i++){
+     generateUser(userArgv,uCounter);
+     
 
-}
+
 }
