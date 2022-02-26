@@ -12,3 +12,8 @@ void transaction_pool(){
         printf("TRANSACTION POLL IS FULL"); 
     }
 }
+
+
+int main(){
+    printf("i'm user") /* just a debug print*/
+}

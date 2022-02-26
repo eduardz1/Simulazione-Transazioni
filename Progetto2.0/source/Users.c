@@ -12,3 +12,7 @@ void CurrentBalance(){
    } 
 
 }
+
+int main(){
+   printf("i'm users");   /*just a debug print*/
+}
