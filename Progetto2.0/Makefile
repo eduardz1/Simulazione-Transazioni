@@ -18,3 +18,7 @@ users: $(USER)
 
 nodes: $(NODE)
 	$(CC) $(CFLAGS) -O0 source/Nodes.c -o Nodes
+
+
+
+run: ./Master
