@@ -1,6 +1,6 @@
 #include <pthread.h>
 void *printing(){
-
+	printf("i'm in thread");
 }
 
 /*thread initialization according to https://www.geeksforgeeks.org/multithreading-c-2/*/

@@ -1,6 +1,5 @@
 #include "include/Master.h" 
-
-
+#
 #define USER_NAME "./Users"
 #define USER_NODE "./Nodes"
 
@@ -42,12 +41,12 @@ void generateUser(char *userArgv[],int uCounter) {    /*need to implement uCount
                break;
 
           default:
-               userPid[uCounter].pid=uPid;
+               uPid[uCounter].pid=uPid;
                return;
      }
 }
 
-void generateNode(char *nodeArgv[],int nCounter) {
+void generateNode(char *nodeArgv[],int nodeCounter) {
      pid_t nPid=fork();
           switch (nPid)
           {
@@ -57,7 +56,7 @@ void generateNode(char *nodeArgv[],int nCounter) {
           case 0:
                execve(USER_NODE,nodeArgv,NULL); /*same of generateUser();*/
           default:
-               nodesPid[nCounter].pid=nPid;
+               nPid[nodeCounter].pid=nPid;
                break;
           }
 }
@@ -82,12 +81,23 @@ void master_Stop_handler(int sigum){
 
 
 int main(){
-
+unsigned int nodeCounter;
+unsigned int userCounter;
      signal(SIGINT,master_Stop_handler);
      UsersInit();
      NodeInit();
-     generateUser(userArgv,uCounter);
+/* create nodes in base of parameters given */
+for(nodeCounter=0;nodeCounter<par->SO_NDOES_NUM;nodeCounter++){
+     nPid[nodeCounter].status=available;
+     nPid[nodeCouter].balance=0;
+     generateNode(nodeArgv,nodeCounter);
      
-
+}
+/* create user in base of parameters given*/
+for(userCounter=0;userCounter<par->SO_USER_NUM;userCounter++){
+     uPid[userCounter].status=alive;
+     uPid[userCounter.balance]=0;
+     generateUser(userArgv,userCounter);
+}
 
 }
