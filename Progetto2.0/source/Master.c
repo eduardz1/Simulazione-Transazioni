@@ -1,9 +1,5 @@
 #include "include/Master.h" 
-<<<<<<< HEAD
-#
-=======
 #include "include/Common.h"
->>>>>>> 57362c96dddc16d5fc2d402aa9756e66f69e6722
 #define USER_NAME "./Users"
 #define USER_NODE "./Nodes"
 

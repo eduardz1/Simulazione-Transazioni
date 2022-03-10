@@ -19,6 +19,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <limits.h>
+#include <pthread.h> 
 
 
 
@@ -62,6 +63,10 @@ typedef struct UserStatus
     int value; 
     struct Node *head; 
     struct Node *next; 
+    enum {
+        available,
+        full
+    }status;
 }node;
 
 
