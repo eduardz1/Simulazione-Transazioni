@@ -36,7 +36,7 @@ struct ConfigParameters
     unsigned long SO_MIN_TRANS_GEN_NSEC;
     unsigned long SO_MAX_TRANS_GEN_NSEC;
     unsigned int SO_RETRY;
-    unsigned int SO_TP_SIZE;
+    /*unsigned int SO_TP_SIZE; don't understand why it doesent work*/ 
     unsigned long SO_MIN_TRANS_PROC_NSEC;
     unsigned long SO_MAX_TRANS_PROC_NSEC;
     unsigned int SO_SIM_SEC;
