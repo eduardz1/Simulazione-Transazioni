@@ -2,8 +2,12 @@
 #include "include/Parser.h"
 
 #define CONF_FILE "conf.txt"
+{
+    /* data */
+};
 struct parameters *par;
-void assign_defaults(struct ConfigParameters *par){
+void assign_defaults(struct ConfigParameters *par)
+{
     par->SO_USER_NUM = 100;
     par->SO_NODES_NUM = 10;
     par->SO_BUDGET_INIT = 1000;
@@ -19,7 +23,8 @@ void assign_defaults(struct ConfigParameters *par){
     par->SO_HOPS = 10;
 }
 
-int parseParameters(struct ConfigParameters *par){
+int parse_parameters(struct ConfigParameters *par)
+{
     FILE *fp;
 
     /* longer than NUM_PARAMETERS to account for comments and such */
@@ -79,10 +84,10 @@ int parseParameters(struct ConfigParameters *par){
         {
             par->SO_RETRY = values[i];
         }
-       /* else if (!strcmp(tokens[i], "SO_TP_SIZE"))
+        else if (!strcmp(tokens[i], "SO_TP_SIZE"))
         {
             par->SO_TP_SIZE = values[i];
-        } */
+        }
         else if (!strcmp(tokens[i], "SO_MIN_TRANS_PROC_NSEC"))
         {
             par->SO_MIN_TRANS_PROC_NSEC = values[i];
@@ -118,15 +123,16 @@ int parseParameters(struct ConfigParameters *par){
     {
         par->SO_MIN_TRANS_PROC_NSEC = par->SO_MAX_TRANS_PROC_NSEC;
     }
-   /* if(par->SO_TP_SIZE <= SO_BLOCK_SIZE){
-        par->SO_TP_SIZE = SO_BLOCK_SIZE + 1; */
+    if(par->SO_TP_SIZE <= SO_BLOCK_SIZE){
+        par->SO_TP_SIZE = SO_BLOCK_SIZE + 1;
     }
-    if (par->SO_FRIENDS_NUM > par->SO_NODES_NUM){
-      par->SO_FRIENDS_NUM = par->SO_NODES_NUM;
+    if(par->SO_FRIENDS_NUM > par->SO_NODES_NUM){
+        par->SO_FRIENDS_NUM = par->SO_NODES_NUM;
     }
-    
+
     for (i = 0; i < NUM_PARAMETERS; i++)
     {
+       /* TRACE(("%s %lu\n", tokens[i], values[i])) */
         free(tokens[i]);
     }
 
