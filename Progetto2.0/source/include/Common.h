@@ -81,9 +81,8 @@ typedef struct MoneyTransaction
        pending,
        processing,
        confirmed,
-       aborted, 
-
-    } T_status; 
+       aborted 
+ } T_status; 
 }transaction;
 
 
