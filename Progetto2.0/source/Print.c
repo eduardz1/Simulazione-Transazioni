@@ -11,10 +11,7 @@ fp=fopen("ledger.txt","w+");
 	
 	fclose(fp);
 printf("i'm *printing function\n");
-
-return 0;	
 }
-
 
 /*thread initialization according to https://www.includehelp.com/articles/threading-in-c-programming-language-with-gcc-linux.aspx */
 int main(){
@@ -22,13 +19,13 @@ pthread_t threadId;
 int thTest;
 thTest=pthread_create(&threadId,NULL,printing(),NULL);
 if(thTest==0){
-    printf("thread is kinda working :)\n");
+    printf("thread work without error :)\n");
     
 } else {
-    printf("thread not working :(\n");
+    printf("thread doesn't work  :(\n");
     return 0;
 }
-printf("i'm out of thread\n");
+printf("printing from main\n");
 printf("--------------------------------------------\n----------- Configuration value ------------\n");
     printf("SO_USER_NUM->%u\n", par->SO_USER_NUM);
     printf("SO_NODES_NUM->%u\n", par->SO_NODES_NUM);
