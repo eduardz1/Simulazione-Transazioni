@@ -6,11 +6,11 @@ DEBUG= -DDEBUG -g -Wall -O0
 MASTER=source/Master.c source/include/Master.h
 USERS=source/Users.c source/include/Users.h
 NODES=source/Nodes.c source/include/Nodes.h
-
+PRINT=source/Print.c source/include/Print.h
 
 all: Master  Users Nodes
 
-Master:$(MASTER)
+master:$(MASTER)
 	$(CC) $(CFLAGS) -O2 source/Master.c -o Master
 
 users: $(USER)
@@ -19,6 +19,7 @@ users: $(USER)
 nodes: $(NODE)
 	$(CC) $(CFLAGS) -O0 source/Nodes.c -o Nodes
 
-
+print:$(PRINT)
+	$(CC) $(CFLAGS) -O0 source/Print.c -o Print
 
 run: ./Master
