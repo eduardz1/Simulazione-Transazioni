@@ -1,5 +1,4 @@
-#include <pthread.h>
-#include "include/Common.h"
+#include "include/Print.h"
 struct ConfigParameters *par;
 
 
