@@ -5,7 +5,7 @@
 {
     /* data */
 };
-struct parameters *par;
+struct ConfigParameters *par;
 void assign_defaults(struct ConfigParameters *par)
 {
     par->SO_USER_NUM = 100;
