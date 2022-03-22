@@ -51,7 +51,7 @@ typedef struct UserStatus
     enum                       /* Enum: ASSEGNA NOMI A COSTANTI--> Ogni costante ha una flag numerata "NON VISIBILE " */
     { 
       alive,
-      NotAvailble,
+      NotAvailable,
       dead 
     }status; 
 }user;
