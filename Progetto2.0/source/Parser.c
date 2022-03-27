@@ -2,9 +2,8 @@
 #include "include/Parser.h"
 
 #define CONF_FILE "conf.txt"
-{
-    /* data */
-};
+  
+  
 struct ConfigParameters *par;
 void assign_defaults(struct ConfigParameters *par)
 {
@@ -15,7 +14,7 @@ void assign_defaults(struct ConfigParameters *par)
     par->SO_MIN_TRANS_GEN_NSEC = 100000000;
     par->SO_MAX_TRANS_GEN_NSEC = 200000000;
     par->SO_RETRY = 20;
-   /* par->SO_TP_SIZE = 1000; */ 
+    par->SO_TP_SIZE = 1000; 
     par->SO_MIN_TRANS_PROC_NSEC = 100000000;
     par->SO_MAX_TRANS_PROC_NSEC = 200000000;
     par->SO_SIM_SEC = 10;

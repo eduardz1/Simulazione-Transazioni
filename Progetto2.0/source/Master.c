@@ -1,32 +1,34 @@
 #include "include/Master.h" 
 #include "include/Common.h"
+#include <stdlib.h>
 #define USER_NAME "./Users"
 #define USER_NODE "./Nodes"
+struct ConfigParameters *par;
 
-
-/*
-void Shared_Memory( key_t key,size_t size,int shmflg){  
+void Sh_MemMaster( key_t key,size_t size,int shmflg){  
      int m_id; 
-     int Init=shmget(IPC_PRIVATE,sizeof(SO_REGISTRY_SIZE)*2,0666); //ShdMem Define Area 
-     /*struct Shared_Data = shmat(m_id,NULL,0);   
-} */
-
-
-
-void  UsersInit(){
-     pid_t Parent; 
-     pid_t Child; 
-     Parent=getppid();
-     Child=getpid(); 
-
+     int ShInit=shmget(key,sizeof(So_REGISTRY_SIZE)*2,IPC_CREAT|0666); /*ShdMem Define Area*/  /* Raddoppio l'area per evitare saturazioni*/
+    char*shm=shmat(ShInit,NULL,0); /*Attach ShMem;*/ 
+    int shmdet=shmdt(ShInit); /*Detach ShMem*/
+    system("./Users");
 }
 
 
-void NodeInit(){ 
-     pid_t NParent;
-     pid_t NChild; 
-     NParent= getppid(); 
-     NChild=getpid();
+void Sh_UserPID(key_t key,size_t size,int shmflg){ 
+ 
+int id; 
+int Sh_UserPIDInit=shmget(key,sizeof(par->SO_USER_NUM),IPC_CREAT|0666); 
+char * Sh_UserPIDAttach=shmat(Sh_UserPID,NULL,0); 
+int Sh_UserPIDDet=shmdt(Sh_UserPIDInit); 
+}
+
+
+void Shared_Memory( key_t key,size_t size,int shmflg){  
+     int m_id; 
+     int *shm; 
+     int ShInit=shmget(key,sizeof(So_REGISTRY_SIZE)*2,IPC_CREAT|0666); /*ShdMem Define Area*/  
+     shm=shmat(ShInit,NULL,0); /*Attach ShMem;*/ 
+     int shmdt(const void *shmaddr); /*Detach ShMem*/
 }
 /* generate the user with fork and lauch ./users with execve*/
 void generateUser(char *userArgv[],int uCounter) {    /*need to implement uCounter !! */
