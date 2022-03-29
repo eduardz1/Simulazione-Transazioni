@@ -85,4 +85,14 @@ typedef struct MoneyTransaction
  } T_status; 
 }transaction;
 
+struct msgbuf_trans
+{
+  long m_type;
+    struct message
+    {
+      int hops; 
+      transaction uTrans;
+      struct msgbuf_trans *next;
+    }transactionMessage;
+};
 

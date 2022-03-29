@@ -7,15 +7,9 @@
 #define ERROR -1
 #define SUCCESS 0
 
-/*message buffer stored in transaction pool, contains message struct in order to define it*/
-struct msgbuf_trans {
- struct message{
-    int hops;
-    transaction userTrans;
-    struct msgbuf_trans *next;
-  }transactionMessage;
-};
-typedef struct tp_pool {
+
+typedef struct tp_pool
+{
     struct msgbuf_trans *head;
     struct msgbuf_trans *tail;
     unsigned int size;

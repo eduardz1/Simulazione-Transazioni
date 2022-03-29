@@ -1,14 +1,20 @@
 #include "include/Nodes.h"
-#include <stdlib.h/*#define SENDER -1*/
-struct mesg_buffer *MessageQ;
+#include <stdlib.h>
+/*#define SENDER -1*/
+/*struct mesg_buffer *MessageQ;*/
+pool transPool;
+struct msgbuf_trans *newTransaction;
+
+/*
 int MessagId;
+
 void Reward(){
 int Money_q; 
 pid_t myPID; 
     
 }
-/*https://www.geeksforgeeks.org/ipc-using-message-queues/  */
-/*NON SO DA DOVE DEVO PRENDERE LO STREAM DI DATI PER I NODI   */
+/https://www.geeksforgeeks.org/ipc-using-message-queues/ 
+/NON SO DA DOVE DEVO PRENDERE LO STREAM DI DATI PER I NODI  
 void Message_queue(){
     key_t KeyQ;  
     int sendMes; 
@@ -19,11 +25,11 @@ void Message_queue(){
         return EXIT_FAILURE; 
    }
    printf("TRANSACTION :"); 
-   /* Message sender*/ 
-    msgsnd(MessagId,MessageQ,sizeof(MessageQ),IPC_NOWAIT); /*if fail return EAGAIN*/
+    Message sender 
+    msgsnd(MessagId,MessageQ,sizeof(MessageQ),IPC_NOWAIT); if fail return EAGAIN
     printf("---DEBUG TOOL---\n");
     printf("Data Send is : %s \n",MessageQ->mes_type);
-    msgrcv( MessagId,MessageQ ,sizeof(MessageQ),MessageQ->mes_type,MSG_NOERROR); /*remove message from queue*/ /*  is not specified, then the message isn't removed from the queue and the system call fails returning -1 with errno set to E2BIG.*/
+    msgrcv( MessagId,MessageQ ,sizeof(MessageQ),MessageQ->mes_type,MSG_NOERROR); remove message from queue  is not specified, then the message isn't removed from the queue and the system call fails returning -1 with errno set to E2BIG.
     printf("---DEBUG TOOL---\n");
     printf("message kill PID: Messagid",MessagId); 
 }
@@ -36,6 +42,9 @@ void message_queue_attach()
         MessagId = msgget(myPID, 0);
     } while (errno == ENOENT);
 }
+*/
+
+
 /*transaction pool is a linked list that contains struct of message with all information (see Node header) */
 void transaction_pool_init(pool *transPool){
   transPool->head=NULL;
@@ -44,7 +53,7 @@ void transaction_pool_init(pool *transPool){
 }
 
 int add_to_pool(pool *transPool, struct msgbuf_trans *message){
-  struct mesgbuf_trans *newTransaction = malloc(sizeof(struct msgbuf_trans));
+  struct msgbuf_trans *newTransaction = malloc(sizeof(struct msgbuf_trans));
     if(newTransaction==NULL){
       printf("----malloc error-----");
     }
@@ -59,13 +68,13 @@ int add_to_pool(pool *transPool, struct msgbuf_trans *message){
   return SUCCESS; 
 }
 
-int remove_from_pool(pool *transPool, struct msgbg_trans *message){
+int remove_from_pool(pool *transPool,struct msgbuf_trans *message_t){
   if(transPool==NULL){
     return ERROR;
   } else if(transPool->head==NULL){
     return ERROR;
   }
-  *tMex=*transPool->head;
+  *message_t=*transPool->head;
   free(transPool->head);
   transPool->head=transPool->head->transactionMessage.next;
 
