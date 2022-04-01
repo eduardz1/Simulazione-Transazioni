@@ -86,8 +86,6 @@ int main(){
 unsigned int nodeCounter;
 unsigned int userCounter;
      signal(SIGINT,master_Stop_handler);
-     UsersInit();
-     NodeInit();
 /* create nodes in base of parameters given */
 for(nodeCounter=0;nodeCounter<par->SO_NDOES_NUM;nodeCounter++){
      nPid[nodeCounter].status=available;
