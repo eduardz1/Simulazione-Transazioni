@@ -45,7 +45,9 @@ void message_queue_attach()
 */
 
 
-/*transaction pool is a linked list that contains struct of message with all information (see Node header) */
+/*transaction pool is a linked list that contains struct of message with all information (see Common header) 
+ * to understand free and malloc look up to composite_data_type structure last slide 
+ * */
 void transaction_pool_init(pool *transPool){
   transPool->head=NULL;
   transPool->tail=NULL;
@@ -68,17 +70,17 @@ int add_to_pool(pool *transPool, struct msgbuf_trans *message){
   return SUCCESS; 
 }
 
-int remove_from_pool(pool *transPool,struct msgbuf_trans *message_t){
+int remove_from_pool(pool *transPool, struct msgbuf_trans *message_t){
   if(transPool==NULL){
     return ERROR;
   } else if(transPool->head==NULL){
     return ERROR;
   }
-  *message_t=*transPool->head;
+  *message_t= *transPool->head;
   free(transPool->head);
   transPool->head=transPool->head->transactionMessage.next;
 
-  if(transPool->head==NULL){
+ if(transPool->head==NULL){
     transPool->tail=NULL;
   }
   return SUCCESS;

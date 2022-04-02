@@ -17,4 +17,4 @@ typedef struct tp_pool
 
 void transaction_pool_init(pool *transPool);
 int add_to_pool(pool *transPool,struct msgbuf_trans *message);
-int remove_from_pool(pool *transPool, struct msgbg_trans *message);
+int remove_from_pool(pool *transPool, struct msgbuf_trans *message);
