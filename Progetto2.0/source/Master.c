@@ -91,16 +91,16 @@ unsigned int userCounter;
      signal(SIGINT,master_Stop_handler);
 /* create nodes in base of parameters given */
 for(nodeCounter=0;nodeCounter<par->SO_NDOES_NUM;nodeCounter++){
-     nPid[nodeCounter].status=available;
-     nPid[nodeCouter].balance=0;
-     generateNode(nodeArgv,nodeCounter);
+     nodesPid[nodeCounter].status=available;
+     nodesPid[nodeCouter].balance=0;
+     generateNode(nodeArgv[],nodeCounter);
      
 }
 /* create user in base of parameters given*/
 for(userCounter=0;userCounter<par->SO_USER_NUM;userCounter++){
-     uPid[userCounter].status=alive;
-     uPid[userCounter.balance]=0;
-     generateUser(userArgv,userCounter);
+     userPid[userCounter].status=alive;
+     userPid[userCounter].balance=0;
+     generateUser(userArgv[],userCounter);
 }
 
 }
