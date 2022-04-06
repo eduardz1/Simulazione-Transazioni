@@ -5,17 +5,15 @@
 pool transPool;
 struct msgbuf_trans *newTransaction;
 
-/*
-int MessagId;
 
-void Reward(){
+int MessagId;
 int Money_q; 
 pid_t myPID; 
     
-}
-/https://www.geeksforgeeks.org/ipc-using-message-queues/ 
-/NON SO DA DOVE DEVO PRENDERE LO STREAM DI DATI PER I NODI  
-void Message_queue(){
+
+/*https://www.geeksforgeeks.org/ipc-using-message-queues/ 
+/NON SO DA DOVE DEVO PRENDERE LO STREAM DI DATI PER I NODI */ 
+int Message_queue(){
     key_t KeyQ;  
     int sendMes; 
     KeyQ=ftok("TransaPool",99); 
@@ -25,13 +23,14 @@ void Message_queue(){
         return EXIT_FAILURE; 
    }
    printf("TRANSACTION :"); 
-    Message sender 
-    msgsnd(MessagId,MessageQ,sizeof(MessageQ),IPC_NOWAIT); if fail return EAGAIN
+    /*int sendMes;*/ 
+    msgsnd(MessagId,newTransaction,sizeof(newTransaction),IPC_NOWAIT); /*if fail return EAGAIN;*/
     printf("---DEBUG TOOL---\n");
-    printf("Data Send is : %s \n",MessageQ->mes_type);
-    msgrcv( MessagId,MessageQ ,sizeof(MessageQ),MessageQ->mes_type,MSG_NOERROR); remove message from queue  is not specified, then the message isn't removed from the queue and the system call fails returning -1 with errno set to E2BIG.
+    printf("Data Send is : %ld \n",newTransaction->m_type);
+    msgrcv( MessagId,newTransaction ,sizeof(newTransaction),newTransaction->m_type,MSG_NOERROR); /*remove message from queue  is not specified, then the message isn't removed from the queue and the system call fails returning -1 with errno set to E2BIG.*/
     printf("---DEBUG TOOL---\n");
-    printf("message kill PID: Messagid",MessagId); 
+    printf("message kill PID: %d",MessagId); 
+      message_queue_attach();
 }
 
 
@@ -42,7 +41,7 @@ void message_queue_attach()
         MessagId = msgget(myPID, 0);
     } while (errno == ENOENT);
 }
-*/
+
 
 
 /*transaction pool is a linked list that contains struct of message with all information (see Common header) 
@@ -84,5 +83,12 @@ int remove_from_pool(pool *transPool, struct msgbuf_trans *message_t){
     transPool->tail=NULL;
   }
   return SUCCESS;
+}
+
+int main(){
+  Message_queue();
+  transaction_pool_init(&transPool);   
+  add_to_pool(&transPool,newTransaction);
+  remove_from_pool(&transPool, newTransaction);
 }
 
