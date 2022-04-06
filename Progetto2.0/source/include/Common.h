@@ -46,7 +46,7 @@ struct ConfigParameters
    
 typedef struct UserStatus
 {
-    pid_t UsPid; 
+    pid_t usPid; 
     unsigned int balance; 
     enum                       /* Enum: ASSEGNA NOMI A COSTANTI--> Ogni costante ha una flag numerata "NON VISIBILE " */
     { 
@@ -59,7 +59,8 @@ typedef struct UserStatus
  
  typedef struct StructNode
 {
-    int value; 
+    pid_t nodPid;
+    unsigned long balance; 
     struct Node *head; 
     struct Node *next; 
     enum {
@@ -85,9 +86,12 @@ typedef struct MoneyTransaction
  } T_status; 
 }transaction;
 
+
+
 struct msgbuf_trans
 {
   long m_type;
+  char mesText[1];
     struct message
     {
       int hops; 

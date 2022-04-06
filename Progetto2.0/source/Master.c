@@ -4,6 +4,9 @@
 #define USER_NAME "./Users"
 #define USER_NODE "./Nodes"
 struct ConfigParameters *par;
+user *userPid;
+node *nodesPid;
+
 
 void Sh_MemMaster( key_t key,size_t size,int shmflg){  
      int m_id; 
@@ -43,7 +46,7 @@ void generateUser(char *userArgv[],int uCounter) {    /*need to implement uCount
                break;
 
           default:
-               uPid[uCounter].pid=uPid;
+               userPid[uCounter].usPid=uPid;
                return;
      }
 }
@@ -58,7 +61,7 @@ void generateNode(char *nodeArgv[],int nodeCounter) {
           case 0:
                execve(USER_NODE,nodeArgv,NULL); /*same of generateUser();*/
           default:
-               nPid[nodeCounter].pid=nPid;
+               nodesPid[nodeCounter].nodPid=nPid;
                break;
           }
 }
