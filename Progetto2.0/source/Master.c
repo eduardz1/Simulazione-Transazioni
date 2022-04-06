@@ -90,7 +90,7 @@ unsigned int nodeCounter;
 unsigned int userCounter;
      signal(SIGINT,master_Stop_handler);
 /* create nodes in base of parameters given */
-for(nodeCounter=0;nodeCounter<par->SO_NDOES_NUM;nodeCounter++){
+for(nodeCounter=0;nodeCounter<par->SO_NODES_NUM;nodeCounter++){
      nodesPid[nodeCounter].status=available;
      nodesPid[nodeCouter].balance=0;
      generateNode(nodeArgv[],nodeCounter);
