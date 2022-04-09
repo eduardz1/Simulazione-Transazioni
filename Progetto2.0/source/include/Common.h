@@ -22,7 +22,7 @@
 #include <pthread.h> 
 
 
-
+#define SO_REGISTRY_SIZE 100
 
 #define SO_BLOCK_SIZE
 

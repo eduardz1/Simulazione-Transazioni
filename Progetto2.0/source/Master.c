@@ -10,7 +10,7 @@ node *nodesPid;
 
 void Sh_MemMaster( key_t key,size_t size,int shmflg){  
      int m_id; 
-     int ShInit=shmget(key,sizeof(So_REGISTRY_SIZE)*2,IPC_CREAT|0666); /*ShdMem Define Area*/  /* Raddoppio l'area per evitare saturazioni*/
+     int ShInit=shmget(key,sizeof(SO_REGISTRY_SIZE)*2,IPC_CREAT|0666); /*ShdMem Define Area*/  /* Raddoppio l'area per evitare saturazioni*/
     char*shm=shmat(ShInit,NULL,0); /*Attach ShMem;*/ 
     int shmdet=shmdt(ShInit); /*Detach ShMem*/
     system("./Users");
@@ -29,7 +29,7 @@ int Sh_UserPIDDet=shmdt(Sh_UserPIDInit);
 void Shared_Memory( key_t key,size_t size,int shmflg){  
      int m_id; 
      int *shm; 
-     int ShInit=shmget(key,sizeof(So_REGISTRY_SIZE)*2,IPC_CREAT|0666); /*ShdMem Define Area*/  
+     int ShInit=shmget(key,sizeof(SO_REGISTRY_SIZE)*2,IPC_CREAT|0666); /*ShdMem Define Area*/  
      shm=shmat(ShInit,NULL,0); /*Attach ShMem;*/ 
      int shmdt(const void *shmaddr); /*Detach ShMem*/
 }
@@ -92,15 +92,15 @@ unsigned int userCounter;
 /* create nodes in base of parameters given */
 for(nodeCounter=0;nodeCounter<par->SO_NODES_NUM;nodeCounter++){
      nodesPid[nodeCounter].status=available;
-     nodesPid[nodeCouter].balance=0;
-     generateNode(nodeArgv[],nodeCounter);
+     nodesPid[nodeCounter].balance=0;
+     generateNode(&nodeArgv[],nodeCounter);
      
 }
 /* create user in base of parameters given*/
 for(userCounter=0;userCounter<par->SO_USER_NUM;userCounter++){
      userPid[userCounter].status=alive;
      userPid[userCounter].balance=0;
-     generateUser(userArgv[],userCounter);
+     generateUser(&userArgv[],userCounter);
 }
 
 }
