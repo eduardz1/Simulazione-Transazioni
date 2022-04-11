@@ -74,7 +74,7 @@ typedef struct UserStatus
 typedef struct MoneyTransaction
 {
     pid_t Sender; 
-    pid_t Reciver; 
+    pid_t Receiver; 
     int Money; 
     int Reward; 
     enum
@@ -99,4 +99,11 @@ struct msgbuf_trans
       struct msgbuf_trans *next;
     }transactionMessage;
 };
+
+typedef struct block_t 
+  {
+    transaction t_list[SO_BLOCK_SIZE];
+    unsigned int blockIndex; /*the index need to be updated when a block is written */
+
+  }block;
 

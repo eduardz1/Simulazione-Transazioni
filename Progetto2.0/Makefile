@@ -13,7 +13,7 @@ all: Master  Users Nodes
 master:$(MASTER)
 	$(CC) $(CFLAGS) -O2 source/Master.c -o Master
 
-users: $(USER)
+user: $(USER)
 	$(CC) $(CFLAGS) -O2 source/Users.c  -o Users
 
 nodes: $(NODE)
