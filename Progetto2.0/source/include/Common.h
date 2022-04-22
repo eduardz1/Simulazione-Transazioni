@@ -1,5 +1,6 @@
 #ifndef  _GNU_SOURCE
 #define  _GNU_SOURCE
+#include <bits/types/struct_timespec.h>
 #endif
 
 #include <stdlib.h>
@@ -24,7 +25,8 @@
 
 #define SO_REGISTRY_SIZE 100
 
-#define SO_BLOCK_SIZE
+#define TRANSACTION_MTYPE 2800 
+#define SO_BLOCK_SIZE 10
 
 struct ConfigParameters
 {
@@ -73,6 +75,7 @@ typedef struct UserStatus
 
 typedef struct MoneyTransaction
 {
+ struct timespec time;
     pid_t Sender; 
     pid_t Receiver; 
     int Money; 
@@ -90,6 +93,7 @@ typedef struct MoneyTransaction
 
 struct msgbuf_trans
 {
+ 
   long m_type;
   char mesText[1];
     struct message
