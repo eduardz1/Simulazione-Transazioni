@@ -12,3 +12,9 @@ struct Transaction
     reciver; 
     
 }; */
+
+void Sh_MemMaster( key_t key,size_t size,int shmflg); 
+void Sh_UserPID(key_t key,size_t size,int shmflg);
+void GenerateUser(char userArgv[],int userCounter);
+void master_Stop_handle(int signum); 
+void Node_Sem_init();

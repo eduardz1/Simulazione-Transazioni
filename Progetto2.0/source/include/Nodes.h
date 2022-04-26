@@ -18,3 +18,14 @@ typedef struct tp_pool
 void transaction_pool_init(pool *transPool);
 int add_to_pool(pool *transPool,struct msgbuf_trans *message);
 int remove_from_pool(pool *transPool, struct msgbuf_trans *message);
+
+struct msqid_ds{ 
+    struct ipc_perm mesg_perm; 
+    time_t msg_stime; 
+    time_t msg_rtime; 
+    time_t msg_ctime;
+    msgqnum_t msg_qnum;
+    msglen_t msg_qbytes;
+    pid_t msg_lspid;
+    pid_t msg_lrpid; 
+};

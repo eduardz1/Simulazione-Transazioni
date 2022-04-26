@@ -42,7 +42,16 @@ void message_queue_attach()
     } while (errno == ENOENT);
 }
 
+int sum_reward(transaction *sumBlock)
+{
+    int i = 0;
+    int sum = 0;
 
+    for (i = 0; i < (SO_BLOCK_SIZE - 1); i++)
+    {
+        sum += sumBlock[i].Reward;
+    }
+    return sum ;
 
 /*transaction pool is a linked list that contains struct of message with all information (see Common header) 
  * to understand free and malloc look up to composite_data_type structure last slide 

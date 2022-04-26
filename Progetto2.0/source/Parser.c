@@ -2,10 +2,13 @@
 #include "include/Parser.h"
 
 #define CONF_FILE "conf.txt"
-  
+
+int main(){
+
+}
   
 struct ConfigParameters *par;
-void assign_defaults(struct ConfigParameters *par)
+void assign_defaults()
 {
     par->SO_USER_NUM = 100;
     par->SO_NODES_NUM = 10;
@@ -22,7 +25,7 @@ void assign_defaults(struct ConfigParameters *par)
     par->SO_HOPS = 10;
 }
 
-int parse_parameters(struct ConfigParameters *par)
+int parse_parameters()
 {
     FILE *fp;
 

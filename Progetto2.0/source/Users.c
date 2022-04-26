@@ -11,7 +11,7 @@ pid_t myPid;
 user *usersPid;
 node *nodesPid;
 
-void getPidUserIndex(int searchPid) {
+int getPidUserIndex(int searchPid) {
   unsigned int i;
 
   for (i = 0; i < par->SO_USER_NUM; i++) {
@@ -36,7 +36,7 @@ void updateStatus(int setStatus) {
 
 void start_transaction(pid_t usersPid, int money, int reward) {
   struct timespec exTime = {0};
-  clock_gettime(CLOCK_REALTIME, &exactTime);
+  clock_gettime(CLOCK_REALTIME, &exTime);
 
   tm->m_type = TRANSACTION_MTYPE;
   tm->transactionMessage.uTrans.Sender = myPid;
@@ -49,6 +49,14 @@ void start_transaction(pid_t usersPid, int money, int reward) {
   tm->transactionMessage.hops = par->SO_HOPS;
 }
 
+
+void Sh_MemUser(key_t key,size_t size,int shmflg){
+    int Mem_id; 
+    int Sh_MemInit=shmget(key,sizeof(par->SO_USER_NUM),IPC_CREAT|0666); /define area/
+    char*shmAttach=shmat(Sh_MemInit,NULL,0); /*Attach Area*/
+    int ShDet=shmdt(Sh_MemInit); /*Detach Area*/ 
+
+}
 
 /*saves user balance when the program is interrupted in tmpBalance*/
 void CurrentBalance() {
