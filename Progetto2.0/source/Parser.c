@@ -4,11 +4,11 @@
 #define CONF_FILE "conf.txt"
 
 int main(){
-
+    return 0;
 }
   
 struct ConfigParameters *par;
-void assign_defaults()
+void assign_defaults(struct ConfigParameters *par)
 {
     par->SO_USER_NUM = 100;
     par->SO_NODES_NUM = 10;
