@@ -93,14 +93,14 @@ unsigned int userCounter;
 for(nodeCounter=0;nodeCounter<par->SO_NODES_NUM;nodeCounter++){
      nodesPid[nodeCounter].status=available;
      nodesPid[nodeCounter].balance=0;
-     generateNode(&nodeArgv[],nodeCounter);
+     generateNode(&nodeArgv[],nodeCounter); //Non capisco perchè è un fottuto array sono  disperato :) 
      
 }
 /* create user in base of parameters given*/
 for(userCounter=0;userCounter<par->SO_USER_NUM;userCounter++){
      userPid[userCounter].status=alive;
      userPid[userCounter].balance=0;
-     generateUser(&userArgv[],userCounter);
+     generateUser(&userArgv[0],userCounter);
 }
 
 }
