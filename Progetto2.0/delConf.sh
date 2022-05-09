@@ -1,0 +1,13 @@
+unset SO_USER_NUM 
+unset SO_NODES_NUM 
+unset  SO_FRIENDS_NUM 
+unset SO_SIM_SEC 
+unset SO_HOPS 
+unset SO_BUDGET_INIT 
+unset SO_REWARD 
+unset SO_MIN_TRANS_GEN_NSEC 
+unset SO_MAX_TRANS_GEN_NSEC 
+unset SO_RETRY 
+unset SO_TP_SIZE 
+unset SO_MIN_TRANS_PROC_NSEC 
+unset SO_MAX_TRANS_PROC_NSEC 

@@ -8,7 +8,14 @@ USERS=source/Users.c source/include/Users.h
 NODES=source/Nodes.c source/include/Nodes.h
 PRINT=source/Print.c source/include/Print.h
 PARSER=source/Parser.c source/include/Parser.h
-all: Master  Users Nodes
+
+/bin/bash
+conf:
+	./conf.sh
+delConf:
+	./delConf.sh
+all: 
+	Master  Users Nodes
 
 master:$(MASTER)
 	$(CC) $(CFLAGS) -O2 source/Master.c -o Master
