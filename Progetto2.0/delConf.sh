@@ -1,3 +1,4 @@
+bash
 unset SO_USER_NUM 
 unset SO_NODES_NUM 
 unset  SO_FRIENDS_NUM 

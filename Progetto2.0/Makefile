@@ -9,11 +9,12 @@ NODES=source/Nodes.c source/include/Nodes.h
 PRINT=source/Print.c source/include/Print.h
 PARSER=source/Parser.c source/include/Parser.h
 
-/bin/bash
 conf:
-	./conf.sh
+	$(CC) $(CFLAGS) source/Conf.c	
+
 delConf:
-	./delConf.sh
+	source ./delConf.sh
+
 all: 
 	Master  Users Nodes
 
