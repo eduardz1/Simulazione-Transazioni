@@ -1,6 +1,6 @@
 #ifndef  _GNU_SOURCE
 #define  _GNU_SOURCE
-#include <bits/types/struct_timespec.h>
+//#include <bits/types/struct_timespec.h>
 #endif
 
 #include <stdlib.h>

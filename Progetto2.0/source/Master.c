@@ -51,7 +51,7 @@ void generateUser(char *userArgv[],int uCounter) {    /*need to implement uCount
      }
 }
 
-void generateNode(char *nodeArgv[],int nodeCounter) {
+void generateNode(int **nodeArgv[],int nodeCounter) {
      pid_t nPid=fork();
           switch (nPid)
           {
@@ -88,12 +88,13 @@ void master_Stop_handler(int sigum){
 int main(){
 unsigned int nodeCounter;
 unsigned int userCounter;
+char argv; 
      signal(SIGINT,master_Stop_handler);
 /* create nodes in base of parameters given */
 for(nodeCounter=0;nodeCounter<par->SO_NODES_NUM;nodeCounter++){
      nodesPid[nodeCounter].status=available;
      nodesPid[nodeCounter].balance=0;
-     generateNode(&nodeArgv[],nodeCounter); //Non capisco perchè è un fottuto array sono  disperato :) 
+     generateNode(&nodeArgv[1],nodeCounter); //Non capisco perchè è un fottuto array sono  disperato :) 
      
 }
 /* create user in base of parameters given*/

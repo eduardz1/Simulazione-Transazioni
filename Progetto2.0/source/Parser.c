@@ -1,13 +1,17 @@
 #include "include/Common.h"
-#include "include/Parser.h"
-
+/* #include "include/Parser.h"
+ */
 #define CONF_FILE "conf.txt"
-
+#define NUM_PARAMETERS 13
+#define CONF_ERROR -1
+struct ConfigParameters *par;
 int main(){
+    assign_defaults(); 
+    parse_parameters(); 
     return 0;
 }
   
-struct ConfigParameters *par;
+
 void assign_defaults(struct ConfigParameters *par)
 {
     par->SO_USER_NUM = 100;
