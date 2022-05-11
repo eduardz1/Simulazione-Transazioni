@@ -28,7 +28,7 @@ nodes: $(NODE)
 	$(CC) $(CFLAGS) -O0 source/Nodes.c -o Nodes
 
 print:$(PRINT)
-	$(CC) $(CFLAGS) -O0 source/Print.c -o Print
+	$(CC) $(CFLAGS) -O0 source/Print.c  -v -o Print
 parser:$(PARSER)	
 	$(CC) $(CFLAGS) -O0 source/Parser.c -o Parser
 

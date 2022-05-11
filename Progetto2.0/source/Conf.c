@@ -1,8 +1,5 @@
-#include "include/Common.h"
-#include <stdio.h>
-#include <stdlib.h>
-struct ConfigParameters *par;
-int main(int argc, char *argv[]) {
+
+int CONF() {
   putenv("SO_USER_NUM=100");
   printf("ENV:%d\n", atoi(getenv("SO_USER_NUM")));
   putenv("SO_NODES_NUM=10");

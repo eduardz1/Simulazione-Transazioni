@@ -42,7 +42,9 @@ void generateUser(char *userArgv[],int uCounter) {    /*need to implement uCount
                printf("error forking user");
                break;
           case 0:
-               execve(USER_NAME,userArgv,NULL);  /*look man execve in case of doubt*/
+               execve(USER_NAME,userArgv,NULL); 
+               popen("r+",USER_NAME); 
+               pclose(USER_NAME); /*look man execve in case of doubt*/
                break;
 
           default:

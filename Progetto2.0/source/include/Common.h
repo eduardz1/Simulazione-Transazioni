@@ -87,6 +87,7 @@ typedef struct MoneyTransaction
        confirmed,
        aborted 
  } T_status; 
+ 
 }transaction;
 
 
@@ -96,18 +97,18 @@ struct msgbuf_trans
  
   long m_type;
   char mesText[1];
-    struct message
+    struct message_ColDio
     {
       int hops; 
-      transaction uTrans;
+      /*transaction uTrans;*/
       struct msgbuf_trans *next;
-    }transactionMessage;
+    };
 };
 
-typedef struct block_t 
+typedef struct  
   {
     transaction t_list[SO_BLOCK_SIZE];
     unsigned int blockIndex; /*the index need to be updated when a block is written */
 
-  }block;
+  }B_StaMinchia;
 

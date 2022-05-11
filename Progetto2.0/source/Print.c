@@ -1,4 +1,7 @@
 #include "include/Print.h"
+#include "include/Conf.h"
+#include <pthread.h> 
+
 
 struct ConfigParameters *par;
 
@@ -11,7 +14,8 @@ void *printing(void *p) {
   printf("--------------------------\n");
   printf("i'm *printing function\n");
   printf("-------------------------\n");
-
+  CONF(); 
+/*
   printf("----------- Configuration value ------------\n");
   printf("SO_USER_NUM->%u\n", par->SO_USER_NUM);
   printf("SO_NODES_NUM->%u\n", par->SO_NODES_NUM);
@@ -26,6 +30,7 @@ void *printing(void *p) {
   printf("SO_SIM_SEC->%u\n", par->SO_SIM_SEC);
   printf("SO_FRIENDS_NUM->%u\n", par->SO_FRIENDS_NUM);
   printf("SO_HOPS->%u\n", par->SO_HOPS);
+  */
 }
 
 /*thread initialization according to
@@ -37,7 +42,7 @@ int main() {
   int thTest;
   int *ptr;
   P_Parent = 1;
-  thTest = pthread_create(&threadId, NULL, printing(0),P_Paren);
+  thTest = pthread_create(&threadId, NULL, printing(0),P_Parent);
   if (thTest == 0) {
     printf("thread work without error :)\n");
     pthread_join(threadId, (void **)&ptr);
