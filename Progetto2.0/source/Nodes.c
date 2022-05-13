@@ -1,46 +1,22 @@
 #include "include/Nodes.h"
+#include "/Users/popper/Desktop/Folders/RiProgetto/Simulazione-Transazioni/Progetto2.0/Util/Ms_Queue.h"
 #include <stdlib.h>
 /*#define SENDER -1*/
 /*struct mesg_buffer *MessageQ;*/
 pool transPool;
 struct msgbuf_trans *newTransaction;
-
+struct msgbuf_trans *Trans_ptr ; 
+#define PROC_PERMISSION 0666 /* CHMOD value for root permission */ 
 
 int MessagId;
+int Message_Erro; 
 int Money_q; 
+int toend ; 
 pid_t myPID; 
-    
+
+    //DA RIFARE MSQUEUE CREARE HEADER FILE APPOSITO E SVOLGERE DA  0 
 
 /*https://www.geeksforgeeks.org/ipc-using-message-queues*/ 
-int Message_queue(){
-    key_t KeyQ;  
-    int sendMes; 
-    KeyQ=ftok("TransaPool",99); 
-    MessagId=msgget(KeyQ,0666|IPC_CREAT); 
-   if(MessagId==-1){ 
-       perror("MSGGET");
-        return EXIT_FAILURE; 
-   }
-   printf("TRANSACTION :"); 
-    /*int sendMes;*/ 
-    msgsnd(MessagId,newTransaction,sizeof(newTransaction),IPC_NOWAIT); /*if fail return EAGAIN;*/
-    printf("---DEBUG TOOL---\n");
-    printf("Data Send is : %ld \n",newTransaction->m_type);
-    msgrcv( MessagId,newTransaction ,sizeof(newTransaction),newTransaction->m_type,MSG_NOERROR); /*remove message from queue  is not specified, then the message isn't removed from the queue and the system call fails returning -1 with errno set to E2BIG.*/
-    printf("---DEBUG TOOL---\n");
-    printf("message kill PID: %d",MessagId); 
-      message_queue_attach();
-}
-
-
-void message_queue_attach()
-{
-    do
-    {
-        MessagId = msgget(myPID, 0);
-    } while (errno == ENOENT);
-}
-
 int sum_reward(transaction *sumBlock)
 {
     int i = 0;
@@ -93,6 +69,7 @@ int remove_from_pool(pool *transPool, struct msgbuf_trans *message_t){
   }
   return SUCCESS;
 }
+
 
 int main(){
   Message_queue();

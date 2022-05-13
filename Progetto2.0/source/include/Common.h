@@ -1,8 +1,13 @@
 #ifndef  _GNU_SOURCE
 #define  _GNU_SOURCE
-//#include <bits/types/struct_timespec.h>
+/*#include <bits/types/struct_timespec.h>*/
 #endif
 #ifndef _USE_GNU
+struct msgbuf
+{
+
+  char mtext[1];
+};
 #endif 
 #ifndef NULL
 #define NULL 0
@@ -98,17 +103,6 @@ typedef struct MoneyTransaction
 
 
 
-struct msgbuf_trans
-{
-  long m_type;
-  char mesText[1];
-    struct message
-    {
-      int hops; 
-      transaction uTrans;
-      struct msgbuf_trans *next;
-    }Message_Transaction;
-};
 
 typedef struct Block
   {
