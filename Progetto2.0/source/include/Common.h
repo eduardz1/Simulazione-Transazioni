@@ -110,7 +110,7 @@ struct msgbuf_trans
     }Message_Transaction;
 };
 
-typedef struct  
+typedef struct Block
   {
     transaction t_list[SO_BLOCK_SIZE];
     unsigned int blockIndex; /*the index need to be updated when a block is written */

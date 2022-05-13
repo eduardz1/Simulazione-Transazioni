@@ -11,8 +11,7 @@ int Money_q;
 pid_t myPID; 
     
 
-/*https://www.geeksforgeeks.org/ipc-using-message-queues/ 
-/NON SO DA DOVE DEVO PRENDERE LO STREAM DI DATI PER I NODI */ 
+/*https://www.geeksforgeeks.org/ipc-using-message-queues*/ 
 int Message_queue(){
     key_t KeyQ;  
     int sendMes; 
@@ -52,6 +51,7 @@ int sum_reward(transaction *sumBlock)
         sum += sumBlock[i].Reward;
     }
     return sum ;
+}
 
 /*transaction pool is a linked list that contains struct of message with all information (see Common header) 
  * to understand free and malloc look up to composite_data_type structure last slide 
@@ -68,8 +68,8 @@ int add_to_pool(pool *transPool, struct msgbuf_trans *message){
       printf("----malloc error-----");
     }
 
-  newTransaction->transactionMessage=message->transactionMessage;
-  newTransaction->transactionMessage.next=NULL;
+  newTransaction->Message_Transaction=message->Message_Transaction;
+  newTransaction->Message_Transaction.next=NULL;
 
   if(transPool->tail){
     transPool->head=newTransaction;
@@ -86,7 +86,7 @@ int remove_from_pool(pool *transPool, struct msgbuf_trans *message_t){
   }
   *message_t= *transPool->head;
   free(transPool->head);
-  transPool->head=transPool->head->transactionMessage.next;
+  transPool->head=transPool->head->Message_Transaction.next;
 
  if(transPool->head==NULL){
     transPool->tail=NULL;

@@ -8,6 +8,7 @@
 #define SUCCESS 0
 
 
+
 typedef struct tp_pool
 {
     struct msgbuf_trans *head;
@@ -18,6 +19,7 @@ typedef struct tp_pool
 void transaction_pool_init(pool *transPool);
 int add_to_pool(pool *transPool,struct msgbuf_trans *message);
 int remove_from_pool(pool *transPool, struct msgbuf_trans *message);
+void message_queue_attach(); 
 
 struct msqid_ds{ 
     struct ipc_perm mesg_perm; 
