@@ -2,6 +2,12 @@
 #define  _GNU_SOURCE
 //#include <bits/types/struct_timespec.h>
 #endif
+#ifndef _USE_GNU
+#endif 
+#ifndef NULL
+#define NULL 0
+#endif
+ 
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -94,15 +100,14 @@ typedef struct MoneyTransaction
 
 struct msgbuf_trans
 {
- 
   long m_type;
   char mesText[1];
-    struct message_ColDio
+    struct message
     {
       int hops; 
-      /*transaction uTrans;*/
+      transaction uTrans;
       struct msgbuf_trans *next;
-    };
+    }Message_Transaction;
 };
 
 typedef struct  
@@ -110,5 +115,5 @@ typedef struct
     transaction t_list[SO_BLOCK_SIZE];
     unsigned int blockIndex; /*the index need to be updated when a block is written */
 
-  }B_StaMinchia;
+  }Block_;
 

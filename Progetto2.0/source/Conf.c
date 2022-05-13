@@ -1,4 +1,4 @@
-
+/* THIS FILE CONTAIN THE VALUE OF THE CONFIGURATION PARAMETERS*/
 int CONF() {
   putenv("SO_USER_NUM=100");
   printf("ENV:%d\n", atoi(getenv("SO_USER_NUM")));

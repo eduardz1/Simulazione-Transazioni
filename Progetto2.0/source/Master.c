@@ -4,6 +4,7 @@
 #define USER_NAME "./Users"
 #define USER_NODE "./Nodes"
 struct ConfigParameters *par;
+user *state; 
 user *userPid;
 node *nodesPid;
 
@@ -33,10 +34,13 @@ void Shared_Memory( key_t key,size_t size,int shmflg){
      shm=shmat(ShInit,NULL,0); /*Attach ShMem;*/ 
      int shmdt(const void *shmaddr); /*Detach ShMem*/
 }
+
+
+
 /* generate the user with fork and lauch ./users with execve*/
 void generateUser(char *userArgv[],int uCounter) {    /*need to implement uCounter !! */
      pid_t uPid=fork();
-
+     int *Status; 
      switch(uPid){
           case -1:
                printf("error forking user");
@@ -51,6 +55,10 @@ void generateUser(char *userArgv[],int uCounter) {    /*need to implement uCount
                userPid[uCounter].usPid=uPid;
                return;
      }
+
+     for (userArgv!=NULL;userPid->status==alive;uCounter++){ 
+        uCounter; 
+     } 
 }
 
 void generateNode(int **nodeArgv[],int nodeCounter) {
@@ -66,6 +74,11 @@ void generateNode(int **nodeArgv[],int nodeCounter) {
                nodesPid[nodeCounter].nodPid=nPid;
                break;
           }
+          for (nodeCounter!=NULL; nodeCounter= nodesPid->status==available;nodeCounter++)
+          {
+               nodeCounter; 
+          }
+          
 }
 
 
@@ -96,7 +109,7 @@ char argv;
 for(nodeCounter=0;nodeCounter<par->SO_NODES_NUM;nodeCounter++){
      nodesPid[nodeCounter].status=available;
      nodesPid[nodeCounter].balance=0;
-     generateNode(&nodeArgv[1],nodeCounter); //Non capisco perchè è un fottuto array sono  disperato :) 
+     generateNode(&nodeArgv[1],nodeCounter);  
      
 }
 /* create user in base of parameters given*/
