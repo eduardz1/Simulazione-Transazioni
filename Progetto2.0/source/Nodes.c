@@ -1,5 +1,4 @@
 #include "include/Nodes.h"
-#include "/Users/popper/Desktop/Folders/RiProgetto/Simulazione-Transazioni/Progetto2.0/Util/Ms_Queue.h"
 #include <stdlib.h>
 /*#define SENDER -1*/
 /*struct mesg_buffer *MessageQ;*/
@@ -69,9 +68,22 @@ int remove_from_pool(pool *transPool, struct msgbuf_trans *message_t){
   return SUCCESS;
 }
 
+void Message_Queue(){ 
+    
+    
+    Message_get= msgget(Mes_Key, IPC_CREAT); /*IF FALILED RETURN -1 */
+    Message_Send=msgsnd(Message_ID,Message_p,Message_size,IPC_NOWAIT); /*IPC_NOWAIT return  "1" if Failed*/
+    Message_Rcv= msgrcv(Message_ID,&Message_p,Message_size,Message_Buff->m_type,IPC_NOWAIT);
+    Message_Ctrl=msgctl(Message_ID,IPC_RMID,NULL);
+
+    /*PRINT'S */
+    printf("MESS_RECIVED",Message_Buff->mesText);    
+    system("MESG_out.txt"); 
+     
+}
 
 int main(){
-  Message_queue();
+  Message_Queue();
   transaction_pool_init(&transPool);   
   add_to_pool(&transPool,newTransaction);
   remove_from_pool(&transPool, newTransaction);
