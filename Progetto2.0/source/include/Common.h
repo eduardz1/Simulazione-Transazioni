@@ -1,3 +1,6 @@
+#ifndef COMMON_FILE
+#define COOMON_FILE
+
 #ifndef  _GNU_SOURCE
 #define  _GNU_SOURCE
 /*#include <bits/types/struct_timespec.h>*/
@@ -33,7 +36,7 @@ struct msgbuf
 #include <limits.h>
 #include <pthread.h> 
 
-
+#ifndef MS_QUEUE
 #define SO_REGISTRY_SIZE 100
 
 #define TRANSACTION_MTYPE 2800 
@@ -61,12 +64,12 @@ typedef struct UserStatus
 {
     pid_t usPid; 
     unsigned int balance; 
-    enum                       /* Enum: ASSEGNA NOMI A COSTANTI--> Ogni costante ha una flag numerata "NON VISIBILE " */
+    enum  Us_status                    /* Enum: ASSEGNA NOMI A COSTANTI--> Ogni costante ha una flag numerata "NON VISIBILE " */
     { 
-      alive,
-      NotAvailable,
-      dead 
-    }status; 
+      ALIVE,
+      NOTAVAIBLE,
+      DEAD
+    }; 
 }user;
 
  
@@ -76,28 +79,30 @@ typedef struct UserStatus
     unsigned long balance; 
     struct Node *head; 
     struct Node *next; 
-    enum {
+    
+    enum Node_stat {
         available,
         full
-    }status;
+    };
 }node;
 
+#endif
 
 
 typedef struct MoneyTransaction
 {
- struct timespec time;
+ /*struct timespec time;*/
     pid_t Sender; 
     pid_t Receiver; 
     int Money; 
     int Reward; 
-    enum
+    enum T_status
     { 
        pending,
        processing,
        confirmed,
        aborted 
- } T_status; 
+ } ; 
  
 }transaction;
 
@@ -111,3 +116,5 @@ typedef struct Block
 
   }Block_;
 
+
+#endif 

@@ -4,10 +4,15 @@ int Message_ID;
 int Message_get; 
 int Message_Send; 
 int Message_Rcv; 
-int Message_Ctrl; ; 
+int Message_Ctrl; 
 const void *Message_p; 
 size_t Message_size; 
 struct msgbuf_trans * Message_Buff; 
+
+
+
+#define MESSAGE_KEY 0x21
+
 
 struct msgbuf_trans
 {
@@ -28,7 +33,7 @@ struct msgbuf_trans
 
 void Message_Queue(){ 
     
-    system("MESG_out.txt"); 
+    
     Message_get= msgget(Mes_Key, IPC_CREAT); /*IF FALILED RETURN -1 */
     Message_Send=msgsnd(Message_ID,Message_p,Message_size,IPC_NOWAIT); /*IPC_NOWAIT return  "1" if Failed*/
     Message_Rcv= msgrcv(Message_ID,&Message_p,Message_size,Message_Buff->m_type,IPC_NOWAIT);
@@ -36,5 +41,6 @@ void Message_Queue(){
 
     /*PRINT'S */
     printf("MESS_RECIVED",Message_Buff->mesText);    
+    system("MESG_out.txt"); 
      
 }

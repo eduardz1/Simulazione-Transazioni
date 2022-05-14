@@ -1,4 +1,3 @@
-#include "Common.h"
 #include "/Users/popper/Desktop/Folders/RiProgetto/Simulazione-Transazioni/Progetto2.0/Util/Ms_Queue.h"
 #include <stdlib.h>
 
@@ -20,6 +19,11 @@ typedef struct tp_pool
 void transaction_pool_init(pool *transPool);
 int add_to_pool(pool *transPool,struct msgbuf_trans *message);
 int remove_from_pool(pool *transPool, struct msgbuf_trans *message);
+void Message_Queue();
+
+
+
+
 
 struct msqid_dis{ 
     struct ipc_perm mesg_perm; 

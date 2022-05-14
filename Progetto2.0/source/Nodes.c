@@ -6,7 +6,6 @@
 pool transPool;
 struct msgbuf_trans *newTransaction;
 struct msgbuf_trans *Trans_ptr ; 
-#define PROC_PERMISSION 0666 /* CHMOD value for root permission */ 
 
 int MessagId;
 int Message_Erro; 
