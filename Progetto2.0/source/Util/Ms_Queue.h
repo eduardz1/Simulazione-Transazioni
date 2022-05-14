@@ -25,6 +25,6 @@ struct msgbuf_trans
       struct msgbuf_trans *next;
     }Message_Transaction;
 };
-
+/*PROTOTYPE'S */
 void Message_Queue();
 

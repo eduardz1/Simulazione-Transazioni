@@ -6,11 +6,6 @@
 /*#include <bits/types/struct_timespec.h>*/
 #endif
 #ifndef _USE_GNU
-struct msgbuf
-{
-
-  char mtext[1];
-};
 #endif 
 #ifndef NULL
 #define NULL 0

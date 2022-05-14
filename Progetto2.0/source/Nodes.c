@@ -1,5 +1,4 @@
 #include "include/Nodes.h"
-#include <stdlib.h>
 /*#define SENDER -1*/
 /*struct mesg_buffer *MessageQ;*/
 pool transPool;
@@ -12,7 +11,7 @@ int Money_q;
 int toend ; 
 pid_t myPID; 
 
-    //DA RIFARE MSQUEUE CREARE HEADER FILE APPOSITO E SVOLGERE DA  0 
+    
 
 /*https://www.geeksforgeeks.org/ipc-using-message-queues*/ 
 int sum_reward(transaction *sumBlock)
@@ -77,7 +76,7 @@ void Message_Queue(){
     Message_Ctrl=msgctl(Message_ID,IPC_RMID,NULL);
 
     /*PRINT'S */
-    printf("MESS_RECIVED",Message_Buff->mesText);    
+    printf("MESS_RECIVED %lu",Message_Buff->mesText);    
     system("MESG_out.txt"); 
      
 }
