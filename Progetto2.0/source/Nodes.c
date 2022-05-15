@@ -5,7 +5,7 @@ pool transPool;
 struct msgbuf_trans *newTransaction;
 struct msgbuf_trans *Trans_ptr ; 
 
-int MessagId;
+
 int Message_Erro; 
 int Money_q; 
 int toend ; 
@@ -68,13 +68,14 @@ int remove_from_pool(pool *transPool, struct msgbuf_trans *message_t){
 }
 
 void Message_Queue(){ 
-    
+    int MessagId =getpid();
     
     Message_get= msgget(Mes_Key, IPC_CREAT); /*IF FALILED RETURN -1 */
     Message_Send=msgsnd(Message_ID,Message_p,Message_size,IPC_NOWAIT); /*IPC_NOWAIT return  "1" if Failed*/
-    Message_Rcv= msgrcv(Message_ID,&Message_p,Message_size,Message_Buff->m_type,IPC_NOWAIT);
+    printf("DEBUG MS_Q %d",Message_Send);
+  /*  Message_Rcv= msgrcv(Message_ID,&Message_p,Message_size,Trans_ptr->m_type,IPC_NOWAIT);
     Message_Ctrl=msgctl(Message_ID,IPC_RMID,NULL);
-
+*/
     /*PRINT'S */
     printf("MESS_RECIVED %lu",Message_Buff->mesText);    
     system("MESG_out.txt"); 

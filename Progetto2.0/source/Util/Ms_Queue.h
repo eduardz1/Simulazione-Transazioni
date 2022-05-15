@@ -11,7 +11,6 @@ struct msgbuf_trans * Message_Buff;
 
 
 
-#define MESSAGE_KEY 0x21
 
 
 struct msgbuf_trans

@@ -64,7 +64,7 @@ typedef struct UserStatus
       ALIVE,
       NOTAVAIBLE,
       DEAD
-    }; 
+    }Us_state; 
 }user;
 
  
@@ -78,7 +78,7 @@ typedef struct UserStatus
     enum Node_stat {
         available,
         full
-    };
+    }Node_state;
 }node;
 
 #endif

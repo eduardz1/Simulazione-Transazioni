@@ -56,7 +56,7 @@ void generateUser(char *userArgv[],int uCounter) {    /*need to implement uCount
                return;
      }
 
-     for (userArgv!=NULL;userPid->status=alive;uCounter++){ 
+     for (userArgv==NULL;userPid->Us_state=ALIVE;uCounter++){ 
         uCounter; 
      } 
 }
@@ -74,7 +74,7 @@ void generateNode(int **nodeArgv[],int nodeCounter) {
                nodesPid[nodeCounter].nodPid=nPid;
                break;
           }
-          for (nodeCounter!=NULL; nodeCounter= nodesPid->status=available;nodeCounter++)
+          for (nodeCounter==NULL; nodeCounter= nodesPid->Node_state=available;nodeCounter++)
           {
                nodeCounter; 
           }
@@ -108,14 +108,14 @@ char argv;
 signal(SIGINT,master_Stop_handler);
 /* create nodes in base of parameters given */
 for(nodeCounter=0;nodeCounter<par->SO_NODES_NUM;nodeCounter++){
-     nodesPid[nodeCounter].status=available;
+     nodesPid[nodeCounter].Node_state=available;
      nodesPid[nodeCounter].balance=0;
      /*generateNode(nodeArgv[1],nodeCounter);  */
      
 }
 /* create user in base of parameters given*/
 for(userCounter=0;userCounter<par->SO_USER_NUM;userCounter++){
-     userPid[userCounter].status=alive;
+     userPid[userCounter].Us_state=ALIVE;
      userPid[userCounter].balance=0;
      /*generateUser(&userArgv[0],userCounter);*/
 }
