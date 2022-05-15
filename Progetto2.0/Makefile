@@ -21,7 +21,7 @@ all:
 master:$(MASTER)
 	$(CC) $(CFLAGS) -O2 source/Master.c -o Master
 
-user: $(USER)
+user: $(USERS)
 	$(CC) $(CFLAGS) -O2 source/Users.c  -o Users
 
 nodes: $(NODE)
