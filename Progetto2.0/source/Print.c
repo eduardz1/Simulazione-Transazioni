@@ -1,9 +1,9 @@
 #include "include/Print.h"
 #include "include/Conf.h"
 #include <pthread.h> 
+#include <stdio.h>
+#include <stdlib.h>
 
-
-struct ConfigParameters *par;
 
 void *printing(void *p) {
   FILE *fp;
@@ -15,6 +15,9 @@ void *printing(void *p) {
   printf("i'm *printing function\n");
   printf("-------------------------\n");
   CONF(); 
+
+
+
 /*
   printf("----------- Configuration value ------------\n");
   printf("SO_USER_NUM->%u\n", par->SO_USER_NUM);
@@ -32,6 +35,10 @@ void *printing(void *p) {
   printf("SO_HOPS->%u\n", par->SO_HOPS);
   */
 }
+
+
+
+
 
 /*thread initialization according to
  * https://www.includehelp.com/articles/threading-in-c-programming-language-with-gcc-linux.aspx

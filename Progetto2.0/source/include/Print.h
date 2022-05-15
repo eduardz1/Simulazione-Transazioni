@@ -1,2 +1,2 @@
-#include "Conf.h"
-void *printing();
+
+void *printing(void *p);

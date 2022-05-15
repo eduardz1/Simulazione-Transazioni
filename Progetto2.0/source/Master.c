@@ -7,6 +7,8 @@ struct ConfigParameters *par;
 user *state; 
 user *userPid;
 node *nodesPid;
+int * nodeArgv[]; 
+int * userArgv[]; 
 
 
 void Sh_MemMaster( key_t key,size_t size,int shmflg){  
@@ -38,7 +40,7 @@ void Shared_Memory( key_t key,size_t size,int shmflg){
 
 
 /* generate the user with fork and lauch ./users with execve*/
-void generateUser(char *userArgv[],int uCounter) {    /*need to implement uCounter !! */
+void generateUser(&userArgv[],int uCounter) {    /*need to implement uCounter !! */
      pid_t uPid=fork();
      int *Status; 
      switch(uPid){
@@ -61,7 +63,7 @@ void generateUser(char *userArgv[],int uCounter) {    /*need to implement uCount
      } 
 }
 
-void generateNode(int **nodeArgv[],int nodeCounter) {
+void generateNode(&nodeArgv[],int nodeCounter) {
      pid_t nPid=fork();
           switch (nPid)
           {
@@ -110,14 +112,14 @@ signal(SIGINT,master_Stop_handler);
 for(nodeCounter=0;nodeCounter<par->SO_NODES_NUM;nodeCounter++){
      nodesPid[nodeCounter].Node_state=available;
      nodesPid[nodeCounter].balance=0;
-     /*generateNode(nodeArgv[1],nodeCounter);  */
+     generateNode(nodeArgv[0],nodeCounter);  
      
 }
 /* create user in base of parameters given*/
 for(userCounter=0;userCounter<par->SO_USER_NUM;userCounter++){
      userPid[userCounter].Us_state=ALIVE;
      userPid[userCounter].balance=0;
-     /*generateUser(&userArgv[0],userCounter);*/
+     generateUser(&userArgv[0],userCounter);
 }
 
 }

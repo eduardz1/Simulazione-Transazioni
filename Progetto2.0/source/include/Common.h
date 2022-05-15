@@ -1,16 +1,19 @@
-#ifndef COMMON_FILE
-#define COOMON_FILE
-
+#ifndef COMMON_H_INCLUDE
+#define COOMON_H_INCLUDE
+#endif
 #ifndef  _GNU_SOURCE
 #define  _GNU_SOURCE
 /*#include <bits/types/struct_timespec.h>*/
 #endif
-#ifndef _USE_GNU
-#endif 
+
 #ifndef NULL
 #define NULL 0
 #endif
- 
+
+
+
+
+
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -30,6 +33,7 @@
 #include <sys/wait.h>
 #include <limits.h>
 #include <pthread.h> 
+#include "Conf.h"
 
 #ifndef MS_QUEUE
 #define SO_REGISTRY_SIZE 100
@@ -39,8 +43,8 @@
 
 struct ConfigParameters
 {
-    unsigned int SO_USER_NUM;
-    unsigned int SO_NODES_NUM;
+    unsigned int SO_USER_NUM ;
+    unsigned int SO_NODES_NUM ;
     unsigned int SO_BUDGET_INIT;
     char SO_REWARD; 
     unsigned long SO_MIN_TRANS_GEN_NSEC;
@@ -59,7 +63,7 @@ typedef struct UserStatus
 {
     pid_t usPid; 
     unsigned int balance; 
-    enum  Us_status                    /* Enum: ASSEGNA NOMI A COSTANTI--> Ogni costante ha una flag numerata "NON VISIBILE " */
+    enum  Us_status  
     { 
       ALIVE,
       NOTAVAIBLE,
@@ -81,7 +85,7 @@ typedef struct UserStatus
     }Node_state;
 }node;
 
-#endif
+
 
 
 typedef struct MoneyTransaction
@@ -97,7 +101,7 @@ typedef struct MoneyTransaction
        processing,
        confirmed,
        aborted 
- } ; 
+ }MoneyStatusTrans; 
  
 }transaction;
 
@@ -111,5 +115,3 @@ typedef struct Block
 
   }Block_;
 
-
-#endif 
