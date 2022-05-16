@@ -43,7 +43,7 @@
 #define SO_BLOCK_SIZE 10
 
 
-typedef struct _ConfigParameters
+typedef struct COnfigParameters
 {
     unsigned int SO_USER_NUM  ;
     unsigned int SO_NODES_NUM ;
