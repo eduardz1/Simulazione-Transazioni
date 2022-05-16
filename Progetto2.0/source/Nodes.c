@@ -38,9 +38,10 @@ void transaction_pool_init(pool *transPool){
 int add_to_pool(pool *transPool, struct msgbuf_trans *message){
   struct msgbuf_trans *newTransaction = malloc(sizeof(struct msgbuf_trans));
     if(newTransaction==NULL){
-      printf("----malloc error-----");
+      perror("MALLOC ERROR IN POOL\n ");
+      exit(EXIT_FAILURE);
     }
-
+while(newTransaction!=NULL){
   newTransaction->Message_Transaction=message->Message_Transaction;
   newTransaction->Message_Transaction.next=NULL;
 
@@ -48,6 +49,7 @@ int add_to_pool(pool *transPool, struct msgbuf_trans *message){
     transPool->head=newTransaction;
 
   }
+}
   return SUCCESS; 
 }
 
@@ -78,7 +80,7 @@ void Message_Queue(){
 */
     /*PRINT'S */
     printf("MESS_RECIVED %lu",Message_Buff->mesText);    
-    system("MESG_out.txt"); 
+    fprintf("MESG_out.txt","r+"); 
      
 }
 

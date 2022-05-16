@@ -15,9 +15,12 @@ unsigned int userCounter;
 
 void Sh_MemMaster( key_t key,size_t size,int shmflg){  
      int m_id; 
-     int ShInit=shmget(key,sizeof(SO_REGISTRY_SIZE)*2,IPC_CREAT|0666); /*ShdMem Define Area*/  /* Raddoppio l'area per evitare saturazioni*/
-    char*shm=shmat(ShInit,NULL,0); /*Attach ShMem;*/ 
-    int shmdet=shmdt(ShInit); /*Detach ShMem*/
+     int ShInit;
+     char  *shm;  
+     int shmdet; 
+     ShInit=shmget(key,sizeof(SO_REGISTRY_SIZE)*2,IPC_CREAT|0666); /*ShdMem Define Area*/  /* Raddoppio l'area per evitare saturazioni*/
+     shm=shmat(ShInit,NULL,0); /*Attach ShMem;*/ 
+     shmdet=shmdt(ShInit); /*Detach ShMem*/
     system("./Users");
 }
 
@@ -27,8 +30,9 @@ void Sh_UserPID(key_t key,size_t size,int shmflg){
  int Sh_UserPIDDet;
  int Sh_UserPIDInit;
  int id; 
+ char *Sh_UserPIDAttach;
  Sh_UserPIDInit=shmget(key,sizeof(ConfigParameters.SO_USER_NUM),IPC_CREAT|0666); 
- char * Sh_UserPIDAttach=shmat(Sh_UserPID,NULL,0); 
+ Sh_UserPIDAttach=shmat(Sh_UserPID,NULL,0); 
  Sh_UserPIDDet=shmdt(Sh_UserPIDInit); 
 }
 
@@ -36,7 +40,8 @@ void Sh_UserPID(key_t key,size_t size,int shmflg){
 void Shared_Memory( key_t key,size_t size,int shmflg){  
      int m_id; 
      int *shm; 
-     int ShInit=shmget(key,sizeof(SO_REGISTRY_SIZE)*2,IPC_CREAT|0666); /*ShdMem Define Area*/  
+     int ShInit; 
+     ShInit=shmget(key,sizeof(SO_REGISTRY_SIZE)*2,IPC_CREAT|0666); /*ShdMem Define Area*/  
      shm=shmat(ShInit,NULL,0); /*Attach ShMem;*/ 
      int shmdt(const void *shmaddr); /*Detach ShMem*/
 }
