@@ -4,7 +4,7 @@
 #define CONF_FILE "conf.txt"
 #define NUM_PARAMETERS 13
 #define CONF_ERROR -1
-struct ConfigParameters *par;
+struct _ConfigParameters *par;
 int main(){
     assign_defaults(); 
     parse_parameters(); 
@@ -12,7 +12,7 @@ int main(){
 }
   
 
-void assign_defaults(struct ConfigParameters *par)
+void assign_defaults(struct _ConfigParameters *par)
 {
     par->SO_USER_NUM = 100;
     par->SO_NODES_NUM = 10;

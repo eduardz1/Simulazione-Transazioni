@@ -1,11 +1,13 @@
 #include "include/Common.h"
+#include "Util/Ms_Queue.h"
 /*#include <bits/time.h>*/
 #include <sys/types.h>
 #include <time.h>
 
-struct ConfigParameters *par;
-struct msgbuf_trans *tm;
+struct _ConfigParameters *par;
+struct msgbuf_trans *tm; 
 struct node *tmp;
+struct _Block *Block ;
 struct node *sendingTransaction;
 pid_t myPid;
 user *usersPid;
@@ -15,7 +17,7 @@ int getPidUserIndex(int searchPid) {
   unsigned int i;
 
   for (i = 0; i < par->SO_USER_NUM; i++) {
-    if (usersPid[i].pid == searchPid)
+    if (usersPid[i].usPid == searchPid)
       return i;
   }
 }
@@ -28,7 +30,7 @@ void updateStatus(int setStatus) {
     printf("user failed to find");
   }
 
-  usersPid[i].status = setStatus;
+  usersPid[i].Us_state = setStatus;
   if (setStatus == 2) {
     printf("dead");
   }
@@ -39,14 +41,14 @@ void start_transaction(pid_t usersPid, int money, int reward) {
   clock_gettime(CLOCK_REALTIME, &exTime);
 
   tm->m_type = TRANSACTION_MTYPE;
-  tm->transactionMessage.uTrans.Sender = myPid;
-  tm->transactionMessage.uTrans.Receiver = usersPid;
-  tm->transactionMessage.uTrans.Money = money;
-  tm->transactionMessage.uTrans.Reward = reward;
-  tm->transactionMessage.uTrans.T_status = pending;
+  tm->Message_Transaction.uTrans.Sender = myPid;
+  tm->Message_Transaction.uTrans.Receiver = usersPid;
+  tm->Message_Transaction.uTrans.Money = money;
+  tm->Message_Transaction.uTrans.Reward = reward;
+  tm->Message_Transaction.uTrans.MoneyStatusTrans = pending;
 
-  tm->transactionMessage.uTrans.time = exTime;
-  tm->transactionMessage.hops = par->SO_HOPS;
+  /*tm->Message_Transaction.uTrans. = exTime;*/
+  tm->Message_Transaction.hops = ConfigParameters.SO_HOPS;
 }
 
 
@@ -64,7 +66,7 @@ void CurrentBalance() {
   int j;
   int accumulate = 0;
   unsigned int tmpBalance = par->SO_BUDGET_INIT;
-  block tmpLedger[SO_REGISTRY_SIZE];
+  Block tmpLedger[SO_REGISTRY_SIZE];
 
   for (i = 0; i < SO_REGISTRY_SIZE; < i++) {
     /*if transaction is out-going remove Money+Reward else add to receiver Money

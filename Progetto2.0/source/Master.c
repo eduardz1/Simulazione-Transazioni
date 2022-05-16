@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #define USER_NAME "./Users"
 #define USER_NODE "./Nodes"
-struct ConfigParameters *par;
+struct _ConfigParameters *par;
 user *state; 
 user *userPid;
 node *nodesPid;
@@ -21,11 +21,12 @@ void Sh_MemMaster( key_t key,size_t size,int shmflg){
 
 
 void Sh_UserPID(key_t key,size_t size,int shmflg){ 
- 
-int id; 
-int Sh_UserPIDInit=shmget(key,sizeof(par->SO_USER_NUM),IPC_CREAT|0666); 
-char * Sh_UserPIDAttach=shmat(Sh_UserPID,NULL,0); 
-int Sh_UserPIDDet=shmdt(Sh_UserPIDInit); 
+ int Sh_UserPIDDet;
+ int Sh_UserPIDInit;
+ int id; 
+ Sh_UserPIDInit=shmget(key,sizeof(ConfigParameters.SO_USER_NUM),IPC_CREAT|0666); 
+ char * Sh_UserPIDAttach=shmat(Sh_UserPID,NULL,0); 
+ Sh_UserPIDDet=shmdt(Sh_UserPIDInit); 
 }
 
 
@@ -40,46 +41,48 @@ void Shared_Memory( key_t key,size_t size,int shmflg){
 
 
 /* generate the user with fork and lauch ./users with execve*/
-void generateUser(int * userArgv[],int uCounter) {    /*need to implement uCounter !! */
+void generateUser() {    /*need to implement uCounter !! */
+     int j ; 
+     for ( j = 0; j < ConfigParameters.SO_USER_NUM; j++)
+     {
+          /* code */
+     
+     
      pid_t uPid=fork();
      switch(uPid){
-          case -1:
-               printf("error forking user");
-               break;
-          case 0:
-               execve(USER_NAME,userArgv,NULL); 
-               popen("r+",USER_NAME); 
-               pclose(USER_NAME); /*look man execve in case of doubt*/
-               break;
-
-          default:
-               userPid[uCounter].usPid=uPid;
-               return;
+      case -1 : 
+      perror("USER SPAWN ERROR CHECK IT \n"); 
+      exit(EXIT_FAILURE); 
+      case 0 : 
+      userPid[j].usPid=getpid(); 
+      userPid[j].balance=0; 
+      userPid[j].Us_state=ALIVE; 
+      break;
+      default: 
+      break;  
+      } 
      }
-
-     for (userArgv==NULL;userPid->Us_state=ALIVE;uCounter++){ 
-        uCounter; 
-     } 
 }
 
-void generateNode(int * nodeArgv[],int nodeCounter) {
+void generateNode() {
+     int i;
+     for ( i = 0; i < ConfigParameters.SO_NODES_NUM; i++)
+     {
      pid_t nPid=fork();
-          switch (nPid)
-          {
-          case -1:
-               printf("error in forking user");
-               break;
-          case 0:
-               execve(USER_NODE,nodeArgv,NULL); /*same of generateUser();*/
-          default:
-               nodesPid[nodeCounter].nodPid=nPid;
-               break;
-          }
-          for (nodeCounter==NULL; nodeCounter= nodesPid->Node_state=available;nodeCounter++)
-          {
-               nodeCounter; 
-          }
-          
+      switch (nPid)
+      {
+      case -1:
+           perror("NODE'S FAILURE");
+           exit(EXIT_FAILURE);
+           break;
+      case 0:
+      nodesPid[i].nodPid=getpid();
+      nodesPid[i].balance=0;
+      break;
+      default:
+           break;
+      }
+     }          
  }
 
 
@@ -104,17 +107,7 @@ void master_Stop_handler(int sigum){
 int main(){
 
 /* create nodes in base of parameters given */
-for(nodeCounter=0;nodeCounter<par->SO_NODES_NUM;nodeCounter++){
-     nodesPid[nodeCounter].Node_state=available;
-     nodesPid[nodeCounter].balance=0;
-     generateNode(NULL,nodeCounter);  
-     
-}
-/* create user in base of parameters given*/
-for(userCounter=0;userCounter<par->SO_USER_NUM;userCounter++){
-     userPid[userCounter].Us_state=ALIVE;
-     userPid[userCounter].balance=0;
-     generateUser(NULL,userCounter);
-}
+generateNode();  
+generateUser();
 signal(SIGINT,master_Stop_handler);
 }

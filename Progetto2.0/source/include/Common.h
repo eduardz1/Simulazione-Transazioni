@@ -42,9 +42,10 @@
 #define TRANSACTION_MTYPE 2800 
 #define SO_BLOCK_SIZE 10
 
-struct ConfigParameters
+
+typedef struct _ConfigParameters
 {
-    unsigned int SO_USER_NUM ;
+    unsigned int SO_USER_NUM  ;
     unsigned int SO_NODES_NUM ;
     unsigned int SO_BUDGET_INIT;
     char SO_REWARD; 
@@ -57,7 +58,8 @@ struct ConfigParameters
     unsigned int SO_SIM_SEC;
     unsigned int SO_FRIENDS_NUM;
     unsigned int SO_HOPS;
-};
+}configparameter;
+extern configparameter ConfigParameters; 
 
    
 typedef struct UserStatus
