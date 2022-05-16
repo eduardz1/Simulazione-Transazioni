@@ -4,17 +4,10 @@
 #include <signal.h>   /* for signal handler*/
 #include <stdlib.h> /*for exit function*/
 
-void master_Stop_handler(int sigum);
-/*
-struct Transaction  
-{
-    timestamp; 
-    reciver; 
-    
-}; */
 
 void Sh_MemMaster( key_t key,size_t size,int shmflg); 
 void Sh_UserPID(key_t key,size_t size,int shmflg);
-void GenerateUser(char userArgv[],int userCounter);
+void Shared_Memory( key_t key,size_t size,int shmflg);
+void generateUser(int * userArgv[],int uCounter);
+void generateNode(int *nodeArgv[],int nodeCounter);
 void master_Stop_handle(int signum); 
-void Node_Sem_init();

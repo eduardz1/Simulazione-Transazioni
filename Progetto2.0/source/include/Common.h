@@ -33,9 +33,10 @@
 #include <sys/wait.h>
 #include <limits.h>
 #include <pthread.h> 
-#include "Conf.h"
+
 
 #ifndef MS_QUEUE
+#endif 
 #define SO_REGISTRY_SIZE 100
 
 #define TRANSACTION_MTYPE 2800 
