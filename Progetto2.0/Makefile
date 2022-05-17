@@ -1,6 +1,6 @@
 CC=gcc
-CFLAGS= -std=c89 -g -Wall  -pedantic -D_GNU_SOURCE -lpthread
-DEBUG= -DDEBUG -g -Wall -O0
+CFLAGS= -std=c89 -g  -Wall  -pedantic -D_GNU_SOURCE 
+
 
 # Dependencies
 MASTER=source/Master.c source/include/Master.h
@@ -16,20 +16,20 @@ delConf:
 	source ./delConf.sh
 
 all: 
-	Master  Users Nodes
+	nodes master users
 
 master:$(MASTER)
-	$(CC) $(CFLAGS) -O2 source/Master.c -o Master
+	$(CC) $(CFLAGS)  source/Master.c -o Master
 
 user: $(USERS)
-	$(CC) $(CFLAGS) -O2 source/Users.c  -o Users
+	$(CC) $(CFLAGS)  source/Users.c  -o Users
 
 nodes: $(NODE)
-	$(CC) $(CFLAGS) -O0 source/Nodes.c -o Nodes
+	$(CC) $(CFLAGS)  source/Nodes.c -o Nodes
 
 print:$(PRINT)
-	$(CC) $(CFLAGS) -O0 source/Print.c  -v -o Print
+	$(CC) $(CFLAGS)  source/Print.c  -v -lpthread -o Print
 parser:$(PARSER)	
-	$(CC) $(CFLAGS) -O0 source/Parser.c -o Parser
-
+	$(CC) $(CFLAGS)  source/Parser.c -o Parser
+	
 run: ./Master
