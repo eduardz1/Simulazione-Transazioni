@@ -3,7 +3,7 @@
 #include <sys/types.h>
 #include <signal.h>   /* for signal handler*/
 #include <stdlib.h> /*for exit function*/
-
+pid_t nPid;
 
 void Sh_MemMaster( key_t key,size_t size,int shmflg); 
 void Sh_UserPID(key_t key,size_t size,int shmflg);

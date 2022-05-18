@@ -1,10 +1,5 @@
 #include "../include/Common.h"
-key_t Mes_Key ; 
-int Message_ID; 
-int Message_get; 
-int Message_Send; 
-int Message_Rcv; 
-int Message_Ctrl; 
+
 const void *Message_p; 
 size_t Message_size; 
 struct msgbuf_trans * Message_Buff; 
@@ -13,9 +8,10 @@ struct msgbuf_trans * Message_Buff;
 
 
 
-struct msgbuf_trans
-{
-  long m_type;
+typedef struct msgbuf_trans
+{ 
+  size_t Size_Msg; 
+  int  m_type;
   char mesText[1];
     struct message
     {
@@ -23,7 +19,8 @@ struct msgbuf_trans
       transaction uTrans;
       struct msgbuf_trans *next;
     }Message_Transaction;
-};
+}Message;
+
 /*PROTOTYPE'S */
 void Message_Queue();
 
