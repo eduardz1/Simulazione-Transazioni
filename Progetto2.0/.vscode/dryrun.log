@@ -1,5 +1,6 @@
-make --dry-run --always-make --keep-going --print-directory
+make --dry-run --keep-going --print-directory
 make: Entering directory `/Users/popper/Desktop/Folders/Simulazione-Transazioni/Progetto2.0'
 gcc -std=c89 -g  -Wall  -pedantic -D_GNU_SOURCE  source/Conf.c	
+ 
 make: Leaving directory `/Users/popper/Desktop/Folders/Simulazione-Transazioni/Progetto2.0'
  

@@ -6,8 +6,10 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
 
-# Make data base, printed on Thu Jul 21 18:19:18 2022
+ 
+# Make data base, printed on Fri Jul 22 12:15:43 2022
 
 # Variables
 
@@ -142,7 +144,7 @@ VSCODE_PID = 21569
 # makefile (from `Makefile', line 10)
 PARSER = source/Parser.c source/include/Parser.h
 # variable set hash-table stats:
-# Load=65/1024=6%, Rehash=0, Collisions=2/96=2%
+# Load=65/1024=6%, Rehash=0, Collisions=2/98=2%
 
 # Pattern-specific Variable Values
 
@@ -150,9 +152,10 @@ PARSER = source/Parser.c source/include/Parser.h
 
 # Directories
 
-# . (device 16777234, inode 8369473): 14 files, no impossibilities.
+# . (device 16777234, inode 8369473): 15 files, no impossibilities.
 
-# 14 files, no impossibilities in 1 directories.
+# 15 files, no impossibilities in 1 directories.
+ 
 
 # Implicit Rules
 
@@ -164,7 +167,7 @@ user: source/Users.c source/include/Users.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 25):
+#  commands to execute (from `Makefile', line 24):
 	$(CC) $(CFLAGS)  source/Users.c  -o Users
 	
 
@@ -174,34 +177,14 @@ source/Master.c:
 #  Modification time never checked.
 #  File has not been updated.
 
-all:
+all: nodes master users
 #  Command-line target.
-#  Implicit rule search has not been done.
-#  Implicit/static pattern stem: `'
+#  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
-# automatic
-# @ := all
-# automatic
-# % := 
-# automatic
-# * := 
-# automatic
-# + := 
-# automatic
-# | := 
-# automatic
-# < := 
-# automatic
-# ^ := 
-# automatic
-# ? := 
 # variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/10=10%
-#  commands to execute (from `Makefile', line 19):
-	nodes master users
-	
+# Load=0/32=0%, Rehash=0, Collisions=0/4=0%
 
 # Not a target:
 source/include/Users.h:
@@ -219,7 +202,7 @@ print: source/Print.c source/include/Print.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 31):
+#  commands to execute (from `Makefile', line 30):
 	$(CC) $(CFLAGS)  source/Print.c  -v -lpthread -o Print
 	
 
@@ -232,7 +215,7 @@ source/include/Print.h:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-17 15:04:33
+#  Last modified 2022-07-22 12:15:14
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -254,7 +237,7 @@ parser: source/Parser.c source/include/Parser.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 33):
+#  commands to execute (from `Makefile', line 32):
 	$(CC) $(CFLAGS)  source/Parser.c -o Parser
 	
 
@@ -277,9 +260,29 @@ run: Master
 
 nodes:
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 28):
+#  Implicit/static pattern stem: `'
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := nodes
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := 
+# automatic
+# | := 
+# automatic
+# < := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  commands to execute (from `Makefile', line 27):
 	$(CC) $(CFLAGS)  source/Nodes.c -o Nodes
 	
 
@@ -299,10 +302,15 @@ master: source/Master.c source/include/Master.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
-#  commands to execute (from `Makefile', line 22):
+#  commands to execute (from `Makefile', line 21):
 	$(CC) $(CFLAGS)  source/Master.c -o Master
 	
+
+# Not a target:
+users:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 source/include/Master.h:
@@ -327,7 +335,7 @@ conf:
 	
 
 # files hash-table stats:
-# Load=21/1024=2%, Rehash=0, Collisions=0/44=0%
+# Load=22/1024=2%, Rehash=0, Collisions=0/48=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -339,6 +347,6 @@ conf:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Jul 21 18:19:18 2022
+# Finished Make data base on Fri Jul 22 12:15:43 2022
 
  

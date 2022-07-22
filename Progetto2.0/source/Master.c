@@ -115,11 +115,14 @@ void master_Stop_handler(int sigum){
 
 int main(){
 int i ; 
+user * USpid; 
+int PID_US = USpid->usPid ;
+
 /* create nodes in base of parameters given */
 for ( i = 0; i <par->SO_USER_NUM ; i++)
 {
-     pid_t uPid=fork();
-     switch(uPid){
+     PID_US = fork();
+     switch(PID_US){
       case -1 : 
           perror("USER SPAWN ERROR CHECK IT \n"); 
           exit(EXIT_FAILURE); 
@@ -129,8 +132,6 @@ for ( i = 0; i <par->SO_USER_NUM ; i++)
           User[i].balance=0; 
           User[i].Us_state=ALIVE; 
           generateUser();
-          
-          
       break;
       default: 
       break;  

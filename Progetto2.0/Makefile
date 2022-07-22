@@ -15,8 +15,7 @@ conf:
 delConf:
 	source ./delConf.sh
 
-all: 
-	nodes master users
+all:nodes master users 
 
 master:$(MASTER)
 	$(CC) $(CFLAGS)  source/Master.c -o Master
