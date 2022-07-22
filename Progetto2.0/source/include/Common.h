@@ -81,7 +81,7 @@ typedef struct UserStatus
     unsigned long balance; 
     struct Node *head; 
     struct Node *next; 
-    
+    transaction* transaPtr;
     enum Node_stat {
         available,
         full
@@ -115,6 +115,6 @@ typedef struct Block
   {
     transaction t_list[SO_BLOCK_SIZE];
     unsigned int blockIndex; /*the index need to be updated when a block is written */
-
+    char tmpLedger[]; 
   }Block_;
 

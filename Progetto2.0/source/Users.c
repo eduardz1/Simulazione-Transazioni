@@ -4,9 +4,9 @@
 #include <sys/types.h>
 #include <time.h>
 
-struct _ConfigParameters *par;
+configparameter  *par;
 struct msgbuf_trans *tm; 
-struct node *tmp;
+node *tmp;
 struct _Block *Block ;
 struct node *sendingTransaction;
 pid_t myPid;
@@ -54,45 +54,65 @@ void start_transaction(pid_t usersPid, int money, int reward) {
 
 void Sh_MemUser(key_t key,size_t size,int shmflg){
     int Mem_id; 
-    int Sh_MemInit=shmget(key,sizeof(par->SO_USER_NUM),IPC_CREAT|0666); /define area/
+    int Sh_MemInit=shmget(key,sizeof(par->SO_USER_NUM),IPC_CREAT|0666); /*define area*/
     char*shmAttach=shmat(Sh_MemInit,NULL,0); /*Attach Area*/
     int ShDet=shmdt(Sh_MemInit); /*Detach Area*/ 
 
 }
 
-/*saves user balance when the program is interrupted in tmpBalance*/
-void CurrentBalance() {
-  int i;
-  int j;
-  int accumulate = 0;
-  unsigned int tmpBalance = par->SO_BUDGET_INIT;
-  Block tmpLedger[SO_REGISTRY_SIZE];
-
-  for (i = 0; i < SO_REGISTRY_SIZE; < i++) {
-    /*if transaction is out-going remove Money+Reward else add to receiver Money
-     */
-    for (j = 0; j < SO_BLOCK_SIZE; i++) {
-      if (tmpLedger[i].t_list[j].Sender == myPid) {
-        accumulate -=
-            (tmpLedger[i].t_list[j].Money + &tmpLedger[i].t_list[j].Reward);
-      } else if (tmpLedger[i].t_list[j].Receiver == myPid) {
-        accumulate += tmpLedger[i].t_list[j].Money;
-      }
+void Kill_User(int signo){
+    int i;
+    for(i=0;i<par->SO_USER_NUM;i++){
+        kill(usersPid[i].usPid,SIGKILL);
     }
-  }
-  tmp = sendingTransaction;
-
-  while (tmp != NULL) {
-    accumulate -= (tmp->transaction.Money + tmp->transaction.Reward);
-    tmp = tmp->next;
-  }
-  if (accumulate * (-1) > tmpBalance) {
-    fprintf(stderr,
-            "*** [USER %d] errror in calculating balance, overflow ***\n",
-            myPID);
-    update_status(2);
-    killpg(0, SIGINT);
-  }
+    exit(0);
 }
 
-int main() { printf("i'm users"); /*just a debug print*/ }
+void Alive_User(pid_t myPid, int money , user * UserStatus){
+    int i;
+    for(i=0;i<par->SO_USER_NUM;i++){
+        if(UserStatus[i].usPid==myPid){
+            UserStatus[i].Us_state=ALIVE;
+        }
+    }
+}
+
+/*saves user balance when the program is interrupted in tmpBalance*/
+void CurrentBalance(user * UserBalance , pid_t myPid , transaction * PidSender) {
+    int i ; 
+    int Use_Balence  = UserBalance->balance; 
+    int Pid_Sender = PidSender->Sender;
+    
+    for ( i = 0; Pid_Sender==myPid ; i++)
+    {
+      getBalamce(); 
+    }
+    
+
+}
+
+int main() { 
+    int i ; 
+    int money;
+    int reward;
+    user * usersPid;
+    transaction * Money; 
+    transaction * Reward ; 
+    money = Money->Money;
+    reward = Reward->Reward;
+
+    int usPid = usersPid->usPid;
+  for ( i = 0; i < par->SO_USER_NUM; i++)
+  {
+    usersPid[i].usPid = fork();
+    if (usersPid[i].usPid <= 0){
+      exit(EXIT_FAILURE); 
+    } 
+    else{ 
+      start_transaction( usPid , money , reward);
+    }
+    
+  }
+  exit(EXIT_SUCCESS);
+  
+  }

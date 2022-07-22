@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #define USER_NAME "./Users"
 #define USER_NODE "./Nodes"
-struct configparameter *par;
-struct StructNode *Node;
-struct UserStatus *User; 
+configparameter *par;
+node *Node;
+user *User; 
 user *state; 
 char *userPid;
 char *nodesPid;
@@ -51,7 +51,7 @@ void Shared_Memory( key_t key,size_t size,int shmflg){
 /* generate the user with fork and lauch ./users with execve*/
 void generateUser(){    /*need to implement uCounter !! */
      int j ; 
-     for ( j = 0; j < ConfigParameters.SO_USER_NUM; j++)
+     for ( j = 0; j <par->SO_USER_NUM; j++)
      {
      pid_t uPid=fork();
      switch(uPid){
@@ -75,7 +75,7 @@ void generateUser(){    /*need to implement uCounter !! */
 
 void generateNode(){
      int i;
-     for ( i = 0; i < ConfigParameters.SO_NODES_NUM; i++)
+     for ( i = 0; i <par->SO_NODES_NUM; i++)
      {
      pid_t nPid=fork();
       switch (nPid)
@@ -114,9 +114,27 @@ void master_Stop_handler(int sigum){
 
 
 int main(){
-
+int i ; 
 /* create nodes in base of parameters given */
-generateNode();  
-generateUser();
-signal(SIGINT,master_Stop_handler);
+for ( i = 0; i <par->SO_USER_NUM ; i++)
+{
+     pid_t uPid=fork();
+     switch(uPid){
+      case -1 : 
+          perror("USER SPAWN ERROR CHECK IT \n"); 
+          exit(EXIT_FAILURE); 
+          break;
+      case 0 : 
+          User[i].usPid=getpid(); 
+          User[i].balance=0; 
+          User[i].Us_state=ALIVE; 
+          generateUser();
+          
+          
+      break;
+      default: 
+      break;  
+      } 
+}
+
 }
