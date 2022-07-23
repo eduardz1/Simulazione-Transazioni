@@ -115,7 +115,7 @@ user * USpid;
 int PID_US = USpid->usPid ;
 
 /* create nodes in base of parameters given */
-for ( i = 0; i <par->SO_USER_NUM ; i++)
+for ( i = 0; i <4 ; i++)
 {
      PID_US = fork();
      switch(PID_US){

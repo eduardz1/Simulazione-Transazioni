@@ -3,9 +3,10 @@
 /*#define SENDER -1*/
 /*struct mesg_buffer *MessageQ;*/
 pool transPool;
+Message message;
 Message *newTransaction;
 Message *Trans_ptr ; 
-
+configparameter * Config ; 
 #define BUFF_MAX 10 
 
 
@@ -40,13 +41,13 @@ void transaction_pool_init(pool *transPool){
   transPool->size=0;
 }
 
-int add_to_pool(pool *transPool, struct msgbuf_trans *message){
-  struct msgbuf_trans *newTransaction = malloc(sizeof(newTransaction));
+int add_to_pool(pool *transPool, Message *message){
+    newTransaction = malloc(sizeof(newTransaction));
     if(newTransaction==NULL){
       perror("MALLOC ERROR IN POOL\n ");
       exit(EXIT_FAILURE);
     }
-while(newTransaction!=NULL){
+  while(newTransaction!=NULL){
   newTransaction->Message_Transaction=message->Message_Transaction;
   newTransaction->Message_Transaction.next=NULL;
 
@@ -58,7 +59,7 @@ while(newTransaction!=NULL){
   return SUCCESS; 
 }
 
-int remove_from_pool(pool *transPool, struct msgbuf_trans *message_t){
+int remove_from_pool(pool *transPool, Message *message_t){
   if(transPool==NULL){
     return ERROR;
   } else if(transPool->head==NULL){
@@ -91,9 +92,9 @@ void Message_Queue(){
     /*MEssage to send */
     msgsnd(Msg_ID,Trans_ptr,sizeof(Trans_ptr->Message_Transaction),0);
     printf("DAta Send :%s \n",Trans_ptr->mesText);
-    Message_Rec(); 
+    Message_Rec( Msg_ID, myPID); 
 }
-void Message_Rec(){ 
+ void Message_Rec(int messageID ,key_t messageKey ){ 
  MSG_Key= &nPid; 
  Msg_ID= msgget(MSG_Key,0666 |IPC_CREAT);
  msgrcv(Msg_ID,Trans_ptr,sizeof(Trans_ptr->Message_Transaction), 1, 0 );  
@@ -105,8 +106,21 @@ void Message_Rec(){
 
 int main(){
   /*Message_Queue();*/
-  transaction_pool_init(&transPool);   
-  add_to_pool(&transPool,newTransaction);
-  remove_from_pool(&transPool, newTransaction);
+int i , j ,l ; 
+printf("TEST MAIN \n"); 
+for(i = 0 ; i < Config->SO_USER_NUM; i++){ 
+      transaction_pool_init(&transPool); 
+      Message_Queue(); 
+      add_to_pool(&transPool , &message); 
+      Message_Rec(Msg_ID, MSG_Key); 
+      remove_from_pool(&transPool , &message); 
+
+
+}
+
+
+
+
+
 }
 
