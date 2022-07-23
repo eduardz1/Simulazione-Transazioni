@@ -69,10 +69,6 @@ void generateUser(){    /*need to implement uCounter !! */
       } 
      }
 }
-
-
-
-
 void generateNode(){
      int i;
      for ( i = 0; i <par->SO_NODES_NUM; i++)

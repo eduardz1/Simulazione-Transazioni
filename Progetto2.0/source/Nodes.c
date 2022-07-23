@@ -3,11 +3,13 @@
 /*#define SENDER -1*/
 /*struct mesg_buffer *MessageQ;*/
 pool transPool;
-struct msgbuf_trans *newTransaction;
-struct msgbuf_trans *Trans_ptr ; 
-#define BUFF_MAX 10 
- int Msg_ID ; 
+Message *newTransaction;
+Message *Trans_ptr ; 
 
+#define BUFF_MAX 10 
+
+
+int Msg_ID ; 
 int Message_Erro; 
 int Money_q; 
 int toend ; 

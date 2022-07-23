@@ -77,15 +77,16 @@ typedef struct UserStatus
  
  typedef struct StructNode
 {
+   
     pid_t nodPid;
     unsigned long balance; 
     struct Node *head; 
     struct Node *next; 
-    transaction* transaPtr;
     enum Node_stat {
         available,
         full
     }Node_state;
+ 
 }node;
 
 

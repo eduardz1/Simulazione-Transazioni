@@ -1,10 +1,10 @@
-#include "include/Common.h"
+#include "../include/Common.h"
 /* #include "include/Parser.h"
  */
 #define CONF_FILE "conf.txt"
 #define NUM_PARAMETERS 13
 #define CONF_ERROR -1
-struct _ConfigParameters *par;
+configparameter *par;
 int main(){
     assign_defaults(); 
     parse_parameters(); 

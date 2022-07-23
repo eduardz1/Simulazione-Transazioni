@@ -1,14 +1,13 @@
-#include "include/Common.h"
-#include "Util/Ms_Queue.h"
+#include "include/Users.h"
 /*#include <bits/time.h>*/
 #include <sys/types.h>
 #include <time.h>
 
 configparameter  *par;
-struct msgbuf_trans *tm; 
+Message *tm; 
 node *tmp;
-struct _Block *Block ;
-struct node *sendingTransaction;
+Block_ *Block ;
+node *sendingTransaction;
 pid_t myPid;
 user *usersPid;
 node *nodesPid;
@@ -77,7 +76,7 @@ void Alive_User(pid_t myPid, int money , user * UserStatus){
     }
 }
 
-/*saves user balance when the program is interrupted in tmpBalance*/
+/*saves user balance when the program is interrupted in tmpBalance
 void CurrentBalance(user * UserBalance , pid_t myPid , transaction * PidSender) {
     int i ; 
     int Use_Balence  = UserBalance->balance; 
@@ -90,7 +89,7 @@ void CurrentBalance(user * UserBalance , pid_t myPid , transaction * PidSender) 
     
 
 }
-
+*/
 int main() { 
     int i ; 
     int money;

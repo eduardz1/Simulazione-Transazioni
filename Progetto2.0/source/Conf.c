@@ -1,3 +1,4 @@
+#include "./include/Conf.h"
 /* THIS FILE CONTAIN THE VALUE OF THE CONFIGURATION PARAMETERS*/
 int CONF() {
   putenv("SO_USER_NUM=100");

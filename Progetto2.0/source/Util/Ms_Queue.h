@@ -2,7 +2,7 @@
 
 const void *Message_p; 
 size_t Message_size; 
-struct msgbuf_trans * Message_Buff; 
+ 
 
 
 
