@@ -33,7 +33,7 @@
 #include <sys/wait.h>
 #include <limits.h>
 #include <pthread.h> 
-
+#include "Util/Ms_Queue.h"
 
 #ifndef MS_QUEUE
 #endif 
@@ -43,7 +43,7 @@
 #define SO_BLOCK_SIZE 10
 
 
-typedef struct COnfigParameters
+typedef struct ConfigParameters
 {
     unsigned int SO_USER_NUM  ;
     unsigned int SO_NODES_NUM ;
@@ -94,7 +94,7 @@ typedef struct UserStatus
 
 typedef struct MoneyTransaction
 {
- /*struct timespec time;*/
+ struct timespec time;
     pid_t Sender; 
     pid_t Receiver; 
     int Money; 

@@ -10,4 +10,4 @@ void Sh_UserPID(key_t key,size_t size,int shmflg);
 void Shared_Memory( key_t key,size_t size,int shmflg);
 void generateUser();
 void generateNode();
-void master_Stop_handle(int signum); 
+void signal_handler(int signum);

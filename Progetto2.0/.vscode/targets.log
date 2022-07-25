@@ -1,155 +1,235 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-# GNU Make 3.81
-# Copyright (C) 2006  Free Software Foundation, Inc.
-# This is free software; see the source for copying conditions.
-# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
-# PARTICULAR PURPOSE.
+# GNU Make 4.3
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
 
-# This program built for i386-apple-darwin11.3.0
- 
-make: *** No rule to make target `users', needed by `all'.  Stop.
-
-
-# Make data base, printed on Fri Jul 22 19:54:16 2022
+# Make data base, printed on Sat Jul 23 18:20:41 2022
 
 # Variables
 
-# automatic
-<D = $(patsubst %/,%,$(dir $<))
-# automatic
-?F = $(notdir $?)
-# automatic
-?D = $(patsubst %/,%,$(dir $?))
-# automatic
-@D = $(patsubst %/,%,$(dir $@))
-# automatic
-@F = $(notdir $@)
-# makefile
-CURDIR := /Users/popper/Desktop/Folders/Simulazione-Transazioni/Progetto2.0
-# makefile
-SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"it","availableLanguages":{"*":"it"},"_languagePackId":"ab4c584458951cae9fe6dd31374e1344.it","_translationsConfigFile":"/Users/popper/Library/Application Support/Code/clp/ab4c584458951cae9fe6dd31374e1344.it/tcf.json","_cacheRoot":"/Users/popper/Library/Application Support/Code/clp/ab4c584458951cae9fe6dd31374e1344.it","_resolvedLanguagePackCoreLocation":"/Users/popper/Library/Application Support/Code/clp/ab4c584458951cae9fe6dd31374e1344.it/3b889b090b5ad5793f524b5d1d39fda662b96a2a","_corruptedFile":"/Users/popper/Library/Application Support/Code/clp/ab4c584458951cae9fe6dd31374e1344.it/corrupted.info","_languagePackSupport":true}
+JAVA_HOME = /usr/lib/jvm/java-17-openjdk
 # environment
-_ = /usr/bin/make
-# makefile (from `Makefile', line 2)
-CFLAGS = -std=c89 -g  -Wall  -pedantic -D_GNU_SOURCE 
-# makefile (from `Makefile', line 1)
-MAKEFILE_LIST :=  Makefile
+GDK_BACKEND = x11
 # environment
-__CFBundleIdentifier = com.microsoft.VSCode
+LC_ALL = C
 # environment
-VSCODE_CWD = /
-# environment
-PATH = /usr/local/bin:/usr/local/sbin:~/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/Library/Apple/usr/bin
-# makefile (from `Makefile', line 7)
+NO_AT_BRIDGE = 1
+# makefile (from 'Makefile', line 7)
 USERS = source/Users.c source/include/Users.h
 # environment
-LaunchInstanceID = 380AAF62-1D8B-4E05-9A60-E13D3C3A9CF8
+GTK_RC_FILES = /etc/gtk/gtkrc:/home/francesco/.gtkrc:/home/francesco/.config/gtkrc
 # environment
-ELECTRON_RUN_AS_NODE = 1
+CHROME_EXECUTABLE = /usr/bin/google-chrome-stable
+# environment
+ZEITGEIST_DATA_PATH = /home/francesco/.local/share/zeitgeist
+# environment
+VSCODE_CWD = /home/francesco
 # default
-.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
+MAKE_COMMAND := make
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.CCvmnoek4g/Listeners
+GTK3_MODULES = xapp-gtk3-module
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+.VARIABLES := 
+# environment
+PWD = /home/francesco/Documents/Universita/2_Anno/SO/Simulazione-Transazioni/Progetto2.0
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+MAIL = /var/spool/mail/francesco
+# environment
+XDG_DATA_DIRS = /usr/local/share:/usr/share:/var/lib/snapd/desktop
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
 # automatic
 %F = $(notdir $%)
 # environment
-PWD = /Users/popper/Desktop/Folders/Simulazione-Transazioni/Progetto2.0
+VSCODE_CODE_CACHE_PATH = /home/francesco/.config/Code/CachedData/3b889b090b5ad5793f524b5d1d39fda662b96a2a
 # environment
-ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session1
 # environment
-VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+LANG = C
 # environment
-HOME = /Users/popper
+XAUTHORITY = /home/francesco/.Xauthority
 # default
-MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
+.LOADED := 
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# makefile
+MAKEFLAGS = pqrR
+# makefile
+CURDIR := /home/francesco/Documents/Universita/2_Anno/SO/Simulazione-Transazioni/Progetto2.0
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/popper/Library/Application Support/Code/CachedData/3b889b090b5ad5793f524b5d1d39fda662b96a2a
-# environment
-LOGNAME = popper
-# environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
-# environment
-VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # automatic
-^D = $(patsubst %/,%,$(dir $^))
+*D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_FLAGS = 0x0
+PAM_KWALLET5_LOGIN = /run/user/1000/kwallet5.socket
+# environment
+MFLAGS = -pqrR
 # default
-MAKE = $(MAKE_COMMAND)
+.SHELLFLAGS := -c
+# environment
+XDG_CONFIG_DIRS = /home/francesco/.config/kdedefaults:/etc/xdg
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+OMF_PATH = /home/francesco/.local/share/omf
+# environment
+XCURSOR_THEME = Nordic-cursors
+# environment
+XDG_SESSION_DESKTOP = KDE
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST := Makefile
+# automatic
+@F = $(notdir $@)
+# environment
+VSCODE_PID = 82296
+# environment
+XDG_SESSION_TYPE = x11
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# environment
+SESSION_MANAGER = local/francesco-ws:@/tmp/.ICE-unix/1429,unix/francesco-ws:/tmp/.ICE-unix/1429
+# automatic
+*F = $(notdir $*)
+# makefile (from 'Makefile', line 10)
+PARSER = source/Parser.c source/include/Parser.h
+# environment
+CHROME_DESKTOP = code-url-handler.desktop
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# makefile (from 'Makefile', line 9)
+PRINT = source/Print.c source/include/Print.h
+# makefile
+SHELL = /bin/sh
 # default
 MAKECMDGOALS := all
 # environment
 SHLVL = 2
-# makefile (from `Makefile', line 1)
-CC = gcc
+# environment
+MAKELEVEL := 0
 # default
-MAKE_VERSION := 3.81
+MAKE = $(MAKE_COMMAND)
 # environment
-USER = popper
-# makefile (from `Makefile', line 9)
-PRINT = source/Print.c source/include/Print.h
-# makefile
-.DEFAULT_GOAL := conf
-# automatic
-%D = $(patsubst %/,%,$(dir $%))
+PATH = /usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/var/lib/snapd/snap/bin
 # default
-MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
-# default
-.VARIABLES := 
+MAKEFILES := 
 # environment
-TMPDIR = /var/folders/tc/n9fflz493t1ckr05x_kz0pm00000gn/T/
+MOTD_SHOWN = pam
 # automatic
-*F = $(notdir $*)
+^F = $(notdir $^)
+# makefile (from 'Makefile', line 6)
+MASTER = source/Master.c source/include/Master.h
 # environment
-VSCODE_IPC_HOOK = /Users/popper/Library/Application Support/Code/1.69.2-main.sock
+INVOCATION_ID = e8c56442fa1a48d3a0d00a53ca16401a
 # environment
-MallocNanoZone = 0
-# makefile (from `Makefile', line 8)
-NODES = source/Nodes.c source/include/Nodes.h
-# makefile
-MAKEFLAGS = Rrqp
-# environment
-MFLAGS = -Rrqp
+_JAVA_AWT_WM_NONREPARENTING = 1
 # automatic
-*D = $(patsubst %/,%,$(dir $*))
+?F = $(notdir $?)
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.12970148.12970154
-# automatic
-+D = $(patsubst %/,%,$(dir $+))
+KDE_APPLICATIONS_AS_SCOPE = 1
+# environment
+XDG_SEAT = seat0
+# environment
+XDG_CURRENT_DESKTOP = KDE
 # automatic
 +F = $(notdir $+)
 # environment
-__CF_USER_TEXT_ENCODING = 0x1F5:0x0:0x4
+XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
 # environment
-COMMAND_MODE = unix2003
+DESKTOP_SESSION = plasma
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = KDE
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+QT_SCREEN_SCALE_FACTORS = DP1=1;HDMI1=1;HDMI2=1;HDMI3=1;VIRTUAL1=1;
+# environment
+LOGNAME = francesco
+# environment
+XDG_VTNR = 1
+# makefile
+.DEFAULT_GOAL := conf
+# environment
+SYSTEMD_EXEC_PID = 3126
+# environment
+DISPLAY = :0
+# environment
+GTK_MODULES = canberra-gtk-module
+# environment
+USER = francesco
 # default
-MAKEFILES := 
+MAKE_VERSION := 4.3
+# environment
+KDE_SESSION_UID = 1000
+# environment
+MANAGERPID = 1243
+# makefile (from 'Makefile', line 8)
+NODES = source/Nodes.c source/include/Nodes.h
+# environment
+_ = /usr/bin/make
+# environment
+XDG_RUNTIME_DIR = /run/user/1000
+# makefile (from 'Makefile', line 2)
+CFLAGS = -std=c89 -g  -Wall  -pedantic -D_GNU_SOURCE 
+# environment
+JOURNAL_STREAM = 8:52489
+# environment
+XDG_SESSION_CLASS = user
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+GTK2_RC_FILES = /etc/gtk-2.0/gtkrc:/home/francesco/.gtkrc-2.0:/home/francesco/.config/gtkrc-2.0
+# environment
+HOME = /home/francesco
+# environment
+JDK_HOME = /usr/lib/jvm/java-17-openjdk
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+VSCODE_IPC_HOOK = /run/user/1000/vscode-ef618831-1.69.2-main.sock
+# environment
+XDG_SESSION_ID = 2
+# environment
+XCURSOR_SIZE = 24
+# default
+.RECIPEPREFIX := 
 # automatic
 <F = $(notdir $<)
-# environment
-LC_ALL = C
-# environment
-SECURITYSESSIONID = 186b2
-# automatic
-^F = $(notdir $^)
 # default
 SUFFIXES := 
+# environment
+QT_AUTO_SCREEN_SCALE_FACTOR = 0
+# environment
+VSCODE_CLI = 1
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# environment
+KDE_SESSION_VERSION = 5
 # default
-.INCLUDE_DIRS = /usr/local/include
-# makefile (from `Makefile', line 6)
-MASTER = source/Master.c source/include/Master.h
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink guile load
+# makefile (from 'Makefile', line 1)
+CC = gcc
 # environment
-MAKELEVEL := 0
+KDE_FULL_SESSION = true
 # environment
-LANG = C
-# environment
-VSCODE_PID = 645
-# makefile (from `Makefile', line 10)
-PARSER = source/Parser.c source/include/Parser.h
+OMF_CONFIG = /home/francesco/.config/omf
 # variable set hash-table stats:
-# Load=67/1024=7%, Rehash=0, Collisions=2/96=2%
+# Load=109/1024=11%, Rehash=0, Collisions=2/149=1%
 
 # Pattern-specific Variable Values
 
@@ -157,9 +237,9 @@ PARSER = source/Parser.c source/include/Parser.h
 
 # Directories
 
-# . (device 16777231, inode 8369473): 18 files, no impossibilities.
+# . (device 2050, inode 82581716): 17 files, no impossibilities.
 
-# 18 files, no impossibilities in 1 directories.
+# 17 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -167,75 +247,14 @@ PARSER = source/Parser.c source/include/Parser.h
 
 # Files
 
-user: source/Users.c source/include/Users.h
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 24):
-	$(CC) $(CFLAGS)  source/Users.c  -o Users
-	
-
 # Not a target:
-source/Master.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-22 12:22:58
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-all: nodes master users
-#  Command-line target.
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has not been updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-source/include/Users.h:
+source/Parser.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-.SUFFIXES:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-print: source/Print.c source/include/Print.h
- 
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 30):
-	$(CC) $(CFLAGS)  source/Print.c  -v -lpthread -o Print
-	
-
-# Not a target:
-source/include/Print.h:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-Makefile:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-22 12:15:14
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-source/Users.c:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-source/Print.c:
+source/include/Master.h:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -244,12 +263,84 @@ parser: source/Parser.c source/include/Parser.h
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 32):
+#  recipe to execute (from 'Makefile', line 32):
 	$(CC) $(CFLAGS)  source/Parser.c -o Parser
 	
 
 # Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-23 18:18:29.296555079
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+source/Print.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+ 
+
+print: source/Print.c source/include/Print.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 30):
+	$(CC) $(CFLAGS)  source/Print.c  -v -lpthread -o Print
+
+# Not a target:
+users:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+source/include/Print.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+master: source/Master.c source/include/Master.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 21):
+	$(CC) $(CFLAGS)  source/Master.c -o Master
+
+# Not a target:
+source/include/Users.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 .DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+all: nodes master users
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+
+run: Master
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+source/Master.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+source/Users.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -260,25 +351,32 @@ source/include/Parser.h:
 #  Modification time never checked.
 #  File has not been updated.
 
-run: Master
+conf:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-
-nodes:
-#  Implicit rule search has not been done.
-#  Last modified 2022-07-22 12:33:02
-#  File has been updated.
-#  Successfully updated.
-#  commands to execute (from `Makefile', line 27):
-	$(CC) $(CFLAGS)  source/Nodes.c -o Nodes
-	
+#  recipe to execute (from 'Makefile', line 13):
+	$(CC) $(CFLAGS) source/Conf.c	
 
 # Not a target:
-source/Parser.c:
+.SUFFIXES:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+
+user: source/Users.c source/include/Users.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 24):
+	$(CC) $(CFLAGS)  source/Users.c  -o Users
+
+delConf:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 16):
+	source ./delConf.sh
 
 # Not a target:
 Master:
@@ -286,63 +384,47 @@ Master:
 #  Modification time never checked.
 #  File has not been updated.
 
-master: source/Master.c source/include/Master.h
+nodes:
 #  Implicit rule search has not been done.
-#  Last modified 2022-07-22 12:33:08
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 21):
-	$(CC) $(CFLAGS)  source/Master.c -o Master
-	
-
-# Not a target:
-users:
-#  Implicit rule search has been done.
+#  Implicit/static pattern stem: ''
 #  File does not exist.
-#  File has not been updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-source/include/Master.h:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-17 15:04:29
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := nodes
+# automatic
+# * := 
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-delConf:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 16):
-	source ./delConf.sh
-	
-
-conf:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 13):
-	$(CC) $(CFLAGS) source/Conf.c	
-	
+# Load=8/32=25%, Rehash=0, Collisions=2/13=15%
+#  recipe to execute (from 'Makefile', line 27):
+	$(CC) $(CFLAGS)  source/Nodes.c -o Nodes
 
 # files hash-table stats:
-# Load=22/1024=2%, Rehash=0, Collisions=0/47=0%
+# Load=22/1024=2%, Rehash=0, Collisions=0/48=0%
 # VPATH Search Paths
 
-# No `vpath' search paths.
+# No 'vpath' search paths.
 
-# No general (`VPATH' variable) search path.
+# No general ('VPATH' variable) search path.
 
-# # of strings in strcache: 1
-# # of strcache buffers: 1
-# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
-# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
+# strcache buffers: 1 (0) / strings = 39 / storage = 431 B / avg = 11 B
+# current buf: size = 8162 B / used = 431 B / count = 39 / avg = 11 B
 
-# Finished Make data base on Fri Jul 22 19:54:16 2022
+# strcache performance: lookups = 57 / hit rate = 31%
+# hash-table stats:
+# Load=39/8192=0%, Rehash=0, Collisions=0/57=0%
+# Finished Make data base on Sat Jul 23 18:20:41 2022
 
  

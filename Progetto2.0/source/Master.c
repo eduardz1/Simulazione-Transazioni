@@ -92,15 +92,15 @@ void generateNode(){
 
 
 /* Stop Simulation handler Ctrl-C */
-void master_Stop_handler(int sigum){
+void signal_handler(int signum){
      char c;
-     signal(sigum,SIG_IGN);
+     signal(signum,SIG_IGN);
      printf("you pressed CTRL-C\n" "would you like to quit?[y/n]");
      c=getchar();
      if(c=='y'||c=='Y'){
           exit(0);
      } else {
-          signal(SIGINT,master_Stop_handler);
+        /*  signal(SIGINT,signal_handler);*/
           getchar();
      }
 }
@@ -113,6 +113,7 @@ int main(){
 int i ; 
 user * USpid; 
 int PID_US = USpid->usPid ;
+int signum=SIGINT;
 
 /* create nodes in base of parameters given */
 for ( i = 0; i <4 ; i++)

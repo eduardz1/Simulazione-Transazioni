@@ -15,12 +15,12 @@ conf:
 delConf:
 	source ./delConf.sh
 
-all:nodes master users 
+all:nodes master users
 
 master:$(MASTER)
 	$(CC) $(CFLAGS)  source/Master.c -o Master
 
-user: $(USERS)
+users: $(USERS)
 	$(CC) $(CFLAGS)  source/Users.c  -o Users
 
 nodes: $(NODE)
@@ -31,4 +31,5 @@ print:$(PRINT)
 parser:$(PARSER)	
 	$(CC) $(CFLAGS)  source/Parser.c -o Parser
 	
-run: ./Master
+run:
+	./Master

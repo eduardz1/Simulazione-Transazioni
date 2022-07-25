@@ -1,5 +1,5 @@
 #include "./include/Conf.h"
-/* THIS FILE CONTAIN THE VALUE OF THE CONFIGURATION PARAMETERS*/
+/* THIS FILE CONTAIN THE VALUE OF THE CONFIGURATION PARAMETERSc,also the */
 int CONF() {
   putenv("SO_USER_NUM=100");
   printf("ENV:%d\n", atoi(getenv("SO_USER_NUM")));

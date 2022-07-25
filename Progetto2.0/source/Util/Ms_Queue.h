@@ -24,3 +24,5 @@ typedef struct msgbuf_trans
 /*PROTOTYPE'S */
 void Message_Queue();
 
+int send_message(int queueID,void *msg,int size,int flag);
+int receive_message(int queueID,void *msg,int size,int mtype,int flag);
