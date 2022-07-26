@@ -1,4 +1,5 @@
-#include "./include/Conf.h"
+#include "Conf.h"
+#include "Print.h"
 /* THIS FILE CONTAIN THE VALUE OF THE CONFIGURATION PARAMETERSc,also the */
 int CONF() {
   putenv("SO_USER_NUM=100");
@@ -6,7 +7,7 @@ int CONF() {
   putenv("SO_NODES_NUM=10");
   printf("ENV:%d\n", atoi(getenv("SO_NODES_NUM")));
   putenv("SO_FRIENDS_NUM=5");
-  printf("ENV:%d\n", atoi(getenv("SO_FRIENDS_NUM")));
+  printf("ENV:%d\n", atoi(getenv("SO_FRIENDS_NU")));
   putenv("SO_BUDGET_INIT=1000");
   printf("ENV:%d\n", atoi(getenv("SO_BUDGET_INIT")));
   putenv("SO_REWARD=20");
