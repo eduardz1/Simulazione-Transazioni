@@ -1,5 +1,3 @@
-#include "Common.h"
-
-/*struct ConfigParameters *par;*/
-
+#include <stdio.h> 
+#include <stdlib.h> 
 int CONF();
