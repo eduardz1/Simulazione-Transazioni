@@ -1,4 +1,5 @@
 #include "Common.h"
-#include "Conf.h"
+#include "./Conf.h"
+
 void *printing(void *p);
-int CONF(); 
+void conf_value(); 

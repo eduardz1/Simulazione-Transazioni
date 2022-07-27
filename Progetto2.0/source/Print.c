@@ -4,6 +4,22 @@
 #include <stdlib.h>
 
 
+ int    SO_USERS_NUM;            
+ int    SO_NODES_NUM ;
+ int    SO_BUDGET_INIT;
+ int    SO_REWARD;
+ int    SO_MIN_TRANS_GEN_NSEC;
+ int    SO_MAX_TRANS_GEN_NSEC;
+ int    SO_RETRY;
+ int    SO_TP_SIZE;  
+ int    SO_MIN_TRANS_PROC_NSEC ; 
+ int    SO_MAX_TRANS_PROC_NSEC  ;
+ int    SO_SIM_SEC  ;
+ int    SO_FRIENDS_NUM;  
+ int    SO_HOPS  ;
+
+
+
 void *printing(void *p) {
   FILE *fp;
   fp = fopen("ledger.txt", "w+");
@@ -13,60 +29,43 @@ void *printing(void *p) {
   printf("--------------------------\n");
   printf("i'm *printing function\n");
   printf("-------------------------\n");
-  CONF(); 
+  conf_value(); 
 
 
 
-/*
-  printf("----------- Configuration value ------------\n");
-  printf("SO_USER_NUM->%u\n", par->SO_USER_NUM);
-  printf("SO_NODES_NUM->%u\n", par->SO_NODES_NUM);
-  printf("SO_BUDGET_INIT->%u\n", par->SO_BUDGET_INIT);
-  printf("SO_REWARD->%c\n", par->SO_REWARD);
-  printf("SO_MIN_TRANS_GEN_NSEC->%lu\n", par->SO_MIN_TRANS_GEN_NSEC);
-  printf("SO_MAX_TRANS_GEN_NSEC->%lu\n", par->SO_MAX_TRANS_GEN_NSEC);
-  printf("SO_RETRY->%u\n", par->SO_RETRY);
-  printf("SO_TP_SIZE->%u\n", par->SO_TP_SIZE);
-  printf("SO_MIN_TRANS_PROC_NSEC->%lu\n", par->SO_MIN_TRANS_PROC_NSEC);
-  printf("SO_MAX_TRANS_PROC_NSEC->%lu\n", par->SO_MAX_TRANS_PROC_NSEC);
-  printf("SO_SIM_SEC->%u\n", par->SO_SIM_SEC);
-  printf("SO_FRIENDS_NUM->%u\n", par->SO_FRIENDS_NUM);
-  printf("SO_HOPS->%u\n", par->SO_HOPS);
-  */
+
 }
 
 
-int CONF() {
-  putenv("SO_USER_NUM=100");
-  printf("SO_USER_NUM:%d\n", atoi(getenv("SO_USER_NUM")));
-  putenv("SO_NODES_NUM=10");
-  printf("ENV:%d\n", atoi(getenv("SO_NODES_NUM")));
-  putenv("SO_FRIENDS_NUM=5");
-  printf("ENV:%d\n", atoi(getenv("SO_FRIENDS_NUM")));
-  putenv("SO_BUDGET_INIT=1000");
-  printf("ENV:%d\n", atoi(getenv("SO_BUDGET_INIT")));
-  putenv("SO_REWARD=20");
-  printf("ENV:%d\n", atoi(getenv("SO_REWARD")));
-  putenv("SO_MIN_TRANS_GEN_NSEC=10000000");
-  printf("ENV:%d\n", atoi(getenv("SO_MIN_TRANS_GEN_NSEC")));
-  putenv("SO_MAX_TRANS_GEN_NSEC=200000000");
-  printf("ENV:%d\n", atoi(getenv("SO_MAX_TRANS_GEN_NSEC")));
-  putenv("SO_RETRY=2");
-  printf("ENV:%d\n", atoi(getenv("SO_RETRY")));
-  putenv("SO_TP_SIZE=20");
-  printf("ENV:%d\n", atoi(getenv("SO_TP_SIZE")));
-  putenv("SO_MIN_TRANS_PROC_NSEC=1000000 ");
-  printf("ENV:%d\n", atoi(getenv("SO_MIN_TRANS_PROC_NSEC")));
-  putenv("SO_MAX_TRANS_PROC_NSEC=1000000");
-  printf("ENV:%d\n", atoi(getenv("SO_MAX_TRANS_PROC_NSEC")));
-  putenv("SO_REWARD=20");
-  printf("ENV:%d\n", atoi(getenv("SO_REWARD")));
-  putenv("SO_SIM_SEC=10");
-  printf("ENV:%d\n",atoi(getenv("SO_SIM_SEC")));
-  putenv("SO_HOPS = 140"); 
-  printf("ENV:%d\n", atoi(getenv("SO_HOPS"))); 
+void  conf_value() {
+  SO_USERS_NUM = 6; 
+  SO_NODES_NUM = 10 ; 
+  SO_BUDGET_INIT = 1000; 
+  SO_REWARD = 20 ;
+  SO_MIN_TRANS_GEN_NSEC =100000000;
+  SO_MAX_TRANS_GEN_NSEC =100000000;
+  SO_RETRY = 2 ; 
+  SO_TP_SIZE = 20 ; 
+  SO_MIN_TRANS_PROC_NSEC =1000000;
+  SO_MAX_TRANS_PROC_NSEC =1000000;
+  SO_SIM_SEC = 10 ;
+  SO_FRIENDS_NUM = 3;
+  SO_HOPS = 140 ; 
+
+  printf("SO_USER_NUM=%d\n", SO_USERS_NUM);
+  printf("SO_NODES_NUM=%d\n", SO_NODES_NUM); 
+  printf("SO_BUDGET_INIT=%d\n",SO_BUDGET_INIT);
+  printf("SO_REWARD =:%d\n",SO_REWARD);
+  printf("SO_MIN_TRANS_GEN_NSEC=%d\n",SO_MIN_TRANS_GEN_NSEC);
+  printf("SO_MAX_TRANS_GEN_NSEC=%d\n",SO_MAX_TRANS_GEN_NSEC);
+  printf("SO_RETRY=:%d\n",SO_RETRY);
+  printf("SO_TP_SIZE=%d\n",SO_TP_SIZE);
+  printf("SO_MIN_TRANS_PROC_NSEC=%d\n",SO_MIN_TRANS_PROC_NSEC);
+  printf("SO_SIM_SEC=%d\n",SO_SIM_SEC);
+  printf("SO_FRIENDS_NUM=%d\n",SO_FRIENDS_NUM);
+  printf("SO_HOPS=%d\n",SO_HOPS);
   exit(EXIT_SUCCESS);
-  return 0;
+  
 }
 
 
