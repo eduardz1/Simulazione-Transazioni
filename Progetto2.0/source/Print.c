@@ -38,7 +38,7 @@ void *printing(void *p) {
 
 int CONF() {
   putenv("SO_USER_NUM=100");
-  printf("ENV:%d\n", atoi(getenv("SO_USER_NUM")));
+  printf("SO_USER_NUM:%d\n", atoi(getenv("SO_USER_NUM")));
   putenv("SO_NODES_NUM=10");
   printf("ENV:%d\n", atoi(getenv("SO_NODES_NUM")));
   putenv("SO_FRIENDS_NUM=5");
@@ -55,10 +55,17 @@ int CONF() {
   printf("ENV:%d\n", atoi(getenv("SO_RETRY")));
   putenv("SO_TP_SIZE=20");
   printf("ENV:%d\n", atoi(getenv("SO_TP_SIZE")));
-  putenv("SO_MIN_TRANS_PROC_NSEC");
+  putenv("SO_MIN_TRANS_PROC_NSEC=1000000 ");
   printf("ENV:%d\n", atoi(getenv("SO_MIN_TRANS_PROC_NSEC")));
-  putenv("SO_MAX_TRANS_PROC_NSEC");
-
+  putenv("SO_MAX_TRANS_PROC_NSEC=1000000");
+  printf("ENV:%d\n", atoi(getenv("SO_MAX_TRANS_PROC_NSEC")));
+  putenv("SO_REWARD=20");
+  printf("ENV:%d\n", atoi(getenv("SO_REWARD")));
+  putenv("SO_SIM_SEC=10");
+  printf("ENV:%d\n",atoi(getenv("SO_SIM_SEC")));
+  putenv("SO_HOPS = 140"); 
+  printf("ENV:%d\n", atoi(getenv("SO_HOPS"))); 
+  exit(EXIT_SUCCESS);
   return 0;
 }
 
