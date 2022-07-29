@@ -2,23 +2,9 @@
 #include <pthread.h> 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-/*
- int    SO_USERS_NUM;            
- int    SO_NODES_NUM ;
- int    SO_BUDGET_INIT;
- int    SO_REWARD;
- int    SO_MIN_TRANS_GEN_NSEC;
- int    SO_MAX_TRANS_GEN_NSEC;
- int    SO_RETRY;
- int    SO_TP_SIZE;  
- int    SO_MIN_TRANS_PROC_NSEC ; 
- int    SO_MAX_TRANS_PROC_NSEC  ;
- int    SO_SIM_SEC  ;
- int    SO_FRIENDS_NUM;  
- int    SO_HOPS  ;
-*/
-extern char ** env_ptr; 
+extern char **env_ptr; 
 
 void *printing(void *p) {
   FILE *fp;
@@ -127,12 +113,17 @@ void  conf_value() {
 /*thread initialization according to
  * https://www.includehelp.com/articles/threading-in-c-programming-language-with-gcc-linux.aspx
  */
-int main(){
+int main(int argc, char *argv[], char **env_ptr){
   pthread_t threadId;
   int P_Parent;
   int thTest;
   int *ptr;
   P_Parent = 1;
+  unsigned int i ; 
+  char * my_value ; 
+  for(i=0;env_ptr[i];i++){
+    printf("env_var[%d] = \"%s\"\n", i,env_ptr[i]);
+   }
   thTest = pthread_create(&threadId, NULL, printing(0),P_Parent);
   if (thTest == 0) {
     printf("thread work without error :)\n");

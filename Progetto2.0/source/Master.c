@@ -1,5 +1,6 @@
 #include "include/Master.h" 
 #include "include/Common.h"
+#include "include/Print.h"
 #include <stdlib.h>
 #define USER_NAME "./Users"
 #define USER_NODE "./Nodes"
@@ -116,7 +117,7 @@ int PID_US = USpid->usPid ;
 int signum=SIGINT;
 
 /* create nodes in base of parameters given */
-for ( i = 0; i <4 ; i++)
+for ( i = 0; i <so_user_num ; i++)
 {
      PID_US = fork();
      switch(PID_US){
