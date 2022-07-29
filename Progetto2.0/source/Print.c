@@ -38,6 +38,19 @@ void *printing(void *p) {
 /* La differenza con le global sta che ,le global vanno definite in ogni file le env no 
 getenv returna una stringa */
 void conf_env(){ 
+    setenv("SO_USER_NUM","1000",1); 
+    setenv("SO_NODES_NUM","10",1);
+    setenv("SO_BUDGET_INIT","1000",1);
+    setenv("SO_REWARD","20",1);
+    setenv("SO_MIN_TRANS_GEN_NSEC","100000000",1);
+    setenv("SO_MAX_TRANS_GEN_NSEC","100000000",1);
+    setenv("SO_RETRY","2",1);
+    setenv("SO_TP_SIZE","20",1);
+    setenv("SO_MIN_TRANS_PROC_NSEC","1000000",1);
+    setenv("SO_MAX_TRANS_PROC_NSEC","1000000",1);
+    setenv("SO_SIM_SEC","10",1);
+    setenv("SO_FRIENDS_NUM","2",1);
+    setenv("SO_HOPS","140",1);
 
     char * so_user_num   = getenv("SO_USER_NUM"); 
     char * so_nodes_num  = getenv("SO_NODES_NUM");
@@ -114,7 +127,7 @@ void  conf_value() {
 /*thread initialization according to
  * https://www.includehelp.com/articles/threading-in-c-programming-language-with-gcc-linux.aspx
  */
-int main() {
+int main(){
   pthread_t threadId;
   int P_Parent;
   int thTest;
