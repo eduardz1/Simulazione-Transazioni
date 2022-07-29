@@ -62,7 +62,7 @@ void conf_env(){
     char * so_tp_size = getenv("SO_TP_SIZE"); 
     char * so_min_trans_proc_nsec = getenv("SO_MIN_TRANS_PROC_NSEC"); 
     char * so_max_trans_proc_nsec = getenv("SO_MAX_TRANS_PROC_NSEC"); 
-    char * so_sim_sec = getenv("SO_SIM_SEC "); 
+    char * so_sim_sec = getenv("SO_SIM_SEC"); 
     char * so_friends_num = getenv("SO_FRIENDS_NUM"); 
     char * so_hops = getenv("SO_HOPS"); 
 
