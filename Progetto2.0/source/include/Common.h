@@ -42,7 +42,7 @@
 #define TRANSACTION_MTYPE 2800 
 #define SO_BLOCK_SIZE 10
 
-
+/*
 typedef struct ConfigParameters
 {
     unsigned int SO_USER_NUM  ;
@@ -61,7 +61,7 @@ typedef struct ConfigParameters
 }configparameter;
 extern configparameter ConfigParameters; 
 
-   
+*/
 typedef struct UserStatus
 {
     pid_t usPid; 

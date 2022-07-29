@@ -3,9 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
-extern char **env_ptr; 
-
+extern struct exter_var extr_str;  
 void *printing(void *p) {
   FILE *fp;
   fp = fopen("ledger.txt", "w+");

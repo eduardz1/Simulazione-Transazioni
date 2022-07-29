@@ -2,7 +2,32 @@
 #include "./Conf.h"
 
 
-extern so_user_num;
+
+
+
+void *printing(void *p);
+void conf_value(); 
+void conf_env(); 
+
+struct exter_var{
+ char **env_ptr; 
+ char* so_user_num;
+ char*so_nodes_num; 
+ char*budget_init; 
+ char*so_reward; 
+ char*so_min_trans_gen_nsec;
+ char*so_max_trans_gen_nsec; 
+ char*so_retry ; 
+ char*so_tp_size; 
+ char*so_min_trans_proc_nsec; 
+ char*so_max_trans_proc_nsec; 
+ char*so_sim_sec; 
+ char*so_friends_num; 
+ char*so_hops; 
+}; 
+/*
+
+extern char * so_user_num;
 extern so_nodes_num; 
 extern budget_init; 
 extern so_reward; 
@@ -15,11 +40,4 @@ extern so_max_trans_proc_nsec;
 extern so_sim_sec; 
 extern so_friends_num; 
 extern so_hops; 
-
-
-
-void *printing(void *p);
-void conf_value(); 
-void conf_env(); 
-
-
+*/
