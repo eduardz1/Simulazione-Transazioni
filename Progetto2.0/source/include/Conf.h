@@ -1,6 +1,6 @@
 #include <stdio.h> 
 #include <stdlib.h> 
-/*SET GLOBAL VARIABLE INSIDE A  .h FILE WHITHOUT ANY VALUE   */ 
+/*SET GLOBAL VARIABLE INSIDE A  .h FILE WHITHOUT ANY VALUE   
 extern int    SO_USERS_NUM;            
 extern int    SO_NODES_NUM ;
 extern int    SO_BUDGET_INIT;
@@ -16,7 +16,7 @@ extern int    SO_FRIENDS_NUM;
 extern int    SO_HOPS  ;
 
 
-
+*/ 
 
 #define     SO_BLOCK_SIZE           10
 #define     SO_REGISTRY_SIZE        100

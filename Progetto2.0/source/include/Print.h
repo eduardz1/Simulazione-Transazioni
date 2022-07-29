@@ -3,3 +3,4 @@
 
 void *printing(void *p);
 void conf_value(); 
+void conf_env(); 
