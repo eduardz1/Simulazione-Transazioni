@@ -133,7 +133,7 @@ void CurrentBalance() {
 }
 
 transaction create_transaction(){
-
+      t
 }
 int main() {
   unsigned int amount,reward,retry;
