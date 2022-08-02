@@ -1,8 +1,8 @@
 #include "include/Users.h"
-
+#include "include/Conf.h"
 Message *tns;
-struct node *tmp;
-struct node *sendingTransaction;
+node *tmp;
+node *sendingTransaction;
 pid_t myPid;
 user *usersPid;
 node *nodesPid;
@@ -91,7 +91,7 @@ int send_transaction(){
 }
 void Sh_MemUser(key_t key,size_t size,int shmflg){
     int Mem_id; 
-    int Sh_MemInit=shmget(key,sizeof(SO_USER_NUM),IPC_CREAT|0666); /*define area*/
+    int Sh_MemInit=shmget(key,sizeof(SO_USERS_NUM),IPC_CREAT|0666); /*define area*/
     char*shmAttach=shmat(Sh_MemInit,NULL,0); /*Attach Area*/
     int ShDet=shmdt(Sh_MemInit); /*Detach Area*/ 
 
@@ -109,11 +109,11 @@ void CurrentBalance() {
     /*if transaction is out-going remove Money+Reward else add to receiver Money
      */
     for (j = 0; j < SO_BLOCK_SIZE; i++) {
-      if (tmpLedger[i].t_list[j].Sender == myPid) {
+      if (tmpLedger[i]->t_list[j].Sender == myPid) {
         accumulate -=
-            (tmpLedger[i].t_list[j].Money + &tmpLedger[i].t_list[j].Reward);
-      } else if (tmpLedger[i].t_list[j].Receiver == myPid) {
-        accumulate += tmpLedger[i].t_list[j].Money;
+            (tmpLedger[i]->t_list[j].Money + &tmpLedger[i]->t_list[j]->Reward);
+      } else if (tmpLedger[i]->t_list[j]->Receiver == myPid) {
+        accumulate += tmpLedger[i]->t_list[j]->Money;
       }
     }
   }
@@ -130,12 +130,6 @@ void CurrentBalance() {
   }
 }
 
-<<<<<<< HEAD
-transaction create_transaction(){
-      
-}
-=======
->>>>>>> refs/remotes/origin/branchesco
 int main() {
   unsigned int amount,reward,retry,money;
   pid_t UsPid,NdPid;

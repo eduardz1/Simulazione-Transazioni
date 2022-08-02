@@ -82,6 +82,7 @@ typedef struct UserStatus
     unsigned long balance; 
     struct Node *head; 
     struct Node *next; 
+    transaction * transaction;
     enum Node_stat {
         available,
         full

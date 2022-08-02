@@ -109,7 +109,10 @@ void  conf_value() {
 
 
 void print_Env(){
-  printf(getenv("SO_USERS_NUM:%s"), SO_USERS_NUM); 
+  getenv("SO_USERS_NUM:%d\n"); 
+
+  
+   
   printf("SO_NODES_NUM:%d\n", SO_NODES_NUM);
   printf("SO_REWARD:%d\n",SO_REWARD); 
   printf("SO_RETRY:%d\n",SO_RETRY); 

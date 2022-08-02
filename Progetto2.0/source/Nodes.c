@@ -1,12 +1,12 @@
 #include "include/Nodes.h"
 #include "include/Master.h"
+#include "include/Conf.h"
 /*#define SENDER -1*/
 /*struct mesg_buffer *MessageQ;*/
 pool transPool;
 Message message;
 Message *newTransaction;
 Message *Trans_ptr ; 
-configparameter * Config ; 
 #define BUFF_MAX 10 
 
 
@@ -108,7 +108,7 @@ int main(){
   /*Message_Queue();*/
 int i , j ,l ; 
 printf("TEST MAIN \n"); 
-for(i = 0 ; i < Config->SO_USER_NUM; i++){ 
+for(i = 0 ; i < SO_NODES_NUM; i++){ 
       transaction_pool_init(&transPool); 
       Message_Queue(); 
       add_to_pool(&transPool , &message); 
