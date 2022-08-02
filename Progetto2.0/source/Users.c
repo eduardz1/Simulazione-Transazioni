@@ -1,6 +1,5 @@
 #include "include/Users.h"
 
-struct ConfigParameters *par;
 Message *tns;
 struct node *tmp;
 struct node *sendingTransaction;
@@ -38,7 +37,7 @@ void push(node *head, transaction t){
 int get_pid_userIndex(int searchPid) {
   unsigned int i;
 
-  for (i = 0; i < par->SO_USER_NUM; i++) {
+  for (i = 0; i < SO_USER_NUM; i++) {
     if (usersPid[i].usPid == searchPid)
       return i;
   }
@@ -70,7 +69,7 @@ void start_transaction(int money, int reward) {
   tns->Message_Transaction.uTrans.MoneyStatusTrans = pending;
 
   tns->Message_Transaction.uTrans.time= exTime;
-  tns->Message_Transaction.hops = par->SO_HOPS;
+  tns->Message_Transaction.hops = SO_HOPS;
 }
 
 int send_transaction(){
@@ -78,7 +77,7 @@ int send_transaction(){
 
   if(send_message(queueID,&tns,sizeof(tns),IPC_NOWAIT)==0){
     printf("[USER %d] sent a transaction of %d UC to [USER %d] via queue %d\n", myPid, tns->Message_Transaction.uTrans.Money, tns->Message_Transaction.uTrans.Receiver, queueID);
-    currentBalance-=(tns->Message_Transaction.uTrans.Money+tns->Message_Transaction.uTrans.Reward);
+    currentBalance-=(tns->Message_Transaction.uTrans.Money + tns->Message_Transaction.uTrans.Reward);
     sent=tns->Message_Transaction.uTrans;
     if(outGoingTransactions==NULL) {
       outGoingTransactions = new_node(sent);
@@ -92,7 +91,7 @@ int send_transaction(){
 }
 void Sh_MemUser(key_t key,size_t size,int shmflg){
     int Mem_id; 
-    int Sh_MemInit=shmget(key,sizeof(par->SO_USER_NUM),IPC_CREAT|0666); /define area/
+    int Sh_MemInit=shmget(key,sizeof(SO_USER_NUM),IPC_CREAT|0666); /*define area*/
     char*shmAttach=shmat(Sh_MemInit,NULL,0); /*Attach Area*/
     int ShDet=shmdt(Sh_MemInit); /*Detach Area*/ 
 
@@ -103,8 +102,8 @@ void CurrentBalance() {
   int i;
   int j;
   int accumulate = 0;
-  unsigned int tmpBalance = par->SO_BUDGET_INIT;
-  block *tmpLedger[SO_REGISTRY_SIZE];
+  unsigned int tmpBalance = SO_BUDGET_INIT;
+  Block_ *tmpLedger[SO_REGISTRY_SIZE];
 
   for (i = 0; i < SO_REGISTRY_SIZE; < i++) {
     /*if transaction is out-going remove Money+Reward else add to receiver Money
@@ -125,22 +124,27 @@ void CurrentBalance() {
     tmp = tmp->next;
   }
   if (accumulate * (-1) > tmpBalance) {
-    fprintf(stderr,
-            "*** [USER %d] errror in calculating balance, overflow ***\n",myPID);
+    fprintf(stderr,"*** [USER %d] errror in calculating balance, overflow ***\n",myPID);
     update_status(2);
     killpg(0, SIGINT);
   }
 }
 
+<<<<<<< HEAD
 transaction create_transaction(){
       
 }
+=======
+>>>>>>> refs/remotes/origin/branchesco
 int main() {
-  unsigned int amount,reward,retry;
+  unsigned int amount,reward,retry,money;
   pid_t UsPid,NdPid;
   myPid=getpid();
-   actBalance=par->SO_BUDGET_INIT;
+   actBalance=SO_BUDGET_INIT;
+   myPid=getpid();
+  start_transaction(money,reward);
+  send_transaction();
   /*signal_handler(SIGINT, SIG_IGN);*/
 
-
+  return 0;
 }
