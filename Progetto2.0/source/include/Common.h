@@ -75,20 +75,7 @@ typedef struct UserStatus
 }user;
 
  
- typedef struct StructNode
-{
-   
-    pid_t nodPid;
-    unsigned long balance; 
-    struct Node *head; 
-    struct Node *next; 
-    transaction * transaction;
-    enum Node_stat {
-        available,
-        full
-    }Node_state;
- 
-}node;
+
 
 
 
@@ -110,7 +97,20 @@ typedef struct MoneyTransaction
  
 }transaction;
 
+typedef struct StructNode
+{
 
+    pid_t nodPid;
+    unsigned long balance;
+    struct Node *head;
+    struct Node *next;
+    transaction * transaction;
+    enum Node_stat {
+        available,
+        full
+    }Node_state;
+
+}node;
 
 
 typedef struct Block

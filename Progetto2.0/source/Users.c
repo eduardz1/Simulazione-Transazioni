@@ -3,7 +3,6 @@
 Message *tns;
 node *tmp;
 node *sendingTransaction;
-pid_t myPid;
 user *usersPid;
 node *nodesPid;
 unsigned int actBalance;
