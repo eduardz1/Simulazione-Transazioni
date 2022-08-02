@@ -17,5 +17,5 @@ void updateStatus(int setStatus);
 void start_transaction(pid_t userPid , int money, int reward);
 void Kill_User(int signo); 
 void Alive_User(pid_t myPid , int money , user * UserStatus);
-void CurrentBalance(user * UserBalance , pid_t myPid , transaction * PidSender);
+void CurrentBalance();
 
