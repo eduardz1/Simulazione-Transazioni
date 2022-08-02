@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-extern struct exter_var extr_str;  
 void *printing(void *p) {
   FILE *fp;
   fp = fopen("ledger.txt", "w+");
@@ -13,7 +12,7 @@ void *printing(void *p) {
   printf("--------------------------\n");
   printf("i'm *printing function\n");
   printf("-------------------------\n");
-  conf_env(); 
+  print_Env(); 
 
 
 
@@ -21,6 +20,7 @@ void *printing(void *p) {
 }
 /* La differenza con le global sta che ,le global vanno definite in ogni file le env no 
 getenv returna una stringa */
+/*
 void conf_env(){ 
     setenv("SO_USER_NUM","1000",1); 
     setenv("SO_NODES_NUM","10",1);
@@ -52,7 +52,7 @@ void conf_env(){
 
     /*Set value for env varible */
     
-    /*Print env variable  */
+    /*Print env variable  
     printf("SO_USER_NUM:%s\n",so_user_num);
     printf("SO_NODES_NUM:%s\n",so_nodes_num); 
     printf("SO_BUDGET_INIT:%s\n",so_budget_init);
@@ -69,8 +69,8 @@ void conf_env(){
 
 
 exit(EXIT_SUCCESS); 
-
 }
+*/
 
 
 
@@ -104,24 +104,38 @@ void  conf_value() {
   printf("SO_HOPS=%d\n",SO_HOPS);
   exit(EXIT_SUCCESS);
   
+}*/ 
+
+
+
+void print_Env(){
+  printf(getenv("SO_USERS_NUM:%s"), SO_USERS_NUM); 
+  printf("SO_NODES_NUM:%d\n", SO_NODES_NUM);
+  printf("SO_REWARD:%d\n",SO_REWARD); 
+  printf("SO_RETRY:%d\n",SO_RETRY); 
+  printf("SO_TP_SIZE:%d\n",SO_TP_SIZE);  
+  printf("SO_BUDGET_INIT:%d\n",SO_BUDGET_INIT); 
+  printf("SO_SIM_SEC:%d\n",SO_SIM_SEC); 
+  printf("SO_MIN_TRANS_GEN_NSEC:%d\n",SO_MIN_TRANS_GEN_NSEC); 
+  printf("SO_MAX_TRANS_GEN_NSEC:%d\n",SO_MAX_TRANS_GEN_NSEC); 
+  printf("SO_MIN_TRANS_PROC_NSEC:%d\n",SO_MIN_TRANS_PROC_NSEC); 
+  printf("SO_MAX_TRANS_PROC_NSEC:%d\n",SO_MAX_TRANS_PROC_NSEC);
+  printf("SO_FRIENDS:%d\n",SO_FRIENDS_NUM);
+  printf("SO_HOPS:%d\n",SO_HOPS); 
+  exit(EXIT_SUCCESS); 
 }
 
-*/ 
+
 
 /*thread initialization according to
  * https://www.includehelp.com/articles/threading-in-c-programming-language-with-gcc-linux.aspx
  */
-int main(int argc, char *argv[], char **env_ptr){
+int main(int argc, char *argv[]){
   pthread_t threadId;
   int P_Parent;
   int thTest;
   int *ptr;
-  P_Parent = 1;
-  unsigned int i ; 
-  char * my_value ; 
-  for(i=0;env_ptr[i];i++){
-    printf("env_var[%d] = \"%s\"\n", i,env_ptr[i]);
-   }
+  P_Parent = 1;  
   thTest = pthread_create(&threadId, NULL, printing(0),P_Parent);
   if (thTest == 0) {
     printf("thread work without error :)\n");

@@ -1,14 +1,16 @@
 #include "Common.h"
-#include "./Conf.h"
+#include "Conf.h"
 
 
 
 
 
 void *printing(void *p);
-void conf_value(); 
-void conf_env(); 
-
+/*void conf_value(); 
+void conf_env();
+*/
+void print_Env();  
+/*
 struct exter_var{
  char **env_ptr; 
  char* so_user_num;
@@ -24,7 +26,8 @@ struct exter_var{
  char*so_sim_sec; 
  char*so_friends_num; 
  char*so_hops; 
-}; 
+};
+*/ 
 /*
 
 extern char * so_user_num;
