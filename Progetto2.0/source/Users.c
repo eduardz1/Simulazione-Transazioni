@@ -123,7 +123,7 @@ void CurrentBalance() {
     tmp = tmp->next;
   }
   if (accumulate * (-1) > tmpBalance) {
-    fprintf(stderr,"*** [USER %d] errror in calculating balance, overflow ***\n",myPID);
+    fprintf(stderr,"*** [USER %d] errror in calculating balance, overflow ***\n",myPid);
     update_status(2);
     killpg(0, SIGINT);
   }
