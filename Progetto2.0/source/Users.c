@@ -19,7 +19,7 @@ node *new_node(transaction t){
   if(newNode==NULL){
     printf("Error allocating memory for new node\n");
   }
-  newNode->trans=t;
+  newNode->transaction=t; //TODO why is this not working?
   newNode->next=NULL;
   return newNode;
 }
@@ -36,7 +36,7 @@ void push(node *head, transaction t){
 int get_pid_userIndex(int searchPid) {
   unsigned int i;
 
-  for (i = 0; i < SO_USER_NUM; i++) {
+  for (i = 0; i < SO_USERS_NUM; i++) {
     if (usersPid[i].usPid == searchPid)
       return i;
   }
@@ -91,7 +91,7 @@ int send_transaction(){
 void Sh_MemUser(key_t key,size_t size,int shmflg){
     int Mem_id; 
     int Sh_MemInit=shmget(key,sizeof(SO_USERS_NUM),IPC_CREAT|0666); /*define area*/
-    char*shmAttach=shmat(Sh_MemInit,NULL,0); /*Attach Area*/
+    char *shmAttach=shmat(Sh_MemInit,NULL,0); /*Attach Area*/
     int ShDet=shmdt(Sh_MemInit); /*Detach Area*/ 
 
 }
@@ -104,22 +104,21 @@ void CurrentBalance() {
   unsigned int tmpBalance = SO_BUDGET_INIT;
   Block_ *tmpLedger[SO_REGISTRY_SIZE];
 
-  for (i = 0; i < SO_REGISTRY_SIZE; < i++) {
+  for (i = 0; i < SO_REGISTRY_SIZE;i++) {
     /*if transaction is out-going remove Money+Reward else add to receiver Money
      */
     for (j = 0; j < SO_BLOCK_SIZE; i++) {
       if (tmpLedger[i]->t_list[j].Sender == myPid) {
-        accumulate -=
-            (tmpLedger[i]->t_list[j].Money + &tmpLedger[i]->t_list[j]->Reward);
-      } else if (tmpLedger[i]->t_list[j]->Receiver == myPid) {
-        accumulate += tmpLedger[i]->t_list[j]->Money;
+        accumulate -= (tmpLedger[i]->t_list[j].Money + tmpLedger[i]->t_list[j].Reward);
+      } else if (tmpLedger[i]->t_list[j].Receiver == myPid) {
+        accumulate += tmpLedger[i]->t_list[j].Money;
       }
     }
   }
   tmp = sendingTransaction;
 
   while (tmp != NULL) {
-    accumulate -= (tmp->transaction.Money + tmp->transaction.Reward);
+    accumulate -= (tmp->transaction->Money + tmp->transaction->Reward);
     tmp = tmp->next;
   }
   if (accumulate * (-1) > tmpBalance) {
