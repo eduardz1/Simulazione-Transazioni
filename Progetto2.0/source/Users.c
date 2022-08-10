@@ -1,5 +1,5 @@
 #include "include/Users.h"
-#include "include/Conf.h"
+
 Message *tns;
 node *tmp;
 node *sendingTransaction;
@@ -11,20 +11,56 @@ pid_t myPid;
 unsigned int currentBalance;
 node *outGoingTransactions=NULL;
 
+
 /*function to handle transaction pool easily(linked list util) */
 
 /*allocates new node */
+int send_message(int queueID,void *msg,int size,int flag) {
+  if (msgsnd(queueID, msg, size, flag) == 0) {
+    return 0; /*SUCCESS*/
+  }
+  switch (errno) {
+    case EACCES:
+      fprintf(stderr, "[MSG SEND %d] no write permission on queue\n", getpid());
+      break;
+    case EAGAIN:
+      fprintf(stderr, "[MSG SEND %d] couldn't write on queue\n", getpid());
+      break;
+    case EFAULT:
+      fprintf(stderr, "[MSG SEND %d] address pointed by message inaccessible\n", getpid());
+      break;
+    case EIDRM:
+      fprintf(stderr, "[MSG SEND %d] message queue removed\n", getpid());
+      break;
+    case EINTR:
+      fprintf(stderr, "[MSG SEND %d] signal caught when waiting for queue to free\n", getpid());
+      break;
+    case EINVAL:
+      fprintf(stderr, "[MSG SEND %d] invalid  msqid  value,  or nonpositive mtype value, or invalid msgsz value\n",
+              getpid());
+      break;
+    case ENOMEM:
+      fprintf(stderr, "[MSG SEND %d] system out of memory\n", getpid()); /* hoping this never happens */
+      break;
+    default:
+      return 0;
+      break;
+  }
+  return -1;
+}
+
+
 node *new_node(transaction t){
   node *newNode= malloc(sizeof(node));
   if(newNode==NULL){
     printf("Error allocating memory for new node\n");
   }
-  newNode->transaction=t; //TODO why is this not working?
+  /* newNode->transaction=t;  TODO why is this not working? */
   newNode->next=NULL;
   return newNode;
 }
 
-/*set transaction at the end of the list*/
+/*set transaction at the end of the linked list*/
 void push(node *head, transaction t){
   node *curr=head;
   while(curr->next!=NULL){
@@ -40,6 +76,7 @@ int get_pid_userIndex(int searchPid) {
     if (usersPid[i].usPid == searchPid)
       return i;
   }
+  return -1; /*error*/
 }
 
 /* update status of user , NB--> 0 alive, 1 broke, 2 dead*/
@@ -69,11 +106,11 @@ void start_transaction(int money, int reward) {
 
   tns->Message_Transaction.uTrans.time= exTime;
   tns->Message_Transaction.hops = SO_HOPS;
+
 }
 
 int send_transaction(){
   transaction sent={0};
-
   if(send_message(queueID,&tns,sizeof(tns),IPC_NOWAIT)==0){
     printf("[USER %d] sent a transaction of %d UC to [USER %d] via queue %d\n", myPid, tns->Message_Transaction.uTrans.Money, tns->Message_Transaction.uTrans.Receiver, queueID);
     currentBalance-=(tns->Message_Transaction.uTrans.Money + tns->Message_Transaction.uTrans.Reward);
@@ -88,6 +125,8 @@ int send_transaction(){
   }
   return -1; /*error*/
 }
+
+
 void Sh_MemUser(key_t key,size_t size,int shmflg){
     int Mem_id; 
     int Sh_MemInit=shmget(key,sizeof(SO_USERS_NUM),IPC_CREAT|0666); /*define area*/
@@ -107,7 +146,7 @@ void CurrentBalance() {
   for (i = 0; i < SO_REGISTRY_SIZE;i++) {
     /*if transaction is out-going remove Money+Reward else add to receiver Money
      */
-    for (j = 0; j < SO_BLOCK_SIZE; i++) {
+    for (j = 0; j < SO_BLOCK_SIZE; j++) {
       if (tmpLedger[i]->t_list[j].Sender == myPid) {
         accumulate -= (tmpLedger[i]->t_list[j].Money + tmpLedger[i]->t_list[j].Reward);
       } else if (tmpLedger[i]->t_list[j].Receiver == myPid) {

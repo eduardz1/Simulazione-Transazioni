@@ -13,7 +13,7 @@ int send_message(int queueID,void *msg,int size,int flag){
       fprintf(stderr,"[MSG SEND %d] couldn't write on queue\n", getpid());
       break;
     case EFAULT:
-      fprintf(stderr,"[MSG SEND %d] address pointed by msgp inaccessible\n", getpid());
+      fprintf(stderr,"[MSG SEND %d] address pointed by message inaccessible\n", getpid());
       break;
     case EIDRM:
       fprintf(stderr,"[MSG SEND %d] message queue removed\n", getpid());
@@ -67,6 +67,4 @@ int receive_message(int queueID,void *msg,int size,int mtype,int flag){
       break;
   }
   return -1;
-}
-
 }
