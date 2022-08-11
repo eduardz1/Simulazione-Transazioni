@@ -14,6 +14,14 @@ node *outGoingTransactions=NULL;
 
 /*function to handle transaction pool easily(linked list util) */
 
+double get_reward(int amount,int reward){
+  return ceil(reward*amount/100);
+}
+
+int get_rand(int min,int max){
+  return rand()%(max-min+1)+min;
+}
+
 /*allocates new node */
 int send_message(int queueID,void *msg,int size,int flag) {
   if (msgsnd(queueID, msg, size, flag) == 0) {
@@ -49,6 +57,71 @@ int send_message(int queueID,void *msg,int size,int flag) {
   return -1;
 }
 
+int receive_message(int queueID,void *msg,int size,int mtype,int flag){
+  if(msgrcv(queueID,msg,size,mtype,flag)==0){
+    return 0; /*SUCCESS*/
+  }
+  switch (errno)
+  {
+    case EACCES:
+      fprintf(stderr,"[MSG SEND %d] no write permission on queue\n", getpid());
+      break;
+    case EAGAIN:
+      fprintf(stderr,"[MSG SEND %d] couldn't write on queue\n", getpid());
+      break;
+    case EFAULT:
+      fprintf(stderr,"[MSG SEND %d] address pointed by msgp inaccessible\n", getpid());
+      break;
+    case EIDRM:
+      fprintf(stderr,"[MSG SEND %d] message queue removed\n", getpid());
+      break;
+    case EINTR:
+      fprintf(stderr,"[MSG SEND %d] signal caught when waiting for queue to free\n", getpid());
+      break;
+    case EINVAL:
+      fprintf(stderr,"[MSG SEND %d] invalid  msqid  value,  or non positive mtype value, or invalid msgs value\n", getpid());
+      break;
+    case ENOMEM:
+      fprintf(stderr,"[MSG SEND %d] system out of memory\n", getpid()); /* hoping this never happens */
+      break;
+    default:
+      return 0;
+      break;
+  }
+  return -1;
+}
+
+/* returns a random PID of a non-dead user from usersPID[] */
+pid_t get_random_userPID()
+{
+  int index;
+  pid_t val = 0;
+
+  do
+  {
+    index = get_rand(0, SO_USERS_NUM - 1);
+    if (usersPid[index].Us_state != DEAD && usersPid[index].usPid != myPid)
+      val = usersPid[index].usPid;
+  } while (!val);
+
+  return val;
+}
+
+/* returns a random PID of an available node from nodesPID[] */
+pid_t get_random_nodePID()
+{
+  int index;
+  pid_t val = 0;
+
+  do
+  {
+    index = get_rand(0, SO_NODES_NUM * 2 - 1);
+    if (nodesPid[index].Node_state == available && nodesPid[index].nodPid != 0)
+      val = nodesPid[index].nodPid;
+  } while (!val);
+
+  return val;
+}
 
 node *new_node(transaction t){
   node *newNode= malloc(sizeof(node));
@@ -67,6 +140,14 @@ void push(node *head, transaction t){
     curr=curr->next;
   }
   curr->next=new_node(t);
+}
+
+/* try to attach to queue of nodePid key until it succed */
+void queue_to_pid(pid_t nodePid){
+  do{
+    errno = 0;
+    queueID= msgget(nodePid, 0);
+  } while (errno == ENOENT);
 }
 
 int get_pid_userIndex(int searchPid) {
@@ -136,7 +217,7 @@ void Sh_MemUser(key_t key,size_t size,int shmflg){
 }
 
 /*saves user balance when the program is interrupted in tmpBalance*/
-void CurrentBalance() {
+void current_balance() {
   int i;
   int j;
   int accumulate = 0;
@@ -160,6 +241,7 @@ void CurrentBalance() {
     accumulate -= (tmp->transaction->Money + tmp->transaction->Reward);
     tmp = tmp->next;
   }
+  printf("accumulate %d\n", accumulate);
   if (accumulate * (-1) > tmpBalance) {
     fprintf(stderr,"*** [USER %d] errror in calculating balance, overflow ***\n",myPid);
     update_status(2);
@@ -167,15 +249,80 @@ void CurrentBalance() {
   }
 }
 
+void user_transaction_handle(int signum){
+  int retry = SO_RETRY;
+
+  write(1,"::USER:: SIGUSR1 received\n",27);
+
+  current_balance();
+  if(currentBalance>=2){
+    pid_t userPid = get_random_userPID();
+    pid_t nodePid = get_random_nodePID();
+
+    unsigned int amount = get_rand(1, currentBalance);
+    unsigned int reward = get_rand(1, amount);
+    amount -= reward;
+    update_status(0);
+
+    start_transaction(amount, reward);
+
+    if(send_transaction()==0){
+      retry= SO_RETRY;
+    } else {
+      retry--;
+    }
+    if(retry==0){
+      update_status(2);
+      kill(myPid,SIGINT);
+    }
+  } else {
+    write(1,"::USER:: sorry balance too low :(\n",32);
+  }
+}
+
 int main() {
-  unsigned int amount,reward,retry,money;
-  pid_t UsPid,NdPid;
+   unsigned int amount,reward,retry,money;
+  pid_t usPid,ndPid;
   myPid=getpid();
    actBalance=SO_BUDGET_INIT;
    myPid=getpid();
-  start_transaction(money,reward);
-  send_transaction();
   /*signal_handler(SIGINT, SIG_IGN);*/
 
+  srand(myPid); /*initialize rand function, so we have same pattern for each user*/
+  retry=SO_RETRY;
+
+  while(1){
+    current_balance();
+
+    if(currentBalance>=2){
+      update_status(0);
+
+      usPid=get_random_userPID();
+      ndPid=get_random_nodePID();
+
+      amount=get_rand(2,currentBalance);
+      reward=get_reward(amount,SO_REWARD);
+      amount -= reward;
+
+      queue_to_pid(ndPid);
+      start_transaction(money,reward);
+
+      if(send_transaction()==0){
+        retry=SO_RETRY;
+      }else{
+        retry--;
+      }
+
+      if(retry==0){
+        update_status(2);
+        printf("[USER %d] max retry reached, life has no meaning any more\n", myPid);
+        kill(myPid, SIGINT);
+      }
+
+      else {
+        update_status(1);
+      }
+    }
+  }
   return 0;
 }

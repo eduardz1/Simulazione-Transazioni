@@ -32,7 +32,7 @@
 #endif
 
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
-#define RAND(min, max) ((rand() % (max - min + 1)) + min)
+#define "RAND(min, max) ((rand() % (max - min + 1)) + min)
 
 /* -- IPC OBJECTS -- */
 #define IPC_ERROR -1
