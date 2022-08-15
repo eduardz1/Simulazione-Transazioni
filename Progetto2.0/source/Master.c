@@ -32,7 +32,7 @@ void Sh_UserPID(key_t key,size_t size,int shmflg){
  int Sh_UserPIDInit;
  int id; 
  char *Sh_UserPIDAttach;
- Sh_UserPIDInit=shmget(key,sizeof(extr_str.so_user_num),IPC_CREAT|0666); 
+ Sh_UserPIDInit=shmget(key,sizeof(SO_USERS_NUM),IPC_CREAT|0666); 
  Sh_UserPIDAttach=shmat(Sh_UserPID,NULL,0); 
  Sh_UserPIDDet=shmdt(Sh_UserPIDInit); 
 }
@@ -52,7 +52,7 @@ void Shared_Memory( key_t key,size_t size,int shmflg){
 /* generate the user with fork and lauch ./users with execve*/
 void generateUser(){    /*need to implement uCounter !! */
      int j ; 
-     for ( j = 0; j <extr_str.so_user_num; j++)
+     for ( j = 0; j <SO_USERS_NUM; j++)
      {
      pid_t uPid=fork();
      switch(uPid){
@@ -72,7 +72,7 @@ void generateUser(){    /*need to implement uCounter !! */
 }
 void generateNode(){
      int i;
-     for ( i = 0; i <extr_str.so_nodes_num; i++)
+     for ( i = 0; i < SO_NODES_NUM; i++)
      {
      pid_t nPid=fork();
       switch (nPid)
@@ -116,8 +116,8 @@ user * USpid;
 int PID_US = USpid->usPid ;
 int signum=SIGINT;
 
-/* create nodes in base of parameters given */
-for ( i = 0; i <extr_str.so_user_num ; i++)
+/* create usersnodes in base of parameters given */
+for ( i = 0; i <SO_USERS_NUM ; i++)
 {
      PID_US = fork();
      switch(PID_US){
