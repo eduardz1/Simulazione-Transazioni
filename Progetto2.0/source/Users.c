@@ -5,10 +5,9 @@ node *tmp;
 node *sendingTransaction;
 user *usersPid;
 node *nodesPid;
-unsigned int actBalance;
 int queueID;
 pid_t myPid;
-unsigned int currentBalance;
+unsigned int currBalance;
 node *outGoingTransactions=NULL;
 
 
@@ -22,7 +21,7 @@ int get_rand(int min,int max){
   return rand()%(max-min+1)+min;
 }
 
-/*allocates new node */
+/*send a message and check for errors */
 int send_message(int queueID,void *msg,int size,int flag) {
   if (msgsnd(queueID, msg, size, flag) == 0) {
     return 0; /*SUCCESS*/
@@ -57,6 +56,7 @@ int send_message(int queueID,void *msg,int size,int flag) {
   return -1;
 }
 
+/*receive message and check for error,same check in send_message*/
 int receive_message(int queueID,void *msg,int size,int mtype,int flag){
   if(msgrcv(queueID,msg,size,mtype,flag)==0){
     return 0; /*SUCCESS*/
@@ -142,6 +142,40 @@ void push(node *head, transaction t){
   curr->next=new_node(t);
 }
 
+int compare_transaction(transaction *t1, transaction *t2){
+  if(t1->Money==t2->Money &&
+     t1->Sender==t2->Sender){
+    return 1;
+  }
+  return 0;
+}
+
+/* find and removes a message from pool if present */
+void find_and_remove(node **head,transaction *search){
+  node *curr=*head;
+  node *prev=NULL;
+
+  if(head==NULL){
+    return -1;
+  }
+  while(!compare_transaction(&curr->transaction,search)){
+    if(curr->next==NULL){
+      return -1;
+    } else {
+    prev=curr;
+    curr=curr->next;
+  }
+}
+if(curr==head){
+  free(*head);
+  *head=(*head)->next;
+
+} else {
+  free(curr);
+  prev->next=curr->next;;
+}
+}
+
 /* try to attach to queue of nodePid key until it succed */
 void queue_to_pid(pid_t nodePid){
   do{
@@ -194,7 +228,7 @@ int send_transaction(){
   transaction sent={0};
   if(send_message(queueID,&tns,sizeof(tns),IPC_NOWAIT)==0){
     printf("[USER %d] sent a transaction of %d UC to [USER %d] via queue %d\n", myPid, tns->Message_Transaction.uTrans.Money, tns->Message_Transaction.uTrans.Receiver, queueID);
-    currentBalance-=(tns->Message_Transaction.uTrans.Money + tns->Message_Transaction.uTrans.Reward);
+    currBalance-=(tns->Message_Transaction.uTrans.Money + tns->Message_Transaction.uTrans.Reward);
     sent=tns->Message_Transaction.uTrans;
     if(outGoingTransactions==NULL) {
       outGoingTransactions = new_node(sent);
@@ -216,19 +250,26 @@ void Sh_MemUser(key_t key,size_t size,int shmflg){
 
 }
 
+void update_balance(unsigned int tmpBalance){
+  int i = get_pid_userIndex(myPid);
+  currBalance=tmpBalance;
+  usersPid[i].balance=currBalance;
+}
+
 /*saves user balance when the program is interrupted in tmpBalance*/
 void current_balance() {
   int i;
   int j;
-  int accumulate = 0;
+  long accumulate = 0;
+  long flag =1;
   unsigned int tmpBalance = SO_BUDGET_INIT;
   Block_ *tmpLedger[SO_REGISTRY_SIZE];
 
-  for (i = 0; i < SO_REGISTRY_SIZE;i++) {
-    /*if transaction is out-going remove Money+Reward else add to receiver Money
-     */
-    for (j = 0; j < SO_BLOCK_SIZE; j++) {
+  for (i = 0; i < SO_REGISTRY_SIZE && flag!=0;i++) {
+    /*if transaction is out-going remove Money+Reward else add to receiver Money */
+    for (j = 0; j < SO_BLOCK_SIZE && flag!=0; j++) {
       if (tmpLedger[i]->t_list[j].Sender == myPid) {
+        find_and_remove(&outGoingTransactions,&tmpLedger[i]->t_list[j]);
         accumulate -= (tmpLedger[i]->t_list[j].Money + tmpLedger[i]->t_list[j].Reward);
       } else if (tmpLedger[i]->t_list[j].Receiver == myPid) {
         accumulate += tmpLedger[i]->t_list[j].Money;
@@ -255,11 +296,11 @@ void user_transaction_handle(int signum){
   write(1,"::USER:: SIGUSR1 received\n",27);
 
   current_balance();
-  if(currentBalance>=2){
+  if(currBalance>=2){
     pid_t userPid = get_random_userPID();
     pid_t nodePid = get_random_nodePID();
 
-    unsigned int amount = get_rand(1, currentBalance);
+    unsigned int amount = get_rand(1, currBalance);
     unsigned int reward = get_rand(1, amount);
     amount -= reward;
     update_status(0);
@@ -278,13 +319,15 @@ void user_transaction_handle(int signum){
   } else {
     write(1,"::USER:: sorry balance too low :(\n",32);
   }
+
+  update_balance(currBalance);
 }
 
 int main() {
    unsigned int amount,reward,retry,money;
   pid_t usPid,ndPid;
   myPid=getpid();
-   actBalance=SO_BUDGET_INIT;
+   currBalance=SO_BUDGET_INIT;
    myPid=getpid();
   /*signal_handler(SIGINT, SIG_IGN);*/
 
@@ -294,13 +337,13 @@ int main() {
   while(1){
     current_balance();
 
-    if(currentBalance>=2){
+    if(currBalance>=2){
       update_status(0);
 
       usPid=get_random_userPID();
       ndPid=get_random_nodePID();
 
-      amount=get_rand(2,currentBalance);
+      amount=get_rand(2,currBalance);
       reward=get_reward(amount,SO_REWARD);
       amount -= reward;
 
