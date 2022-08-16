@@ -171,8 +171,9 @@ if(curr==head){
   *head=(*head)->next;
 
 } else {
+  
+  prev->next=curr->next;
   free(curr);
-  prev->next=curr->next;;
 }
 }
 
@@ -256,18 +257,29 @@ void update_balance(unsigned int tmpBalance){
   usersPid[i].balance=currBalance;
 }
 
+
+
 /*saves user balance when the program is interrupted in tmpBalance*/
 void current_balance() {
+  
   int i;
   int j;
   long accumulate = 0;
   long flag =1;
   unsigned int tmpBalance = SO_BUDGET_INIT;
   Block_ *tmpLedger[SO_REGISTRY_SIZE];
+  
 
+  printf("current balance function\n");
+  printf("[USER %d] current balance is %d\n", myPid, currBalance);
+ 
   for (i = 0; i < SO_REGISTRY_SIZE && flag!=0;i++) {
+    /*can't have time =0, otherwise it means the block isn't initialized*/
+    flag=(tmpLedger[i]->t_list->time.tv_nsec) + (tmpLedger[i]->t_list->time.tv_sec);
+    printf("flag is %d\n", flag);
     /*if transaction is out-going remove Money+Reward else add to receiver Money */
     for (j = 0; j < SO_BLOCK_SIZE && flag!=0; j++) {
+      printf("Sender is %d\n", tmpLedger[i]->t_list->Sender);
       if (tmpLedger[i]->t_list[j].Sender == myPid) {
         find_and_remove(&outGoingTransactions,&tmpLedger[i]->t_list[j]);
         accumulate -= (tmpLedger[i]->t_list[j].Money + tmpLedger[i]->t_list[j].Reward);
@@ -282,7 +294,7 @@ void current_balance() {
     accumulate -= (tmp->transaction->Money + tmp->transaction->Reward);
     tmp = tmp->next;
   }
-  printf("accumulate %d\n", accumulate);
+  printf("accumulate %ld\n", accumulate);
   if (accumulate * (-1) > tmpBalance) {
     fprintf(stderr,"*** [USER %d] errror in calculating balance, overflow ***\n",myPid);
     update_status(2);
@@ -324,16 +336,16 @@ void user_transaction_handle(int signum){
 }
 
 int main() {
-   unsigned int amount,reward,retry,money;
+
+  unsigned int amount,reward,retry,money;
   pid_t usPid,ndPid;
   myPid=getpid();
    currBalance=SO_BUDGET_INIT;
    myPid=getpid();
   /*signal_handler(SIGINT, SIG_IGN);*/
-
+  printf("-->main\n");
   srand(myPid); /*initialize rand function, so we have same pattern for each user*/
   retry=SO_RETRY;
-
   while(1){
     current_balance();
 
