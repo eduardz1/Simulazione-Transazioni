@@ -192,7 +192,7 @@ int get_pid_userIndex(int searchPid) {
     if (usersPid[i].usPid == searchPid)
       return i;
   }
-  return -1; /*error*/
+  return PROBLEM; /*error*/
 }
 
 /* update status of user , NB--> 0 alive, 1 broke, 2 dead*/
