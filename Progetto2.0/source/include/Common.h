@@ -41,6 +41,19 @@
 
 #define TRANSACTION_MTYPE 2800 
 #define SO_BLOCK_SIZE 10
+#define NO_BLOCK -1 
+
+
+
+
+
+/*USERS STATE MACRO's */
+
+#define PROBLEM -1 
+#define OK 0
+#define NOT_ARRIVED 1 
+#define MAX_RETRY 2 
+
 
 /*
 typedef struct ConfigParameters
@@ -88,7 +101,7 @@ typedef  struct msg_friend{
 
 typedef struct MoneyTransaction
 {
- struct timespec time;
+    struct timespec time;
     pid_t Sender; 
     pid_t Receiver; 
     int Money; 
