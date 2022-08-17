@@ -9,6 +9,7 @@ Message *newTransaction;
 Message *Trans_ptr ; 
 Message fetchMex; 
 pid_t * friendList ; 
+Block_ * ledger; 
 #define BUFF_MAX 10 
 
 
@@ -118,6 +119,34 @@ void confirm_state_block(Block_ * confirmed)
     confirmed->t_list[i].MoneyStatusTrans = confirmed;
   }
 }
+
+
+void block_ladger(Block_ * newBlock )
+{ 
+  int i ; 
+  Block_ tmp ; 
+  for(i = 0 ; SO_REGISTRY_SIZE; i++ )
+  {
+    if(ledger[i].t_list[1].Sender==0)
+    {
+      /* Casto nel blocco tmp un nuovo nodo con tutte le sue caratteristiche */
+      tmp = *newBlock ; 
+      tmp.blockIndex =1; 
+      /*da aggiungere Ttramite semaforo le risorse  */
+      ledger[i]=tmp;
+      confirm_state_block(&ledger[i]);
+      /*inserire funzione per il rilascio delle risorse tramite semaforo */ 
+      return;
+    }
+  }
+  printf("NODE n * %d ledger is full i can t insert block \n",myPID);
+  killpg(0,SIGINT); /* invia segnali ad un gruppo di process almeno questo ho capito */
+}
+
+/*
+
+
+*/
 
 /*https://www.geeksforgeeks.org/ipc-using-message-queues*/ 
 int sum_reward(transaction *sumBlock)
