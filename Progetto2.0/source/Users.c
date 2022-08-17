@@ -9,7 +9,7 @@ int queueID;
 pid_t myPid;
 unsigned int currBalance;
 node *outGoingTransactions=NULL;
-
+Block_ *ledger;
 
 /*function to handle transaction pool easily(linked list util) */
 
@@ -158,7 +158,7 @@ void find_and_remove(node **head,transaction *search){
   if(head==NULL){
     return -1;
   }
-  while(!compare_transaction(&curr->transaction,search)){
+  while(!compare_transaction(curr->transaction,search)){
     if(curr->next==NULL){
       return -1;
     } else {
@@ -187,7 +187,7 @@ void queue_to_pid(pid_t nodePid){
 
 int get_pid_userIndex(int searchPid) {
   unsigned int i;
-
+  printf("searchPid %d\n", searchPid);
   for (i = 0; i < SO_USERS_NUM; i++) {
     if (usersPid[i].usPid == searchPid)
       return i;
@@ -197,13 +197,15 @@ int get_pid_userIndex(int searchPid) {
 
 /* update status of user , NB--> 0 alive, 1 broke, 2 dead*/
 void update_status(int setStatus) {
+  printf("[%d] updating status to %d\n", myPid, setStatus);
   int i = get_pid_userIndex(myPid);
 
   if (i == -1) {
     printf("user failed to find");
   }
 
-  usersPid[i].Us_state = setStatus;
+  usersPid[i].Us_state = setStatus;  /* maybe a semaphore is needed to protect this section  debug*/
+
   if (setStatus == 2) {
     printf("dead");
   }
@@ -252,12 +254,11 @@ void Sh_MemUser(key_t key,size_t size,int shmflg){
 }
 
 void update_balance(unsigned int tmpBalance){
+  printf("[%d] updating balance to %d\n", myPid, tmpBalance);
   int i = get_pid_userIndex(myPid);
   currBalance=tmpBalance;
   usersPid[i].balance=currBalance;
 }
-
-
 
 /*saves user balance when the program is interrupted in tmpBalance*/
 void current_balance() {
@@ -267,7 +268,7 @@ void current_balance() {
   long accumulate = 0;
   long flag =1;
   unsigned int tmpBalance = SO_BUDGET_INIT;
-  Block_ *tmpLedger[SO_REGISTRY_SIZE];
+  Block_ tmpLedger[SO_REGISTRY_SIZE];
   
 
   printf("current balance function\n");
@@ -275,21 +276,19 @@ void current_balance() {
  
   for (i = 0; i < SO_REGISTRY_SIZE && flag!=0;i++) {
     /*can't have time =0, otherwise it means the block isn't initialized*/
-    flag=(tmpLedger[i]->t_list->time.tv_nsec) + (tmpLedger[i]->t_list->time.tv_sec);
-    printf("flag is %d\n", flag);
+    flag=(tmpLedger[i].t_list->time.tv_nsec) + (tmpLedger[i].t_list->time.tv_sec);
+    printf("flag is %ld\n", flag); /*debug*/
     /*if transaction is out-going remove Money+Reward else add to receiver Money */
     for (j = 0; j < SO_BLOCK_SIZE && flag!=0; j++) {
-      printf("Sender is %d\n", tmpLedger[i]->t_list->Sender);
-      if (tmpLedger[i]->t_list[j].Sender == myPid) {
-        find_and_remove(&outGoingTransactions,&tmpLedger[i]->t_list[j]);
-        accumulate -= (tmpLedger[i]->t_list[j].Money + tmpLedger[i]->t_list[j].Reward);
-      } else if (tmpLedger[i]->t_list[j].Receiver == myPid) {
-        accumulate += tmpLedger[i]->t_list[j].Money;
+      printf("Sender is %d\n", tmpLedger[i].t_list->Sender); /*debug*/
+      if (tmpLedger[i].t_list[j].Sender == myPid) {
+        find_and_remove(&outGoingTransactions,&tmpLedger[i].t_list[j]);
+        accumulate -= (tmpLedger[i].t_list[j].Money + tmpLedger[i].t_list[j].Reward);
+      } else if (tmpLedger[i].t_list[j].Receiver == myPid) {
+        accumulate += tmpLedger[i].t_list[j].Money;
       }
     }
   }
-  tmp = sendingTransaction;
-
   while (tmp != NULL) {
     accumulate -= (tmp->transaction->Money + tmp->transaction->Reward);
     tmp = tmp->next;
@@ -300,6 +299,7 @@ void current_balance() {
     update_status(2);
     killpg(0, SIGINT);
   }
+  printf("balance is %d\n", tmpBalance);
 }
 
 void user_transaction_handle(int signum){
