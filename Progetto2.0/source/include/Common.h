@@ -74,6 +74,12 @@ typedef struct UserStatus
     }Us_state; 
 }user;
 
+
+typedef  struct msg_friend{ 
+
+  long mtype; 
+  pid_t friend ; 
+}friend_msg ; 
  
 
 
