@@ -7,7 +7,10 @@ pool transPool;
 Message message;
 Message *newTransaction;
 Message *Trans_ptr ; 
+Message fetchMex; 
+pid_t * friendList ; 
 #define BUFF_MAX 10 
+
 
 
 int Msg_ID ; 
@@ -16,9 +19,38 @@ int Money_q;
 int toend ; 
 pid_t myPID;
 key_t MSG_Key;  
+int friendList_size; 
 
-    
 
+
+take_transaction(){ 
+  unsigned int friendCycle =20 ; 
+  friend_msg  friends_recived ; 
+ int sizeofFriend = friendList_size; 
+  if (transPool.size < SO_TP_SIZE && friendCycle<20 )
+  {
+    if(receive_message(Msg_ID, &fetchMex , sizeof(Message), message.m_type ,0 )==0) 
+    {
+    add_to_pool(&transPool, &fetchMex); 
+    transPool.size++;
+    }
+  
+  
+  if(receive_message(Msg_ID, &friends_recived , sizeof(Message), message.m_type,IPC_NOWAIT )==0) 
+  {
+  friendList = realloc(friendList, sizeof(pid_t)*(friendList_size+1)); 
+  friendList ++ ; 
+  friendList[sizeofFriend] = friends_recived.friend;; 
+  }
+  
+friendCycle ++ ; 
+}
+else{ 
+  /* Random friends da implemmentare funzione */ 
+    friendCycle = 0 ;
+
+ }
+}
 /*https://www.geeksforgeeks.org/ipc-using-message-queues*/ 
 int sum_reward(transaction *sumBlock)
 {
