@@ -11,9 +11,12 @@ Message fetchMex;
 pid_t * friendList ; 
 Block_ * ledger; 
 #define BUFF_MAX 10 
+/*POINTER TO STRUCTURE  */ 
+user * UserID; 
+node * NodeID; 
+Block_ *Ledger; 
 
-
-
+/* -------------*/
 int Msg_ID ; 
 int Message_Erro; 
 int Money_q; 
@@ -160,6 +163,31 @@ int sum_reward(transaction *sumBlock)
     }
     return sum ;
 }
+
+void shm_Attach(char **argv)
+{
+   UserID = shmat(USERS_PID_ARGV, NULL , 0 ); 
+   NodeID = shmat(NODES_PID_ARGV, NULL , 0 );
+   Ledger = shmat(LEDGER_ARGV, NULL , 0 );
+   /*MAncano i semafori  */
+}
+void get_pid_index()
+{
+  unsigned int i ; 
+  i =0 ; 
+  for ( i = 0; i < SO_NODES_NUM *2 ; i++)
+  {
+    if (NodeID[i].nodPid==myPID)
+    {
+      return i;
+    }
+  }
+   return PROBLEM;    
+  
+}
+
+
+
 
 /*transaction pool is a linked list that contains struct of message with all information (see Common header) 
  * to understand free and malloc look up to composite_data_type structure last slide 

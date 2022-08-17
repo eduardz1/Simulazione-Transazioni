@@ -44,7 +44,14 @@
 #define NO_BLOCK -1 
 
 
-
+/* -- ARGV LOCATION OF IPC OBJECTS -- */
+#define USERS_PID_ARGV (atoi(argv[1]))
+#define NODES_PID_ARGV (atoi(argv[2]))
+#define PARAMETERS_ARGV (atoi(argv[3]))
+#define LEDGER_ARGV (atoi(argv[4]))
+#define SEM_USERS_PIDS_ARGV (atoi(argv[5]))
+#define SEM_LEDGER_ARGV (atoi(argv[6]))
+#define SEM_NODES_PIDS_ARGV (atoi(argv[7]))
 
 
 /*USERS STATE MACRO's */
