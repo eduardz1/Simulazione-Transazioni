@@ -12,7 +12,7 @@ char *userPid;
 char *nodesPid;
 unsigned int nodeCounter;
 unsigned int userCounter;
-struct exter_var extr_str; 
+/* struct exter_var extr_str;*/ 
 
 void Sh_MemMaster( key_t key,size_t size,int shmflg){  
      int m_id; 
