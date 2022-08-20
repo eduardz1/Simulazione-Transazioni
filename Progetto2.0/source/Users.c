@@ -223,7 +223,7 @@ int get_pid_userIndex(int searchPid)
     printf("found user %d\n", i);
     return i;
   }
-  return -1; /*error*/
+  return PROBLEM; /*error*/
 }
 
 /* update status of user , NB--> 0 alive, 1 broke, 2 dead*/
