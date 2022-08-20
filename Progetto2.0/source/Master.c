@@ -1,18 +1,33 @@
 #include "include/Master.h" 
-/*#include "include/Common.h"*/
-#include "include/Print.h"
+
 #include <stdlib.h>
 #define USER_NAME "./Users"
 #define USER_NODE "./Nodes"
-/*configparameter *par;*/
-node *Node;
-user *User; 
-user *state; 
-char *userPid;
-char *nodesPid;
-unsigned int nodeCounter;
-unsigned int userCounter;
-/* struct exter_var extr_str;*/ 
+
+
+user *usersPid;
+node *nodesPid;
+Block_ ledger[SO_REGISTRY_SIZE];
+Block_ *tmpLedger;
+int mQueue;
+
+int message_queue_id(){
+	int pidGot=getpid();
+	int qId=msgget(pidGot,IPC_CREAT| IPC_EXCL| 0666);
+
+	switch(errno){
+		case EIDRM:
+        printf("[PROCESS %d] queue %d was removed\n", pidGot, qId);
+        break;
+    case EINVAL:
+        printf("[PROCESS %d] queue %d invalid value for cmd or msqid\n", pidGot, qId);
+        break;
+    case EPERM:
+        printf("[PROCESS %d] queue %d the effective user ID of the calling process is not the creator or the owner\n", pidGot, qId);
+        break;
+    }
+    return qId;
+	}
 
 void Sh_MemMaster( key_t key,size_t size,int shmflg){  
      int m_id; 
@@ -50,8 +65,10 @@ void Shared_Memory( key_t key,size_t size,int shmflg){
 
 
 /* generate the user with fork and lauch ./users with execve*/
-void generateUser(){    /*need to implement uCounter !! */
+void generate_user(){    /*need to implement uCounter !! */
      int j ; 
+     int i;
+     printf("generateUser\n");
      for ( j = 0; j <SO_USERS_NUM; j++)
      {
      pid_t uPid=fork();
@@ -69,8 +86,13 @@ void generateUser(){    /*need to implement uCounter !! */
       break;  
       } 
      }
+     for(i =0;i<20;i++){
+     printf(" pid %d",User[i].usPid);
+     printf("balance %d",User[i].balance);
+     printf(" us state%d\n",User[i].Us_state); /* debug*/
+     }
 }
-void generateNode(){
+void generate_node(){
      int i;
      for ( i = 0; i < SO_NODES_NUM; i++)
      {
@@ -111,29 +133,55 @@ void signal_handler(int signum){
 
 
 int main(){
-int i ; 
-user * USpid; 
-int PID_US = USpid->usPid ;
-int signum=SIGINT;
+	int i;
+	unsigned int uCounter;
+	unsigned int nCounter;
 
-/* create usersnodes in base of parameters given */
-for ( i = 0; i <SO_USERS_NUM ; i++)
-{
-     PID_US = fork();
-     switch(PID_US){
-      case -1 : 
-          perror("USER SPAWN ERROR CHECK IT \n"); 
-          exit(EXIT_FAILURE); 
-          break;
-      case 0 : 
-          User[i].usPid=getpid(); 
-          User[i].balance=0; 
-          User[i].Us_state=ALIVE; 
-          generateUser();
-      break;
-      default: 
-      break;  
-      } 
-}
+	struct sigaction sa;
+	
+	tmpLedger=ledger;
+	
 
+	mQueue=message_quque_init();
+
+	for(nCounter=0;nCounter<SO_NODES_NUM;nCounter++){
+		nodesPid[nCounter].Node_state=ALIVE;
+		nodesPid[nCounter].balance=0;
+		generate_user();
+	}
+
+	for(uCounter=0;uCounter<SO_USERS_NUM;uCounter++){
+		usersPid[uCounter].User_state=ALIVE;
+		usersPid[uCounter].balance=0;
+		generate_user();
+	}
+
+	alarm(SO_SIM_SEC);
+
+	switch (fork())
+	{
+	case -1:
+		fprintf(stderr,"[master] fork error\n");
+		break;
+	case 0:
+		{
+			unsigned int i;
+			unsigned int tmpPid;
+
+			friend_msg newNode;
+			Message transHop;
+			signal(SIGINT,SIG_DFL);
+
+			while (1)
+			{
+				receive_message(mQueue,&newNode,sizeof(Message),TRANSACTION_MTYPE,0);
+				nodesPid[nCounter].Node_state=ALIVE;
+				nodePid[nCounter].balance=0;
+				tmpPid=generate_node()
+			}
+			
+		}
+	default:
+		break;
+	}
  }
