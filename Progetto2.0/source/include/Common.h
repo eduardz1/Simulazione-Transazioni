@@ -34,6 +34,7 @@
 #include <limits.h>
 #include <pthread.h> 
 
+#include "Conf.h"
 
 #ifndef MS_QUEUE
 #endif 

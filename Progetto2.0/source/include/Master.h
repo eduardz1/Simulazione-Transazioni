@@ -4,9 +4,8 @@
 #include <signal.h>   /* for signal handler*/
 #include <stdlib.h> /*for exit function*/
 
-/*#include "include/Common.h"*/
-#include "include/Print.h"
-#include "Util/Ms_Queue.h"
+/*#include "Print.h"*/
+#include "../Util/Ms_Queue.h"
 pid_t nPid;
 
 void Sh_MemMaster( key_t key,size_t size,int shmflg); 
