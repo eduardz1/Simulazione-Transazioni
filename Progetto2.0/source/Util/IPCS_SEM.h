@@ -10,7 +10,7 @@ typedef struct sembuf {
 }SemBuf;
 
 
-
+/*this union must be defined as rewuired by the semctl man page  */ 
 union semun {
 	int              val;    /* Value for SETVAL */
 	struct semid_ds *buf;    /* Buffer for IPC_STAT, IPC_SET */
@@ -18,3 +18,10 @@ union semun {
 	struct seminfo  *__buf;  /* Buffer for IPC_INFO
 				    (Linux-specific) */
 };
+
+int sem_set_val(int sem_id, int sem_num , int sem_val ); 
+
+
+int sem_released( int sem_id , int sem_num ); 
+
+void sem_getall(char * mystring , int sem_id ) ; 
