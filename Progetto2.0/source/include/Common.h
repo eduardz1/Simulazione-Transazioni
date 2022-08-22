@@ -90,7 +90,7 @@ typedef struct UserStatus
     enum  Us_status  
     { 
       ALIVE,
-      NOTAVAI<LABLE,
+      NOTAVAILBLE,
       DEAD
     }Us_state; 
 }user;

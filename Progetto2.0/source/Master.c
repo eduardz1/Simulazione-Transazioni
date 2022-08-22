@@ -166,6 +166,7 @@ int main()
 	{
 	case -1:
 		fprintf(stderr, "[master] fork error\n");
+		exit(EXIT_FAILURE); 
 		break;
 	case 0:
 	{

@@ -1,0 +1,37 @@
+// ---INDEX FUNZIONAMENTO SIMULAZIONE_TRANSAZIONI ---//
+
+// -- PREMESSA 
+// -- NECESSARIO 
+// -- [// STRUTTURA DEL PROGRMMA \\]
+// -- NODI 
+// -- UTENTI 
+// -- PRINT
+// -- CONFIGURAZIONE 
+// -- SCELTE IMPLEMENTATIVE 
+// -- CONCLUSIONI 
+// -- BUGS && THINKS 
+
+
+
+// PREMESSA --> 
+Il codice presente all'interno del programma è frutto di ricerca e lavoro da parte di @ORO_RICCARDO e @FRANCESCO_MAURO
+docuemntandoci attraverso l'utilizzo del materiale didattico fornito dal docente @Enrico_Bini e @Claudio_Schifanella nella
+sezione moodle del corso, eventuale docuemtazione utilizzata all'interno del codice viene allegata con il relativo 
+link di indirizzamento al/ai documenti utilizzati. 
+Il programma fa riferimento al documento fornito dai docenti sulle caratteristiche da soddisfare. 
+<----//
+
+// -- NECESSARIO 
+Per eseguire / compilare il seguente programma è necessario aver installato i seguenti tool all'interno del calcolatore 
+    - Distro Unix like 
+    - Compilatore C (gcc)
+    - libreria make 
+    - Text-Editor / IDE (facoltativo per la visualizzazione del codice )
+<---//
+
+// -- [// STRUTTURA DEL PROGRMMA \\]
+
+
+// --> NODI 
+
+// 

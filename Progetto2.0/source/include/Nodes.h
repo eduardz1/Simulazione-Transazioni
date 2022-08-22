@@ -1,4 +1,4 @@
-#include "../Util/Ms_Queue.h"
+
 
 
 /*user return status, used in tp */
@@ -19,6 +19,7 @@ typedef struct tp_pool
 void transaction_pool_init(pool *transPool);
 int add_to_pool(pool *transPool,struct msgbuf_trans *message);
 int remove_from_pool(pool *transPool, struct msgbuf_trans *message);
+int sum_reward(transaction* sumBlock); 
 void Message_Queue();
 void Message_Rec(); 
 void take_transaction(); 
@@ -26,7 +27,7 @@ void Block(transaction * blockT, Block_ *newBlock);
 void transListTo_block(transaction * Noreward);
 void fill_friends(pid_t * friendList) ;
 void confirm_state_block(Block_ * confirmed); 
-
+void get_pid_indes(); 
 
 
 
