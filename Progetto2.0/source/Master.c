@@ -104,7 +104,7 @@ int generate_node(int nCounter)
 
 	case 0:
 	  printf("[PROCESS %d] Forked child %d\n", getpid(), getpid());		
-		message_quque_init();	
+		message_queue_id();	
 		system(NODE_NAME);
 		break;
 
@@ -144,7 +144,7 @@ int main()
 
 	tmpLedger = ledger;
 
-	mQueue = message_quque_init();
+	mQueue = message_queue_id();
 
 	for (nCounter = 0; nCounter < SO_NODES_NUM; nCounter++)
 	{
