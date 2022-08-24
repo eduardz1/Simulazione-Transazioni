@@ -1,231 +1,134 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-# GNU Make 4.3
-# Built for x86_64-pc-linux-gnu
-# Copyright (C) 1988-2020 Free Software Foundation, Inc.
-# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
-# This is free software: you are free to change and redistribute it.
-# There is NO WARRANTY, to the extent permitted by law.
+# GNU Make 3.81
+# Copyright (C) 2006  Free Software Foundation, Inc.
+# This is free software; see the source for copying conditions.
+# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
 
-# Make data base, printed on Thu Aug 11 19:05:12 2022
+# This program built for i386-apple-darwin11.3.0
+
+# Make data base, printed on Wed Aug 24 20:03:19 2022
 
 # Variables
 
-# environment
-GDK_BACKEND = x11
-# environment
-LC_ALL = C
-# environment
-NO_AT_BRIDGE = 1
-# environment
-GTK_RC_FILES = /etc/gtk/gtkrc:/home/francesco/.gtkrc:/home/francesco/.config/gtkrc
-# environment
-LC_NAME = it_IT.UTF-8
-# environment
-LC_NUMERIC = it_IT.UTF-8
-# environment
-VSCODE_CWD = /home/francesco
-# environment
-LC_ADDRESS = it_IT.UTF-8
-# default
-MAKE_COMMAND := make
-# environment
-GTK3_MODULES = xapp-gtk3-module
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
+# automatic
+@F = $(notdir $@)
+# makefile
+CURDIR := /Users/popper/Desktop/Folders/RiProgetto/Simulazione-Transazioni
+# makefile
+SHELL = /bin/sh
 # environment
-VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+VSCODE_NLS_CONFIG = {"locale":"it","availableLanguages":{"*":"it"},"_languagePackId":"733e63a346861b85a80ab453548d8e7a.it","_translationsConfigFile":"/Users/popper/Library/Application Support/Code/clp/733e63a346861b85a80ab453548d8e7a.it/tcf.json","_cacheRoot":"/Users/popper/Library/Application Support/Code/clp/733e63a346861b85a80ab453548d8e7a.it","_resolvedLanguagePackCoreLocation":"/Users/popper/Library/Application Support/Code/clp/733e63a346861b85a80ab453548d8e7a.it/e4503b30fc78200f846c62cf8091b76ff5547662","_corruptedFile":"/Users/popper/Library/Application Support/Code/clp/733e63a346861b85a80ab453548d8e7a.it/corrupted.info","_languagePackSupport":true}
+# environment
+_ = /usr/bin/make
+# makefile
+MAKEFILE_LIST := 
+# environment
+__CFBundleIdentifier = com.microsoft.VSCode
+# environment
+VSCODE_CWD = /
+# environment
+PATH = /usr/local/bin:/usr/local/sbin:~/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/Library/Apple/usr/bin
+# environment
+ELECTRON_RUN_AS_NODE = 1
 # default
-.VARIABLES := 
+.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-PWD = /home/francesco/Documents/Università/2_Anno/SO/Simulazione-Transazioni
-# automatic
-%D = $(patsubst %/,%,$(dir $%))
-# environment
-MAIL = /var/spool/mail/francesco
-# automatic
-^D = $(patsubst %/,%,$(dir $^))
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.zDfLO1i4Uf/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_CODE_CACHE_PATH = /home/francesco/.config/Code/CachedData/6d9b74a70ca9c7733b29f0456fd8195364076dda
+PWD = /Users/popper/Desktop/Folders/RiProgetto/Simulazione-Transazioni
 # environment
-XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session1
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
-LANG = C
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-XAUTHORITY = /home/francesco/.Xauthority
+HOME = /Users/popper
 # default
-.LOADED := 
+MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
+# environment
+VSCODE_CODE_CACHE_PATH = /Users/popper/Library/Application Support/Code/CachedData/e4503b30fc78200f846c62cf8091b76ff5547662
+# environment
+LOGNAME = popper
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+XPC_FLAGS = 0x0
 # default
-.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
-# makefile
-MAKEFLAGS = pqrR
-# makefile
-CURDIR := /home/francesco/Documents/Università/2_Anno/SO/Simulazione-Transazioni
-# environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
-# automatic
-*D = $(patsubst %/,%,$(dir $*))
-# environment
-PAM_KWALLET5_LOGIN = /run/user/1000/kwallet5.socket
-# environment
-MFLAGS = -pqrR
-# default
-.SHELLFLAGS := -c
-# environment
-XDG_CONFIG_DIRS = /home/francesco/.config/kdedefaults:/etc/xdg
-# automatic
-+D = $(patsubst %/,%,$(dir $+))
-# environment
-XCURSOR_THEME = breeze_cursors
-# environment
-XDG_SESSION_DESKTOP = KDE
-# makefile
-MAKEFILE_LIST := 
-# automatic
-@F = $(notdir $@)
-# environment
-VSCODE_PID = 7044
-# environment
-XDG_SESSION_TYPE = x11
-# automatic
-?D = $(patsubst %/,%,$(dir $?))
-# environment
-SESSION_MANAGER = local/francesco-thinkpad:@/tmp/.ICE-unix/676,unix/francesco-thinkpad:/tmp/.ICE-unix/676
-# automatic
-*F = $(notdir $*)
-# environment
-QT_QPA_PLATFORMTHEME = qt5ct
-# environment
-CHROME_DESKTOP = code-url-handler.desktop
-# environment
-DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
-# automatic
-<D = $(patsubst %/,%,$(dir $<))
-# environment
-VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
-# default
-MAKE_HOST := x86_64-pc-linux-gnu
-# makefile
-SHELL = /bin/sh
+MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # environment
 SHLVL = 2
-# environment
-MAKELEVEL := 0
 # default
-MAKE = $(MAKE_COMMAND)
+MAKE_VERSION := 3.81
 # environment
-PATH = /usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+USER = popper
+# makefile
+.DEFAULT_GOAL := 
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
 # default
-MAKEFILES := 
+MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
+# default
+.VARIABLES := 
 # environment
-LC_MONETARY = it_IT.UTF-8
-# environment
-MOTD_SHOWN = pam
+TMPDIR = /var/folders/tc/n9fflz493t1ckr05x_kz0pm00000gn/T/
 # automatic
-^F = $(notdir $^)
+*F = $(notdir $*)
 # environment
-LC_TIME = it_IT.UTF-8
+VSCODE_IPC_HOOK = /Users/popper/Library/Application Support/Code/1.70.2-main.sock
 # environment
-INVOCATION_ID = 4629c12f219644caaf2a1a3a3cead5ac
+MallocNanoZone = 0
+# makefile
+MAKEFLAGS = Rrqp
 # environment
-_JAVA_AWT_WM_NONREPARENTING = 1
-# environment
-LC_TELEPHONE = it_IT.UTF-8
+MFLAGS = -Rrqp
 # automatic
-?F = $(notdir $?)
+*D = $(patsubst %/,%,$(dir $*))
 # environment
-KDE_APPLICATIONS_AS_SCOPE = 1
-# environment
-XDG_SEAT = seat0
-# environment
-XDG_CURRENT_DESKTOP = KDE
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.13782157.13782163
+# automatic
++D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
 # environment
-XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
+__CF_USER_TEXT_ENCODING = 0x1F5:0x0:0x4
 # environment
-DESKTOP_SESSION = plasma-i3
-# environment
-ORIGINAL_XDG_CURRENT_DESKTOP = KDE
-# 'override' directive
-GNUMAKEFLAGS := 
-# environment
-BROWSER = firefox-developer-edition
-# environment
-LOGNAME = francesco
-# environment
-XDG_VTNR = 1
-# makefile
-.DEFAULT_GOAL := 
-# environment
-SYSTEMD_EXEC_PID = 1746
-# environment
-EDITOR = nvim
-# environment
-DISPLAY = :0
-# environment
-GTK_MODULES = canberra-gtk-module
-# environment
-USER = francesco
+COMMAND_MODE = unix2003
 # default
-MAKE_VERSION := 4.3
-# environment
-KDE_SESSION_UID = 1000
-# environment
-MANAGERPID = 577
-# environment
-LC_MEASUREMENT = it_IT.UTF-8
-# environment
-_ = /usr/bin/make
-# environment
-LC_PAPER = it_IT.UTF-8
-# environment
-XDG_RUNTIME_DIR = /run/user/1000
-# environment
-JOURNAL_STREAM = 8:26181
-# environment
-XDG_SESSION_CLASS = user
-# environment
-VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
-# environment
-GTK2_RC_FILES = /etc/gtk-2.0/gtkrc:/home/francesco/.gtkrc-2.0:/home/francesco/.config/gtkrc-2.0
-# environment
-HOME = /home/francesco
-# environment
-ELECTRON_RUN_AS_NODE = 1
-# environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-ef618831-1.70.1-main.sock
-# environment
-KDEWM = /usr/bin/i3
-# environment
-XDG_SESSION_ID = 2
-# environment
-XCURSOR_SIZE = 24
-# default
-.RECIPEPREFIX := 
+MAKEFILES := 
 # automatic
 <F = $(notdir $<)
+# environment
+LC_ALL = C
+# automatic
+^F = $(notdir $^)
 # default
 SUFFIXES := 
-# environment
-QT_AUTO_SCREEN_SCALE_FACTOR = 0
-# environment
-VSCODE_CLI = 1
-# environment
-ELECTRON_NO_ATTACH_CONSOLE = 1
-# environment
-KDE_SESSION_VERSION = 5
 # default
-.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink guile load
+.INCLUDE_DIRS = /usr/local/include
 # environment
-KDE_FULL_SESSION = true
+MAKELEVEL := 0
 # environment
-LC_IDENTIFICATION = it_IT.UTF-8
+LANG = C
+# environment
+VSCODE_PID = 25435
 # variable set hash-table stats:
-# Load=107/1024=10%, Rehash=0, Collisions=4/134=3%
+# Load=58/1024=6%, Rehash=0, Collisions=1/79=1%
 
 # Pattern-specific Variable Values
 
@@ -233,7 +136,7 @@ LC_IDENTIFICATION = it_IT.UTF-8
 
 # Directories
 
-# . (device 66309, inode 10224912): 21 files, no impossibilities.
+# . (device 16777234, inode 13682221): 21 files, no impossibilities.
 
 # 21 files, no impossibilities in 1 directories.
 
@@ -244,11 +147,39 @@ LC_IDENTIFICATION = it_IT.UTF-8
 # Files
 
 # Not a target:
+all:
+#  Command-line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 Makefile:
+#  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
 #  Failed to be updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+makefile:
+#  A default, MAKEFILES, or -include/sinclude makefile.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 .DEFAULT:
@@ -257,43 +188,30 @@ Makefile:
 #  File has not been updated.
 
 # Not a target:
-all:
-#  Command line target.
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has not been updated.
-
-# Not a target:
-makefile:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
-
-# Not a target:
 GNUmakefile:
+#  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
 #  Failed to be updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # files hash-table stats:
-# Load=6/1024=1%, Rehash=0, Collisions=0/15=0%
+# Load=6/1024=1%, Rehash=0, Collisions=0/17=0%
 # VPATH Search Paths
 
-# No 'vpath' search paths.
+# No `vpath' search paths.
 
-# No general ('VPATH' variable) search path.
+# No general (`VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 29 / storage = 330 B / avg = 11 B
-# current buf: size = 8162 B / used = 330 B / count = 29 / avg = 11 B
+# # of strings in strcache: 0
+# # of strcache buffers: 0
+# strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
+# strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# strcache performance: lookups = 32 / hit rate = 9%
-# hash-table stats:
- 
-make: *** No rule to make target 'all'.  Stop.
-
-# Load=29/8192=0%, Rehash=0, Collisions=0/32=0%
-# Finished Make data base on Thu Aug 11 19:05:12 2022
+# Finished Make data base on Wed Aug 24 20:03:19 2022
 
  
+make: *** No rule to make target `all'.  Stop.
+

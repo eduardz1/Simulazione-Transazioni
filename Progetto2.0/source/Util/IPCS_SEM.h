@@ -2,7 +2,6 @@
 
 
 
-
 typedef struct sembuf {
    unsigned short sem_num; /* Semaphore set num */
    short sem_op; /* Semaphore operation */

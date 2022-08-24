@@ -1,6 +1,7 @@
 #include "include/Nodes.h"
 #include "include/Master.h"
 #include "include/Conf.h"
+#include "include/Common.h"
 /*#define SENDER -1*/
 /*struct mesg_buffer *MessageQ;*/
 pool transPool;
