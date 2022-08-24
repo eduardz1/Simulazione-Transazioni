@@ -2,6 +2,7 @@
 #include <sys/types.h>
 #include <time.h>
 #include "../include/Conf.h"
+#include "../Util/IPCS_SEM.h"
 /*
 struct node {
   transaction trans;

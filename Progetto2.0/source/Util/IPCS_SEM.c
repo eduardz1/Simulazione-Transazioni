@@ -21,7 +21,7 @@ int resource_set(int sem_id , int sem_count)
 
 }
 
-int resouce_release(int sem_id , int sem_count)
+int resource_release(int sem_id , int sem_count)
 {
         SemBuf sops ={0}; 
 

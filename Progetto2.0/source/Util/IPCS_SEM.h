@@ -24,4 +24,8 @@ int sem_set_val(int sem_id, int sem_num , int sem_val );
 
 int sem_released( int sem_id , int sem_num ); 
 
+
+int resource_set(int sem_id , int sem_count);
+int resource_release(int sem_id , int sem_count);
+
 void sem_getall(char * mystring , int sem_id ) ; 

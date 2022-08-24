@@ -1,7 +1,7 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #define SO_USERS_NUM            atoi(getenv("SO_USERS_NUM"))
-#define SO_NODES_NUM            atoi(getenv("SO_NODES_NUM "))
+#define SO_NODES_NUM            atoi(getenv("SO_NODES_NUM"))
 #define SO_REWARD               atoi(getenv("SO_REWARD"))
 #define SO_RETRY                atoi(getenv("SO_RETRY"))
 #define SO_TP_SIZE              atoi(getenv("SO_TP_SIZE"))

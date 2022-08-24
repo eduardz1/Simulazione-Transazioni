@@ -175,10 +175,19 @@ int main()
 	unsigned int uCounter;
 	unsigned int nCounter;
 
-	/*struct sigaction sa;*/
+	struct sigaction sa;
 
 	tmpLedger = ledger;
 
+	/*signal handler function 
+	* set all sigaction's byte to zero
+	* sa.handler to handle signal_handler(),then the handler is set to handle SIGINT signals
+	*/
+
+	bzero(&sa, sizeof(sa));
+	sa.sa_handler = signal_handler;
+	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGALRM, &sa, NULL);
 	mQueue = message_queue_id();
 
 	for (nCounter = 0; nCounter < SO_NODES_NUM; nCounter++) /*TODO: seg fault here imo, need to solve */
@@ -210,6 +219,8 @@ int main()
 
 		friend_msg newNode;
 		Message transHop;
+		bzero(&newNode,sizeof(newNode)); /*set memory region to zero */
+		bzero(&transHop,sizeof(transHop));
 		signal(SIGINT, SIG_DFL);
 
 		while (1)
@@ -223,4 +234,5 @@ int main()
 	default:
 		break;
 	}
+	return 0;
 }
