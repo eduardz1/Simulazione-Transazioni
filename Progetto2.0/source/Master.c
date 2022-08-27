@@ -1,6 +1,4 @@
 #include "include/Master.h"
-#include "include/Common.h"
-#include <stdlib.h>
 
 
 #define USER_NAME "./Users"
