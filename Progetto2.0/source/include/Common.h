@@ -132,6 +132,7 @@ typedef struct StructNode
     struct Node *head;
     struct Node *next;
     transaction * transaction;
+    int tpsize; 
     enum Node_stat {
         available,
         full

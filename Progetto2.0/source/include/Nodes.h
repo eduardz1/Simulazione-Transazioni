@@ -8,6 +8,12 @@
 #define SUCCESS 0
 
 
+#define SLEEP                                                                            \
+    clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &randSleepTime, &sleepTimeRemaining); \
+    clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &sleepTimeRemaining, NULL);
+#define SLEEP_TIME_SET        \
+    randSleepTime.tv_sec = 0; \
+    randSleepTime.tv_nsec = RAND(SO_MIN_TRANS_PROC_NSEC, SO_MAX_TRANS_PROC_NSEC);
 
 typedef struct tp_pool
 {
@@ -27,7 +33,8 @@ void Block(transaction * blockT, Block_ *newBlock);
 void transListTo_block(transaction * Noreward);
 void fill_friends(pid_t * friendList) ;
 void confirm_state_block(Block_ * confirmed); 
-void get_pid_indes(); 
+void get_pid_node_index(); 
+
 
 
 

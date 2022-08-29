@@ -4,10 +4,6 @@
 #include <signal.h>   /* for signal handler*/
 #include <stdlib.h> /*for exit function*/
 #include  <string.h>
-
-#include "../include/Common.h"
-#include "../Util/Ms_Queue.h"
-#include "../include/Conf.h"
 /*#include "Print.h"*/
 pid_t nPid;
 

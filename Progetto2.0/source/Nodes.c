@@ -2,6 +2,7 @@
 #include "include/Master.h"
 #include "include/Conf.h"
 #include "include/Common.h"
+#include "./Util/Ms_Queue.h"
 /*#define SENDER -1*/
 /*struct mesg_buffer *MessageQ;*/
 pool transPool;
@@ -25,7 +26,8 @@ int toend ;
 pid_t myPID;
 key_t MSG_Key;  
 int friendList_size; 
-
+int sem_id_ledger; 
+int semNodesPIDs_ID;
 
 
 void take_transaction(){ 
@@ -136,10 +138,11 @@ void block_ladger(Block_ * newBlock )
       /* Casto nel blocco tmp un nuovo nodo con tutte le sue caratteristiche */
       tmp = *newBlock ; 
       tmp.blockIndex =1; 
-      /*da aggiungere Ttramite semaforo le risorse  */
+      /* preleviamo le risorse per la creazione del ledger */
+      resource_set(&sem_id_ledger,1) ; 
       ledger[i]=tmp;
       confirm_state_block(&ledger[i]);
-      /*inserire funzione per il rilascio delle risorse tramite semaforo */ 
+      resource_release(&sem_id_ledger ,1 ); 
       return;
     }
   }
@@ -172,7 +175,7 @@ void shm_Attach(char **argv)
    Ledger = shmat(LEDGER_ARGV, NULL , 0 );
    /*MAncano i semafori  */
 }
-void get_pid_index()
+void get_pid_node_index()
 {
   unsigned int i ; 
   i =0 ; 
@@ -186,6 +189,38 @@ void get_pid_index()
    return PROBLEM;    
   
 }
+
+
+void sig_handler_init(struct sigaction *saint_node ){ 
+  saint_node->sa_handler = node_handler_interrupt; 
+  sigaction(SIGINT , saint_node , NULL ); 
+}
+void node_handler_interrupt(int sigum){ 
+    int i ; 
+    int accurate_balance; 
+    accurate_balance = 0 ; 
+  /*------------------------ */
+
+  msgctl(Msg_ID , IPC_RMID , NULL ); 
+    /* traverse ledger because only the balance written on ledger at the end is
+     * the one that should be displayed
+     */
+
+  for ( i = 0; i < SO_REGISTRY_SIZE; i++)
+  {
+    if (Ledger[i].t_list[0].Receiver == myPID)
+    {
+      accurate_balance += Ledger[i].t_list[0].Money; 
+    }
+  }
+    resource_set(semNodesPIDs_ID , 1 ) ; 
+    NodeID[get_pid_node_index()].balance  = accurate_balance ;
+    resource_release(semNodesPIDs_ID, 1 ) ; 
+   
+  
+  exit(0); 
+}
+
 
 
 
@@ -236,9 +271,13 @@ int remove_from_pool(pool *transPool, Message *message_t){
 
 
 
-
-
-
+void message_queue_attach()
+{
+    do
+    {
+        Msg_ID = msgget(myPID, 0);
+    }   while (errno == ENOENT);
+}
 
 
 void Message_Queue(){ 
@@ -270,20 +309,67 @@ void Message_Queue(){
 
 
 
-int main(){
-  /*Message_Queue();*/
-int i , j ,l ; 
-printf("TEST MAIN \n"); 
-for(i = 0 ; i < SO_NODES_NUM; i++){ 
-      transaction_pool_init(&transPool); 
-      Message_Queue(); 
-      add_to_pool(&transPool , &message); 
-      Message_Rec(Msg_ID, MSG_Key); 
-      remove_from_pool(&transPool , &message); 
+int main(int argc , char * argv[] ){
+transaction transBuffer[sizeof(transaction )* (SO_BLOCK_SIZE-1)]; /*Bufferizziamo in dimensione della block size e della transazione che dobbiamo inserire*/
 
+struct timespec randSleeptime ; 
+struct timespec sleeptimeremaning ; 
+struct sigaction saint_node; 
 
+bzero ( &randSleeptime , sizeof(randSleeptime)); 
+bzero (&sleeptimeremaning , sizeof(sleeptimeremaning));
+bzero ( &saint_node , sizeof(saint_node)); 
+
+myPID = getpid(); 
+
+if (argc == 0 )
+{
+  perror("NO ARGUMENT PASSED CHECK IT PLEASE \n "); 
+  exit(EXIT_FAILURE); 
 }
+  shm_Attach(argv); 
+  srand(getpid());
+  sig_handler_init(&saint_node); 
+  message_queue_attach(); 
 
+  friendList = malloc(SO_FRIENDS_NUM * sizeof (pid_t)) ; 
+  friendList_size = SO_FRIENDS_NUM; 
+  fill_friends(friendList);
+
+  transaction_pool_init(&transPool); 
+  while (1)
+  {
+    take_transaction(); 
+    resource_set(semNodesPIDs_ID, 1 ); 
+    NodeID[get_pid_node_index()].tpsize = transPool.size ; 
+    resource_release(semNodesPIDs_ID ,1 ); 
+
+      if (transPool.size >= (SO_BLOCK_SIZE -1 ))
+      {
+        transListTo_block(transBuffer); 
+        switch(fork()){
+           case -1:  /*ERROR CASE*/
+               printf("ERROR DURING FORKING TO CREATE A BLOCK n*[--%d--]CHECK IT ",myPID);
+              exit(EXIT_FAILURE); 
+             break;
+          case  0 : /* child creates a new block and appends it to ledger */
+            {
+              Block_ *newBlock  = malloc(sizeof(Block_)); 
+              SLEEP_TIME_SET ; 
+              new_Block(transBuffer  , newBlock ); 
+              block_ladger (newBlock ); 
+              free(newBlock); 
+              SLEEP ; 
+              exit(0); 
+              break;
+            }
+           default: /*Parent case */
+              break;
+         }
+      }
+      
+  }
+   
 
 
 
