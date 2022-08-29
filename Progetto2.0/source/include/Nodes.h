@@ -1,5 +1,5 @@
 
-
+#include "../Util/transaction.h"
 
 /*user return status, used in tp */
 #define WENT_BROKE 1
@@ -27,13 +27,19 @@ int add_to_pool(pool *transPool,struct msgbuf_trans *message);
 int remove_from_pool(pool *transPool, struct msgbuf_trans *message);
 int sum_reward(transaction* sumBlock); 
 void Message_Queue();
+void message_queue_attach(); 
 void Message_Rec(); 
 void take_transaction(); 
 void Block(transaction * blockT, Block_ *newBlock); 
 void transListTo_block(transaction * Noreward);
 void fill_friends(pid_t * friendList) ;
 void confirm_state_block(Block_ * confirmed); 
+void block_ladger(Block_ *newBlock);
+
+void shm_attach(char **argv) ; 
 void get_pid_node_index(); 
+void sig_handler_init(struct sigaction * saint_node) ; 
+void node_handler_interrupt(int sigum);
 
 
 
