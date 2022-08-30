@@ -2,7 +2,8 @@
 #include "include/Master.h"
 #include "include/Conf.h"
 #include "include/Common.h"
-#include "./Util/Ms_Queue.h"
+
+#include "./Util/IPCS_SEM.h"
 
 /*#define SENDER -1*/
 /*struct mesg_buffer *MessageQ;*/
@@ -169,14 +170,14 @@ int sum_reward(transaction *sumBlock)
     return sum ;
 }
 
-void shm_Attach(char **argv)
+void ipc_Attach_argv(char **argv)
 {
    UserID = shmat(USERS_PID_ARGV, NULL , 0 ); 
    NodeID = shmat(NODES_PID_ARGV, NULL , 0 );
    Ledger = shmat(LEDGER_ARGV, NULL , 0 );
    /*MAncano i semafori  */
 }
-void get_pid_node_index()
+int get_pid_node_index()
 {
   unsigned int i ; 
   i =0 ; 
@@ -196,6 +197,9 @@ void sig_handler_init(struct sigaction *saint_node ){
   saint_node->sa_handler = node_handler_interrupt; 
   sigaction(SIGINT , saint_node , NULL ); 
 }
+
+
+
 void node_handler_interrupt(int sigum){ 
     int i ; 
     int accurate_balance; 
@@ -280,7 +284,7 @@ void message_queue_attach()
     }   while (errno == ENOENT);
 }
 
-
+/* 
 void Message_Queue(){ 
    
     nPid = fork(); 
@@ -295,11 +299,12 @@ void Message_Queue(){
     newTransaction->m_type=1; 
     printf("WRITE DATA \n "); 
     fgets(Trans_ptr->mesText,BUFF_MAX,stdin);  
-    /*MEssage to send */
+    /*MEssage to send 
     msgsnd(Msg_ID,Trans_ptr,sizeof(Trans_ptr->Message_Transaction),0);
     printf("DAta Send :%s \n",Trans_ptr->mesText);
     Message_Rec( Msg_ID, myPID); 
 }
+*/ 
  void Message_Rec(int messageID ,key_t messageKey ){ 
  MSG_Key= &nPid; 
  Msg_ID= msgget(MSG_Key,0666 |IPC_CREAT);
@@ -328,7 +333,7 @@ if (argc == 0 )
   perror("NO ARGUMENT PASSED CHECK IT PLEASE \n "); 
   exit(EXIT_FAILURE); 
 }
-  shm_Attach(argv); 
+  ipc_Attach_argv(argv); 
   srand(getpid());
   sig_handler_init(&saint_node); 
   message_queue_attach(); 
