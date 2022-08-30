@@ -2,7 +2,6 @@
 #include "include/Master.h"
 #include "include/Conf.h"
 #include "include/Common.h"
-
 #include "./Util/IPCS_SEM.h"
 
 /*#define SENDER -1*/
@@ -361,11 +360,13 @@ if (argc == 0 )
           case  0 : /* child creates a new block and appends it to ledger */
             {
               Block_ *newBlock  = malloc(sizeof(Block_)); 
-              SLEEP_TIME_SET ; 
+              /*SLEEP_TIME_SET;*/ 
+              sleep(1);  
               new_Block(transBuffer  , newBlock ); 
               block_ladger (newBlock ); 
               free(newBlock); 
-              SLEEP ; 
+              /*SLEEP;*/
+              sleep(1);   
               exit(0); 
               break;
             }

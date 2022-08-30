@@ -1,6 +1,4 @@
-
-#include "../Util/transaction.h"
-
+#include "Conf.h"
 /*user return status, used in tp */
 #define WENT_BROKE 1
 #define MAX_RETRY 2
@@ -8,12 +6,13 @@
 #define SUCCESS 0
 
 
-#define SLEEP                                                                            
-    clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &randSleepTime, &sleepTimeRemaining);
-    clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &sleepTimeRemaining, NULL);
-#define SLEEP_TIME_SET        
-    randSleepTime.tv_sec = 0; 
+#define SLEEP_TIME_SET        \
+    randSleepTime.tv_sec = 0; \
     randSleepTime.tv_nsec = RAND(SO_MIN_TRANS_PROC_NSEC, SO_MAX_TRANS_PROC_NSEC);
+
+#define SLEEP                                                                            \
+    clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &randSleepTime, &sleepTimeRemaining); \
+    clock_nanosleep(CLOCK_REALTIME, TIMER_ABSTIME, &sleepTimeRemaining, NULL);
 
 typedef struct tp_pool
 {
@@ -25,7 +24,7 @@ typedef struct tp_pool
 void transaction_pool_init(pool *transPool);
 int add_to_pool(pool *transPool,struct msgbuf_trans *message);
 int remove_from_pool(pool *transPool, struct msgbuf_trans *message);
-int sum_reward(transaction* sumBlock); 
+int sum_reward(transaction* ); 
 int  get_pid_node_index(); 
 void Message_Queue();
 void message_queue_attach(); 
