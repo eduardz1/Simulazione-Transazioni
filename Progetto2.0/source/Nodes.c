@@ -3,7 +3,7 @@
 #include "include/Conf.h"
 #include "include/Common.h"
 #include "./Util/IPCS_SEM.h"
-
+#include "./Util/transaction.h"
 /*#define SENDER -1*/
 /*struct mesg_buffer *MessageQ;*/
 pool transPool;
@@ -362,7 +362,7 @@ if (argc == 0 )
               Block_ *newBlock  = malloc(sizeof(Block_)); 
               /*SLEEP_TIME_SET;*/ 
               sleep(1);  
-              new_Block(transBuffer  , newBlock ); 
+              Block(transBuffer  , newBlock ); 
               block_ladger (newBlock ); 
               free(newBlock); 
               /*SLEEP;*/

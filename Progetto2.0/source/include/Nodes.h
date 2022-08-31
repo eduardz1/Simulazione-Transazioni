@@ -1,4 +1,5 @@
 #include "Conf.h"
+
 /*user return status, used in tp */
 #define WENT_BROKE 1
 #define MAX_RETRY 2
@@ -42,7 +43,7 @@ void node_handler_interrupt(int sigum);
 
 
 
-
+/*
 
 struct msqid_dis{ 
     struct ipc_perm mesg_perm; 
@@ -54,3 +55,4 @@ struct msqid_dis{
     pid_t msg_lspid;
     pid_t msg_lrpid; 
 };
+*/
