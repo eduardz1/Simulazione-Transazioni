@@ -3,13 +3,11 @@
 #endif
 #ifndef  _GNU_SOURCE
 #define  _GNU_SOURCE
-/*#include <bits/types/struct_timespec.h>*/
 #endif
 
 #ifndef NULL
 #define NULL 0
 #endif
-
 
 
 

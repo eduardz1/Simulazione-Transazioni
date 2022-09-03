@@ -170,7 +170,7 @@ void signal_handler(int signum)
 
 int main()
 {
-	int i;
+	unsigned int i;
 	unsigned int uCounter;
 	unsigned int nCounter;
 
@@ -189,13 +189,13 @@ int main()
 	sigaction(SIGALRM, &sa, NULL);
 	mQueue = message_queue_id();
 
-	for (nCounter = 0; nCounter < SO_NODES_NUM; nCounter++) /*TODO: seg fault here imo, need to solve */
+	for (nCounter = 0; nCounter < SO_NODES_NUM-1; nCounter++) /*TODO: seg fault here imo, need to solve */
 	{
 		nodesPid[nCounter].Node_state = ALIVE;
 		nodesPid[nCounter].balance = 0;
 		generate_user(nCounter);
 	}
-
+	
 	for (uCounter = 0; uCounter < SO_USERS_NUM; uCounter++)
 	{
 		usersPid[uCounter].Us_state = ALIVE;

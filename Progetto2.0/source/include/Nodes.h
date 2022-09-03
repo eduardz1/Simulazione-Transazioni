@@ -1,5 +1,6 @@
-
-
+#include "../include/Common.h"
+#include "../include/Conf.h"
+#include "../Util/Ms_Queue.h"
 
 /*user return status, used in tp */
 #define WENT_BROKE 1
@@ -26,7 +27,7 @@ void take_transaction();
 void Block(transaction * blockT, Block_ *newBlock); 
 void transListTo_block(transaction * Noreward);
 void fill_friends(pid_t * friendList) ;
-void confirm_state_block(Block_ * confirmed); 
+void confirm_state_block(Block_ * toConfirm); 
 void get_pid_indes(); 
 
 

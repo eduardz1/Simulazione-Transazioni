@@ -1,7 +1,5 @@
 #include "include/Nodes.h"
-#include "include/Master.h"
-#include "include/Conf.h"
-#include "include/Common.h"
+
 /*#define SENDER -1*/
 /*struct mesg_buffer *MessageQ;*/
 pool transPool;
@@ -23,6 +21,7 @@ int Message_Erro;
 int Money_q; 
 int toend ; 
 pid_t myPID;
+pid_t nPid;
 key_t MSG_Key;  
 int friendList_size; 
 
@@ -115,12 +114,12 @@ void fill_friends(pid_t * friendList)
 
 }
 
-void confirm_state_block(Block_ * confirmed)
+void confirm_state_block(Block_ * toConfirm)
 {
   int i ; 
   for ( i = 0; i < SO_BLOCK_SIZE; i++)
   {
-    confirmed->t_list[i].MoneyStatusTrans = confirmed;
+    toConfirm->t_list[i].MoneyStatusTrans = confirmed;
   }
 }
 
