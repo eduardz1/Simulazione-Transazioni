@@ -1,5 +1,5 @@
 #include "IPCS_SEM.h"
-
+#include "sem.h"
 
 
 /* int sem_id  = semget ( IPC_ PRIVATE  , NUM_RISORSE , 0600 )*/ 

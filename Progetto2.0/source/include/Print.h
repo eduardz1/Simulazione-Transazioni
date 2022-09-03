@@ -8,7 +8,10 @@ void *printing(void *p);
 /*void conf_value(); 
 void conf_env();
 */
+
 void print_Env();  
+void simulation_print();
+
 /*
 struct exter_var{
  char **env_ptr; 

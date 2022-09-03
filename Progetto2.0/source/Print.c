@@ -3,6 +3,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+node * node_print ; 
+user * user_print ; 
+pid_t myPID ; 
+transaction *t_print ; 
+transaction * stat_print; 
+
 void *printing(void *p) {
   FILE *fp;
   fp = fopen("ledger.txt", "w+");
@@ -12,10 +18,7 @@ void *printing(void *p) {
   printf("--------------------------\n");
   printf("i'm *printing function\n");
   printf("-------------------------\n");
-  print_Env(); 
-
-
-
+  simulation_print() ; 
 
 }
 /* La differenza con le global sta che ,le global vanno definite in ogni file le env no 
@@ -111,8 +114,6 @@ void  conf_value() {
 void print_Env(){
   getenv("SO_USERS_NUM:%d\n"); 
 
-  
-   
   printf("SO_NODES_NUM:%d\n", SO_NODES_NUM);
   printf("SO_REWARD:%d\n",SO_REWARD); 
   printf("SO_RETRY:%d\n",SO_RETRY); 
@@ -129,7 +130,22 @@ void print_Env(){
 }
 
 
+void simulation_print (){ 
+  int time ; 
+  int high; 
+  for ( time = 0; time < SO_MAX_TRANS_GEN_NSEC; time++)
+  {
+    for ( high = 0; high <SO_USERS_NUM && SO_NODES_NUM; high++)
+    {
+      printf("[PID:%d] ---[NODE n * :%d ] -- [ AMAOUNT : %d ] --- [STATUS: %s] ----" , myPID , node_print->nodPid , user_print->usPid,t_print->Money , stat_print->MoneyStatusTrans);
 
+
+    }
+    
+   
+  }
+  
+}
 /*thread initialization according to
  * https://www.includehelp.com/articles/threading-in-c-programming-language-with-gcc-linux.aspx
  */
