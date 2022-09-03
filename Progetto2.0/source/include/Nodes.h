@@ -1,10 +1,7 @@
-<<<<<<< HEAD
-#include "../include/Common.h"
-#include "../include/Conf.h"
-#include "../Util/Ms_Queue.h"
-=======
 #include "Conf.h"
->>>>>>> 74b1ba6559fb1ac798128bc686473efa121ef008
+#include "Master.h"
+#include "Common.h"
+#include "../Util/IPCS_SEM.h"
 
 /*user return status, used in tp */
 #define WENT_BROKE 1
@@ -29,8 +26,8 @@ typedef struct tp_pool
 }pool;
 
 void transaction_pool_init(pool *transPool);
-int add_to_pool(pool *transPool,struct msgbuf_trans *message);
-int remove_from_pool(pool *transPool, struct msgbuf_trans *message);
+int add_to_pool(pool *transPool,Message *message);
+int remove_from_pool(pool *transPool, Message *message);
 int sum_reward(transaction* ); 
 int  get_pid_node_index(); 
 void Message_Queue();
@@ -40,17 +37,12 @@ void take_transaction();
 void Block(transaction * blockT, Block_ *newBlock); 
 void transListTo_block(transaction * Noreward);
 void fill_friends(pid_t * friendList) ;
-<<<<<<< HEAD
-void confirm_state_block(Block_ * toConfirm); 
-void get_pid_indes(); 
-=======
 void confirm_state_block(Block_ * confirmed) ; 
 void block_ladger(Block_ *newBlock);
 
 void ipc_attach_argv(char **argv) ; 
 void sig_handler_init(struct sigaction * saint_node) ; 
 void node_handler_interrupt(int sigum);
->>>>>>> 74b1ba6559fb1ac798128bc686473efa121ef008
 
 
 

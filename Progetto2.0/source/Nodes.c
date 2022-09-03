@@ -1,13 +1,6 @@
 #include "include/Nodes.h"
-<<<<<<< HEAD
 
-=======
-#include "include/Master.h"
-#include "include/Conf.h"
-#include "include/Common.h"
-#include "./Util/IPCS_SEM.h"
-#include "./Util/transaction.h"
->>>>>>> 74b1ba6559fb1ac798128bc686473efa121ef008
+
 /*#define SENDER -1*/
 /*struct mesg_buffer *MessageQ;*/
 pool transPool;
@@ -196,11 +189,12 @@ int get_pid_node_index()
   
 }
 
-
-void sig_handler_init(struct sigaction *saint_node ){ 
-  saint_node->sa_handler = node_handler_interrupt; 
-  sigaction(SIGINT , saint_node , NULL ); 
+/*
+void sig_handler_init(struct sigaction *sa ){ 
+  sa->sa_handler = node_handler_interrupt; 
+  sigaction(SIGINT , sa , NULL ); 
 }
+*/
 
 
 
@@ -267,7 +261,7 @@ int remove_from_pool(pool *transPool, Message *message_t){
   } else if(transPool->head==NULL){
     return ERROR;
   }
-  *message_t= *transPool->head;
+  message_t= *transPool->head;
   free(transPool->head);
   transPool->head=transPool->head->Message_Transaction.next;
 
@@ -324,7 +318,7 @@ transaction transBuffer[sizeof(transaction )* (SO_BLOCK_SIZE-1)]; /*Bufferizziam
 
 struct timespec randSleeptime ; 
 struct timespec sleeptimeremaning ; 
-struct sigaction saint_node; 
+struct sigaction sa; 
 
 bzero ( &randSleeptime , sizeof(randSleeptime)); 
 bzero (&sleeptimeremaning , sizeof(sleeptimeremaning));
@@ -339,7 +333,7 @@ if (argc == 0 )
 }
   ipc_Attach_argv(argv); 
   srand(getpid());
-  sig_handler_init(&saint_node); 
+  sig_handler_init(&sa); 
   message_queue_attach(); 
 
   friendList = malloc(SO_FRIENDS_NUM * sizeof (pid_t)) ; 
