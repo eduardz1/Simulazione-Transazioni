@@ -1,5 +1,4 @@
 #include "Ms_Queue.h"
-
 int send_message(int queueID,void *msg,int size,int flag){
   if(msgsnd(queueID,msg,size,flag)==0){
     return 0; /*SUCCESS*/
@@ -33,6 +32,8 @@ int send_message(int queueID,void *msg,int size,int flag){
   }
   return -1; /*error*/
 }
+
+
 
 
 int receive_message(int queueID,void *msg,int size,int mtype,int flag){

@@ -1,6 +1,6 @@
 #include <sys/types.h>
 #include <sys/time.h>
-
+#include <errno.h>
 typedef struct MoneyTransaction
 {
     struct timespec time;

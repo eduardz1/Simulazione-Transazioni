@@ -104,7 +104,6 @@ typedef  struct msg_friend{
 
 
 
-
 typedef struct MoneyTransaction
 {
     struct timespec time;
@@ -121,6 +120,20 @@ typedef struct MoneyTransaction
  }MoneyStatusTrans; 
  
 }transaction;
+
+/* moved here from Ms_queue.h to avoid conflict errors*/
+typedef struct msgbuf_trans
+{ 
+  size_t Size_Msg; 
+  int  m_type;
+  char mesText[1];
+    struct message
+    {
+      int hops; 
+      transaction uTrans;
+      struct msgbuf_trans *next;
+    }Message_Transaction;
+}Message;
 
 typedef struct StructNode
 {

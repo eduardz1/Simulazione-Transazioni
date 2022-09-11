@@ -145,7 +145,7 @@ node *new_node(transaction t)
   newNode->next = NULL;
   return newNode;
 }
- 
+
 /*set transaction at the end of the linked list*/
 void push(node *head, transaction t)
 {
@@ -218,7 +218,7 @@ int get_pid_userIndex(int searchPid)
   printf("\n");
   printf("get_pid_userIndex function\n");
   printf("searchPid %d\n", searchPid);
-  for (i = 0; i < SO_USERS_NUM-1; i++)
+  for (i = 0; i < SO_USERS_NUM - 1; i++)
   {
     printf("for loop %d\n", i);         /*debug*/
     if (usersPid[i].usPid == searchPid) /*TODO: solve seg fault*/
@@ -235,19 +235,19 @@ void update_status(int setStatus)
 {
   printf("[%d] updating status to %d\n", myPid, setStatus);
   int i = get_pid_userIndex(myPid);
-  
+
   if (i == -1)
   {
     printf("user failed to find");
   }
-  resource_set(semUsersPids_id,i);
+  resource_set(semUsersPids_id, i);
   usersPid[i].Us_state = setStatus; /* maybe a semaphore is needed to protect this section  debug*/
 
   if (setStatus == 2)
   {
     printf("[USERS] dead increased");
   }
-  resource_release(semUsersPids_id,i);
+  resource_release(semUsersPids_id, i);
 }
 
 void start_transaction(int money, int reward)
@@ -299,10 +299,10 @@ void update_balance(unsigned int tmpBalance)
 {
   printf("[%d] updating balance to %d\n", myPid, tmpBalance);
   int i = get_pid_userIndex(myPid);
-  resource_set(semUsersPids_id,i);
+  resource_set(semUsersPids_id, i);
   currBalance = tmpBalance;
   usersPid[i].balance = currBalance;
-  resource_release(semUsersPids_id,i);
+  resource_release(semUsersPids_id, i);
 }
 
 /*saves user balance when the program is interrupted in tmpBalance*/
@@ -315,9 +315,9 @@ void current_balance()
   long flag = 1;
   unsigned int tmpBalance = SO_BUDGET_INIT;
   Block_ tmpLedger[SO_REGISTRY_SIZE];
-  resource_set(semLedger_id,i);
-  memcpy(&tmpLedger,ledger,sizeof(tmpLedger));
-  resource_release(semLedger_id,i);
+  resource_set(semLedger_id, i);
+  memcpy(&tmpLedger, ledger, sizeof(tmpLedger));
+  resource_release(semLedger_id, i);
 
   printf("current balance function\n");
   printf("[USER %d] current balance is %d\n", myPid, currBalance);
@@ -341,13 +341,13 @@ void current_balance()
       }
     }
   }
-  resource_set(semUsersPids_id,i);
+  resource_set(semUsersPids_id, i);
   while (tmp != NULL)
   {
     accumulate -= (tmp->transaction->Money + tmp->transaction->Reward);
     tmp = tmp->next;
   }
-  resource_release(semUsersPids_id,i);
+  resource_release(semUsersPids_id, i);
   printf("accumulate %ld\n", accumulate);
   if (accumulate * (-1) > tmpBalance)
   {
@@ -383,8 +383,7 @@ void user_transaction_handle(int signum)
     }
     else
     {
-      retry--;
-    }
+      retry--;    }
     if (retry == 0)
     {
       update_status(2);
@@ -410,7 +409,7 @@ int main()
   printf("-->main\n");
   srand(myPid); /*initialize rand function, so we have same pattern for each user*/
   retry = SO_RETRY;
-   while (1)
+  while (1)
   {
     current_balance();
 
