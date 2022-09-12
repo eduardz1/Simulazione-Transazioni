@@ -3,13 +3,6 @@
 const void *Message_p; 
 size_t Message_size; 
  
-
-
-
-
-
-
-
 /*PROTOTYPE'S */
 void Message_Queue();
 
