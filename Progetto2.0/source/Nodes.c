@@ -189,12 +189,10 @@ int get_pid_node_index()
   
 }
 
-/*
-void sig_handler_init(struct sigaction *sa ){ 
+void sig_handler_init(struct sigaction *sa){ 
   sa->sa_handler = node_handler_interrupt; 
   sigaction(SIGINT , sa , NULL ); 
 }
-*/
 
 
 
@@ -202,12 +200,11 @@ void node_handler_interrupt(int sigum){
     int i ; 
     int accurate_balance; 
     accurate_balance = 0 ; 
-  /*------------------------ */
 
   msgctl(Msg_ID , IPC_RMID , NULL ); 
     /* traverse ledger because only the balance written on ledger at the end is
-     * the one that should be displayed
-     */
+     * the one that should be displayed */
+     
 
   for ( i = 0; i < SO_REGISTRY_SIZE; i++)
   {
@@ -261,7 +258,7 @@ int remove_from_pool(pool *transPool, Message *message_t){
   } else if(transPool->head==NULL){
     return ERROR;
   }
-  message_t= *transPool->head;
+  message_t= transPool->head;
   free(transPool->head);
   transPool->head=transPool->head->Message_Transaction.next;
 
@@ -318,11 +315,11 @@ transaction transBuffer[sizeof(transaction )* (SO_BLOCK_SIZE-1)]; /*Bufferizziam
 
 struct timespec randSleeptime ; 
 struct timespec sleeptimeremaning ; 
-struct sigaction sa; 
+struct sigaction *sa; 
 
 bzero ( &randSleeptime , sizeof(randSleeptime)); 
 bzero (&sleeptimeremaning , sizeof(sleeptimeremaning));
-bzero ( &saint_node , sizeof(saint_node)); 
+bzero ( &sa , sizeof(sa)); 
 
 myPID = getpid(); 
 
