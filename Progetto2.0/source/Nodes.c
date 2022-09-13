@@ -45,7 +45,6 @@ void take_transaction()
 			friendList = realloc(friendList, sizeof(pid_t) * (friendList_size + 1));
 			friendList++;
 			friendList[sizeofFriend] = friends_recived.friend;
-			;
 		}
 
 		friendCycle++;
@@ -118,7 +117,7 @@ void confirm_state_block(Block_ *toConfirm)
 	}
 }
 
-void block_ladger(Block_ *newBlock)
+void block_ledger(Block_ *newBlock)
 {
 	int i;
 	Block_ tmp;
@@ -188,7 +187,7 @@ void node_handler_interrupt(int sigum)
 	accurate_balance = 0;
 
 	msgctl(Msg_ID, IPC_RMID, NULL);
-	/*scrolling ledger because only the balance written on ledger at the end is
+	/* travers ledger because only the balance written on ledger at the end is
 	 * the one that should be displayed */
 
 	for (i = 0; i < SO_REGISTRY_SIZE; i++)
@@ -346,7 +345,7 @@ int main(int argc, char *argv[])
 				/*SLEEP_TIME_SET;*/
 				sleep(1);
 				Block(transBuffer, newBlock);
-				block_ladger(newBlock);
+				block_ledger(newBlock);
 				free(newBlock);
 				/*SLEEP;*/
 				sleep(1);

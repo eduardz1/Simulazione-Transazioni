@@ -1,6 +1,7 @@
 #include "Conf.h"
 #include "Master.h"
 #include "../Util/IPCS_SEM.h"
+#include "../Util/Ms_Queue.h"
 #include <time.h>
 /*user return status, used in tp */
 #define WENT_BROKE 1
@@ -36,12 +37,13 @@ void Block(transaction *blockT, Block_ *newBlock);
 void transListTo_block(transaction *Noreward);
 void fill_friends(pid_t *friendList);
 void confirm_state_block(Block_ *confirmed);
-void block_ladger(Block_ *newBlock);
-
+void block_ledger(Block_ *newBlock);
 void ipc_attach_argv(char **argv);
 void sig_handler_init(struct sigaction *sa);
 void node_handler_interrupt(int sigum);
 
+int send_message(int queueID,void *msg,int size,int flag);
+int receive_message(int queueID,void *msg,int size,int mtype,int flag);
 /*
 
 struct msqid_dis{
