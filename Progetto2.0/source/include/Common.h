@@ -31,7 +31,7 @@
 #include <sys/wait.h>
 #include <limits.h>
 #include <pthread.h> 
-
+#include <time.h>
 #include "Conf.h"
 
 #ifndef MS_QUEUE

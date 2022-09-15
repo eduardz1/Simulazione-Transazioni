@@ -2,7 +2,7 @@
 #include "Master.h"
 #include "../Util/IPCS_SEM.h"
 #include "../Util/Ms_Queue.h"
-#include <time.h>
+
 /*user return status, used in tp */
 #define WENT_BROKE 1
 #define MAX_RETRY 2

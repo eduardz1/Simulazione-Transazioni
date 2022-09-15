@@ -27,6 +27,8 @@ int friendList_size;
 int sem_id_ledger;
 int semNodesPIDs_ID;
 
+
+
 void take_transaction()
 {
 	unsigned int friendCycle = 20;
@@ -34,7 +36,7 @@ void take_transaction()
 	int sizeofFriend = friendList_size;
 	if (transPool.size < SO_TP_SIZE && friendCycle < 20)
 	{
-		if (receive_message(Msg_ID, &fetchMex, sizeof(Message), message.m_type, 0) == 0)
+		if (receive_message(Msg_ID, &fetchMex, sizeof(Message), message.m_type, 0) == 0) /*undefined reference to receive_message() dunno why*/
 		{
 			add_to_pool(&transPool, &fetchMex);
 			transPool.size++;
@@ -279,9 +281,9 @@ void Message_Queue(){
 		newTransaction->m_type=1;
 		printf("WRITE DATA \n ");
 		fgets(Trans_ptr->mesText,BUFF_MAX,stdin);
-		/*MEssage to send
+		/*Message to send
 		msgsnd(Msg_ID,Trans_ptr,sizeof(Trans_ptr->Message_Transaction),0);
-		printf("DAta Send :%s \n",Trans_ptr->mesText);
+		printf("Data Send :%s \n",Trans_ptr->mesText);
 		Message_Rec( Msg_ID, myPID);
 }
 */

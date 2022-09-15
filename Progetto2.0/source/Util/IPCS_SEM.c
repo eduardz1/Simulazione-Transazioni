@@ -1,5 +1,4 @@
 #include "IPCS_SEM.h"
-#include <sys/sem.h>
 
 
 /* int sem_id  = semget ( IPC_ PRIVATE  , NUM_RISORSE , 0600 )*/ 
@@ -28,7 +27,7 @@ int resource_release(int sem_id , int sem_count)
         sops.sem_flg = 0 ; 
         sops.sem_num = sem_count; 
         sops.sem_op = -1 ; 
-        return somop(sem_id,&sops,1);
+        return semop(sem_id,&sops,1);
 }
 void sem_print_value(char *mystring , int sem_id)
 {

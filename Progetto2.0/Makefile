@@ -12,13 +12,13 @@ PARSER=source/Parser.c source/include/Parser.h
 all:nodes master users print
 
 master:$(MASTER)
-	$(CC) $(CFLAGS)  source/Master.c -o Master
+	$(CC) $(CFLAGS)  source/Master.c source/Util/IPCS_SEM.c source/Util/Ms_Queue.c -o Master
 
 users: $(USERS)
-	$(CC) $(CFLAGS)  source/Users.c -o Users
+	$(CC) $(CFLAGS)  source/Users.c source/Util/IPCS_SEM.c source/Util/Ms_Queue.c -o Users
 
 nodes: $(NODE)
-	$(CC) $(CFLAGS)  source/Nodes.c -o Nodes
+	$(CC) $(CFLAGS)  source/Nodes.c source/Util/IPCS_SEM.c source/Util/Ms_Queue.c -o Nodes
 
 print:$(PRINT)
 	$(CC) $(CFLAGS)  source/Print.c  -v -lpthread -o Print

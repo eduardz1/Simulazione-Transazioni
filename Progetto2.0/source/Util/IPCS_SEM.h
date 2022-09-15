@@ -1,5 +1,8 @@
 /*#include "Ms_Queue.h"*/
-
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/sem.h>
 typedef struct semphbuf
 {
 	unsigned short sem_num; /* Semaphore set num */
