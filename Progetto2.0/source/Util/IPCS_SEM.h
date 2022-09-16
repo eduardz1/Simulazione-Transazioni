@@ -3,20 +3,25 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/sem.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <errno.h>
+
+
 typedef struct semphbuf
 {
-	unsigned short sem_num; /* Semaphore set num */
+	unsigned short sem_num; 			/* Semaphore set num */
 	short sem_op;						/* Semaphore operation */
-	short sem_flg;					/* Operation flags, IPC_NOWAIT, SEM_UNDO */
+	short sem_flg;				     	/* Operation flags, IPC_NOWAIT, SEM_UNDO */
 } SemBuf;
 
 /*this union must be defined as rewqired by the semctl man page  */
 union semun
 {
 	int val;							 /* Value for SETVAL */
-	struct semid_ds *buf;	 /* Buffer for IPC_STAT, IPC_SET */
-	unsigned short *array; /* Array for GETALL, SETALL */
-	struct seminfo *__buf; /* Buffer for IPC_INFO Linux-specific) */
+	struct semid_ds *buf;				 /* Buffer for IPC_STAT, IPC_SET */
+	unsigned short *array; 				 /* Array for GETALL, SETALL */
+	struct seminfo *__buf; 				 /* Buffer for IPC_INFO Linux-specific) */
 };
 /*PROTOTYPE'S FUNCTION DECLARATION */
 
