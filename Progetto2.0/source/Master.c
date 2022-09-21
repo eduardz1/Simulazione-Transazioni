@@ -155,12 +155,12 @@ int main()
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGALRM, &sa, NULL);
 	mQueue = message_queue_id();
-
 	for (nCounter = 0; nCounter < SO_NODES_NUM-1; nCounter++) /*TODO: seg fault here imo, need to solve */
 	{
-		nodesPid[nCounter].Node_state = ALIVE;
 		nodesPid[nCounter].balance = 0;
-		generate_user(nCounter);
+		nodesPid[nCounter].Node_state = available ; 
+		nodesPid[nCounter].nodPid = generate_node(nCounter);
+
 	}
 	
 	for (uCounter = 0; uCounter < SO_USERS_NUM; uCounter++)
