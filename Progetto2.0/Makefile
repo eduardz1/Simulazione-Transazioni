@@ -25,3 +25,4 @@ print:$(PRINT)
 	
 run:
 	./Master
+
