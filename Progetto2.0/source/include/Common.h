@@ -42,6 +42,15 @@
 #define SO_BLOCK_SIZE 10
 #define NO_BLOCK -1 
 
+#define IPC_ERROR -1
+#define SHM_PARAMETERS 1337
+#define SHM_USERS_ARRAY 1338
+#define SHM_NODES_ARRAY 1339
+#define SHM_LEDGER 1340
+#define SEM_USERS_PIDS_KEY 420
+#define SEM_NODES_PIDS_KEY 421
+#define SEM_LEDGER_KEY 422
+#define M_QUEUE_KEY 0x5AD
 
 /* -- ARGV LOCATION OF IPC OBJECTS -- */
 #define USERS_PID_ARGV (atoi(argv[1]))

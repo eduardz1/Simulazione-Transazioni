@@ -1,6 +1,5 @@
 #include "include/Master.h"
 
-
 #define USER_NAME "./Users"
 #define NODE_NAME "./Nodes"
 
@@ -10,7 +9,36 @@ Block_ ledger[SO_REGISTRY_SIZE];
 Block_ *tmpLedger;
 int mQueue;
 
+void sems_init(){
+	semUsersPid_Id=semget(,1,IPC_CREAT|0666);
 
+
+}
+
+void create_arguments(int *IPC_array, char **argv)
+{
+	char uPid_array[13] = {0};
+	char nPid_array[13] = {0};
+	char ledger[13] = {0};
+	char semUserPid_Id[13] = {0};
+	char semNodePid_Id[13] = {0};
+	char semLedger_Id[13] = {0};
+
+	snprintf(uPid_array, 13, "%d", IPC_array[0]);
+	snprintf(nPid_array, 13, "%d", IPC_array[1]);
+	snprintf(ledger, 13, "%d", IPC_array[3]);
+	snprintf(semUserPid_Id, 13, "%d", IPC_array[4]);
+	snprintf(semNodePid_Id, 13, "%d", IPC_array[6]);
+	snprintf(semLedger_Id, 13, "%d", IPC_array[5]);
+
+	strncpy(argv[1], uPid_array, 13);
+	strncpy(argv[2], nPid_array, 13);
+	strncpy(argv[4], ledger, 13);
+	strncpy(argv[5], semUserPid_Id, 13);
+	strncpy(argv[6], semLedger_Id, 13);
+	strncpy(argv[7], semNodePid_Id, 13);
+	argv[8] = NULL; /* Terminating argv with NULL value */
+}
 
 int message_queue_id()
 {
@@ -69,19 +97,20 @@ void Shared_Memory(key_t key, size_t size, int shmflg)
 /* generate the user with fork and lauch ./users with execve*/
 void generate_user(int uCounter)
 { /*need to implement uCounter !! */
-	pid_t uPid= fork();
+	pid_t uPid = fork();
 
-	switch(uPid){
-		case -1:
-		 	printf("Error in fork for user\n");
+	switch (uPid)
+	{
+	case -1:
+		printf("Error in fork for user\n");
 		break;
-		case 0:
-		 	printf("[PROCESS %d] Forked child %d\n", getpid(), getpid());
-		 	system(USER_NAME);
-		 break;
-		default:
-			usersPid[uCounter].usPid=uPid;
-			return;
+	case 0:
+		printf("[PROCESS %d] Forked child %d\n", getpid(), getpid());
+		system(USER_NAME);
+		break;
+	default:
+		usersPid[uCounter].usPid = uPid;
+		return;
 	}
 }
 int generate_node(int nCounter)
@@ -104,8 +133,8 @@ int generate_node(int nCounter)
 		break;
 
 	case 0:
-	  printf("[PROCESS %d] Forked child %d\n", getpid(), getpid());		
-		message_queue_id();	
+		printf("[PROCESS %d] Forked child %d\n", getpid(), getpid());
+		message_queue_id();
 		system(NODE_NAME);
 		break;
 
@@ -140,29 +169,31 @@ int main()
 	unsigned int i;
 	unsigned int uCounter;
 	unsigned int nCounter;
-
+	char *argvCreator[8];
 	struct sigaction sa;
-
+	struct sembuf sops;
+	for(i=0;i<8;i++)
+		argvCreator[i] = malloc(3*sizeof(int)+1);
+	
 	tmpLedger = ledger;
-
-	/*signal handler function 
-	* set all sigaction's byte to zero
-	* sa.handler to handle signal_handler(),then the handler is set to handle SIGINT signals
-	*/
+	sems_init();
+	/*signal handler function
+	 * set all sigaction's byte to zero
+	 * sa.handler to handle signal_handler(),then the handler is set to handle SIGINT signals
+	 */
 
 	bzero(&sa, sizeof(sa));
 	sa.sa_handler = signal_handler;
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGALRM, &sa, NULL);
 	mQueue = message_queue_id();
-	for (nCounter = 0; nCounter < SO_NODES_NUM-1; nCounter++) /*TODO: seg fault here imo, need to solve */
+	for (nCounter = 0; nCounter < SO_NODES_NUM - 1; nCounter++) /*TODO: seg fault here imo, need to solve */
 	{
 		nodesPid[nCounter].balance = 0;
-		nodesPid[nCounter].Node_state = available ; 
+		nodesPid[nCounter].Node_state = available;
 		nodesPid[nCounter].nodPid = generate_node(nCounter);
-
 	}
-	
+
 	for (uCounter = 0; uCounter < SO_USERS_NUM; uCounter++)
 	{
 		usersPid[uCounter].Us_state = ALIVE;
@@ -176,7 +207,7 @@ int main()
 	{
 	case -1:
 		fprintf(stderr, "[master] fork error\n");
-		exit(EXIT_FAILURE); 
+		exit(EXIT_FAILURE);
 		break;
 	case 0:
 	{
@@ -185,8 +216,8 @@ int main()
 
 		friend_msg newNode;
 		Message transHop;
-		bzero(&newNode,sizeof(newNode)); /*set memory region to zero */
-		bzero(&transHop,sizeof(transHop));
+		bzero(&newNode, sizeof(newNode)); /*set memory region to zero */
+		bzero(&transHop, sizeof(transHop));
 		signal(SIGINT, SIG_DFL);
 
 		while (1)
