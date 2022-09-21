@@ -4,8 +4,8 @@
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/msg.h>
-const void *Message_p; 
-size_t Message_size; 
+/*const void *Message_p; 
+size_t Message_size;*/ 
  
 /*PROTOTYPE'S */
 /*void Message_Queue();*/

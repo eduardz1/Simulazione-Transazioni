@@ -2,8 +2,6 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <sys/types.h>
-#define CONF_FILE "../../conf.txt"
-struct ConfigParameters *par;
 
 
 

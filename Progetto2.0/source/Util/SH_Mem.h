@@ -1,5 +1,4 @@
 #include "../include/Common.h"
-#include "parametri.h"
 #include <sys/types.h>
 /*PROTOTYPE'S FUNCTION'S */
 void Sh_Mem_Def();
