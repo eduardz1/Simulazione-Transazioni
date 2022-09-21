@@ -1,13 +1,13 @@
 #include "../include/Common.h"
 #include <sys/types.h>
+#include <sys/stat.h>
+
 /*PROTOTYPE'S FUNCTION'S */
 void Sh_Mem_Def();
 void Sh_CONFIG_Rd();
 void Sh_Mem_Wr();
 void Sh_Mem_Atc();
 void Sh_Mem_Det();
-pid_t *NodePid[SO_NODES_NUM];
-pid_t *UserPid[SO_NODES_NUM];
 
 /*
 struct SH_Mem_Data
