@@ -26,3 +26,8 @@ print:$(PRINT)
 run:
 	./Master
 
+clean:
+	rm Master Nodes Users Print 
+
+clean_ipc:
+	ipcrm -a
