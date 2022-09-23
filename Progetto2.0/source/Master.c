@@ -8,13 +8,35 @@ node *nodesPid;
 Block_ ledger[SO_REGISTRY_SIZE];
 Block_ *tmpLedger;
 int mQueue;
+int semUsersPid_Id;
+int semNodesPid_Id;
+int semLedger_Id;
 
-void sems_init(){
-	semUsersPid_Id=semget(,1,IPC_CREAT|0666);
 
+void sems_init()
+{
+
+	semUsersPid_Id=semget(SEM_USERS_PIDS_KEY,1,0600|IPC_CREAT|IPC_EXCL);
+	semNodesPid_Id=semget(SEM_NODES_PIDS_KEY,1,0600|IPC_CREAT|IPC_EXCL);
+	semLedger_Id=semget(SEM_LEDGER_KEY,1,0600|IPC_CREAT|IPC_EXCL);
+
+	switch(errno){
+		case EEXIST:
+			printf("[MASTER] one or more sems couldn't be created\n");
+			exit(1);
+		case ENOSPC:
+			printf("[MASTER] too many sems in the system");
+			exit(1);
+
+		default:
+		printf("[MASTER] semUsersPid_id is %d\n",semUsersPid_Id);
+		printf("[MASTER] semNodesPid_id is %d\n",semNodesPid_Id);
+		printf("[MASTER] semLedger_id is %d\n",semLedger_Id);
+		break;
+
+	}
 
 }
-
 void create_arguments(int *IPC_array, char **argv)
 {
 	char uPid_array[13] = {0};
@@ -176,10 +198,14 @@ int main()
 		argvCreator[i] = malloc(3*sizeof(int)+1);
 	
 	tmpLedger = ledger;
+	
 	sems_init();
-	/*signal handler function
-	 * set all sigaction's byte to zero
-	 * sa.handler to handle signal_handler(),then the handler is set to handle SIGINT signals
+
+	
+
+	 /* set all sigaction's byte to zero
+	  sa.handler to handle signal_handler(),then the handler is set to handle SIGINT signals
+	 
 	 */
 
 	bzero(&sa, sizeof(sa));
@@ -189,7 +215,7 @@ int main()
 	mQueue = message_queue_id();
 	for (nCounter = 0; nCounter < SO_NODES_NUM - 1; nCounter++) /*TODO: seg fault here imo, need to solve */
 	{
-		nodesPid[nCounter].balance = 0;
+		nodesPid[nCounter].balance = 0; /*TODO seg fault here */
 		nodesPid[nCounter].Node_state = available;
 		nodesPid[nCounter].nodPid = generate_node(nCounter);
 	}
