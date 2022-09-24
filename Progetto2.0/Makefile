@@ -29,5 +29,5 @@ run:
 clean:
 	rm Master Nodes Users Print 
 
-clean_ipc:
+ipc_clean:
 	ipcrm -a
