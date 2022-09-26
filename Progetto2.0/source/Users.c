@@ -118,7 +118,7 @@ void find_and_remove(node **head, transaction *search)
       curr = curr->next;
     }
   }
-  if (curr == head)
+  if (curr == *head)
   {
     free(*head);
     *head = (*head)->next;
@@ -221,7 +221,7 @@ void Sh_MemUser(key_t key, size_t size, int shmflg)
   int Mem_id;
   int Sh_MemInit = shmget(key, sizeof(SO_USERS_NUM), IPC_CREAT | 0666); /*define area*/
   char *shmAttach = shmat(Sh_MemInit, NULL, 0);                         /*Attach Area*/
-  int ShDet = shmdt(Sh_MemInit);                                        /*Detach Area*/
+  int *ShDet = shmdt(Sh_MemInit);                                        /*Detach Area*/
 }
 
 void update_balance(unsigned int tmpBalance)
@@ -329,7 +329,7 @@ void user_transaction_handle(int signum)
 
 int main()
 {
-  unsigned int amount, reward, retry, money;
+  unsigned int amount, reward, retry;
   pid_t usPid, ndPid;
   myPid = getpid();
   currBalance = SO_BUDGET_INIT;
@@ -354,7 +354,7 @@ int main()
       amount -= reward;
 
       queue_to_pid(ndPid);
-      start_transaction(money, reward);
+      start_transaction(amount, reward);
 
       if (send_transaction() == 0)
       {

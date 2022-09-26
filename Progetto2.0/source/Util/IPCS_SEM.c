@@ -51,7 +51,7 @@ void sem_print_value(char *mystring , int sem_id)
         sem_vals=malloc(sizeof(*sem_vals)*num_sem);
         arg.array =sem_vals;
         semctl(sem_id ,0,  GETALL, arg); 
-        /* GETALL MACRO =  /* [XSI] Return semvals into arg.array {READ} */
+        /* GETALL MACRO =  [XSI] Return semvals into arg.array {READ} */
 
         /* the string myst be allocated by the caller */
         mystring [0]= 0 ; 

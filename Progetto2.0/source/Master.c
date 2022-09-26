@@ -96,11 +96,11 @@ void Sh_MemMaster(key_t key, size_t size, int shmflg)
 
 void Sh_UserPID(key_t key, size_t size, int shmflg)
 {
-	key = getpid();
 	int Sh_UserPIDDet;
 	int Sh_UserPIDInit;
 	int id;
 	char *Sh_UserPIDAttach;
+	key = getpid();
 	Sh_UserPIDInit = shmget(key, sizeof(SO_USERS_NUM), IPC_CREAT | 0666);
 	Sh_UserPIDAttach = shmat(Sh_UserPID, NULL, 0);
 	Sh_UserPIDDet = shmdt(Sh_UserPIDInit);
@@ -117,7 +117,7 @@ void Shared_Memory(key_t key, size_t size, int shmflg)
 }
 
 /* generate the user with fork and lauch ./users with execve*/
-void generate_user(int uCounter)
+void generate_user(int uCounter,char *userArgv[])
 { /*need to implement uCounter !! */
 	pid_t uPid = fork();
 
@@ -135,7 +135,7 @@ void generate_user(int uCounter)
 		return;
 	}
 }
-int generate_node(int nCounter)
+int generate_node(int nCounter,char *nodeArgv[])
 {
 	static unsigned int buff = 0;
 	pid_t nPid = fork();
@@ -198,8 +198,10 @@ int main()
 		argvCreator[i] = malloc(3*sizeof(int)+1);
 	
 	tmpLedger = ledger;
-	
+	printf("Master PID: %d\n", getpid());
+	printf("before sems_init\n"); /*TODO: remove,debug only*/
 	sems_init();
+	printf("after sems_init\n"); /*TODO: remove,debug only*/
 
 	
 
@@ -213,18 +215,22 @@ int main()
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGALRM, &sa, NULL);
 	mQueue = message_queue_id();
-	for (nCounter = 0; nCounter < SO_NODES_NUM - 1; nCounter++) /*TODO: seg fault here imo, need to solve */
+	printf("before for loop\n");/*TODO: remove,debug only*/
+	for (nCounter = 0; nCounter < SO_NODES_NUM; nCounter++) /*TODO: seg fault here imo, need to solve */
 	{
+		printf("nCounter: %d\n", nCounter);
+		printf("in for loop\n");/*TODO: remove,debug only*/
 		nodesPid[nCounter].balance = 0; /*TODO seg fault here */
 		nodesPid[nCounter].Node_state = available;
-		nodesPid[nCounter].nodPid = generate_node(nCounter);
+		generate_node(nCounter,argvCreator);
 	}
+
 
 	for (uCounter = 0; uCounter < SO_USERS_NUM; uCounter++)
 	{
 		usersPid[uCounter].Us_state = ALIVE;
 		usersPid[uCounter].balance = 0;
-		generate_user(uCounter);
+		generate_user(uCounter,argvCreator);
 	}
 
 	alarm(SO_SIM_SEC);
@@ -251,7 +257,7 @@ int main()
 			receive_message(mQueue, &newNode, sizeof(Message), TRANSACTION_MTYPE, 0);
 			nodesPid[nCounter].Node_state = ALIVE;
 			nodesPid[nCounter].balance = 0;
-			tmpPid = generate_node(nCounter);
+			tmpPid = generate_node(nCounter,argvCreator);
 		}
 	}
 	default:

@@ -24,9 +24,10 @@ void *printing(void *p)
   {
     for (high = 0; high < SO_USERS_NUM && SO_NODES_NUM; high++)
     {
-      printf("[PID:%d] ---[NODE n * :%d ] -- [ AMAOUNT : %d ] --- [STATUS: %s] ----", myPID, node_print->nodPid, user_print->usPid, t_print->Money, stat_print->MoneyStatusTrans);
+      printf("[PID:%d] ---[NODE n * :%d ] -- [ AMAOUNT : %d ] --- [STATUS: %d] ----", myPID, node_print->nodPid, user_print->usPid, t_print->Money, stat_print->MoneyStatusTrans);
     }
   }
+  return 0;
 }
 /* La differenza con le global sta che ,le global vanno definite in ogni file le env no
 getenv returna una stringa */
@@ -60,9 +61,9 @@ void conf_env(){
     char * so_friends_num = getenv("SO_FRIENDS_NUM");
     char * so_hops = getenv("SO_HOPS");
 
-    /*Set value for env varible */
+    Set value for env varible 
 
-/*Print env variable
+Print env variable
 printf("SO_USER_NUM:%s\n",so_user_num);
 printf("SO_NODES_NUM:%s\n",so_nodes_num);
 printf("SO_BUDGET_INIT:%s\n",so_budget_init);
@@ -157,10 +158,10 @@ void simulation_print (){
 int main(int argc, char *argv[])
 {
   pthread_t threadId;
-  int P_Parent;
+  int *P_Parent;
   int thTest;
   int *ptr;
-  P_Parent = 1;
+  P_Parent = 0;
   thTest = pthread_create(&threadId, NULL, printing(0), P_Parent);
   if (thTest == 0)
   {
@@ -174,4 +175,6 @@ int main(int argc, char *argv[])
     exit(EXIT_FAILURE);
   }
   printf("printing from main\n");
+
+  return 0;
 }
