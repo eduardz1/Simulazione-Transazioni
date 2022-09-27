@@ -5,6 +5,7 @@
 
 user *usersPid;
 node *nodesPid;
+node start; 
 Block_ ledger[SO_REGISTRY_SIZE];
 Block_ *tmpLedger;
 int mQueue;
@@ -132,6 +133,9 @@ void generate_user(int uCounter,char *userArgv[])
 		break;
 	default:
 		usersPid[uCounter].usPid = uPid;
+		usersPid[uCounter].Us_state=ALIVE; 
+		usersPid[uCounter].balance=0; 
+
 		return;
 	}
 }
@@ -162,6 +166,8 @@ int generate_node(int nCounter,char *nodeArgv[])
 
 	default:
 		nodesPid[nCounter].nodPid = nPid;
+		nodesPid[nCounter].balance = 0;
+		nodesPid[nCounter].Node_state=available;
 		break;
 	}
 	return nPid;
@@ -220,16 +226,16 @@ int main()
 	{
 		printf("nCounter: %d\n", nCounter);
 		printf("in for loop\n");/*TODO: remove,debug only*/
-		nodesPid[nCounter].balance = 0; /*TODO seg fault here */
-		nodesPid[nCounter].Node_state = available;
+		/*nodesPid[nCounter].balance = 0; /*TODO seg fault here 
+		nodesPid[nCounter].Node_state = available; */
 		generate_node(nCounter,argvCreator);
 	}
 
 
 	for (uCounter = 0; uCounter < SO_USERS_NUM; uCounter++)
 	{
-		usersPid[uCounter].Us_state = ALIVE;
-		usersPid[uCounter].balance = 0;
+		/*usersPid[uCounter].Us_state = ALIVE;
+		usersPid[uCounter].balance = 0;*/
 		generate_user(uCounter,argvCreator);
 	}
 
