@@ -176,20 +176,14 @@ int generate_node(int nCounter,char *nodeArgv[])
 /* Stop Simulation handler Ctrl-C */
 void signal_handler(int signum)
 {
-	char c;
-	signal(signum, SIG_IGN);
-	printf("you pressed CTRL-C\n"
-				 "would you like to quit?[y/n]");
-	c = getchar();
-	if (c == 'y' || c == 'Y')
+	printf("Signal %d received\n", signum);
+	/*if ctrl-c is pressed, the simulation is stopped*/
+	if (signum == SIGINT)
 	{
-		exit(0);
+		printf("Simulation stopped\n");
+		kill(0, SIGTERM);
 	}
-	else
-	{
-		/*  signal(SIGINT,signal_handler);*/
-		getchar();
-	}
+
 }
 
 int main()
