@@ -224,19 +224,26 @@ int main()
 	printf("before for loop\n");/*TODO: remove,debug only*/
 	for (nCounter = 0; nCounter < SO_NODES_NUM; nCounter++) /*TODO: seg fault here imo, need to solve */
 	{
+		int sigum; 
 		printf("nCounter: %d\n", nCounter);
 		printf("in for loop\n");/*TODO: remove,debug only*/
 		/*nodesPid[nCounter].balance = 0; /*TODO seg fault here 
 		nodesPid[nCounter].Node_state = available; */
 		generate_node(nCounter,argvCreator);
+		sleep(5);
+		signal_handler(sigum); 
+		
 	}
 
 
 	for (uCounter = 0; uCounter < SO_USERS_NUM; uCounter++)
 	{
+		int sigum;
 		/*usersPid[uCounter].Us_state = ALIVE;
 		usersPid[uCounter].balance = 0;*/
 		generate_user(uCounter,argvCreator);
+		sleep(5);
+		signal_handler(sigum);
 	}
 
 	alarm(SO_SIM_SEC);
