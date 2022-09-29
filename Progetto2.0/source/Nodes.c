@@ -317,7 +317,7 @@ int main(int argc, char *argv[])
 	}
 	ipc_Attach_argv(argv);
 	srand(getpid());
-	sig_handler_init(&sa);
+	sig_handler_init(sa);
 	message_queue_attach();
 
 	friendList = malloc(SO_FRIENDS_NUM * sizeof(pid_t));

@@ -335,7 +335,7 @@ int main()
   currBalance = SO_BUDGET_INIT;
   myPid = getpid();
   /*signal_handler(SIGINT, SIG_IGN);*/
-  printf("-->main\n");
+  printf("-->[USER] main\n");
   srand(myPid); /*initialize rand function, so we have same pattern for each user*/
   retry = SO_RETRY;
   while (1)
