@@ -24,7 +24,7 @@ void *printing(void *p)
   {
     for (high = 0; high < SO_USERS_NUM && SO_NODES_NUM; high++)
     {
-      printf("[PID:%d] ---[NODE n * :%d ] -- [ AMAOUNT : %d ] --- [STATUS: %d] ----", myPID, node_print->nodPid, user_print->usPid, t_print->Money, stat_print->MoneyStatusTrans);
+      printf("[PID:%d] ---[NODE PID:%d] -- [USER PID:%d] --- [MONEY:%d] --- [STATUS:%d]", myPID, node_print->nodPid, user_print->usPid, t_print->Money, stat_print->MoneyStatusTrans);
     }
   }
   return 0;

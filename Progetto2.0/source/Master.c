@@ -174,6 +174,7 @@ int generate_node(int nCounter, char* nodeArgv[])
 		break;
 
 	default:
+    /*FIXME: nCounter cause seg fault*/
 		nodesPid[nCounter].nodPid = nPid;
 		nodesPid[nCounter].balance = 0;
 		nodesPid[nCounter].Node_state = available;
@@ -264,7 +265,7 @@ int main()
 			receive_message(mQueue, &newNode, sizeof(Message), TRANSACTION_MTYPE, 0);
 			nodesPid[nCounter].Node_state = ALIVE;
 			nodesPid[nCounter].balance = 0;
-			tmpPid = generate_node(nCounter, argvCreator);
+			tmpPid = generate_node(-1,argvCreator);
 		}
 	}
 	default:
