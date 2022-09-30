@@ -144,22 +144,26 @@ typedef struct msgbuf_trans
     }Message_Transaction;
 }Message;
 
+/*simulation node struct*/
 typedef struct StructNode
 {
 
     pid_t nodPid;
     unsigned long balance;
-    struct Node *head;
-    struct Node *next;
-    transaction * transaction;
-    int tpsize; 
+    int tpsize;
     enum Node_stat {
         available,
         full
     }Node_state;
 
-}node;
+}node_t;
 
+/* linked list nodes struct*/
+struct node
+{
+		transaction trans;
+		struct node *next;
+};
 
 typedef struct Block
   {

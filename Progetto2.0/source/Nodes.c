@@ -12,7 +12,7 @@ Block_ *ledger;
 #define BUFF_MAX 10
 /*POINTER TO STRUCTURE  */
 user *UserID;
-node *NodeID;
+node_t *NodeID;
 Block_ *Ledger;
 
 /* -------------*/
@@ -168,7 +168,7 @@ int get_pid_node_index()
 	i = 0;
 	for (i = 0; i < SO_NODES_NUM * 2; i++)
 	{
-		if (NodeID[i].nodPid == myPID)
+		if (NodeID[i].nodPid== myPID)
 		{
 			return i;
 		}
@@ -200,7 +200,7 @@ void node_handler_interrupt(int sigum)
 		}
 	}
 	resource_set(semNodesPIDs_ID, 1);
-	NodeID[get_pid_node_index()].balance = accurate_balance;
+	NodeID[get_pid_node_index()].balance= accurate_balance;
 	resource_release(semNodesPIDs_ID, 1);
 
 	exit(0);

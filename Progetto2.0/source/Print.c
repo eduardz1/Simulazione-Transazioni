@@ -1,6 +1,6 @@
 #include "include/Print.h"
 
-node *node_print;
+node_t *node_print;
 user *user_print;
 pid_t myPID;
 transaction *t_print;

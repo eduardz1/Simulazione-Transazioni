@@ -1,14 +1,13 @@
 #include "include/Users.h"
 
 Message *tns;
-node *tmp;
-node *sendingTransaction;
+node_t *sendingTransaction;
 user *usersPid;
-node *nodesPid;
+node_t *nodesPid;
 int queueID;
 pid_t myPid;
 unsigned int currBalance;
-node *outGoingTransactions = NULL;
+struct node *outGoingTransactions = NULL;
 Block_ *ledger;
 
 int semUsersPids_id;
@@ -63,22 +62,22 @@ pid_t get_random_nodePID()
   return val;
 }
 
-node *new_node(transaction t)
+struct node *new_node(transaction t)
 {
-  node *newNode = malloc(sizeof(node));
+ struct node *newNode = malloc(sizeof(struct node));
   if (newNode == NULL)
   {
     printf("Error allocating memory for new node\n");
   }
-  /* newNode->transaction=t;  TODO why is this not working? */
+   newNode->trans=t;  /*TODO why is this not working? */
   newNode->next = NULL;
   return newNode;
 }
 
 /*set transaction at the end of the linked list*/
-void push(node *head, transaction t)
+void push(struct node *head, transaction t)
 {
-  node *curr = head;
+  struct node *curr = head;
   while (curr->next != NULL)
   {
     curr = curr->next;
@@ -88,8 +87,7 @@ void push(node *head, transaction t)
 
 int compare_transaction(transaction *t1, transaction *t2)
 {
-  if (t1->Money == t2->Money &&
-      t1->Sender == t2->Sender)
+  if (t1->Money == t2->Money && t1->Sender == t2->Sender)
   {
     return 1;
   }
@@ -97,16 +95,16 @@ int compare_transaction(transaction *t1, transaction *t2)
 }
 
 /* find and removes a message from pool if present */
-void find_and_remove(node **head, transaction *search)
+void find_and_remove(struct node **head, transaction *search)
 {
-  node *curr = *head;
-  node *prev = NULL;
+  struct node *curr = *head;
+  struct node *prev = NULL;
 
   if (head == NULL)
   {
     return -1;
   }
-  while (!compare_transaction(curr->transaction, search))
+  while (!compare_transaction(&curr->trans, search))
   {
     if (curr->next == NULL)
     {
@@ -243,6 +241,7 @@ void current_balance()
   long accumulate = 0;
   long flag = 1;
   unsigned int tmpBalance = SO_BUDGET_INIT;
+	struct node *tmp;
   Block_ tmpLedger[SO_REGISTRY_SIZE];
   resource_set(semLedger_id, i);
   memcpy(&tmpLedger, ledger, sizeof(tmpLedger));
@@ -258,7 +257,7 @@ void current_balance()
     /*if transaction is out-going remove Money+Reward else add to receiver Money */
     for (j = 0; j < SO_BLOCK_SIZE && flag != 0; j++)
     {
-      printf("Sender is %d\n", tmpLedger[i].t_list->Sender); /*debug*/
+      printf("Sender is %d\n", tmpLedger[i].t_list->Sender); /*FIXME: remove, just for debug*/
       if (tmpLedger[i].t_list[j].Sender == myPid)
       {
         find_and_remove(&outGoingTransactions, &tmpLedger[i].t_list[j]);
@@ -273,9 +272,10 @@ void current_balance()
   resource_set(semUsersPids_id, i);
   while (tmp != NULL)
   {
-    accumulate -= (tmp->transaction->Money + tmp->transaction->Reward);
+    accumulate -= (tmp->trans.Money + tmp->trans.Reward);
     tmp = tmp->next;
   }
+
   resource_release(semUsersPids_id, i);
   printf("accumulate %ld\n", accumulate);
   if (accumulate * (-1) > tmpBalance)

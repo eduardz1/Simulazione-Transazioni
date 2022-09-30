@@ -5,9 +5,9 @@
 
 user* usersPid;
 
-node* nodesPid;
+node_t *nodesPid;
 
-node start;
+node_t *start;
 
 Block_ ledger[SO_REGISTRY_SIZE];
 
