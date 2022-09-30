@@ -266,27 +266,7 @@ void message_queue_attach()
 	} while (errno == ENOENT);
 }
 
-/*
-void Message_Queue(){
 
-		nPid = fork();
-		MSG_Key= &nPid;
-		if (MSG_Key==NULL)
-		{
-			perror("KEY PROBLEM IN MSG_QUEUE CHECK IT \n ");
-			exit(EXIT_FAILURE);
-		 }
-
-		Msg_ID = msgget(MSG_Key, 0666|IPC_CREAT);
-		newTransaction->m_type=1;
-		printf("WRITE DATA \n ");
-		fgets(Trans_ptr->mesText,BUFF_MAX,stdin);
-		/*Message to send
-		msgsnd(Msg_ID,Trans_ptr,sizeof(Trans_ptr->Message_Transaction),0);
-		printf("Data Send :%s \n",Trans_ptr->mesText);
-		Message_Rec( Msg_ID, myPID);
-}
-*/
 void Message_Rec(int messageID, key_t messageKey)
 {
 	MSG_Key = &nPid;
@@ -360,3 +340,5 @@ int main(int argc, char *argv[])
 		}
 	}
 }
+
+

@@ -1,5 +1,5 @@
-/*#include "Conf.h"
-#include "Print.h"*/
+#include "include/Conf.h"
+/*#include "Print.h"*/
 /* THIS FILE CONTAIN THE VALUE OF THE CONFIGURATION PARAMETERSc,also the */
 int CONF() {
   putenv("SO_USER_NUM=100");

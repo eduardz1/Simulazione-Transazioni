@@ -29,7 +29,6 @@ int add_to_pool(pool *transPool, Message *message);
 int remove_from_pool(pool *transPool, Message *message);
 int sum_reward(transaction *);
 int get_pid_node_index();
-void Message_Queue();
 void message_queue_attach();
 void Message_Rec();
 void take_transaction();

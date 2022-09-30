@@ -4,21 +4,13 @@
 #define NODE_NAME "./Nodes"
 
 user* usersPid;
-
 node_t *nodesPid;
-
-node_t *start;
-
 Block_ ledger[SO_REGISTRY_SIZE];
-
 Block_* tmpLedger;
-
 int mQueue;
 
 int semUsersPid_Id;
-
 int semNodesPid_Id;
-
 int semLedger_Id;
 
 void sems_init()
@@ -98,7 +90,7 @@ void Sh_MemMaster(key_t key, size_t size, int shmflg)
 	/*int m_id; TODO remove this if useless at th end*/
 	int ShInit;
 	char* shm;
-	int shmdet;
+	int *shmdet;
 	ShInit = shmget(key, sizeof(SO_REGISTRY_SIZE) * 2, IPC_CREAT | 0666);
 	/*ShdMem Define Area*/        /* Raddoppio l'area per evitare saturazioni*/
 	shm = shmat(ShInit, NULL, 0); /*Attach ShMem;*/
@@ -131,7 +123,8 @@ void Shared_Memory(key_t key, size_t size, int shmflg)
 
 /* generate the user with fork and lauch ./users with execve*/
 void generate_user(int uCounter, char* userArgv[])
-{ /*need to implement uCounter !! */
+{
+  /*TODO: need to implement uCounter !! */
 	pid_t uPid = fork();
 
 	switch (uPid)
@@ -141,7 +134,8 @@ void generate_user(int uCounter, char* userArgv[])
 		break;
 	case 0:
 		printf("[PROCESS %d] Forked child %d\n", getpid(), getpid());
-		system(USER_NAME);
+		/*system(USER_NAME);*/
+    execve(USER_NAME,userArgv,NULL);
 		break;
 	default:
 		usersPid[uCounter].usPid = uPid;
@@ -175,7 +169,8 @@ int generate_node(int nCounter, char* nodeArgv[])
 	case 0:
 		printf("[PROCESS %d] Forked child %d\n", getpid(), getpid());
 		message_queue_id();
-		system(NODE_NAME);
+      execve(NODE_NAME,nodeArgv,NULL);
+		/*system(NODE_NAME);*/
 		break;
 
 	default:
@@ -187,7 +182,7 @@ int generate_node(int nCounter, char* nodeArgv[])
 	return nPid;
 }
 
-/* Stop Simulation handler Ctrl-C */
+/*TODO: Stop Simulation handler Ctrl-C */
 void signal_handler(int signum)
 {
 	printf("please write me !!");
@@ -261,7 +256,6 @@ int main()
 
 		friend_msg newNode;
 		Message transHop;
-		bzero(&newNode, sizeof(newNode)); /*set memory region to zero */
 		bzero(&transHop, sizeof(transHop));
 		signal(SIGINT, SIG_DFL);
 
