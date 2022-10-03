@@ -11,18 +11,18 @@ int Sem_set(int sem_id , int sem_num , int sem_val ){
 
 int resource_set(int sem_id , int sem_count) 
 { 
-        SemBuf sops = {0};
+        struct sembuf sops = {0};
         
         sops.sem_num = sem_count ; 
         sops.sem_flg =0 ; 
         sops.sem_op=-1; 
-        return semop(sem_id,&sops,1); /*system call conteined in the sem.h library check how they work visit man page   */ 
+        return semop(sem_id, &sops, 1); /*system call conteined in the sem.h library check how they work visit man page   */
 
 }
 
 int resource_release(int sem_id , int sem_count)
 {
-        SemBuf sops ={0}; 
+        struct sembuf sops ={0};
 
         sops.sem_flg = 0 ; 
         sops.sem_num = sem_count; 
