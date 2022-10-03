@@ -16,12 +16,12 @@ int queueId;
 
 /*function to handle transaction pool easily(linked list util) */
 
-double get_reward(int amount, int reward)
+int get_reward(int amount, int reward)
 {
   return ceil(reward * amount / 100);
 }
 
-int get_rand(int min, int max)
+unsigned int get_rand(int min, int max)
 {
   return rand() % (max - min + 1) + min;
 }
@@ -87,7 +87,7 @@ void push(struct node *head, transaction t)
 
 int compare_transaction(transaction *t1, transaction *t2)
 {
-  if (t1->Money == t2->Money && t1->Sender == t2->Sender)
+  if (t1->Money == t2->Money && t1->Receiver == t2->Receiver && t1->time.tv_nsec == t2->time.tv_sec && t1->time.tv_nsec && t2->time.tv_nsec)
   {
     return 1;
   }
@@ -100,15 +100,15 @@ void find_and_remove(struct node **head, transaction *search)
   struct node *curr = *head;
   struct node *prev = NULL;
 
-  if (head == NULL)
+  if (*head == NULL)
   {
-    return -1;
+    return;
   }
   while (!compare_transaction(&curr->trans, search))
   {
     if (curr->next == NULL)
     {
-      return -1;
+      return; /* transaction not found */
     }
     else
     {
@@ -160,9 +160,9 @@ int get_pid_userIndex(int searchPid)
 /* update status of user , NB--> 0 alive, 1 broke, 2 dead*/
 void update_status(int setStatus)
 {
-  printf("[%d] updating status to %d\n", myPid, setStatus);
   int i = get_pid_userIndex(myPid);
 
+  printf("[%d] updating status to %d\n", myPid, setStatus);
   if (i == -1)
   {
     printf("user failed to find");
@@ -177,18 +177,17 @@ void update_status(int setStatus)
   resource_release(semUsersPids_id, i);
 }
 
-void start_transaction(int money, int reward)
+void start_transaction(pid_t userPid, int money, int reward)
 {
   struct timespec exTime = {0};
   clock_gettime(CLOCK_REALTIME, &exTime);
 
   tns->m_type = TRANSACTION_MTYPE;
   tns->Message_Transaction.uTrans.Sender = myPid;
-  tns->Message_Transaction.uTrans.Receiver = usersPid;
+  tns->Message_Transaction.uTrans.Receiver = userPid;
   tns->Message_Transaction.uTrans.Money = money;
   tns->Message_Transaction.uTrans.Reward = reward;
   tns->Message_Transaction.uTrans.MoneyStatusTrans = pending;
-
   tns->Message_Transaction.uTrans.time = exTime;
   tns->Message_Transaction.hops = SO_HOPS;
 }
@@ -304,7 +303,7 @@ void user_transaction_handle(int signum)
     amount -= reward;
     update_status(0);
 
-    start_transaction(amount, reward);
+    start_transaction(userPid,amount, reward);
 
     if (send_transaction() == 0)
     {
@@ -333,7 +332,6 @@ int main()
   pid_t usPid, ndPid;
   myPid = getpid();
   currBalance = SO_BUDGET_INIT;
-  myPid = getpid();
   /*signal_handler(SIGINT, SIG_IGN);*/
   printf("-->[USER] main\n");
   srand(myPid); /*initialize rand function, so we have same pattern for each user*/
@@ -354,7 +352,7 @@ int main()
       amount -= reward;
 
       queue_to_pid(ndPid);
-      start_transaction(amount, reward);
+      start_transaction(usPid,amount, reward);
 
       if (send_transaction() == 0)
       {
@@ -378,5 +376,4 @@ int main()
       }
     }
   }
-  return 0;
 }

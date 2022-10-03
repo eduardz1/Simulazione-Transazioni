@@ -17,7 +17,7 @@ void Sh_MemUser(key_t key ,size_t size,int shmflg);
 
 int getPidUserIndex(int searchPid);
 void updateStatus(int setStatus); 
-void start_transaction(int money, int reward);
+void start_transaction(pid_t userPid,int money, int reward);
 void current_balance();
 
 int send_message(int queueID,void *msg,int size,int flag);

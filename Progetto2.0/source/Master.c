@@ -36,7 +36,6 @@ void sems_init()
 		break;
 	}
 }
-
 void create_arguments(int* IPC_array, char** argv)
 {
 	char uPid_array[13] = { 0 };
@@ -73,8 +72,7 @@ int message_queue_id()
 		printf("[PROCESS %d] queue %d was removed\n", pidGot, qId);
 		break;
 	case EINVAL:
-		printf("[PROCESS %d] queue %d invalid value for cmd or msqid\n", pidGot,
-				qId);
+		printf("[PROCESS %d] queue %d invalid value for cmd or msqid\n", pidGot,qId);
 		break;
 	case EPERM:
 		printf("[PROCESS %d] queue %d the effective user ID of the calling process "
@@ -115,8 +113,7 @@ void Shared_Memory(key_t key, size_t size, int shmflg)
 	/*int m_id;*/
 	int* shm;
 	int ShInit;
-	ShInit = shmget(key, sizeof(SO_REGISTRY_SIZE) * 2,
-			IPC_CREAT | 0666); /*ShdMem Define Area*/
+	ShInit = shmget(key, sizeof(SO_REGISTRY_SIZE) * 2,IPC_CREAT | 0666); /*ShdMem Define Area*/
 	shm = shmat(ShInit, NULL, 0);      /*Attach ShMem;*/
 	int shmdt(const void* shmaddr);    /*Detach ShMem*/
 }
@@ -134,7 +131,6 @@ void generate_user(int uCounter, char* userArgv[])
 		break;
 	case 0:
 		printf("[PROCESS %d] Forked child %d\n", getpid(), getpid());
-		/*system(USER_NAME);*/
     execve(USER_NAME,userArgv,NULL);
 		break;
 	default:
@@ -170,7 +166,6 @@ int generate_node(int nCounter, char* nodeArgv[])
 		printf("[PROCESS %d] Forked child %d\n", getpid(), getpid());
 		message_queue_id();
       execve(NODE_NAME,nodeArgv,NULL);
-		/*system(NODE_NAME);*/
 		break;
 
 	default:

@@ -15,7 +15,7 @@ void Sh_UserPID(key_t key,size_t size,int shmflg);
 void Shared_Memory( key_t key,size_t size,int shmflg);
 void generateUser();
 void generateNode();
-
+int message_queue_id();
 /*singal handler to end the simulation */
 void signal_handler(int signum);
 

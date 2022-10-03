@@ -10,9 +10,9 @@
 /*
 typedef struct semphbuf
 {
-	unsigned short sem_num; 			/* Semaphore set num
-	short sem_op;						/* Semaphore operation
-	short sem_flg;				     	/* Operation flags, IPC_NOWAIT, SEM_UNDO
+	unsigned short sem_num; 			 Semaphore set num
+	short sem_op;						 Semaphore operation
+	short sem_flg;				     	 Operation flags, IPC_NOWAIT, SEM_UNDO
 } SemBuf;
 */
 /*this union must be defined as rewqired by the semctl man page  */
