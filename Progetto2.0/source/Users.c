@@ -16,12 +16,12 @@ int queueId;
 
 /*function to handle transaction pool easily(linked list util) */
 
-int get_reward(int amount, int reward)
+int get_reward(unsigned int amount, int reward)
 {
   return ceil(reward * amount / 100);
 }
 
-unsigned int get_rand(int min, int max)
+unsigned int get_rand(unsigned int min,unsigned int max)
 {
   return rand() % (max - min + 1) + min;
 }
@@ -326,7 +326,7 @@ void user_transaction_handle(int signum)
   update_balance(currBalance);
 }
 
-int main()
+int main(int argc, char *argv[])
 {
   unsigned int amount, reward, retry;
   pid_t usPid, ndPid;
