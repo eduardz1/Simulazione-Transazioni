@@ -181,7 +181,9 @@ int generate_node(int nCounter, char* nodeArgv[])
 /*TODO: Stop Simulation handler Ctrl-C */
 void signal_handler(int signum)
 {
+	printf("in signal handler function\n");
 	killpg(0,SIGINT);
+
 	printf("Parent: signal recieved %d\n", signum);
 	semctl(semUsersPid_Id, 1, IPC_RMID);
 	semctl(semNodesPid_Id, 1, IPC_RMID);
@@ -218,6 +220,8 @@ int main(int argc,char *argv[])
 	sa.sa_handler = signal_handler;
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGALRM, &sa, NULL);
+	printf("before sigaction\n"); /*TODO: remove,debug only*/
+	signal(SIGUSR1, signal_handler);
 	mQueue = message_queue_id();
 	printf("before for loop\n"); /*TODO: remove,debug only*/
 	for (nCounter = 0; nCounter < SO_NODES_NUM;nCounter++) /*TODO: seg fault here imo, need to solve, FIXME: just for debug purpose */
