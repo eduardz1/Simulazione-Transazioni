@@ -26,10 +26,6 @@ unsigned int get_rand(unsigned int min,unsigned int max)
   return rand() % (max - min + 1) + min;
 }
 
-
-
-
-
 /* returns a random PID of a non-dead user from usersPID[] */
 pid_t get_random_userPID()
 {
@@ -326,15 +322,54 @@ void user_transaction_handle(int signum)
   update_balance(currBalance);
 }
 
+
+void user_signal_handler(int signum){
+	struct node *tmp;
+	int i = get_pid_userIndex(myPid);
+	current_balance();
+
+	if(usersPid[get_pid_userIndex(myPid)].Us_state!=DEAD)
+	{
+		if(usersPid[i].balance >=2)
+			update_status(0);
+		else
+			update_status(1);
+	}
+	tmp = outGoingTransactions;
+	resource_set(semUsersPids_id,1);
+	while(tmp != NULL){
+		usersPid[i].balance += (tmp->trans.Money + tmp->trans.Reward);
+		tmp=tmp->next;
+	}
+	resource_release(semUsersPids_id,1);
+	free(tmp);
+	killpg(0,SIGINT);
+	exit(0);
+}
+
+void signal_handler_user_init(struct sigaction *saUSR1, struct sigaction *saINT)
+{
+	saUSR1->sa_handler = user_transaction_handle;
+	saINT->sa_handler = user_signal_handler;
+	sigaction(SIGUSR1,saUSR1,NULL);
+	sigaction(SIGINT,saINT,NULL);
+}
+
 int main(int argc, char *argv[])
 {
   unsigned int amount, reward, retry;
   pid_t usPid, ndPid;
   myPid = getpid();
   currBalance = SO_BUDGET_INIT;
-  /*signal_handler(SIGINT, SIG_IGN);*/
+	struct sigaction saUSR1;
+	struct sigaction saInt_u;
   printf("-->[USER] main\n");
+	user_signal_handler(signum);
   srand(myPid); /*initialize rand function, so we have same pattern for each user*/
+	if (argc==0){
+		perror("[USER] no arguments passed");
+		exit(EXIT_FAILURE);
+	}
   retry = SO_RETRY;
   while (1)
   {

@@ -181,7 +181,6 @@ int generate_node(int nCounter, char* nodeArgv[])
 /*TODO: Stop Simulation handler Ctrl-C */
 void signal_handler(int signum)
 {
-	printf("in signal handler function\n");
 	killpg(0,SIGINT);
 
 	printf("Parent: signal recieved %d\n", signum);
@@ -190,6 +189,7 @@ void signal_handler(int signum)
 	semctl(semLedger_Id, 1, IPC_RMID);
 	msgctl(mQueue, IPC_RMID, NULL);
 
+	printf("in signal handler function\n");
 	exit(0);
 }
 
@@ -232,7 +232,7 @@ int main(int argc,char *argv[])
 		/*nodesPid[nCounter].balance = 0; /*TODO seg fault here
 		nodesPid[nCounter].Node_state = available; */
 		generate_node(nCounter, argvCreator);
-		/* sleep(5);*/
+		sleep(5);
 		/*signal_handler(sigum);*/
 	}
 
