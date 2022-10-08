@@ -128,10 +128,10 @@ void block_ledger(Block_ *newBlock)
 			tmp = *newBlock;
 			tmp.blockIndex = 1;
 			/* preleviamo le risorse per la creazione del ledger */
-			resource_set(&sem_id_ledger, 1);
+			resource_set(sem_id_ledger, 1);
 			ledger[i] = tmp;
 			confirm_state_block(&ledger[i]);
-			resource_release(&sem_id_ledger, 1);
+			resource_release(sem_id_ledger, 1);
 			return;
 		}
 	}
