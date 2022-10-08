@@ -271,11 +271,7 @@ void Message_Rec(int messageID, key_t messageKey)
 	printf("DATA RECIVED : %s \n", Trans_ptr->mesText);
 	msgctl(Msg_ID, IPC_RMID, NULL);
 }
-void signal_handler_init(struct sigaction *saInt_node)
-{
-	saInt_node->sa_handler = node_handler;
-	sigaction(SIGINT, saInt_node, NULL);
-}
+
 
 void node_handler(int signum)
 {
@@ -295,6 +291,14 @@ void node_handler(int signum)
 	exit(0);
 }
 }
+
+
+void signal_handler_init(struct sigaction *saInt_node)
+{
+	saInt_node->sa_handler = node_handler;
+	sigaction(SIGINT, saInt_node, NULL);
+}
+
 int main(int argc, char *argv[])
 {
 	transaction transBuffer[sizeof(transaction) * (SO_BLOCK_SIZE - 1)]; /*Bufferizziamo in dimensione della block size e della transazione che dobbiamo inserire*/
