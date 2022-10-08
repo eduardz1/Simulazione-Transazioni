@@ -144,7 +144,7 @@ int get_pid_userIndex(int searchPid)
   for (i = 0; i < SO_USERS_NUM - 1; i++)
   {
     printf("for loop %d\n", i);         /*debug*/
-    if (usersPid[i].usPid == searchPid) /*TODO: solve seg fault*/
+    if (usersPid[i].usPid == searchPid) /*FIXME: solve seg fault*/
       return i;
     printf("here segfault\n"); /* debug */
     printf("found user %d\n", i);
@@ -364,7 +364,7 @@ int main(int argc, char *argv[])
 	struct sigaction saUSR1;
 	struct sigaction saInt_u;
   printf("-->[USER] main\n");
-	user_signal_handler(signum);
+  signal_handler_user_init(&saUSR1, &saInt_u);
   srand(myPid); /*initialize rand function, so we have same pattern for each user*/
 	if (argc==0){
 		perror("[USER] no arguments passed");

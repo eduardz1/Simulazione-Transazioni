@@ -27,8 +27,6 @@ int friendList_size;
 int sem_id_ledger;
 int semNodesPIDs_ID;
 
-
-
 void take_transaction()
 {
 	unsigned int friendCycle = 20;
@@ -57,7 +55,6 @@ void take_transaction()
 		friendCycle = 0;
 	}
 }
-
 void Block(transaction *blockT, Block_ *newBlock)
 {
 	int i;
@@ -168,7 +165,7 @@ int get_pid_node_index()
 	i = 0;
 	for (i = 0; i < SO_NODES_NUM * 2; i++)
 	{
-		if (NodeID[i].nodPid== myPID)
+		if (NodeID[i].nodPid == myPID)
 		{
 			return i;
 		}
@@ -200,7 +197,7 @@ void node_handler_interrupt(int sigum)
 		}
 	}
 	resource_set(semNodesPIDs_ID, 1);
-	NodeID[get_pid_node_index()].balance= accurate_balance;
+	NodeID[get_pid_node_index()].balance = accurate_balance;
 	resource_release(semNodesPIDs_ID, 1);
 
 	exit(0);
@@ -266,7 +263,6 @@ void message_queue_attach()
 	} while (errno == ENOENT);
 }
 
-
 void Message_Rec(int messageID, key_t messageKey)
 {
 	MSG_Key = &nPid;
@@ -275,7 +271,30 @@ void Message_Rec(int messageID, key_t messageKey)
 	printf("DATA RECIVED : %s \n", Trans_ptr->mesText);
 	msgctl(Msg_ID, IPC_RMID, NULL);
 }
+void signal_handler_init(struct sigaction *saInt_node)
+{
+	saInt_node->sa_handler = node_handler;
+	sigaction(SIGINT, saInt_node, NULL);
+}
 
+void node_handler(int signum)
+{
+	int i;
+	int accurate_balance = 0;
+	printf("[NODE] Sigint received\n");
+	msgctl(Msg_ID, IPC_RMID, NULL);
+
+	for(i=0;i<SO_REGISTRY_SIZE;i++){
+		if(ledger[i].t_list[0].Receiver == myPID){
+			accurate_balance += ledger[i].t_list[0].Money;
+	}
+	resource_set(semNodesPIDs_ID,1);
+	NodeID[get_pid_node_index()].balance = accurate_balance;
+	resource_release(semNodesPIDs_ID,1);
+
+	exit(0);
+}
+}
 int main(int argc, char *argv[])
 {
 	transaction transBuffer[sizeof(transaction) * (SO_BLOCK_SIZE - 1)]; /*Bufferizziamo in dimensione della block size e della transazione che dobbiamo inserire*/
@@ -340,5 +359,3 @@ int main(int argc, char *argv[])
 		}
 	}
 }
-
-
