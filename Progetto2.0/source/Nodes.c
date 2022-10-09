@@ -34,7 +34,7 @@ void take_transaction()
 	int sizeofFriend = friendList_size;
 	if (transPool.size < SO_TP_SIZE && friendCycle < 20)
 	{
-		if (receive_message(Msg_ID, &fetchMex, sizeof(Message), message.m_type, 0) == 0) /*undefined reference to receive_message() dunno why*/
+		if (msgrcv(Msg_ID, &fetchMex, sizeof(Message), message.m_type, 0) == 0) /*undefined reference to receive_message() dunno why*/
 		{
 			add_to_pool(&transPool, &fetchMex);
 			transPool.size++;
@@ -128,10 +128,10 @@ void block_ledger(Block_ *newBlock)
 			tmp = *newBlock;
 			tmp.blockIndex = 1;
 			/* preleviamo le risorse per la creazione del ledger */
-			resource_set(&sem_id_ledger, 1);
+			resource_set(sem_id_ledger, 1);
 			ledger[i] = tmp;
 			confirm_state_block(&ledger[i]);
-			resource_release(&sem_id_ledger, 1);
+			resource_release(sem_id_ledger, 1);
 			return;
 		}
 	}
