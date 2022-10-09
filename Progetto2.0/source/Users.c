@@ -12,7 +12,6 @@ Block_ *ledger;
 
 int semUsersPids_id;
 int semLedger_id;
-int queueId;
 
 /*function to handle transaction pool easily(linked list util) */
 
@@ -125,6 +124,8 @@ void find_and_remove(struct node **head, transaction *search)
   }
 }
 
+
+
 /* try to attach to queue of nodePid key until it succed */
 void queue_to_pid(pid_t nodePid)
 {
@@ -191,7 +192,7 @@ void start_transaction(pid_t userPid, int money, int reward)
 int send_transaction()
 {
   transaction sent = {0};
-  if (send_message(queueID, &tns, sizeof(tns), IPC_NOWAIT) == 0)
+  if (msgsnd(queueID, &tns, sizeof(tns), IPC_NOWAIT) == 0)
   {
     printf("[USER %d] sent a transaction of %d UC to [USER %d] via queue %d\n", myPid, tns->Message_Transaction.uTrans.Money, tns->Message_Transaction.uTrans.Receiver, queueID);
     currBalance -= (tns->Message_Transaction.uTrans.Money + tns->Message_Transaction.uTrans.Reward);
@@ -207,6 +208,16 @@ int send_transaction()
     return 0;
   }
   return -1; /*error*/
+}
+void attach_ipc_objects(char **argv)
+{
+	
+	
+	usersPid = shmat(USERS_PID_ARGV, NULL, 0);
+	nodesPid = shmat(NODES_PID_ARGV, NULL, 0);
+	ledger = shmat(LEDGER_ARGV, NULL, 0);
+	semUsersPids_id = SEM_USERS_PIDS_ARGV;
+	semLedger_id = SEM_LEDGER_ARGV;
 }
 
 void Sh_MemUser(key_t key, size_t size, int shmflg)
@@ -364,12 +375,20 @@ int main(int argc, char *argv[])
 	struct sigaction saUSR1;
 	struct sigaction saInt_u;
   printf("-->[USER] main\n");
-  signal_handler_user_init(&saUSR1, &saInt_u);
+  
+
+  
+
+  
   srand(myPid); /*initialize rand function, so we have same pattern for each user*/
 	if (argc==0){
 		perror("[USER] no arguments passed");
 		exit(EXIT_FAILURE);
 	}
+  attach_ipc_objects(argv);
+  signal_handler_user_init(&saUSR1, &saInt_u);
+  tns->m_type=TRANSACTION_MTYPE;
+  currBalance=SO_BUDGET_INIT;
   retry = SO_RETRY;
   while (1)
   {

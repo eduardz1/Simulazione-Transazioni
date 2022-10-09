@@ -38,7 +38,7 @@
 #endif 
 #define SO_REGISTRY_SIZE 100
 
-#define TRANSACTION_MTYPE 2800 
+#define TRANSACTION_MTYPE 28410
 #define SO_BLOCK_SIZE 10
 #define NO_BLOCK -1 
 
