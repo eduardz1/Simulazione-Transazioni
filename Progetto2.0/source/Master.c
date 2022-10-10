@@ -2,16 +2,72 @@
 
 #define USER_NAME "./Users"
 #define NODE_NAME "./Nodes"
-
+#define SHM_NUM 4
+#define SEM_NUM 3
+#define IPC_NUM SHM_NUM + SEM_NUM
+/*-----------------*/
 user* usersPid;
 node_t *nodesPid;
 Block_ ledger[SO_REGISTRY_SIZE];
 Block_* tmpLedger;
+Block_ *Ledger;
 int mQueue;
 
 int semUsersPid_Id;
 int semNodesPid_Id;
 int semLedger_Id;
+void shared_memory_objects_init(int *shmArray)
+{
+    /* shared memory segments IDs */
+    int usersPID_ID;
+    int nodesPID_ID;
+    int ledger_ID;
+    int par_ID;
+
+    /* parameters init and read from conf file 
+    par_ID = shmget(SHM_PARAMETERS, sizeof(par), 0600 | IPC_CREAT | IPC_EXCL);
+
+    par = (struct parameters *)shmat(par_ID, NULL, 0);
+    if (parse_parameters(par) == CONF_ERROR)
+    {
+        TRACE(("*** Error reading conf file, defaulting to conf#1 ***\n"))
+    }
+    else
+    {
+        TRACE(("[MASTER] conf file read successful\n"))
+    }
+	*/
+
+    /* make node array twice as big to account for extra nodes when transactions
+     * have hopped out avoiding reallocating a shared memory resource
+     */
+    nodesPID_ID = shmget(SHM_NODES_ARRAY, (SO_NODES_NUM) * sizeof(node_t) * 2, 0600 | IPC_CREAT | IPC_EXCL);
+    usersPID_ID = shmget(SHM_USERS_ARRAY, (SO_USERS_NUM) * sizeof(user), 0600 | IPC_CREAT | IPC_EXCL);
+    ledger_ID = shmget(SHM_LEDGER, sizeof(ledger), 0600 | IPC_CREAT | IPC_EXCL);
+    if (errno == EEXIST)
+    {
+        exit(1); /* we could remove them at the start just in case, but I want the error not to be hidden */
+    }
+
+    Ledger = (Block_*)shmat(ledger_ID, NULL, 0);
+    usersPid = (user *)shmat(usersPID_ID, NULL, 0);
+    nodesPid = (node_t *)shmat(nodesPID_ID, NULL, 0);
+
+    /* mark for deallocation so that they are automatically
+     * removed once master dies
+     * this will set the key to 0x00000000
+     */
+    shmctl(usersPID_ID, IPC_RMID, NULL);
+    shmctl(nodesPID_ID, IPC_RMID, NULL);
+    shmctl(par_ID, IPC_RMID, NULL);
+    shmctl(ledger_ID, IPC_RMID, NULL);
+
+    shmArray[0] = usersPID_ID;
+    shmArray[1] = nodesPID_ID;
+    shmArray[2] = par_ID;
+    shmArray[3] = ledger_ID;
+}
+
 
 void sems_init()
 {
@@ -63,25 +119,27 @@ void create_arguments(int* IPC_array, char** argv)
 
 int message_queue_id()
 {
-	int pidGot = getpid();
-	int qId = msgget(pidGot, IPC_CREAT | IPC_EXCL | 0666);
-
+	key_t pidGot = getpid();
+	msgget(pidGot, IPC_CREAT | IPC_EXCL | 0666);
+	TRANSACTION_MTYPE;
 	switch (errno)
 	{
 	case EIDRM:
-		printf("[PROCESS %d] queue %d was removed\n", pidGot, qId);
+		printf("[PROCESS %d] queue %d was removed\n", pidGot);
 		break;
 	case EINVAL:
-		printf("[PROCESS %d] queue %d invalid value for cmd or msqid\n", pidGot,qId);
+		printf("[PROCESS %d] queue %d invalid value for cmd or msqid\n", pidGot);
 		break;
 	case EPERM:
 		printf("[PROCESS %d] queue %d the effective user ID of the calling process "
 					 "is not the creator or the owner\n",
-				pidGot, qId);
+				pidGot);
 		break;
 	}
-	return qId;
+	return pidGot;
 }
+
+
 
 void Sh_MemMaster(key_t key, size_t size, int shmflg)
 {
@@ -118,6 +176,20 @@ void Shared_Memory(key_t key, size_t size, int shmflg)
 	int shmdt(const void* shmaddr);    /*Detach ShMem*/
 }
 
+void make_ipc_array(int *IPC_array)
+{
+    int shmIDs[SHM_NUM]; /* array containing every shared memory ID */
+    int semIDs[SEM_NUM];
+
+    shared_memory_objects_init(shmIDs);
+    semIDs[0] = semUsersPid_Id;
+    semIDs[1] = semLedger_Id;
+    semIDs[2] = semNodesPid_Id;
+    /* semaphores_init(semIDs); */
+    memcpy(IPC_array, shmIDs, SHM_NUM * sizeof(int));
+    memcpy(IPC_array + SHM_NUM, semIDs, SEM_NUM * sizeof(int));
+    
+}
 /* generate the user with fork and lauch ./users with execve*/
 void generate_user(int uCounter, char* userArgv[])
 {
@@ -131,7 +203,8 @@ void generate_user(int uCounter, char* userArgv[])
 		break;
 	case 0:
 		printf("[PROCESS %d] Forked child %d\n", getpid(), getpid());
-    execve(USER_NAME,userArgv,NULL);
+		message_queue_id();
+        execve(USER_NAME,userArgv,NULL);
 		break;
 	default:
 		usersPid[uCounter].usPid = uPid;
@@ -165,7 +238,7 @@ int generate_node(int nCounter, char* nodeArgv[])
 	case 0:
 		printf("[PROCESS %d] Forked child %d\n", getpid(), getpid());
 		message_queue_id();
-      execve(NODE_NAME,nodeArgv,NULL);
+        execve(NODE_NAME,nodeArgv,NULL);
 		break;
 
 	default:
@@ -198,6 +271,7 @@ int main(int argc,char *argv[])
 	unsigned int i;
 	unsigned int uCounter;
 	unsigned int nCounter;
+	int ipcObj[IPC_NUM];
 	char* argvCreator[8];
 	struct sigaction sa;
 	struct sembuf sops;
@@ -206,9 +280,12 @@ int main(int argc,char *argv[])
 
 	printf("[MASTER] ---> main");
 	tmpLedger = ledger;
+	
 	printf("Master PID: %d\n", getpid());
 	printf("before sems_init\n"); /*TODO: remove,debug only*/
 	sems_init();
+	make_ipc_array(ipcObj);
+	create_arguments(ipcObj,argvCreator);
 	printf("after sems_init\n"); /*TODO: remove,debug only*/
 
 	/* set all sigaction's byte to zero
@@ -224,6 +301,7 @@ int main(int argc,char *argv[])
 	signal(SIGUSR1, signal_handler);
 	mQueue = message_queue_id();
 	printf("before for loop\n"); /*TODO: remove,debug only*/
+	argvCreator[0]=NODE_NAME;
 	for (nCounter = 0; nCounter < SO_NODES_NUM;nCounter++) /*TODO: seg fault here imo, need to solve, FIXME: just for debug purpose */
 	{
 		int sigum;
@@ -233,9 +311,10 @@ int main(int argc,char *argv[])
 		nodesPid[nCounter].Node_state = available; */
 		generate_node(nCounter, argvCreator);
 		sleep(5);
+		signal_handler(sigum);
 		/*signal_handler(sigum);*/
 	}
-
+	argvCreator[0]=USER_NAME;
 	for (uCounter = 0; uCounter < SO_USERS_NUM; uCounter++)
 	{
 		int sigum;
@@ -243,7 +322,6 @@ int main(int argc,char *argv[])
 		usersPid[uCounter].balance = 0;*/
 		generate_user(uCounter, argvCreator);
 		sleep(5);
-		signal_handler(sigum);
 	}
 
 	alarm(SO_SIM_SEC);
@@ -261,6 +339,7 @@ int main(int argc,char *argv[])
 
 		friend_msg newNode;
 		Message transHop;
+		bzero(&newNode , sizeof(newNode));
 		bzero(&transHop, sizeof(transHop));
 		signal(SIGINT, SIG_DFL);
 
@@ -269,11 +348,13 @@ int main(int argc,char *argv[])
 			receive_message(mQueue, &newNode, sizeof(Message), TRANSACTION_MTYPE, 0);
 			nodesPid[nCounter].Node_state = ALIVE;
 			nodesPid[nCounter].balance = 0;
-			tmpPid = generate_node(-1,argvCreator);
+			tmpPid = generate_node(argvCreator,-1);
 		}
 	}
 	default:
+
 		break;
 	}
 	return 0;
-}
+ }
+

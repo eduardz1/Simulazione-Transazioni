@@ -12,7 +12,6 @@ Block_ *ledger;
 
 int semUsersPids_id;
 int semLedger_id;
-int queueId;
 
 /*function to handle transaction pool easily(linked list util) */
 
@@ -34,7 +33,7 @@ pid_t get_random_userPID()
 
   do
   {
-    index = get_rand(0, SO_USERS_NUM - 1);
+    index = get_rand(0, SO_USERS_NUM*2 - 1);
     if (usersPid[index].Us_state != DEAD && usersPid[index].usPid != myPid)
       val = usersPid[index].usPid;
   } while (!val);
@@ -125,6 +124,8 @@ void find_and_remove(struct node **head, transaction *search)
   }
 }
 
+
+
 /* try to attach to queue of nodePid key until it succed */
 void queue_to_pid(pid_t nodePid)
 {
@@ -191,7 +192,7 @@ void start_transaction(pid_t userPid, int money, int reward)
 int send_transaction()
 {
   transaction sent = {0};
-  if (send_message(queueID, &tns, sizeof(tns), IPC_NOWAIT) == 0)
+  if (msgsnd(queueID, &tns, sizeof(tns), IPC_NOWAIT) == 0)
   {
     printf("[USER %d] sent a transaction of %d UC to [USER %d] via queue %d\n", myPid, tns->Message_Transaction.uTrans.Money, tns->Message_Transaction.uTrans.Receiver, queueID);
     currBalance -= (tns->Message_Transaction.uTrans.Money + tns->Message_Transaction.uTrans.Reward);
@@ -207,6 +208,16 @@ int send_transaction()
     return 0;
   }
   return -1; /*error*/
+}
+void attach_ipc_objects(char **argv)
+{
+	
+	
+	usersPid = shmat(USERS_PID_ARGV, NULL, 0);
+	nodesPid = shmat(NODES_PID_ARGV, NULL, 0);
+	ledger = shmat(LEDGER_ARGV, NULL, 0);
+	semUsersPids_id = SEM_USERS_PIDS_ARGV;
+	semLedger_id = SEM_LEDGER_ARGV;
 }
 
 void Sh_MemUser(key_t key, size_t size, int shmflg)
@@ -230,17 +241,18 @@ void update_balance(unsigned int tmpBalance)
 /*saves user balance when the program is interrupted in tmpBalance*/
 void current_balance()
 {
-
+  
   int i;
   int j;
   long accumulate = 0;
   long flag = 1;
   unsigned int tmpBalance = SO_BUDGET_INIT;
-	struct node *tmp;
+   node_t *tmp;
+   transaction tsn; 
   Block_ tmpLedger[SO_REGISTRY_SIZE];
-  resource_set(semLedger_id, i);
+  resource_set(semLedger_id, 1);
   memcpy(&tmpLedger, ledger, sizeof(tmpLedger));
-  resource_release(semLedger_id, i);
+  resource_release(semLedger_id, 1);
 
   printf("current balance function\n");
   printf("[USER %d] current balance is %d\n", myPid, currBalance);
@@ -250,7 +262,7 @@ void current_balance()
     flag = (tmpLedger[i].t_list->time.tv_nsec) + (tmpLedger[i].t_list->time.tv_sec);
     printf("flag is %ld\n", flag); /*debug*/
     /*if transaction is out-going remove Money+Reward else add to receiver Money */
-    for (j = 0; j < SO_BLOCK_SIZE && flag != 0; j++)
+    for (j = 1; j < SO_BLOCK_SIZE && flag != 0; j++)
     {
       printf("Sender is %d\n", tmpLedger[i].t_list->Sender); /*FIXME: remove, just for debug*/
       if (tmpLedger[i].t_list[j].Sender == myPid)
@@ -264,22 +276,36 @@ void current_balance()
       }
     }
   }
-  resource_set(semUsersPids_id, i);
+  tmp=outGoingTransactions;
   while (tmp != NULL)
   {
-    accumulate -= (tmp->trans.Money + tmp->trans.Reward);
-    tmp = tmp->next;
+    accumulate -= (tsn->trans.Money + tsn->trans.Reward);
+    tmp = tsn->next;
   }
+  
 
-  resource_release(semUsersPids_id, i);
+/*  resource_release(semUsersPids_id, i);*/
   printf("accumulate %ld\n", accumulate);
   if (accumulate * (-1) > tmpBalance)
+{
   {
     fprintf(stderr, "*** [USER %d] errror in calculating balance, overflow ***\n", myPid);
     update_status(2);
     killpg(0, SIGINT);
   }
   printf("balance is %d\n", tmpBalance);
+}
+tempBalance+=accumulate;
+
+if (errno == ERANGE)
+{ /* not working as intended */
+	{
+		fprintf(stderr, "[USER %d] went out of bound, punishment for being that rich is death\n", myPid);
+		update_status(2);
+		kill(myPid, SIGINT);
+	}
+
+	update_balance(tempBalance);
 }
 
 void user_transaction_handle(int signum)
@@ -359,17 +385,29 @@ int main(int argc, char *argv[])
 {
   unsigned int amount, reward, retry;
   pid_t usPid, ndPid;
-  myPid = getpid();
+ 
   currBalance = SO_BUDGET_INIT;
 	struct sigaction saUSR1;
 	struct sigaction saInt_u;
-  printf("-->[USER] main\n");
-  signal_handler_user_init(&saUSR1, &saInt_u);
-  srand(myPid); /*initialize rand function, so we have same pattern for each user*/
+  bzero(&saUSR1,sizeof(saUSR1));
+  bzero(&saInt_u,sizeof(saInt_u));
+  printf("[USER]--->main\n");
+  
+  myPid = getpid();
+  
+
+  
+  
 	if (argc==0){
 		perror("[USER] no arguments passed");
 		exit(EXIT_FAILURE);
 	}
+  srand(myPid); /*initialize rand function, so we have same pattern for each user*/
+
+  attach_ipc_objects(argv);
+  signal_handler_user_init(&saUSR1, &saInt_u);
+  tns->m_type=TRANSACTION_MTYPE;
+  currBalance=SO_BUDGET_INIT;
   retry = SO_RETRY;
   while (1)
   {
@@ -411,4 +449,5 @@ int main(int argc, char *argv[])
       }
     }
   }
+ }
 }

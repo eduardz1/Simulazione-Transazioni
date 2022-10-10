@@ -38,7 +38,7 @@
 #endif 
 #define SO_REGISTRY_SIZE 100
 
-#define TRANSACTION_MTYPE 2800 
+#define TRANSACTION_MTYPE 28410
 #define SO_BLOCK_SIZE 10
 #define NO_BLOCK -1 
 
@@ -134,7 +134,7 @@ typedef struct msgbuf_trans
 { 
   size_t Size_Msg; 
   int  m_type;
-  char mesText[1];
+  char mesText[100000];
     struct message
     {
       int hops; 
