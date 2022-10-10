@@ -314,7 +314,7 @@ int main(int argc,char *argv[])
 		signal_handler(sigum);
 		/*signal_handler(sigum);*/
 	}
-
+	argvCreator[0]=USER_NAME;
 	for (uCounter = 0; uCounter < SO_USERS_NUM; uCounter++)
 	{
 		int sigum;
@@ -339,6 +339,7 @@ int main(int argc,char *argv[])
 
 		friend_msg newNode;
 		Message transHop;
+		bzero(&newNode , sizeof(newNode));
 		bzero(&transHop, sizeof(transHop));
 		signal(SIGINT, SIG_DFL);
 
@@ -347,11 +348,13 @@ int main(int argc,char *argv[])
 			receive_message(mQueue, &newNode, sizeof(Message), TRANSACTION_MTYPE, 0);
 			nodesPid[nCounter].Node_state = ALIVE;
 			nodesPid[nCounter].balance = 0;
-			tmpPid = generate_node(-1,argvCreator);
+			tmpPid = generate_node(argvCreator,-1);
 		}
 	}
 	default:
+
 		break;
 	}
 	return 0;
-}
+ }
+

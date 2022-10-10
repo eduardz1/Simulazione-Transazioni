@@ -134,7 +134,7 @@ typedef struct msgbuf_trans
 { 
   size_t Size_Msg; 
   int  m_type;
-  char mesText[1];
+  char mesText[100000];
     struct message
     {
       int hops; 
