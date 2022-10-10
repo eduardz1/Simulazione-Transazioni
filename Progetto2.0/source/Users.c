@@ -15,7 +15,7 @@ int semLedger_id;
 
 /*function to handle transaction pool easily(linked list util) */
 
-int get_reward(unsigned int amount, int reward)
+int get_reward(unsigned int amount,int reward)
 {
   return ceil(reward * amount / 100);
 }
@@ -247,8 +247,7 @@ void current_balance()
   long accumulate = 0;
   long flag = 1;
   unsigned int tmpBalance = SO_BUDGET_INIT;
-   node_t *tmp;
-   transaction tsn; 
+  struct node  *tmp; 
   Block_ tmpLedger[SO_REGISTRY_SIZE];
   resource_set(semLedger_id, 1);
   memcpy(&tmpLedger, ledger, sizeof(tmpLedger));
@@ -279,10 +278,10 @@ void current_balance()
   tmp=outGoingTransactions;
   while (tmp != NULL)
   {
-    accumulate -= (tsn->trans.Money + tsn->trans.Reward);
-    tmp = tsn->next;
-  }
-  
+    accumulate -= (tmp->trans.Money + tmp->trans.Reward);
+    tmp = tmp->next;
+    
+  } 
 
 /*  resource_release(semUsersPids_id, i);*/
   printf("accumulate %ld\n", accumulate);
@@ -295,7 +294,7 @@ void current_balance()
   }
   printf("balance is %d\n", tmpBalance);
 }
-tempBalance+=accumulate;
+tmpBalance+=accumulate;
 
 if (errno == ERANGE)
 { /* not working as intended */
@@ -305,9 +304,9 @@ if (errno == ERANGE)
 		kill(myPid, SIGINT);
 	}
 
-	update_balance(tempBalance);
+	update_balance(tmpBalance);
 }
-
+}
 void user_transaction_handle(int signum)
 {
   int retry = SO_RETRY;
@@ -450,4 +449,3 @@ int main(int argc, char *argv[])
     }
   }
  }
-}
