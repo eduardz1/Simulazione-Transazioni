@@ -230,8 +230,8 @@ void Sh_MemUser(key_t key, size_t size, int shmflg)
 
 void update_balance(unsigned int tmpBalance)
 {
-  printf("[%d] updating balance to %d\n", myPid, tmpBalance);
   int i = get_pid_userIndex(myPid);
+  printf("[%d] updating balance to %d\n", myPid, tmpBalance);
   resource_set(semUsersPids_id, i);
   currBalance = tmpBalance;
   usersPid[i].balance = currBalance;
@@ -384,11 +384,11 @@ int main(int argc, char *argv[])
 {
   unsigned int amount, reward, retry;
   pid_t usPid, ndPid;
- 
-  currBalance = SO_BUDGET_INIT;
-	struct sigaction saUSR1;
+ struct sigaction saUSR1;
 	struct sigaction saInt_u;
-  bzero(&saUSR1,sizeof(saUSR1));
+
+  currBalance = SO_BUDGET_INIT;
+	bzero(&saUSR1,sizeof(saUSR1));
   bzero(&saInt_u,sizeof(saInt_u));
   printf("[USER]--->main\n");
   
