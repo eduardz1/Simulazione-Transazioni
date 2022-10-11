@@ -11,9 +11,8 @@ void *printing(void *p)
   FILE *fp;
   int time;
   int high;
-  /*    pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);*/
 
-  pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS,NULL);  
+  pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS,NULL); /*the first macro set that the thread can be canceled at any time https://linux.die.net/man/3/pthread_setcanceltype */ 
 
   fp = fopen("ledger.txt", "w+");
   fprintf(fp, "testing in file");
