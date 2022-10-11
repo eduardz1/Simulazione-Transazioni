@@ -262,7 +262,7 @@ void signal_handler(int signum)
 	semctl(semLedger_Id, 1, IPC_RMID);
 	msgctl(mQueue, IPC_RMID, NULL);
 
-	printf("in signal handler function\n");
+	printf("User press CTRL-C\n");
 	exit(0);
 }
 
