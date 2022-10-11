@@ -11,6 +11,10 @@ void *printing(void *p)
   FILE *fp;
   int time;
   int high;
+  /*    pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);*/
+
+  pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS,NULL);  
+
   fp = fopen("ledger.txt", "w+");
   fprintf(fp, "testing in file");
 
@@ -158,7 +162,7 @@ void simulation_print (){
 int main(int argc, char *argv[])
 {
   pthread_t threadId;
-  void *P_Parent;
+   void *P_Parent;
   int thTest;
   int *ptr;
   P_Parent = 0;
