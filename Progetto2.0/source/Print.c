@@ -158,7 +158,7 @@ void simulation_print (){
 int main(int argc, char *argv[])
 {
   pthread_t threadId;
-  int *P_Parent;
+  void *P_Parent;
   int thTest;
   int *ptr;
   P_Parent = 0;
