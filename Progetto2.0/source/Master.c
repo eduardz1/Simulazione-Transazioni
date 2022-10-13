@@ -11,6 +11,7 @@ node_t *nodesPid;
 Block_ ledger[SO_REGISTRY_SIZE];
 Block_* tmpLedger;
 Block_ *Ledger;
+Message msg; 
 int mQueue;
 
 int semUsersPid_Id;
@@ -119,9 +120,13 @@ void create_arguments(int* IPC_array, char** argv)
 
 int message_queue_id()
 {
-	key_t pidGot = getpid();
-	msgget(pidGot, IPC_CREAT | IPC_EXCL | 0666);
-	TRANSACTION_MTYPE;
+	/*key_t pidGot = getpid();*/
+	key_t pidGot;
+	Message type;
+	pidGot = ftok("key.txt",'100');
+	mQueue=msgget(pidGot, IPC_CREAT  | 0666);
+	type.m_type=1;
+	/*TRANSACTION_MTYPE;*/
 	switch (errno)
 	{
 	case EIDRM:
@@ -297,16 +302,15 @@ int main(int argc,char *argv[])
 	sa.sa_handler = signal_handler;
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGALRM, &sa, NULL);
-	printf("before sigaction\n"); /*TODO: remove,debug only*/
+	printf("[DEBUG MASTER]:before sigaction\n"); /*TODO: remove,debug only*/
 	signal(SIGUSR1, signal_handler);
-	mQueue = message_queue_id();
-	printf("before for loop\n"); /*TODO: remove,debug only*/
+	printf("[DEBUG MASTER ] :before for loop\n"); /*TODO: remove,debug only*/
 	argvCreator[0]=NODE_NAME;
 	for (nCounter = 0; nCounter < SO_NODES_NUM;nCounter++) /*TODO: seg fault here imo, need to solve, FIXME: just for debug purpose */
 	{
 		int sigum;
-		printf("nCounter: %d\n", nCounter);
-		printf("in for loop\n"); /*TODO: remove,debug only*/
+		printf("[DEBUG: MASTER]:nCounter: %d\n", nCounter);
+		printf("[DEBUG MASTER];in for loop\n"); /*TODO: remove,debug only*/
 		/*nodesPid[nCounter].balance = 0; /*TODO seg fault here
 		nodesPid[nCounter].Node_state = available; */
 		generate_node(nCounter, argvCreator);
@@ -344,8 +348,8 @@ int main(int argc,char *argv[])
 		signal(SIGINT, SIG_DFL);
 
 		while (1)
-		{
-			receive_message(mQueue, &newNode, sizeof(Message), TRANSACTION_MTYPE, 0);
+
+			receive_message(mQueue, &newNode, sizeof(Message), 1, 0);
 			nodesPid[nCounter].Node_state = ALIVE;
 			nodesPid[nCounter].balance = 0;
 			tmpPid = generate_node(argvCreator,-1);

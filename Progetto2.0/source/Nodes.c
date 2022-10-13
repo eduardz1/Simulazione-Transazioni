@@ -32,15 +32,16 @@ void take_transaction()
 	unsigned int friendCycle = 20;
 	friend_msg friends_recived;
 	int sizeofFriend = friendList_size;
+	fetchMex.m_type=1;
 	if (transPool.size < SO_TP_SIZE && friendCycle < 20)
 	{
-		if (msgrcv(Msg_ID, &fetchMex, sizeof(Message), message.m_type, 0) == 0) /*undefined reference to receive_message() dunno why*/
+		if (msgrcv(Msg_ID, &fetchMex, sizeof(Message), fetchMex.m_type, IPC_NOWAIT) == 0) /*undefined reference to receive_message() dunno why*/
 		{
 			add_to_pool(&transPool, &fetchMex);
 			transPool.size++;
 		}
 
-		if (receive_message(Msg_ID, &friends_recived, sizeof(Message), message.m_type, IPC_NOWAIT) == 0)
+		if (receive_message(Msg_ID, &friends_recived, sizeof(Message), fetchMex.m_type, IPC_NOWAIT) == 0)
 		{
 			friendList = realloc(friendList, sizeof(pid_t) * (friendList_size + 1));
 			friendList++;
@@ -258,20 +259,24 @@ int remove_from_pool(pool *transPool, Message *message_t)
 void message_queue_attach()
 {
 	do
-	{
-		Msg_ID = msgget(myPID, 0);
+	{	
+		key_t pidGot;
+		pidGot= ftok("key.txt",'100'); 
+		Msg_ID = msgget(pidGot, 0666|IPC_CREAT);
 	} while (errno == ENOENT);
 }
-
+/*
 void Message_Rec(int messageID, key_t messageKey)
 {
-	MSG_Key = &nPid;
-	Msg_ID = msgget(MSG_Key, 0666 | IPC_CREAT);
-	msgrcv(Msg_ID, Trans_ptr, sizeof(Trans_ptr->Message_Transaction), 1, 0);
+	/*MSG_Key = &nPid;
+	key_t pidGot;
+	pidGot=ftok("key.txt","100");
+	Msg_ID = msgget(pidGot, 0666 | IPC_CREAT);
+	msgrcv(Msg_ID, &Trans_ptr, sizeof(Trans_ptr), 1, IPC_NOWAIT);
 	printf("DATA RECIVED : %s \n", Trans_ptr->mesText);
 	msgctl(Msg_ID, IPC_RMID, NULL);
 }
-
+*/
 
 void node_handler(int signum)
 {
