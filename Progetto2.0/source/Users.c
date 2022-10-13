@@ -1,7 +1,6 @@
 #include "include/Users.h"
 
 Message *tns;
-s_mes message; 
 node_t *sendingTransaction;
 user *usersPid;
 node_t *nodesPid;
@@ -127,19 +126,15 @@ void find_and_remove(struct node **head, transaction *search)
 
 
 
-/* try to attach to queue of nodePid key until it succed 
-void queue_to_pid(key_t pidGot)
+/* try to attach to queue of nodePid key until it succed */
+void queue_to_pid(pid_t nodePid)
 {
   do
   {
-    pidGot=ftok("key.txt","100");
-
     errno = 0;
-    queueID = msgget(pidGot, IPC_CREAT|0666);
-    tns->m_type=1;
+    queueID = msgget(nodePid, 0);
   } while (errno == ENOENT);
 }
-*/
 
 int get_pid_userIndex(int searchPid)
 {
@@ -181,7 +176,6 @@ void update_status(int setStatus)
 
 void start_transaction(pid_t userPid, int money, int reward)
 {
-  FILE *fp ; 
   struct timespec exTime = {0};
   clock_gettime(CLOCK_REALTIME, &exTime);
 
@@ -198,13 +192,9 @@ void start_transaction(pid_t userPid, int money, int reward)
 int send_transaction()
 {
   transaction sent = {0};
-  key_t key;
-  key=ftok("key,txt",'100');
-  queueID=msgget(key,0666|IPC_CREAT);
-   message.mtype=1;
-  if (msgsnd(queueID, &message, sizeof(long)+sizeof(char)*100, IPC_NOWAIT) == 0)
+  if (msgsnd(queueID, &tns, sizeof(tns), IPC_NOWAIT) == 0)
   {
-    printf("[USER %d] sent a transaction of %d UC to [USER %d] via queue %d\n", getpid(), tns->Message_Transaction.uTrans.Money, tns->Message_Transaction.uTrans.Receiver, queueID);
+    printf("[USER %d] sent a transaction of %d UC to [USER %d] via queue %d\n", myPid, tns->Message_Transaction.uTrans.Money, tns->Message_Transaction.uTrans.Receiver, queueID);
     currBalance -= (tns->Message_Transaction.uTrans.Money + tns->Message_Transaction.uTrans.Reward);
     sent = tns->Message_Transaction.uTrans;
     if (outGoingTransactions == NULL)
@@ -415,7 +405,7 @@ int main(int argc, char *argv[])
 
   attach_ipc_objects(argv);
   signal_handler_user_init(&saUSR1, &saInt_u);
-  tns->m_type=1;
+  tns->m_type=TRANSACTION_MTYPE;
   currBalance=SO_BUDGET_INIT;
   retry = SO_RETRY;
   while (1)

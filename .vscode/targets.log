@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'all'.  Stop.
-
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Oct  2 18:02:04 2022
+# Make data base, printed on Thu Oct 13 18:31:42 2022
 
 # Variables
 
@@ -47,7 +45,7 @@ XDG_DATA_DIRS = /usr/share/pop:/usr/share/gnome:/home/rick_pop/.local/share/flat
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_CODE_CACHE_PATH = /home/rick_pop/.config/Code/CachedData/74b1f979648cc44d385a2286793c226e611f59e7
+VSCODE_CODE_CACHE_PATH = /home/rick_pop/.config/Code/CachedData/129500ee4c8ab7263461ffe327268ba56b9f210d
 # environment
 LANG = C
 # environment
@@ -61,7 +59,7 @@ MAKEFLAGS = pqrR
 # makefile
 CURDIR := /home/rick_pop/Documents/Code/SO_Lab/Simulazione-Transazioni
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # automatic
@@ -83,13 +81,13 @@ MAKEFILE_LIST :=
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 3859
+VSCODE_PID = 10724
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/pop-os:@/tmp/.ICE-unix/2605,unix/pop-os:/tmp/.ICE-unix/2605
+SESSION_MANAGER = local/pop-os:@/tmp/.ICE-unix/2851,unix/pop-os:/tmp/.ICE-unix/2851
 # automatic
 *F = $(notdir $*)
 # environment
@@ -125,7 +123,7 @@ MAKEFILES :=
 # automatic
 ^F = $(notdir $^)
 # environment
-INVOCATION_ID = 36fc89579a2b4d33b1d2b2868b35b21d
+INVOCATION_ID = fd6ed2c6d28248bab441ef67ed05e97f
 # environment
 USERNAME = rick_pop
 # environment
@@ -153,7 +151,7 @@ GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
 # makefile
 .DEFAULT_GOAL := 
 # environment
-SYSTEMD_EXEC_PID = 2625
+SYSTEMD_EXEC_PID = 2874
 # environment
 DISPLAY = :1
 # environment
@@ -163,9 +161,9 @@ GTK_MODULES = gail:atk-bridge:appmenu-gtk-module
 # default
 MAKE_VERSION := 4.3
 # environment
-MANAGERPID = 2324
+MANAGERPID = 2677
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 3859
+GIO_LAUNCHED_DESKTOP_FILE_PID = 10724
 # environment
 _ = /usr/share/code/code
 # environment
@@ -173,7 +171,7 @@ XDG_RUNTIME_DIR = /run/user/1000
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-JOURNAL_STREAM = 8:36486
+JOURNAL_STREAM = 8:35559
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -185,7 +183,7 @@ QT_IM_MODULE = ibus
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-35b3a69a-1.71.2-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-35b3a69a-1.72.1-main.sock
 # default
 .RECIPEPREFIX := 
 # automatic
@@ -207,7 +205,7 @@ GDMSESSION = pop
 
 # Directories
 
-# . (device 2049, inode 3159171): 21 files, no impossibilities.
+# . (device 2049, inode 3279772): 21 files, no impossibilities.
 
 # 21 files, no impossibilities in 1 directories.
 
@@ -265,6 +263,8 @@ GNUmakefile:
 # strcache performance: lookups = 32 / hit rate = 9%
 # hash-table stats:
 # Load=29/8192=0%, Rehash=0, Collisions=0/32=0%
-# Finished Make data base on Sun Oct  2 18:02:04 2022
+# Finished Make data base on Thu Oct 13 18:31:42 2022
 
  
+make: *** No rule to make target 'all'.  Stop.
+
