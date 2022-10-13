@@ -130,11 +130,24 @@ typedef struct MoneyTransaction
 }transaction;
 
 /* moved here from Ms_queue.h to avoid conflict errors*/
+
+typedef struct msg_no{
+  long mtype; 
+  char text[100]; 
+
+}s_mes;
+
+
+
+
+
+
+
+
 typedef struct msgbuf_trans
 { 
-  size_t Size_Msg; 
-  int  m_type;
-  char mesText[100000];
+  long  m_type;
+  char mesText[1000];
     struct message
     {
       int hops; 

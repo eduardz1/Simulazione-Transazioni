@@ -19,8 +19,8 @@
 
 typedef struct tp_pool
 {
-    struct msgbuf_trans *head;
-    struct msgbuf_trans *tail;
+    Message *head;
+    Message *tail;
     unsigned int size;
 } pool;
 

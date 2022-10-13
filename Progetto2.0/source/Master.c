@@ -26,7 +26,6 @@ void shared_memory_objects_init(int *shmArray)
 
     /* parameters init and read from conf file 
     par_ID = shmget(SHM_PARAMETERS, sizeof(par), 0600 | IPC_CREAT | IPC_EXCL);
-
     par = (struct parameters *)shmat(par_ID, NULL, 0);
     if (parse_parameters(par) == CONF_ERROR)
     {
@@ -357,4 +356,3 @@ int main(int argc,char *argv[])
 	}
 	return 0;
  }
-

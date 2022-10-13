@@ -115,7 +115,7 @@ void attach_ipc_objects(char **argv)
 	semLedger_ID = SEM_LEDGER_ARGV;
 }
 
-/* try to attach to queue of nodePID key until it succeeds */
+/* try to attach to queue of nodePID key until it succeeds 
 void queue_to_pid(pid_t nodePID)
 {
 	do
@@ -124,6 +124,7 @@ void queue_to_pid(pid_t nodePID)
 		queueID = msgget(nodePID, 0);
 	} while (errno == ENOENT);
 }
+*/
 
 /* initializes transaction values and sets it to pending */
 void transaction_init(pid_t userPID, int amount, int reward)
@@ -162,6 +163,10 @@ void signal_handlers_init(struct sigaction *saUSR1, struct sigaction *saINT)
 int send_transaction()
 {
 	transaction sent = {0};
+	key_t key;
+	key=ftok("key.txt",'100'); 
+	transMsg.mtype=1;
+	queueID=msgget(key,IPC_CREAT|0600);
 
 	if (send_message(queueID, &transMsg, sizeof(struct msgbuf_trans), IPC_NOWAIT) == 0)
 	{
