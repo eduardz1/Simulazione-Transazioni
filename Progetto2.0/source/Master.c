@@ -120,20 +120,20 @@ void create_arguments(int* IPC_array, char** argv)
 int message_queue_id()
 {
 	key_t pidGot = getpid();
-	msgget(pidGot, IPC_CREAT | IPC_EXCL | 0666);
+int mQueue=	msgget(pidGot, IPC_CREAT | IPC_EXCL | 0666);
 	TRANSACTION_MTYPE;
 	switch (errno)
 	{
 	case EIDRM:
-		printf("[PROCESS %d] queue %d was removed\n", pidGot);
+		printf("[PROCESS %d] queue %d was removed\n", pidGot,mQueue);
 		break;
 	case EINVAL:
-		printf("[PROCESS %d] queue %d invalid value for cmd or msqid\n", pidGot);
+		printf("[PROCESS %d] queue %d invalid value for cmd or msqid\n", pidGot,mQueue);
 		break;
 	case EPERM:
 		printf("[PROCESS %d] queue %d the effective user ID of the calling process "
 					 "is not the creator or the owner\n",
-				pidGot);
+				pidGot,mQueue);
 		break;
 	}
 	return pidGot;
@@ -262,7 +262,7 @@ void signal_handler(int signum)
 	semctl(semLedger_Id, 1, IPC_RMID);
 	msgctl(mQueue, IPC_RMID, NULL);
 
-	printf("User press CTRL-C\n");
+	printf("User pressed CTRL-C\n");
 	exit(0);
 }
 
