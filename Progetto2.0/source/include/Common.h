@@ -130,11 +130,24 @@ typedef struct MoneyTransaction
 }transaction;
 
 /* moved here from Ms_queue.h to avoid conflict errors*/
+
+typedef struct msg_no{
+  long mtype; 
+  char text[100]; 
+
+}s_mes;
+
+
+
+
+
+
+
+
 typedef struct msgbuf_trans
 { 
-  size_t Size_Msg; 
-  int  m_type;
-  char mesText[100000];
+  long  m_type;
+  char mesText[1000];
     struct message
     {
       int hops; 
@@ -170,3 +183,13 @@ typedef struct Block
     unsigned int blockIndex; /*the index need to be updated when a block is written */
   }Block_;
 
+struct msqid_dis{ 
+    struct ipc_perm mesg_perm; 
+    time_t msg_stime; 
+    time_t msg_rtime; 
+    time_t msg_ctime;
+    msgqnum_t msg_qnum;
+    msglen_t msg_qbytes;
+    pid_t msg_lspid;
+    pid_t msg_lrpid; 
+};
