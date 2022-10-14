@@ -119,45 +119,26 @@ void create_arguments(int* IPC_array, char** argv)
 
 int message_queue_id()
 {
-<<<<<<< HEAD
-	key_t pidGot = getpid();
-int mQueue=	msgget(pidGot, IPC_CREAT | IPC_EXCL | 0666);
-=======
 	/*key_t pidGot = getpid();*/
 	key_t pidGot = M_QUEUE_KEY;
 	 msgget(pidGot, IPC_CREAT | 0666);
->>>>>>> 162633873e4ff76313ebb808aa8699c1e95dc0f8
 	TRANSACTION_MTYPE;
 	switch (errno)
 	{
 	case EIDRM:
-<<<<<<< HEAD
-		printf("[PROCESS %d] queue %d was removed\n", pidGot,mQueue);
-		break;
-	case EINVAL:
-		printf("[PROCESS %d] queue %d invalid value for cmd or msqid\n", pidGot,mQueue);
-=======
 		printf("[PROCESS %d] queue %d was removed\n", getpid(),pidGot);
 		break;
 	case EINVAL:
 		printf("[PROCESS %d] queue %d invalid value for cmd or msqid\n", getpid(),pidGot);
->>>>>>> 162633873e4ff76313ebb808aa8699c1e95dc0f8
+		printf("Message queue %d removed\n",pidGot);
 		break;
 	case EPERM:
 		printf("[PROCESS %d] queue %d the effective user ID of the calling process "
 					 "is not the creator or the owner\n",
-<<<<<<< HEAD
-				pidGot,mQueue);
-=======
 				getpid(),pidGot);
->>>>>>> 162633873e4ff76313ebb808aa8699c1e95dc0f8
 		break;
 	}
-	return pidGot;
 }
-
-
-
 void Sh_MemMaster(key_t key, size_t size, int shmflg)
 {
 	/*int m_id; TODO remove this if useless at th end*/
