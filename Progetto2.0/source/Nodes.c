@@ -255,23 +255,23 @@ int remove_from_pool(pool *transPool, Message *message_t)
 	return SUCCESS;
 }
 
-void message_queue_attach()
+/*void message_queue_attach()
 {
 	do
 	{
 		Msg_ID = msgget(myPID, 0);
 	} while (errno == ENOENT);
-}
-
+}*/
+/*
 void Message_Rec(int messageID, key_t messageKey)
 {
-	MSG_Key = &nPid;
-	Msg_ID = msgget(MSG_Key, 0666 | IPC_CREAT);
+	/*MSG_Key = &nPid;
+	Msg_ID = msgget(M_QUEUE_KEY, 0666 | IPC_CREAT);
 	msgrcv(Msg_ID, Trans_ptr, sizeof(Trans_ptr->Message_Transaction), 1, 0);
 	printf("DATA RECIVED : %s \n", Trans_ptr->mesText);
 	msgctl(Msg_ID, IPC_RMID, NULL);
 }
-
+*/
 
 void node_handler(int signum)
 {
@@ -321,7 +321,7 @@ int main(int argc, char *argv[])
 	ipc_Attach_argv(argv);
 	srand(getpid());
 	sig_handler_init(sa);
-	message_queue_attach();
+	msgget(M_QUEUE_KEY, 0600 | IPC_CREAT);
 
 	friendList = malloc(SO_FRIENDS_NUM * sizeof(pid_t));
 	friendList_size = SO_FRIENDS_NUM;

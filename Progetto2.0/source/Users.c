@@ -126,7 +126,7 @@ void find_and_remove(struct node **head, transaction *search)
 
 
 
-/* try to attach to queue of nodePid key until it succed */
+/* try to attach to queue of nodePid key until it succed 
 void queue_to_pid(pid_t nodePid)
 {
   do
@@ -135,7 +135,7 @@ void queue_to_pid(pid_t nodePid)
     queueID = msgget(nodePid, 0);
   } while (errno == ENOENT);
 }
-
+*/
 int get_pid_userIndex(int searchPid)
 {
   unsigned int i;
@@ -393,10 +393,7 @@ int main(int argc, char *argv[])
   printf("[USER]--->main\n");
   
   myPid = getpid();
-  
 
-  
-  
 	if (argc==0){
 		perror("[USER] no arguments passed");
 		exit(EXIT_FAILURE);
@@ -423,7 +420,9 @@ int main(int argc, char *argv[])
       reward = get_reward(amount, SO_REWARD);
       amount -= reward;
 
-      queue_to_pid(ndPid);
+      /*queue_to_pid(ndPid);*/
+      queueID = msgget(M_QUEUE_KEY, 0600|IPC_CREAT);
+
       start_transaction(usPid,amount, reward);
 
       if (send_transaction() == 0)
@@ -448,4 +447,4 @@ int main(int argc, char *argv[])
       }
     }
   }
- }
+}
