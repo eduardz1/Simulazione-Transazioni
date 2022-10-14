@@ -6,32 +6,79 @@ pid_t myPID;
 transaction *t_print;
 transaction *stat_print;
 
-void *printing(void *p)
+void *print_ledger(Block_ *b,void *p)
 {
   FILE *fp;
-  int time;
-  int high;
-
+  long flag = 1;
+  int i=0;
   pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS,NULL); /*the first macro set that the thread can be canceled at any time https://linux.die.net/man/3/pthread_setcanceltype */ 
 
-  fp = fopen("ledger.txt", "w+");
+  fp = fopen("ledger.txt", "w");
   fprintf(fp, "testing in file");
 
-  fclose(fp);
-  printf("--------------------------\n");
-  printf("i'm *printing function\n");
-  printf("-------------------------\n");
-  /*simulation_print() ;*/
-
-  for (time = 0; time < SO_MAX_TRANS_GEN_NSEC; time++)
+  for(i=0;i<SO_REGISTRY_SIZE && flag != 0;i++)
   {
-    for (high = 0; high < SO_USERS_NUM && SO_NODES_NUM; high++)
-    {
-      printf("[PID:%d] ---[NODE PID:%d] -- [USER PID:%d] --- [MONEY:%d] --- [STATUS:%d]", myPID, node_print->nodPid, user_print->usPid, t_print->Money, stat_print->MoneyStatusTrans);
+    flag=b[i].t_list[0].time.tv_nsec;
+
+    if(flag){
+        print_block(&b[i],fp);
     }
   }
-  return 0;
+
+  fclose(fp);
+    
 }
+
+
+
+void *print_transaction(transaction *t,FILE *fp,void *c){
+  char tns[31];
+  char tmp[11];
+pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS,NULL);
+  switch (t->MoneyStatusTrans)
+  {
+  case pending: 
+    strcpy(tmp,"pending   ");
+    break;
+  case aborted:
+    strcpy(tmp,"aborted   ");
+    break;
+  case confirmed:
+    strcpy(tmp,"confirmed ");
+    break;
+  case processing:
+    strcpy(tmp,"processing");
+    break; 
+   }
+
+    fprintf(fp, " ---------------------------------------------------------------\n");
+    fprintf(fp, "|  %s                                |\n", tns);
+    fprintf(fp, "|  %s                                                   |\n", tmp);
+    fprintf(fp, "|  %7d --> %7d                                          |\n", t->Sender, t->Receiver);
+    fprintf(fp, "|  Money:    %10u                                        |\n", t->Money);
+    fprintf(fp, "|  Reward:    %10u                                        |\n", t->Reward);
+    fprintf(fp, " ---------------------------------------------------------------\n");
+}
+
+
+void print_block(Block_ *b,FILE *fp){
+  int i;
+  int thPrintTns;
+  pthread_t tnsPrintId;
+  transaction printTns;
+  void *Print_parent;
+  transaction *t; 
+  fprintf(fp,"[BLOCK %5d]==================\n",b->blockIndex);
+
+  for(i=0;i<SO_BLOCK_SIZE;i++)
+  {
+    printTns = b->t_list[i];
+    thPrintTns= pthread_create(&tnsPrintId, NULL, print_transaction(t,fp,0), Print_parent);
+  }
+  fprintf(fp,"================================\n");
+}
+
+
 /* La differenza con le global sta che ,le global vanno definite in ogni file le env no
 getenv returna una stringa */
 /*
@@ -164,8 +211,9 @@ int main(int argc, char *argv[])
    void *P_Parent;
   int thTest;
   int *ptr;
+  Block_ *b;
   P_Parent = 0;
-  thTest = pthread_create(&threadId, NULL, printing(0), P_Parent);
+  thTest = pthread_create(&threadId, NULL, print_ledger(b,0), P_Parent);
   if (thTest == 0)
   {
     printf("thread work without error :)\n");

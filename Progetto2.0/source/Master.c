@@ -257,6 +257,7 @@ void signal_handler(int signum)
 {
 	killpg(0,SIGINT);
 
+
 	printf("Parent: signal recieved %d\n", signum);
 	semctl(semUsersPid_Id, 1, IPC_RMID);
 	semctl(semNodesPid_Id, 1, IPC_RMID);
