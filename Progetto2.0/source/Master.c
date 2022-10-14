@@ -11,6 +11,7 @@ node_t *nodesPid;
 Block_ ledger[SO_REGISTRY_SIZE];
 Block_* tmpLedger;
 Block_ *Ledger;
+struct msqid_dist *MessageQ;
 int mQueue;
 
 int semUsersPid_Id;
@@ -118,21 +119,22 @@ void create_arguments(int* IPC_array, char** argv)
 
 int message_queue_id()
 {
-	key_t pidGot = getpid();
-	msgget(pidGot, IPC_CREAT | IPC_EXCL | 0666);
+	/*key_t pidGot = getpid();*/
+	key_t pidGot = M_QUEUE_KEY;
+	 msgget(pidGot, IPC_CREAT | 0666);
 	TRANSACTION_MTYPE;
 	switch (errno)
 	{
 	case EIDRM:
-		printf("[PROCESS %d] queue %d was removed\n", pidGot);
+		printf("[PROCESS %d] queue %d was removed\n", getpid(),pidGot);
 		break;
 	case EINVAL:
-		printf("[PROCESS %d] queue %d invalid value for cmd or msqid\n", pidGot);
+		printf("[PROCESS %d] queue %d invalid value for cmd or msqid\n", getpid(),pidGot);
 		break;
 	case EPERM:
 		printf("[PROCESS %d] queue %d the effective user ID of the calling process "
 					 "is not the creator or the owner\n",
-				pidGot);
+				getpid(),pidGot);
 		break;
 	}
 	return pidGot;
@@ -203,7 +205,9 @@ void generate_user(int uCounter, char* userArgv[])
 	case 0:
 		printf("[PROCESS %d] Forked child %d\n", getpid(), getpid());
 		message_queue_id();
-        execve(USER_NAME,userArgv,NULL);
+		system("./Users");
+       /* execve(USER_NAME,userArgv,NULL);*/
+
 		break;
 	default:
 		usersPid[uCounter].usPid = uPid;
@@ -237,7 +241,8 @@ int generate_node(int nCounter, char* nodeArgv[])
 	case 0:
 		printf("[PROCESS %d] Forked child %d\n", getpid(), getpid());
 		message_queue_id();
-        execve(NODE_NAME,nodeArgv,NULL);
+		system("./Nodes");
+        /*execve(NODE_NAME,nodeArgv,NULL);*/
 		break;
 
 	default:
@@ -259,7 +264,7 @@ void signal_handler(int signum)
 	semctl(semUsersPid_Id, 1, IPC_RMID);
 	semctl(semNodesPid_Id, 1, IPC_RMID);
 	semctl(semLedger_Id, 1, IPC_RMID);
-	msgctl(mQueue, IPC_RMID, NULL);
+	/*  msgctl(mQueue, IPC_RMID, MessageQ); */
 
 	printf("in signal handler function\n");
 	exit(0);
@@ -297,7 +302,7 @@ int main(int argc,char *argv[])
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGALRM, &sa, NULL);
 	printf("before sigaction\n"); /*TODO: remove,debug only*/
-	signal(SIGUSR1, signal_handler);
+	/*signal(SIGUSR1, signal_handler);*/
 	mQueue = message_queue_id();
 	printf("before for loop\n"); /*TODO: remove,debug only*/
 	argvCreator[0]=NODE_NAME;
@@ -310,7 +315,7 @@ int main(int argc,char *argv[])
 		nodesPid[nCounter].Node_state = available; */
 		generate_node(nCounter, argvCreator);
 		sleep(5);
-		signal_handler(sigum);
+		/*signal_handler(sigum);*/
 		/*signal_handler(sigum);*/
 	}
 	argvCreator[0]=USER_NAME;
@@ -338,6 +343,7 @@ int main(int argc,char *argv[])
 
 		friend_msg newNode;
 		Message transHop;
+
 		bzero(&newNode , sizeof(newNode));
 		bzero(&transHop, sizeof(transHop));
 		signal(SIGINT, SIG_DFL);

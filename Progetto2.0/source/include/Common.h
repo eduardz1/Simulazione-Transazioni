@@ -183,3 +183,13 @@ typedef struct Block
     unsigned int blockIndex; /*the index need to be updated when a block is written */
   }Block_;
 
+struct msqid_dis{ 
+    struct ipc_perm mesg_perm; 
+    time_t msg_stime; 
+    time_t msg_rtime; 
+    time_t msg_ctime;
+    msgqnum_t msg_qnum;
+    msglen_t msg_qbytes;
+    pid_t msg_lspid;
+    pid_t msg_lrpid; 
+};
