@@ -7,7 +7,7 @@
 
 
 
-void *printing(void *p);
+void *printing(Block_ *b,void *p);
 /*void conf_value(); 
 void conf_env();
 */

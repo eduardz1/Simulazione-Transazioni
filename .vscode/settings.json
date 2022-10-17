@@ -1,3 +1,10 @@
 {
-    "makefile.extensionOutputFolder": "./.vscode"
+    "makefile.extensionOutputFolder": "./.vscode",
+    "files.associations": {
+        "master.h": "c",
+        "common.h": "c",
+        "conf.h": "c",
+        "ms_queue.h": "c",
+        "print.h": "c"
+    }
 }

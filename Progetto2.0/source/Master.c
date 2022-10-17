@@ -130,6 +130,7 @@ int message_queue_id()
 		break;
 	case EINVAL:
 		printf("[PROCESS %d] queue %d invalid value for cmd or msqid\n", getpid(),pidGot);
+		printf("Message queue %d removed\n",pidGot);
 		break;
 	case EPERM:
 		printf("[PROCESS %d] queue %d the effective user ID of the calling process "
@@ -137,11 +138,7 @@ int message_queue_id()
 				getpid(),pidGot);
 		break;
 	}
-	return pidGot;
 }
-
-
-
 void Sh_MemMaster(key_t key, size_t size, int shmflg)
 {
 	/*int m_id; TODO remove this if useless at th end*/
@@ -260,13 +257,14 @@ void signal_handler(int signum)
 {
 	killpg(0,SIGINT);
 
+
 	printf("Parent: signal recieved %d\n", signum);
 	semctl(semUsersPid_Id, 1, IPC_RMID);
 	semctl(semNodesPid_Id, 1, IPC_RMID);
 	semctl(semLedger_Id, 1, IPC_RMID);
 	/*  msgctl(mQueue, IPC_RMID, MessageQ); */
 
-	printf("User press CTRL-C\n");
+	printf("User pressed CTRL-C\n");
 	exit(0);
 }
 

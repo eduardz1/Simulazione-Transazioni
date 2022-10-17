@@ -6,28 +6,28 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Oct 13 18:31:42 2022
+# Make data base, printed on Fri Oct 14 20:13:45 2022
 
 # Variables
 
+# environment
+JAVA_HOME = /usr/lib/jvm/java-17-openjdk
 # environment
 GDK_BACKEND = x11
 # environment
 LC_ALL = C
 # environment
-GNOME_SHELL_SESSION_MODE = pop
+NO_AT_BRIDGE = 1
 # environment
-SSH_AGENT_LAUNCHER = gnome-keyring
+CHROME_EXECUTABLE = /usr/bin/google-chrome-stable
 # environment
-GJS_DEBUG_OUTPUT = stderr
+I3SOCK = /run/user/1000/i3/ipc-socket.1331
 # environment
-VSCODE_CWD = /home/rick_pop
-# environment
-WINDOWPATH = 2
+VSCODE_CWD = /home/francesco
 # default
 MAKE_COMMAND := make
 # environment
-QT_ACCESSIBILITY = 1
+GTK3_MODULES = xapp-gtk3-module
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # environment
@@ -35,59 +35,61 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
 .VARIABLES := 
 # environment
-PWD = /home/rick_pop/Documents/Code/SO_Lab/Simulazione-Transazioni
+PWD = /home/francesco/Documents/Universita/2_Anno/SO/Simulazione-Transazioni
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
-XDG_DATA_DIRS = /usr/share/pop:/usr/share/gnome:/home/rick_pop/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/
+MAIL = /var/spool/mail/francesco
+# environment
+XDG_DATA_DIRS = /home/francesco/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/var/lib/snapd/desktop
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_CODE_CACHE_PATH = /home/rick_pop/.config/Code/CachedData/129500ee4c8ab7263461ffe327268ba56b9f210d
+VSCODE_CODE_CACHE_PATH = /home/francesco/.config/Code/CachedData/d045a5eda657f4d7b676dedbfa7aab8207f8a075
+# environment
+XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session1
 # environment
 LANG = C
 # environment
-XAUTHORITY = /run/user/1000/gdm/Xauthority
+XAUTHORITY = /home/francesco/.Xauthority
 # default
 .LOADED := 
 # default
-.INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
 # makefile
 MAKEFLAGS = pqrR
 # makefile
-CURDIR := /home/rick_pop/Documents/Code/SO_Lab/Simulazione-Transazioni
+CURDIR := /home/francesco/Documents/Universita/2_Anno/SO/Simulazione-Transazioni
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
-# environment
-LESSOPEN = | /usr/bin/lesspipe %s
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-MFLAGS = -pqrR
+PAM_KWALLET5_LOGIN = /run/user/1000/kwallet5.socket
 # environment
-SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
+MFLAGS = -pqrR
 # default
 .SHELLFLAGS := -c
 # environment
-XDG_CONFIG_DIRS = /etc/xdg/xdg-pop:/etc/xdg
+XDG_CONFIG_DIRS = /home/francesco/.config/kdedefaults:/etc/xdg
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # environment
-XDG_SESSION_DESKTOP = pop
+OMF_PATH = /home/francesco/.local/share/omf
+# environment
+XDG_SESSION_DESKTOP = KDE
 # makefile
 MAKEFILE_LIST := 
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 10724
+VSCODE_PID = 2530
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
-# environment
-SESSION_MANAGER = local/pop-os:@/tmp/.ICE-unix/2851,unix/pop-os:/tmp/.ICE-unix/2851
 # automatic
 *F = $(notdir $*)
 # environment
@@ -100,104 +102,112 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
-# environment
-GNOME_DESKTOP_SESSION_ID = this-is-deprecated
 # makefile
 SHELL = /bin/sh
 # default
 MAKECMDGOALS := all
 # environment
-XMODIFIERS = @im=ibus
-# environment
-GJS_DEBUG_TOPICS = JS ERROR;JS LOG
-# environment
-SHLVL = 0
+SHLVL = 2
 # environment
 MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+PATH = /usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/var/lib/snapd/snap/bin
 # default
 MAKEFILES := 
+# environment
+MOTD_SHOWN = pam
 # automatic
 ^F = $(notdir $^)
 # environment
-INVOCATION_ID = fd6ed2c6d28248bab441ef67ed05e97f
+INVOCATION_ID = 9e251016297149ddb5a6cbd870f560e0
 # environment
-USERNAME = rick_pop
-# environment
-LESSCLOSE = /usr/bin/lesspipe %s %s
+_JAVA_AWT_WM_NONREPARENTING = 1
 # automatic
 ?F = $(notdir $?)
 # environment
-GTK_IM_MODULE = ibus
+KDE_APPLICATIONS_AS_SCOPE = 1
 # environment
-XDG_CURRENT_DESKTOP = Unity
+XDG_SEAT = seat0
 # environment
-LS_COLORS = 
+XDG_CURRENT_DESKTOP = KDE
 # automatic
 +F = $(notdir $+)
 # environment
-DESKTOP_SESSION = pop
+XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
 # environment
-ORIGINAL_XDG_CURRENT_DESKTOP = pop:GNOME
+DESKTOP_SESSION = plasma-i3
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = KDE
 # 'override' directive
 GNUMAKEFLAGS := 
 # environment
-LOGNAME = rick_pop
+QT_SCREEN_SCALE_FACTORS = DP1=1;HDMI1=1;HDMI2=1;HDMI3=1;VIRTUAL1=1;
 # environment
-GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
+LOGNAME = francesco
+# environment
+XDG_VTNR = 1
 # makefile
 .DEFAULT_GOAL := 
 # environment
-SYSTEMD_EXEC_PID = 2874
+SYSTEMD_EXEC_PID = 1331
 # environment
-DISPLAY = :1
+DISPLAY = :0
 # environment
-USER = rick_pop
+GTK_MODULES = canberra-gtk-module
 # environment
-GTK_MODULES = gail:atk-bridge:appmenu-gtk-module
+USER = francesco
 # default
 MAKE_VERSION := 4.3
 # environment
-MANAGERPID = 2677
+KDE_SESSION_UID = 1000
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 10724
+MANAGERPID = 1197
 # environment
-_ = /usr/share/code/code
+_ = /usr/bin/make
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
-GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
-# environment
-JOURNAL_STREAM = 8:35559
+JOURNAL_STREAM = 8:25106
 # environment
 XDG_SESSION_CLASS = user
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-HOME = /home/rick_pop
+HOME = /home/francesco
 # environment
-QT_IM_MODULE = ibus
+JDK_HOME = /usr/lib/jvm/java-17-openjdk
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-35b3a69a-1.72.1-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-ef618831-1.72.2-main.sock
+# environment
+KDEWM = /usr/bin/i3
+# environment
+XDG_SESSION_ID = 2
 # default
 .RECIPEPREFIX := 
 # automatic
 <F = $(notdir $<)
 # default
 SUFFIXES := 
+# environment
+QT_AUTO_SCREEN_SCALE_FACTOR = 0
+# environment
+VSCODE_CLI = 1
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# environment
+KDE_SESSION_VERSION = 5
 # default
-.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink guile load
 # environment
-XDG_MENU_PREFIX = gnome-
+KDE_FULL_SESSION = true
 # environment
-GDMSESSION = pop
+OMF_CONFIG = /home/francesco/.config/omf
 # variable set hash-table stats:
-# Load=93/1024=9%, Rehash=0, Collisions=2/120=2%
+# Load=98/1024=10%, Rehash=0, Collisions=2/125=2%
 
 # Pattern-specific Variable Values
 
@@ -205,9 +215,9 @@ GDMSESSION = pop
 
 # Directories
 
-# . (device 2049, inode 3279772): 21 files, no impossibilities.
+# . (device 2050, inode 80354247): 22 files, no impossibilities.
 
-# 21 files, no impossibilities in 1 directories.
+# 22 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -257,13 +267,13 @@ GNUmakefile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 29 / storage = 330 B / avg = 11 B
-# current buf: size = 8162 B / used = 330 B / count = 29 / avg = 11 B
+# strcache buffers: 1 (0) / strings = 30 / storage = 340 B / avg = 11 B
+# current buf: size = 8162 B / used = 340 B / count = 30 / avg = 11 B
 
-# strcache performance: lookups = 32 / hit rate = 9%
+# strcache performance: lookups = 33 / hit rate = 9%
 # hash-table stats:
-# Load=29/8192=0%, Rehash=0, Collisions=0/32=0%
-# Finished Make data base on Thu Oct 13 18:31:42 2022
+# Load=30/8192=0%, Rehash=0, Collisions=0/33=0%
+# Finished Make data base on Fri Oct 14 20:13:45 2022
 
  
 make: *** No rule to make target 'all'.  Stop.
