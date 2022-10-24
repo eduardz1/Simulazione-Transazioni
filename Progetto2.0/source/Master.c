@@ -121,8 +121,10 @@ int message_queue_id()
 {
 	/*key_t pidGot = getpid();*/
 	key_t pidGot = M_QUEUE_KEY;
-	 msgget(pidGot, IPC_CREAT | 0666);
+	int queue;
+	 queue =msgget(pidGot, IPC_CREAT | 0666);
 	TRANSACTION_MTYPE;
+	/*
 	switch (errno)
 	{
 	case EIDRM:
@@ -136,8 +138,13 @@ int message_queue_id()
 		printf("[PROCESS %d] queue %d the effective user ID of the calling process "
 					 "is not the creator or the owner\n",
 				getpid(),pidGot);
+				
 		break;
+		
 	}
+	*/
+printf("[MASTER %d QUEUE PID IS %d  , STATUS --> CREATION SUCCESS ",pidGot,queue); 
+return pidGot; 
 }
 void Sh_MemMaster(key_t key, size_t size, int shmflg)
 {
