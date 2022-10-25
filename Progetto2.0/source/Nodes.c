@@ -14,7 +14,7 @@ Block_ *ledger;
 user *UserID;
 node_t *NodeID;
 Block_ *Ledger;
-
+int queuID; 
 /* -------------*/
 int Msg_ID;
 int Message_Erro;
@@ -32,6 +32,7 @@ void take_transaction()
 	unsigned int friendCycle = 20;
 	friend_msg friends_recived;
 	int sizeofFriend = friendList_size;
+	message.m_type=M_QUEUE_KEY;
 	if (transPool.size < SO_TP_SIZE && friendCycle < 20)
 	{
 		if (msgrcv(Msg_ID, &fetchMex, sizeof(Message), message.m_type, 0) == 0) /*undefined reference to receive_message() dunno why*/
@@ -306,7 +307,7 @@ int main(int argc, char *argv[])
 	struct timespec randSleeptime;
 	struct timespec sleeptimeremaning;
 	struct sigaction *sa;
-
+	message.m_type=M_QUEUE_KEY;
 	bzero(&randSleeptime, sizeof(randSleeptime));
 	bzero(&sleeptimeremaning, sizeof(sleeptimeremaning));
 	bzero(&sa, sizeof(sa));
@@ -321,7 +322,7 @@ int main(int argc, char *argv[])
 	ipc_Attach_argv(argv);
 	srand(getpid());
 	sig_handler_init(sa);
-	msgget(M_QUEUE_KEY, 0600 | IPC_CREAT);
+	Msg_ID=msgget(M_QUEUE_KEY, 0600 | IPC_CREAT);
 
 	friendList = malloc(SO_FRIENDS_NUM * sizeof(pid_t));
 	friendList_size = SO_FRIENDS_NUM;
