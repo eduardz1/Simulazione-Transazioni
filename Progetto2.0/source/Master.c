@@ -123,6 +123,12 @@ int message_queue_id()
 	key_t pidGot = M_QUEUE_KEY;
 	int queue;
 	 queue =msgget(pidGot, IPC_CREAT | 0666);
+	 if (queue <= -1 )
+	 {
+		perror("[MASTER : ] PROBLEM IN QUEUE \n");
+		return PROBLEM; 
+	 }
+	 
 	TRANSACTION_MTYPE;
 	/*
 	switch (errno)
@@ -198,7 +204,6 @@ void make_ipc_array(int *IPC_array)
 /* generate the user with fork and lauch ./users with execve*/
 void generate_user(int uCounter, char* userArgv[])
 {
-  /*TODO: need to implement uCounter !! */
 	pid_t uPid = fork();
 
 	switch (uPid)
@@ -209,9 +214,7 @@ void generate_user(int uCounter, char* userArgv[])
 	case 0:
 		printf("[PROCESS %d] Forked child %d\n", getpid(), getpid());
 		message_queue_id();
-		system("./Users");
-       /* execve(USER_NAME,userArgv,NULL);*/
-
+    	execve(USER_NAME,userArgv,NULL); 
 		break;
 	default:
 		usersPid[uCounter].usPid = uPid;
@@ -244,9 +247,10 @@ int generate_node(int nCounter, char* nodeArgv[])
 
 	case 0:
 		printf("[PROCESS %d] Forked child %d\n", getpid(), getpid());
+		printf("[MASTER QUEUE ] BEFORE QUEUE FUNCTION \n");
 		message_queue_id();
-		system("./Nodes");
-        /*execve(NODE_NAME,nodeArgv,NULL);*/
+		printf("[MASTER QUEUE AFTER CALL FUNCTION \n "); 
+        execve(NODE_NAME,nodeArgv,NULL);
 		break;
 
 	default:
@@ -319,8 +323,15 @@ int main(int argc,char *argv[])
 	mQueue = message_queue_id();
 	printf("before for loop\n"); /*TODO: remove,debug only*/
 	argvCreator[0]=NODE_NAME;
-	for (nCounter = 0; nCounter < SO_NODES_NUM;nCounter++) /*TODO: seg fault here imo, need to solve, FIXME: just for debug purpose */
+	for (nCounter = 0; nCounter <= SO_NODES_NUM;nCounter++) /*TODO: seg fault here imo, need to solve, FIXME: just for debug purpose */
 	{
+	
+		if (nCounter > SO_NODES_NUM)
+		{
+			printf("[MASTER USER FUNCTION ] | GENRATION USERS COMPLETE  \n");
+			break;
+		}
+		
 		int sigum;
 		printf("nCounter: %d\n", nCounter);
 		printf("in for loop\n"); /*TODO: remove,debug only*/
@@ -332,13 +343,19 @@ int main(int argc,char *argv[])
 		/*signal_handler(sigum);*/
 	}
 	argvCreator[0]=USER_NAME;
-	for (uCounter = 0; uCounter < SO_USERS_NUM; uCounter++)
-	{
+	for (uCounter = 0; uCounter <= SO_USERS_NUM; uCounter++)
+	{	
 		int sigum;
 		/*usersPid[uCounter].Us_state = ALIVE;
 		usersPid[uCounter].balance = 0;*/
 		generate_user(uCounter, argvCreator);
 		sleep(5);
+		if (uCounter > SO_USERS_NUM )
+		{
+			printf("[MASTER NODE ] NODE GENERATION COMPLETE \n"); 
+			break;
+		}
+		
 	}
 
 	alarm(SO_SIM_SEC);
@@ -354,16 +371,16 @@ int main(int argc,char *argv[])
 		unsigned int i;
 		unsigned int tmpPid;
 
-		friend_msg newNode;
+		/*friend_msg newNode;*/ 
 		Message transHop;
 
-		bzero(&newNode , sizeof(newNode));
+		/*bzero(&newNode , sizeof(newNode));*/
 		bzero(&transHop, sizeof(transHop));
 		signal(SIGINT, SIG_DFL);
 
 		while (1)
 		{
-			receive_message(mQueue, &newNode, sizeof(Message), TRANSACTION_MTYPE, 0);
+			/*receive_message(mQueue, &newNode, sizeof(Message), TRANSACTION_MTYPE, 0);*/ 
 			nodesPid[nCounter].Node_state = ALIVE;
 			nodesPid[nCounter].balance = 0;
 			tmpPid = generate_node(argvCreator,-1);
