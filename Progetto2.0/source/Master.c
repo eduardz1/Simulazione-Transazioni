@@ -284,6 +284,8 @@ int main(int argc,char *argv[])
 	char* argvCreator[8];
 	struct sigaction sa;
 	struct sembuf sops;
+
+    
 	for (i = 0; i < 8; i++)
 		argvCreator[i] = malloc(3 * sizeof(int) + 1);
 
@@ -291,10 +293,16 @@ int main(int argc,char *argv[])
 	tmpLedger = ledger;
 	
 	printf("Master PID: %d\n", getpid());
+	make_ipc_array(ipcObj);
+
+	create_arguments(ipcObj,argvCreator);
+    if(argc < 1)
+    {
+        printf("Missing arguments, maybe you need to do <source setting.conf>\n");
+        exit(1);
+    }
 	printf("before sems_init\n"); /*TODO: remove,debug only*/
 	sems_init();
-	make_ipc_array(ipcObj);
-	create_arguments(ipcObj,argvCreator);
 	printf("after sems_init\n"); /*TODO: remove,debug only*/
 
 	/* set all sigaction's byte to zero
