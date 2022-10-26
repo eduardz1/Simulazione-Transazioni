@@ -1,4 +1,7 @@
 /*#include "Ms_Queue.h"*/
+#ifndef IPC_SEM_H_UTIL
+#define IPC_SEM_H_UTIL
+
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -30,3 +33,5 @@ int sem_release(int sem_id, int sem_num);
 int resource_set(int sem_id, int sem_count);
 int resource_release(int sem_id, int sem_count);
 void sem_getall(char *mystring, int sem_id);
+
+#endif

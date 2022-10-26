@@ -1,6 +1,10 @@
+#ifndef transaction_H_UTIL
+#define transaction_H_UTIL
+
 #include <sys/types.h>
 #include <sys/time.h>
 #include <errno.h>
+
 typedef struct MoneyTransaction
 {
     struct timespec time;
@@ -17,3 +21,5 @@ typedef struct MoneyTransaction
  }MoneyStatusTrans; 
  
 }transaction;
+
+#endif

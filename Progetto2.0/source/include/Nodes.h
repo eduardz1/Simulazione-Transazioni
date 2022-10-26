@@ -1,7 +1,13 @@
+
+#ifndef NODES_H_INCLUDE
+#define NODES_H_INCLUDE
+
 #include "Conf.h"
 #include "Master.h"
 #include "../Util/IPCS_SEM.h"
 #include "../Util/Ms_Queue.h"
+
+
 
 /*user return status, used in tp */
 #define WENT_BROKE 1
@@ -56,3 +62,5 @@ struct msqid_dis{
     pid_t msg_lrpid;
 };
 */
+
+#endif

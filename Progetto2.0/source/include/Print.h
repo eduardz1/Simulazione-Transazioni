@@ -1,8 +1,13 @@
+#ifndef PRINT_H_INCLUDE
+#define PRINT_H_INCLUDE
+
+
 #include "Common.h"
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
 
 
 
@@ -49,3 +54,5 @@ extern so_sim_sec;
 extern so_friends_num; 
 extern so_hops; 
 */
+
+#endif

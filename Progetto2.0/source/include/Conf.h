@@ -1,3 +1,6 @@
+
+#ifndef CONF_H_INCLUDE
+#define CONF_H_INCLUDE
 #include <stdio.h> 
 #include <stdlib.h>
 #define SO_USERS_NUM            atoi(getenv("SO_USERS_NUM"))
@@ -19,3 +22,4 @@
 #define     MSG_KEY                 12345
 #define     SM_KEY                  ((key_t)5077)
 #define     SEM_KEY                 ((key_t)5078)
+#endif

@@ -1,3 +1,6 @@
+#ifndef SH_Mem_H_UTIL
+#define SH_Mem_H_UTIL
+
 #include "../include/Common.h"
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -29,3 +32,5 @@ struct msqid_dis {
   pid_t msg_lspid;
   pid_t msg_lrpid;
 };
+
+#endif

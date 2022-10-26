@@ -1,3 +1,6 @@
+#ifndef MASTER_H_INCLUDE
+#define MASTER_H_INCLUDE
+
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -23,3 +26,4 @@ int message_queue_id();
 /*singal handler to end the simulation */
 void signal_handler(int signum);
 
+#endif

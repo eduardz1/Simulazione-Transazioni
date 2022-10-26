@@ -1,5 +1,7 @@
 /* #define _XOPEN_SOURCE 700 */
 /*#define _GNU_SOURCE*/ 
+#ifdef PARAMETRI_H_UTIL
+#define PRAMETRI_H_UTIL
 #include <stdlib.h>
 #include <stdio.h>
 #include <signal.h>
@@ -78,3 +80,5 @@ struct msg_buf {
 };
 
 void one_for_all(int signum);
+
+#endif
