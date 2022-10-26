@@ -15,7 +15,7 @@ master:$(MASTER)
 	$(CC) $(CFLAGS)  source/Master.c source/Util/IPCS_SEM.c source/Util/Ms_Queue.c -o Master
 
 users: $(USERS)
-	$(CC) $(CFLAGS)  source/Users.c source/Util/IPCS_SEM.c source/Util/Ms_Queue.c -o Users
+	$(CC) $(CFLAGS)  source/Users.c source/Util/IPCS_SEM.c source/Util/Ms_Queue.c source/Util/lklist.c -o Users
 
 nodes: $(NODE)
 	$(CC) $(CFLAGS)  source/Nodes.c source/Util/IPCS_SEM.c source/Util/Ms_Queue.c -o Nodes

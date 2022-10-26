@@ -2,7 +2,7 @@
 
 
 #ifndef  USERS_H_INCLUDE
-#define USERS_J_INCLUDE
+#define  USERS_J_INCLUDE
 #include <sys/types.h>
 #include <time.h>
 #include "../include/Conf.h"
