@@ -1,16 +1,9 @@
 /* #include "../Util/Ms_Queue.h"*/ 
-#include "../include/Common.h"
 #include <sys/types.h>
 #include <time.h>
 #include "../include/Conf.h"
 #include "../Util/IPCS_SEM.h"
-/*
-struct node {
-  transaction trans;
-  struct node *next;
-};
- */
-
+#include "../Util/lklist.h"
 
 
 void Sh_MemUser(key_t key ,size_t size,int shmflg);

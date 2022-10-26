@@ -21,7 +21,7 @@ nodes: $(NODE)
 	$(CC) $(CFLAGS)  source/Nodes.c source/Util/IPCS_SEM.c source/Util/Ms_Queue.c -o Nodes
 
 print:$(PRINT)
-	$(CC) $(CFLAGS) -lpthread  source/Print.c   -o Print
+	$(CC) $(CFLAGS) -lpthread  source/Print.c -o Print
 	
 run:
 	./Master

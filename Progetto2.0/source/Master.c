@@ -149,7 +149,7 @@ int message_queue_id()
 		
 	}
 	*/
-printf("[MASTER %d QUEUE PID IS %d  , STATUS --> CREATION SUCCESS ",pidGot,queue); 
+printf("[MASTER %d QUEUE PID IS %d  , STATUS --> CREATION SUCCESS] ",pidGot,queue); 
 return pidGot; 
 }
 void Sh_MemMaster(key_t key, size_t size, int shmflg)

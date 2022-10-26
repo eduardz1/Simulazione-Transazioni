@@ -15,12 +15,12 @@ int semLedger_id;
 
 /*function to handle transaction pool easily(linked list util) */
 
-int get_reward(unsigned int amount,int reward)
+int get_reward(unsigned int amount, int reward)
 {
   return ceil(reward * amount / 100);
 }
 
-unsigned int get_rand(unsigned int min,unsigned int max)
+unsigned int get_rand(unsigned int min, unsigned int max)
 {
   return rand() % (max - min + 1) + min;
 }
@@ -33,7 +33,7 @@ pid_t get_random_userPID()
 
   do
   {
-    index = get_rand(0, SO_USERS_NUM*2 - 1);
+    index = get_rand(0, SO_USERS_NUM * 2 - 1);
     if (usersPid[index].Us_state != DEAD && usersPid[index].usPid != myPid)
       val = usersPid[index].usPid;
   } while (!val);
@@ -57,6 +57,7 @@ pid_t get_random_nodePID()
   return val;
 }
 
+/*
 struct node *new_node(transaction t)
 {
  struct node *newNode = malloc(sizeof(struct node));
@@ -64,12 +65,12 @@ struct node *new_node(transaction t)
   {
     printf("Error allocating memory for new node\n");
   }
-   newNode->trans=t;  /*TODO why is this not working? */
+   newNode->trans=t;  /*TODO why is this not working?
   newNode->next = NULL;
   return newNode;
 }
 
-/*set transaction at the end of the linked list*/
+/*set transaction at the end of the linked list
 void push(struct node *head, transaction t)
 {
   struct node *curr = head;
@@ -89,7 +90,7 @@ int compare_transaction(transaction *t1, transaction *t2)
   return 0;
 }
 
-/* find and removes a message from pool if present */
+/* find and removes a message from pool if present
 void find_and_remove(struct node **head, transaction *search)
 {
   struct node *curr = *head;
@@ -103,7 +104,7 @@ void find_and_remove(struct node **head, transaction *search)
   {
     if (curr->next == NULL)
     {
-      return; /* transaction not found */
+      return; /* transaction not found
     }
     else
     {
@@ -123,10 +124,9 @@ void find_and_remove(struct node **head, transaction *search)
     free(curr);
   }
 }
+*/
 
-
-
-/* try to attach to queue of nodePid key until it succed 
+/* try to attach to queue of nodePid key until it succed
 void queue_to_pid(pid_t nodePid)
 {
   do
@@ -191,48 +191,44 @@ void start_transaction(pid_t userPid, int money, int reward)
 
 int send_transaction()
 {
-    Message buff; 
-    int i ; 
-    buff.mesText [0] = myPid;
-    buff.mesText [1] =tns->Message_Transaction.uTrans.Money;
-    buff.mesText [2] =tns->Message_Transaction.uTrans.MoneyStatusTrans;
-    buff.mesText [3] =tns->Message_Transaction.uTrans.Receiver;
-    buff.mesText [4] =tns->Message_Transaction.uTrans.Sender;
-    buff.mesText [5] =sprintf(buff.mesText,"%d",tns->Message_Transaction.uTrans.time);
+  Message buff;
+  int i;
+  buff.mesText[0] = myPid;
+  buff.mesText[1] = tns->Message_Transaction.uTrans.Money;
+  buff.mesText[2] = tns->Message_Transaction.uTrans.MoneyStatusTrans;
+  buff.mesText[3] = tns->Message_Transaction.uTrans.Receiver;
+  buff.mesText[4] = tns->Message_Transaction.uTrans.Sender;
+  buff.mesText[5] = sprintf(buff.mesText, "%d", tns->Message_Transaction.uTrans.time);
 
   transaction sent = {0};
-  for ( i = 0; i < 5; i++)
+  for (i = 0; i < 5; i++)
   {
-    
-  
-  
-  if (msgsnd(queueID, (char*)&buff.mesText[i], sizeof(char)+sizeof(long), IPC_NOWAIT) == 0)
-  {
-    printf("[USER %d] sent a transaction of %d UC to [USER %d] via queue %d\n", myPid, tns->Message_Transaction.uTrans.Money, tns->Message_Transaction.uTrans.Receiver, queueID);
-    currBalance -= (tns->Message_Transaction.uTrans.Money + tns->Message_Transaction.uTrans.Reward);
-    sent = tns->Message_Transaction.uTrans;
-    if (outGoingTransactions == NULL)
+    if (msgsnd(queueID, (char *)&buff.mesText[i], sizeof(char) + sizeof(long), IPC_NOWAIT) == 0)
     {
-      outGoingTransactions = new_node(sent);
+      printf("[USER %d] sent a transaction of %d UC to [USER %d] via queue %d\n", myPid, tns->Message_Transaction.uTrans.Money, tns->Message_Transaction.uTrans.Receiver, queueID);
+      currBalance -= (tns->Message_Transaction.uTrans.Money + tns->Message_Transaction.uTrans.Reward);
+      sent = tns->Message_Transaction.uTrans;
+      if (outGoingTransactions == NULL)
+      {
+        outGoingTransactions = new_node(sent);
+      }
+      else
+      {
+        push(outGoingTransactions, sent);
+      }
+      return 0;
     }
-    else
-    {
-      push(outGoingTransactions, sent);
-    }
-    return 0;
   }
-  return -1; /*error*/
- }
+
+    return -1; /*error*/
 }
 void attach_ipc_objects(char **argv)
 {
-	
-	
-	usersPid = shmat(USERS_PID_ARGV, NULL, 0);
-	nodesPid = shmat(NODES_PID_ARGV, NULL, 0);
-	ledger = shmat(LEDGER_ARGV, NULL, 0);
-	semUsersPids_id = SEM_USERS_PIDS_ARGV;
-	semLedger_id = SEM_LEDGER_ARGV;
+  usersPid = shmat(USERS_PID_ARGV, NULL, 0);
+  nodesPid = shmat(NODES_PID_ARGV, NULL, 0);
+  ledger = shmat(LEDGER_ARGV, NULL, 0);
+  semUsersPids_id = SEM_USERS_PIDS_ARGV;
+  semLedger_id = SEM_LEDGER_ARGV;
 }
 
 void Sh_MemUser(key_t key, size_t size, int shmflg)
@@ -240,7 +236,7 @@ void Sh_MemUser(key_t key, size_t size, int shmflg)
   int Mem_id;
   int Sh_MemInit = shmget(key, sizeof(SO_USERS_NUM), IPC_CREAT | 0666); /*define area*/
   char *shmAttach = shmat(Sh_MemInit, NULL, 0);                         /*Attach Area*/
-  int *ShDet = shmdt(Sh_MemInit);                                        /*Detach Area*/
+  int *ShDet = shmdt(Sh_MemInit);                                       /*Detach Area*/
 }
 
 void update_balance(unsigned int tmpBalance)
@@ -256,13 +252,13 @@ void update_balance(unsigned int tmpBalance)
 /*saves user balance when the program is interrupted in tmpBalance*/
 void current_balance()
 {
-  
+
   int i;
   int j;
   long accumulate = 0;
   long flag = 1;
   unsigned int tmpBalance = SO_BUDGET_INIT;
-  struct node  *tmp; 
+  struct node *tmp;
   Block_ tmpLedger[SO_REGISTRY_SIZE];
   resource_set(semLedger_id, 1);
   memcpy(&tmpLedger, ledger, sizeof(tmpLedger));
@@ -290,37 +286,36 @@ void current_balance()
       }
     }
   }
-  tmp=outGoingTransactions;
+  tmp = outGoingTransactions;
   while (tmp != NULL)
   {
     accumulate -= (tmp->trans.Money + tmp->trans.Reward);
     tmp = tmp->next;
-    
-  } 
+  }
 
-/*  resource_release(semUsersPids_id, i);*/
+  /*  resource_release(semUsersPids_id, i);*/
   printf("accumulate %ld\n", accumulate);
   if (accumulate * (-1) > tmpBalance)
-{
   {
-    fprintf(stderr, "*** [USER %d] errror in calculating balance, overflow ***\n", myPid);
-    update_status(2);
-    killpg(0, SIGINT);
+    {
+      fprintf(stderr, "*** [USER %d] errror in calculating balance, overflow ***\n", myPid);
+      update_status(2);
+      killpg(0, SIGINT);
+    }
+    printf("balance is %d\n", tmpBalance);
   }
-  printf("balance is %d\n", tmpBalance);
-}
-tmpBalance+=accumulate;
+  tmpBalance += accumulate;
 
-if (errno == ERANGE)
-{ /* not working as intended */
-	{
-		fprintf(stderr, "[USER %d] went out of bound, punishment for being that rich is death\n", myPid);
-		update_status(2);
-		kill(myPid, SIGINT);
-	}
+  if (errno == ERANGE)
+  { /* not working as intended */
+    {
+      fprintf(stderr, "[USER %d] went out of bound, punishment for being that rich is death\n", myPid);
+      update_status(2);
+      kill(myPid, SIGINT);
+    }
 
-	update_balance(tmpBalance);
-}
+    update_balance(tmpBalance);
+  }
 }
 void user_transaction_handle(int signum)
 {
@@ -339,7 +334,7 @@ void user_transaction_handle(int signum)
     amount -= reward;
     update_status(0);
 
-    start_transaction(userPid,amount, reward);
+    start_transaction(userPid, amount, reward);
 
     if (send_transaction() == 0)
     {
@@ -347,7 +342,8 @@ void user_transaction_handle(int signum)
     }
     else
     {
-      retry--;    }
+      retry--;
+    }
     if (retry == 0)
     {
       update_status(2);
@@ -362,63 +358,65 @@ void user_transaction_handle(int signum)
   update_balance(currBalance);
 }
 
+void user_signal_handler(int signum)
+{
+  struct node *tmp;
+  int i = get_pid_userIndex(myPid);
+  current_balance();
 
-void user_signal_handler(int signum){
-	struct node *tmp;
-	int i = get_pid_userIndex(myPid);
-	current_balance();
-
-	if(usersPid[get_pid_userIndex(myPid)].Us_state!=DEAD)
-	{
-		if(usersPid[i].balance >=2)
-			update_status(0);
-		else
-			update_status(1);
-	}
-	tmp = outGoingTransactions;
-	resource_set(semUsersPids_id,1);
-	while(tmp != NULL){
-		usersPid[i].balance += (tmp->trans.Money + tmp->trans.Reward);
-		tmp=tmp->next;
-	}
-	resource_release(semUsersPids_id,1);
-	free(tmp);
-	killpg(0,SIGINT);
-	exit(0);
+  if (usersPid[get_pid_userIndex(myPid)].Us_state != DEAD)
+  {
+    if (usersPid[i].balance >= 2)
+      update_status(0);
+    else
+      update_status(1);
+  }
+  tmp = outGoingTransactions;
+  resource_set(semUsersPids_id, 1);
+  while (tmp != NULL)
+  {
+    usersPid[i].balance += (tmp->trans.Money + tmp->trans.Reward);
+    tmp = tmp->next;
+  }
+  resource_release(semUsersPids_id, 1);
+  free(tmp);
+  killpg(0, SIGINT);
+  exit(0);
 }
 
 void signal_handler_user_init(struct sigaction *saUSR1, struct sigaction *saINT)
 {
-	saUSR1->sa_handler = user_transaction_handle;
-	saINT->sa_handler = user_signal_handler;
-	sigaction(SIGUSR1,saUSR1,NULL);
-	sigaction(SIGINT,saINT,NULL);
+  saUSR1->sa_handler = user_transaction_handle;
+  saINT->sa_handler = user_signal_handler;
+  sigaction(SIGUSR1, saUSR1, NULL);
+  sigaction(SIGINT, saINT, NULL);
 }
 
 int main(int argc, char *argv[])
 {
   unsigned int amount, reward, retry;
   pid_t usPid, ndPid;
- struct sigaction saUSR1;
-	struct sigaction saInt_u;
+  struct sigaction saUSR1;
+  struct sigaction saInt_u;
 
   currBalance = SO_BUDGET_INIT;
-	bzero(&saUSR1,sizeof(saUSR1));
-  bzero(&saInt_u,sizeof(saInt_u));
+  bzero(&saUSR1, sizeof(saUSR1));
+  bzero(&saInt_u, sizeof(saInt_u));
   printf("[USER]--->main\n");
-  
+
   myPid = getpid();
 
-	if (argc==0){
-		perror("[USER] no arguments passed");
-		exit(EXIT_FAILURE);
-	}
+  if (argc == 0)
+  {
+    perror("[USER] no arguments passed");
+    exit(EXIT_FAILURE);
+  }
   srand(myPid); /*initialize rand function, so we have same pattern for each user*/
 
   attach_ipc_objects(argv);
   signal_handler_user_init(&saUSR1, &saInt_u);
-  tns->m_type=TRANSACTION_MTYPE;
-  currBalance=SO_BUDGET_INIT;
+  tns->m_type = TRANSACTION_MTYPE;
+  currBalance = SO_BUDGET_INIT;
   retry = SO_RETRY;
   while (1)
   {
@@ -436,9 +434,9 @@ int main(int argc, char *argv[])
       amount -= reward;
 
       /*queue_to_pid(ndPid);*/
-      queueID = msgget(M_QUEUE_KEY, 0666|IPC_CREAT);
+      queueID = msgget(M_QUEUE_KEY, 0666 | IPC_CREAT);
 
-      start_transaction(usPid,amount, reward);
+      start_transaction(usPid, amount, reward);
 
       if (send_transaction() == 0)
       {
