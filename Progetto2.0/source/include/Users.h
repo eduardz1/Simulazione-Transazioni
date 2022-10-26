@@ -1,8 +1,8 @@
 /* #include "../Util/Ms_Queue.h"*/ 
 
 
-#ifdef USERS_H_INCLUDE
-#define USERS_H_INCLUDE
+#ifndef  USERS_H_INCLUDE
+#define USERS_J_INCLUDE
 #include <sys/types.h>
 #include <time.h>
 #include "../include/Conf.h"
