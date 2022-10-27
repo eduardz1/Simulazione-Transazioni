@@ -203,7 +203,7 @@ int send_transaction()
   transaction sent = {0};
   for (i = 0; i < 5; i++)
   {
-    if (msgsnd(queueID, (char *)&buff.mesText[i], sizeof(char) + sizeof(long), IPC_NOWAIT) == 0)
+    if (send_message(queueID, (char *)&buff.mesText[i], sizeof(char) + sizeof(long), IPC_NOWAIT) == 0)
     {
       printf("[USER %d] sent a transaction of %d UC to [USER %d] via queue %d\n", myPid, tns->Message_Transaction.uTrans.Money, tns->Message_Transaction.uTrans.Receiver, queueID);
       currBalance -= (tns->Message_Transaction.uTrans.Money + tns->Message_Transaction.uTrans.Reward);
