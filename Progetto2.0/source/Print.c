@@ -222,7 +222,7 @@ int main(int argc, char *argv[])
   }
   else
   {
-    perror("thread doesn't work  :(\n");
+    fprintf(stderr,"thread doesn't work  :(\n");
     exit(EXIT_FAILURE);
   }
   printf("printing from main\n");

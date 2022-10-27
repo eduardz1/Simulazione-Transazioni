@@ -125,7 +125,7 @@ int message_queue_id()
 	 queue =msgget(pidGot, IPC_CREAT | 0666);
 	 if (queue <= -1 )
 	 {
-		perror("[MASTER : ] PROBLEM IN QUEUE \n");
+		fprintf(stderr,"[MASTER : ] PROBLEM IN QUEUE \n");
 		return PROBLEM; 
 	 }
 	 

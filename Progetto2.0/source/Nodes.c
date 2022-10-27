@@ -219,7 +219,7 @@ int add_to_pool(pool *transPool, Message *message)
 	newTransaction = malloc(sizeof(newTransaction));
 	if (newTransaction == NULL)
 	{
-		perror("MALLOC ERROR IN POOL\n ");
+		fprintf(stderr,"MALLOC ERROR IN POOL\n ");
 		exit(EXIT_FAILURE);
 	}
 	while (newTransaction != NULL)
@@ -316,7 +316,7 @@ int main(int argc, char *argv[])
 
 	if (argc == 0)
 	{
-		perror("NO ARGUMENT PASSED CHECK IT PLEASE \n ");
+		fprintf(stderr,"NO ARGUMENT PASSED CHECK IT PLEASE \n ");
 		exit(EXIT_FAILURE);
 	}
 	ipc_Attach_argv(argv);

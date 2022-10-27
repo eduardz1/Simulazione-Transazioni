@@ -408,7 +408,7 @@ int main(int argc, char *argv[])
 
   if (argc == 0)
   {
-    perror("[USER] no arguments passed");
+    fprintf(stderr,"[USER] no arguments passed");
     exit(EXIT_FAILURE);
   }
   srand(myPid); /*initialize rand function, so we have same pattern for each user*/
