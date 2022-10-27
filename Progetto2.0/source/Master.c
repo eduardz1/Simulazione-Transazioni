@@ -249,7 +249,7 @@ int generate_node(int nCounter, char* nodeArgv[])
 		printf("[PROCESS %d] Forked child %d\n", getpid(), getpid());
 		printf("[MASTER QUEUE ] BEFORE QUEUE FUNCTION \n");
 		message_queue_id();
-		printf("[MASTER QUEUE AFTER CALL FUNCTION \n "); 
+		printf("[MASTER] QUEUE AFTER CALL FUNCTION \n "); 
         execve(NODE_NAME,nodeArgv,NULL);
 		break;
 
