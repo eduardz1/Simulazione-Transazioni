@@ -122,7 +122,7 @@ int message_queue_id()
 	/*key_t pidGot = getpid();*/
 	key_t pidGot = M_QUEUE_KEY;
 	int queue;
-	 queue =msgget(pidGot, IPC_CREAT | 0666);
+	 queue =msgget(M_QUEUE_KEY, IPC_CREAT | 0666);
 	 if (queue <= -1 )
 	 {
 		fprintf(stderr,"[MASTER : ] PROBLEM IN QUEUE \n");
@@ -254,7 +254,6 @@ int generate_node(int nCounter, char* nodeArgv[])
 		break;
 
 	default:
-    /*FIXME: nCounter cause seg fault*/
 		nodesPid[nCounter].nodPid = nPid;
 		nodesPid[nCounter].balance = 0;
 		nodesPid[nCounter].Node_state = available;
@@ -263,7 +262,7 @@ int generate_node(int nCounter, char* nodeArgv[])
 	return nPid;
 }
 
-/*TODO: Stop Simulation handler Ctrl-C */
+/*Ctrl-C handler*/
 void signal_handler(int signum)
 {
 	killpg(0,SIGINT);
@@ -363,7 +362,7 @@ int main(int argc,char *argv[])
 	switch (fork())
 	{
 	case -1:
-		fprintf(stderr, "[master] fork error\n");
+		fprintf(stderr, "[MASTER]] fork error\n");
 		exit(EXIT_FAILURE);
 		break;
 	case 0:

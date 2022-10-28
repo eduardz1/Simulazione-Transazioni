@@ -13,7 +13,7 @@ int main(){
 	key_t key = ftok("key.txt",'100'); 
 	//key_t key =KEY;
 	int id; 
-	id= msgget(key,0666|IPC_CREAT);
+	id= msgget(key,IPC_CREAT|0666);
 	printf("[RECIVE %d]WAITING MESSAGE\n",id); 
 	msgrcv(id,&rcv ,sizeof(rcv),1,0);
 	printf("[RECIVE: PID]:THIS IS THE MESSAGE :%s\n" ,rcv.mesText);

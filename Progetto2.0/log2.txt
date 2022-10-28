@@ -1,0 +1,140 @@
+/Master
+[MASTER] ---> mainMaster PID: 8837
+creating arguments
+before sems_init
+[MASTER] semUsersPid_id is 12
+[MASTER] semNodesPid_id is 13
+[MASTER] semLedger_id is 14
+after sems_init
+before sigaction
+[MASTER 1453 QUEUE PID IS 0  , STATUS --> CREATION SUCCESS] before for loop
+nCounter: 0
+in for loop
+generating node
+generating node
+[PROCESS 8838] Forked child 8838
+[MASTER QUEUE ] BEFORE QUEUE FUNCTION 
+[MASTER 1453 QUEUE PID IS 0  , STATUS --> CREATION SUCCESS] [MASTER] QUEUE AFTER CALL FUNCTION 
+nCounter: 1
+in for loop
+generating node
+generating node
+[PROCESS 8876] Forked child 8876
+[MASTER QUEUE ] BEFORE QUEUE FUNCTION 
+[MASTER 1453 QUEUE PID IS 0  , STATUS --> CREATION SUCCESS] [MASTER] QUEUE AFTER CALL FUNCTION 
+nCounter: 2
+in for loop
+generating node
+generating node
+[PROCESS 8905] Forked child 8905
+[MASTER QUEUE ] BEFORE QUEUE FUNCTION 
+[MASTER 1453 QUEUE PID IS 0  , STATUS --> CREATION SUCCESS] [MASTER] QUEUE AFTER CALL FUNCTION 
+nCounter: 3
+in for loop
+generating node
+generating node
+[PROCESS 8937] Forked child 8937
+[MASTER QUEUE ] BEFORE QUEUE FUNCTION 
+[MASTER 1453 QUEUE PID IS 0  , STATUS --> CREATION SUCCESS] [MASTER] QUEUE AFTER CALL FUNCTION 
+nCounter: 4
+in for loop
+generating node
+generating node
+[PROCESS 8971] Forked child 8971
+[MASTER QUEUE ] BEFORE QUEUE FUNCTION 
+[MASTER 1453 QUEUE PID IS 0  , STATUS --> CREATION SUCCESS] [MASTER] QUEUE AFTER CALL FUNCTION 
+nCounter: 5
+in for loop
+generating node
+generating node
+[PROCESS 9008] Forked child 9008
+[MASTER QUEUE ] BEFORE QUEUE FUNCTION 
+[MASTER 1453 QUEUE PID IS 0  , STATUS --> CREATION SUCCESS] [MASTER] QUEUE AFTER CALL FUNCTION 
+nCounter: 6
+in for loop
+generating node
+generating node
+[PROCESS 9038] Forked child 9038
+[MASTER QUEUE ] BEFORE QUEUE FUNCTION 
+[MASTER 1453 QUEUE PID IS 0  , STATUS --> CREATION SUCCESS] [MASTER] QUEUE AFTER CALL FUNCTION 
+nCounter: 7
+in for loop
+generating node
+generating node
+[PROCESS 9103] Forked child 9103
+[MASTER QUEUE ] BEFORE QUEUE FUNCTION 
+[MASTER 1453 QUEUE PID IS 0  , STATUS --> CREATION SUCCESS] [MASTER] QUEUE AFTER CALL FUNCTION 
+nCounter: 8
+in for loop
+generating node
+generating node
+[PROCESS 9182] Forked child 9182
+[MASTER QUEUE ] BEFORE QUEUE FUNCTION 
+[MASTER 1453 QUEUE PID IS 0  , STATUS --> CREATION SUCCESS] [MASTER] QUEUE AFTER CALL FUNCTION 
+nCounter: 9
+in for loop
+generating node
+generating node
+[PROCESS 9288] Forked child 9288
+[MASTER QUEUE ] BEFORE QUEUE FUNCTION 
+[MASTER 1453 QUEUE PID IS 0  , STATUS --> CREATION SUCCESS] [MASTER] QUEUE AFTER CALL FUNCTION 
+nCounter: 10
+in for loop
+generating node
+generating node
+[PROCESS 9382] Forked child 9382
+[MASTER QUEUE ] BEFORE QUEUE FUNCTION 
+[MASTER 1453 QUEUE PID IS 0  , STATUS --> CREATION SUCCESS] [MASTER] QUEUE AFTER CALL FUNCTION 
+[PROCESS 9421] Forked child 9421
+[PROCESS 9495] Forked child 9495
+[PROCESS 9556] Forked child 9556
+[PROCESS 9620] Forked child 9620
+[PROCESS 9666] Forked child 9666
+[PROCESS 9771] Forked child 9771
+[PROCESS 9845] Forked child 9845
+[PROCESS 9921] Forked child 9921
+[PROCESS 10000] Forked child 10000
+[PROCESS 10087] Forked child 10087
+[PROCESS 10175] Forked child 10175
+[PROCESS 10264] Forked child 10264
+[PROCESS 10355] Forked child 10355
+[PROCESS 10449] Forked child 10449
+[PROCESS 10546] Forked child 10546
+[PROCESS 10615] Forked child 10615
+[PROCESS 10755] Forked child 10755
+[PROCESS 10854] Forked child 10854
+[PROCESS 10947] Forked child 10947
+[PROCESS 11101] Forked child 11101
+[PROCESS 11221] Forked child 11221
+[PROCESS 11336] Forked child 11336
+[PROCESS 11467] Forked child 11467
+[PROCESS 11557] Forked child 11557
+[PROCESS 11683] Forked child 11683
+[PROCESS 11833] Forked child 11833
+[PROCESS 11947] Forked child 11947
+[PROCESS 12105] Forked child 12105
+[PROCESS 12248] Forked child 12248
+[PROCESS 12399] Forked child 12399
+[PROCESS 12515] Forked child 12515
+[PROCESS 12695] Forked child 12695
+[PROCESS 12813] Forked child 12813
+[PROCESS 13006] Forked child 13006
+[PROCESS 13144] Forked child 13144
+[PROCESS 13323] Forked child 13323
+[PROCESS 13474] Forked child 13474
+[PROCESS 13619] Forked child 13619
+[PROCESS 13801] Forked child 13801
+[PROCESS 13958] Forked child 13958
+[PROCESS 14155] Forked child 14155
+[PROCESS 14370] Forked child 14370
+[PROCESS 14550] Forked child 14550
+[PROCESS 14753] Forked child 14753
+[PROCESS 14906] Forked child 14906
+[PROCESS 15136] Forked child 15136
+[PROCESS 15291] Forked child 15291
+[PROCESS 15485] Forked child 15485
+[PROCESS 15684] Forked child 15684
+[PROCESS 15885] Forked child 15885
+[PROCESS 16160] Forked child 16160
+^CParent: signal recieved 2
+User pressed CTRL-C
