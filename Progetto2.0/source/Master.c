@@ -162,7 +162,6 @@ void Sh_MemMaster(key_t key, size_t size, int shmflg)
 	/*ShdMem Define Area*/        /* Raddoppio l'area per evitare saturazioni*/
 	shm = shmat(ShInit, NULL, 0); /*Attach ShMem;*/
 	shmdet = shmdt(ShInit);       /*Detach ShMem*/
-	system("./Users");
 }
 
 void Sh_UserPID(key_t key, size_t size, int shmflg)
@@ -214,7 +213,7 @@ void generate_user(int uCounter, char* userArgv[])
 	case 0:
 		printf("[PROCESS %d] Forked child %d\n", getpid(), getpid());
 		message_queue_id();
-    	execve(USER_NAME,userArgv,NULL); 
+    	execv(USER_NAME,&userArgv); 
 		break;
 	default:
 		usersPid[uCounter].usPid = uPid;
@@ -250,7 +249,7 @@ int generate_node(int nCounter, char* nodeArgv[])
 		printf("[MASTER QUEUE ] BEFORE QUEUE FUNCTION \n");
 		message_queue_id();
 		printf("[MASTER] QUEUE AFTER CALL FUNCTION \n "); 
-        execve(NODE_NAME,nodeArgv,NULL);
+        execv((char*)NODE_NAME,nodeArgv);
 		break;
 
 	default:

@@ -7,6 +7,7 @@ Message message;
 Message *newTransaction;
 Message *Trans_ptr;
 Message fetchMex;
+transaction fetch_Mex; 
 pid_t *friendList;
 Block_ *ledger;
 #define BUFF_MAX 10
@@ -26,7 +27,7 @@ key_t MSG_Key;
 int friendList_size;
 int sem_id_ledger;
 int semNodesPIDs_ID;
-
+/*
 void take_transaction()
 {
 	unsigned int friendCycle = 20;
@@ -52,8 +53,26 @@ void take_transaction()
 	}
 	else
 	{
-		/* Random friends da implemmentare funzione */
+		/* Random friends da implemmentare funzione 
 		friendCycle = 0;
+	}
+}
+*/
+
+
+void take_transaction_no_friend(){ 
+
+	fetchMex.m_type = M_QUEUE_KEY; 
+	Msg_ID=msgget(M_QUEUE_KEY, 0666 | IPC_CREAT); /* Istanzio una collegamento con la message queue degli user per prelevare i parametri da eleborare ss*/
+	if(transPool.size < SO_TP_SIZE )
+	{ 
+		if (receive_message(Msg_ID,(void*)&fetch_Mex,sizeof(fetch_Mex),M_QUEUE_KEY,0))
+		{ 	 
+			printf("[DEBUG NODE : I HAVE RECEVIVE THIS BALL SHIT\n %d\n,%d\n,%d\n ,%d\n", queuID, fetch_Mex.Money, fetch_Mex.Receiver,Msg_ID );
+			printf("[DEBUG NODES : BEFORE ADD TO POOL INSIEDE RECEIVE\n");
+			add_to_pool(&transPool,&fetchMex); 
+		}
+		
 	}
 }
 void Block(transaction *blockT, Block_ *newBlock)
@@ -94,19 +113,20 @@ void transListTo_block(transaction *Noreward)
 		transPool.size--;
 	}
 }
-
+/**
 void fill_friends(pid_t *friendList)
 {
 	unsigned int i;
 	friend_msg friendMex;
 
-	bzero(&friendMex, sizeof(friendMex)); /* azzero i byte in memoria */
+	bzero(&friendMex, sizeof(friendMex)); /* azzero i byte in memoria 
 	for (i = 0; i < SO_FRIENDS_NUM; i++)
 	{
 		receive_message(Msg_ID, &friendMex, sizeof(friend_msg), friendMex.mtype, 0);
 		friendList[i] = friendMex.friend;
 	}
 }
+*/
 
 void confirm_state_block(Block_ *toConfirm)
 {
@@ -322,16 +342,16 @@ int main(int argc, char *argv[])
 	ipc_Attach_argv(argv);
 	srand(getpid());
 	sig_handler_init(sa);
-	Msg_ID=msgget(M_QUEUE_KEY, 0600 | IPC_CREAT);
-
-	friendList = malloc(SO_FRIENDS_NUM * sizeof(pid_t));
+	
+/*	friendList = malloc(SO_FRIENDS_NUM * sizeof(pid_t));
 	friendList_size = SO_FRIENDS_NUM;
 	fill_friends(friendList);
+	*/ 
 
 	transaction_pool_init(&transPool);
 	while (1)
 	{
-		take_transaction();
+		take_transaction_no_friend();
 		resource_set(semNodesPIDs_ID, 1);
 		NodeID[get_pid_node_index()].tpsize = transPool.size;
 		resource_release(semNodesPIDs_ID, 1);

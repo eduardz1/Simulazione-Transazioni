@@ -30,6 +30,7 @@ typedef struct tp_pool
     unsigned int size;
 } pool;
 
+void take_transaction_no_friend();
 void transaction_pool_init(pool *transPool);
 int add_to_pool(pool *transPool, Message *message);
 int remove_from_pool(pool *transPool, Message *message);
