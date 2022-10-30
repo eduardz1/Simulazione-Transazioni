@@ -75,7 +75,7 @@ void sems_init()
 	semUsersPid_Id = semget(SEM_USERS_PIDS_KEY, 1, 0600 | IPC_CREAT | IPC_EXCL);
 	semNodesPid_Id = semget(SEM_NODES_PIDS_KEY, 1, 0600 | IPC_CREAT | IPC_EXCL);
 	semLedger_Id = semget(SEM_LEDGER_KEY, 1, 0600 | IPC_CREAT | IPC_EXCL);
-
+	printf("[MASTER] {sems_init} semUsersPid_Id: %d\n", semUsersPid_Id);
 	switch (errno)
 	{
 	case EEXIST:
@@ -123,6 +123,7 @@ int message_queue_id()
 	key_t pidGot = M_QUEUE_KEY;
 	int queue;
 	 queue =msgget(M_QUEUE_KEY, IPC_CREAT | 0666);
+	 printf("[QUEUE ID] is %d\n", queue);
 	 if (queue <= -1 )
 	 {
 		fprintf(stderr,"[MASTER : ] PROBLEM IN QUEUE \n");
@@ -211,8 +212,9 @@ void generate_user(int uCounter, char* userArgv[])
 		printf("Error in fork for user\n");
 		break;
 	case 0:
-		printf("[PROCESS %d] Forked child %d\n", getpid(), getpid());
+		printf("[PROCESS %d] Forked child (generate_user)) %d\n", getpid(), getpid());
 		message_queue_id();
+		printf("[PROCESS %d] Executing user %d\n", getpid(), getpid());
     	execv(USER_NAME,&userArgv); 
 		break;
 	default:
@@ -229,7 +231,6 @@ int generate_node(int nCounter, char* nodeArgv[])
 	static unsigned int buff = 0;
 	pid_t nPid = fork();
 
-	printf("generating node\n");
 	if (buff == 0)
 		buff = SO_NODES_NUM;
 
@@ -238,6 +239,7 @@ int generate_node(int nCounter, char* nodeArgv[])
 	else if (nCounter == -1)
 		nCounter = buff++;
 
+	printf("[MASTER] generating node\n");
 	switch (nPid)
 	{
 	case -1:
@@ -245,11 +247,12 @@ int generate_node(int nCounter, char* nodeArgv[])
 		break;
 
 	case 0:
-		printf("[PROCESS %d] Forked child %d\n", getpid(), getpid());
-		printf("[MASTER QUEUE ] BEFORE QUEUE FUNCTION \n");
+		printf("{MASTER} [NODE PROCESS %d] Forked child (generate_node) %d\n", getpid(), getpid());
+		printf("{MASTER} [QUEUE ] BEFORE QUEUE FUNCTION \n");
 		message_queue_id();
-		printf("[MASTER] QUEUE AFTER CALL FUNCTION \n "); 
-        execv((char*)NODE_NAME,nodeArgv);
+		printf("{MASTER} [QUEUE] AFTER CALL FUNCTION \n "); 
+		printf("{MASTER}[PROCESS %d] Executing node %d\n", getpid(), getpid());
+        execv(NODE_NAME,nodeArgv);
 		break;
 
 	default:
@@ -291,7 +294,7 @@ int main(int argc,char *argv[])
 	for (i = 0; i < 8; i++)
 		argvCreator[i] = malloc(3 * sizeof(int) + 1);
 
-	printf("[MASTER] ---> main");
+	printf("[MASTER] -> main %d\n", getpid());
 	tmpLedger = ledger;
 	
 	printf("Master PID: %d\n", getpid());
@@ -323,36 +326,36 @@ int main(int argc,char *argv[])
 	argvCreator[0]=NODE_NAME;
 	for (nCounter = 0; nCounter <= SO_NODES_NUM;nCounter++) /*TODO: seg fault here imo, need to solve, FIXME: just for debug purpose */
 	{
-	
+
+	/*	
 		if (nCounter > SO_NODES_NUM)
 		{
-			printf("[MASTER USER FUNCTION ] | GENRATION USERS COMPLETE  \n");
+			printf("[MASTER NODE FUNCTION ] | GENRATION NODES COMPLETE  \n");
 			break;
 		}
-		
-		int sigum;
-		printf("nCounter: %d\n", nCounter);
-		printf("in for loop\n"); /*TODO: remove,debug only*/
-		/*nodesPid[nCounter].balance = 0; /*TODO seg fault here
-		nodesPid[nCounter].Node_state = available; */
+		*/
+		printf("[MAIN MASTER] nCounter: %d\n", nCounter); /*FIXME: debug only*/
+		nodesPid[nCounter].balance = 0; /*TODO seg fault here */
+		nodesPid[nCounter].Node_state = available; 
 		generate_node(nCounter, argvCreator);
-		sleep(5);
-		/*signal_handler(sigum);*/
-		/*signal_handler(sigum);*/
+		/*sleep(5);*/
+			
 	}
 	argvCreator[0]=USER_NAME;
+
+
 	for (uCounter = 0; uCounter <= SO_USERS_NUM; uCounter++)
 	{	
 		int sigum;
-		/*usersPid[uCounter].Us_state = ALIVE;
-		usersPid[uCounter].balance = 0;*/
+		usersPid[uCounter].Us_state = ALIVE;
+		usersPid[uCounter].balance = 0;
 		generate_user(uCounter, argvCreator);
 		sleep(5);
-		if (uCounter > SO_USERS_NUM )
+		/*if (uCounter > SO_USERS_NUM )
 		{
-			printf("[MASTER NODE ] NODE GENERATION COMPLETE \n"); 
+			printf("[MASTER USER] USER GENERATION COMPLETE \n"); 
 			break;
-		}
+		}*/
 		
 	}
 

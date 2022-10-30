@@ -201,6 +201,8 @@ int send_transaction()
   buff.mesText[5] = */sprintf(send_tns.tmp, "%d", tns->Message_Transaction.uTrans.time);
 
   transaction sent = {0};
+
+  printf("[USERS] send_transaction function\n");
     if (send_message(queueID, (void*)&send_tns, sizeof(send_tns), IPC_NOWAIT) == 0)
     {
       printf("[USER %d] sent a transaction of %d UC to [USER %d] via queue %d\n", myPid, tns->Message_Transaction.uTrans.Money, tns->Message_Transaction.uTrans.Receiver, queueID);
@@ -399,7 +401,7 @@ int main(int argc, char *argv[])
   currBalance = SO_BUDGET_INIT;
   bzero(&saUSR1, sizeof(saUSR1));
   bzero(&saInt_u, sizeof(saInt_u));
-  printf("[USER]--->main\n");
+  printf("[USER]->main %d\n",getpid());
 
   myPid = getpid();
 

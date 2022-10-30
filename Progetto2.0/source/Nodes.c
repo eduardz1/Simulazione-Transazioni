@@ -8,7 +8,7 @@ Message *newTransaction;
 Message *Trans_ptr;
 Message fetchMex;
 transaction fetch_Mex; 
-pid_t *friendList;
+/*pid_t *friendList;*/
 Block_ *ledger;
 #define BUFF_MAX 10
 /*POINTER TO STRUCTURE  */
@@ -24,7 +24,7 @@ int toend;
 pid_t myPID;
 pid_t nPid;
 key_t MSG_Key;
-int friendList_size;
+/*int friendList_size;*/
 int sem_id_ledger;
 int semNodesPIDs_ID;
 /*
@@ -64,6 +64,7 @@ void take_transaction_no_friend(){
 
 	fetchMex.m_type = M_QUEUE_KEY; 
 	Msg_ID=msgget(M_QUEUE_KEY, 0666 | IPC_CREAT); /* Istanzio una collegamento con la message queue degli user per prelevare i parametri da eleborare ss*/
+	printf("[NODE] taking transaction");
 	if(transPool.size < SO_TP_SIZE )
 	{ 
 		if (receive_message(Msg_ID,(void*)&fetch_Mex,sizeof(fetch_Mex),M_QUEUE_KEY,0))
@@ -75,6 +76,8 @@ void take_transaction_no_friend(){
 		
 	}
 }
+
+
 void Block(transaction *blockT, Block_ *newBlock)
 {
 	int i;
@@ -175,6 +178,7 @@ int sum_reward(transaction *sumBlock)
 
 void ipc_Attach_argv(char **argv)
 {
+	printf("[NODE] IPC attach argv\n");
 	UserID = shmat(USERS_PID_ARGV, NULL, 0);
 	NodeID = shmat(NODES_PID_ARGV, NULL, 0);
 	Ledger = shmat(LEDGER_ARGV, NULL, 0);
@@ -229,6 +233,7 @@ void node_handler_interrupt(int sigum)
  * */
 void transaction_pool_init(pool *transPool)
 {
+	printf("inittialize transaction pool\n");
 	transPool->head = NULL;
 	transPool->tail = NULL;
 	transPool->size = 0;
@@ -331,15 +336,17 @@ int main(int argc, char *argv[])
 	bzero(&randSleeptime, sizeof(randSleeptime));
 	bzero(&sleeptimeremaning, sizeof(sleeptimeremaning));
 	bzero(&sa, sizeof(sa));
-
+	printf("[NODE] -> main %d\n",getpid());
 	myPID = getpid();
 
-	if (argc == 0)
+	
+	ipc_Attach_argv(argv);
+	if (argv == NULL)
 	{
-		fprintf(stderr,"NO ARGUMENT PASSED CHECK IT PLEASE \n ");
+		fprintf(stderr, "IPC ATTACH ERROR\n");
 		exit(EXIT_FAILURE);
 	}
-	ipc_Attach_argv(argv);
+	
 	srand(getpid());
 	sig_handler_init(sa);
 	
