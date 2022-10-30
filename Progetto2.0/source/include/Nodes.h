@@ -30,7 +30,7 @@ typedef struct tp_pool
     unsigned int size;
 } pool;
 
-void take_transaction_no_friend();
+/*void take_transaction_no_friend();*/
 void transaction_pool_init(pool *transPool);
 int add_to_pool(pool *transPool, Message *message);
 int remove_from_pool(pool *transPool, Message *message);
@@ -41,7 +41,7 @@ void Message_Rec();
 void take_transaction();
 void Block(transaction *blockT, Block_ *newBlock);
 void transListTo_block(transaction *Noreward);
-void fill_friends(pid_t *friendList);
+/*void fill_friends(pid_t *friendList);*/
 void confirm_state_block(Block_ *confirmed);
 void block_ledger(Block_ *newBlock);
 void ipc_attach_argv(char **argv);

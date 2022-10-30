@@ -8,7 +8,7 @@ Message *newTransaction;
 Message *Trans_ptr;
 Message fetchMex;
 transaction fetch_Mex; 
-pid_t *friendList;
+/*pid_t *friendList;*/
 Block_ *ledger;
 #define BUFF_MAX 10
 /*POINTER TO STRUCTURE  */
@@ -24,7 +24,7 @@ int toend;
 pid_t myPID;
 pid_t nPid;
 key_t MSG_Key;
-int friendList_size;
+/*int friendList_size;*/
 int sem_id_ledger;
 int semNodesPIDs_ID;
 /*
