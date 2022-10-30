@@ -191,19 +191,17 @@ void start_transaction(pid_t userPid, int money, int reward)
 
 int send_transaction()
 {
-  Message buff;
+  transaction send_tns;
   int i;
-  buff.mesText[0] = myPid;
+  /*buff.mesText[0] = myPid;
   buff.mesText[1] = tns->Message_Transaction.uTrans.Money;
   buff.mesText[2] = tns->Message_Transaction.uTrans.MoneyStatusTrans;
   buff.mesText[3] = tns->Message_Transaction.uTrans.Receiver;
   buff.mesText[4] = tns->Message_Transaction.uTrans.Sender;
-  buff.mesText[5] = sprintf(buff.mesText, "%d", tns->Message_Transaction.uTrans.time);
+  buff.mesText[5] = */sprintf(send_tns.tmp, "%d", tns->Message_Transaction.uTrans.time);
 
   transaction sent = {0};
-  for (i = 0; i < 5; i++)
-  {
-    if (send_message(queueID, (char *)&buff.mesText[i], sizeof(char) + sizeof(long), IPC_NOWAIT) == 0)
+    if (send_message(queueID, (void*)&send_tns, sizeof(send_tns), IPC_NOWAIT) == 0)
     {
       printf("[USER %d] sent a transaction of %d UC to [USER %d] via queue %d\n", myPid, tns->Message_Transaction.uTrans.Money, tns->Message_Transaction.uTrans.Receiver, queueID);
       currBalance -= (tns->Message_Transaction.uTrans.Money + tns->Message_Transaction.uTrans.Reward);
@@ -218,7 +216,6 @@ int send_transaction()
       }
       return 0;
     }
-  }
 
     return -1; /*error*/
 }

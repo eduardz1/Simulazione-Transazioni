@@ -114,6 +114,8 @@ typedef  struct msg_friend{
 
 typedef struct MoneyTransaction
 {
+    long t_type;
+    char tmp[10]; 
     struct timespec time;
     pid_t Sender; 
     pid_t Receiver; 
