@@ -11,6 +11,7 @@ node_t *nodesPid;
 Block_ ledger[SO_REGISTRY_SIZE];
 Block_* tmpLedger;
 Block_ *Ledger;
+transaction trans; 
 struct msqid_dist *MessageQ;
 int mQueue;
 
@@ -121,6 +122,7 @@ int message_queue_id()
 {
 	/*key_t pidGot = getpid();*/
 	/*key_t pidGot =ftok(".key.txt",'100');*/
+	trans.t_type = MS_TYPE; 
 	int queue = msgget(M_QUEUE_KEY, IPC_CREAT | 0666);
 	 printf("[QUEUE ID] is %d\n", queue);
 	 if (queue <= -1 )
@@ -128,9 +130,7 @@ int message_queue_id()
 		fprintf(stderr,"[MASTER : ] PROBLEM IN QUEUE \n");
 		return PROBLEM; 
 	 }
-	 
-	TRANSACTION_MTYPE;
-	
+
 	switch (errno)
 	{
 	case EIDRM:
@@ -354,11 +354,12 @@ int main(int argc,char *argv[])
 	}
 
 	alarm(SO_SIM_SEC);
-
+	/*
 	switch (fork())
 	{
 	case -1:
 		fprintf(stderr, "[MASTER]] fork error\n");
+		killpg( getpid(),SIGINT);
 		exit(EXIT_FAILURE);
 		break;
 	case 0:
@@ -366,16 +367,16 @@ int main(int argc,char *argv[])
 		unsigned int i;
 		unsigned int tmpPid;
 
-		/*friend_msg newNode;*/ 
+		/*friend_msg newNode;
 		Message transHop;
 
-		/*bzero(&newNode , sizeof(newNode));*/
+		/*bzero(&newNode , sizeof(newNode));
 		bzero(&transHop, sizeof(transHop));
 		signal(SIGINT, SIG_DFL);
 
 		while (1)
 		{
-			/*receive_message(mQueue, &newNode, sizeof(Message), TRANSACTION_MTYPE, 0);*/ 
+			/*receive_message(mQueue, &newNode, sizeof(Message), TRANSACTION_MTYPE, 0);
 			nodesPid[nCounter].Node_state = ALIVE;
 			nodesPid[nCounter].balance = 0;
 			tmpPid = generate_node(argvCreator,-1);
@@ -385,5 +386,7 @@ int main(int argc,char *argv[])
 
 		break;
 	}
+	*/
+  
 	return 0;
  }

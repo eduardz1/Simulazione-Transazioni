@@ -62,13 +62,13 @@ void take_transaction()
 
 void take_transaction_no_friend(){ 
 
-	/*fetchMex.m_type = M_QUEUE_KEY;*/
+	fetchMex.m_type = MS_TYPE;
 
 	Msg_ID=msgget(M_QUEUE_KEY, 0666 | IPC_CREAT); /* Istanzio una collegamento con la message queue degli user per prelevare i parametri da eleborare ss*/
 	printf("[NODE] taking transaction");
 	if(transPool.size < SO_TP_SIZE )
 	{ 
-		if (receive_message(Msg_ID,(void*)&fetch_Mex,sizeof(fetch_Mex),M_QUEUE_KEY,0))
+		if (receive_message(Msg_ID,(void*)&fetch_Mex,sizeof(fetch_Mex),fetch_Mex.t_type,0))
 		{ 	 
 			printf("[DEBUG NODE : I HAVE RECEVIVE THIS BALL SHIT\n %d\n,%d\n,%d\n ,%d\n", queuID, fetch_Mex.Money, fetch_Mex.Receiver,Msg_ID );
 			printf("[DEBUG NODES : BEFORE ADD TO POOL INSIEDE RECEIVE\n");

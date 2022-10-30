@@ -1,6 +1,5 @@
 #ifndef COMMON_H_INCLUDE
 #define COOMON_H_INCLUDE
-#endif
 #ifndef  _GNU_SOURCE
 #define  _GNU_SOURCE
 #endif
@@ -34,11 +33,11 @@
 #include <time.h>
 #include "Conf.h"
 
-#ifndef MS_QUEUE
-#endif 
+#define MS_QUEUE 
+#define MS_TYPE 20
 #define SO_REGISTRY_SIZE 100
 
-#define TRANSACTION_MTYPE 28410
+/*#define TRANSACTION_MTYPE 28410*/
 #define SO_BLOCK_SIZE 10
 #define NO_BLOCK -1 
 
@@ -196,3 +195,5 @@ struct msqid_dis{
     pid_t msg_lspid;
     pid_t msg_lrpid; 
 };
+
+#endif

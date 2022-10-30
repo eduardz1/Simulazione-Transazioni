@@ -4,6 +4,7 @@ Message *tns;
 node_t *sendingTransaction;
 user *usersPid;
 node_t *nodesPid;
+transaction t;
 int queueID;
 pid_t myPid;
 unsigned int currBalance;
@@ -180,7 +181,7 @@ void start_transaction(pid_t userPid, int money, int reward)
   clock_gettime(CLOCK_REALTIME, &exTime);
 
   printf("[USER start_trasaction %d] starting transaction with %d\n", getpid(), userPid);
-  tns->m_type = TRANSACTION_MTYPE;
+  tns->m_type = MS_TYPE;
   tns->Message_Transaction.uTrans.Sender = myPid;
   tns->Message_Transaction.uTrans.Receiver = userPid;
   tns->Message_Transaction.uTrans.Money = money;
@@ -416,7 +417,7 @@ int main(int argc, char *argv[])
 
   attach_ipc_objects(argv);
   signal_handler_user_init(&saUSR1, &saInt_u);
-  tns->m_type = TRANSACTION_MTYPE;
+  t.t_type = MS_TYPE ;
   currBalance = SO_BUDGET_INIT;
   retry = SO_RETRY;
   while (1)
