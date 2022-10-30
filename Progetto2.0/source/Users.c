@@ -179,6 +179,7 @@ void start_transaction(pid_t userPid, int money, int reward)
   struct timespec exTime = {0};
   clock_gettime(CLOCK_REALTIME, &exTime);
 
+  printf("[USER start_trasaction %d] starting transaction with %d\n", getpid(), userPid);
   tns->m_type = TRANSACTION_MTYPE;
   tns->Message_Transaction.uTrans.Sender = myPid;
   tns->Message_Transaction.uTrans.Receiver = userPid;
@@ -193,12 +194,14 @@ int send_transaction()
 {
   transaction send_tns;
   int i;
+  key_t key = ftok(".key.txt",'100');
   /*buff.mesText[0] = myPid;
   buff.mesText[1] = tns->Message_Transaction.uTrans.Money;
   buff.mesText[2] = tns->Message_Transaction.uTrans.MoneyStatusTrans;
   buff.mesText[3] = tns->Message_Transaction.uTrans.Receiver;
   buff.mesText[4] = tns->Message_Transaction.uTrans.Sender;
-  buff.mesText[5] = */sprintf(send_tns.tmp, "%d", tns->Message_Transaction.uTrans.time);
+  buff.mesText[5] = */
+  sprintf(send_tns.tmp, "%d", tns->Message_Transaction.uTrans.time);
 
   transaction sent = {0};
 
@@ -397,7 +400,6 @@ int main(int argc, char *argv[])
   pid_t usPid, ndPid;
   struct sigaction saUSR1;
   struct sigaction saInt_u;
-
   currBalance = SO_BUDGET_INIT;
   bzero(&saUSR1, sizeof(saUSR1));
   bzero(&saInt_u, sizeof(saInt_u));

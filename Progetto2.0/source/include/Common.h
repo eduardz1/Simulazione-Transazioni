@@ -50,7 +50,7 @@
 #define SEM_USERS_PIDS_KEY 420
 #define SEM_NODES_PIDS_KEY 421
 #define SEM_LEDGER_KEY 422
-#define M_QUEUE_KEY 0x5AD
+#define M_QUEUE_KEY ftok("../.key.txt",'100')
 
 /* -- ARGV LOCATION OF IPC OBJECTS -- */
 #define USERS_PID_ARGV (atoi(argv[1]))

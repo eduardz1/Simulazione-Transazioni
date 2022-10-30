@@ -120,9 +120,8 @@ void create_arguments(int* IPC_array, char** argv)
 int message_queue_id()
 {
 	/*key_t pidGot = getpid();*/
-	key_t pidGot = M_QUEUE_KEY;
-	int queue;
-	 queue =msgget(M_QUEUE_KEY, IPC_CREAT | 0666);
+	/*key_t pidGot =ftok(".key.txt",'100');*/
+	int queue = msgget(M_QUEUE_KEY, IPC_CREAT | 0666);
 	 printf("[QUEUE ID] is %d\n", queue);
 	 if (queue <= -1 )
 	 {
@@ -131,27 +130,24 @@ int message_queue_id()
 	 }
 	 
 	TRANSACTION_MTYPE;
-	/*
+	
 	switch (errno)
 	{
 	case EIDRM:
-		printf("[PROCESS %d] queue %d was removed\n", getpid(),pidGot);
+		printf("[PROCESS %d] queue %d was removed\n", getpid(),queue);
 		break;
 	case EINVAL:
-		printf("[PROCESS %d] queue %d invalid value for cmd or msqid\n", getpid(),pidGot);
-		printf("Message queue %d removed\n",pidGot);
+		printf("[PROCESS %d] queue %d invalid value for cmd or msqid\n", getpid(),queue);
+		printf("Message queue %d removed\n",queue);
 		break;
 	case EPERM:
-		printf("[PROCESS %d] queue %d the effective user ID of the calling process "
-					 "is not the creator or the owner\n",
-				getpid(),pidGot);
+		printf("[PROCESS %d] queue %d the effective user ID of the calling process ""is not the creator or the owner\n",getpid(),queue);
 				
 		break;
 		
 	}
-	*/
-printf("[MASTER %d QUEUE PID IS %d  , STATUS --> CREATION SUCCESS] ",pidGot,queue); 
-return pidGot; 
+	printf("[MASTER %d QUEUE ID IS %d  , STATUS --> CREATION SUCCESS] ",getpid(),queue); 
+	return queue; 
 }
 void Sh_MemMaster(key_t key, size_t size, int shmflg)
 {
@@ -326,7 +322,6 @@ int main(int argc,char *argv[])
 	argvCreator[0]=NODE_NAME;
 	for (nCounter = 0; nCounter <= SO_NODES_NUM;nCounter++) /*TODO: seg fault here imo, need to solve, FIXME: just for debug purpose */
 	{
-
 	/*	
 		if (nCounter > SO_NODES_NUM)
 		{
@@ -334,12 +329,11 @@ int main(int argc,char *argv[])
 			break;
 		}
 		*/
-		printf("[MAIN MASTER] nCounter: %d\n", nCounter); /*FIXME: debug only*/
+		printf("[MAIN MASTER] \x1b[31m nCounter: %d\x1b[0m\n", nCounter); /*FIXME: debug only*/
 		nodesPid[nCounter].balance = 0; /*TODO seg fault here */
 		nodesPid[nCounter].Node_state = available; 
 		generate_node(nCounter, argvCreator);
 		/*sleep(5);*/
-			
 	}
 	argvCreator[0]=USER_NAME;
 
