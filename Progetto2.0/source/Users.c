@@ -438,7 +438,7 @@ int main(int argc, char *argv[])
       /*queue_to_pid(ndPid);*/
       queueID = msgget(M_QUEUE_KEY, 0666 | IPC_CREAT);
 
-      start_transaction(usPid, amount, reward);
+      start_transaction(usPid, amount, SO_REWARD);
 
       if (send_transaction() == 0)
       {

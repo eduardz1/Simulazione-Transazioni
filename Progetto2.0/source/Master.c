@@ -329,7 +329,7 @@ int main(int argc,char *argv[])
 			break;
 		}
 		*/
-		printf("[MAIN MASTER] \x1b[31m nCounter: %d\x1b[0m\n", nCounter); /*FIXME: debug only*/
+		printf("[MAIN MASTER]"ANSI_COLOR_RED "nCounter: %d"ANSI_RESET_ALL"\n", nCounter); /*FIXME: debug only*/
 		nodesPid[nCounter].balance = 0; /*TODO seg fault here */
 		nodesPid[nCounter].Node_state = available; 
 		generate_node(nCounter, argvCreator);
@@ -341,10 +341,11 @@ int main(int argc,char *argv[])
 	for (uCounter = 0; uCounter <= SO_USERS_NUM; uCounter++)
 	{	
 		int sigum;
+		printf("[MAIN MASTER]"ANSI_COLOR_GREEN "uCounter: %d"  ANSI_RESET_ALL "\n",uCounter);
 		usersPid[uCounter].Us_state = ALIVE;
 		usersPid[uCounter].balance = 0;
 		generate_user(uCounter, argvCreator);
-		sleep(5);
+		/*sleep(5);*/
 		/*if (uCounter > SO_USERS_NUM )
 		{
 			printf("[MASTER USER] USER GENERATION COMPLETE \n"); 

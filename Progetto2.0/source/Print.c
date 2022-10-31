@@ -1,5 +1,4 @@
 #include "include/Print.h"
-
 node_t *node_print;
 user *user_print;
 pid_t myPID;

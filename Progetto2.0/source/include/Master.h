@@ -11,6 +11,7 @@
 #include <sys/sem.h>
 #include "Common.h"
 #include "../Util/Ms_Queue.h"
+
 pid_t nPid;
 
 void Sh_MemMaster( key_t key,size_t size,int shmflg); 

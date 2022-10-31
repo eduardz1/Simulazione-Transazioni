@@ -33,10 +33,17 @@
 #include <time.h>
 #include "Conf.h"
 
+
 #define MS_QUEUE 
 #define MS_TYPE 20
 #define SO_REGISTRY_SIZE 100
-
+/*COLORED MACRO ANSI  */
+#define ANSI_RESET_ALL          "\x1b[0m"
+#define ANSI_COLOR_RED          "\x1b[31m"
+#define ANSI_COLOR_GREEN        "\x1b[32m"
+#define ANSI_COLOR_YELLOW       "\x1b[33m"
+#define ANSI_COLOR_BLUE         "\x1b[34m"
+#define ANSI_COLOR_MAGENTA      "\x1b[35m"
 /*#define TRANSACTION_MTYPE 28410*/
 #define SO_BLOCK_SIZE 10
 #define NO_BLOCK -1 
