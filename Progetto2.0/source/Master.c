@@ -319,25 +319,46 @@ int main(int argc,char *argv[])
 	/*signal(SIGUSR1, signal_handler);*/
 	mQueue = message_queue_id();
 	printf("before for loop\n"); /*TODO: remove,debug only*/
+
+
 	argvCreator[0]=NODE_NAME;
+
 	for (nCounter = 0; nCounter <= SO_NODES_NUM;nCounter++) /*TODO: seg fault here imo, need to solve, FIXME: just for debug purpose */
 	{
-	/*	
-		if (nCounter > SO_NODES_NUM)
-		{
-			printf("[MASTER NODE FUNCTION ] | GENRATION NODES COMPLETE  \n");
-			break;
-		}
-		*/
-		printf("[MAIN MASTER]"ANSI_COLOR_RED "nCounter: %d"ANSI_RESET_ALL"\n", nCounter); /*FIXME: debug only*/
+
+		
+		printf("[MAIN MASTER]"ANSI_COLOR_RED "nCounter: %d" ANSI_RESET_ALL "\n", nCounter); /*FIXME: debug only*/
 		nodesPid[nCounter].balance = 0; /*TODO seg fault here */
 		nodesPid[nCounter].Node_state = available; 
 		generate_node(nCounter, argvCreator);
 		/*sleep(5);*/
+
+		if (nCounter > SO_NODES_NUM)
+		{
+			printf("[MASTER NODE FUNCTION ]" ANSI_COLOR_MAGENTA "| GENRATION NODES COMPLETE"ANSI_RESET_ALL  "\n");
+			break;
+		}
 	}
+
+
 	argvCreator[0]=USER_NAME;
+/* 
+
+PROBLEMA 
+
+--> Ho provato a runnare e ho notato che solo nCounter funziona , e se eseguiamo la porzione di codice
+di uCounter non funziona piu' nCounter --> possibili problemi 
+
+		*Funzione generate node and generate user
+		* Non esce dal ciclo for 
+		* dopo essere entrato nel ./Nodes non ritorna nel ./Naster 
+		* Bho
 
 
+*/
+
+
+	
 	for (uCounter = 0; uCounter <= SO_USERS_NUM; uCounter++)
 	{	
 		int sigum;
@@ -346,11 +367,11 @@ int main(int argc,char *argv[])
 		usersPid[uCounter].balance = 0;
 		generate_user(uCounter, argvCreator);
 		/*sleep(5);*/
-		/*if (uCounter > SO_USERS_NUM )
+		if (uCounter > SO_USERS_NUM )
 		{
 			printf("[MASTER USER] USER GENERATION COMPLETE \n"); 
 			break;
-		}*/
+		}
 		
 	}
 
