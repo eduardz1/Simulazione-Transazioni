@@ -6,12 +6,12 @@
 #define SEM_NUM 3
 #define IPC_NUM SHM_NUM + SEM_NUM
 /*-----------------*/
-user* usersPid;
+user *usersPid;
 node_t *nodesPid;
 Block_ ledger[SO_REGISTRY_SIZE];
-Block_* tmpLedger;
+Block_ *tmpLedger;
 Block_ *Ledger;
-transaction trans; 
+transaction trans;
 struct msqid_dist *MessageQ;
 int mQueue;
 
@@ -20,55 +20,54 @@ int semNodesPid_Id;
 int semLedger_Id;
 void shared_memory_objects_init(int *shmArray)
 {
-    /* shared memory segments IDs */
-    int usersPID_ID;
-    int nodesPID_ID;
-    int ledger_ID;
-    int par_ID;
+	/* shared memory segments IDs */
+	int usersPID_ID;
+	int nodesPID_ID;
+	int ledger_ID;
+	int par_ID;
 
-    /* parameters init and read from conf file 
-    par_ID = shmget(SHM_PARAMETERS, sizeof(par), 0600 | IPC_CREAT | IPC_EXCL);
-    par = (struct parameters *)shmat(par_ID, NULL, 0);
-    if (parse_parameters(par) == CONF_ERROR)
-    {
-        TRACE(("*** Error reading conf file, defaulting to conf#1 ***\n"))
-    }
-    else
-    {
-        TRACE(("[MASTER] conf file read successful\n"))
-    }
-	*/
+	/* parameters init and read from conf file
+	par_ID = shmget(SHM_PARAMETERS, sizeof(par), 0600 | IPC_CREAT | IPC_EXCL);
+	par = (struct parameters *)shmat(par_ID, NULL, 0);
+	if (parse_parameters(par) == CONF_ERROR)
+	{
+			TRACE(("*** Error reading conf file, defaulting to conf#1 ***\n"))
+	}
+	else
+	{
+			TRACE(("[MASTER] conf file read successful\n"))
+	}
+*/
 
-    /* make node array twice as big to account for extra nodes when transactions
-     * have hopped out avoiding reallocating a shared memory resource
-     */
-    nodesPID_ID = shmget(SHM_NODES_ARRAY, (SO_NODES_NUM) * sizeof(node_t) * 2, 0600 | IPC_CREAT | IPC_EXCL);
-    usersPID_ID = shmget(SHM_USERS_ARRAY, (SO_USERS_NUM) * sizeof(user), 0600 | IPC_CREAT | IPC_EXCL);
-    ledger_ID = shmget(SHM_LEDGER, sizeof(ledger), 0600 | IPC_CREAT | IPC_EXCL);
-    if (errno == EEXIST)
-    {
-        exit(1); /* we could remove them at the start just in case, but I want the error not to be hidden */
-    }
+	/* make node array twice as big to account for extra nodes when transactions
+	 * have hopped out avoiding reallocating a shared memory resource
+	 */
+	nodesPID_ID = shmget(SHM_NODES_ARRAY, (SO_NODES_NUM) * sizeof(node_t) * 2, 0600 | IPC_CREAT | IPC_EXCL);
+	usersPID_ID = shmget(SHM_USERS_ARRAY, (SO_USERS_NUM) * sizeof(user), 0600 | IPC_CREAT | IPC_EXCL);
+	ledger_ID = shmget(SHM_LEDGER, sizeof(ledger), 0600 | IPC_CREAT | IPC_EXCL);
+	if (errno == EEXIST)
+	{
+		exit(1); /* we could remove them at the start just in case, but I want the error not to be hidden */
+	}
 
-    Ledger = (Block_*)shmat(ledger_ID, NULL, 0);
-    usersPid = (user *)shmat(usersPID_ID, NULL, 0);
-    nodesPid = (node_t *)shmat(nodesPID_ID, NULL, 0);
+	Ledger = (Block_ *)shmat(ledger_ID, NULL, 0);
+	usersPid = (user *)shmat(usersPID_ID, NULL, 0);
+	nodesPid = (node_t *)shmat(nodesPID_ID, NULL, 0);
 
-    /* mark for deallocation so that they are automatically
-     * removed once master dies
-     * this will set the key to 0x00000000
-     */
-    shmctl(usersPID_ID, IPC_RMID, NULL);
-    shmctl(nodesPID_ID, IPC_RMID, NULL);
-    shmctl(par_ID, IPC_RMID, NULL);
-    shmctl(ledger_ID, IPC_RMID, NULL);
+	/* mark for deallocation so that they are automatically
+	 * removed once master dies
+	 * this will set the key to 0x00000000
+	 */
+	shmctl(usersPID_ID, IPC_RMID, NULL);
+	shmctl(nodesPID_ID, IPC_RMID, NULL);
+	shmctl(par_ID, IPC_RMID, NULL);
+	shmctl(ledger_ID, IPC_RMID, NULL);
 
-    shmArray[0] = usersPID_ID;
-    shmArray[1] = nodesPID_ID;
-    shmArray[2] = par_ID;
-    shmArray[3] = ledger_ID;
+	shmArray[0] = usersPID_ID;
+	shmArray[1] = nodesPID_ID;
+	shmArray[2] = par_ID;
+	shmArray[3] = ledger_ID;
 }
-
 
 void sems_init()
 {
@@ -80,10 +79,10 @@ void sems_init()
 	switch (errno)
 	{
 	case EEXIST:
-		printf(ANSI_COLOR_RED"[MASTER] one or more sems couldn't be created\n"ANSI_RESET_ALL);
+		printf(ANSI_COLOR_RED "[MASTER] one or more sems couldn't be created\n" ANSI_RESET_ALL);
 		exit(1);
 	case ENOSPC:
-		printf(ANSI_COLOR_RED"[MASTER] too many sems in the system\n"ANSI_RESET_ALL);
+		printf(ANSI_COLOR_RED "[MASTER] too many sems in the system\n" ANSI_RESET_ALL);
 		exit(1);
 
 	default:
@@ -93,14 +92,14 @@ void sems_init()
 		break;
 	}
 }
-void create_arguments(int* IPC_array, char** argv)
+void create_arguments(int *IPC_array, char **argv)
 {
-	char uPid_array[13] = { 0 };
-	char nPid_array[13] = { 0 };
-	char ledger[13] = { 0 };
-	char semUserPid_Id[13] = { 0 };
-	char semNodePid_Id[13] = { 0 };
-	char semLedger_Id[13] = { 0 };
+	char uPid_array[13] = {0};
+	char nPid_array[13] = {0};
+	char ledger[13] = {0};
+	char semUserPid_Id[13] = {0};
+	char semNodePid_Id[13] = {0};
+	char semLedger_Id[13] = {0};
 	printf("creating arguments\n");
 	snprintf(uPid_array, 13, "%d", IPC_array[0]);
 	snprintf(nPid_array, 13, "%d", IPC_array[1]);
@@ -122,51 +121,52 @@ int message_queue_id()
 {
 	/*key_t pidGot = getpid();*/
 	/*key_t pidGot =ftok(".key.txt",'100');*/
-	trans.t_type = MS_TYPE; 
+	trans.t_type = MS_TYPE;
 	int queue = msgget(M_QUEUE_KEY, IPC_CREAT | 0666);
-	 printf("[QUEUE ID] is %d\n", queue);
-	 if (queue <= -1 )
-	 {
-		fprintf(stderr,"[MASTER : ] PROBLEM IN QUEUE \n");
-		return PROBLEM; 
-	 }
+	printf("[QUEUE ID] is %d\n", queue);
+	if (queue <= -1)
+	{
+		fprintf(stderr, "[MASTER : ] PROBLEM IN QUEUE \n");
+		return PROBLEM;
+	}
 
 	switch (errno)
 	{
 	case EIDRM:
-		printf(ANSI_COLOR_RED"[PROCESS %d] queue %d was removed\n"ANSI_RESET_ALL, getpid(),queue);
+		printf(ANSI_COLOR_RED "[PROCESS %d] queue %d was removed\n" ANSI_RESET_ALL, getpid(), queue);
 		break;
 	case EINVAL:
-		printf(ANSI_COLOR_RED"[PROCESS %d] queue %d invalid value for cmd or msqid\n"ANSI_RESET_ALL, getpid(),queue);
-		printf("Message queue %d removed\n",queue);
+		printf(ANSI_COLOR_RED "[PROCESS %d] queue %d invalid value for cmd or msqid\n" ANSI_RESET_ALL, getpid(), queue);
+		printf("Message queue %d removed\n", queue);
 		break;
 	case EPERM:
-		printf(ANSI_COLOR_RED"[PROCESS %d] queue %d the effective user ID of the calling process ""is not the creator or the owner\n"ANSI_RESET_ALL,getpid(),queue);
-				
+		printf(ANSI_COLOR_RED "[PROCESS %d] queue %d the effective user ID of the calling process "
+													"is not the creator or the owner\n" ANSI_RESET_ALL,
+					 getpid(), queue);
+
 		break;
-		
 	}
-	printf("[MASTER %d QUEUE ID IS %d  , STATUS --> CREATION SUCCESS] \n",getpid(),queue); 
-	return queue; 
+	printf("[MASTER %d QUEUE ID IS %d  , STATUS --> CREATION SUCCESS] \n", getpid(), queue);
+	return queue;
 }
 void Sh_MemMaster(key_t key, size_t size, int shmflg)
 {
 	/*int m_id; TODO remove this if useless at th end*/
 	int ShInit;
-	char* shm;
+	char *shm;
 	int *shmdet;
 	ShInit = shmget(key, sizeof(SO_REGISTRY_SIZE) * 2, IPC_CREAT | 0666);
-	/*ShdMem Define Area*/        /* Raddoppio l'area per evitare saturazioni*/
+	/*ShdMem Define Area*/				/* Raddoppio l'area per evitare saturazioni*/
 	shm = shmat(ShInit, NULL, 0); /*Attach ShMem;*/
-	shmdet = shmdt(ShInit);       /*Detach ShMem*/
+	shmdet = shmdt(ShInit);				/*Detach ShMem*/
 }
 
 void Sh_UserPID(key_t key, size_t size, int shmflg)
 {
 	int Sh_UserPIDDet;
-	int* Sh_UserPIDInit;
+	int *Sh_UserPIDInit;
 	/*int id; TODO delete this if is actually useless*/
-	char* Sh_UserPIDAttach;
+	char *Sh_UserPIDAttach;
 	key = getpid();
 	Sh_UserPIDInit = shmget(key, sizeof(SO_USERS_NUM), IPC_CREAT | 0666);
 	Sh_UserPIDAttach = shmat(Sh_UserPID, NULL, 0);
@@ -176,53 +176,51 @@ void Sh_UserPID(key_t key, size_t size, int shmflg)
 void Shared_Memory(key_t key, size_t size, int shmflg)
 {
 	/*int m_id;*/
-	int* shm;
+	int *shm;
 	int ShInit;
-	ShInit = shmget(key, sizeof(SO_REGISTRY_SIZE) * 2,IPC_CREAT | 0666); /*ShdMem Define Area*/
-	shm = shmat(ShInit, NULL, 0);      /*Attach ShMem;*/
-	int shmdt(const void* shmaddr);    /*Detach ShMem*/
+	ShInit = shmget(key, sizeof(SO_REGISTRY_SIZE) * 2, IPC_CREAT | 0666); /*ShdMem Define Area*/
+	shm = shmat(ShInit, NULL, 0);																					/*Attach ShMem;*/
+	int shmdt(const void *shmaddr);																				/*Detach ShMem*/
 }
 
 void make_ipc_array(int *IPC_array)
 {
-    int shmIDs[SHM_NUM]; /* array containing every shared memory ID */
-    int semIDs[SEM_NUM];
+	int shmIDs[SHM_NUM]; /* array containing every shared memory ID */
+	int semIDs[SEM_NUM];
 
-    shared_memory_objects_init(shmIDs);
-    semIDs[0] = semUsersPid_Id;
-    semIDs[1] = semLedger_Id;
-    semIDs[2] = semNodesPid_Id;
-    /* semaphores_init(semIDs); */
-    memcpy(IPC_array, shmIDs, SHM_NUM * sizeof(int));
-    memcpy(IPC_array + SHM_NUM, semIDs, SEM_NUM * sizeof(int));
-    
+	shared_memory_objects_init(shmIDs);
+	semIDs[0] = semUsersPid_Id;
+	semIDs[1] = semLedger_Id;
+	semIDs[2] = semNodesPid_Id;
+	/* semaphores_init(semIDs); */
+	memcpy(IPC_array, shmIDs, SHM_NUM * sizeof(int));
+	memcpy(IPC_array + SHM_NUM, semIDs, SEM_NUM * sizeof(int));
 }
 /* generate the user with fork and lauch ./users with execve*/
-void generate_user(int uCounter, char* userArgv[])
+void generate_user(int uCounter, char *userArgv[])
 {
 	pid_t uPid = fork();
-
 	switch (uPid)
 	{
 	case -1:
-		printf(ANSI_COLOR_RED"Error in fork for user\n"ANSI_RESET_ALL);
+		printf(ANSI_COLOR_RED "Error %d in fork for user\n" ANSI_RESET_ALL, errno);
+		killpg(getpgrp(), SIGTERM);/*FIXME debug only purpose*/
 		break;
 	case 0:
 		printf("[PROCESS %d] Forked child (generate_user)) %d\n", getpid(), getpid());
 		message_queue_id();
 		printf("[PROCESS %d] Executing user %d\n", getpid(), getpid());
-    	execve(USER_NAME,&userArgv,NULL); 
+		execve(USER_NAME, &userArgv, NULL);
 		break;
 	default:
 		usersPid[uCounter].usPid = uPid;
 		usersPid[uCounter].Us_state = ALIVE;
 		usersPid[uCounter].balance = 0;
-
 		return;
 	}
 }
 
-int generate_node(int nCounter, char* nodeArgv[])
+int generate_node(int nCounter, char *nodeArgv[])
 {
 	static unsigned int buff = 0;
 	pid_t nPid = fork();
@@ -239,16 +237,17 @@ int generate_node(int nCounter, char* nodeArgv[])
 	switch (nPid)
 	{
 	case -1:
-		printf("ERROR FORKING NODE\n");
+		printf("ERROR %d FORKING NODE\n",errno);
+		killpg(getpgrp(), SIGTERM);/*FIXME debug only purpose*/
 		break;
 
 	case 0:
 		printf("{MASTER} [NODE PROCESS %d] Forked child (generate_node) %d\n", getpid(), getpid());
 		printf("{MASTER} [QUEUE ] BEFORE QUEUE FUNCTION \n");
 		message_queue_id();
-		printf("{MASTER} [QUEUE] AFTER CALL FUNCTION \n "); 
+		printf("{MASTER} [QUEUE] AFTER CALL FUNCTION \n ");
 		printf("{MASTER}[PROCESS %d] Executing node %d\n", getpid(), getpid());
-        execve(NODE_NAME,nodeArgv,NULL);
+		execve(NODE_NAME, nodeArgv, NULL);
 		break;
 
 	default:
@@ -263,45 +262,43 @@ int generate_node(int nCounter, char* nodeArgv[])
 /*Ctrl-C handler*/
 void signal_handler(int signum)
 {
-	killpg(0,SIGINT);
+	killpg(0, SIGINT);
 
-
-	printf("Parent: signal recieved %d\n", signum);
+	/*printf("Parent: signal recieved %d\n", signum);*/
 	semctl(semUsersPid_Id, 1, IPC_RMID);
 	semctl(semNodesPid_Id, 1, IPC_RMID);
 	semctl(semLedger_Id, 1, IPC_RMID);
-	/*  msgctl(mQueue, IPC_RMID, MessageQ); */
+	msgctl(mQueue, IPC_RMID, MessageQ);
 
 	printf("User pressed CTRL-C\n");
 	exit(0);
 }
 
-int main(int argc,char *argv[])
+int main(int argc, char *argv[])
 {
 	unsigned int i;
 	unsigned int uCounter;
 	unsigned int nCounter;
 	int ipcObj[IPC_NUM];
-	char* argvCreator[8];
+	char *argvCreator[8];
 	struct sigaction sa;
 	struct sembuf sops;
 
-    
 	for (i = 0; i < 8; i++)
 		argvCreator[i] = malloc(3 * sizeof(int) + 1);
 
 	printf("[MASTER] -> main %d\n", getpid());
 	tmpLedger = ledger;
-	
+
 	printf("Master PID: %d\n", getpid());
 	make_ipc_array(ipcObj);
 
-	create_arguments(ipcObj,argvCreator);
-    if(argc < 1)
-    {
-        printf(ANSI_COLOR_RED"Missing arguments, maybe you need to do <source setting.conf>\n"ANSI_RESET_ALL);
-        exit(1);
-    }
+	create_arguments(ipcObj, argvCreator);
+	if (argc < 1)
+	{
+		printf(ANSI_COLOR_RED "Missing arguments, maybe you need to do <source setting.conf>\n" ANSI_RESET_ALL);
+		exit(1);
+	}
 	printf("before sems_init\n"); /*TODO: remove,debug only*/
 	sems_init();
 	printf("after sems_init\n"); /*TODO: remove,debug only*/
@@ -320,59 +317,56 @@ int main(int argc,char *argv[])
 	mQueue = message_queue_id();
 	printf("before for loop\n"); /*TODO: remove,debug only*/
 
+	argvCreator[0] = NODE_NAME;
 
-	argvCreator[0]=NODE_NAME;
-
-	for (nCounter = 0; nCounter <= SO_NODES_NUM;nCounter++) /*TODO: seg fault here imo, need to solve, FIXME: just for debug purpose */
+	for (nCounter = 0; nCounter <= SO_NODES_NUM; nCounter++) /*TODO: seg fault here imo, need to solve, FIXME: just for debug purpose */
 	{
 
-		
-		printf("[MAIN MASTER]"ANSI_COLOR_RED "nCounter: %d" ANSI_RESET_ALL "\n", nCounter); /*FIXME: debug only*/
-		nodesPid[nCounter].balance = 0; /*TODO seg fault here */
-		nodesPid[nCounter].Node_state = available; 
+		nodesPid[nCounter].balance = 0;																											 /*TODO seg fault here */
+		nodesPid[nCounter].Node_state = available;
+		printf("[MAIN MASTER]" ANSI_COLOR_RED "nCounter: %d" ANSI_RESET_ALL "\n"); /*FIXME debug purpose*/
+		printf("[MAIN MASTER] nodesPid[nCounter].balance: %lu\n", nodesPid[nCounter].balance);/*FIXME debug purpose*/
+		printf("[MAIN MASTER] nodesPid[nCounter].balance: %d\n", nodesPid[nCounter].Node_state);/*FIXME debug purpose*/
 		generate_node(nCounter, &argvCreator);
 		/*sleep(5);*/
-
-		if (nCounter > SO_NODES_NUM)
+		/*if (nCounter > SO_NODES_NUM)
 		{
-			printf("[MASTER NODE FUNCTION ]" ANSI_COLOR_MAGENTA "| GENRATION NODES COMPLETE"ANSI_RESET_ALL  "\n");
+			printf("[MASTER NODE FUNCTION ]" ANSI_COLOR_MAGENTA "| GENRATION NODES COMPLETE" ANSI_RESET_ALL "\n");
 			break;
-		}
+		}*/
 	}
 
+	argvCreator[0] = USER_NAME;
+	/*
 
-	argvCreator[0]=USER_NAME;
-/* 
+	TOFIX
 
-TOFIX
+	--> Ho provato a runnare e ho notato che solo nCounter funziona , e se eseguiamo la porzione di codice
+	di uCounter non funziona piu' nCounter --> possibili problemi
 
---> Ho provato a runnare e ho notato che solo nCounter funziona , e se eseguiamo la porzione di codice
-di uCounter non funziona piu' nCounter --> possibili problemi 
-
-		*Funzione generate node and generate user
-		* Non esce dal ciclo for 
-		* dopo essere entrato nel ./Nodes non ritorna nel ./Naster 
-		* Bho
-
-
-*/
+			*Funzione generate node and generate user
+			* Non esce dal ciclo for
+			* dopo essere entrato nel ./Nodes non ritorna nel ./Naster
+			* Bho
 
 
-	
+	*/
+
 	for (uCounter = 0; uCounter <= SO_USERS_NUM; uCounter++)
-	{	
+	{
 		int sigum;
-		printf("[MAIN MASTER]"ANSI_COLOR_GREEN "uCounter: %d"  ANSI_RESET_ALL "\n",uCounter);
 		usersPid[uCounter].Us_state = ALIVE;
 		usersPid[uCounter].balance = 0;
+		printf("[MAIN MASTER]" ANSI_COLOR_GREEN "uCounter: %d" ANSI_RESET_ALL "\n", uCounter);/*FIXME debug purpose*/  
+		printf("[MAIN MASTER]" ANSI_COLOR_GREEN "userPid state: %d" ANSI_RESET_ALL "\n", usersPid[uCounter].Us_state);/*FIXME debug purpose*/
+		printf("[MAIN MASTER]" ANSI_COLOR_GREEN "userPid balance: %u" ANSI_RESET_ALL "\n",usersPid[uCounter].balance);/*FIXME debug purpose*/
 		generate_user(uCounter, &argvCreator);
 		/*sleep(5);*/
-		if (uCounter > SO_USERS_NUM )
+		/*if (uCounter > SO_USERS_NUM)
 		{
-			printf(ANSI_COLOR_RED"[MASTER USER] USER GENERATION COMPLETE \n" ANSI_RESET_ALL); 
+			printf(ANSI_COLOR_RED "[MASTER USER] USER GENERATION COMPLETE \n" ANSI_RESET_ALL);
 			break;
-		}
-		
+		} */
 	}
 
 	alarm(SO_SIM_SEC);
@@ -409,6 +403,6 @@ di uCounter non funziona piu' nCounter --> possibili problemi
 		break;
 	}
 	*/
-  
+
 	return 0;
- }
+}
