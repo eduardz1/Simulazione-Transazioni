@@ -395,7 +395,7 @@ void signal_handler_user_init(struct sigaction *saUSR1, struct sigaction *saINT)
   sigaction(SIGINT, saINT, NULL);
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv[])
 {
   unsigned int amount, reward, retry;
   pid_t usPid, ndPid;

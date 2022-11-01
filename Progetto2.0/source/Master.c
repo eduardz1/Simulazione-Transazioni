@@ -80,10 +80,10 @@ void sems_init()
 	switch (errno)
 	{
 	case EEXIST:
-		printf("[MASTER] one or more sems couldn't be created\n");
+		printf(ANSI_COLOR_RED"[MASTER] one or more sems couldn't be created\n"ANSI_RESET_ALL);
 		exit(1);
 	case ENOSPC:
-		printf("[MASTER] too many sems in the system");
+		printf(ANSI_COLOR_RED"[MASTER] too many sems in the system\n"ANSI_RESET_ALL);
 		exit(1);
 
 	default:
@@ -134,19 +134,19 @@ int message_queue_id()
 	switch (errno)
 	{
 	case EIDRM:
-		printf("[PROCESS %d] queue %d was removed\n", getpid(),queue);
+		printf(ANSI_COLOR_RED"[PROCESS %d] queue %d was removed\n"ANSI_RESET_ALL, getpid(),queue);
 		break;
 	case EINVAL:
-		printf("[PROCESS %d] queue %d invalid value for cmd or msqid\n", getpid(),queue);
+		printf(ANSI_COLOR_RED"[PROCESS %d] queue %d invalid value for cmd or msqid\n"ANSI_RESET_ALL, getpid(),queue);
 		printf("Message queue %d removed\n",queue);
 		break;
 	case EPERM:
-		printf("[PROCESS %d] queue %d the effective user ID of the calling process ""is not the creator or the owner\n",getpid(),queue);
+		printf(ANSI_COLOR_RED"[PROCESS %d] queue %d the effective user ID of the calling process ""is not the creator or the owner\n"ANSI_RESET_ALL,getpid(),queue);
 				
 		break;
 		
 	}
-	printf("[MASTER %d QUEUE ID IS %d  , STATUS --> CREATION SUCCESS] ",getpid(),queue); 
+	printf("[MASTER %d QUEUE ID IS %d  , STATUS --> CREATION SUCCESS] \n",getpid(),queue); 
 	return queue; 
 }
 void Sh_MemMaster(key_t key, size_t size, int shmflg)
@@ -205,13 +205,13 @@ void generate_user(int uCounter, char* userArgv[])
 	switch (uPid)
 	{
 	case -1:
-		printf("Error in fork for user\n");
+		printf(ANSI_COLOR_RED"Error in fork for user\n"ANSI_RESET_ALL);
 		break;
 	case 0:
 		printf("[PROCESS %d] Forked child (generate_user)) %d\n", getpid(), getpid());
 		message_queue_id();
 		printf("[PROCESS %d] Executing user %d\n", getpid(), getpid());
-    	execv(USER_NAME,&userArgv); 
+    	execve(USER_NAME,&userArgv,NULL); 
 		break;
 	default:
 		usersPid[uCounter].usPid = uPid;
@@ -248,7 +248,7 @@ int generate_node(int nCounter, char* nodeArgv[])
 		message_queue_id();
 		printf("{MASTER} [QUEUE] AFTER CALL FUNCTION \n "); 
 		printf("{MASTER}[PROCESS %d] Executing node %d\n", getpid(), getpid());
-        execv(NODE_NAME,nodeArgv);
+        execve(NODE_NAME,nodeArgv,NULL);
 		break;
 
 	default:
@@ -299,7 +299,7 @@ int main(int argc,char *argv[])
 	create_arguments(ipcObj,argvCreator);
     if(argc < 1)
     {
-        printf("Missing arguments, maybe you need to do <source setting.conf>\n");
+        printf(ANSI_COLOR_RED"Missing arguments, maybe you need to do <source setting.conf>\n"ANSI_RESET_ALL);
         exit(1);
     }
 	printf("before sems_init\n"); /*TODO: remove,debug only*/
@@ -330,7 +330,7 @@ int main(int argc,char *argv[])
 		printf("[MAIN MASTER]"ANSI_COLOR_RED "nCounter: %d" ANSI_RESET_ALL "\n", nCounter); /*FIXME: debug only*/
 		nodesPid[nCounter].balance = 0; /*TODO seg fault here */
 		nodesPid[nCounter].Node_state = available; 
-		generate_node(nCounter, argvCreator);
+		generate_node(nCounter, &argvCreator);
 		/*sleep(5);*/
 
 		if (nCounter > SO_NODES_NUM)
@@ -344,7 +344,7 @@ int main(int argc,char *argv[])
 	argvCreator[0]=USER_NAME;
 /* 
 
-PROBLEMA 
+TOFIX
 
 --> Ho provato a runnare e ho notato che solo nCounter funziona , e se eseguiamo la porzione di codice
 di uCounter non funziona piu' nCounter --> possibili problemi 
@@ -365,11 +365,11 @@ di uCounter non funziona piu' nCounter --> possibili problemi
 		printf("[MAIN MASTER]"ANSI_COLOR_GREEN "uCounter: %d"  ANSI_RESET_ALL "\n",uCounter);
 		usersPid[uCounter].Us_state = ALIVE;
 		usersPid[uCounter].balance = 0;
-		generate_user(uCounter, argvCreator);
+		generate_user(uCounter, &argvCreator);
 		/*sleep(5);*/
 		if (uCounter > SO_USERS_NUM )
 		{
-			printf("[MASTER USER] USER GENERATION COMPLETE \n"); 
+			printf(ANSI_COLOR_RED"[MASTER USER] USER GENERATION COMPLETE \n" ANSI_RESET_ALL); 
 			break;
 		}
 		
