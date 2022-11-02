@@ -18,7 +18,7 @@ make all
 To run the project, run the following command:
 
 ```bash
-./main
+./master
 ```
 
 The configuration can be set in the file conf.txt which is included as an example.
