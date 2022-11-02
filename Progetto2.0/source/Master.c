@@ -140,8 +140,7 @@ int message_queue_id()
 		printf("Message queue %d removed\n", queue);
 		break;
 	case EPERM:
-		printf(ANSI_COLOR_RED "[PROCESS %d] queue %d the effective user ID of the calling process "
-													"is not the creator or the owner\n" ANSI_RESET_ALL,
+		printf(ANSI_COLOR_RED "[PROCESS %d] queue %d the effective user ID of the calling process is not the creator or the owner\n" ANSI_RESET_ALL,
 					 getpid(), queue);
 
 		break;
@@ -319,7 +318,7 @@ int main(int argc, char *argv[])
 
 	argvCreator[0] = NODE_NAME;
 
-	for (nCounter = 0; nCounter <= SO_NODES_NUM; nCounter++) /*TODO: seg fault here imo, need to solve, FIXME: just for debug purpose */
+	for (nCounter = 0; nCounter < SO_NODES_NUM; nCounter++) /*TODO: seg fault here imo, need to solve, FIXME: just for debug purpose */
 	{
 
 		nodesPid[nCounter].balance = 0;																											 /*TODO seg fault here */
@@ -352,7 +351,7 @@ int main(int argc, char *argv[])
 
 	*/
 
-	for (uCounter = 0; uCounter <= SO_USERS_NUM; uCounter++)
+	for (uCounter = 0; uCounter < SO_USERS_NUM; uCounter++)
 	{
 		int sigum;
 		usersPid[uCounter].Us_state = ALIVE;
