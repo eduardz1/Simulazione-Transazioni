@@ -1,0 +1,7 @@
+# project files
+*.o master users nodes log.txt ledger.txt
+
+# ide folders
+.idea
+.obsidian
+.vscode
