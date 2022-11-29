@@ -1,5 +1,10 @@
 # project files
-*.o master users nodes log.txt ledger.txt
+*.o
+master
+users
+nodes
+log.txt
+ledger.txt
 
 # ide folders
 .idea
