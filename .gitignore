@@ -1,12 +1,12 @@
 # project files
-*.o
-master
-users
-nodes
-log.txt
+bin/
+obj/
 ledger.txt
 
 # ide folders
 .idea
 .obsidian
 .vscode
+
+#logs
+*.log

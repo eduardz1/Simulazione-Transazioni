@@ -1,16 +1,17 @@
 #include "sem.h"
+#include <stdint.h>
 
 #ifndef TEST_ERROR
-#define TEST_ERROR                                 \
-    if (errno)                                     \
-    {                                              \
-        fprintf(stderr,                            \
-                "%s:%d: PID=%5d: Error %d (%s)\n", \
-                __FILE__,                          \
-                __LINE__,                          \
-                getpid(),                          \
-                errno,                             \
-                strerror(errno));                  \
+#define TEST_ERROR                                                             \
+    if (errno)                                                                 \
+    {                                                                          \
+        fprintf(stderr,                                                        \
+                "%s:%d: PID=%5d: Error %d (%s)\n",                             \
+                __FILE__,                                                      \
+                __LINE__,                                                      \
+                getpid(),                                                      \
+                errno,                                                         \
+                strerror(errno));                                              \
     }
 #endif
 
@@ -51,9 +52,9 @@ void sem_getall(char *my_string, int sem_id)
 {
     union semun arg; /* man semctl per vedere def della union  */
     unsigned short *sem_vals, i;
-    unsigned long num_sem;
+    uint64_t num_sem;
     char cur_str[10];
-    struct semid_ds my_ds ={0};
+    struct semid_ds my_ds = {0};
 
     /* Get the number of semaphores */
     arg.buf = &my_ds;

@@ -1,13 +1,13 @@
 #ifndef SIMULAZIONE_TRANSAZIONI_PARSER_H
 #define SIMULAZIONE_TRANSAZIONI_PARSER_H
 
+#include "common.h"
 #include <stdio.h>
 #include <string.h>
 
 #define NUM_PARAMETERS 13
-#define CONF_ERROR -1
-/* Prototype*/
-void assign_defaults(struct parameters *par); 
-int parse_parameters(struct parameters *par); 
+
+void assign_defaults(struct Params *par);
+int parse_parameters(struct Params *par);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_PARSER_H */

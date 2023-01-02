@@ -1,0 +1,27 @@
+BasedOnStyle: Microsoft
+IndentWidth: 4
+ColumnLimit: 80
+AllowShortCaseLabelsOnASingleLine: true
+AllowShortEnumsOnASingleLine: true
+AllowShortBlocksOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: true
+BinPackArguments: false
+BinPackParameters: false
+BreakBeforeTernaryOperators: false
+AlignArrayOfStructures: Left
+AlignConsecutiveBitFields: Consecutive
+
+BraceWrapping:
+  SplitEmptyFunction: false
+  SplitEmptyNamespace: false
+  SplitEmptyRecord: false
+
+# Penalties taken from https://github.com/git/git/commit/42efde4c299141ddf1ca5b63909b94ab3875aa14
+# This decides what order things should be done if a line is too long
+PenaltyBreakAssignment: 10
+PenaltyBreakBeforeFirstCallParameter: 30
+PenaltyBreakComment: 10
+PenaltyBreakFirstLessLess: 0
+PenaltyBreakString: 10
+PenaltyExcessCharacter: 100
+PenaltyReturnTypeOnItsOwnLine: 5

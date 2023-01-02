@@ -1,13 +1,13 @@
 #ifndef SIMULAZIONE_TRANSAZIONI_SEM_H
 #define SIMULAZIONE_TRANSAZIONI_SEM_H
 
-#include <sys/types.h>
-#include <sys/ipc.h>
-#include <sys/sem.h>
-#include <string.h>
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <errno.h>
+#include <string.h>
+#include <sys/ipc.h>
+#include <sys/sem.h>
+#include <sys/types.h>
 #include <unistd.h>
 
 /* from prof. Bini examples */
@@ -17,13 +17,12 @@
  * page
  */
 union semun {
-	int              val;    /* Value for SETVAL */
-	struct semid_ds *buf;    /* Buffer for IPC_STAT, IPC_SET */
-	unsigned short  *array;  /* Array for GETALL, SETALL */
-	struct seminfo  *__buf;  /* Buffer for IPC_INFO
-				    (Linux-specific) */
+    int val;               /* Value for SETVAL */
+    struct semid_ds *buf;  /* Buffer for IPC_STAT, IPC_SET */
+    unsigned short *array; /* Array for GETALL, SETALL */
+    struct seminfo *__buf; /* Buffer for IPC_INFO
+                  (Linux-specific) */
 };
-
 
 /*
  * Set a semaphore to a user defined value
@@ -67,7 +66,6 @@ int sem_release(int sem_id, int sem_num);
  * Print all semaphore values to a string. my_string MUST be
  * previously allocated
  */
-void sem_getall(char * my_string, int sem_id);
-
+void sem_getall(char *my_string, int sem_id);
 
 #endif /* SIMULAZIONE_TRANSAZIONI_SEM_H */

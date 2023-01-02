@@ -1,37 +1,73 @@
-CC=gcc
-CFLAGS=-std=c89 -pedantic -D_GNU_SOURCE
-DEBUG=-DDEBUG -g -Wall -O0
+CC := clang
+override CFLAGS := -std=c99 -pedantic -Wall -Wextra -Werror -D_GNU_SOURCE $(CFLAGS)
 
-# Dependencies
-SHARED=src/include/common.h src/utils/*.h src/utils/*.c
-OBJS=lklist.o msg.o pool.o debug.o sem.o
-MASTER=src/master.c src/include/master.h src/print.c src/include/print.h src/parser.c src/include/parser.h
-USER=src/users.c src/include/users.h
-NODE=src/nodes.c src/include/nodes.h
+# Directories ------------------------------------------------------------------
+
+BIN := bin
+SRC := src
+OBJ := obj
+$(info $(shell mkdir -p $(BIN) $(OBJ)))
+
+# Master -----------------------------------------------------------------------
+
+MASTER := $(SRC)
+MASTER_SRCS := $(wildcard $(MASTER)/*.c)
+MASTER_OBJS := $(patsubst $(MASTER)/%.c, $(OBJ)/%.o, $(MASTER_SRCS))
+MASTER_HDRS := $(wildcard $(MASTER)/include/*.h)
+
+# Boat -------------------------------------------------------------------------
+
+NODE := $(SRC)/nodes
+NODE_SRCS := $(wildcard $(NODE)/*.c)
+NODE_OBJS := $(patsubst $(NODE)/%.c, $(OBJ)/%.o, $(NODE_SRCS))
+NODE_HDRS := $(wildcard $(NODE)/include/*.h)
+
+# Pier -------------------------------------------------------------------------
+
+USER := $(SRC)/users
+USER_SRCS := $(wildcard $(USER)/*.c)
+USER_OBJS := $(patsubst $(USER)/%.c, $(OBJ)/%.o, $(USER_SRCS))
+USER_HDRS := $(wildcard $(USER)/include/*.h)
+
+# Utils ------------------------------------------------------------------------
+
+UTILS := $(SRC)/utils
+UTILS_SRCS := $(wildcard $(UTILS)/*.c)
+UTILS_OBJS := $(patsubst $(UTILS)/%.c, $(OBJ)/%.o, $(UTILS_SRCS))
+UTILS_HDRS := $(wildcard $(UTILS)/*.h)
+
+.PHONY: run all clean master users nodes
 
 all: master users nodes
 
-master: $(OBJS) $(MASTER)
-	$(CC) $(CFLAGS) -O2 src/master.c  src/print.c src/parser.c *.o -lm -o master
-
-users: $(OBJS) $(USER)
-	$(CC) $(CFLAGS) -O2 src/users.c src/print.c *.o -lm -o users
-
-nodes: $(OBJS) $(NODE)
-	$(CC) $(CFLAGS) -O0 src/nodes.c src/print.c *.o -lm -o nodes
-
-%.o: src/utils/%.c $(SHARED)
-	$(CC) -c $(CFLAGS) -O2 src/utils/*.c
-
-debug:
-	rm -f *.o master users nodes *~
-	$(CC) -c $(CFLAGS) $(DEBUG) src/utils/*.c
-	$(CC) $(CFLAGS) $(DEBUG) src/master.c  src/print.c src/parser.c *.o -lm -o master
-	$(CC) $(CFLAGS) $(DEBUG) src/users.c src/print.c *.o -lm -o users
-	$(CC) $(CFLAGS) $(DEBUG) src/nodes.c src/print.c *.o -lm -o nodes
+run: all
+	@$(BIN)/master
 
 clean:
-	rm -f *.o master users nodes log.txt ledger.txt *~
+	@rm -f -r $(BIN) $(OBJ) *~
 
-run: all
-	./master
+master: $(BIN)/master
+$(BIN)/master: $(MASTER_OBJS) $(UTILS_OBJS)
+	$(CC) $(CFLAGS) -o $@ $^ -pthread
+
+users: $(BIN)/users
+$(BIN)/users: $(USER_OBJS) $(UTILS_OBJS)
+	$(CC) $(CFLAGS) -o $@ $^ -lm
+
+nodes: $(BIN)/nodes
+$(BIN)/nodes: $(NODE_OBJS) $(UTILS_OBJS)
+	$(CC) $(CFLAGS) -o $@ $^
+
+# Objs -------------------------------------------------------------------------
+
+$(OBJ)/%.o: $(MASTER)/%.c $(MASTER_HDRS)
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(OBJ)/%.o: $(NODE)/%.c $(NODE_HDRS)
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(OBJ)/%.o: $(USER)/%.c $(USER_HDRS)
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(OBJ)/%.o: $(UTILS)/%.c $(UTILS_HDRS)
+	$(CC) $(CFLAGS) -c -o $@ $<

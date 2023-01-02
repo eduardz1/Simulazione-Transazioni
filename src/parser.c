@@ -1,10 +1,11 @@
+#include "include/parser.h"
 #include "include/common.h"
 #include "utils/debug.h"
-#include "include/parser.h"
+#include <stdlib.h>
 
 #define CONF_FILE "conf.txt"
 
-void assign_defaults(struct parameters *par)
+void assign_defaults(struct Params *par)
 {
     par->SO_USER_NUM = 100;
     par->SO_NODES_NUM = 10;
@@ -21,7 +22,7 @@ void assign_defaults(struct parameters *par)
     par->SO_HOPS = 10;
 }
 
-int parse_parameters(struct parameters *par)
+int parse_parameters(struct Params *par)
 {
     FILE *fp;
 
@@ -30,14 +31,14 @@ int parse_parameters(struct parameters *par)
     int i = 0;
 
     char *tokens[NUM_PARAMETERS];
-    unsigned long values[NUM_PARAMETERS]; /* downcast is easy, upcast not so much */
+    uint64_t values[NUM_PARAMETERS]; /* downcast is easy, upcast not so
+                                             much */
 
     assign_defaults(par);
     TRACE(("[PARSER] assigned defaults\n"))
 
     fp = fopen(CONF_FILE, "r");
-    if (fp == NULL)
-        return CONF_ERROR; /* default config */
+    if (fp == NULL) return EXIT_FAILURE; /* default config */
 
     while (fgets(buffer, 127, fp))
     {
@@ -63,13 +64,14 @@ int parse_parameters(struct parameters *par)
         else if (!strcmp(tokens[i], "SO_REWARD"))
         {
             /* given that it is a char it's very easy to get it out of bound,
-             * I prefer straight up normalizing it rather than resetting everything
-             * because of ERANGE
+             * I prefer straight up normalizing it rather than resetting
+             * everything because of ERANGE
              */
             if (values[i] <= 100) /* no need to check >= 0 as it's unsigned */
                 par->SO_REWARD = values[i];
             else
-                printf("[PARSER] SO_REWARD incorrect value, resetting default\n");
+                TRACE(("[PARSER] SO_REWARD incorrect value, resetting "
+                       "default\n"));
         }
         else if (!strcmp(tokens[i], "SO_MIN_TRANS_GEN_NSEC"))
         {
@@ -112,29 +114,37 @@ int parse_parameters(struct parameters *par)
     /* -- CONF ERRORS CORRECTION -- */
     if (errno == ERANGE)
     {
-        TRACE(("[PARSER] one or multiple values out of bound, resetting defaults\n"))
+        TRACE(("[PARSER] one or multiple values out of bound, resetting "
+               "defaults\n"))
         assign_defaults(par);
     }
     if (par->SO_MIN_TRANS_GEN_NSEC > par->SO_MAX_TRANS_GEN_NSEC)
     {
-        TRACE(("[PARSER] SO_MIN_TRANS_GEN_NSEC greater than SO_MAX_TRANS_GEN_NSEC, will be normalized\n"))
+        TRACE(("[PARSER] SO_MIN_TRANS_GEN_NSEC greater than "
+               "SO_MAX_TRANS_GEN_NSEC, will be normalized\n"))
         par->SO_MIN_TRANS_GEN_NSEC = par->SO_MAX_TRANS_GEN_NSEC;
     }
     if (par->SO_MIN_TRANS_PROC_NSEC > par->SO_MAX_TRANS_PROC_NSEC)
     {
-        TRACE(("[PARSER] SO_MIN_TRANS_PROC_NSEC greater than SO_MAX_TRANS_PROC_NSEC, will be normalized\n"))
+        TRACE(("[PARSER] SO_MIN_TRANS_PROC_NSEC greater than "
+               "SO_MAX_TRANS_PROC_NSEC, will be normalized\n"))
         par->SO_MIN_TRANS_PROC_NSEC = par->SO_MAX_TRANS_PROC_NSEC;
     }
-    if(par->SO_TP_SIZE <= SO_BLOCK_SIZE){
-        TRACE(("[PARSER] SO_TP_SIZE smaller or equal to SO_BLOCK_SIZE, will be normalized\n"))
+    if (par->SO_TP_SIZE <= SO_BLOCK_SIZE)
+    {
+        TRACE(("[PARSER] SO_TP_SIZE smaller or equal to SO_BLOCK_SIZE, will be "
+               "normalized\n"))
         par->SO_TP_SIZE = SO_BLOCK_SIZE + 1;
     }
-    if(par->SO_FRIENDS_NUM > par->SO_NODES_NUM){
-        TRACE(("[PARSER] SO_FRIENDS_NUM greater than SO_NODES_NUM, will be set to equal\n"))
+    if (par->SO_FRIENDS_NUM > par->SO_NODES_NUM)
+    {
+        TRACE(("[PARSER] SO_FRIENDS_NUM greater than SO_NODES_NUM, will be set "
+               "to equal\n"))
         par->SO_FRIENDS_NUM = par->SO_NODES_NUM;
     }
 
-    TRACE(("--------------------------------------------\n----------- Configuration input ------------\n"))
+    TRACE(("--------------------------------------------\n----------- "
+           "Configuration input ------------\n"))
     for (i = 0; i < NUM_PARAMETERS; i++)
     {
         TRACE(("%s %lu\n", tokens[i], values[i]))
